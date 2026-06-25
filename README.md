@@ -40,6 +40,11 @@ little Kierkegaard; the self-referential claims stay pinned at `ish`:
 
 ![Gödel incompleteness](assets/godel_consensus.gif)
 
+**🗺️ …and a self-organizing map** learning the topology of that truth-space —
+the net unfolds to drape the manifold, undecidable claims at its peak:
+
+![SOM unfolding](assets/som_unfold.gif)
+
 One engine, four worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 
@@ -281,6 +286,21 @@ python examples/godel_consensus_demo.py
 
 > *Decidable claims slide out to vtrue/vfalse; the violet self-referential
 > markers quiver at `ish`, unable to move — the engine tasting its own limit.*
+
+## 🗺️ Self-organizing maps
+
+A SOM is relaxation labeling's competitive-learning cousin — both settle a field
+by *local neighborhood coherence*. Here a SOM learns the 2-D topology of the
+engine's **own truth-assignment space**: feed it every claim's assignment vector
+(from the physics, chess, and Gödel demos) and the lattice unfolds to drape over
+the manifold — vtrue / ish / vfalse become contiguous territory, with the
+undecidable claims piled at the arch's peak. A model mapping the engine's output.
+
+```bash
+python examples/som_demo.py     # 94% tighter quantization; the map self-segments by truth
+```
+
+![SOM unfolding over the truth manifold](assets/som_unfold.gif)
 
 ## Test
 
