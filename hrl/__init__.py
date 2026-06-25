@@ -9,6 +9,10 @@ only the compatibility kernel and prior change.
 from .core import RelaxationLabeler, RelaxationResult
 from .kernels import pairwise_distance_compatibility
 from .tracking import temporal_prior, track_sequence, synthetic_sequence
+from .consensus import (
+    relax_truth, agreement_to_compatibility, anchor_prior, truth_report,
+    lexical_agreement, TRUTH_NAMES, VFALSE, ISH, VTRUE,
+)
 
 __all__ = [
     "RelaxationLabeler",
@@ -17,6 +21,15 @@ __all__ = [
     "temporal_prior",
     "track_sequence",
     "synthetic_sequence",
+    "relax_truth",
+    "agreement_to_compatibility",
+    "anchor_prior",
+    "truth_report",
+    "lexical_agreement",
+    "TRUTH_NAMES",
+    "VFALSE",
+    "ISH",
+    "VTRUE",
 ]
 
 __version__ = "0.1.0"

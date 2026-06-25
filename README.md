@@ -117,6 +117,46 @@ from hrl import track_sequence
 assignments = track_sequence(frames, model_markers)   # per frame: detection -> marker id (-1 = noise)
 ```
 
+## Syncretistic model consensus
+
+Every model is a simplification of the world, so the "true" picture is a
+weighted reconciliation of many models against each other and against the
+observations we trust most. The same engine does this: **claims are objects,
+the labels are the three Trool truth values `{vfalse, ish, vtrue}`**, an
+agreement/contradiction web is the compatibility kernel, and a few trusted
+observations *anchor* the field and break its sign symmetry.
+
+```bash
+python examples/physics_consensus_demo.py
+```
+
+Eight physics claims plus one deliberately contested ninth, with only **two**
+claims anchored as trusted observations:
+
+```
+[ vtrue +0.94]  The speed of light in vacuum is the same for every observer.  <- anchor
+[vfalse -0.51]  Light propagates through a stationary luminiferous ether.
+[ vtrue +0.48]  Gravity is the curvature of spacetime and propagates at c.
+[ vtrue +0.96]  All objects fall at the same rate in a vacuum.  <- anchor
+[vfalse -0.48]  Heavier objects fall faster than lighter ones.
+[   ish +0.02]  Newtonian gravity predicts planetary orbits accurately.
+```
+
+Truth propagates from the two anchors across the whole web — recovering the
+modern picture, rejecting the classical errors, and parking the genuinely
+regime-limited claim on `ish` (`score ≈ 0`).
+
+The agreement matrix is the only NLP-dependent part, and it is fully
+**swappable** — hand-authored, the bundled lexical heuristic, or a real
+natural-language-inference / embedding / LLM-judge front-end:
+
+```python
+from hrl.consensus import lexical_agreement, relax_truth, anchor_prior, truth_report
+agreement = lexical_agreement(sentences)            # raw text -> agreement web
+result = relax_truth(agreement, anchor_prior(n, {trusted_idx: VTRUE}))
+truth_report(result)                                # per claim: truth + signed score
+```
+
 ## Test
 
 ```bash
@@ -130,12 +170,15 @@ hrl/
   core.py       RelaxationLabeler — the prior-respecting, noise-aware engine
   kernels.py    pairwise_distance_compatibility — the marker-correspondence kernel
   tracking.py   temporal_prior + track_sequence — correspondence across time
+  consensus.py  relax_truth — claims -> vtrue/ish/vfalse over an agreement web
 examples/
-  core_demo.py            the three core behaviors
-  mocap_tracking_demo.py  marker tracking through motion, ghosts, dropouts
+  core_demo.py               the three core behaviors
+  mocap_tracking_demo.py     marker tracking through motion, ghosts, dropouts
+  physics_consensus_demo.py  relax a web of physics claims to truth values
 tests/
-  test_core.py      correspondence recovery, noise quarantine, prior tie-break
-  test_tracking.py  identity stability through motion / shuffle / ghosts
+  test_core.py       correspondence recovery, noise quarantine, prior tie-break
+  test_tracking.py   identity stability through motion / shuffle / ghosts
+  test_consensus.py  anchored truth propagation, ish for contested claims
 ```
 
 ## Background
