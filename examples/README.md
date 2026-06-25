@@ -26,6 +26,10 @@ its identity, ghosts go to noise.
 
 ![mocap](../assets/mocap_tracks.png)
 
+**🎞️ Watch it play out** (`python make_mocap_gif.py`):
+
+![mocap animation](../assets/mocap_tracking.gif)
+
 ---
 
 ## ⚛️ `physics_consensus_demo.py` — claims → truth

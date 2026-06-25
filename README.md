@@ -22,6 +22,12 @@ capture** and to a **syncretistic, weighted consensus of physical models**.
 
 ## 🖼️ Gallery
 
+**🎞️ The marker tracker, playing out frame-by-frame** — colored dots keep their
+identity through the motion, gray ✕ ghosts are rejected to the noise label
+(`python make_mocap_gif.py`):
+
+![tracker animation](assets/mocap_tracking.gif)
+
 One engine, four worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 

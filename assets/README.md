@@ -22,6 +22,10 @@ detections, ghosts, and dropouts. Each colored track holds a **stable identity**
 (the two hip tracks even cross without swapping); the gray ✕ ghosts are routed
 to the noise label. **146/146 identity, 0 switches.**
 
+**🎞️ Animated, frame-by-frame** (`python make_mocap_gif.py`):
+
+![mocap animation](mocap_tracking.gif)
+
 ---
 
 ## ⚛️ Physics consensus
