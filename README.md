@@ -35,6 +35,11 @@ as the relaxation labeling iterates (`python make_consensus_viz.py`):
 |---|---|
 | ![physics consensus](assets/consensus_physics.gif) | ![chess consensus](assets/consensus_chess.gif) |
 
+**🌀 …and tasting incompleteness** — Gödel's theorems, chess solvability, and a
+little Kierkegaard; the self-referential claims stay pinned at `ish`:
+
+![Gödel incompleteness](assets/godel_consensus.gif)
+
 One engine, four worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 
@@ -257,6 +262,25 @@ Sound rules hold at `vtrue`; the dogmas the daring games refute relax to `ish`
 — rules of thumb with real exceptions. It's the whimsy-chess thesis (creativity
 over the engine's book) made quantitative, on the *same* relaxation engine that
 labels chess pieces by role and physics claims by truth.
+
+### 🌀 The engine tastes incompleteness — Gödel
+
+Point the same consensus engine at the limits of formal reason — Gödel's
+incompleteness theorems, the solvability of chess, a little Kierkegaard. The
+decidable claims commit (incompleteness comes out **true**; "Gödel ⇒ chess
+unsolvable" comes out **false** — chess is finite). But a field that rewards
+*consistency* has nowhere to push a **self-referential** claim: the Liar, the
+Gödel sentence, and "the self relates to itself" stay pinned in the central
+`ish` band — undecidability, *felt*.
+
+```bash
+python examples/godel_consensus_demo.py
+```
+
+![Gödel — tasting incompleteness](assets/godel_consensus.gif)
+
+> *Decidable claims slide out to vtrue/vfalse; the violet self-referential
+> markers quiver at `ish`, unable to move — the engine tasting its own limit.*
 
 ## Test
 
