@@ -196,6 +196,32 @@ agreement = NLIAgreement()(claims)              # real model -> agreement web
 truth_report(relax_truth(agreement, anchor_prior(len(claims), {0: VTRUE})))
 ```
 
+### Grading chess theory — the whimsy-chess bridge
+
+The same consensus engine grades **chess rules of thumb**, with the evidence
+prior drawn from a corpus of *real games that break the book and win anyway*
+(the narrated whimsy-chess study games — Maestro / Vim / Roblox). Maxims are
+claims, the labels are `{vtrue, ish, vfalse}`, and the daring wins anchor the
+field:
+
+```bash
+python examples/chess_maxims_demo.py
+```
+
+```
+[   ish -0.05]  Control the center with your pawns and pieces.   (REFUTED by every Kadas game)
+[ vtrue +0.45]  Develop all your pieces before you attack.
+[ vtrue +0.45]  Castle early to keep your king safe.
+[   ish -0.05]  Material advantage decides the game.   (REFUTED by Houdini won down ~9 points)
+[ vtrue +0.93]  Storm the enemy king with a flank pawn.   (PROVEN by the Kadas wins)
+[ vtrue +0.93]  Daring and initiative outweigh following the book.
+```
+
+Sound rules hold at `vtrue`; the dogmas the daring games refute relax to `ish`
+— rules of thumb with real exceptions. It's the whimsy-chess thesis (creativity
+over the engine's book) made quantitative, on the *same* relaxation engine that
+labels chess pieces by role and physics claims by truth.
+
 ## Test
 
 ```bash
@@ -217,6 +243,7 @@ examples/
   mocap_tracking_demo.py     marker tracking through motion, ghosts, dropouts
   physics_consensus_demo.py  relax a web of physics claims to truth values
   paper_consensus_demo.py    real NLI model builds the web from raw prose
+  chess_maxims_demo.py       grade chess rules of thumb against real games
 tests/
   test_core.py       correspondence recovery, noise quarantine, prior tie-break
   test_tracking.py   identity stability through motion / shuffle / ghosts
