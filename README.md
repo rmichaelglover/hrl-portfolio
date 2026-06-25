@@ -35,6 +35,11 @@ as the relaxation labeling iterates (`python make_consensus_viz.py`):
 |---|---|
 | ![physics consensus](assets/consensus_physics.gif) | ![chess consensus](assets/consensus_chess.gif) |
 
+**🌌 …across the cosmos** — relativity, quantum gravity, and the dark sector
+weighted by how proven each is (the speculative frontier rests honestly at `ish`):
+
+![Cosmic consensus](assets/quantum_consensus.gif)
+
 **🌀 …and tasting incompleteness** — Gödel's theorems, chess solvability, and a
 little Kierkegaard; the self-referential claims stay pinned at `ish`:
 
@@ -70,6 +75,19 @@ the book's rules of thumb against real games.
 ![Chess Maestro](whimsy-chess/media/maestro_kadas.gif)
 
 → **[Browse the whimsy-chess showcase »](whimsy-chess/README.md)**
+
+## 🔬 From the original research
+
+The clean core in this repo is the distilled version of a longer body of work —
+relaxation labeling applied to chess-piece roles, 3-D fiducial correspondence,
+and more. Here is the **real role-labeler converging**: the Hummel–Zucker
+strength of each piece's winning role climbing over 40 iterations (some pieces
+commit fast, the runner takes its time), and the role-compatibility heatmap that
+drives it.
+
+| Strength over iterations | Role compatibility |
+|---|---|
+| ![role strength over time](assets/research/role_strength_over_time.png) | ![role compatibility](assets/research/role_compatibility_heatmap.png) |
 
 ## What makes this core different
 
@@ -272,6 +290,23 @@ Sound rules hold at `vtrue`; the dogmas the daring games refute relax to `ish`
 — rules of thumb with real exceptions. It's the whimsy-chess thesis (creativity
 over the engine's book) made quantitative, on the *same* relaxation engine that
 labels chess pieces by role and physics claims by truth.
+
+### 🌌 The cosmos — relativity, quantum gravity, the dark sector
+
+The original syncretistic dream: every physical model is a simplification, so we
+weight each by how *proven* it is and relax the web toward consistency. Confirmed
+physics (c constant, E = mc², massless timeless photons) → **vtrue**; the genuinely
+speculative frontier (loop quantum gravity, quantum foam, the dark-matter particle,
+the cosmological constant) → **ish**; "a theory of everything has been found" →
+**vfalse** (incompleteness, cosmic). And the self-referential reading of a photon —
+always at `c`, hence in its own frame never moving, never aging — rests at `ish`,
+where Gödel quietly chimes in.
+
+```bash
+python examples/quantum_consensus_demo.py
+```
+
+![Cosmic consensus](assets/quantum_consensus.gif)
 
 ### 🌀 The engine tastes incompleteness — Gödel
 
