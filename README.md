@@ -85,6 +85,38 @@ python examples/core_demo.py
    prior nudges object 0 toward label 1  -> assignment [1, 0]
 ```
 
+## Motion-capture marker tracking
+
+Single-frame correspondence becomes *tracking* with one addition: **memory,
+expressed as a prior.** Each frame, the previous frame's labeled positions
+predict where every marker should be now; that prediction is the prior for this
+frame. Geometry keeps the constellation self-consistent, memory keeps
+identities stable, and the noise label quarantines ghost detections.
+
+```bash
+python examples/mocap_tracking_demo.py
+```
+
+A rigid 5-marker body rotates and drifts for 30 frames; detections arrive
+shuffled, with periodic ghosts and dropouts:
+
+```
+real-marker identity  : 146/146 correct (100.0%)
+ghosts -> noise label : 4/5 quarantined
+identity switches     : 0
+```
+
+![Recovered marker tracks](examples/mocap_tracks.png)
+
+Every marker holds its identity through the motion — note the two hip tracks
+*cross* near the middle without swapping — and the gray ✕ ghosts are sent to
+the noise label instead of corrupting a track.
+
+```python
+from hrl import track_sequence
+assignments = track_sequence(frames, model_markers)   # per frame: detection -> marker id (-1 = noise)
+```
+
 ## Test
 
 ```bash
@@ -95,12 +127,15 @@ pytest            # or: python tests/test_core.py
 
 ```
 hrl/
-  core.py      RelaxationLabeler — the prior-respecting, noise-aware engine
-  kernels.py   pairwise_distance_compatibility — the marker-correspondence kernel
+  core.py       RelaxationLabeler — the prior-respecting, noise-aware engine
+  kernels.py    pairwise_distance_compatibility — the marker-correspondence kernel
+  tracking.py   temporal_prior + track_sequence — correspondence across time
 examples/
-  core_demo.py the three behaviors above
+  core_demo.py            the three core behaviors
+  mocap_tracking_demo.py  marker tracking through motion, ghosts, dropouts
 tests/
-  test_core.py correspondence recovery, noise quarantine, prior tie-break
+  test_core.py      correspondence recovery, noise quarantine, prior tie-break
+  test_tracking.py  identity stability through motion / shuffle / ghosts
 ```
 
 ## Background

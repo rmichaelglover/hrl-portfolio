@@ -8,11 +8,15 @@ only the compatibility kernel and prior change.
 """
 from .core import RelaxationLabeler, RelaxationResult
 from .kernels import pairwise_distance_compatibility
+from .tracking import temporal_prior, track_sequence, synthetic_sequence
 
 __all__ = [
     "RelaxationLabeler",
     "RelaxationResult",
     "pairwise_distance_compatibility",
+    "temporal_prior",
+    "track_sequence",
+    "synthetic_sequence",
 ]
 
 __version__ = "0.1.0"

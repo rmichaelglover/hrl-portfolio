@@ -24,6 +24,8 @@ def pairwise_distance_compatibility(
     *,
     sigma: float = 1.0,
     exclude_self: bool = True,
+    enforce_uniqueness: bool = True,
+    exclusion_penalty: float = 0.0,
 ) -> np.ndarray:
     """Distance-invariant point correspondence kernel.
 
@@ -45,11 +47,19 @@ def pairwise_distance_compatibility(
     exclude_self:
         Zero out ``i == k`` so an object lends no support to its own labeling
         (the standard relaxation convention). Default ``True``.
+    enforce_uniqueness:
+        Suppress two distinct objects sharing one label (``i != k`` and
+        ``j == l``). Without this the kernel would *reward* nearby points for
+        taking the same marker (since the model self-distance is 0), producing
+        duplicate assignments. Default ``True``.
+    exclusion_penalty:
+        Value written into the suppressed same-label entries. ``0.0`` removes
+        the spurious reward; a negative value actively penalizes collisions.
 
     Returns
     -------
     np.ndarray
-        ``[n_objects, n_labels, n_objects, n_labels]`` compatibility in ``[0, 1]``.
+        ``[n_objects, n_labels, n_objects, n_labels]`` compatibility.
     """
     objects = np.asarray(objects, dtype=float)
     labels = np.asarray(labels, dtype=float)
@@ -62,6 +72,11 @@ def pairwise_distance_compatibility(
     # diff[i, j, k, l] = d_obj[i, k] - d_lab[j, l]
     diff = d_obj[:, None, :, None] - d_lab[None, :, None, :]
     compatibility = np.exp(-(diff ** 2) / (2.0 * sigma ** 2))
+
+    if enforce_uniqueness:
+        # same label j == l for distinct objects: a collision, not support.
+        for j in range(labels.shape[0]):
+            compatibility[:, j, :, j] = exclusion_penalty
 
     if exclude_self:
         idx = np.arange(objects.shape[0])
