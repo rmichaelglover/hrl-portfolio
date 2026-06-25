@@ -28,6 +28,13 @@ identity through the motion, gray ✕ ghosts are rejected to the noise label
 
 ![tracker animation](assets/mocap_tracking.gif)
 
+**⚖️ The Truth-O-Meter** — claims sliding to vtrue / ish / vfalse and lighting up
+as the relaxation labeling iterates (`python make_consensus_viz.py`):
+
+| Physics claims | Chess maxims |
+|---|---|
+| ![physics consensus](assets/consensus_physics.gif) | ![chess consensus](assets/consensus_chess.gif) |
+
 One engine, four worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 

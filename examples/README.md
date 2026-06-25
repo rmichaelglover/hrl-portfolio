@@ -41,6 +41,10 @@ across the whole agreement web → **5 vtrue / 1 ish / 3 vfalse.**
 
 ![consensus](../assets/consensus_physics.png)
 
+**⚖️ Truth-O-Meter, animated** (`python make_consensus_viz.py`):
+
+![physics meter](../assets/consensus_physics.gif)
+
 ---
 
 ## ♟️ `chess_maxims_demo.py` — grading chess theory
@@ -51,6 +55,10 @@ The **whimsy-chess bridge**: the book's maxims graded against your daring wins.
 Sound rules stay `vtrue`; the dogmas your Kádas games refute relax to `ish`.
 
 ![chess](../assets/chess_maxims.png)
+
+**⚖️ Truth-O-Meter, animated** — the maxims settle as the engine iterates:
+
+![chess meter](../assets/consensus_chess.gif)
 
 ---
 

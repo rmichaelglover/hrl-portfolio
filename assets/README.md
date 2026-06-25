@@ -36,6 +36,12 @@ are the two anchored observations. From those anchors, relaxation propagates
 truth across the whole web and sorts every claim into 🟢 `vtrue` / 🟡 `ish` /
 🔴 `vfalse` (bars, right).
 
+**⚖️ Physics Truth-O-Meter** — and animated, claims lighting up as it iterates
+(`python make_consensus_viz.py`):
+
+![physics meter](truthometer_physics.png)
+![physics gif](consensus_physics.gif)
+
 ---
 
 ## ♟️ Chess maxims — the whimsy-chess bridge
@@ -46,6 +52,11 @@ the book and win anyway**. Sound rules stay 🟢 `vtrue`; the dogmas your Kádas
 wins refute ("control the center", "material decides") relax into the 🟡 `ish`
 band. Right: the conflict graph — the only tensions run *center/material vs.
 daring*.
+
+**⚖️ Chess Truth-O-Meter** — static, and animated as the verdicts settle:
+
+![chess meter](truthometer_chess.png)
+![chess gif](consensus_chess.gif)
 
 ---
 
