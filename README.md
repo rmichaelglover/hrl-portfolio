@@ -44,6 +44,18 @@ full set in [`assets/`](assets/README.md)):
 | **⚛️ Physics consensus** | **♟️ Chess maxims** |
 | ![consensus](assets/consensus_physics.png) | ![chess](assets/chess_maxims.png) |
 
+## ♟️ Applied: Whimsy-Chess
+
+The same engine, [played for fun](whimsy-chess/README.md) — a narrated, musical,
+emoji chess studio (the **Chess Maestro** PWA + a **Vim** version). The terrain
+overlay *is* relaxation-labeling board segmentation; the role overlay *is* the
+HRL labeler; and the [chess-maxims demo](examples/chess_maxims_demo.py) grades
+the book's rules of thumb against real games.
+
+![Chess Maestro](whimsy-chess/media/maestro_kadas.gif)
+
+→ **[Browse the whimsy-chess showcase »](whimsy-chess/README.md)**
+
 ## What makes this core different
 
 Classic relaxation labeling (Rosenfeld–Hummel–Zucker) has two well-known
