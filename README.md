@@ -28,6 +28,11 @@ identity through the motion, gray ✕ ghosts are rejected to the noise label
 
 ![tracker animation](assets/mocap_tracking.gif)
 
+**🧬 …and a body that heals itself** — morphogenesis as relaxation labeling: an
+amputated tail regrows, a wound closes (Michael Levin, in code):
+
+![Morphogenesis](assets/morphogenesis.gif)
+
 **⚖️ The Truth-O-Meter** — claims sliding to vtrue / ish / vfalse and lighting up
 as the relaxation labeling iterates (`python make_consensus_viz.py`):
 
@@ -55,7 +60,7 @@ cross and starve, or leap by the absurd and flourish:
 
 ![The leap of faith](assets/leap_of_faith.gif)
 
-One engine, four worlds — every chart is real output (`python make_figures.py`,
+One engine, many worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 
 | 🎯 Core | 🕺 Mocap tracking |
@@ -75,6 +80,30 @@ the book's rules of thumb against real games.
 ![Chess Maestro](whimsy-chess/media/maestro_kadas.gif)
 
 → **[Browse the whimsy-chess showcase »](whimsy-chess/README.md)**
+
+## 🧬 Morphogenesis — the engine grows a body
+
+The circle closes. The same `RelaxationLabeler` that tracks markers, grades
+theories, and tastes incompleteness now **regenerates a body** — Michael Levin's
+picture of morphogenesis cast as relaxation labeling:
+
+- **cells** are the objects, on a grid
+- their **anatomical region** is the label (head / trunk / tail)
+- **bioelectric gap-junction coupling** is the compatibility kernel — adjacent
+  cells want to share an identity
+- a coarse **pattern memory** (the blurred target morphology) is the respected
+  prior — Levin's bioelectric setpoint
+
+Wound the creature — punch a hole, or amputate the tail — and relaxation
+propagates identity inward from the intact boundary, guided by the memory, until
+the form grows back. Interior wounds heal to **100%**; an amputated tail regrows
+**~88%** from boundary + memory alone.
+
+```bash
+python examples/morphogenesis_demo.py
+```
+
+![Morphogenesis — a body heals itself](assets/morphogenesis.gif)
 
 ## 🔬 From the original research
 

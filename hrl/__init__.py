@@ -16,6 +16,7 @@ from .consensus import (
 from .nli import NLIAgreement          # transformers/torch imported lazily on use
 from .llm_judge import LLMAgreement, extract_claims_llm  # anthropic imported lazily
 from .som import SelfOrganizingMap
+from .morphogenesis import body_plan, regenerate
 
 __all__ = [
     "RelaxationLabeler",
@@ -34,6 +35,8 @@ __all__ = [
     "LLMAgreement",
     "extract_claims_llm",
     "SelfOrganizingMap",
+    "body_plan",
+    "regenerate",
     "TRUTH_NAMES",
     "VFALSE",
     "ISH",
