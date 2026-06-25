@@ -3,8 +3,9 @@ import numpy as np
 
 from hrl.consensus import (
     VFALSE, VTRUE, agreement_to_compatibility, anchor_prior,
-    lexical_agreement, relax_truth, truth_report,
+    extract_claims, lexical_agreement, relax_truth, truth_report,
 )
+from hrl.nli import NLIAgreement
 
 
 def _web(n, links):
@@ -55,6 +56,39 @@ def test_lexical_frontend_signs():
         "Space does not need an ether to carry light.",
     ])
     assert a[0, 1] < 0  # negation polarity differs -> contradiction
+
+
+class _FakeNLI:
+    """Stand-in for a transformers NLI pipeline (no model download in tests)."""
+    def __call__(self, pairs, batch_size=16):
+        out = []
+        for p in pairs:
+            a, b = p["text"], p["text_pair"]
+            base_a, base_b = a.replace("not ", ""), b.replace("not ", "")
+            if base_a == base_b and ("not" in a) != ("not" in b):
+                scores = {"entailment": 0.0, "neutral": 0.1, "contradiction": 0.9}
+            elif a == b:
+                scores = {"entailment": 0.9, "neutral": 0.1, "contradiction": 0.0}
+            else:
+                scores = {"entailment": 0.1, "neutral": 0.8, "contradiction": 0.1}
+            out.append([{"label": k, "score": v} for k, v in scores.items()])
+        return out
+
+
+def test_nli_agreement_signs_and_threshold():
+    agg = NLIAgreement(threshold=0.15)
+    agg._pipe = _FakeNLI()                       # inject the fake; no real load
+    a = agg(["it works", "not it works", "something else"])
+    assert a[0, 1] < 0                            # opposite polarity -> contradiction
+    assert a[0, 1] == a[1, 0]                     # symmetric
+    assert a[0, 2] == 0 and a[1, 2] == 0          # weak/neutral edge dropped
+
+
+def test_extract_claims_splits_and_filters():
+    text = "Compound X reduces mortality. It was tested widely, e.g. in mice. Short."
+    claims = extract_claims(text, min_words=4)
+    assert len(claims) == 2                       # "Short." dropped (too short)
+    assert any("e.g. in mice" in c for c in claims)   # abbreviation not split
 
 
 if __name__ == "__main__":

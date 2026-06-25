@@ -157,6 +157,45 @@ result = relax_truth(agreement, anchor_prior(n, {trusted_idx: VTRUE}))
 truth_report(result)                                # per claim: truth + signed score
 ```
 
+### Real NLP backends
+
+The lexical heuristic is the floor. Two real models drop in as the agreement
+provider — same signed-matrix interface, so nothing downstream changes:
+
+- **NLI** (`hrl.nli.NLIAgreement`, `pip install -e '.[nli]'`) — a DeBERTa-v3
+  natural-language-inference model reads every claim pair and scores
+  `P(entail) − P(contradict)`. Entailing claims pull toward the same truth
+  value, contradicting ones toward opposite. Runs locally, offline after the
+  one-time model download.
+- **Claude LLM-judge** (`hrl.llm_judge`, `pip install -e '.[llm]'` + an API key)
+  — `extract_claims_llm` pulls atomic claims out of a *whole paper*, and
+  `LLMAgreement` judges them with real world knowledge. The strongest backend
+  for abstract or knowledge-heavy claims.
+
+```bash
+python examples/paper_consensus_demo.py        # NLI builds the web from raw prose
+```
+
+```
+NLI-inferred relations (entail = +, contradict = -):
+  c0 contradict c3   (-1.00)      # "X reduces mortality"  vs  "X has no effect"
+  c3 agree    c4   (+0.98)        # the two null-result claims agree
+  ...
+anchored claim c1 as a trusted observation (vtrue):
+  [ vtrue +0.55]  c0: Compound X significantly reduces patient mortality.
+  [vfalse -0.52]  c3: Compound X has no effect on patient mortality.
+```
+
+The NLI model inferred the entire agreement web from raw text; relaxation then
+propagated truth from one anchored replication across it.
+
+```python
+from hrl import NLIAgreement, extract_claims, relax_truth, anchor_prior, truth_report, VTRUE
+claims = extract_claims(open("abstract.txt").read())
+agreement = NLIAgreement()(claims)              # real model -> agreement web
+truth_report(relax_truth(agreement, anchor_prior(len(claims), {0: VTRUE})))
+```
+
 ## Test
 
 ```bash
@@ -171,10 +210,13 @@ hrl/
   kernels.py    pairwise_distance_compatibility — the marker-correspondence kernel
   tracking.py   temporal_prior + track_sequence — correspondence across time
   consensus.py  relax_truth — claims -> vtrue/ish/vfalse over an agreement web
+  nli.py        NLIAgreement — DeBERTa-v3 NLI builds the agreement web from text
+  llm_judge.py  LLMAgreement + extract_claims_llm — Claude backend (opt-in)
 examples/
   core_demo.py               the three core behaviors
   mocap_tracking_demo.py     marker tracking through motion, ghosts, dropouts
   physics_consensus_demo.py  relax a web of physics claims to truth values
+  paper_consensus_demo.py    real NLI model builds the web from raw prose
 tests/
   test_core.py       correspondence recovery, noise quarantine, prior tie-break
   test_tracking.py   identity stability through motion / shuffle / ghosts

@@ -30,7 +30,7 @@ from .core import RelaxationLabeler
 __all__ = [
     "VFALSE", "ISH", "VTRUE", "TRUTH_NAMES", "TRUTH_VALUES",
     "agreement_to_compatibility", "anchor_prior", "relax_truth",
-    "truth_report", "lexical_agreement",
+    "truth_report", "lexical_agreement", "extract_claims",
 ]
 
 VFALSE, ISH, VTRUE = 0, 1, 2
@@ -109,6 +109,25 @@ def truth_report(result) -> list[dict]:
             "confidence": float(np.max(norm)),
         })
     return out
+
+
+def extract_claims(text: str, *, min_words: int = 4, max_claims: int | None = None) -> list[str]:
+    """Split raw text (e.g. a paper's abstract) into candidate claim sentences.
+
+    A deliberately simple sentence splitter — good enough to feed real prose
+    into the consensus pipeline. Drops fragments shorter than ``min_words``.
+    For production use, swap in a real claim-extraction step (e.g. the Claude
+    LLM-judge in :mod:`hrl.llm_judge`, which pulls atomic claims from a paper).
+    """
+    # protect common abbreviations, then split on sentence-final punctuation
+    protected = re.sub(r"\b(e\.g|i\.e|et al|vs|Fig|Eq|cf|approx)\.", r"\1<dot>", text)
+    pieces = re.split(r"(?<=[.!?])\s+", protected.strip())
+    claims = []
+    for p in pieces:
+        s = p.replace("<dot>", ".").strip()
+        if len(s.split()) >= min_words:
+            claims.append(s)
+    return claims[:max_claims] if max_claims else claims
 
 
 # --- swappable NLP front-end (placeholder for a real NLI / embedding model) ---

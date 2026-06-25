@@ -11,8 +11,10 @@ from .kernels import pairwise_distance_compatibility
 from .tracking import temporal_prior, track_sequence, synthetic_sequence
 from .consensus import (
     relax_truth, agreement_to_compatibility, anchor_prior, truth_report,
-    lexical_agreement, TRUTH_NAMES, VFALSE, ISH, VTRUE,
+    lexical_agreement, extract_claims, TRUTH_NAMES, VFALSE, ISH, VTRUE,
 )
+from .nli import NLIAgreement          # transformers/torch imported lazily on use
+from .llm_judge import LLMAgreement, extract_claims_llm  # anthropic imported lazily
 
 __all__ = [
     "RelaxationLabeler",
@@ -26,6 +28,10 @@ __all__ = [
     "anchor_prior",
     "truth_report",
     "lexical_agreement",
+    "extract_claims",
+    "NLIAgreement",
+    "LLMAgreement",
+    "extract_claims_llm",
     "TRUTH_NAMES",
     "VFALSE",
     "ISH",
