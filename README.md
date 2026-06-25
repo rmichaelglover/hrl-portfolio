@@ -45,6 +45,11 @@ the net unfolds to drape the manifold, undecidable claims at its peak:
 
 ![SOM unfolding](assets/som_unfold.gif)
 
+**🕊️ …and the leap of faith** — where Gödel's chasm meets Kierkegaard: refuse to
+cross and starve, or leap by the absurd and flourish:
+
+![The leap of faith](assets/leap_of_faith.gif)
+
 One engine, four worlds — every chart is real output (`python make_figures.py`,
 full set in [`assets/`](assets/README.md)):
 
@@ -301,6 +306,27 @@ python examples/som_demo.py     # 94% tighter quantization; the map self-segment
 ```
 
 ![SOM unfolding over the truth manifold](assets/som_unfold.gif)
+
+## 🕊️ The leap of faith — rational irrationality
+
+Gödel showed reason cannot bridge every gap: some truths are real but unprovable
+from within the system — the `ish` chasm of the Gödel demo. Kierkegaard stood at
+that same gap and called the crossing **the leap of faith** — not the abandonment
+of reason (that comes out *false* here), but a commitment *responsive to* the
+limit reason itself reveals, yet not derived from it. Rational **and** irrational
+at once.
+
+And it isn't optional. An agent that refuses to commit hovers at the edge of the
+chasm and its vitality drains — it **starves** (the apprehensive bug that won't
+cross into uncharted territory). The one that leaps — committing across the
+boundary before all the proof is in — flourishes. *To refuse the leap is despair;
+to refuse to cross is to starve. Life requires leaps.*
+
+```bash
+python examples/kierkegaard_leap_demo.py
+```
+
+![The leap of faith](assets/leap_of_faith.gif)
 
 ## Test
 
