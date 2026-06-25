@@ -20,6 +20,17 @@ capture** and to a **syncretistic, weighted consensus of physical models**.
 
 ---
 
+## 🖼️ Gallery
+
+One engine, four worlds — every chart is real output (`python make_figures.py`,
+full set in [`assets/`](assets/README.md)):
+
+| 🎯 Core | 🕺 Mocap tracking |
+|---|---|
+| ![core](assets/core_convergence.png) | ![mocap](assets/mocap_tracks.png) |
+| **⚛️ Physics consensus** | **♟️ Chess maxims** |
+| ![consensus](assets/consensus_physics.png) | ![chess](assets/chess_maxims.png) |
+
 ## What makes this core different
 
 Classic relaxation labeling (Rosenfeld–Hummel–Zucker) has two well-known
