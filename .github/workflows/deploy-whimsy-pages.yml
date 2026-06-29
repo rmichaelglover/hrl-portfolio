@@ -24,6 +24,8 @@ jobs:
           rm -rf public || true
           mkdir -p public
           cp -r whimsy-chess/* public/
+          # Also make Maestro the site root
+          cp -f whimsy-chess/maestro.html public/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
