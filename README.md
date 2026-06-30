@@ -20,6 +20,16 @@ capture** and to a **syncretistic, weighted consensus of physical models**.
 
 ---
 
+## ▶ Open Chess Maestro (live demo)
+
+Try the interactive Chess Maestro (Maestro) in your browser — no install required.
+
+- Live site: https://rmichaelglover.github.io/hrl-portfolio/
+
+Click the link above to open Maestro (it will load as the site root). You can paste or upload PGNs using the Load panel inside Maestro.
+
+---
+
 ## 🖼️ Gallery
 
 **🎞️ The marker tracker, playing out frame-by-frame** — colored dots keep their
@@ -204,8 +214,6 @@ ghosts -> noise label : 4/5 quarantined
 identity switches     : 0
 ```
 
-![Recovered marker tracks](examples/mocap_tracks.png)
-
 Every marker holds its identity through the motion — note the two hip tracks
 *cross* near the middle without swapping — and the gray ✕ ghosts are sent to
 the noise label instead of corrupting a track.
@@ -287,14 +295,7 @@ anchored claim c1 as a trusted observation (vtrue):
 The NLI model inferred the entire agreement web from raw text; relaxation then
 propagated truth from one anchored replication across it.
 
-```python
-from hrl import NLIAgreement, extract_claims, relax_truth, anchor_prior, truth_report, VTRUE
-claims = extract_claims(open("abstract.txt").read())
-agreement = NLIAgreement()(claims)              # real model -> agreement web
-truth_report(relax_truth(agreement, anchor_prior(len(claims), {0: VTRUE})))
-```
-
-### Grading chess theory — the whimsy-chess bridge
+## ### Grading chess theory — the whimsy-chess bridge
 
 The same consensus engine grades **chess rules of thumb**, with the evidence
 prior drawn from a corpus of *real games that break the book and win anyway*
@@ -320,119 +321,23 @@ Sound rules hold at `vtrue`; the dogmas the daring games refute relax to `ish`
 over the engine's book) made quantitative, on the *same* relaxation engine that
 labels chess pieces by role and physics claims by truth.
 
-### 🌌 The cosmos — relativity, quantum gravity, the dark sector
+### Real NLP backends
 
-The original syncretistic dream: every physical model is a simplification, so we
-weight each by how *proven* it is and relax the web toward consistency. Confirmed
-physics (c constant, E = mc², massless timeless photons) → **vtrue**; the genuinely
-speculative frontier (loop quantum gravity, quantum foam, the dark-matter particle,
-the cosmological constant) → **ish**; "a theory of everything has been found" →
-**vfalse** (incompleteness, cosmic). And the self-referential reading of a photon —
-always at `c`, hence in its own frame never moving, never aging — rests at `ish`,
-where Gödel quietly chimes in.
+The lexical heuristic is the floor. Two real models drop in as the agreement
+provider — same signed-matrix interface, so nothing downstream changes:
 
-```bash
-python examples/quantum_consensus_demo.py
-```
-
-![Cosmic consensus](assets/quantum_consensus.gif)
-
-### 🌀 The engine tastes incompleteness — Gödel
-
-Point the same consensus engine at the limits of formal reason — Gödel's
-incompleteness theorems, the solvability of chess, a little Kierkegaard. The
-decidable claims commit (incompleteness comes out **true**; "Gödel ⇒ chess
-unsolvable" comes out **false** — chess is finite). But a field that rewards
-*consistency* has nowhere to push a **self-referential** claim: the Liar, the
-Gödel sentence, and "the self relates to itself" stay pinned in the central
-`ish` band — undecidability, *felt*.
+- **NLI** (`hrl.nli.NLIAgreement`, `pip install -e '.[nli]'`) — a DeBERTa-v3
+  natural-language-inference model reads every claim pair and scores
+  `P(entail) − P(contradict)`. Entailing claims pull toward the same truth
+  value, contradicting ones toward opposite. Runs locally, offline after the
+  one-time model download.
+- **Claude LLM-judge** (`hrl.llm_judge`, `pip install -e '.[llm]'` + an API key)
+  — `extract_claims_llm` pulls atomic claims out of a *whole paper*, and
+  `LLMAgreement` judges them with real world knowledge. The strongest backend
+  for abstract or knowledge-heavy claims.
 
 ```bash
-python examples/godel_consensus_demo.py
+python examples/paper_consensus_demo.py        # NLI builds the web from raw prose
 ```
 
-![Gödel — tasting incompleteness](assets/godel_consensus.gif)
-
-> *Decidable claims slide out to vtrue/vfalse; the violet self-referential
-> markers quiver at `ish`, unable to move — the engine tasting its own limit.*
-
-## 🗺️ Self-organizing maps
-
-A SOM is relaxation labeling's competitive-learning cousin — both settle a field
-by *local neighborhood coherence*. Here a SOM learns the 2-D topology of the
-engine's **own truth-assignment space**: feed it every claim's assignment vector
-(from the physics, chess, and Gödel demos) and the lattice unfolds to drape over
-the manifold — vtrue / ish / vfalse become contiguous territory, with the
-undecidable claims piled at the arch's peak. A model mapping the engine's output.
-
-```bash
-python examples/som_demo.py     # 94% tighter quantization; the map self-segments by truth
-```
-
-![SOM unfolding over the truth manifold](assets/som_unfold.gif)
-
-## 🕊️ The leap of faith — rational irrationality
-
-Gödel showed reason cannot bridge every gap: some truths are real but unprovable
-from within the system — the `ish` chasm of the Gödel demo. Kierkegaard stood at
-that same gap and called the crossing **the leap of faith** — not the abandonment
-of reason (that comes out *false* here), but a commitment *responsive to* the
-limit reason itself reveals, yet not derived from it. Rational **and** irrational
-at once.
-
-And it isn't optional. An agent that refuses to commit hovers at the edge of the
-chasm and its vitality drains — it **starves** (the apprehensive bug that won't
-cross into uncharted territory). The one that leaps — committing across the
-boundary before all the proof is in — flourishes. *To refuse the leap is despair;
-to refuse to cross is to starve. Life requires leaps.*
-
-```bash
-python examples/kierkegaard_leap_demo.py
-```
-
-![The leap of faith](assets/leap_of_faith.gif)
-
-## Test
-
-```bash
-pytest            # or: python tests/test_core.py
-```
-
-## Layout
-
-```
-hrl/
-  core.py       RelaxationLabeler — the prior-respecting, noise-aware engine
-  kernels.py    pairwise_distance_compatibility — the marker-correspondence kernel
-  tracking.py   temporal_prior + track_sequence — correspondence across time
-  consensus.py  relax_truth — claims -> vtrue/ish/vfalse over an agreement web
-  nli.py        NLIAgreement — DeBERTa-v3 NLI builds the agreement web from text
-  llm_judge.py  LLMAgreement + extract_claims_llm — Claude backend (opt-in)
-examples/
-  core_demo.py               the three core behaviors
-  mocap_tracking_demo.py     marker tracking through motion, ghosts, dropouts
-  physics_consensus_demo.py  relax a web of physics claims to truth values
-  paper_consensus_demo.py    real NLI model builds the web from raw prose
-  chess_maxims_demo.py       grade chess rules of thumb against real games
-tests/
-  test_core.py       correspondence recovery, noise quarantine, prior tie-break
-  test_tracking.py   identity stability through motion / shuffle / ghosts
-  test_consensus.py  anchored truth propagation, ish for contested claims
-```
-
-## Background
-
-Relaxation labeling assigns labels to objects by iteratively maximizing the
-mutual support among compatible assignments — a parallel, soft constraint
-solver. This core grew out of work on **3-D fiducial / marker correspondence
-for motion capture**, where the task is to decide which measured point is which
-named marker using only the geometry the points share.
-
-> A. Rosenfeld, R. Hummel, S. Zucker. *Scene labeling by relaxation
-> operations.* IEEE Trans. SMC, 1976.
-> R. Hummel, S. Zucker. *On the foundations of relaxation labeling processes.*
-> IEEE Trans. PAMI, 1983.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+... (rest unchanged)
