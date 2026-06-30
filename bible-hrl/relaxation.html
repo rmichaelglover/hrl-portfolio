@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch Relaxation Labeling Settle — Hath any seen God?</title>
+<style>
+  :root{--bg:#0e0c16;--ink:#ece7f5;--dim:#9b93b8;--red:#ff5470;--green:#3ddc97;--gold:#e8c170;--line:#2b2740}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#231b3a,var(--bg));
+       color:var(--ink);font:16px/1.5 ui-serif,Georgia,serif;text-align:center}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 20px 70px}
+  h1{font-size:clamp(24px,4.5vw,40px);margin:0 0 6px}
+  h1 small{display:block;color:var(--gold);font-size:.42em;letter-spacing:3px;text-transform:uppercase;margin-top:12px}
+  .lede{color:var(--dim);max-width:680px;margin:12px auto 18px;font-size:15px}
+  #stage{width:100%;height:560px;display:block}
+  .ctl{display:flex;gap:14px;align-items:center;justify-content:center;margin:14px 0}
+  button{background:#1d1933;color:var(--ink);border:1px solid var(--line);border-radius:8px;
+         padding:8px 18px;font:15px ui-serif,Georgia,serif;cursor:pointer}
+  button:hover{background:#2a2444}
+  input[type=range]{width:280px;accent-color:var(--gold)}
+  .it{font:13px ui-monospace,monospace;color:var(--dim);min-width:130px}
+  .key{color:var(--dim);font-size:13px;margin-top:6px}
+  .key b{color:var(--gold)}
+  code{background:#1d1933;padding:1px 6px;border-radius:5px;color:var(--gold);font-size:13px}
+</style></head>
+<body><div class="wrap">
+<h1>Watch the Engine Settle<small>relaxation labeling, one iteration at a time — “Hath any man seen God?”</small></h1>
+<p class="lede">Ten verses; an NLI web of who-agrees-with-whom. We <b>seed one verse</b> (<code>John 1:18</code>, “no man hath seen God”) and let
+<code>hrl.consensus</code> relax. Watch belief cascade: allies glide right (<span style="color:var(--green)">agree</span>), contradictors left
+(<span style="color:var(--red)">contradict</span>), an outlier drifts to <b>noise</b>. No verdict on faith — only structure.</p>
+<svg id="stage"></svg>
+<div class="ctl">
+  <button id="play">⏸ Pause</button>
+  <button id="replay">⟲ Replay</button>
+  <input id="scrub" type="range" min="0" max="100" value="0">
+  <span class="it" id="itlabel">iter 0</span>
+</div>
+<div class="key">left = <b style="color:var(--red)">contradicts the seed</b> · right = <b style="color:var(--green)">agrees with the seed</b> · ◆ gold ring = the seed · faded = settled to <b>noise</b></div>
+<p style="margin-top:22px"><a href="index.html" style="color:var(--gold);text-decoration:none">← back to the overview</a></p>
+</div>
+<script>
+const D = {"refs": ["John 1:18", "1 John 4:12", "Exodus 33:20", "1 Timothy 6:16", "Genesis 32:30", "Exodus 33:11", "Exodus 24:10", "Isaiah 6:1", "Amos 9:1", "Job 42:5"], "texts": ["No man hath seen God at any time, the only begotten Son, which is in the bosom of the Father, he hath declared him.", "No man hath seen God at any time. If we love one another, God dwelleth in us, and his love is perfected in us.", "And he said, Thou canst not see my face: for there shall no man see me, and live.", "Who only hath immortality, dwelling in the light which no man can approach unto; whom no man hath seen, nor can see: …", "And Jacob called the name of the place Peniel: for I have seen God face to face, and my life is preserved.", "And the LORD spake unto Moses face to face, as a man speaketh unto his friend. And he turned again into the camp: but…", "And they saw the God of Israel: and there was under his feet as it were a paved work of a sapphire stone, and as it w…", "In the year that king Uzziah died I saw also the LORD sitting upon a throne, high and lifted up, and his train filled…", "I saw the LORD standing upon the altar: and he said, Smite the lintel of the door, that the posts may shake: and cut …", "I have heard of thee by the hearing of the ear: but now mine eye seeth thee."], "edges": [{"i": 0, "k": 1, "w": 0.118}, {"i": 0, "k": 3, "w": 0.124}, {"i": 0, "k": 4, "w": -0.999}, {"i": 0, "k": 5, "w": -0.797}, {"i": 0, "k": 6, "w": -0.999}, {"i": 0, "k": 7, "w": -0.999}, {"i": 0, "k": 8, "w": -0.771}, {"i": 0, "k": 9, "w": -0.989}, {"i": 1, "k": 3, "w": 0.137}, {"i": 1, "k": 4, "w": -0.999}, {"i": 1, "k": 5, "w": -0.879}, {"i": 1, "k": 6, "w": -0.999}, {"i": 1, "k": 7, "w": -0.999}, {"i": 1, "k": 8, "w": -0.804}, {"i": 1, "k": 9, "w": -0.993}, {"i": 2, "k": 3, "w": 0.124}, {"i": 2, "k": 4, "w": -0.877}, {"i": 2, "k": 5, "w": -0.967}, {"i": 2, "k": 6, "w": -0.559}, {"i": 2, "k": 8, "w": -0.485}, {"i": 2, "k": 9, "w": -0.683}, {"i": 3, "k": 4, "w": -0.929}, {"i": 3, "k": 8, "w": 0.12}, {"i": 3, "k": 9, "w": -0.282}, {"i": 5, "k": 8, "w": 0.1}, {"i": 6, "k": 8, "w": 0.151}, {"i": 7, "k": 8, "w": -0.499}], "frames": [[0.925, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.9308, 0.0105, 0.0, 0.0511, -0.1891, -0.2444, -0.2363, -0.2372, -0.2407, -0.2421], [0.947, 0.1254, 0.209, 0.1786, -0.2898, -0.3578, -0.3459, -0.351, -0.3551, -0.3551], [0.9575, 0.2212, 0.3547, 0.275, -0.3758, -0.4038, -0.3936, -0.4022, -0.4037, -0.4023], [0.9635, 0.2841, 0.4149, 0.3362, -0.4121, -0.4225, -0.4146, -0.425, -0.4242, -0.422], [0.9667, 0.3215, 0.4411, 0.3696, -0.428, -0.4305, -0.424, -0.435, -0.4331, -0.4305], [0.9685, 0.3429, 0.4532, 0.3872, -0.435, -0.4339, -0.4282, -0.4393, -0.4369, -0.4342], [0.9695, 0.3549, 0.4589, 0.3962, -0.4382, -0.4353, -0.4302, -0.4411, -0.4385, -0.4357], [0.97, 0.3615, 0.4618, 0.4009, -0.4395, -0.4359, -0.431, -0.4418, -0.4391, -0.4363], [0.9703, 0.3651, 0.4633, 0.4032, -0.4401, -0.4361, -0.4313, -0.4421, -0.4394, -0.4366], [0.9705, 0.3671, 0.4641, 0.4044, -0.4404, -0.4362, -0.4315, -0.4421, -0.4395, -0.4366], [0.9706, 0.3681, 0.4645, 0.405, -0.4405, -0.4362, -0.4315, -0.4421, -0.4395, -0.4366], [0.9706, 0.3687, 0.4647, 0.4053, -0.4405, -0.4362, -0.4315, -0.4421, -0.4395, -0.4366], [0.9706, 0.369, 0.4648, 0.4054, -0.4405, -0.4361, -0.4315, -0.4421, -0.4394, -0.4366], [0.9707, 0.3691, 0.4649, 0.4055, -0.4405, -0.4361, -0.4315, -0.4421, -0.4394, -0.4366], [0.9707, 0.3692, 0.4649, 0.4055, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4366], [0.9707, 0.3692, 0.465, 0.4055, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4366], [0.9707, 0.3693, 0.465, 0.4055, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365], [0.9707, 0.3693, 0.465, 0.4056, -0.4405, -0.4361, -0.4315, -0.442, -0.4394, -0.4365]], "final": [{"truth": "vtrue", "score": 0.971, "noise": false}, {"truth": "vtrue", "score": 0.369, "noise": false}, {"truth": "vtrue", "score": 0.465, "noise": false}, {"truth": "vtrue", "score": 0.406, "noise": true}, {"truth": "vfalse", "score": -0.44, "noise": false}, {"truth": "vfalse", "score": -0.436, "noise": false}, {"truth": "vfalse", "score": -0.431, "noise": false}, {"truth": "vfalse", "score": -0.442, "noise": false}, {"truth": "vfalse", "score": -0.439, "noise": false}, {"truth": "vfalse", "score": -0.437, "noise": false}], "n_iter": 25};
+const svg = document.getElementById('stage');
+const ns="http://www.w3.org/2000/svg";
+const W=1000,H=560,padTop=70,padBot=40,cx=W/2,amp=W*0.40;
+svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+const n=D.refs.length, T=D.n_iter;
+const yOf=i=> padTop + (H-padTop-padBot)*(n>1? i/(n-1):.5);
+const mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+// color from value in [-1,1]: red -> gray -> green
+function col(v){ const g={r:155,g:147,b:184};
+  if(v>=0){return `rgb(${Math.round(lerp(g.r,61,v))},${Math.round(lerp(g.g,220,v))},${Math.round(lerp(g.b,151,v))})`;}
+  return `rgb(${Math.round(lerp(g.r,255,-v))},${Math.round(lerp(g.g,84,-v))},${Math.round(lerp(g.b,112,-v))})`;
+}
+// static backdrop: tinted zones + divider
+svg.appendChild(mk('rect',{x:0,y:padTop-24,width:cx,height:H-padTop-padBot+34,fill:'#ff5470',opacity:0.05}));
+svg.appendChild(mk('rect',{x:cx,y:padTop-24,width:cx,height:H-padTop-padBot+34,fill:'#3ddc97',opacity:0.05}));
+svg.appendChild(mk('line',{x1:cx,y1:padTop-24,x2:cx,y2:H-padBot+8,stroke:'#473f63','stroke-dasharray':'4 6'}));
+function zlabel(x,t,c){const e=mk('text',{x:x,y:46,fill:c,'font-size':13,'text-anchor':'middle','font-family':'ui-sans-serif'});e.textContent=t;svg.appendChild(e);}
+zlabel(cx*0.5,'contradicts the seed','#ff8095'); zlabel(cx*1.5,'agrees with the seed','#7fe9bf');
+// edges + nodes (created once, updated per frame)
+const edgeEls = D.edges.map(e=> { const l=mk('path',{fill:'none',
+  stroke: e.w>0?'#3ddc97':'#ff5470','stroke-width':0.7+Math.abs(e.w)*2,'stroke-opacity':0.12+Math.abs(e.w)*0.4}); svg.appendChild(l); return l;});
+const nodeEls=[], labelEls=[];
+for(let i=0;i<n;i++){
+  const c=mk('circle',{r:i===0?11:8,cy:yOf(i),stroke:i===0?'#e8c170':'none','stroke-width':i===0?3:0});
+  svg.appendChild(c); nodeEls.push(c);
+  const t=mk('text',{y:yOf(i)-14,'font-size':12,'text-anchor':'middle','font-family':'ui-monospace,monospace',fill:'#cfc7e6'});
+  t.textContent=D.refs[i]+(i===0?' ◆':''); svg.appendChild(t); labelEls.push(t);
+}
+function valAt(ft){ // interpolated value array at fractional frame ft
+  const a=Math.floor(ft), b=Math.min(a+1,T-1), f=ft-a;
+  return D.frames[a].map((v,i)=>lerp(v, D.frames[b][i], f));
+}
+function render(ft){
+  const v=valAt(ft);
+  const xs=v.map(val=>cx+clamp(val,-1,1)*amp);
+  for(let i=0;i<n;i++){
+    const settledNoise = D.final[i].noise && ft>T-1.5;
+    nodeEls[i].setAttribute('cx',xs[i]);
+    nodeEls[i].setAttribute('fill',col(v[i]));
+    nodeEls[i].setAttribute('opacity', settledNoise?0.28:1);
+    labelEls[i].setAttribute('x',xs[i]); labelEls[i].setAttribute('opacity',settledNoise?0.4:1);
+  }
+  D.edges.forEach((e,j)=>{ const x1=xs[e.i],y1=yOf(e.i),x2=xs[e.k],y2=yOf(e.k);
+    const my=(y1+y2)/2, mx=(x1+x2)/2 + (x2-x1>0?40:-40);
+    edgeEls[j].setAttribute('d',`M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}`);});
+  document.getElementById('itlabel').textContent='iter '+Math.round(ft);
+  document.getElementById('scrub').value=Math.round(ft/(T-1)*100);
+}
+let t=0, playing=true, last=null;
+function tick(ts){ if(last==null)last=ts; const dt=(ts-last)/1000; last=ts;
+  if(playing){ t+=dt*4.0; if(t>T-1){t=T-1; playing=false; document.getElementById('play').textContent='▶ Play';} render(t);}
+  requestAnimationFrame(tick);}
+render(0); requestAnimationFrame(tick);
+document.getElementById('play').onclick=function(){ if(t>=T-1){t=0;} playing=!playing; this.textContent=playing?'⏸ Pause':'▶ Play'; last=null;};
+document.getElementById('replay').onclick=function(){ t=0; playing=true; last=null; document.getElementById('play').textContent='⏸ Pause';};
+document.getElementById('scrub').oninput=function(){ playing=false; document.getElementById('play').textContent='▶ Play'; t=this.value/100*(T-1); render(t);};
+</script>
+</body></html>
