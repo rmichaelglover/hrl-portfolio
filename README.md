@@ -143,6 +143,13 @@ head and a tail — a heritable re-targeting with no genomic change.
 → **[Open the live two-headed-planaria demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis/)**
  · [research proposal](morphogenesis/proposal.md)
 
+**🌱 A body grows itself — morphogenesis on a *growing graph* (Milestone 2).** No fixed
+lattice: a single seed-cell grows by recruiting neighbours (division), every cell labels
+itself each step by relaxation, then the creature is amputated and *regrows* — wild-type a
+tail, the setpoint-reprogrammed a second head, all on a living, changing substrate.
+
+→ **[Open the live growing-body demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-grow/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
