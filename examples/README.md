@@ -32,6 +32,24 @@ its identity, ghosts go to noise.
 
 ---
 
+## 🛏️ `body_pos_demo.py` — sleep posture from an accelerometer
+```bash
+python examples/body_pos_demo.py
+```
+A wearable's gravity vector is labeled with a body position each sample. **The
+prior is absolute fit** (which way is down?) — essential, because the six
+canonical directions form a symmetric octahedron that pure geometry can't
+orient. Roll-overs leave the gravity sphere and go to noise. **34/34 postures,
+6/6 roll-overs quarantined.**
+
+![body position](../assets/body_pos.png)
+
+**🎞️ Watch it settle** (`python make_body_pos_gif.py`):
+
+![body position animation](../assets/body_pos.gif)
+
+---
+
 ## ⚛️ `physics_consensus_demo.py` — claims → truth
 ```bash
 python examples/physics_consensus_demo.py

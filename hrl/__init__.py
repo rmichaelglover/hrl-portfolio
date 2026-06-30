@@ -17,6 +17,10 @@ from .nli import NLIAgreement          # transformers/torch imported lazily on u
 from .llm_judge import LLMAgreement, extract_claims_llm  # anthropic imported lazily
 from .som import SelfOrganizingMap
 from .morphogenesis import body_plan, regenerate
+from .body_pos import (
+    classify_session, synthetic_session, canonical_positions,
+    affinity_prior, POSITION_NAMES,
+)
 
 __all__ = [
     "RelaxationLabeler",
@@ -37,6 +41,11 @@ __all__ = [
     "SelfOrganizingMap",
     "body_plan",
     "regenerate",
+    "classify_session",
+    "synthetic_session",
+    "canonical_positions",
+    "affinity_prior",
+    "POSITION_NAMES",
     "TRUTH_NAMES",
     "VFALSE",
     "ISH",

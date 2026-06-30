@@ -28,6 +28,22 @@ to the noise label. **146/146 identity, 0 switches.**
 
 ---
 
+## 🛏️ Body-position labeling
+![body position](body_pos.png)
+
+*Left:* a wearable accelerometer's gravity vector lives on the gravity sphere
+and snaps to one of six canonical postures (colored anchors); roll-over spikes
+fly off the sphere and flash gray ✕ to the noise label. *Right:* the night's
+hypnogram, labeled by relaxation — **100% posture, every roll-over quarantined.**
+The absolute-fit prior is essential: the canonical directions form a symmetric
+octahedron, so without it the geometry alone collapses opposite axes together.
+
+**🎞️ Animated, settling over iterations** (`python make_body_pos_gif.py`):
+
+![body position animation](body_pos.gif)
+
+---
+
 ## ⚛️ Physics consensus
 ![consensus](consensus_physics.png)
 
