@@ -204,6 +204,15 @@ today, with the October-2023 body-position burst standing out.
 
 → **[Open the live timeline »](https://rmichaelglover.github.io/hrl-portfolio/chronology/)**
 
+## 🚂 Beena Train-Brake Inspection — the engine's first application (2014, reborn)
+
+The earliest link in the chain: a 2014 automatic safety inspection that detected **line segments**
+in a train **bogie** image and labelled each as a **brake component** by relaxation labeling. The
+real 2014 compatibility tensor (33 lines × 4 brake parts) now runs through the *same* modern `hrl`
+engine — watch the 33 detected lines settle onto their brake components. (Proprietary imagery kept private.)
+
+→ **[Open the live Beena demo »](https://rmichaelglover.github.io/hrl-portfolio/beena/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
