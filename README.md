@@ -109,7 +109,7 @@ page ranks 29 famous contradictions, reveals where the machine goes *blind*
 arc-web of tensions across the four Gospels. Scholarly textual analysis; no verdict
 on faith.
 
-→ **[Open the live visualization »](bible-hrl/)**
+→ **[Open the live visualization »](https://rmichaelglover.github.io/hrl-portfolio/bible-hrl/)**
 
 ## 🧬 Morphogenesis — the engine grows a body
 
