@@ -12,10 +12,16 @@ narrated, musical, emoji study app.
 Two surfaces, one cast of characters (the **Woodland Agents** 🦊🐲🦁 — you — vs.
 the **Misfit Squad** 👸🤴🦏):
 
-- **🎹 Chess Maestro** (`maestro.html`) — a self-contained PWA: emoji board,
+- **🎹 Chess Maestro** ([`maestro.html`](maestro.html)) — a self-contained PWA: emoji board,
   character narration, terrain & role overlays, and **music generated from the
   moves** (key + meter inferred from the game).
 - **⌨️ Vim Chess** (`chess_emoji.vim`) — the same study, native in a Vim buffer.
+
+### [▶️ **Play Chess Maestro now →**](maestro.html)
+
+Runs straight in the browser — no install needed. On phone or desktop, use your
+browser's **"Install" / "Add to Home Screen"** to keep it as an offline app: it's
+a full PWA (manifest + service worker), so it plays with no network at all.
 
 ---
 
@@ -116,12 +122,13 @@ Step to the end and Queen Dilorias 🐲 stampedes onto g7 for mate:
 
 | Surface | How |
 |---|---|
-| 🎹 Maestro | open `maestro.html` in any browser (it's fully self-contained) |
+| 🎹 Maestro | [**open `maestro.html`**](maestro.html) in any browser (fully self-contained); or **Install** it as an offline PWA |
 | ⌨️ Vim | `vim -c 'source chess_emoji.vim' -c 'ChessEmoji kadas'` — step with `l`/`h` |
 
 🔊 **Audio:** in Maestro, press **🔊 Music**, or **⬇ Export → WAV / MIDI / Suno
 prompt** — the key and meter are inferred from the moves. (Generated live in the
 browser, so it isn't captured in these stills.)
 
-*The full source (PWA manifest/service-worker, Roblox port, more games) lives in
-the author's private working repo; this is the polished showcase.*
+*The Maestro PWA here is fully installable (manifest + service worker bundled). The
+Roblox port and the broader engine live in the author's private working repo; this
+is the polished, playable showcase.*
