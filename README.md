@@ -135,6 +135,14 @@ python examples/morphogenesis_demo.py
 
 ![Morphogenesis — a body heals itself](assets/morphogenesis.gif)
 
+**🐛🐛 Editable anatomical memory — Levin's two-headed planaria, in silico.** Edit
+*only* the prior (the bioelectric setpoint), leaving the kernel and labels (the
+"genome") untouched, and the same amputation regenerates **two heads** instead of a
+head and a tail — a heritable re-targeting with no genomic change.
+
+→ **[Open the live two-headed-planaria demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis/)**
+ · [research proposal](morphogenesis/proposal.md)
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
