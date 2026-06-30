@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chirality — where the 2-simplex sees what pairs cannot</title>
+<style>
+:root{--bg:#0e0c16;--ink:#ece7f5;--dim:#9b93b8;--gold:#e8c170;--line:#2b2740;--cyan:#37e6ff;--red:#ff476f}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#231b3a,var(--bg));color:var(--ink);font:16px/1.5 ui-serif,Georgia,serif;text-align:center}
+.wrap{max-width:980px;margin:0 auto;padding:34px 16px 70px}
+h1{font-size:clamp(22px,4vw,36px);margin:0 0 6px}
+h1 small{display:block;color:var(--cyan);font-size:.44em;letter-spacing:3px;text-transform:uppercase;margin-top:12px}
+.lede{color:var(--dim);max-width:740px;margin:12px auto 14px;font-size:15px}
+.proof{background:#0b1022;border:1px solid var(--line);border-radius:12px;padding:14px 18px;max-width:760px;margin:0 auto 14px;font:14px ui-monospace,monospace;text-align:left}
+.proof b{color:var(--gold)} .proof .id{color:var(--cyan)} .proof .op{color:var(--red)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+button{background:#1d1933;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 14px;font:13px ui-monospace,monospace;cursor:pointer}
+button.on{border-color:var(--cyan);color:var(--cyan)} button:hover{background:#2a2444}
+svg{width:100%;max-width:840px;height:430px;background:#070912;border:1px solid var(--line);border-radius:12px}
+.cap{color:var(--dim);font-size:13.5px;margin-top:8px}
+.legend{color:var(--dim);font-size:13px;margin-top:6px}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:middle;margin:0 4px}
+a{color:var(--cyan);text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>Chirality<small>where the 2-simplex sees what pairs cannot</small></h1>
+<p class="lede">A field of oriented triangles, three labels. The pairwise rule "the three cells differ" is satisfied by a triangle read
+<b>clockwise</b> or <b>counter-clockwise</b> alike. Handedness is invisible to edges — but a <b>2-simplex</b> can demand 0→1→2 CCW.</p>
+<div class="proof" id="proof"></div>
+<div class="bar">
+  <button id="bCCW" class="on">CCW field</button>
+  <button id="bCW">CW mirror</button>
+  <button id="bHigh">higher-order result</button>
+  <button id="bPair">pairwise result</button>
+</div>
+<svg id="cx" viewBox="0 0 840 430"></svg>
+<div class="cap" id="cap"></div>
+<div class="legend"><span><i style="background:#ff8c42"></i>0</span><span><i style="background:#3ddc84"></i>1</span><span><i style="background:#5b8cff"></i>2</span>
+  &nbsp;·&nbsp; triangle ring: <span style="color:#37e6ff">cyan = CCW ✓</span> · <span style="color:#ff476f">red = CW</span> · gray = degenerate</div>
+<p style="margin-top:16px"><a href="../simplicial-3d/">← 3D complex</a> · <a href="../bible-hrl/">HRL gallery</a></p>
+</div>
+<script>
+const D={"pos": [[0.0, 0.85], [1.0, -0.85], [-1.0, -0.85], [2.4, 0.85], [3.4, -0.85], [1.4, -0.85], [4.8, 0.85], [5.8, -0.85], [3.8, -0.85], [7.2, 0.85], [8.2, -0.85], [6.2, -0.85], [9.6, 0.85], [10.6, -0.85], [8.6, -0.85], [12.0, 0.85], [13.0, -0.85], [11.0, -0.85], [14.4, 0.85], [15.4, -0.85], [13.4, -0.85], [16.8, 0.85], [17.8, -0.85], [15.8, -0.85], [19.2, 0.85], [20.2, -0.85], [18.2, -0.85], [21.6, 0.85], [22.6, -0.85], [20.6, -0.85], [24.0, 0.85], [25.0, -0.85], [23.0, -0.85], [0.0, 3.25], [1.0, 1.55], [-1.0, 1.55], [2.4, 3.25], [3.4, 1.55], [1.4, 1.55], [4.8, 3.25], [5.8, 1.55], [3.8, 1.55], [7.2, 3.25], [8.2, 1.55], [6.2, 1.55], [9.6, 3.25], [10.6, 1.55], [8.6, 1.55], [12.0, 3.25], [13.0, 1.55], [11.0, 1.55], [14.4, 3.25], [15.4, 1.55], [13.4, 1.55], [16.8, 3.25], [17.8, 1.55], [15.8, 1.55], [19.2, 3.25], [20.2, 1.55], [18.2, 1.55], [21.6, 3.25], [22.6, 1.55], [20.6, 1.55], [24.0, 3.25], [25.0, 1.55], [23.0, 1.55], [0.0, 5.65], [1.0, 3.95], [-1.0, 3.95], [2.4, 5.65], [3.4, 3.95], [1.4, 3.95], [4.8, 5.65], [5.8, 3.95], [3.8, 3.95], [7.2, 5.65], [8.2, 3.95], [6.2, 3.95], [9.6, 5.65], [10.6, 3.95], [8.6, 3.95], [12.0, 5.65], [13.0, 3.95], [11.0, 3.95], [14.4, 5.65], [15.4, 3.95], [13.4, 3.95], [16.8, 5.65], [17.8, 3.95], [15.8, 3.95], [19.2, 5.65], [20.2, 3.95], [18.2, 3.95], [21.6, 5.65], [22.6, 3.95], [20.6, 3.95], [24.0, 5.65], [25.0, 3.95], [23.0, 3.95], [0.0, 8.05], [1.0, 6.35], [-1.0, 6.35], [2.4, 8.05], [3.4, 6.35], [1.4, 6.35], [4.8, 8.05], [5.8, 6.35], [3.8, 6.35], [7.2, 8.05], [8.2, 6.35], [6.2, 6.35], [9.6, 8.05], [10.6, 6.35], [8.6, 6.35], [12.0, 8.05], [13.0, 6.35], [11.0, 6.35], [14.4, 8.05], [15.4, 6.35], [13.4, 6.35], [16.8, 8.05], [17.8, 6.35], [15.8, 6.35], [19.2, 8.05], [20.2, 6.35], [18.2, 6.35], [21.6, 8.05], [22.6, 6.35], [20.6, 6.35], [24.0, 8.05], [25.0, 6.35], [23.0, 6.35], [0.0, 10.45], [1.0, 8.75], [-1.0, 8.75], [2.4, 10.45], [3.4, 8.75], [1.4, 8.75], [4.8, 10.45], [5.8, 8.75], [3.8, 8.75], [7.2, 10.45], [8.2, 8.75], [6.2, 8.75], [9.6, 10.45], [10.6, 8.75], [8.6, 8.75], [12.0, 10.45], [13.0, 8.75], [11.0, 8.75], [14.4, 10.45], [15.4, 8.75], [13.4, 8.75], [16.8, 10.45], [17.8, 8.75], [15.8, 8.75], [19.2, 10.45], [20.2, 8.75], [18.2, 8.75], [21.6, 10.45], [22.6, 8.75], [20.6, 8.75], [24.0, 10.45], [25.0, 8.75], [23.0, 8.75], [0.0, 12.85], [1.0, 11.15], [-1.0, 11.15], [2.4, 12.85], [3.4, 11.15], [1.4, 11.15], [4.8, 12.85], [5.8, 11.15], [3.8, 11.15], [7.2, 12.85], [8.2, 11.15], [6.2, 11.15], [9.6, 12.85], [10.6, 11.15], [8.6, 11.15], [12.0, 12.85], [13.0, 11.15], [11.0, 11.15], [14.4, 12.85], [15.4, 11.15], [13.4, 11.15], [16.8, 12.85], [17.8, 11.15], [15.8, 11.15], [19.2, 12.85], [20.2, 11.15], [18.2, 11.15], [21.6, 12.85], [22.6, 11.15], [20.6, 11.15], [24.0, 12.85], [25.0, 11.15], [23.0, 11.15], [0.0, 15.25], [1.0, 13.55], [-1.0, 13.55], [2.4, 15.25], [3.4, 13.55], [1.4, 13.55], [4.8, 15.25], [5.8, 13.55], [3.8, 13.55], [7.2, 15.25], [8.2, 13.55], [6.2, 13.55], [9.6, 15.25], [10.6, 13.55], [8.6, 13.55], [12.0, 15.25], [13.0, 13.55], [11.0, 13.55], [14.4, 15.25], [15.4, 13.55], [13.4, 13.55], [16.8, 15.25], [17.8, 13.55], [15.8, 13.55], [19.2, 15.25], [20.2, 13.55], [18.2, 13.55], [21.6, 15.25], [22.6, 13.55], [20.6, 13.55], [24.0, 15.25], [25.0, 13.55], [23.0, 13.55]], "tris": [[0, 2, 1], [3, 5, 4], [6, 8, 7], [9, 11, 10], [12, 14, 13], [15, 17, 16], [18, 20, 19], [21, 23, 22], [24, 26, 25], [27, 29, 28], [30, 32, 31], [33, 35, 34], [36, 38, 37], [39, 41, 40], [42, 44, 43], [45, 47, 46], [48, 50, 49], [51, 53, 52], [54, 56, 55], [57, 59, 58], [60, 62, 61], [63, 65, 64], [66, 68, 67], [69, 71, 70], [72, 74, 73], [75, 77, 76], [78, 80, 79], [81, 83, 82], [84, 86, 85], [87, 89, 88], [90, 92, 91], [93, 95, 94], [96, 98, 97], [99, 101, 100], [102, 104, 103], [105, 107, 106], [108, 110, 109], [111, 113, 112], [114, 116, 115], [117, 119, 118], [120, 122, 121], [123, 125, 124], [126, 128, 127], [129, 131, 130], [132, 134, 133], [135, 137, 136], [138, 140, 139], [141, 143, 142], [144, 146, 145], [147, 149, 148], [150, 152, 151], [153, 155, 154], [156, 158, 157], [159, 161, 160], [162, 164, 163], [165, 167, 166], [168, 170, 169], [171, 173, 172], [174, 176, 175], [177, 179, 178], [180, 182, 181], [183, 185, 184], [186, 188, 187], [189, 191, 190], [192, 194, 193], [195, 197, 196], [198, 200, 199], [201, 203, 202], [204, 206, 205], [207, 209, 208], [210, 212, 211], [213, 215, 214], [216, 218, 217], [219, 221, 220], [222, 224, 223], [225, 227, 226], [228, 230, 229]], "labels": {"ccw": [0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1], "cw": [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2], "pairwise": [2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 1, 2, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 1, 1, 1, 2, 2, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1, 1, 1, 0, 2, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0, 0], "higher": [1, 0, 2, 2, 1, 0, 0, 2, 1, 2, 1, 0, 2, 1, 0, 1, 0, 2, 2, 1, 0, 0, 0, 0, 2, 1, 0, 0, 2, 1, 2, 1, 0, 2, 1, 0, 0, 2, 1, 2, 1, 0, 2, 1, 0, 0, 2, 1, 1, 0, 2, 2, 1, 0, 2, 1, 0, 0, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0, 2, 0, 2, 1, 2, 1, 0, 0, 2, 1, 0, 2, 1, 2, 1, 0, 1, 0, 2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 2, 1, 0, 0, 2, 1, 2, 1, 0, 0, 2, 1, 2, 1, 0, 1, 0, 2, 0, 2, 1, 0, 2, 1, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 2, 1, 0, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 2, 1, 0, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 2, 1, 0, 2, 1, 0, 0, 2, 1, 0, 2, 1, 2, 1, 0, 0, 2, 1, 1, 0, 2, 2, 1, 0, 0, 2, 1, 0, 2, 1, 0, 2, 1, 1, 0, 2, 0, 2, 1, 0, 2, 1, 1, 0, 2, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 0, 2, 1, 2, 1, 0]}, "proof": {"pe_ccw": 231, "pe_cw": 231, "E": 231, "he_ccw": [77, 0], "he_cw": [0, 77]}, "dyn": {"pairwise": [2, 2], "higher": [74, 0], "T": 77}}, ns="http://www.w3.org/2000/svg";
+const COL=["#ff8c42","#3ddc84","#5b8cff"], GOOD=new Set(["0,1,2","1,2,0","2,0,1"]), BAD=new Set(["0,2,1","2,1,0","1,0,2"]);
+const svg=document.getElementById('cx'); let which="ccw";
+const P=D.pos, T=D.tris;
+const xs=P.map(p=>p[0]), ys=P.map(p=>p[1]);
+const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+const sc=Math.min(820/(maxx-minx),410/(maxy-miny)), ox=10-minx*sc, oy=10-miny*sc;
+const X=i=>P[i][0]*sc+ox, Y=i=>P[i][1]*sc+oy;
+const mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+function chirCol(t){ return GOOD.has(t)?"#37e6ff":BAD.has(t)?"#ff476f":"#667"; }
+function render(){
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const lab=D.labels[which];
+  T.forEach(([a,b,c])=>{
+    const key=`${lab[a]},${lab[b]},${lab[c]}`;
+    svg.appendChild(mk('polygon',{points:`${X(a)},${Y(a)} ${X(b)},${Y(b)} ${X(c)},${Y(c)}`,
+      fill:'none',stroke:chirCol(key),'stroke-width':2.4,'stroke-linejoin':'round'}));
+    [a,b,c].forEach(v=>svg.appendChild(mk('circle',{cx:X(v),cy:Y(v),r:4.5,fill:COL[lab[v]]})));
+  });
+  const cap={ccw:"CCW field — every triangle reads 0→1→2 counter-clockwise (chirality +).",
+    cw:"CW mirror — every edge still differs (pairwise-perfect!), yet every triangle is flipped.",
+    higher:`higher-order relaxation from a blank slate → ${D.dyn.higher[0]} CCW, ${D.dyn.higher[1]} CW (recovers the handed field).`,
+    pairwise:`pairwise relaxation from a blank slate → ${D.dyn.pairwise[0]} CCW, ${D.dyn.pairwise[1]} CW (frustrated — no chirality signal).`}[which];
+  document.getElementById('cap').textContent=cap;
+}
+const pr=D.proof;
+document.getElementById('proof').innerHTML=
+ `<b>Representational proof — pairwise is blind to chirality</b><br>`+
+ `pairwise energy (edges satisfied):&nbsp; CCW = ${pr.pe_ccw}/${pr.E} &nbsp; CW = ${pr.pe_cw}/${pr.E} &nbsp; <span class="id">→ IDENTICAL — edges cannot tell them apart</span><br>`+
+ `chirality (CCW,CW triangles):&nbsp;&nbsp;&nbsp;&nbsp; CCW field = (${pr.he_ccw}) &nbsp; CW mirror = (${pr.he_cw}) &nbsp; <span class="op">→ OPPOSITE — only the 2-simplex sees it</span>`;
+function pick(id,w){const b=document.getElementById(id);b.onclick=()=>{which=w;['bCCW','bCW','bHigh','bPair'].forEach(x=>document.getElementById(x).classList.remove('on'));b.classList.add('on');render();};}
+pick('bCCW','ccw');pick('bCW','cw');pick('bHigh','higher');pick('bPair','pairwise');
+render();
+</script></body></html>

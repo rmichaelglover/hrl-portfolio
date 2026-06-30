@@ -177,6 +177,15 @@ sparse problems — the next frontier; here edges already suffice.)*
 
 → **[Open the live 3D viewer »](https://rmichaelglover.github.io/hrl-portfolio/simplicial-3d/)**
 
+**🔺👑 Chirality — where the 2-simplex *provably* beats pairwise.** The honest crown of the
+hierarchy claim. A field of oriented triangles: a CCW colouring and its CW mirror have
+**identical pairwise energy** (231/231 edges both — pairwise potentials are *blind* to
+handedness) yet **opposite** chirality. Only the 2-simplex distinguishes them; higher-order
+relaxation recovers the consistent CCW field from scratch while pairwise stays frustrated.
+Chirality / left-right asymmetry is Levin's territory.
+
+→ **[Open the live chirality demo »](https://rmichaelglover.github.io/hrl-portfolio/frustrated/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
