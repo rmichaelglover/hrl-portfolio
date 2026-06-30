@@ -168,6 +168,15 @@ simplex dimensions).
 → **[Open the live simplicial-complex view »](https://rmichaelglover.github.io/hrl-portfolio/simplicial/)**
  · [roadmap](simplicial/roadmap.md)
 
+**🌐 The body in 3D — higher-order relaxation across simplex dimensions (Milestone 3).** A
+rotating 3D organism (drag to spin) as a simplicial complex — 701 cells, 5,160 junctions,
+10,424 tissue-patches. The engine now relaxes across *dimensions*: cell-scale (edges) **and**
+tissue-scale (2-simplices). On this well-posed body the two scales **agree** — a coherent
+multi-scale labelling. *(Honest note: higher-order's distinct advantage needs frustrated /
+sparse problems — the next frontier; here edges already suffice.)*
+
+→ **[Open the live 3D viewer »](https://rmichaelglover.github.io/hrl-portfolio/simplicial-3d/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
