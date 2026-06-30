@@ -196,6 +196,14 @@ a rotating 3D gravity-vector scatter — all from real sensor logs, no synthetic
 
 → **[Open the live real-data testbed »](https://rmichaelglover.github.io/hrl-portfolio/body-pos/)**
 
+## 🗓️ One algorithm, thirteen years — career & contribution timeline
+
+A neutral, factual timeline: career roles (the NewIDByConstraints / relaxation-labeling thread
+highlighted) against the real monthly commit history of the engine — Motion Reality (2010) to
+today, with the October-2023 body-position burst standing out.
+
+→ **[Open the live timeline »](https://rmichaelglover.github.io/hrl-portfolio/chronology/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
