@@ -158,6 +158,16 @@ head cells — it becomes two-headed with **no amputation**. Homeostatic error-c
 
 → **[Open the live remodelling demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-remodel/)**
 
+**🔺 The body as a simplicial complex — the topological substrate for the hierarchy.** Lift
+the body from a graph to a 2-complex (cells = 0-simplices, junctions = 1-simplices, tissue
+patches = 2-simplices). Its **homology** is a health signature: a healthy body is a disk
+(b₁=0); a wound is a **hole** (b₁=1), detected topologically. The white **seams** are the
+anatomical-boundary sub-complex. This is the scaffold for Milestone 3 (relaxation across
+simplex dimensions).
+
+→ **[Open the live simplicial-complex view »](https://rmichaelglover.github.io/hrl-portfolio/simplicial/)**
+ · [roadmap](simplicial/roadmap.md)
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
