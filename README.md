@@ -186,6 +186,16 @@ Chirality / left-right asymmetry is Levin's territory.
 
 → **[Open the live chirality demo »](https://rmichaelglover.github.io/hrl-portfolio/frustrated/)**
 
+## 📊 HRL on REAL data — wearable body-position labeling
+
+The engine on real clinician-labelled accelerometer logs (the Huxley body-position study,
+23 subjects). Each second's gravity vector is labelled a posture by the `RelaxationLabeler`
+(affinity prior + temporal smoothing + noise), calibrated per subject and scored against the
+clinician: **85.2% mean accuracy**. Data tables, a 2D accel timeline, a confusion matrix, and
+a rotating 3D gravity-vector scatter — all from real sensor logs, no synthetic data.
+
+→ **[Open the live real-data testbed »](https://rmichaelglover.github.io/hrl-portfolio/body-pos/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
