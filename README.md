@@ -150,6 +150,14 @@ tail, the setpoint-reprogrammed a second head, all on a living, changing substra
 
 → **[Open the live growing-body demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-grow/)**
 
+**🧠 Remodelling without injury — decision-driven division + apoptosis (Milestone 2.5).**
+Now cells *commit* to an identity, *divide* only where the setpoint wants tissue, and
+*apoptose* (the noise label) when the field disagrees. Flip the posterior setpoint of an
+**intact** one-headed body and its tail cells die in a resorption wave and are replaced by
+head cells — it becomes two-headed with **no amputation**. Homeostatic error-correction.
+
+→ **[Open the live remodelling demo »](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-remodel/)**
+
 ## 🔬 From the original research
 
 The clean core in this repo is the distilled version of a longer body of work —
