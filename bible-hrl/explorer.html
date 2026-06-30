@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verse Explorer — the algorithm's relationships</title>
+<style>
+:root{--bg:#070912;--ink:#e8f0ff;--dim:#7d89b0;--red:#ff476f;--green:#27e0a4;--gold:#ffd34a;--purp:#9b8cff;--line:#1a2138;--cyan:#37e6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;
+  background-image:linear-gradient(#0c1020 1px,transparent 1px),linear-gradient(90deg,#0c1020 1px,transparent 1px);
+  background-size:34px 34px}
+.wrap{max-width:1060px;margin:0 auto;padding:30px 18px 70px}
+h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px;text-align:center;
+   letter-spacing:.5px;text-shadow:0 0 24px rgba(55,230,255,.35)}
+.sub{text-align:center;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:18px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin:0 auto 14px;max-width:760px}
+input,select,button{background:#0c1124;color:var(--ink);border:1px solid var(--line);border-radius:9px;
+  padding:10px 14px;font:15px ui-monospace,monospace}
+input{min-width:260px} button{cursor:pointer;border-color:var(--cyan);color:var(--cyan)}
+button:hover{background:#10182f;box-shadow:0 0 16px rgba(55,230,255,.3)}
+.center-verse{max-width:780px;margin:0 auto 8px;text-align:center;min-height:46px}
+.center-verse .ref{color:var(--gold);font:600 15px ui-monospace,monospace}
+.center-verse .txt{color:var(--ink);font:18px/1.4 ui-serif,Georgia,serif;margin-top:4px}
+#graph{width:100%;height:540px;display:block}
+.legend{display:flex;gap:18px;justify-content:center;color:var(--dim);font-size:13px;margin:4px 0 14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.col h3{margin:0 0 8px;font:600 14px ui-monospace,monospace;letter-spacing:1px}
+.rel{background:#0b1022;border:1px solid var(--line);border-left-width:3px;border-radius:0 10px 10px 0;
+  padding:8px 11px;margin-bottom:8px;cursor:pointer;transition:.12s}
+.rel:hover{background:#101831;transform:translateX(2px)}
+.rel .r{font:600 12px ui-monospace,monospace} .rel .s{float:right;font:12px ui-monospace,monospace;color:var(--dim)}
+.rel .t{font-size:12.5px;color:var(--dim);margin-top:3px}
+.rel.anchor .r::after{content:" ⤤";color:var(--cyan)}
+.hint{text-align:center;color:var(--dim);font-size:12.5px;margin-top:18px}
+a{color:var(--cyan);text-decoration:none}
+.loading{text-align:center;color:var(--dim);padding:40px}
+</style></head>
+<body><div class="wrap">
+<h1>Verse Explorer</h1>
+<div class="sub">the algorithm's relationships, laid bare</div>
+<div class="bar">
+  <input id="pick" list="anchors" placeholder="type a verse, e.g. John 3:16" autocomplete="off">
+  <datalist id="anchors"></datalist>
+  <button id="go">explore →</button>
+  <button id="rnd">🎲 random</button>
+</div>
+<div class="center-verse" id="centerVerse"></div>
+<svg id="graph"></svg>
+<div class="legend">
+  <span><i style="background:var(--red)"></i>contradiction</span>
+  <span><i style="background:var(--green)"></i>harmony</span>
+  <span><i style="background:var(--gold)"></i>ish (related, neutral)</span>
+  <span><i style="background:var(--purp)"></i>unrelated</span>
+  <span style="color:var(--cyan)">⤤ click any ⤤-marked verse to travel there</span>
+</div>
+<div class="cols" id="cols"></div>
+<div class="loading" id="loading">loading the verse-web…</div>
+<p class="hint"><a href="index.html">← back to the overview</a> · a chosen verse glows at the centre; its kin orbit by relationship, nearer = stronger.</p>
+</div>
+<script>
+const ns="http://www.w3.org/2000/svg";
+const KIND={contra:{c:"#ff476f",ang:Math.PI,name:"Most contradictory"},
+            harmony:{c:"#27e0a4",ang:0,name:"Most harmonious"},
+            ish:{c:"#ffd34a",ang:-Math.PI/2,name:"Ish — related, neutral"},
+            unrelated:{c:"#9b8cff",ang:Math.PI/2,name:"Unrelated"}};
+let DATA=null, AID=null, ASET=null, anim=null;
+
+fetch("explorer_data.json").then(r=>r.json()).then(d=>{
+  DATA=d; AID={}; ASET=new Set();
+  d.anchors.forEach(a=>{AID[a.id]=a; ASET.add(a.id);});
+  const dl=document.getElementById("anchors");
+  d.anchors.forEach(a=>{const o=document.createElement("option");o.value=a.id;dl.appendChild(o);});
+  document.getElementById("loading").style.display="none";
+  show(d.anchors.find(a=>a.id==="John 3:16")?"John 3:16":d.anchors[0].id);
+}).catch(e=>{document.getElementById("loading").textContent="could not load explorer_data.json";});
+
+const svg=document.getElementById("graph"), W=1040,H=540,cx=W/2,cy=H/2;
+svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+const mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+function show(id){
+  const a=AID[id]; if(!a) return;
+  document.getElementById("pick").value=id;
+  const cv=document.getElementById("centerVerse");
+  cv.innerHTML=`<div class="ref">${id}</div><div class="txt">“${DATA.verses[id]||""}”</div>`;
+  // group neighbours by kind, spread within each sector
+  const groups={contra:[],harmony:[],ish:[],unrelated:[]};
+  a.neighbors.forEach(nb=>{(groups[nb.kind]||groups.ish).push(nb);});
+  if(anim) cancelAnimationFrame(anim);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  // edges + nodes
+  const placed=[];
+  for(const k in groups){
+    const arr=groups[k].slice().sort((x,y)=>Math.abs(y.signed)-Math.abs(x.signed)).slice(0,8);
+    const base=KIND[k].ang, spread=Math.PI/3;
+    arr.forEach((nb,i)=>{
+      const t=arr.length>1? (i/(arr.length-1)-0.5):0;
+      const ang=base+t*spread;
+      const strength=Math.abs(nb.signed);
+      const rad = k==="unrelated"?260 : k==="ish"?205 : (255-strength*120);
+      placed.push({nb,ang,rad,col:KIND[k].c,k});
+    });
+  }
+  // glow defs
+  const defs=mk("defs",{}); svg.appendChild(defs);
+  defs.innerHTML=`<filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+  const edgeEls=[];
+  placed.forEach(p=>{
+    const x=cx+Math.cos(p.ang)*p.rad, y=cy+Math.sin(p.ang)*p.rad; p.x=x; p.y=y;
+    const e=mk("line",{x1:cx,y1:cy,x2:x,y2:y,stroke:p.col,"stroke-width":0.8+Math.abs(p.nb.signed)*2.2,
+      "stroke-opacity":p.k==="unrelated"?0.22:0.5,"stroke-dasharray":"5 7"}); svg.appendChild(e); edgeEls.push(e);
+  });
+  placed.forEach(p=>{
+    const r=p.k==="unrelated"?4:(5+Math.abs(p.nb.signed)*6);
+    const node=mk("circle",{cx:p.x,cy:p.y,r,fill:p.col,filter:"url(#glow)",
+      opacity:p.k==="unrelated"?0.6:1,style:"cursor:pointer"});
+    node.addEventListener("click",()=>{ if(ASET.has(p.nb.id)) show(p.nb.id); });
+    const tt=mk("title",{}); tt.textContent=`${p.nb.id} (${p.nb.signed>=0?"+":""}${p.nb.signed})`; node.appendChild(tt);
+    svg.appendChild(node);
+    const lab=mk("text",{x:p.x,y:p.y-r-4,fill:p.col,"font-size":10,"text-anchor":"middle","font-family":"ui-monospace"});
+    lab.textContent=p.nb.id; svg.appendChild(lab);
+  });
+  // centre node
+  svg.appendChild(mk("circle",{cx,cy,r:13,fill:"#ffd34a",filter:"url(#glow)"}));
+  const cl=mk("text",{x:cx,y:cy-20,fill:"#ffd34a","font-size":12,"text-anchor":"middle","font-family":"ui-monospace",style:"font-weight:600"});
+  cl.textContent=id; svg.appendChild(cl);
+  // animate edge dash flow
+  let off=0;
+  (function loop(){ off=(off-0.6); edgeEls.forEach(e=>e.setAttribute("stroke-dashoffset",off)); anim=requestAnimationFrame(loop); })();
+  // side panels
+  const cols=document.getElementById("cols"); cols.innerHTML="";
+  ["contra","harmony","ish","unrelated"].forEach(k=>{
+    const arr=groups[k].slice().sort((x,y)=> k==="contra"? x.signed-y.signed : (k==="harmony"? y.signed-x.signed : y.sim-x.sim)).slice(0,5);
+    if(!arr.length) return;
+    const col=document.createElement("div"); col.className="col";
+    col.innerHTML=`<h3 style="color:${KIND[k].c}">${KIND[k].name}</h3>`;
+    arr.forEach(nb=>{
+      const d=document.createElement("div");
+      d.className="rel"+(ASET.has(nb.id)?" anchor":""); d.style.borderLeftColor=KIND[k].c;
+      d.innerHTML=`<div><span class="r">${nb.id}</span><span class="s">${nb.signed>=0?"+":""}${nb.signed}</span></div>
+                   <div class="t">${DATA.verses[nb.id]||""}</div>`;
+      d.addEventListener("click",()=>{ if(ASET.has(nb.id)) show(nb.id); });
+      col.appendChild(d);
+    });
+    cols.appendChild(col);
+  });
+}
+document.getElementById("go").onclick=()=>show(document.getElementById("pick").value.trim());
+document.getElementById("pick").addEventListener("keydown",e=>{if(e.key==="Enter")show(e.target.value.trim());});
+document.getElementById("rnd").onclick=()=>{ if(DATA) show(DATA.anchors[Math.floor(Math.random()*DATA.anchors.length)].id); };
+</script>
+</body></html>
