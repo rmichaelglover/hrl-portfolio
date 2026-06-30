@@ -98,6 +98,19 @@ the book's rules of thumb against real games.
 
 → **[Browse the whimsy-chess showcase »](whimsy-chess/README.md)**
 
+## 📖 Applied: Relaxation Labeling Reads the Bible
+
+The same engine, set upon the **King James scripture** (31,102 verses). An NLI
+front-end (`hrl.nli`) judges pairs of verses by `agree = P(entail) − P(contradict)`
+to surface **contradictions**, **kindred passages**, and **themes** — then a
+relaxation pass sorts the fiercest contradiction-web into camps. The interactive
+page ranks 29 famous contradictions, reveals where the machine goes *blind*
+(it called "seven years" vs "three years" of famine a **harmony**), and draws an
+arc-web of tensions across the four Gospels. Scholarly textual analysis; no verdict
+on faith.
+
+→ **[Open the live visualization »](bible-hrl/)**
+
 ## 🧬 Morphogenesis — the engine grows a body
 
 The circle closes. The same `RelaxationLabeler` that tracks markers, grades
