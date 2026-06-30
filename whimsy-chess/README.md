@@ -118,6 +118,15 @@ Step to the end and Queen Dilorias 🐲 stampedes onto g7 for mate:
 
 ---
 
+## 🗂️ Annotated games
+
+Full board-by-board walkthroughs with the Woodland cast, every critter tracked
+by identity from its home square:
+
+- [**The Kádas Roundup vs. Tschucksl**](games/2026-06-30-kadas-tschucksl.md) — 1.h4, and 🦊 Alexander the fox eats a queen while 🦉 Ella Elouise marches a pawn into a crown. **1–0.**
+
+---
+
 ## ▶️ Run it
 
 | Surface | How |
