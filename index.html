@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hierarchical Relaxation Labeling — the portfolio</title>
+<meta name="description" content="One engine that assigns labels under context — relaxation labeling applied from galaxies to genomes to markets. Interactive, dark-themed portfolio.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#04050b;color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system}
+canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:relative;overflow:hidden;text-align:center;padding:74px 20px 40px;
+ background:radial-gradient(900px 520px at 50% -10%,#16224a,transparent)}
+h1{font:700 clamp(30px,7vw,64px)/1.02 ui-serif,Georgia,serif;margin:0;letter-spacing:-1px;
+ background:linear-gradient(120deg,#fff,#9fd0ff 40%,#c9a0ff);-webkit-background-clip:text;background-clip:text;color:transparent;
+ text-shadow:0 0 60px rgba(120,180,255,.18)}
+.tag{color:var(--dim);font-size:clamp(15px,2.4vw,20px);max-width:660px;margin:16px auto 0}
+.tag b{color:var(--ink)}
+.eyebrow{color:var(--cy);letter-spacing:4px;text-transform:uppercase;font-size:12px;margin-bottom:14px}
+nav{display:flex;gap:10px 20px;justify-content:center;flex-wrap:wrap;margin-top:26px;font:13px ui-monospace,monospace}
+nav a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:6px 15px}
+nav a:hover{color:#fff;border-color:var(--cy);background:#0c1630}
+section{padding:44px 0 8px}
+h2{font:600 24px ui-serif,Georgia,serif;margin:0 0 4px;color:#fff}
+h2 .k{color:var(--dim);font:12px ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px}
+.lead{color:var(--dim);max-width:720px;margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;text-decoration:none;color:inherit;background:#0a1020;border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
+.card:hover{transform:translateY(-4px);border-color:#2f3f6e;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.card .thumb{aspect-ratio:16/10;width:100%;object-fit:cover;object-position:50% 72%;display:block;background:#02030a}
+.card .body{padding:13px 15px 15px}
+.card h3{margin:0 0 4px;font:600 16px ui-serif,Georgia,serif;color:#fff}
+.card p{margin:0;color:var(--dim);font-size:13px;line-height:1.5}
+.chip{display:inline-block;margin-top:9px;font:10.5px ui-monospace,monospace;letter-spacing:1px;text-transform:uppercase;
+ padding:2px 8px;border-radius:12px;border:1px solid}
+.chip.real{color:var(--gr);border-color:#1e5e3e;background:#0a1a14}
+.chip.sim{color:var(--gd);border-color:#5e4a1e;background:#1a1406}
+.chip.idea{color:var(--pu);border-color:#3a1e5e;background:#140a24}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left}
+th{color:#fff;font-weight:600} td{color:var(--dim)} td b{color:var(--ink)}
+.more{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.more a{color:var(--ink);text-decoration:none;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px}
+.more a:hover{border-color:var(--cy);background:#0c1630}.more a span{color:var(--dim);font-size:12px;display:block;margin-top:2px}
+footer{text-align:center;color:var(--dim);font-size:13px;padding:50px 20px 60px;margin-top:30px;border-top:1px solid var(--line)}
+footer a{color:var(--cy);text-decoration:none}
+</style></head><body>
+<canvas id="stars"></canvas>
+<header>
+<div class="wrap">
+  <div class="eyebrow">Relaxation Labeling · a working engine</div>
+  <h1>Labels, Under Context</h1>
+  <p class="tag">One engine assigns meaning by <b>letting constraints relax into agreement</b> — the same core, from
+   <b>galaxies</b> to <b>genomes</b> to <b>markets</b>. Give it objects, labels, and a compatibility, and it settles the whole
+   field into a mutually consistent labeling. Below: interactive, dark, and mostly built on <b>real data</b>.</p>
+  <nav>
+    <a href="#featured">Featured</a>
+    <a href="genesis/">Project Genesis</a>
+    <a href="#engine">The Engine</a>
+    <a href="#all">All Projects</a>
+    <a href="https://github.com/rmichaelglover/hrl-portfolio">GitHub ↗</a>
+  </nav>
+</div>
+</header>
+
+<div class="wrap">
+
+<section id="featured">
+<h2><span class="k">Featured — prettiest first</span>Interactive visualizations</h2>
+<p class="lead">Every tile runs in your browser. The bulk are the <a href="genesis/" style="color:var(--cy)">Project Genesis</a>
+ series — real cosmology, neuroscience and econometrics through the one engine, honestly framed.</p>
+<div class="grid">
+
+  <a class="card" href="genesis/sdss/"><img class="thumb" src="assets/thumbs/sdss.png" alt="cosmic web">
+   <div class="body"><h3>The Real Cosmic Web</h3><p>25,000 SDSS galaxies, relaxation-labeled into void, filament &amp; cluster.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/"><img class="thumb" src="assets/thumbs/genesis.png" alt="self-gravitating light">
+   <div class="body"><h3>Project Genesis</h3><p>Self-gravitating light condenses cosmic structure from a single rule.</p><span class="chip sim">simulation</span></div></a>
+
+  <a class="card" href="genesis/critter/"><img class="thumb" style="object-position:50% 50%" src="assets/thumbs/critter.png" alt="the critter">
+   <div class="body"><h3>The Critter</h3><p>A simplicial organism that labels, grows, grooms &amp; reproduces <i>itself</i>.</p><span class="chip idea">autopoiesis</span></div></a>
+
+  <a class="card" href="genesis/ontology/"><img class="thumb" src="assets/thumbs/ontology.png" alt="four poles tetrahedron">
+   <div class="body"><h3>The Four Poles</h3><p>A tetrahedral ontology — dark matter as the null-set noise at the centroid.</p><span class="chip idea">concept</span></div></a>
+
+  <a class="card" href="genesis/rar/"><img class="thumb" src="assets/thumbs/rar.png" alt="radial acceleration relation">
+   <div class="body"><h3>The Clog Threshold</h3><p>The Radial Acceleration Relation, from 3,343 real measurements.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/sparc/"><img class="thumb" src="assets/thumbs/sparc.png" alt="rotation curves">
+   <div class="body"><h3>The Fingerprint of Dark Matter</h3><p>165 real galaxy rotation curves — the gap with no light behind it.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/brain/"><img class="thumb" src="assets/thumbs/brain.png" alt="connectome">
+   <div class="body"><h3>A Nervous System, Relaxing</h3><p>The real <i>C. elegans</i> connectome, labeled into functional communities.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/cord/"><img class="thumb" src="assets/thumbs/cord.png" alt="trinary cord">
+   <div class="body"><h3>The Cord of Three Strands</h3><p>Trinary relaxation: sensory → interneuron → motor on the real wiring.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/planck/"><img class="thumb" src="assets/thumbs/planck.png" alt="planck power spectrum">
+   <div class="body"><h3>Seeded by the Big Bang</h3><p>A cosmic web grown from the real ΛCDM matter power spectrum.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/forecast/"><img class="thumb" src="assets/thumbs/forecast.png" alt="forecasting ensemble">
+   <div class="body"><h3>Forecasting by Relaxation</h3><p>An adaptive econometric ensemble that beats every single model.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="morphogenesis-grow/"><img class="thumb" src="assets/thumbs/morpho.png" alt="morphogenesis">
+   <div class="body"><h3>Morphogenesis</h3><p>Bioelectric pattern formation &amp; remodeling as constraint relaxation.</p><span class="chip idea">bio</span></div></a>
+
+  <a class="card" href="simplicial-3d/"><img class="thumb" src="assets/thumbs/simplicial.png" alt="simplicial complex">
+   <div class="body"><h3>Simplicial Complexes</h3><p>Higher-order relaxation on a growing 3-D complex.</p><span class="chip idea">topology</span></div></a>
+
+</div>
+</section>
+
+<section id="engine">
+<h2><span class="k">The Engine</span>One core, many compatibilities</h2>
+<p class="lead">Relaxation labeling (Rosenfeld–Hummel–Zucker, extended with a learned <i>noise label</i>) takes a set of objects, a set of
+ labels, and a compatibility function that says how much one labeled pair reinforces another. It iteratively relaxes the field into a
+ mutually consistent labeling. Only the compatibility kernel and prior change between domains:</p>
+<table>
+<tr><th>Domain</th><th>objects</th><th>labels</th><th>what compatibility encodes</th></tr>
+<tr><td><b>Cosmology</b></td><td>galaxies / parcels</td><td>void · filament · cluster</td><td>local density &amp; neighborhood coherence</td></tr>
+<tr><td><b>Neuroscience</b></td><td>neurons</td><td>sensory · inter · motor</td><td>directed synaptic flow through the connectome</td></tr>
+<tr><td><b>Econometrics</b></td><td>forecast origins</td><td>candidate models</td><td>recent accuracy + temporal coherence</td></tr>
+<tr><td><b>Motion capture</b></td><td>measured 3-D points</td><td>skeleton markers</td><td>inter-point distances match the model</td></tr>
+<tr><td><b>Strategy</b></td><td>chess pieces</td><td>tactical roles</td><td>roles that co-occur in a real plan</td></tr>
+</table>
+<p class="lead" style="margin-top:16px">The Python core is a tested library (<code style="color:var(--gd)">hrl.core.RelaxationLabeler</code>) — see the
+ <a href="https://github.com/rmichaelglover/hrl-portfolio" style="color:var(--cy)">repository</a>.</p>
+</section>
+
+<section id="all">
+<h2><span class="k">All Projects</span>The full portfolio</h2>
+<div class="more">
+  <a href="genesis/">🌌 Project Genesis <span>the full 14-piece series + hub</span></a>
+  <a href="genesis/monad/">🪟 The Windowed Monad <span>a self relating itself to itself</span></a>
+  <a href="genesis/energy/">📐 Energy = Diversity × Unity <span>a rigorous, honest essay</span></a>
+  <a href="genesis/games/">🎮 Critter Games <span>Roblox · Minecraft · Python ports</span></a>
+  <a href="genesis/clog/">🚰 The Dynamical Clog <span>an honest null result</span></a>
+  <a href="whimsy-chess/maestro.html">♟️ Chess Maestro <span>tactical role labeling, live</span></a>
+  <a href="bible-hrl/">📖 Gospel-HRL <span>scripture theme &amp; contradiction analysis</span></a>
+  <a href="beena/">🚂 Beena Train-Brake <span>2014 line-segment relaxation labeling</span></a>
+  <a href="body-pos/">🏃 Body Position <span>body pose from accelerometer</span></a>
+  <a href="chronology/">🗓️ Career Chronology <span>the work across the years</span></a>
+  <a href="morphogenesis/">🧬 Morphogenesis (base) <span>bioelectric pattern formation</span></a>
+  <a href="morphogenesis-remodel/">🧬 Morphogenesis (remodel) <span>form repair &amp; remodeling</span></a>
+  <a href="simplicial/">🔺 Simplicial (2D) <span>higher-order networks</span></a>
+  <a href="frustrated/">🧲 Frustrated Systems <span>constraint frustration</span></a>
+</div>
+</section>
+
+</div>
+<footer>
+Built by <b style="color:var(--ink)">Manny Glover</b> — hierarchical relaxation labeling, applied everywhere.<br>
+<a href="https://github.com/rmichaelglover/hrl-portfolio">github.com/rmichaelglover/hrl-portfolio</a> · dark theme, real data, honestly framed.
+</footer>
+<script>
+// subtle drifting starfield
+const cv=document.getElementById('stars'),x=cv.getContext('2d');let W,H,st=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;st=[];const n=Math.min(150,innerWidth/9|0);
+ for(let i=0;i<n;i++)st.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*0.18+0.02});}
+addEventListener('resize',rs);rs();
+(function loop(){x.clearRect(0,0,W,H);for(const p of st){p.y+=p.s*(0.4+p.z);if(p.y>H)p.y=0;
+ const a=0.25+p.z*0.5;x.fillStyle=`rgba(${160+80*p.z|0},${190+50*p.z|0},255,${a})`;
+ x.fillRect(p.x,p.y,p.z*1.7+0.4,p.z*1.7+0.4);}requestAnimationFrame(loop);})();
+</script>
+</body></html>

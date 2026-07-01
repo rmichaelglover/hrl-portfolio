@@ -21,13 +21,22 @@ capture** and to a **syncretistic, weighted consensus of physical models**.
 
 ---
 
-## ▶ Open Chess Maestro (live demo)
+## ▶ Live portfolio
 
-Try the interactive Chess Maestro (Maestro) in your browser — no install required.
+**→ https://rmichaelglover.github.io/hrl-portfolio/** — a dark-themed, interactive home page with the
+full gallery (prettiest graphics first). Highlights:
 
-- Live site: https://rmichaelglover.github.io/hrl-portfolio/
-
-Click the link above to open Maestro (it will load as the site root). You can paste or upload PGNs using the Load panel inside Maestro.
+- **[Project Genesis](https://rmichaelglover.github.io/hrl-portfolio/genesis/)** — a 14-piece series
+  applying the engine to **real** cosmology, neuroscience, and econometrics: the [cosmic web](https://rmichaelglover.github.io/hrl-portfolio/genesis/sdss/)
+  (25k SDSS galaxies), [dark-matter rotation curves](https://rmichaelglover.github.io/hrl-portfolio/genesis/sparc/),
+  the [*C. elegans* connectome](https://rmichaelglover.github.io/hrl-portfolio/genesis/brain/), an
+  [adaptive forecasting ensemble](https://rmichaelglover.github.io/hrl-portfolio/genesis/forecast/),
+  and a [self-relaxing organism](https://rmichaelglover.github.io/hrl-portfolio/genesis/critter/).
+- **[Chess Maestro](https://rmichaelglover.github.io/hrl-portfolio/whimsy-chess/maestro.html)** — the
+  interactive, narrated chess studio (PWA). Paste or upload PGNs in the Load panel.
+- **[Gospel-HRL](https://rmichaelglover.github.io/hrl-portfolio/bible-hrl/)**,
+  **[Morphogenesis](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-grow/)**, and
+  **[real-data body-position](https://rmichaelglover.github.io/hrl-portfolio/body-pos/)** — and more on the site.
 
 ---
 
