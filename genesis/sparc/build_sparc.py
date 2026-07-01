@@ -167,10 +167,11 @@ modified gravity rather than unseen mass; SPARC is a battleground for both. Eith
 is undeniable.
 <br><br>
 <b>Where this meets our model.</b> In Manny's picture the gap is where matter/energy geodesics get too <i>cluttered</i> to carry a
-clean luminous label — the <a href="../ontology/">noise / dark-matter pole</a> made of real starlight's shortfall. Next: relaxation-label
-these 175 real galaxies by their dark-matter signature.
+clean luminous label — the <a href="../ontology/">noise / dark-matter pole</a> made of real starlight's shortfall. The same data forms
+the <a href="../rar/">Radial Acceleration Relation</a> — the "clog threshold" — where the engine sorts these 165 galaxies into
+free-flow / clogged regimes.
 </div>
-<p style="margin-top:14px"><a href="../ontology/">← The Four Poles</a> · <a href="../">Project Genesis</a> · <span style="color:var(--dim)">data: SPARC, Lelli et&nbsp;al. 2016</span></p>
+<p style="margin-top:14px"><a href="../rar/">The Clog Threshold →</a> · <a href="../ontology/">The Four Poles</a> · <a href="../">Project Genesis</a> · <span style="color:var(--dim)">data: SPARC, Lelli et&nbsp;al. 2016</span></p>
 </div>
 <script>
 const D = /*DATA*/;
