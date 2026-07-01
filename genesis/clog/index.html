@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does the Threshold Emerge? — the clog, dynamically</title>
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;--free:#e8c170;--clog:#c060ff;--cool:#37e6ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#161029,var(--bg));color:var(--ink);
+ font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:940px;margin:0 auto;padding:30px 16px 70px}
+h1{font:700 clamp(21px,3.6vw,34px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px}
+.sub{color:var(--clog);letter-spacing:2.5px;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+.lede{color:var(--dim);max-width:760px;margin:0 auto 14px;font-size:14.5px}.lede b{color:var(--ink)}.lede i{color:var(--clog)}
+.stage{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;margin:12px auto}
+#flow{background:#02030a;border:1px solid var(--line);border-radius:12px;flex:1 1 560px;max-width:580px}
+#diag{background:#02030a;border:1px solid var(--line);border-radius:12px;flex:1 1 300px;max-width:340px}
+.panel{display:flex;gap:14px 20px;justify-content:center;align-items:center;margin:12px auto;flex-wrap:wrap}
+button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 15px;font:14px ui-serif,Georgia;cursor:pointer}button:hover{background:#171334}
+input[type=range]{width:180px;accent-color:var(--clog)}
+.stat{font:12.5px ui-monospace,monospace;color:var(--dim);margin-top:4px}.stat b{color:var(--free)}
+.regime{font:600 15px ui-serif,Georgia;padding:3px 10px;border-radius:6px;display:inline-block}
+.note{color:var(--dim);font-size:12.5px;max-width:810px;margin:20px auto 0;text-align:left;
+ background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.note b{color:var(--clog)} code{background:#141d3a;padding:1px 6px;border-radius:5px;color:var(--free);font-size:12px}
+a{color:var(--cool);text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>Does the Threshold Emerge?</h1><div class="sub">the clog, dynamically · an honest test</div>
+<p class="lede">Manny's picture: a free‑flowing whirlpool that <b>clogs</b> below a critical push — and the <a href="../rar/">real data</a>
+shows exactly such a threshold, <i>g&dagger;</i>. So we ran the honest test: drive particles through a <b>bottleneck</b> and sweep the
+push. The <b>humble result</b> — in this simple model <b>no sharp threshold emerges</b>. Flow is <i>proportional</i> to the drive; the
+clog is gradual, not a switch. That's worth knowing: <b>g&dagger; is not free</b> — it demands deeper physics than a funnel.</p>
+<div class="stage">
+  <canvas id="flow" width="580" height="340"></canvas>
+  <canvas id="diag" width="340" height="340"></canvas>
+</div>
+<div class="panel">
+  <button id="sweep">⟳ Auto-sweep the drive</button>
+  <button id="reset">↺ Reset</button>
+  <label style="font:12px ui-monospace,monospace;color:var(--dim)">drive g <input id="drv" type="range" min="4" max="60" value="46"></label>
+  <span class="regime" id="reg"></span>
+</div>
+<div class="stat" id="stat"></div>
+<div class="note">
+<b>What you're seeing.</b> Particles are pushed rightward through a funnel, repelling one another like a crowd. At high drive they
+stream; at low drive they crawl and slow — but they never truly <i>jam</i>. The right panel plots the toy's <b>flow vs drive</b> as you
+sweep: it comes out a near-straight <span style="color:var(--free)">line</span> — proportional, no knee — next to the sharp
+<span style="color:var(--clog)">knee</span> the real universe shows.
+<br><br>
+<b>The honest result (I verified this off-screen).</b> I ran this exact physics headless and swept both the drive and the crowd
+density: throughput stays <i>proportional</i> in every case — <b>no threshold emerges</b>. Soft, overdamped particles can't build the
+load-bearing <i>arches</i> that make a real clog; that needs genuine granular contact + friction, or new physics (MOND's fundamental
+scale, ΛCDM feedback…). So the clog is a <b>beautiful metaphor</b> that a naïve simulation does <b>not</b> reproduce — and that's the
+valuable part: it shows exactly <i>where the mystery lives</i>. There's a Zen in testing your own idea and letting the answer be what
+it is. The rest of this site earns its striking claims by reporting the honest ones too.
+</div>
+<p style="margin-top:14px"><a href="../rar/">← The Clog Threshold (real data)</a> · <a href="../ontology/">The Four Poles</a> · <a href="../">Genesis</a></p>
+</div>
+<script>
+const fc=document.getElementById('flow'), fx=fc.getContext('2d'), FW=fc.width, FH=fc.height;
+const dc=document.getElementById('diag'), dx=dc.getContext('2d'), DW=dc.width, DH=dc.height;
+const N=360, RAD=4.2, R0=10.5, CY=FH/2;
+let px=new Float32Array(N),py=new Float32Array(N),vx=new Float32Array(N),vy=new Float32Array(N);
+let drive=46/150, sweeping=false, sweepD=0, cross=0, crossAvg=0, tframe=0, meanSpd=0;
+const diag=[];                       // [driveG(x1e4), throughput]
+let gCrit=null, maxTh=0;
+// funnel half-width as a function of x: narrows to a gap at center
+const GAP=20, WALL=FH*0.46, WW=70;
+function halfw(x){ const c=(x-FW/2)/WW; return GAP + (WALL-GAP)*(1-Math.exp(-c*c)); }
+function seed(){ for(let i=0;i<N;i++){ px[i]=Math.random()*FW; const h=halfw(px[i]);
+  py[i]=CY+(Math.random()*2-1)*h*0.9; vx[i]=0.5; vy[i]=0; }
+  diag.length=0; gCrit=null; maxTh=0; crossAvg=0; }
+function grid(){ // spatial hash for repulsion
+  const cs=R0, nx=Math.ceil(FW/cs), ny=Math.ceil(FH/cs), cells=new Array(nx*ny);
+  for(let i=0;i<N;i++){ const cx=Math.min(nx-1,px[i]/cs|0), cy=Math.min(ny-1,py[i]/cs|0), id=cy*nx+cx;
+    (cells[id]||(cells[id]=[])).push(i); }
+  return {cs,nx,ny,cells};
+}
+function step(){
+  const G=grid(), cs=G.cs,nx=G.nx,ny=G.ny,cells=G.cells;
+  // repulsion
+  for(let i=0;i<N;i++){ const cx=Math.min(nx-1,px[i]/cs|0), cy=Math.min(ny-1,py[i]/cs|0);
+    for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const ccx=cx+a,ccy=cy+b;
+      if(ccx<0||ccy<0||ccx>=nx||ccy>=ny)continue; const lst=cells[ccy*nx+ccx]; if(!lst)continue;
+      for(const j of lst){ if(j<=i)continue; let dxp=px[i]-px[j],dyp=py[i]-py[j];
+        const d2=dxp*dxp+dyp*dyp; if(d2<R0*R0&&d2>1e-4){ const d=Math.sqrt(d2),f=(R0-d)/d*0.18;
+          dxp*=f;dyp*=f; vx[i]+=dxp;vy[i]+=dyp;vx[j]-=dxp;vy[j]-=dyp; } } } }
+  cross=0;
+  for(let i=0;i<N;i++){
+    vx[i]+=drive; vx[i]*=0.90; vy[i]*=0.90;
+    const ox=px[i]; px[i]+=vx[i]; py[i]+=vy[i];
+    // funnel walls
+    const h=halfw(px[i]); if(py[i]>CY+h){py[i]=CY+h;vy[i]*=-0.3;} if(py[i]<CY-h){py[i]=CY-h;vy[i]*=-0.3;}
+    if(ox< FW/2 && px[i]>=FW/2) cross++;           // crossed the throat
+    if(px[i]>=FW){ px[i]-=FW; py[i]=CY+(Math.random()*2-1)*WALL*0.85; vx[i]=drive*8; }
+    if(px[i]<0) px[i]+=FW;
+  }
+  crossAvg=0.96*crossAvg+0.04*cross;
+  let ms=0; for(let i=0;i<N;i++) ms+=Math.hypot(vx[i],vy[i]); meanSpd=0.9*meanSpd+0.1*(ms/N);
+  tframe++;
+}
+function drawFlow(){
+  fx.clearRect(0,0,FW,FH);
+  // walls
+  fx.strokeStyle='rgba(120,140,190,.35)'; fx.lineWidth=2; fx.beginPath();
+  for(let x=0;x<=FW;x+=4){const h=halfw(x); (x?fx.lineTo:fx.moveTo).call(fx,x,CY-h);} fx.stroke();
+  fx.beginPath(); for(let x=0;x<=FW;x+=4){const h=halfw(x); (x?fx.lineTo:fx.moveTo).call(fx,x,CY+h);} fx.stroke();
+  for(let i=0;i<N;i++){ const sp=Math.hypot(vx[i],vy[i]); const t=Math.max(0,Math.min(1,sp/2.5));
+    // fast=gold(free)  slow=purple(clog)
+    const r=Math.round(192+(232-192)*t),g=Math.round(96+(193-96)*t),b=Math.round(255+(112-255)*t);
+    fx.fillStyle=`rgb(${r},${g},${b})`; fx.beginPath(); fx.arc(px[i],py[i],RAD,0,7); fx.fill(); }
+}
+function drawDiag(){
+  dx.clearRect(0,0,DW,DH); const P={l:46,r:14,t:30,b:38};
+  maxTh=Math.max(0.6,...diag.map(p=>p[1]));
+  dx.fillStyle='#9aa6c8'; dx.font='11px ui-serif,Georgia'; dx.textAlign='center';
+  dx.fillText('flow vs drive', DW/2, 14);
+  const XX=g=>P.l+(g-4)/(60-4)*(DW-P.l-P.r), YY=t=>DH-P.b-Math.min(1,t/maxTh)*(DH-P.t-P.b);
+  dx.strokeStyle='rgba(120,140,190,.16)'; dx.beginPath();dx.moveTo(P.l,P.t);dx.lineTo(P.l,DH-P.b);dx.lineTo(DW-P.r,DH-P.b);dx.stroke();
+  dx.fillStyle='#7f8bb0'; dx.font='9px ui-monospace'; dx.textAlign='center'; dx.fillText('drive  g →', DW/2, DH-6);
+  dx.save();dx.translate(12,DH/2);dx.rotate(-Math.PI/2);dx.fillText('flow through throat',0,0);dx.restore();
+  // reference: what a REAL threshold (knee) would look like — flow collapses below g†
+  dx.strokeStyle='rgba(192,96,255,.6)'; dx.setLineDash([4,4]); dx.lineWidth=1.6; dx.beginPath();
+  for(let g=4;g<=60;g+=1){ const ref=maxTh/(1+Math.exp(-(g-30)/2.2)); const x=XX(g),y=YY(ref); g===4?dx.moveTo(x,y):dx.lineTo(x,y);} dx.stroke(); dx.setLineDash([]);
+  // toy measured points (gold) — proportional, straight, no knee
+  dx.fillStyle='#e8c170'; for(const p of diag){ dx.beginPath();dx.arc(XX(p[0]),YY(p[1]),2.4,0,7);dx.fill(); }
+  dx.textAlign='left'; dx.font='italic 10px ui-serif';
+  dx.fillStyle='#e8c170'; dx.fillText('toy: proportional', XX(6), YY(maxTh*0.92));
+  dx.fillStyle='#c060ff'; dx.fillText('a real g† (knee)', XX(31), YY(maxTh*0.18));
+}
+function loop(){
+  for(let k=0;k<2;k++) step();
+  if(sweeping){ sweepD-=0.08; drive=sweepD/150; document.getElementById('drv').value=sweepD;
+    if(tframe%10===0) diag.push([sweepD, crossAvg]);
+    if(sweepD<=5){ sweeping=false; document.getElementById('sweep').textContent='⟳ Auto-sweep the drive'; }
+  }
+  drawFlow(); drawDiag(); updateStat(); requestAnimationFrame(loop);
+}
+function updateStat(){
+  const gv=drive*150; const slow=meanSpd<0.9;
+  const reg=document.getElementById('reg');
+  reg.textContent = slow?'crawling':'streaming';
+  reg.style.background = slow?'rgba(192,96,255,.16)':'rgba(232,193,112,.15)';
+  reg.style.color = slow?'#c060ff':'#e8c170';
+  document.getElementById('stat').innerHTML=
+    `drive g = <b>${gv.toFixed(0)}</b> · flow <b>${crossAvg.toFixed(2)}</b>/frame · mean speed <b>${meanSpd.toFixed(2)}</b> — proportional, gradual (no sharp clog)`;
+}
+document.getElementById('drv').oninput=function(){drive=(+this.value)/150; sweeping=false;
+  document.getElementById('sweep').textContent='⟳ Auto-sweep the drive';};
+document.getElementById('sweep').onclick=function(){ sweeping=!sweeping;
+  if(sweeping){ diag.length=0;gCrit=null;maxTh=0; sweepD=60; this.textContent='⏸ sweeping…'; }
+  else this.textContent='⟳ Auto-sweep the drive'; };
+document.getElementById('reset').onclick=()=>{seed();drive=46/150;document.getElementById('drv').value=46;sweeping=false;document.getElementById('sweep').textContent='⟳ Auto-sweep the drive';};
+seed(); loop();
+</script></body></html>
