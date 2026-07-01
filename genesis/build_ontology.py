@@ -227,7 +227,7 @@ physically at the <b>Dark Matter</b> pole. Dark matter as the cosmos's own unass
 the light sim, and the sorting is the real engine, but the four-pole ontology and the dark-matter-as-noise identification are a
 hypothesis being <i>visualized</i>, not a measurement of the universe.
 </div>
-<p style="margin-top:14px"><a href="../">Genesis</a> · <a href="../monad/">Monad</a> · <a href="../sparc/">SPARC curves</a> · <a href="../rar/">Clog threshold</a> · <a href="../sdss/">Cosmic web</a> · <a href="../planck/">Planck seed</a> · <a href="../clog/">Dynamical clog →</a></p>
+<p style="margin-top:14px"><a href="../">Genesis</a> · <a href="../monad/">Monad</a> · <a href="../sparc/">SPARC curves</a> · <a href="../rar/">Clog threshold</a> · <a href="../sdss/">Cosmic web</a> · <a href="../planck/">Planck seed</a> · <a href="../clog/">Dynamical clog</a> · <a href="../brain/">Connectome →</a></p>
 </div>
 <script>
 const D = /*DATA*/;
