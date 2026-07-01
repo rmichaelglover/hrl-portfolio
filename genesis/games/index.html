@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Critter, in Worlds You Can Play — Roblox & Minecraft</title>
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;--rb:#ff6b8a;--mc:#5fe3a0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
+ font:15px/1.6 ui-sans-serif,system-ui}
+.wrap{max-width:820px;margin:0 auto;padding:34px 18px 80px}
+h1{font:700 clamp(22px,4vw,36px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px;text-align:center}
+.sub{color:#7fe0c0;letter-spacing:2.5px;text-transform:uppercase;font-size:12px;margin-bottom:16px;text-align:center}
+.lede{color:var(--dim);max-width:700px;margin:0 auto 8px;font-size:14.5px;text-align:center}.lede b{color:var(--ink)}
+.warn{max-width:700px;margin:14px auto 24px;background:#1a1206;border:1px solid #5e3a1e;border-left:4px solid #e8a020;
+ border-radius:0 10px 10px 0;padding:12px 16px;color:#e8cfa0;font-size:13px}
+.warn b{color:#ffcf5e}
+.card{background:#0a1020;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+.card h2{margin:0 0 4px;font:600 21px ui-serif,Georgia,serif}
+.card.rb h2{color:var(--rb)} .card.mc h2{color:var(--mc)}
+.card .tag{font:12px ui-monospace,monospace;color:var(--dim);margin-bottom:10px}
+ol{margin:10px 0;padding-left:22px;color:#cdd6ef} ol li{margin:5px 0}
+code{background:#141d3a;padding:2px 7px;border-radius:5px;color:#ffcf5e;font-size:12.5px}
+a.btn{display:inline-block;background:#12203a;border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+ color:#7fe0c0;text-decoration:none;font:13px ui-monospace,monospace;margin:8px 8px 0 0}
+a.btn:hover{background:#182a4a}
+.note{color:var(--dim);font-size:13px;margin-top:8px}
+a{color:#7fe0c0;text-decoration:none}
+.foot{margin-top:30px;color:var(--dim);font-size:13px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>The Critter, in Worlds You Can Play</h1>
+<div class="sub">Roblox &amp; Minecraft ports of the autopoiesis organism</div>
+<p class="lede">The same self‑relaxing simplicial organism from <a href="../critter/">The Critter</a> — it relaxation‑labels itself,
+<b>grows</b> where coherent, <b>grooms</b> the undecided, <b>buds</b> children, and tunes its own temperature to the critical edge —
+now escapes the browser into two game engines.</p>
+<div class="warn"><b>Honest heads‑up.</b> I wrote and <i>logic‑tested</i> both (the growth/groom/relax/bud loop was verified to be
+alive &amp; stable), but I could <b>not</b> run Roblox Studio or a Minecraft server here — so treat these as clean, well‑commented
+starter code you load and press Play, not shrink‑wrapped games. Tweak the constants at the top to taste.</p>
+
+<div class="card rb">
+<h2>▶ Roblox Studio</h2>
+<div class="tag">Luau · a live 3D organism above spawn · click a cell to poke it</div>
+<ol>
+<li>Open <b>Roblox Studio</b> → new <b>Baseplate</b>.</li>
+<li>In Explorer, right‑click <code>ServerScriptService</code> → Insert Object → <b>Script</b>.</li>
+<li>Delete the default line, <b>paste the whole file</b>, press <b>Play</b>.</li>
+<li>Walk up and <b>click a cell</b> — an avalanche of relabeling ripples out.</li>
+</ol>
+<a class="btn" href="roblox/Critter.server.luau">view / copy the Luau script →</a>
+<div class="note">Tune <code>NMAX</code>, <code>SPACING</code>, colours at the top. It caps itself and self‑tunes its temperature.</div>
+</div>
+
+<div class="card mc">
+<h2>▶ Minecraft (Java)</h2>
+<div class="tag">Python + mcpi · a living mat of wool that spreads, prunes, and seeds child colonies</div>
+<ol>
+<li>Run a <b>Spigot/Paper</b> server with the <b>RaspberryJuice</b> plugin (opens the API on port 4711).</li>
+<li><code>pip install mcpi</code></li>
+<li>Stand in a flat open area and run <code>python3 critter_mc.py</code></li>
+<li>No server handy? Watch it live in your terminal: <code>python3 critter_mc.py --dry</code></li>
+</ol>
+<a class="btn" href="minecraft/critter_mc.py">view / copy the Python script →</a>
+<div class="note">The <code>--dry</code> run is exactly what I used to verify the organism is alive &amp; stable before shipping.</div>
+</div>
+
+<div class="card" style="border-color:#37506e">
+<h2 style="color:#8fb0ff">▶ Python mockup <span style="font-size:13px;color:var(--dim)">(runs right now, zero setup)</span></h2>
+<div class="tag">the same organism, drawn live in colour in your terminal — this is what I use to see the critter before any engine</div>
+<ol>
+<li>Download the script, then just run <code>python3 critter_ascii.py</code> (needs nothing but Python 3).</li>
+<li>Watch it grow, groom, shimmer, and bud — <code>Ctrl-C</code> to stop.</li>
+<li>For a still frame / log: <code>python3 critter_ascii.py --plain --snapshot 300</code></li>
+</ol>
+<a class="btn" href="python/critter_ascii.py">view / copy the Python mockup →</a>
+<div class="note">Verified alive &amp; stable here before shipping — the one port I <i>could</i> fully run.</div>
+</div>
+
+<div class="foot"><a href="../critter/">← The Critter (browser)</a> · <a href="../">Project Genesis</a></div>
+</div></body></html>
