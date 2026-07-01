@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Simplex Ladder — 1·2·3·4, Troolean relaxation across dimensions</title>
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;--vt:#5fe3a0;--vf:#ff4d6d;--ish:#8296eb}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
+ font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 70px}
+h1{font:700 clamp(21px,3.6vw,33px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px}
+.sub{color:var(--vt);letter-spacing:2.5px;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+.lede{color:var(--dim);max-width:740px;margin:0 auto 12px;font-size:14px}.lede b{color:var(--ink)}
+.lede .a{color:var(--ish)}.lede .b{color:var(--vf)}.lede .c{color:var(--vt)}
+#c{width:100%;max-width:640px;aspect-ratio:1.25;background:#02030a;border:1px solid var(--line);border-radius:14px;cursor:pointer;touch-action:none}
+.panel{display:flex;gap:12px 16px;justify-content:center;align-items:center;margin:12px auto;flex-wrap:wrap}
+button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:13px ui-serif,Georgia;cursor:pointer}button:hover{background:#12203a}
+.ladder{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px auto;font:12.5px ui-monospace,monospace;color:var(--dim)}
+.ladder span b{color:#fff}
+.leg{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px auto;font:12px ui-monospace,monospace;color:var(--dim)}
+.leg span{display:inline-flex;align-items:center;gap:6px}.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.note{color:var(--dim);font-size:12.5px;max-width:800px;margin:16px auto 0;text-align:left;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.note b{color:var(--vt)} code{background:#141d3a;padding:1px 6px;border-radius:5px;color:var(--ish);font-size:12px}
+a{color:var(--ish);text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>The Simplex Ladder</h1><div class="sub">1 · 2 · 3 · 4 — Troolean relaxation across dimensions</div>
+<p class="lede">Oneness <b>·</b> vertices. Twoness <b>—</b> edges. Threeness <b>△</b> triangles. And fourness <b>▲</b> the tetrahedron —
+<i>four is one plus three</i>, a triangle plus an apex. Every simplex carries a three-valued <b>Troolean</b> truth
+(<span class="b">vfalse</span> / <span class="a">ish</span> / <span class="c">vtrue</span>), and relaxation labeling settles them into
+agreement <b>across dimensions</b> through the boundary coupling. <b>Click any piece</b> — a dot, an edge, a face — to anchor a truth
+and watch it climb the ladder.</p>
+<canvas id="c" width="680" height="544"></canvas>
+<div class="panel">
+  <button id="anchor">anchor: <b id="av">vtrue</b></button>
+  <button id="reseed">↺ Reseed</button>
+  <button id="clear">clear anchors</button>
+</div>
+<div class="ladder" id="ladder"></div>
+<div class="leg">
+  <span><i class="dot" style="background:var(--vt)"></i>vtrue (green)</span>
+  <span><i class="dot" style="background:var(--ish)"></i>ish (blue)</span>
+  <span><i class="dot" style="background:var(--vf)"></i>vfalse (red)</span>
+</div>
+<div class="note">
+<b>What this is (honestly).</b> A real illustration of <b>higher-order relaxation labeling on a simplicial complex</b>. Each k-simplex
+relaxes toward agreement with its <i>faces</i> (dimension k−1) and <i>cofaces</i> (dimension k+1) — the coupling encoded by the
+<code>boundary operator ∂</code> and the <b>Hodge Laplacian</b>, the honest generalization of graph diffusion to shapes. The labels are
+<b>Troolean</b> — three-valued logic (Łukasiewicz/Kleene), real. So threeness (triangles) genuinely interacts with twoness (edges) and
+oneness (vertices), and the tetrahedron lifts the ladder to four. The theology is Manny's; the topology is the mathematics'.
+</div>
+<p style="margin-top:14px"><a href="../simplicial-3d/">← Simplicial (3D)</a> · <a href="../ontology/">The Four Poles</a> · <a href="../">Genesis</a></p>
+</div>
+<script>
+const cv=document.getElementById('c'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+const VT=[95,227,160], ISH=[130,150,235], VF=[255,77,109];
+function col(p){ const r=p[0]*VF[0]+p[1]*ISH[0]+p[2]*VT[0], g=p[0]*VF[1]+p[1]*ISH[1]+p[2]*VT[1], b=p[0]*VF[2]+p[1]*ISH[2]+p[2]*VT[2]; return [r|0,g|0,b|0]; }
+function norm(p){ const s=p[0]+p[1]+p[2]||1; return [p[0]/s,p[1]/s,p[2]/s]; }
+function rnd(){ return norm([Math.random(),Math.random(),Math.random()]); }
+let verts=[], edges=[], tris=[], emap={}, anchorMode=2;   // 0 vf,1 ish,2 vt
+
+function ekey(a,b){ return a<b?a+'_'+b:b+'_'+a; }
+function getEdge(a,b){ const k=ekey(a,b); if(emap[k]!==undefined) return emap[k];
+  const id=edges.length; edges.push({a,b,p:rnd(),anc:null,tris:[]}); emap[k]=id;
+  verts[a].edges.push(id); verts[b].edges.push(id); return id; }
+
+function build(){
+  verts=[];edges=[];tris=[];emap={};
+  const dx=44, dy=dx*Math.sin(Math.PI/3), shear=0.5, cols=17, rows=13;
+  const cx=W/2, cy=H/2+8, rxE=W*0.44, ryE=H*0.40;
+  const grid={};
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    const x=(c - cols/2)*dx + (r-rows/2)*dx*shear + cx;
+    const y=(r-rows/2)*dy + cy;
+    if(((x-cx)/rxE)**2 + ((y-cy)/ryE)**2 < 1){
+      grid[r+','+c]=verts.length; verts.push({x,y,p:rnd(),anc:null,edges:[],tris:[]});
+    }
+  }
+  const g=(r,c)=>grid[r+','+c];
+  for(let r=0;r<rows-1;r++)for(let c=0;c<cols-1;c++){
+    const A=g(r,c),B=g(r,c+1),C=g(r+1,c),Dd=g(r+1,c+1);
+    // up triangle A,B,C ; down triangle B,D,C
+    for(const T of [[A,B,C],[B,Dd,C]]){
+      if(T.every(v=>v!==undefined)){
+        const e0=getEdge(T[0],T[1]), e1=getEdge(T[1],T[2]), e2=getEdge(T[2],T[0]);
+        const id=tris.length; tris.push({v:T,e:[e0,e1,e2],p:rnd(),anc:null});
+        for(const v of T) verts[v].tris.push(id);
+        for(const e of [e0,e1,e2]) edges[e].tris.push(id);
+      }
+    }
+  }
+}
+
+function relaxStep(){
+  // vertices: support from incident edges + tris
+  for(const v of verts){ if(v.anc){v.p=v.anc;continue;}
+    let s=[0.02,0.02,0.02],n=0;
+    for(const e of v.edges){const q=edges[e].p;s[0]+=q[0];s[1]+=q[1];s[2]+=q[2];n++;}
+    for(const t of v.tris){const q=tris[t].p;s[0]+=q[0];s[1]+=q[1];s[2]+=q[2];n++;}
+    v._s=blend(v.p,s); }
+  for(const e of edges){ if(e.anc){e.p=e.anc;continue;}
+    let s=[0.02,0.02,0.02];
+    const qa=verts[e.a].p,qb=verts[e.b].p; for(let l=0;l<3;l++)s[l]+=qa[l]+qb[l];
+    for(const t of e.tris){const q=tris[t].p;s[0]+=q[0];s[1]+=q[1];s[2]+=q[2];}
+    e._s=blend(e.p,s); }
+  for(const t of tris){ if(t.anc){t.p=t.anc;continue;}
+    let s=[0.02,0.02,0.02];
+    for(const v of t.v){const q=verts[v].p;s[0]+=q[0];s[1]+=q[1];s[2]+=q[2];}
+    for(const e of t.e){const q=edges[e].p;s[0]+=q[0];s[1]+=q[1];s[2]+=q[2];}
+    t._s=blend(t.p,s); }
+  for(const v of verts) if(!v.anc) v.p=v._s;
+  for(const e of edges) if(!e.anc) e.p=e._s;
+  for(const t of tris) if(!t.anc) t.p=t._s;
+}
+function blend(p,s){ s=norm(s); const beta=2.2;
+  const q=[Math.pow(p[0],0.35)*Math.exp(beta*s[0]),Math.pow(p[1],0.35)*Math.exp(beta*s[1]),Math.pow(p[2],0.35)*Math.exp(beta*s[2])];
+  return norm(q); }
+
+// ---- the tetrahedron (the 4): 4 verts, 6 edges, 4 faces, relaxing among themselves ----
+let tetV=[], tetE=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]], tetF=[[0,1,2],[0,1,3],[0,2,3],[1,2,3]];
+let tetVP=[],tetEP=[],tetFP=[]; let yaw=0.6;
+function tetSeed(){ const s=1;
+  tetV=[[s,s,s],[s,-s,-s],[-s,s,-s],[-s,-s,s]];
+  tetVP=tetV.map(rnd); tetEP=tetE.map(rnd); tetFP=tetF.map(rnd);
+  // anchor the apex vertex vtrue and base triangle vfalse -> "4 = 1 + 3"
+  tetVP[0]=[0,0,1]; }
+function tetRelax(){
+  const nvp=tetVP.map((p,i)=>{ if(i===0)return p; let s=[0.02,0.02,0.02];
+    tetE.forEach((e,ei)=>{if(e.includes(i)){const q=tetEP[ei];for(let l=0;l<3;l++)s[l]+=q[l];}});
+    tetF.forEach((f,fi)=>{if(f.includes(i)){const q=tetFP[fi];for(let l=0;l<3;l++)s[l]+=q[l];}});
+    return blend(p,s); });
+  const nep=tetEP.map((p,ei)=>{ let s=[0.02,0.02,0.02]; const e=tetE[ei];
+    for(const v of e){const q=tetVP[v];for(let l=0;l<3;l++)s[l]+=q[l];}
+    tetF.forEach((f,fi)=>{if(e.every(v=>f.includes(v))){const q=tetFP[fi];for(let l=0;l<3;l++)s[l]+=q[l];}});
+    return blend(p,s); });
+  const nfp=tetFP.map((p,fi)=>{ let s=[0.02,0.02,0.02]; const f=tetF[fi];
+    for(const v of f){const q=tetVP[v];for(let l=0;l<3;l++)s[l]+=q[l];}
+    tetE.forEach((e,ei)=>{if(e.every(v=>f.includes(v))){const q=tetEP[ei];for(let l=0;l<3;l++)s[l]+=q[l];}});
+    return blend(p,s); });
+  tetVP=nvp;tetEP=nep;tetFP=nfp;
+}
+function drawTet(){
+  const ox=W-96, oy=90, sc=34; yaw+=0.012;
+  const proj=v=>{ const x=v[0]*Math.cos(yaw)+v[2]*Math.sin(yaw), z=-v[0]*Math.sin(yaw)+v[2]*Math.cos(yaw);
+    const y=v[1]*0.85 - z*0.32; return [ox+x*sc, oy+y*sc]; };
+  const P=tetV.map(proj);
+  ctx.save(); ctx.globalAlpha=0.9;
+  tetF.forEach((f,fi)=>{const c=col(tetFP[fi]); ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},0.22)`;
+    ctx.beginPath();ctx.moveTo(P[f[0]][0],P[f[0]][1]);ctx.lineTo(P[f[1]][0],P[f[1]][1]);ctx.lineTo(P[f[2]][0],P[f[2]][1]);ctx.closePath();ctx.fill();});
+  tetE.forEach((e,ei)=>{const c=col(tetEP[ei]); ctx.strokeStyle=`rgb(${c[0]},${c[1]},${c[2]})`;ctx.lineWidth=1.6;
+    ctx.beginPath();ctx.moveTo(P[e[0]][0],P[e[0]][1]);ctx.lineTo(P[e[1]][0],P[e[1]][1]);ctx.stroke();});
+  P.forEach((p,i)=>{const c=col(tetVP[i]);ctx.fillStyle=`rgb(${c[0]},${c[1]},${c[2]})`;ctx.beginPath();ctx.arc(p[0],p[1],i===0?5:4,0,7);ctx.fill();});
+  ctx.fillStyle='#8a97b8';ctx.font='italic 10px ui-serif,Georgia';ctx.textAlign='center';
+  ctx.fillText('4 = 3 + 1',ox,oy+58); ctx.restore();
+}
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+  // triangles
+  for(const t of tris){ const c=col(t.p); const [a,b,d]=t.v;
+    ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${t.anc?0.5:0.34})`;
+    ctx.beginPath();ctx.moveTo(verts[a].x,verts[a].y);ctx.lineTo(verts[b].x,verts[b].y);ctx.lineTo(verts[d].x,verts[d].y);ctx.closePath();ctx.fill(); }
+  // edges
+  for(const e of edges){ const c=col(e.p); ctx.strokeStyle=`rgba(${c[0]},${c[1]},${c[2]},${e.anc?1:0.6})`;ctx.lineWidth=e.anc?2.4:1;
+    ctx.beginPath();ctx.moveTo(verts[e.a].x,verts[e.a].y);ctx.lineTo(verts[e.b].x,verts[e.b].y);ctx.stroke(); }
+  // vertices
+  for(const v of verts){ const c=col(v.p); ctx.fillStyle=`rgb(${c[0]},${c[1]},${c[2]})`;
+    ctx.beginPath();ctx.arc(v.x,v.y,v.anc?4.5:2.6,0,7);ctx.fill();
+    if(v.anc){ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.arc(v.x,v.y,6.5,0,7);ctx.stroke();} }
+  drawTet();
+}
+function loop(){ relaxStep(); tetRelax(); render(); requestAnimationFrame(loop); }
+
+// interaction: click nearest simplex, cycle its anchor to the current mode (or clear)
+function ptInTri(px,py,t){ const [a,b,c]=t.v.map(i=>verts[i]);
+  const d=(b.y-c.y)*(a.x-c.x)+(c.x-b.x)*(a.y-c.y);
+  const l1=((b.y-c.y)*(px-c.x)+(c.x-b.x)*(py-c.y))/d, l2=((c.y-a.y)*(px-c.x)+(a.x-c.x)*(py-c.y))/d, l3=1-l1-l2;
+  return l1>=0&&l2>=0&&l3>=0; }
+function distSeg(px,py,a,b){ const dx=b.x-a.x,dy=b.y-a.y,L=dx*dx+dy*dy||1; let t=((px-a.x)*dx+(py-a.y)*dy)/L;t=Math.max(0,Math.min(1,t));
+  return Math.hypot(px-(a.x+t*dx),py-(a.y+t*dy)); }
+cv.addEventListener('pointerdown',ev=>{ const r=cv.getBoundingClientRect();
+  const px=(ev.clientX-r.left)*W/r.width, py=(ev.clientY-r.top)*H/r.height;
+  const val=[[1,0,0],[0,1,0],[0,0,1]][anchorMode];
+  // nearest vertex first (small radius), then edge, then triangle
+  let vv=-1,vd=12; verts.forEach((v,i)=>{const d=Math.hypot(v.x-px,v.y-py);if(d<vd){vd=d;vv=i;}});
+  if(vv>=0){ verts[vv].anc = verts[vv].anc?null:val.slice(); return; }
+  let ee=-1,ed=7; edges.forEach((e,i)=>{const d=distSeg(px,py,verts[e.a],verts[e.b]);if(d<ed){ed=d;ee=i;}});
+  if(ee>=0){ edges[ee].anc = edges[ee].anc?null:val.slice(); return; }
+  for(const t of tris){ if(ptInTri(px,py,t)){ t.anc = t.anc?null:val.slice(); return; } }
+});
+const names=['vfalse','ish','vtrue'];
+document.getElementById('anchor').onclick=function(){ anchorMode=(anchorMode+1)%3; document.getElementById('av').textContent=names[anchorMode];
+  document.getElementById('av').style.color=[ '#ff4d6d','#8296eb','#5fe3a0'][anchorMode]; };
+document.getElementById('reseed').onclick=()=>{ build(); tetSeed(); };
+document.getElementById('clear').onclick=()=>{ verts.forEach(v=>v.anc=null);edges.forEach(e=>e.anc=null);tris.forEach(t=>t.anc=null); };
+function ladder(){ document.getElementById('ladder').innerHTML=
+  `<span>1 · vertices <b>${verts.length}</b></span><span>2 · edges <b>${edges.length}</b></span>`+
+  `<span>3 · triangles <b>${tris.length}</b></span><span>4 · the tetrahedron <b>△+•</b></span>`; }
+build(); tetSeed();
+for(let i=0;i<40;i++){ relaxStep(); tetRelax(); }   // settle before first paint
+ladder(); document.getElementById('av').style.color='#5fe3a0';
+loop();
+</script></body></html>
