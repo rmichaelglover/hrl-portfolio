@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Critter — a self-relaxing simplicial organism</title>
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
+ font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 70px}
+h1{font:700 clamp(21px,3.6vw,34px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px}
+.sub{color:#7fe0c0;letter-spacing:2.5px;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+.lede{color:var(--dim);max-width:750px;margin:0 auto 12px;font-size:14px}.lede b{color:var(--ink)}.lede i{color:#7fe0c0}
+#c{width:100%;max-width:620px;aspect-ratio:1;background:#010208;border:1px solid var(--line);border-radius:16px;cursor:crosshair;touch-action:none}
+.panel{display:flex;gap:12px 18px;justify-content:center;align-items:center;margin:12px auto;flex-wrap:wrap}
+button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 15px;font:14px ui-serif,Georgia;cursor:pointer}button:hover{background:#12203a}
+.stat{font:12px ui-monospace,monospace;color:var(--dim);margin-top:4px}.stat b{color:#7fe0c0}
+.note{color:var(--dim);font-size:12.5px;max-width:790px;margin:16px auto 0;text-align:left;
+ background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.note b{color:#7fe0c0} code{background:#141d3a;padding:1px 6px;border-radius:5px;color:#e8c170;font-size:12px}
+a{color:#7fe0c0;text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>The Critter</h1><div class="sub">a self-relaxing simplicial organism</div>
+<p class="lede">A living <b>simplicial complex</b> that runs our engine on <i>itself</i>. Each cell relaxation-labels toward its neighbours
+(the <b>E-step</b>); then the body reshapes (the <b>M-step</b>) — it <i>grows</i> where it's coherent, <i>grooms</i> away cells that
+can't decide, tunes its own <b>temperature</b> to the critical edge, and <i>buds</i> a child when it's whole. It feels, grooms, grows,
+and reproduces itself. Click to poke it.</p>
+<canvas id="c" width="620" height="620"></canvas>
+<div class="panel">
+  <button id="play">⏸ Pause</button>
+  <button id="reset">↺ New seed</button>
+  <span class="stat" id="stat"></span>
+</div>
+<div class="note">
+<b>The loop.</b> <b>E-step</b> — every cell relaxes its label toward its neighbours through a Potts compatibility at temperature
+<code>T</code> (relaxation labeling). <b>M-step (morphogenesis)</b> — <i>grow</i>: a coherent boundary edge sprouts a new cell + triangle
+(the "can"); <i>groom</i>: an undecided cell is pruned (the "cannot"); <i>reproduce</i>: a whole, coherent body buds off a peripheral
+patch as a free child. <b>Self-organized criticality</b> — <code>T</code> auto-tunes (simulated annealing with a homeostatic set-point):
+it heats when the body freezes, cools when it churns, hovering at the critical edge between order and chaos.
+<br><br>
+<b>Honest framing.</b> This is a toy of <i>autopoiesis</i> (Maturana &amp; Varela) — a network that produces what produces it — not a
+claim of life or mind. But the loop is real: label relaxation feeding structural growth feeding label relaxation, "relax applied to
+relax," poised at criticality.
+</div>
+<p style="margin-top:14px"><a href="../cord/">← Cord of Three Strands</a> · <a href="../energy/">Energy=Diversity×Unity</a> · <a href="../">Genesis</a></p>
+</div>
+<script>
+const cv=document.getElementById('c'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+const K=3, COL=[[95,227,160],[192,96,255],[232,207,112]];   // cell types
+const L0=24, RREP=30, NMAX=210, NMIN=16;
+let nodes=new Map(), NID=0, playing=true, frame=0, T=0.5, gen=0, activity=0;
+
+function rndp(){ const p=[Math.random(),Math.random(),Math.random()]; const s=p[0]+p[1]+p[2]; return [p[0]/s,p[1]/s,p[2]/s]; }
+function dom(p){ let m=0,mi=0; for(let l=0;l<K;l++) if(p[l]>m){m=p[l];mi=l;} return mi; }
+function addNode(x,y,p){ const id=NID++; nodes.set(id,{x,y,vx:0,vy:0,p:p||rndp(),age:0}); return id; }
+function link(a,b){ if(a===b)return; nodes.get(a)&&nodes.get(b)&&(nodes.get(a).__nb||(nodes.get(a).__nb=new Set())).add(b)&&(nodes.get(b).__nb||(nodes.get(b).__nb=new Set())).add(a); }
+function nb(id){ return nodes.get(id).__nb || (nodes.get(id).__nb=new Set()); }
+function removeNode(id){ const n=nodes.get(id); if(!n)return; for(const j of nb(id)){ const nj=nodes.get(j); nj&&nj.__nb&&nj.__nb.delete(id); } nodes.delete(id); }
+
+function seed(){
+  nodes=new Map(); NID=0; gen=0; T=0.5;
+  const cx=W/2, cy=H/2, ids=[];
+  for(let r=0;r<3;r++)for(let a=0;a<6;a++){ const ang=a*Math.PI/3+r*0.4, rad=(r+1)*L0*0.9;
+    ids.push(addNode(cx+Math.cos(ang)*rad, cy+Math.sin(ang)*rad)); }
+  const center=addNode(cx,cy);
+  // triangulate roughly: connect near neighbours
+  const arr=[...nodes.keys()];
+  for(const a of arr)for(const b of arr){ if(a<b){ const na=nodes.get(a),nb2=nodes.get(b);
+    if(Math.hypot(na.x-nb2.x,na.y-nb2.y)<L0*1.7) link(a,b); } }
+}
+
+function relax(){                                   // E-step: label relaxation at temperature T
+  const beta=1/Math.max(0.12,T); let changed=0, cnt=0;
+  for(const [id,n] of nodes){ const NB=nb(id); if(NB.size===0)continue;
+    const sup=[0,0,0]; for(const j of NB){ const pj=nodes.get(j).p; sup[0]+=pj[0];sup[1]+=pj[1];sup[2]+=pj[2]; }
+    const inv=1/NB.size; sup[0]*=inv; sup[1]*=inv; sup[2]*=inv;   // normalize -> a real critical T exists
+    // Potts compatibility: like-likes-like, mild cross-tolerance
+    const h=[ sup[0]+0.35*(sup[1]+sup[2]), sup[1]+0.35*(sup[0]+sup[2]), sup[2]+0.35*(sup[0]+sup[1]) ];
+    const d0=dom(n.p); let mx=Math.max(h[0],h[1],h[2]), z=0, np=[0,0,0];
+    for(let l=0;l<K;l++){ np[l]=Math.pow(n.p[l],0.2)*Math.exp(beta*(h[l]-mx)); z+=np[l]; }   // light inertia
+    for(let l=0;l<K;l++) np[l]/=z;
+    for(let l=0;l<K;l++) np[l]=Math.max(1e-4, np[l]+(Math.random()-0.5)*0.55*T);              // thermal noise ~ T
+    { const s=np[0]+np[1]+np[2]; np[0]/=s; np[1]/=s; np[2]/=s; }
+    n.p=np; n.age++; cnt++; if(dom(np)!==d0) changed++;
+  }
+  activity = cnt? changed/cnt : 0;
+  // self-organized criticality: homeostatic annealing toward moderate activity
+  if(activity<0.03) T=Math.min(1.2,T*1.03); else if(activity>0.12) T=Math.max(0.15,T*0.97);
+}
+
+function commonCount(a,b){ let c=0; const nb2=nb(b); for(const x of nb(a)) if(nb2.has(x)) c++; return c; }
+
+function morph(){                                   // M-step: grow / groom / reproduce
+  const ids=[...nodes.keys()], N=ids.length;
+  let cx=0,cy=0; for(const id of ids){const n=nodes.get(id);cx+=n.x;cy+=n.y;} cx/=N;cy/=N;
+  // GROOM: prune undecided or dangling cells
+  const groomP = 0.02 + 0.06*(N/NMAX);
+  for(const id of ids){ const n=nodes.get(id); if(!n)continue; const deg=nb(id).size;
+    const undec = Math.max(...n.p) < 0.45;
+    if(N>NMIN && ((undec && n.age>6 && Math.random()<groomP) || deg<=1 && Math.random()<0.3)) removeNode(id);
+  }
+  // GROW: sprout at coherent boundary edges (can)
+  const growP = 0.5*(1 - N/NMAX);
+  if(growP>0){
+    const seen=new Set();
+    for(const a of [...nodes.keys()]){ for(const b of nb(a)){ if(a>=b)continue; const key=a+'-'+b; if(seen.has(key))continue; seen.add(key);
+      if(commonCount(a,b)>1) continue;               // interior edge, skip
+      const na=nodes.get(a), nb2=nodes.get(b);
+      if(dom(na.p)!==dom(nb2.p)) continue;           // grow only where coherent
+      if(Math.random()>growP*0.25) continue;
+      const mx=(na.x+nb2.x)/2, my=(na.y+nb2.y)/2;
+      let nx=-(nb2.y-na.y), ny=(nb2.x-na.x); const nl=Math.hypot(nx,ny)||1; nx/=nl;ny/=nl;
+      if((mx-cx)*nx+(my-cy)*ny<0){ nx=-nx; ny=-ny; }  // point outward
+      const c=addNode(mx+nx*L0*0.85, my+ny*L0*0.85, na.p.slice());
+      link(c,a); link(c,b);
+      if(nodes.size>=NMAX) break;
+    } if(nodes.size>=NMAX) {} }
+  }
+  // REPRODUCE: a whole coherent body buds a peripheral patch
+  const arr=[...nodes.keys()]; const NN=arr.length;
+  if(NN>NMAX*0.72 && Math.random()<0.13){ let coh=0; for(const id of arr) coh+=Math.max(...nodes.get(id).p); coh/=NN;
+    if(coh>0.66){
+      // pick peripheral seed (farthest from centroid)
+      let far=-1,fd=-1; for(const id of arr){ const n=nodes.get(id); const d=(n.x-cx)**2+(n.y-cy)**2; if(d>fd){fd=d;far=id;} }
+      const patch=new Set([far]); let fringe=[far];
+      for(let h=0;h<2;h++){ const nx=[]; for(const u of fringe) for(const v of nb(u)) if(!patch.has(v)&&patch.size<14){patch.add(v);nx.push(v);} fringe=nx; }
+      if(patch.size>=5 && patch.size<NN-6){
+        for(const u of patch) for(const v of [...nb(u)]) if(!patch.has(v)){ nb(u).delete(v); nb(v).delete(u); }
+        // kick the child outward
+        for(const u of patch){ const n=nodes.get(u); n.vx+=(n.x-cx)*0.03; n.vy+=(n.y-cy)*0.03; }
+        gen++;
+      }
+    }
+  }
+  if(nodes.size<NMIN){ // never let it die: regrow from survivors
+    const a=[...nodes.keys()]; if(a.length){ const s=nodes.get(a[0]); addNode(s.x+8,s.y+6,rndp()); }
+    else seed();
+  }
+}
+
+function physics(){
+  const ids=[...nodes.keys()];
+  // spatial hash for repulsion
+  const cs=RREP, grid=new Map();
+  for(const id of ids){ const n=nodes.get(id); const gx=Math.floor(n.x/cs),gy=Math.floor(n.y/cs),k=gx+','+gy; (grid.get(k)||grid.set(k,[]).get(k)).push(id); }
+  for(const id of ids){ const n=nodes.get(id); const gx=Math.floor(n.x/cs),gy=Math.floor(n.y/cs);
+    for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const cell=grid.get((gx+a)+','+(gy+b)); if(!cell)continue;
+      for(const j of cell){ if(j<=id)continue; const m=nodes.get(j); let dx=n.x-m.x,dy=n.y-m.y,d=Math.hypot(dx,dy)||1e-3;
+        if(d<RREP){ const f=(RREP-d)/d*0.22; dx*=f;dy*=f; n.vx+=dx;n.vy+=dy;m.vx-=dx;m.vy-=dy; } } } }
+  // springs on edges
+  for(const id of ids){ const n=nodes.get(id); for(const j of nb(id)){ if(j<=id)continue; const m=nodes.get(j);
+    let dx=m.x-n.x,dy=m.y-n.y,d=Math.hypot(dx,dy)||1e-3; const f=(d-L0)/d*0.06; dx*=f;dy*=f; n.vx+=dx;n.vy+=dy;m.vx-=dx;m.vy-=dy; } }
+  // integrate + soft walls
+  for(const id of ids){ const n=nodes.get(id); n.vx*=0.86;n.vy*=0.86;
+    const sp=Math.hypot(n.vx,n.vy); if(sp>3){n.vx*=3/sp;n.vy*=3/sp;}
+    n.x+=n.vx;n.y+=n.vy;
+    const M=14; if(n.x<M){n.x=M;n.vx*=-.4;} if(n.x>W-M){n.x=W-M;n.vx*=-.4;} if(n.y<M){n.y=M;n.vy*=-.4;} if(n.y>H-M){n.y=H-M;n.vy*=-.4;}
+  }
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // fill triangles (2-simplices)
+  const ids=[...nodes.keys()];
+  for(const i of ids){ const NBi=nb(i); for(const j of NBi){ if(j<=i)continue; const NBj=nb(j);
+    for(const k of NBi){ if(k<=j)continue; if(!NBj.has(k))continue;
+      const a=nodes.get(i),b=nodes.get(j),c=nodes.get(k);
+      const col=[0,0,0]; for(const n of [a,b,c]){ const d=dom(n.p); col[0]+=COL[d][0];col[1]+=COL[d][1];col[2]+=COL[d][2]; }
+      ctx.fillStyle=`rgba(${col[0]/3|0},${col[1]/3|0},${col[2]/3|0},0.16)`;
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.lineTo(c.x,c.y);ctx.closePath();ctx.fill();
+    } } }
+  // edges
+  ctx.strokeStyle='rgba(150,170,210,0.10)';ctx.lineWidth=1;
+  for(const i of ids){ const a=nodes.get(i); for(const j of nb(i)){ if(j<=i)continue; const b=nodes.get(j);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); } }
+  // cells
+  for(const i of ids){ const n=nodes.get(i); const d=dom(n.p), conf=Math.max(...n.p);
+    const c=COL[d]; ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${0.45+0.5*conf})`;
+    ctx.beginPath();ctx.arc(n.x,n.y,conf>0.5?3.2:2.2,0,7);ctx.fill(); }
+}
+
+function loop(){ if(playing){ frame++; relax(); physics(); if(frame%8===0) morph(); }
+  draw();
+  document.getElementById('stat').innerHTML=`cells <b>${nodes.size}</b> · T <b>${T.toFixed(2)}</b> · activity <b>${(activity*100).toFixed(0)}%</b> · buds <b>${gen}</b>`;
+  requestAnimationFrame(loop); }
+cv.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect();
+  const mx=(e.clientX-r.left)*W/r.width, my=(e.clientY-r.top)*H/r.height;
+  for(const [id,n] of nodes){ if((n.x-mx)**2+(n.y-my)**2<1600){ n.p=rndp(); n.vx+=(Math.random()-0.5)*4; n.vy+=(Math.random()-0.5)*4; } }
+});
+document.getElementById('play').onclick=function(){playing=!playing;this.textContent=playing?'⏸ Pause':'▶ Play';};
+document.getElementById('reset').onclick=seed;
+seed(); loop();
+</script></body></html>
