@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chess Brain — a mind grown one dimension at a time</title>
+<style>
+:root{--bg:#08060f;--ink:#ece7f5;--dim:#9b93b8;--gold:#e8c170;--line:#221c38;--cyan:#37e6ff}
+body{margin:0;background:radial-gradient(1200px 700px at 50% -10%,#1a1330,var(--bg));color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;text-align:center}
+.wrap{max-width:1000px;margin:0 auto;padding:30px 16px 70px}
+h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px;text-shadow:0 0 26px rgba(123,91,255,.4)}
+.sub{color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:14px}
+.lede{color:var(--dim);max-width:760px;margin:0 auto 16px;font-size:14.5px}
+canvas{background:radial-gradient(600px 500px at 50% 45%,#0d0a1c,#05040c);border:1px solid var(--line);border-radius:16px;cursor:grab;touch-action:none}
+canvas:active{cursor:grabbing}
+.ctl{display:flex;gap:14px;align-items:center;justify-content:center;margin:16px 0 6px;flex-wrap:wrap}
+input[type=range]{width:340px;accent-color:#7b5bff}
+.layer{font:14px ui-monospace,monospace;color:var(--gold);min-width:210px}
+.legend{color:var(--dim);font-size:13px;margin-top:8px}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:middle;margin:0 4px}
+.note{color:var(--dim);font-size:12.5px;margin-top:14px;max-width:820px;margin-left:auto;margin-right:auto}
+code{background:#1d1933;padding:1px 6px;border-radius:5px;color:var(--gold);font-size:12.5px}
+a{color:var(--cyan);text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>Chess Brain</h1><div class="sub">a mind grown one dimension at a time</div>
+<p class="lede">The ground truth (a chess <b>style fingerprint</b>) is seeded at the <b>origin</b> — the 0-D axiom. Each dimension doubles the
+cells and adds a layer of cognition, coloured by <b>trinary relaxation labeling</b> (neighbours prefer to differ) in <b>QCD</b> colour-charge.
+Drag the slider to <b>grow</b> it: axioms → theorems → proofs → ideas → manic musings → dreams.</p>
+<canvas id="c" width="900" height="560"></canvas>
+<div class="ctl">
+  <span class="dim" style="color:var(--dim);font:12px ui-monospace">dim 0</span>
+  <input id="grow" type="range" min="0" max="6" value="6" step="1">
+  <span class="layer" id="layer"></span>
+</div>
+<div class="legend">colour charge: <span><i style="background:#ff4d6d"></i>red</span><span><i style="background:#3ddc84"></i>green</span><span><i style="background:#5b8cff"></i>blue</span>
+  &nbsp;·&nbsp; white glow = <span style="color:#fff">contested</span> (the frustrated seam) &nbsp;·&nbsp; ⬤ big centre node = the axiom</div>
+<p class="note">A generative interpretability object, not a trained AGI: a chess-seeded trinary hypercube grown by the same relaxation-labeling
+engine as the sims, drawn in QCD-inspired colour. Same games → same brain (the origin's ground truth is deterministic). Keep stacking
+dimensions and, well — <code>ad nauseam</code>.</p>
+<p style="margin-top:14px"><a href="../chess-mind/">← Cognitive Fingerprints</a> · <a href="../frustrated/">the trinary / chirality sim →</a></p>
+</div>
+<script>
+const D={"n": 6, "seed_player": "mannyfresher", "seed_dims": [0.4769, 0.1481, 0.126, 0.2756, 0.1535, 0.0984, 0.3189, 0.1296, 0.5057, 0.7778], "dims_names": ["Aggression", "Queen-early", "Pawn-storm", "Capture-happy", "Check-rate", "Sacrifice", "King-hunt", "Development", "Tempo", "Off-book"], "axiom": 0, "shells": ["axioms", "theorems", "proofs", "ideas", "manic musings", "dreams", "the nausea"], "counts": [1, 1, 2, 4, 8, 16, 32], "tri_by_shell": [[1, 0, 0], [0, 1, 0], [1, 1, 0], [2, 2, 0], [4, 4, 0], [8, 8, 0], [16, 16, 0]], "nodes": [{"p": [0.0, 0.0, 0.0], "t": 0, "sh": 0, "c": 0.182}, {"p": [0.304, 0.4583, 0.0], "t": 1, "sh": 1, "c": 0.094}, {"p": [-0.6194, 0.485, 0.5674], "t": 1, "sh": 2, "c": 0.253}, {"p": [-0.3154, 0.9433, 0.5674], "t": 0, "sh": 2, "c": 0.384}, {"p": [0.1198, 0.2317, -1.3653], "t": 1, "sh": 3, "c": 0.075}, {"p": [0.4238, 0.69, -1.3653], "t": 0, "sh": 3, "c": 0.319}, {"p": [-0.4996, 0.7167, -0.7979], "t": 0, "sh": 3, "c": 0.218}, {"p": [-0.1956, 1.175, -0.7979], "t": 1, "sh": 3, "c": 0.071}, {"p": [1.0859, -0.3017, 1.4163], "t": 1, "sh": 4, "c": 0.343}, {"p": [1.3899, 0.1567, 1.4163], "t": 0, "sh": 4, "c": 0.43}, {"p": [0.4664, 0.1833, 1.9838], "t": 0, "sh": 4, "c": 0.306}, {"p": [0.7705, 0.6417, 1.9838], "t": 1, "sh": 4, "c": 0.129}, {"p": [1.2057, -0.07, 0.051], "t": 0, "sh": 4, "c": 0.394}, {"p": [1.5097, 0.3883, 0.051], "t": 1, "sh": 4, "c": 0.196}, {"p": [0.5863, 0.415, 0.6185], "t": 1, "sh": 4, "c": 0.097}, {"p": [0.8903, 0.8733, 0.6185], "t": 0, "sh": 4, "c": 0.346}, {"p": [-1.9017, -1.115, -0.3364], "t": 1, "sh": 5, "c": 0.225}, {"p": [-1.5977, -0.6567, -0.3364], "t": 0, "sh": 5, "c": 0.251}, {"p": [-2.5211, -0.63, 0.2311], "t": 0, "sh": 5, "c": 0.099}, {"p": [-2.2171, -0.1717, 0.2311], "t": 1, "sh": 5, "c": 0.203}, {"p": [-1.7819, -0.8833, -1.7017], "t": 0, "sh": 5, "c": 0.3}, {"p": [-1.4779, -0.425, -1.7017], "t": 1, "sh": 5, "c": 0.26}, {"p": [-2.4013, -0.3983, -1.1343], "t": 1, "sh": 5, "c": 0.209}, {"p": [-2.0973, 0.06, -1.1343], "t": 0, "sh": 5, "c": 0.323}, {"p": [-0.8158, -1.4167, 1.0799], "t": 0, "sh": 5, "c": 0.351}, {"p": [-0.5118, -0.9583, 1.0799], "t": 1, "sh": 5, "c": 0.098}, {"p": [-1.4353, -0.9317, 1.6474], "t": 1, "sh": 5, "c": 0.048}, {"p": [-1.1312, -0.4733, 1.6474], "t": 0, "sh": 5, "c": 0.355}, {"p": [-0.696, -1.185, -0.2854], "t": 1, "sh": 5, "c": 0.071}, {"p": [-0.392, -0.7267, -0.2854], "t": 0, "sh": 5, "c": 0.388}, {"p": [-1.3154, -0.7, 0.2821], "t": 0, "sh": 5, "c": 0.294}, {"p": [-1.0114, -0.2417, 0.2821], "t": 1, "sh": 5, "c": 0.061}, {"p": [1.236, -2.2083, -0.7862], "t": 1, "sh": 6, "c": 0.187}, {"p": [1.54, -1.75, -0.7862], "t": 0, "sh": 6, "c": 0.203}, {"p": [0.6165, -1.7233, -0.2188], "t": 0, "sh": 6, "c": 0.197}, {"p": [0.9206, -1.265, -0.2188], "t": 1, "sh": 6, "c": 0.142}, {"p": [1.3558, -1.9767, -2.1515], "t": 0, "sh": 6, "c": 0.291}, {"p": [1.6598, -1.5183, -2.1515], "t": 1, "sh": 6, "c": 0.179}, {"p": [0.7364, -1.4917, -1.5841], "t": 1, "sh": 6, "c": 0.124}, {"p": [1.0404, -1.0333, -1.5841], "t": 0, "sh": 6, "c": 0.399}, {"p": [2.3218, -2.51, 0.6301], "t": 0, "sh": 6, "c": 0.351}, {"p": [2.6259, -2.0517, 0.6301], "t": 1, "sh": 6, "c": 0.347}, {"p": [1.7024, -2.025, 1.1975], "t": 1, "sh": 6, "c": 0.02}, {"p": [2.0064, -1.5667, 1.1975], "t": 0, "sh": 6, "c": 0.388}, {"p": [2.4417, -2.2783, -0.7352], "t": 1, "sh": 6, "c": 0.151}, {"p": [2.7457, -1.82, -0.7352], "t": 0, "sh": 6, "c": 0.403}, {"p": [1.8222, -1.7933, -0.1678], "t": 0, "sh": 6, "c": 0.343}, {"p": [2.1263, -1.335, -0.1678], "t": 1, "sh": 6, "c": 0.05}, {"p": [-0.6657, -3.3233, -1.1226], "t": 0, "sh": 6, "c": 0.189}, {"p": [-0.3617, -2.865, -1.1226], "t": 1, "sh": 6, "c": 0.173}, {"p": [-1.2852, -2.8383, -0.5552], "t": 1, "sh": 6, "c": 0.219}, {"p": [-0.9811, -2.38, -0.5552], "t": 0, "sh": 6, "c": 0.351}, {"p": [-0.5459, -3.0917, -2.4879], "t": 1, "sh": 6, "c": 0.065}, {"p": [-0.2419, -2.6333, -2.4879], "t": 0, "sh": 6, "c": 0.309}, {"p": [-1.1653, -2.6067, -1.9205], "t": 0, "sh": 6, "c": 0.37}, {"p": [-0.8613, -2.1483, -1.9205], "t": 1, "sh": 6, "c": 0.145}, {"p": [0.4201, -3.625, 0.2937], "t": 1, "sh": 6, "c": 0.007}, {"p": [0.7241, -3.1667, 0.2937], "t": 0, "sh": 6, "c": 0.455}, {"p": [-0.1993, -3.14, 0.8612], "t": 0, "sh": 6, "c": 0.291}, {"p": [0.1047, -2.6817, 0.8612], "t": 1, "sh": 6, "c": 0.007}, {"p": [0.5399, -3.3933, -1.0716], "t": 0, "sh": 6, "c": 0.25}, {"p": [0.844, -2.935, -1.0716], "t": 1, "sh": 6, "c": 0.119}, {"p": [-0.0795, -2.9083, -0.5042], "t": 1, "sh": 6, "c": 0.185}, {"p": [0.2245, -2.45, -0.5042], "t": 0, "sh": 6, "c": 0.449}], "edges": [[0, 1], [0, 2], [0, 4], [0, 8], [0, 16], [0, 32], [1, 3], [1, 5], [1, 9], [1, 17], [1, 33], [2, 3], [2, 6], [2, 10], [2, 18], [2, 34], [3, 7], [3, 11], [3, 19], [3, 35], [4, 5], [4, 6], [4, 12], [4, 20], [4, 36], [5, 7], [5, 13], [5, 21], [5, 37], [6, 7], [6, 14], [6, 22], [6, 38], [7, 15], [7, 23], [7, 39], [8, 9], [8, 10], [8, 12], [8, 24], [8, 40], [9, 11], [9, 13], [9, 25], [9, 41], [10, 11], [10, 14], [10, 26], [10, 42], [11, 15], [11, 27], [11, 43], [12, 13], [12, 14], [12, 28], [12, 44], [13, 15], [13, 29], [13, 45], [14, 15], [14, 30], [14, 46], [15, 31], [15, 47], [16, 17], [16, 18], [16, 20], [16, 24], [16, 48], [17, 19], [17, 21], [17, 25], [17, 49], [18, 19], [18, 22], [18, 26], [18, 50], [19, 23], [19, 27], [19, 51], [20, 21], [20, 22], [20, 28], [20, 52], [21, 23], [21, 29], [21, 53], [22, 23], [22, 30], [22, 54], [23, 31], [23, 55], [24, 25], [24, 26], [24, 28], [24, 56], [25, 27], [25, 29], [25, 57], [26, 27], [26, 30], [26, 58], [27, 31], [27, 59], [28, 29], [28, 30], [28, 60], [29, 31], [29, 61], [30, 31], [30, 62], [31, 63], [32, 33], [32, 34], [32, 36], [32, 40], [32, 48], [33, 35], [33, 37], [33, 41], [33, 49], [34, 35], [34, 38], [34, 42], [34, 50], [35, 39], [35, 43], [35, 51], [36, 37], [36, 38], [36, 44], [36, 52], [37, 39], [37, 45], [37, 53], [38, 39], [38, 46], [38, 54], [39, 47], [39, 55], [40, 41], [40, 42], [40, 44], [40, 56], [41, 43], [41, 45], [41, 57], [42, 43], [42, 46], [42, 58], [43, 47], [43, 59], [44, 45], [44, 46], [44, 60], [45, 47], [45, 61], [46, 47], [46, 62], [47, 63], [48, 49], [48, 50], [48, 52], [48, 56], [49, 51], [49, 53], [49, 57], [50, 51], [50, 54], [50, 58], [51, 55], [51, 59], [52, 53], [52, 54], [52, 60], [53, 55], [53, 61], [54, 55], [54, 62], [55, 63], [56, 57], [56, 58], [56, 60], [57, 59], [57, 61], [58, 59], [58, 62], [59, 63], [60, 61], [60, 62], [61, 63], [62, 63]]}, cv=document.getElementById('c'), ctx=cv.getContext('2d');
+const CW=cv.width, CH=cv.height, CHARGE=["#ff4d6d","#3ddc84","#5b8cff"];
+let grow=D.n, ax=0.5, ay=0.4, drag=false, px=0, py=0, auto=true;
+const gEl=document.getElementById('grow'); gEl.value=D.n;
+function setLayer(){ document.querySelector('.dim').textContent='dim '+grow;
+  document.getElementById('layer').textContent=D.shells[grow]+' · '+D.counts[grow]+' cells'; }
+gEl.oninput=function(){ grow=+this.value; setLayer(); }; setLayer();
+
+function rot(p){ // rotate about Y then X
+  let x=p[0], y=p[1], z=p[2];
+  let x1=x*Math.cos(ay)+z*Math.sin(ay), z1=-x*Math.sin(ay)+z*Math.cos(ay);
+  let y1=y*Math.cos(ax)-z1*Math.sin(ax), z2=y*Math.sin(ax)+z1*Math.cos(ax);
+  return [x1, y1, z2];
+}
+function frame(){
+  ctx.clearRect(0,0,CW,CH);
+  const S=64, R=D.nodes.map((nd,i)=>{const r=rot(nd.p);return {i,x:r[0],y:r[1],z:r[2],nd};});
+  // edges first (only within grown shells)
+  ctx.lineWidth=1;
+  D.edges.forEach(([a,b])=>{ const A=D.nodes[a], B=D.nodes[b]; if(A.sh>grow||B.sh>grow)return;
+    const ra=rot(A.p), rb=rot(B.p); const za=(ra[2]+rb[2])/2;
+    ctx.strokeStyle='rgba(140,120,220,'+(0.05+0.12*(za+3)/6)+')';
+    ctx.beginPath(); ctx.moveTo(CW/2+ra[0]*S, CH/2+ra[1]*S); ctx.lineTo(CW/2+rb[0]*S, CH/2+rb[1]*S); ctx.stroke(); });
+  // nodes back-to-front
+  R.filter(o=>o.nd.sh<=grow).sort((a,b)=>a.z-b.z).forEach(o=>{
+    const X=CW/2+o.x*S, Y=CH/2+o.y*S, depth=(o.z+3)/6;
+    const base=o.i===0?13:(6 - o.nd.sh*0.5); const rad=Math.max(2.4, base)*(0.6+0.5*depth);
+    const col=CHARGE[o.nd.t];
+    if(o.nd.c>0.35){ ctx.beginPath(); ctx.arc(X,Y,rad*2.1,0,7); // contested seam glow (white)
+      ctx.fillStyle='rgba(255,255,255,'+(0.05+0.18*o.nd.c)+')'; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(X,Y,rad*1.7,0,7); ctx.fillStyle=col; ctx.globalAlpha=0.16*depth; ctx.fill(); ctx.globalAlpha=1;
+    ctx.beginPath(); ctx.arc(X,Y,rad,0,7); ctx.fillStyle=col; ctx.globalAlpha=0.35+0.6*depth; ctx.fill(); ctx.globalAlpha=1;
+    if(o.i===0){ ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke(); }
+  });
+  if(auto&&!drag) ay+=0.0032;
+  requestAnimationFrame(frame);
+}
+cv.addEventListener('pointerdown',e=>{drag=true;auto=false;px=e.clientX;py=e.clientY;});
+addEventListener('pointerup',()=>drag=false);
+addEventListener('pointermove',e=>{if(!drag)return;ay+=(e.clientX-px)*0.01;ax+=(e.clientY-py)*0.01;px=e.clientX;py=e.clientY;});
+frame();
+</script>
+<style>
+/* defend against host pages that style bare `svg{}` — class selectors win on
+   specificity, so our hidden defs never balloons and faces stay on white cards */
+.rage-defs{position:absolute!important;width:0!important;height:0!important;
+  overflow:hidden;background:none!important;border:0!important}
+.rage-strip svg,.rage-panel .face{background:none!important;border:0!important;
+  box-shadow:none!important;max-width:100%!important}
+.rage-strip{max-width:900px;margin:26px auto 8px;padding:0 12px}
+.rage-strip h3{font:600 13px/1.4 ui-monospace,monospace;letter-spacing:2px;
+  text-transform:uppercase;color:#9b93b8;margin:0 0 12px;text-align:center}
+.rage-panels{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:stretch}
+.rage-panel{background:#f7f4ee;border:2px solid #141019;border-radius:10px;
+  width:150px;box-shadow:4px 4px 0 rgba(0,0,0,.45);display:flex;flex-direction:column;
+  overflow:hidden;transition:transform .12s ease}
+.rage-panel:hover{transform:translateY(-3px) rotate(-.6deg)}
+.rage-panel .face{color:#141019;fill:none;stroke:#141019;stroke-width:3;
+  stroke-linecap:round;stroke-linejoin:round;display:block;width:100%!important;
+  height:118px!important;padding:8px 8px 0;box-sizing:border-box}
+.rage-panel .cry{font:800 13px/1.15 ui-sans-serif,"Comic Sans MS",system-ui;
+  color:#141019;text-align:center;padding:2px 6px 4px}
+.rage-panel .cap{font:12px/1.3 ui-serif,Georgia,serif;color:#3a3550;
+  background:#fff;border-top:2px solid #141019;padding:7px 8px;flex:1}
+@media (max-width:520px){.rage-panel{width:132px}.rage-panel .face{height:104px}}
+</style>
+<svg class="rage-defs" width="0" height="0" aria-hidden="true" style="position:absolute" fill="none" stroke="#141019" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><defs><symbol id="rc-rage" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M28,36 L46,44"/><path d="M72,36 L54,44"/><circle cx="40" cy="50" r="3.2"/><circle cx="60" cy="50" r="3.2"/><rect x="31" y="62" width="38" height="18" rx="2"/><path d="M31,71 H69 M40,62 V80 M50,62 V80 M60,62 V80"/></symbol><symbol id="rc-troll" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M30,44 Q40,36 50,44" fill="none"/><path d="M52,44 Q62,36 72,44" fill="none"/><path d="M20,58 Q50,96 80,58"/><path d="M20,58 Q50,74 80,58"/><path d="M62,58 q8,-6 12,2"/></symbol><symbol id="rc-megusta" viewBox="0 0 100 100"><path d="M18,24 Q50,6 82,24 Q92,52 82,80 Q50,102 24,84 Q8,54 18,24 Z"/><circle cx="38" cy="46" r="6"/><circle cx="63" cy="44" r="3.5"/><path d="M24,66 Q50,58 76,66"/><path d="M24,66 Q50,84 76,66"/><path d="M46,72 Q50,80 54,72"/></symbol><symbol id="rc-poker" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M32,47 H46"/><path d="M54,47 H68"/><circle cx="39" cy="49" r="2"/><circle cx="61" cy="49" r="2"/><path d="M32,68 H68"/></symbol><symbol id="rc-alone" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><circle cx="40" cy="47" r="2.4"/><circle cx="60" cy="47" r="2.4"/><path d="M34,74 Q50,64 66,74"/><path d="M41,52 q-3,7 0,10 q3,-3 0,-10 Z" fill="currentColor"/></symbol><symbol id="rc-cereal" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><circle cx="39" cy="46" r="4"/><circle cx="61" cy="46" r="4"/><ellipse cx="50" cy="72" rx="12" ry="9"/><path d="M62,72 L82,66 M62,76 L84,78 M60,80 L78,90"/><circle cx="86" cy="64" r="1.6" fill="currentColor"/><circle cx="88" cy="80" r="1.6" fill="currentColor"/></symbol><symbol id="rc-okay" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M35,44 L45,50"/><path d="M65,44 L55,50"/><circle cx="40" cy="52" r="2.4"/><circle cx="60" cy="52" r="2.4"/><path d="M34,70 Q50,66 66,72"/></symbol><symbol id="rc-challenge" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M30,42 L46,46"/><path d="M70,42 L54,46"/><circle cx="41" cy="51" r="2.6"/><circle cx="59" cy="51" r="2.6"/><path d="M30,62 Q50,80 70,62"/><path d="M32,72 h6 m6,4 h6 m6,-4 h6" opacity="0.6"/></symbol><symbol id="rc-mindblown" viewBox="0 0 100 100"><path d="M18,40 Q50,26 82,40 Q92,60 78,84 Q50,98 22,84 Q8,60 18,40 Z"/><circle cx="40" cy="52" r="6"/><circle cx="60" cy="52" r="6"/><circle cx="40" cy="52" r="1.8" fill="currentColor"/><circle cx="60" cy="52" r="1.8" fill="currentColor"/><circle cx="50" cy="72" r="6"/><path d="M30,30 L24,14 M50,26 L50,8 M70,30 L76,14 M40,27 L34,12 M60,27 L66,12"/></symbol><symbol id="rc-tableflip" viewBox="0 0 100 100"><path d="M10,52 Q26,40 42,52 Q48,70 36,84 Q20,92 11,80 Q5,66 10,52 Z"/><path d="M16,58 L26,62"/><path d="M40,56 L31,61"/><circle cx="23" cy="65" r="2.2"/><circle cx="34" cy="64" r="2.2"/><rect x="19" y="72" width="16" height="7" rx="1.5"/><path d="M40,54 L54,42"/><path d="M30,46 L36,34"/><path d="M58,40 L90,26"/><path d="M63,40 L60,50 M85,30 L88,40"/><path d="M50,34 Q58,24 68,22 M54,44 Q64,34 76,32"/></symbol><symbol id="rc-yao" viewBox="0 0 100 100"><path d="M14,30 Q50,10 86,30 Q94,58 84,82 Q50,100 16,82 Q6,58 14,30 Z"/><path d="M28,44 Q38,36 48,44"/><path d="M52,44 Q62,36 72,44"/><path d="M26,60 Q50,90 74,60 Z"/><path d="M26,60 H74"/><path d="M34,68 Q50,62 66,68"/></symbol><symbol id="rc-success" viewBox="0 0 100 100"><path d="M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z"/><path d="M30,42 L44,44"/><path d="M70,42 L56,44"/><circle cx="41" cy="50" r="2.4"/><circle cx="59" cy="50" r="2.4"/><path d="M36,68 Q50,62 64,68"/><rect x="60" y="66" width="20" height="16" rx="4"/><path d="M60,72 h20 M65,66 v6 M70,66 v6 M75,66 v6"/><path d="M60,74 q-5,1 -6,5"/></symbol></defs></svg><section class="rage-strip"><h3>Growing a mind, one dimension at a time</h3><div class="rage-panels"><figure class="rage-panel" style="--hue:#e8c170"><svg class="face" viewBox="0 0 100 100"><use href="#rc-challenge"/></svg><figcaption class="cry" style="color:#141019">challenge accepted</figcaption><div class="cap">Seed the origin with the ground truth — then grow logically, dimension by dimension.</div></figure><figure class="rage-panel" style="--hue:#37e6ff"><svg class="face" viewBox="0 0 100 100"><use href="#rc-mindblown"/></svg><figcaption class="cry" style="color:#141019">mind = blown</figcaption><div class="cap">Trinary relaxation on a hypercube, coloured like QCD colour-charge — a chess-grown brain.</div></figure><figure class="rage-panel" style="--hue:#37e6ff"><svg class="face" viewBox="0 0 100 100"><use href="#rc-mindblown"/></svg><figcaption class="cry" style="color:#141019">mind = blown</figcaption><div class="cap">64 cells across 7 dimensions: axioms → theorems → proofs → ideas → musings → dreams.</div></figure></div></section>
+</body></html>
