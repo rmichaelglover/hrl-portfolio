@@ -125,6 +125,7 @@
     <button id="btnMetro" class="btnrole" title="Metronome click track — hear the inferred time signature (off by default)">🥁 Click</button>
     <button id="btnRiver" class="btnrole" title="Topographic influence field: water in the contested valleys, land rising by elevation (HRL)">🏞️ Terrain</button>
     <button id="btnQcd" class="btnrole" title="QCD disco overlay: the HRL influence field as a full-spectrum colour-charge map — white-control cool, black-control warm, the contested ish seam (Markov blanket) glows">🪩 QCD</button>
+    <button id="btnRage" class="btnrole" title="🃏 Rage Comics: pop a classic rage face on captures, checks and checkmate (off by default)">🃏 Rage</button>
     <button id="btnLoad" class="btnrole" title="Load any annotated PGN">📋 Load PGN</button>
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
@@ -562,7 +563,7 @@ function fillRoles(res){
    smooth and white<->black REPEL, so a contested seam emerges between the
    territories.  The contested band is the river.
    ===================================================================== */
-let riverOn=false, qcdOn=false;
+let riverOn=false, qcdOn=false, rageOn=false;
 const FIELD_C=[[1,0.2,-1],[0.2,0.6,0.2],[-1,0.2,1]];   // compat(j,l): 0=white 1=contested 2=black
 function computeField(frame){
   const pl=frame.placement,pc=frame.pieces, wc={},bc={};
@@ -957,7 +958,14 @@ function renderMoves(){
   el.querySelectorAll(".m").forEach(m=>m.classList.toggle("cur",(+m.dataset.k)===cur-1));
   const c=el.querySelector(".m.cur"); if(c) c.scrollIntoView({block:"nearest"});
 }
-function go(n){cur=Math.max(0,Math.min(frames.length-1,n));render();if(musicOn)playStep();}
+function go(n){cur=Math.max(0,Math.min(frames.length-1,n));render();if(musicOn)playStep();rageReact();}
+function rageReact(){ if(!rageOn||!window.RAGE||cur<1)return; const mv=moves[cur-1]; if(!mv)return;   // 🃏 opt-in rage overlay
+  const san=mv.san+(mv.suffix||""); let ev,cap;
+  if(mv.suffix==="#"){ev="mate";cap=san+" — checkmate. Nailed it.";}
+  else if(mv.suffix==="+"){ev="check";cap=san+" — check.";}
+  else if(/x/.test(mv.san)){ev="capture";cap="…"+san;}
+  else return;
+  RAGE.pop(ev,cap); }
 function step(d){go(cur+d);}
 document.getElementById("first").onclick=()=>{stop();go(0);};
 document.getElementById("prev").onclick=()=>{stop();step(-1);};
@@ -995,6 +1003,7 @@ document.getElementById("btnMusic").onclick=function(){musicOn=!musicOn;this.cla
   if(musicOn){initAudio();if(actx.state==="suspended")actx.resume();}};
 document.getElementById("btnRiver").onclick=function(){riverOn=!riverOn;this.classList.toggle("on",riverOn);render();};
 document.getElementById("btnQcd").onclick=function(){qcdOn=!qcdOn;this.classList.toggle("on",qcdOn);render();};
+document.getElementById("btnRage").onclick=function(){rageOn=!rageOn;this.classList.toggle("on",rageOn);if(rageOn&&window.RAGE)RAGE.pop("challenge","Rage mode on — reacting to the carnage.");};
 document.getElementById("btnLoad").onclick=function(){const p=document.getElementById("loadPanel");
   p.style.display=(p.style.display==="block")?"none":"block";this.classList.toggle("on",p.style.display==="block");};
 document.getElementById("pgnCancel").onclick=()=>{document.getElementById("loadPanel").style.display="none";document.getElementById("btnLoad").classList.remove("on");};
@@ -1013,6 +1022,152 @@ load("queendab");
 if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
   window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
 }
+</script>
+<script>
+/* ===== rage.js (inlined — keep maestro self-contained for the PWA cache) ===== */
+/*! rage.js — Rage Comics for the whimsy-chess viewers.
+ *
+ * The JS twin of python/rage.py (same 12 faces, same semantic-event vocabulary),
+ * so a Rage Guy means the same thing on the board as it does in the sims.
+ *
+ * Drop-in, zero-dependency, self-contained. Load it with a script tag
+ * (src="rage.js"), or inline the whole file into a self-contained page. Then:
+ *
+ *     RAGE.pop('mate',    'Qxb7# — the Queen Dab lands');   // live toast, bottom-right
+ *     RAGE.pop('blunder', '12...Qxh1+? grabbing the rook');
+ *     RAGE.inject([                                          // a persistent comic strip
+ *       ['dab',   'Queen tucked behind flung pawns — dabbing on +482 of rating.'],
+ *       ['check', 'She charges out solo and never looks back.'],
+ *       ['mate',  'Qxb7#. No book. All daring.'],
+ *     ], 'The Queen Dab, in three panels', {mount: document.body});
+ *
+ * Events → faces (see EVENTS): mate→success, blunder→tableflip, brilliancy→mindblown,
+ * capture→cereal, check→challenge, stalemate→poker, resign→okay, crossing→shock,
+ * dab→yao, plus every sim event (frustrated, blind, recovered, revelation, …).
+ */
+(function (global) {
+  "use strict";
+
+  // ── Face data — mirrors python/rage.py FACES/EVENTS (regenerate both together) ──
+  var DATA = {"faces": {"rage": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M28,36 L46,44\"/><path d=\"M72,36 L54,44\"/><circle cx=\"40\" cy=\"50\" r=\"3.2\"/><circle cx=\"60\" cy=\"50\" r=\"3.2\"/><rect x=\"31\" y=\"62\" width=\"38\" height=\"18\" rx=\"2\"/><path d=\"M31,71 H69 M40,62 V80 M50,62 V80 M60,62 V80\"/>", "tag": "FFFFFUUUU", "hue": "#ff476f"}, "troll": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M30,44 Q40,36 50,44\" fill=\"none\"/><path d=\"M52,44 Q62,36 72,44\" fill=\"none\"/><path d=\"M20,58 Q50,96 80,58\"/><path d=\"M20,58 Q50,74 80,58\"/><path d=\"M62,58 q8,-6 12,2\"/>", "tag": "problem?", "hue": "#3ddc84"}, "megusta": {"svg": "<path d=\"M18,24 Q50,6 82,24 Q92,52 82,80 Q50,102 24,84 Q8,54 18,24 Z\"/><circle cx=\"38\" cy=\"46\" r=\"6\"/><circle cx=\"63\" cy=\"44\" r=\"3.5\"/><path d=\"M24,66 Q50,58 76,66\"/><path d=\"M24,66 Q50,84 76,66\"/><path d=\"M46,72 Q50,80 54,72\"/>", "tag": "me gusta", "hue": "#c084fc"}, "poker": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M32,47 H46\"/><path d=\"M54,47 H68\"/><circle cx=\"39\" cy=\"49\" r=\"2\"/><circle cx=\"61\" cy=\"49\" r=\"2\"/><path d=\"M32,68 H68\"/>", "tag": "...", "hue": "#9b93b8"}, "alone": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><circle cx=\"40\" cy=\"47\" r=\"2.4\"/><circle cx=\"60\" cy=\"47\" r=\"2.4\"/><path d=\"M34,74 Q50,64 66,74\"/><path d=\"M41,52 q-3,7 0,10 q3,-3 0,-10 Z\" fill=\"currentColor\"/>", "tag": "forever alone", "hue": "#5b8cff"}, "cereal": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><circle cx=\"39\" cy=\"46\" r=\"4\"/><circle cx=\"61\" cy=\"46\" r=\"4\"/><ellipse cx=\"50\" cy=\"72\" rx=\"12\" ry=\"9\"/><path d=\"M62,72 L82,66 M62,76 L84,78 M60,80 L78,90\"/><circle cx=\"86\" cy=\"64\" r=\"1.6\" fill=\"currentColor\"/><circle cx=\"88\" cy=\"80\" r=\"1.6\" fill=\"currentColor\"/>", "tag": "WAIT WHAT", "hue": "#ff8c42"}, "okay": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M35,44 L45,50\"/><path d=\"M65,44 L55,50\"/><circle cx=\"40\" cy=\"52\" r=\"2.4\"/><circle cx=\"60\" cy=\"52\" r=\"2.4\"/><path d=\"M34,70 Q50,66 66,72\"/>", "tag": "okay.", "hue": "#9b93b8"}, "challenge": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M30,42 L46,46\"/><path d=\"M70,42 L54,46\"/><circle cx=\"41\" cy=\"51\" r=\"2.6\"/><circle cx=\"59\" cy=\"51\" r=\"2.6\"/><path d=\"M30,62 Q50,80 70,62\"/><path d=\"M32,72 h6 m6,4 h6 m6,-4 h6\" opacity=\"0.6\"/>", "tag": "challenge accepted", "hue": "#e8c170"}, "mindblown": {"svg": "<path d=\"M18,40 Q50,26 82,40 Q92,60 78,84 Q50,98 22,84 Q8,60 18,40 Z\"/><circle cx=\"40\" cy=\"52\" r=\"6\"/><circle cx=\"60\" cy=\"52\" r=\"6\"/><circle cx=\"40\" cy=\"52\" r=\"1.8\" fill=\"currentColor\"/><circle cx=\"60\" cy=\"52\" r=\"1.8\" fill=\"currentColor\"/><circle cx=\"50\" cy=\"72\" r=\"6\"/><path d=\"M30,30 L24,14 M50,26 L50,8 M70,30 L76,14 M40,27 L34,12 M60,27 L66,12\"/>", "tag": "mind = blown", "hue": "#37e6ff"}, "tableflip": {"svg": "<path d=\"M10,52 Q26,40 42,52 Q48,70 36,84 Q20,92 11,80 Q5,66 10,52 Z\"/><path d=\"M16,58 L26,62\"/><path d=\"M40,56 L31,61\"/><circle cx=\"23\" cy=\"65\" r=\"2.2\"/><circle cx=\"34\" cy=\"64\" r=\"2.2\"/><rect x=\"19\" y=\"72\" width=\"16\" height=\"7\" rx=\"1.5\"/><path d=\"M40,54 L54,42\"/><path d=\"M30,46 L36,34\"/><path d=\"M58,40 L90,26\"/><path d=\"M63,40 L60,50 M85,30 L88,40\"/><path d=\"M50,34 Q58,24 68,22 M54,44 Q64,34 76,32\"/>", "tag": "(╯°□°)╯︵ ┻━┻", "hue": "#ff476f"}, "yao": {"svg": "<path d=\"M14,30 Q50,10 86,30 Q94,58 84,82 Q50,100 16,82 Q6,58 14,30 Z\"/><path d=\"M28,44 Q38,36 48,44\"/><path d=\"M52,44 Q62,36 72,44\"/><path d=\"M26,60 Q50,90 74,60 Z\"/><path d=\"M26,60 H74\"/><path d=\"M34,68 Q50,62 66,68\"/>", "tag": "bitch, please", "hue": "#e8c170"}, "success": {"svg": "<path d=\"M18,26 Q50,6 82,26 Q94,56 78,84 Q50,98 22,84 Q6,56 18,26 Z\"/><path d=\"M30,42 L44,44\"/><path d=\"M70,42 L56,44\"/><circle cx=\"41\" cy=\"50\" r=\"2.4\"/><circle cx=\"59\" cy=\"50\" r=\"2.4\"/><path d=\"M36,68 Q50,62 64,68\"/><rect x=\"60\" y=\"66\" width=\"20\" height=\"16\" rx=\"4\"/><path d=\"M60,72 h20 M65,66 v6 M70,66 v6 M75,66 v6\"/><path d=\"M60,74 q-5,1 -6,5\"/>", "tag": "NAILED IT", "hue": "#3ddc84"}}, "events": {"frustrated": "rage", "blind": "poker", "indistinguishable": "poker", "recovered": "troll", "solved": "troll", "converged": "megusta", "settled": "megusta", "alone": "alone", "isolated": "alone", "shock": "cereal", "blowup": "cereal", "defeat": "okay", "collapse": "okay", "challenge": "challenge", "revelation": "mindblown", "emergent": "mindblown", "flip": "tableflip", "ragequit": "tableflip", "victory": "success", "win": "success", "disrespect": "yao", "dismiss": "yao", "mate": "success", "brilliancy": "mindblown", "brilliant": "mindblown", "blunder": "tableflip", "stalemate": "poker", "resign": "okay", "capture": "cereal", "check": "challenge", "crossing": "shock", "dab": "yao"}};
+
+  var FACES = DATA.faces, EVENTS = DATA.events;
+
+  function faceFor(k) {
+    var key = EVENTS.hasOwnProperty(k) ? EVENTS[k] : k;
+    if (!FACES.hasOwnProperty(key)) throw new Error("unknown rage face/event: " + k);
+    var f = FACES[key];
+    return { key: key, tag: f.tag, svg: f.svg, hue: f.hue };
+  }
+
+  // ── One-time style + symbol-defs injection (class selectors + !important so a
+  //    host page that styles bare `svg{}` — as maestro/lichess do — can't touch us) ──
+  var CSS = [
+    ".rage-defs{position:absolute!important;width:0!important;height:0!important;overflow:hidden;background:none!important;border:0!important}",
+    ".rage-strip svg,.rage-panel .face,.rage-toast .face{background:none!important;border:0!important;box-shadow:none!important;max-width:100%!important}",
+    ".rage-strip{max-width:900px;margin:26px auto 8px;padding:0 12px;font-family:ui-serif,Georgia,serif}",
+    ".rage-strip h3{font:600 13px/1.4 ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase;color:#9b93b8;margin:0 0 12px;text-align:center}",
+    ".rage-panels{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:stretch}",
+    ".rage-panel,.rage-toast{background:#f7f4ee;border:2px solid #141019;border-radius:10px;box-shadow:4px 4px 0 rgba(0,0,0,.45);display:flex;flex-direction:column;overflow:hidden}",
+    ".rage-panel{width:150px;transition:transform .12s ease}",
+    ".rage-panel:hover{transform:translateY(-3px) rotate(-.6deg)}",
+    ".rage-panel .face,.rage-toast .face{color:#141019;fill:none;stroke:#141019;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;display:block;width:100%!important;height:118px!important;padding:8px 8px 0;box-sizing:border-box}",
+    ".rage-panel .cry,.rage-toast .cry{font:800 13px/1.15 ui-sans-serif,'Comic Sans MS',system-ui;color:#141019;text-align:center;padding:2px 6px 4px}",
+    ".rage-panel .cap,.rage-toast .cap{font:12px/1.3 ui-serif,Georgia,serif;color:#3a3550;background:#fff;border-top:2px solid #141019;padding:7px 8px;flex:1}",
+    ".rage-toasts{position:fixed;right:16px;bottom:16px;z-index:99999;display:flex;flex-direction:column;gap:10px;align-items:flex-end;pointer-events:none}",
+    ".rage-toast{width:210px;animation:rage-in .34s cubic-bezier(.2,1.4,.5,1) both}",
+    ".rage-toast .face{height:104px!important}",
+    ".rage-toast.rage-out{animation:rage-out .3s ease forwards}",
+    "@keyframes rage-in{from{opacity:0;transform:translateY(14px) scale(.85) rotate(-3deg)}to{opacity:1;transform:none}}",
+    "@keyframes rage-out{to{opacity:0;transform:translateX(24px) scale(.9)}}",
+    "@media (max-width:520px){.rage-panel{width:132px}.rage-panel .face{height:104px!important}}"
+  ].join("\n");
+
+  function symbolDefsSvg() {
+    var syms = "";
+    for (var k in FACES) if (FACES.hasOwnProperty(k)) syms += '<symbol id="rc-' + k + '" viewBox="0 0 100 100">' + FACES[k].svg + "</symbol>";
+    return '<svg class="rage-defs" width="0" height="0" aria-hidden="true" fill="none" stroke="#141019" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><defs>' + syms + "</defs></svg>";
+  }
+
+  var _ready = false;
+  function ensure() {
+    if (_ready) return;
+    _ready = true;
+    var st = document.createElement("style");
+    st.setAttribute("data-rage", "css");
+    st.textContent = CSS;
+    document.head.appendChild(st);
+    var holder = document.createElement("div");
+    holder.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+    holder.innerHTML = symbolDefsSvg();
+    document.body.appendChild(holder);
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>]/g, function (c) {
+      return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;";
+    });
+  }
+
+  function panelHTML(f, cap, cls) {
+    return '<figure class="' + cls + '">' +
+      '<svg class="face" viewBox="0 0 100 100"><use href="#rc-' + f.key + '"></use></svg>' +
+      '<figcaption class="cry">' + esc(f.tag) + "</figcaption>" +
+      '<div class="cap">' + esc(cap) + "</div></figure>";
+  }
+
+  // ── Persistent comic strip ──
+  function strip(items, title) {
+    ensure();
+    var panels = items.map(function (it) {
+      var key = Array.isArray(it) ? it[0] : it, cap = Array.isArray(it) ? (it[1] || "") : "";
+      return panelHTML(faceFor(key), cap, "rage-panel");
+    }).join("");
+    var sec = document.createElement("section");
+    sec.className = "rage-strip";
+    sec.innerHTML = '<h3>' + esc(title || "Rage Comics") + "</h3><div class=\"rage-panels\">" + panels + "</div>";
+    return sec;
+  }
+
+  function inject(items, title, opts) {
+    opts = opts || {};
+    var sec = strip(items, title);
+    (opts.mount || document.body).appendChild(sec);
+    return sec;
+  }
+
+  // ── Live transient reaction toast (bottom-right, auto-dismiss) ──
+  function toastLayer() {
+    var el = document.querySelector(".rage-toasts");
+    if (!el) { el = document.createElement("div"); el.className = "rage-toasts"; document.body.appendChild(el); }
+    return el;
+  }
+
+  function pop(key, caption, opts) {
+    ensure();
+    opts = opts || {};
+    var f = faceFor(key);
+    var fig = document.createElement("figure");
+    fig.className = "rage-toast";
+    fig.innerHTML = '<svg class="face" viewBox="0 0 100 100"><use href="#rc-' + f.key + '"></use></svg>' +
+      '<figcaption class="cry">' + esc(f.tag) + "</figcaption>" +
+      (caption ? '<div class="cap">' + esc(caption) + "</div>" : "");
+    var layer = toastLayer();
+    layer.appendChild(fig);
+    var ttl = opts.duration || 2600;
+    setTimeout(function () {
+      fig.classList.add("rage-out");
+      setTimeout(function () { if (fig.parentNode) fig.parentNode.removeChild(fig); }, 320);
+    }, ttl);
+    return fig;
+  }
+
+  global.RAGE = {
+    faces: FACES, events: EVENTS, faceFor: faceFor,
+    strip: strip, inject: inject, pop: pop, css: CSS
+  };
+})(typeof window !== "undefined" ? window : this);
+
 </script>
 </body>
 </html>
