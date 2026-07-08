@@ -24,7 +24,7 @@ a{color:#7fe0c0;text-decoration:none}
 </style></head><body><div class="wrap">
 <h1>A Nervous System, Relaxing</h1><div class="sub">the C. elegans connectome · real wiring</div>
 <p class="lede">This is the near-complete wiring of a real animal — the ~300 neurons of <i>C. elegans</i>, their synapses, and the
-muscles they drive — the only nervous system humanity has fully mapped. Our <b>relaxation-labeling</b> engine sorts the cells into
+muscles they drive — 399 cells in all, ~300 of them neurons — the only nervous system humanity has fully mapped. Our <b>relaxation-labeling</b> engine sorts the cells into
 functional <b>communities</b> from the wiring alone; then we model <b>brain activity</b> as the same relaxation, spreading from a
 sensory stimulus through the true synapses until it reaches the muscles. Click any node to stimulate it and watch the thought propagate.</p>
 <canvas id="net" width="640" height="560"></canvas>
@@ -70,7 +70,7 @@ function draw(){
 }
 function updateStat(){
   let lit=0; for(let i=0;i<D.n;i++) if(act(i)>0.1) lit++;
-  document.getElementById('stat').innerHTML=`stimulus: <b>${seed.map(s=>D.names[s]).join(', ')}</b> · step ${Math.min(t,frames.length-1)}/${frames.length-1} · <b>${lit}</b> neurons active`;
+  document.getElementById('stat').innerHTML=`stimulus: <b>${seed.map(s=>D.names[s]).join(', ')}</b> · step ${Math.min(t,frames.length-1)}/${frames.length-1} · <b>${lit}</b> cells active`;
 }
 function loop(){ if(playing){ fr++; if(fr%3===0){ t++; if(t>=frames.length){t=frames.length-1;playing=false;document.getElementById('play').textContent='▶ Stimulate';} } }
   draw(); updateStat(); requestAnimationFrame(loop); }
