@@ -5,7 +5,7 @@
 <meta name="description" content="A 2-D artificial-life world that grows and changes on its own: relaxation-labeled biomes (desert, plains, forest, water) where red Gooblets eat pink bushes and drink water while blue Zappies hunt them. Built with Elbie.">
 <style>
 :root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;
- --water:#2f8fd0;--desert:#e0a23a;--plain:#57c257;--forest:#2c7a3a;--goob:#ee3b2f;--zap:#3b6cff;--bush:#ff6ec7}
+ --water:#2f8fd0;--desert:#e0a23a;--plain:#57c257;--forest:#2c7a3a;--goob:#ee3b2f;--zap:#3b6cff;--bush:#ff6ec7;--human:#8b1a1a;--settle:#8a5c30}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
  font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
@@ -26,7 +26,7 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
 .speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
-.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
@@ -43,14 +43,16 @@ a{color:#8fd0ff;text-decoration:none}
 <p class="lede">A tiny 2-D world that <b>grows and changes on its own</b>. The land labels itself into
  <b>biomes</b> — desert, plains, forest, water — that drift and shift. The dumb little
  <b style="color:var(--goob)">Gooblets</b> munch the <b style="color:var(--bush)">pink bushes</b> and run to the water to
- <b>drink</b>… until the <b style="color:var(--zap)">Zappies</b> hunt them down. Watch it all rise and fall forever.
- <b>Click the world</b> to play god.</p>
+ <b>drink</b>… until the <b style="color:var(--zap)">Zappies</b> hunt them down. The
+ <b style="color:#cf5b54">Humans</b> chop wood to build <b style="color:#c9925a">brown settlements</b> they can hide in. Watch it all
+ rise and fall forever. <b>Click the world</b> to play god.</p>
 
 <canvas id="c" width="630" height="630"></canvas>
 
 <div class="tools" id="tools">
   <button data-tool="goob" class="on">🔴 Drop Gooblets</button>
   <button data-tool="zap">🔵 Drop Zappies</button>
+  <button data-tool="human">🟥 Drop Humans</button>
   <button data-tool="bush">🌸 Plant Bushes</button>
   <span class="sep"></span>
   <button data-tool="rain">🌧️ Rain</button>
@@ -60,7 +62,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="reset">↺ New world</button>
 </div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 
 <div class="legend">
@@ -68,9 +70,11 @@ a{color:#8fd0ff;text-decoration:none}
   <span><i class="sw" style="background:var(--desert)"></i>desert</span>
   <span><i class="sw" style="background:var(--plain)"></i>plains</span>
   <span><i class="sw" style="background:var(--forest)"></i>forest</span>
+  <span><i class="sw" style="background:var(--settle)"></i>settlement</span>
   <span><i class="dot" style="background:var(--bush)"></i>pink bush (food)</span>
   <span><i class="dot" style="background:var(--goob)"></i>Gooblet</span>
   <span><i class="dot" style="background:var(--zap)"></i>Zappy (hunter)</span>
+  <span><i class="dot" style="background:var(--human)"></i>Human (builder)</span>
 </div>
 
 <div class="note">
@@ -88,8 +92,14 @@ Too many Zappies and the Gooblets crash; then the Zappies starve and crash too, 
 <b>boom-and-bust</b> that never quite ends (a few new critters wander in from off-screen so the world never fully dies). A fun toy
 <i>ecosystem</i>, not real biology.
 <br><br>
-<b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets or 🔵 Zappies, 🌸 plant Bushes, or change the weather —
-🌧️ Rain grows forest, ☀️ Drought spreads desert.
+<b>The Humans.</b> <b style="color:#cf5b54">Humans</b> (dark red) also eat the pink bushes, but they gather <b>wood</b> from the
+forest and spend it to build <b style="color:#c9925a">brown settlement blocks</b>. A Human standing on a settlement is <b>safe from
+the Zappies</b> (who hunt Humans too), and <b>no other creature can walk onto settlement tiles</b>. There can only be about
+<b>two settlement blocks per Human</b> — if there are ever too many (because Humans died off), the extra ones <b>collapse</b> back
+into plain land.
+<br><br>
+<b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies or 🟥 Humans, 🌸 plant Bushes, or change the
+weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
 </div>
 <p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
 </div>
@@ -146,22 +156,39 @@ function waterDir(x,y){ let bd=wdAt(x,y),bx=0,by=0;
 const inWater=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))]===WATER;
 const biomeAt=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
 
+// ---------- settlements (brown, human-built) + forest/settlement distance fields ----------
+const settle=new Uint8Array(N); let settleList=[], sdirty=true;
+const cidx=(x,y)=>idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)));
+const isSettle=(x,y)=>settle[cidx(x,y)]===1;
+const fdist=new Int16Array(N), sdist=new Int16Array(N);
+function bfsFrom(src,out,maxd){ const Q=[]; for(let i=0;i<N;i++){ if(src(i)){out[i]=0;Q.push(i);} else out[i]=9999; }
+  let h=0; while(h<Q.length){ const i=Q[h++]; const x=i%GW,y=(i/GW)|0,d=out[i]; if(d>=maxd)continue;
+    const p=(nx,ny)=>{ if(nx<0||ny<0||nx>=GW||ny>=GH)return; const j=idx(nx,ny); if(out[j]>d+1){out[j]=d+1;Q.push(j);} };
+    p(x-1,y);p(x+1,y);p(x,y-1);p(x,y+1); } }
+const computeFDist=()=>bfsFrom(i=>biome[i]===FOREST,fdist,24);
+const computeSDist=()=>bfsFrom(i=>settle[i]===1,sdist,24);
+const fdAt=(x,y)=>fdist[cidx(x,y)], sdAt=(x,y)=>sdist[cidx(x,y)];
+function gradDir(x,y,field){ let bd=field(x,y),bx=0,by=0; for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){ const w=field(x+dx,y+dy); if(w<bd){bd=w;bx=dx;by=dy;} } const l=Math.hypot(bx,by)||1; return [bx/l,by/l]; }
+
 // ---------- pink bushes (gooblet food) ----------
 const P={ gMeta:0.008,gThirst:0.0045,gHunger:1.5,gDrink:0.40,gRepro:2.4,gReproP:0.06,gMaxAge:1100,gStartE:1.2,gStartW:1.0,gSpeed:1.0,gEatGain:2.6,gFlee:5,
   zPrey:0.80,zMeta:0.028,zRepro:3.0,zReproP:0.05,zMaxAge:900,zStart:1.2,zSpeed:1.05,zVision:5,zEat:1.1,zEatP:0.20,
-  gCap:900,zCap:150, NB:420, bushRegrow:0.011 };
+  gCap:900,zCap:150, NB:420, bushRegrow:0.011,
+  hMeta:0.006,hHunger:1.4,hEatGain:2.4,hMaxAge:1500,hStartE:1.4,hSpeed:0.95,hFlee:7,hWoodRate:0.06,hBuild:1.0,hReproAte:6,hCap:70 };
 let bushes=[];
-const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return b===PLAIN||b===FOREST; };
+const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y); };
 function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
 function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
   while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 
 // ---------- creatures ----------
-let goob=[], zap=[];
+let goob=[], zap=[], human=[];
 function spawnGoob(x,y,E,W){ if(goob.length<P.gCap) goob.push({x,y,E,W:W==null?P.gStartW:W,age:0,ate:0}); }
 function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0,ate:0}); }
-function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)) return; c.x=nx;c.y=ny; }
+function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,wood:0,age:0,ate:0}); }
+function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements block
+function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)) return; c.x=nx;c.y=ny; }              // humans: only water blocks
 function buildHash(list,cell){ const h=new Map(); for(let i=0;i<list.length;i++){ const c=list[i]; const k=(c.x/cell|0)+','+(c.y/cell|0); (h.get(k)||h.set(k,[]).get(k)).push(i);} return h; }
 function nearestIdx(x,y,list,h,cell){ let bd=1e9,bi=-1; const cx=x/cell|0,cy=y/cell|0;
   for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=h.get((cx+a)+','+(cy+b)); if(!arr)continue;
@@ -183,34 +210,64 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee), bh=buildHas
     next.push(g);
   } goob=next;
 }
-function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision), eaten=new Set();
-  for(const z of zap){ z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision,ti=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
-    for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=gh.get((cx+a)+','+(cy+b)); if(!arr)continue; for(const gi of arr){ if(eaten.has(gi))continue; const g=goob[gi]; const d=(g.x-z.x)**2+(g.y-z.y)**2; if(d<bd){bd=d;tx=g.x;ty=g.y;ti=gi;} } }
+function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision), hh=buildHash(human,P.zVision); const eatG=new Set(), eatH=new Set();
+  for(const z of zap){ z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
+    const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
+      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y))continue; } else if(eatG.has(i))continue; const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } };
+    scan(gh,goob,false); scan(hh,human,true);
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
-    if(ti>=0){ const g=goob[ti]; if((g.x-z.x)**2+(g.y-z.y)**2<P.zEat*P.zEat && rnd()<P.zEatP){ eaten.add(ti); z.E+=P.zPrey; z.ate++; } }
+    if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
     z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge) continue;
-    if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 gooblets -> a baby
+    if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
     next.push(z);
-  } zap=next; if(eaten.size) goob=goob.filter((_,i)=>!eaten.has(i));
+  } zap=next; if(eatG.size) goob=goob.filter((_,i)=>!eatG.has(i)); if(eatH.size) human=human.filter((_,i)=>!eatH.has(i));
+}
+function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
+function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee), bh=buildHash(bushes,6); const max=human.length*2;
+  for(const m of human){ m.age++; m.E-=P.hMeta;
+    const onS=isSettle(m.x,m.y);
+    const [zi,zd]=nearestIdx(m.x,m.y,zap,zh,P.hFlee);
+    let dx=0,dy=0,moved=false;
+    if(!onS && zi>=0 && zd<(P.hFlee*0.8)**2){                                        // danger: run to nearest settlement, else flee
+      if(sdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,sdAt); dx=d[0];dy=d[1]; }
+      else { const z=zap[zi]; const l=Math.hypot(m.x-z.x,m.y-z.y)||1; dx=(m.x-z.x)/l; dy=(m.y-z.y)/l; } moved=true;
+    } else if(m.E<P.hHunger){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; moved=true; } } // hungry -> bush
+    else if(m.wood<P.hBuild){ if(fdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,fdAt); dx=d[0];dy=d[1]; moved=true; } }              // need wood -> forest
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+    if(biomeAt(m.x,m.y)===FOREST || fdAt(m.x,m.y)<=1) m.wood+=P.hWoodRate;             // chop wood at the forest
+    const [bi2,bd2]=nearestIdx(m.x,m.y,bushes,bh,6);
+    if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ m.E+=b.food*P.hEatGain; b.food=0; m.ate++; } } // eat a bush
+    if(m.wood>=P.hBuild && settleList.length<max){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && settle[ci]===0){ settle[ci]=1; settleList.push(ci); m.wood-=P.hBuild; sdirty=true; } } // build a settlement
+    if(m.E<=0||m.age>P.hMaxAge) continue;
+    if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
+    next.push(m);
+  } human=next;
 }
 function immigrate(){
   if(goob.length<45 && rnd()<0.6){ let n=0,t=0; while(n<3&&t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);n++;}} }
   if(zap.length<8 && rnd()<0.3){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)){spawnZap(x,y,P.zStart);break;}} }
+  if(human.length<5 && rnd()<0.25){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)&&!isSettle(x,y)){spawnHuman(x,y,P.hStartE);break;}} }
 }
 
 // ---------- world setup ----------
 let day=0;
 function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
-  for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); initBushes();
-  goob=[]; zap=[]; day=0; hist.length=0;
+  for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
+  settle.fill(0); settleList=[]; sdirty=true;
+  goob=[]; zap=[]; human=[]; day=0; hist.length=0;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
+  p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
 }
 
 // ---------- rendering ----------
 function drawTerrain(){ const d=img.data;
-  for(let i=0;i<N;i++){ const b=biome[i]; const o=i*4; d[o]=BCOL[b][0]; d[o+1]=BCOL[b][1]; d[o+2]=BCOL[b][2]; d[o+3]=255; }
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(settle[i]){ d[o]=138; d[o+1]=92; d[o+2]=48; }                                  // brown settlement block
+    else { const b=biome[i]; d[o]=BCOL[b][0]; d[o+1]=BCOL[b][1]; d[o+2]=BCOL[b][2]; }
+    d[o+3]=255; }
   octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
 }
 function drawBushes(){ for(const b of bushes){ if(b.food<0.10)continue; const x=b.x*SC,y=b.y*SC, r=SC*(0.28+0.32*b.food);
@@ -239,6 +296,13 @@ function drawCreatures(){
     ctx.moveTo(x-ex-er*0.9,ey-er*1.15); ctx.lineTo(x-ex+er*0.7,ey-er*0.35);
     ctx.moveTo(x+ex+er*0.9,ey-er*1.15); ctx.lineTo(x+ex-er*0.7,ey-er*0.35); ctx.stroke();
   }
+  // HUMANS — dark red, calm faces; build brown settlements and hide on them
+  for(const m of human){ const x=m.x*SC,y=m.y*SC, r=SC*0.62;
+    ctx.fillStyle='#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
+    ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle='#160a0a'; twoDots(x-ex,x+ex,ey,pr);
+  }
 }
 const gcv=document.getElementById('graph'), ggx=gcv.getContext('2d'); const hist=[];
 function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if(hist.length<2)return;
@@ -251,8 +315,9 @@ function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if
 // ---------- loop + interaction ----------
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
-  stepBushes(); stepGoob(); stepZap(); immigrate();
-  if(frame%4===0){ relaxBiomes(); computeWDist(); }
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); collapseSettlements(); immigrate();
+  if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
+  if(sdirty){ computeSDist(); sdirty=false; }
   if(frame%60===0) driftMoist(0.04);
   if(frame%6===0){ hist.push({g:goob.length,z:zap.length}); if(hist.length>210) hist.shift(); }
 }
@@ -261,6 +326,8 @@ function loop(){
   drawTerrain(); drawBushes(); drawCreatures();
   document.getElementById('ng').textContent=goob.length;
   document.getElementById('nz').textContent=zap.length;
+  document.getElementById('nh').textContent=human.length;
+  document.getElementById('ns').textContent=settleList.length;
   document.getElementById('nb').textContent=bushes.filter(b=>b.food>0.35).length;
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
@@ -273,6 +340,7 @@ function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.
 function applyTool(gxc,gyc){
   if(tool==='goob'){ for(let k=0;k<8;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnGoob(x,y,P.gStartE+0.4,1.0);} }
   else if(tool==='zap'){ for(let k=0;k<4;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnZap(x,y,P.zStart+0.4);} }
+  else if(tool==='human'){ for(let k=0;k<3;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnHuman(x,y,P.hStartE+0.3);} }
   else if(tool==='bush'){ for(let k=0;k<6;k++){const x=gxc+(rnd()-0.5)*5,y=gyc+(rnd()-0.5)*5; if(goodBushCell(x,y)) bushes.push({x,y,food:0.8});} }
   else if(tool==='rain'){ bumpMoist(gxc,gyc,+0.28); }
   else if(tool==='drought'){ bumpMoist(gxc,gyc,-0.28); }
