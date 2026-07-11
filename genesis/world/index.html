@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gooblets &amp; Zappies — a little world that grows itself</title>
+<meta name="description" content="A 2-D artificial-life world that grows and changes on its own: relaxation-labeled biomes (desert, plain, forest, water) where red Gooblets graze and blue Zappies hunt them. Built with Elbie.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;
+ --water:#2f8fd0;--desert:#e0a23a;--plain:#57c257;--forest:#2c7a3a;--goob:#ee3b2f;--zap:#3b6cff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
+ font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:820px;margin:0 auto;padding:26px 16px 70px}
+h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
+.sub{color:#8fd0ff;letter-spacing:2px;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+.sub b{color:#ffd27f}
+.lede{color:var(--dim);max-width:720px;margin:0 auto 14px;font-size:14px}.lede b{color:var(--ink)}
+#c{width:100%;max-width:630px;aspect-ratio:1;background:#02030a;border:1px solid var(--line);border-radius:14px;
+ image-rendering:pixelated;cursor:crosshair;touch-action:none;display:block;margin:0 auto}
+.tools{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:12px auto 6px;max-width:640px}
+.tools button{background:#0c1226;color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:7px 12px;
+ font:13px ui-monospace,monospace;cursor:pointer;transition:background .14s,color .14s,border-color .14s}
+.tools button.on{background:#12203a;color:#fff;border-color:#2f5aa0}
+.tools button:hover:not(.on){color:var(--ink)}
+.tools .sep{width:1px;background:var(--line);margin:2px 4px}
+.counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)}
+#graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:640px;
+ font:12px ui-monospace,monospace;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(255,255,255,.15)}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.note{color:var(--dim);font-size:12.5px;max-width:760px;margin:16px auto 0;text-align:left;
+ background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.note b{color:#8fd0ff} .note i{color:#ffd27f}
+a{color:#8fd0ff;text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>Gooblets &amp; Zappies</h1>
+<div class="sub">a little world that grows itself · <b>built with Elbie</b></div>
+<p class="lede">A tiny 2-D world that <b>grows and changes on its own</b>. The land labels itself into
+ <b>biomes</b> — desert, plains, forest, water — that drift and shift. Out on the grass, the dumb little
+ <b style="color:var(--goob)">Gooblets</b> graze… until the <b style="color:var(--zap)">Zappies</b> hunt them down.
+ Watch the two populations rise and fall forever. <b>Click the world</b> to play god.</p>
+
+<canvas id="c" width="630" height="630"></canvas>
+
+<div class="tools" id="tools">
+  <button data-tool="goob" class="on">🔴 Drop Gooblets</button>
+  <button data-tool="zap">🔵 Drop Zappies</button>
+  <span class="sep"></span>
+  <button data-tool="rain">🌧️ Rain</button>
+  <button data-tool="drought">☀️ Drought</button>
+  <span class="sep"></span>
+  <button id="pause">⏸ Pause</button>
+  <button id="reset">↺ New world</button>
+</div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<canvas id="graph" width="630" height="64"></canvas>
+
+<div class="legend">
+  <span><i class="sw" style="background:var(--water)"></i>water</span>
+  <span><i class="sw" style="background:var(--desert)"></i>desert</span>
+  <span><i class="sw" style="background:var(--plain)"></i>plains</span>
+  <span><i class="sw" style="background:var(--forest)"></i>forest</span>
+  <span><i class="dot" style="background:var(--goob)"></i>Gooblet (grazer)</span>
+  <span><i class="dot" style="background:var(--zap)"></i>Zappy (hunter)</span>
+</div>
+
+<div class="note">
+<b>What's happening.</b> The <b>land labels itself by relaxation</b> — the same engine as the rest of Project Genesis. Every
+patch has four possible labels (water · desert · plains · forest) and each step it relaxes toward <i>agreement</i> with its
+neighbours, guided by a slowly drifting <b>moisture</b> map. So biomes form coherent regions and then creep and change as the
+world "weather" wanders. Grass grows on plains and forest; graze it down and it takes time to grow back.
+<br><br>
+<b>The two species.</b> <b style="color:var(--goob)">Gooblets</b> are dumb herbivores — they wander toward grass, eat, and
+breed when they're full. <b style="color:var(--zap)">Zappies</b> are hunters — they chase the nearest Gooblet and zap it
+(though a Gooblet often slips away). Too many Zappies and the Gooblets crash; then the Zappies go hungry and crash too, and the
+Gooblets bounce back — a <b>boom-and-bust</b> that never quite ends (a few new critters wander in from off-screen so the world
+never fully dies). This is a toy <i>ecosystem</i> — a fun one — not a claim about real biology.
+<br><br>
+<b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets or 🔵 Zappies, or make it 🌧️ Rain (grows forest) or bring a
+☀️ Drought (spreads desert).
+</div>
+<p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
+</div>
+<script>
+const GW=90, GH=90, N=GW*GH, WATER=0,DESERT=1,PLAIN=2,FOREST=3;
+const cv=document.getElementById('c'), ctx=cv.getContext('2d');
+const SC=cv.width/GW;                       // pixels per cell
+const off=document.createElement('canvas'); off.width=GW; off.height=GH;
+const octx=off.getContext('2d'); const img=octx.createImageData(GW,GH);
+ctx.imageSmoothingEnabled=false;
+const idx=(x,y)=>y*GW+x, rnd=()=>Math.random(), clamp01=v=>v<0?0:v>1?1:v;
+// biome colours (Elbie's palette)
+const BCOL=[[47,143,208],[224,162,58],[87,194,87],[44,122,58]];  // water, desert, plain, forest
+
+// ---------- terrain: relaxation-labeled biomes over a drifting moisture prior ----------
+function coarse(scale){ const cw=Math.ceil(GW/scale)+2, ch=Math.ceil(GH/scale)+2, g=new Float32Array(cw*ch);
+  for(let i=0;i<g.length;i++) g[i]=rnd(); return {g,cw,ch,scale}; }
+function sample(c,x,y){ const fx=x/c.scale, fy=y/c.scale; const x0=fx|0,y0=fy|0, tx=fx-x0,ty=fy-y0;
+  const a=c.g[y0*c.cw+x0],b=c.g[y0*c.cw+x0+1],d=c.g[(y0+1)*c.cw+x0],e=c.g[(y0+1)*c.cw+x0+1];
+  return (a+(b-a)*tx)+((d+(e-d)*tx)-(a+(b-a)*tx))*ty; }
+let elevC, moistC;
+const elev=new Float32Array(N), moist=new Float32Array(N), biome=new Uint8Array(N), grass=new Float32Array(N);
+let bStr=new Float32Array(N*4), bTmp=new Float32Array(N*4);
+function computeElev(){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++) elev[idx(x,y)]=sample(elevC,x,y); }
+function computeMoist(){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++) moist[idx(x,y)]=sample(moistC,x,y); }
+function priorAt(i,out){ const e=elev[i], m=moist[i], land=clamp01((e-0.34)*6);
+  out[0]=(1-land)+0.02; out[1]=land*clamp01((0.40-m)*3)+0.02;
+  out[2]=land*clamp01(1-Math.abs(m-0.5)*3)+0.05; out[3]=land*clamp01((m-0.62)*3)+0.02;
+  const s=out[0]+out[1]+out[2]+out[3]; out[0]/=s;out[1]/=s;out[2]/=s;out[3]/=s; }
+function argmaxBiomes(){ for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<4;l++){ const v=bStr[i*4+l]; if(v>m){m=v;mi=l;} } biome[i]=mi; } }
+function initBiomes(){ const pr=[0,0,0,0]; for(let i=0;i<N;i++){ priorAt(i,pr); for(let l=0;l<4;l++) bStr[i*4+l]=pr[l]; } argmaxBiomes(); }
+function relaxBiomes(){ const pr=[0,0,0,0];
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); priorAt(i,pr);
+    const sup=[0,0,0,0]; let cnt=0;
+    if(x>0){const j=idx(x-1,y)*4;sup[0]+=bStr[j];sup[1]+=bStr[j+1];sup[2]+=bStr[j+2];sup[3]+=bStr[j+3];cnt++;}
+    if(x<GW-1){const j=idx(x+1,y)*4;sup[0]+=bStr[j];sup[1]+=bStr[j+1];sup[2]+=bStr[j+2];sup[3]+=bStr[j+3];cnt++;}
+    if(y>0){const j=idx(x,y-1)*4;sup[0]+=bStr[j];sup[1]+=bStr[j+1];sup[2]+=bStr[j+2];sup[3]+=bStr[j+3];cnt++;}
+    if(y<GH-1){const j=idx(x,y+1)*4;sup[0]+=bStr[j];sup[1]+=bStr[j+1];sup[2]+=bStr[j+2];sup[3]+=bStr[j+3];cnt++;}
+    const inv=cnt?1/cnt:0; let z=0;
+    for(let l=0;l<4;l++){ const v=Math.sqrt(pr[l])*(0.22+sup[l]*inv); bTmp[i*4+l]=v; z+=v; }
+    for(let l=0;l<4;l++) bTmp[i*4+l]/=z;
+  }
+  const t=bStr; bStr=bTmp; bTmp=t; argmaxBiomes();
+}
+function driftMoist(k){ for(let i=0;i<moistC.g.length;i++){ moistC.g[i]=clamp01(moistC.g[i]+(rnd()-0.5)*k); } computeMoist(); }
+function regrowGrass(){ for(let i=0;i<N;i++){ const b=biome[i];
+  const r= b===FOREST?0.009 : b===PLAIN?0.005 : 0; grass[i]= r>0 ? Math.min(1,grass[i]+r) : 0; } }
+
+// ---------- creatures ----------
+const P={ gGraze:0.60,gMeta:0.010,gRepro:2.5,gReproP:0.05,gMaxAge:1100,gStart:1.0,gSpeed:1.0,gFlee:5,
+  zPrey:0.80,zMeta:0.028,zRepro:3.0,zReproP:0.05,zMaxAge:900,zStart:1.2,zSpeed:1.05,zVision:5,zEat:1.1,zEatP:0.20,
+  gCap:900,zCap:150 };
+let goob=[], zap=[];
+const inWater=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))]===WATER;
+const grassAt=(x,y)=>grass[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
+function spawnGoob(x,y,E){ if(goob.length<P.gCap) goob.push({x,y,E,age:0}); }
+function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0}); }
+function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)) return; c.x=nx;c.y=ny; }
+function buildHash(list,cell){ const h=new Map(); for(let i=0;i<list.length;i++){ const c=list[i]; const k=(c.x/cell|0)+','+(c.y/cell|0); (h.get(k)||h.set(k,[]).get(k)).push(i);} return h; }
+function nearestDist2(x,y,list,h,cell){ let bd=1e9; const cx=x/cell|0,cy=y/cell|0;
+  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=h.get((cx+a)+','+(cy+b)); if(!arr)continue;
+    for(const i of arr){ const c=list[i]; const d=(c.x-x)**2+(c.y-y)**2; if(d<bd)bd=d; } } return bd; }
+function stepGoob(){ const next=[]; const cell=P.gFlee, zh=buildHash(zap,cell);
+  for(const g of goob){ g.age++;
+    let bx=0,by=0,best=-1e9;
+    for(let k=0;k<5;k++){ const a=rnd()*6.283,dx=Math.cos(a)*P.gSpeed,dy=Math.sin(a)*P.gSpeed;
+      let sc=grassAt(g.x+dx,g.y+dy)-(inWater(g.x+dx,g.y+dy)?9:0);
+      const dz=nearestDist2(g.x+dx,g.y+dy,zap,zh,cell); if(dz<P.gFlee*P.gFlee) sc+=0.35*(1-Math.sqrt(dz)/P.gFlee);
+      if(sc>best){best=sc;bx=dx;by=dy;} }
+    clampMove(g,g.x+bx,g.y+by);
+    const gi=idx(Math.max(0,Math.min(GW-1,g.x|0)),Math.max(0,Math.min(GH-1,g.y|0)));
+    const eat=Math.min(grass[gi],0.35); grass[gi]-=eat; g.E+=eat*P.gGraze*2.2; g.E-=P.gMeta;
+    if(g.E<=0||g.age>P.gMaxAge) continue;
+    if(g.E>P.gRepro && rnd()<P.gReproP){ g.E*=0.5; spawnGoob(g.x+(rnd()-0.5),g.y+(rnd()-0.5),g.E); }
+    next.push(g);
+  } goob=next;
+}
+function stepZap(){ const next=[]; const cell=P.zVision, gh=buildHash(goob,cell), eaten=new Set();
+  for(const z of zap){ z.age++;
+    let tx=null,ty=null,bd=P.zVision*P.zVision,ti=-1; const cx=z.x/cell|0,cy=z.y/cell|0;
+    for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=gh.get((cx+a)+','+(cy+b)); if(!arr)continue;
+      for(const gi of arr){ if(eaten.has(gi))continue; const g=goob[gi]; const d=(g.x-z.x)**2+(g.y-z.y)**2; if(d<bd){bd=d;tx=g.x;ty=g.y;ti=gi;} } }
+    let dx,dy;
+    if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; }
+    else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
+    clampMove(z,z.x+dx,z.y+dy);
+    if(ti>=0){ const g=goob[ti]; if((g.x-z.x)**2+(g.y-z.y)**2<P.zEat*P.zEat && rnd()<P.zEatP){ eaten.add(ti); z.E+=P.zPrey; } }
+    z.E-=P.zMeta;
+    if(z.E<=0||z.age>P.zMaxAge) continue;
+    if(z.E>P.zRepro && rnd()<P.zReproP){ z.E*=0.5; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),z.E); }
+    next.push(z);
+  } zap=next; if(eaten.size) goob=goob.filter((_,i)=>!eaten.has(i));
+}
+function immigrate(){
+  if(goob.length<80 && rnd()<0.6){ let n=0,tr=0; while(n<3&&tr<80){tr++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)&&grassAt(x,y)>0.15){spawnGoob(x,y,P.gStart);n++;}} }
+  if(zap.length<8 && rnd()<0.3){ let tr=0; while(tr<80){tr++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)){spawnZap(x,y,P.zStart);break;}} }
+}
+
+// ---------- world setup ----------
+let day=0;
+function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
+  for(let k=0;k<10;k++) relaxBiomes();
+  for(let i=0;i<N;i++) grass[i]=(biome[i]===FOREST||biome[i]===PLAIN)?rnd():0;
+  goob=[]; zap=[]; day=0; hist.length=0;
+  let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStart);p++;}}
+  p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
+}
+
+// ---------- rendering ----------
+function drawTerrain(){ const d=img.data;
+  for(let i=0;i<N;i++){ const b=biome[i]; let r=BCOL[b][0],g=BCOL[b][1],bl=BCOL[b][2];
+    if(b===PLAIN||b===FOREST){ const f=0.45+0.55*grass[i]; r*=f; g=g*(0.6+0.4*grass[i]); bl*=f; } // grazed = duller
+    const o=i*4; d[o]=r; d[o+1]=g; d[o+2]=bl; d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+}
+function drawCreatures(){
+  for(const g of goob){ const x=g.x*SC,y=g.y*SC;
+    ctx.fillStyle='#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,SC*0.42,0,7); ctx.fill(); }
+  for(const z of zap){ const x=z.x*SC,y=z.y*SC;
+    ctx.fillStyle='rgba(59,108,255,0.9)'; ctx.shadowColor='#6f9bff'; ctx.shadowBlur=5;
+    ctx.beginPath(); ctx.arc(x,y,SC*0.5,0,7); ctx.fill(); ctx.shadowBlur=0; }
+}
+const gcv=document.getElementById('graph'), gx=gcv.getContext('2d'); const hist=[];
+function drawGraph(){ const W=gcv.width,H=gcv.height; gx.clearRect(0,0,W,H);
+  if(hist.length<2) return; const mx=Math.max(P.gCap*0.9,...hist.map(h=>h.g));
+  const mz=Math.max(P.zCap*0.9,...hist.map(h=>h.z));
+  const plot=(key,mxv,col)=>{ gx.strokeStyle=col; gx.lineWidth=1.5; gx.beginPath();
+    for(let i=0;i<hist.length;i++){ const x=i/(hist.length-1)*W, y=H-4-(hist[i][key]/mxv)*(H-8); i?gx.lineTo(x,y):gx.moveTo(x,y);} gx.stroke(); };
+  plot('g',mx,'#ee3b2f'); plot('z',mz,'#3b6cff');
+}
+
+// ---------- loop + interaction ----------
+let playing=true, frame=0, tool='goob';
+function loop(){
+  if(playing){ frame++; day++;
+    regrowGrass(); stepGoob(); stepZap(); immigrate();
+    if(frame%4===0) relaxBiomes();
+    if(frame%60===0) driftMoist(0.04);
+    if(frame%6===0){ hist.push({g:goob.length,z:zap.length}); if(hist.length>210) hist.shift(); }
+  }
+  drawTerrain(); drawCreatures();
+  document.getElementById('ng').textContent=goob.length;
+  document.getElementById('nz').textContent=zap.length;
+  document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
+  if(frame%6===0) drawGraph();
+  requestAnimationFrame(loop);
+}
+function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.round(gyc/moistC.scale);
+  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const x=cx+a,y=cy+b; if(x<0||y<0||x>=moistC.cw||y>=moistC.ch)continue;
+    const w=(a||b)?0.5:1; moistC.g[y*moistC.cw+x]=clamp01(moistC.g[y*moistC.cw+x]+amt*w); } computeMoist(); for(let k=0;k<3;k++) relaxBiomes(); }
+function applyTool(gxc,gyc){
+  if(tool==='goob'){ for(let k=0;k<8;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnGoob(x,y,P.gStart+0.4);} }
+  else if(tool==='zap'){ for(let k=0;k<4;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnZap(x,y,P.zStart+0.4);} }
+  else if(tool==='rain'){ bumpMoist(gxc,gyc,+0.28); }
+  else if(tool==='drought'){ bumpMoist(gxc,gyc,-0.28); }
+}
+let dragging=false;
+function evToGrid(e){ const r=cv.getBoundingClientRect(); const cxp=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  const cyp=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return [cxp/r.width*GW, cyp/r.height*GH]; }
+cv.addEventListener('pointerdown',e=>{ dragging=true; const [x,y]=evToGrid(e); applyTool(x,y); });
+cv.addEventListener('pointermove',e=>{ if(!dragging)return; const [x,y]=evToGrid(e); applyTool(x,y); });
+addEventListener('pointerup',()=>dragging=false);
+document.querySelectorAll('.tools [data-tool]').forEach(b=>b.onclick=()=>{ tool=b.dataset.tool;
+  document.querySelectorAll('.tools [data-tool]').forEach(o=>o.classList.toggle('on',o===b)); });
+document.getElementById('pause').onclick=function(){ playing=!playing; this.textContent=playing?'⏸ Pause':'▶ Play'; };
+document.getElementById('reset').onclick=newWorld;
+newWorld(); loop();
+</script></body></html>
