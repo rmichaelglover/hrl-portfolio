@@ -215,12 +215,30 @@ function drawTerrain(){ const d=img.data;
 }
 function drawBushes(){ for(const b of bushes){ if(b.food<0.10)continue; const x=b.x*SC,y=b.y*SC, r=SC*(0.28+0.32*b.food);
   ctx.fillStyle=`rgba(255,110,199,${0.55+0.4*b.food})`; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); } }
+function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
 function drawCreatures(){
-  for(const g of goob){ const cond=Math.min(1,Math.min(g.E/1.6,g.W/0.5)); // faint when starving/thirsty
-    ctx.fillStyle=`rgba(238,59,47,${0.45+0.5*cond})`; ctx.beginPath(); ctx.arc(g.x*SC,g.y*SC,SC*0.42,0,7); ctx.fill(); }
-  ctx.shadowColor='#6f9bff';
-  for(const z of zap){ ctx.fillStyle='rgba(59,108,255,0.92)'; ctx.shadowBlur=5; ctx.beginPath(); ctx.arc(z.x*SC,z.y*SC,SC*0.5,0,7); ctx.fill(); }
-  ctx.shadowBlur=0;
+  // GOOBLETS — red, with big dumb googly eyes (they fade when starving/thirsty)
+  for(const g of goob){ const x=g.x*SC,y=g.y*SC, r=SC*0.6;
+    const cond=Math.min(1,Math.min(g.E/1.6,g.W/0.5));
+    ctx.globalAlpha=0.5+0.5*cond;
+    ctx.fillStyle='#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    const ex=r*0.42, ey=y-r*0.12, er=r*0.38, pr=er*0.5;
+    ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);                 // wide white eyes
+    ctx.fillStyle='#241018'; twoDots(x-ex,x+ex,ey,pr);              // pupils
+  }
+  ctx.globalAlpha=1;
+  // ZAPPIES — electric blue, mean little eyes + angry brows
+  for(const z of zap){ const x=z.x*SC,y=z.y*SC, r=SC*0.62;
+    ctx.shadowColor='#6f9bff'; ctx.shadowBlur=5;
+    ctx.fillStyle='rgba(59,108,255,0.95)'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    ctx.shadowBlur=0;
+    const ex=r*0.4, ey=y+r*0.02, er=r*0.26, pr=er*0.6;
+    ctx.fillStyle='#eaf2ff'; twoDots(x-ex,x+ex,ey,er);             // small eyes
+    ctx.fillStyle='#0b0b16'; twoDots(x-ex,x+ex,ey,pr);            // pupils
+    ctx.strokeStyle='#0b0b16'; ctx.lineWidth=Math.max(1,r*0.16); ctx.lineCap='round'; ctx.beginPath(); // angry \\ / brows
+    ctx.moveTo(x-ex-er*0.9,ey-er*1.15); ctx.lineTo(x-ex+er*0.7,ey-er*0.35);
+    ctx.moveTo(x+ex+er*0.9,ey-er*1.15); ctx.lineTo(x+ex-er*0.7,ey-er*0.35); ctx.stroke();
+  }
 }
 const gcv=document.getElementById('graph'), ggx=gcv.getContext('2d'); const hist=[];
 function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if(hist.length<2)return;
