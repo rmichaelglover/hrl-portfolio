@@ -26,7 +26,7 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
 .speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
-.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e} .ctreas{color:#ffd76a}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
@@ -66,7 +66,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="viewbtn">🕳️ Go Underground</button>
 </div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 
 <div class="legend">
@@ -75,6 +75,7 @@ a{color:#8fd0ff;text-decoration:none}
   <span><i class="sw" style="background:var(--plain)"></i>plains</span>
   <span><i class="sw" style="background:var(--forest)"></i>forest</span>
   <span><i class="sw" style="background:var(--settle)"></i>settlement</span>
+  <span><i class="sw" style="background:#96969c"></i>stone wall</span>
   <span><i class="dot" style="background:var(--bush)"></i>pink bush (food)</span>
   <span><i class="dot" style="background:var(--goob)"></i>Gooblet</span>
   <span><i class="dot" style="background:var(--zap)"></i>Zappy (hunter)</span>
@@ -118,6 +119,11 @@ breed</i>, so as they die off the caves grow quiet. And every <b>500 days</b> a 
 for a few seconds — any creature caught at the pool is turned into a <b style="color:#ff8a3e">fire minion</b> that walks on lava
 unharmed, hunts the fallen, and (like the Specters) never breeds. While you're underground, the drop tools place creatures
 <b>down in the caves</b> — feed them to the dark, or grow a colony in the glowfruit lake.
+<br><br>
+<b>The Humans get rich.</b> As Humans mine, they collect <b>stone</b> and sometimes strike <b>valuables</b>. They carry it all up
+top: the stone becomes grey <b>stone walls</b> that keep the Zappies out, and the valuables go into the <b>💎 treasury</b>. Once the
+treasury is full enough, a Human <b>buys a boat</b> and sails out onto the water to <b>fish</b> — where, if it's lucky, it might even
+hook a Leviathan.
 <br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
@@ -178,7 +184,7 @@ const inWater=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.mi
 const biomeAt=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
 
 // ---------- settlements (brown, human-built) + forest/settlement distance fields ----------
-const settle=new Uint8Array(N); let settleList=[], sdirty=true;
+const settle=new Uint8Array(N), swall=new Uint8Array(N); let settleList=[], sdirty=true, treasury=0, swallCount=0;
 const cidx=(x,y)=>idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)));
 const isSettle=(x,y)=>settle[cidx(x,y)]===1;
 const fdist=new Int16Array(N), sdist=new Int16Array(N);
@@ -198,7 +204,7 @@ const P={ gMeta:0.008,gThirst:0.0045,gHunger:1.5,gDrink:0.40,gRepro:2.4,gReproP:
   hMeta:0.006,hHunger:1.4,hEatGain:2.4,hMaxAge:1500,hStartE:1.4,hSpeed:0.95,hFlee:7,hWoodRate:0.06,hBuild:1.0,hReproAte:6,hCap:70,hThirst:0.0035,hDrink:0.40,hFishGain:2.2,
   levVision:8,levSpeed:0.95,levEat:1.8,levMeta:0.003,levStartE:3.0,levPrey:1.0,levReproAte:15,levMaxAge:4000,levCap:14 };
 let bushes=[];
-const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y); };
+const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)]; };
 function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
 function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
@@ -208,11 +214,12 @@ function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRe
 let goob=[], zap=[], human=[];
 function spawnGoob(x,y,E,W){ if(goob.length<P.gCap) goob.push({x,y,E,W:W==null?P.gStartW:W,age:0,ate:0}); }
 function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0,ate:0}); }
-function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,W:1,wood:0,age:0,ate:0}); }
+function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false}); }
 let lev=[];
 function spawnLev(x,y,E){ if(lev.length<P.levCap) lev.push({x,y,E,age:0,ate:0}); }
-function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements block
-function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)) return; c.x=nx;c.y=ny; }              // humans: only water blocks
+function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements + stone walls block
+function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }              // humans on foot: water + their own walls block
+function clampMoveBoat(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }        // a boat may go on water
 function clampMoveW(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||!inWater(nx,ny)) return; c.x=nx;c.y=ny; }             // leviathans: water only
 function placeLevWater(nx,ny){ for(let t=0;t<30;t++){ const x=(nx==null?rnd()*GW:nx+(rnd()-0.5)*8), y=(ny==null?rnd()*GH:ny+(rnd()-0.5)*8); if(x>=0&&x<GW&&y>=0&&y<GH&&inWater(x,y)) return {x,y}; }
   for(let t=0;t<300;t++){ const x=rnd()*GW,y=rnd()*GH; if(inWater(x,y)) return {x,y}; } return null; }
@@ -229,7 +236,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=bui
     else if(g.E<P.gHunger){ const [bi,bd]=nearestIdx(g.x,g.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-g.x,b.y-g.y)||1; dx=(b.x-g.x)/l; dy=(b.y-g.y)/l; moved=true; } } // hungry
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     clampMove(g,g.x+dx*P.gSpeed,g.y+dy*P.gSpeed);
-    { let fell=false; for(const h of holes){ if((g.x-h.sx)**2+(g.y-h.sy)**2<1.2){ g.d='under'; g.x=h.ux; g.y=h.uy; g.uAge=0; fell=true; break; } } if(fell){ next.push(g); continue; } } // fell down a hole
+    { if(g.fallCd>0) g.fallCd--; else { let fell=false; for(const h of holes){ if((g.x-h.sx)**2+(g.y-h.sy)**2<1.2){ g.d='under'; g.x=h.ux; g.y=h.uy; g.uAge=0; fell=true; break; } } if(fell){ next.push(g); continue; } } } // fell down a hole
     if(wdAt(g.x,g.y)<=1) g.W=Math.min(1,g.W+0.5);                                    // drink at water's edge
     const [bi2,bd2]=nearestIdx(g.x,g.y,bushes,bh,6);
     if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ g.E+=b.food*P.gEatGain; b.food=0; g.ate++; } } // eat a whole ripe bush
@@ -245,7 +252,7 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=b
     scan(gh,goob,false); scan(hh,human,true);
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
-    { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } // fell down a hole
+    { if(z.fallCd>0) z.fallCd--; else { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } } // fell down a hole
     if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
     z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge) continue;
     if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
@@ -262,16 +269,21 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
       if(sdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,sdAt); dx=d[0];dy=d[1]; }
       else { const z=zap[zi]; const l=Math.hypot(m.x-z.x,m.y-z.y)||1; dx=(m.x-z.x)/l; dy=(m.y-z.y)/l; } moved=true;
     } else if(m.W<P.hDrink){ const d=waterDir(m.x,m.y); dx=d[0];dy=d[1]; moved=true; }        // thirsty -> the shore (where leviathans lurk!)
+    else if(m.boat){ const d=waterDir(m.x,m.y); dx=d[0];dy=d[1]; moved=true; }                // a boat sails out to fish
     else if(m.E<P.hHunger){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; moved=true; } } // hungry -> bush
     else if(m.wood<P.hBuild){ if(fdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,fdAt); dx=d[0];dy=d[1]; moved=true; } }              // need wood -> forest
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
-    clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
-    { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } // fell down a hole
+    if(m.boat) clampMoveBoat(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed); else clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+    { if(m.fallCd>0) m.fallCd--; else { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } } // fell down a hole
     if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);                                       // drink at the shore
     if(biomeAt(m.x,m.y)===FOREST || fdAt(m.x,m.y)<=1) m.wood+=P.hWoodRate;             // chop wood at the forest
     const [bi2,bd2]=nearestIdx(m.x,m.y,bushes,bh,6);
     if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ m.E+=b.food*P.hEatGain; b.food=0; m.ate++; } } // eat a bush
     if(m.wood>=P.hBuild && settleList.length<max){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && settle[ci]===0){ settle[ci]=1; settleList.push(ci); m.wood-=P.hBuild; sdirty=true; } } // build a settlement
+    if(m.loot){ treasury+=m.loot; m.loot=0; }                                          // bank the valuables in the treasury
+    if(m.stone>0 && !m.boat && rnd()<0.25 && swallCount<300){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && !settle[ci] && !swall[ci]){ swall[ci]=1; swallCount++; m.stone--; } } // lay a stone wall for safety
+    if(!m.boat && treasury>=5 && rnd()<0.03){ treasury-=5; m.boat=true; }               // buy a boat with treasury
+    if(m.boat && inWater(m.x,m.y)){ m.E=Math.min(4,m.E+0.05); if(rnd()<0.02) treasury++; } // out fishing
     if(m.E<=0||m.W<=0||m.age>P.hMaxAge) continue;
     if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
     next.push(m);
@@ -300,22 +312,22 @@ function stepUnder(){                                                           
   const glowH=buildHash(glow,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set(), deadS=new Set();
   const moveCreature=(c,species)=>{ c.uAge=(c.uAge||0)+1;
     let dx,dy;
-    if(c.uAge>170){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
+    if(c.uAge>90){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
     else { const [gi]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi>=0){ const g=glow[gi]; const l=Math.hypot(g.x-c.x,g.y-c.y)||1; dx=(g.x-c.x)/l; dy=(g.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } }
-    if(species==='human' && uZoneAt(c.x,c.y)===MINING && rnd()<0.14){ const dirs=[[1,0],[-1,0],[0,1],[0,-1]], dd=dirs[(rnd()*4)|0], nx=(c.x+dd[0])|0, ny=(c.y+dd[1])|0, j=cidx(nx,ny); if(uwall[j] && nx>0&&nx<GW-1&&ny>0&&ny<GH-1) uwall[j]=0; } // Humans mine new tunnels
+    if(species==='human' && uZoneAt(c.x,c.y)===MINING && rnd()<0.14){ const dirs=[[1,0],[-1,0],[0,1],[0,-1]], dd=dirs[(rnd()*4)|0], nx=(c.x+dd[0])|0, ny=(c.y+dd[1])|0, j=cidx(nx,ny); if(uwall[j] && nx>0&&nx<GW-1&&ny>0&&ny<GH-1){ uwall[j]=0; c.stone=(c.stone||0)+1; if(rnd()<0.08) c.loot=(c.loot||0)+1; } } // mine: dig a tunnel, gain stone (+ rare valuables)
     const nx=c.x+dx*0.9, ny=c.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ c.x=nx; c.y=ny; }
+    else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283, mx=c.x+Math.cos(a)*0.9, my=c.y+Math.sin(a)*0.9; if(mx>=0&&mx<GW&&my>=0&&my<GH&&!uWall(mx,my)){ c.x=mx; c.y=my; break; } } } // don't get stuck on walls
     if(ulava[cidx(c.x,c.y)]) return true;                                              // walked into lava -> dies
     const [gi2,gd2]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi2>=0 && gd2<1.6){ const g=glow[gi2]; if(g.food>0.2){ if(c.E!=null)c.E=Math.min(4,c.E+g.food*1.5); if(c.ate!=null)c.ate++; g.food=0; } } // eat glowfruit
     if(uwater[cidx(c.x,c.y)] && c.W!=null) c.W=1;
-    if(c.uAge>130){ for(const h of holes){ if((c.x-h.ux)**2+(c.y-h.uy)**2<1.4){ c.d='up'; c.x=h.sx; c.y=h.sy; c.uAge=0; break; } } }
+    if(c.uAge>80){ for(const h of holes){ if((c.x-h.ux)**2+(c.y-h.uy)**2<2.2){ c.d='up'; c.x=h.sx; c.y=h.sy; c.uAge=0; c.fallCd=40; break; } } } // climb back to the surface (with a cooldown so it doesn't fall right back)
     return false;
   };
   goob.forEach((g,i)=>{ if(g.d==='under' && moveCreature(g,'goob')) deadG.add(i); });
   zap.forEach((z,i)=>{ if(z.d==='under' && moveCreature(z,'zap')) deadZ.add(i); });
   human.forEach((m,i)=>{ if(m.d==='under' && moveCreature(m,'human')) deadH.add(i); });
-  const prey=[];                                                                        // Specters hunt whatever fell down here
+  const prey=[];                                                                        // Specters/fire hunt fallen gooblets & zappies (Humans are too strong for them)
   goob.forEach((g,i)=>{ if(g.d==='under'&&!deadG.has(i)) prey.push({a:'g',i,x:g.x,y:g.y}); });
-  human.forEach((m,i)=>{ if(m.d==='under'&&!deadH.has(i)) prey.push({a:'h',i,x:m.x,y:m.y}); });
   zap.forEach((z,i)=>{ if(z.d==='under'&&!deadZ.has(i)) prey.push({a:'z',i,x:z.x,y:z.y}); });
   const preyH=buildHash(prey,8);
   spec.forEach((s,si)=>{ s.age++;
@@ -419,7 +431,7 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 let day=0;
 function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
-  settle.fill(0); settleList=[]; sdirty=true;
+  settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); treasury=0; swallCount=0;
   genUnderground();
   goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
@@ -432,6 +444,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
 function drawTerrain(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(settle[i]){ d[o]=138; d[o+1]=92; d[o+2]=48; }                                  // brown settlement block
+    else if(swall[i]){ d[o]=150; d[o+1]=150; d[o+2]=156; }                            // grey stone wall
     else { const b=biome[i]; d[o]=BCOL[b][0]; d[o+1]=BCOL[b][1]; d[o+2]=BCOL[b][2]; }
     d[o+3]=255; }
   octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
@@ -464,6 +477,7 @@ function drawCreatures(){
   }
   // HUMANS — dark red, calm faces; build brown settlements and hide on them
   for(const m of human){ if((m.d==='under')!==(view==='under')) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
+    if(m.boat){ ctx.fillStyle='#6b4420'; ctx.beginPath(); ctx.moveTo(x-r*1.15,y+r*0.15); ctx.lineTo(x+r*1.15,y+r*0.15); ctx.lineTo(x+r*0.7,y+r*0.95); ctx.lineTo(x-r*0.7,y+r*0.95); ctx.closePath(); ctx.fill(); } // fishing boat
     ctx.fillStyle='#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
     const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
     ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
@@ -505,6 +519,7 @@ function loop(){
   document.getElementById('ns').textContent=settleList.length;
   document.getElementById('nspec').textContent=spec.length;
   document.getElementById('nfire').textContent=fire.length;
+  document.getElementById('ntreas').textContent=treasury;
   document.getElementById('nb').textContent=bushes.filter(b=>b.food>0.35).length;
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
