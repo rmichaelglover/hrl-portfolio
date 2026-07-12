@@ -28,6 +28,12 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
 .counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e} .ctreas{color:#ffd76a} .cang{color:#fff2b0} .cfolk{color:#2fd0b8}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
+.glegend{display:flex;flex-wrap:wrap;gap:5px 6px;justify-content:center;margin:7px auto 0;max-width:648px}
+.glegend button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 8px;
+ font:11px ui-monospace,monospace;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:opacity .14s,border-color .14s}
+.glegend button.off{opacity:.32}
+.glegend button:hover{border-color:#2f5aa0}
+.gsw{width:15px;height:3px;border-radius:2px;display:inline-block}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -71,6 +77,7 @@ a{color:#8fd0ff;text-decoration:none}
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
 <div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
+<div class="glegend" id="glegend"></div>
 
 <div class="legend">
   <span><i class="sw" style="background:var(--water)"></i>water</span>
@@ -684,11 +691,28 @@ function drawCreatures(){
   }
 }
 const gcv=document.getElementById('graph'), ggx=gcv.getContext('2d'); const hist=[];
+// every factor Elbie can watch on the graph; click a chip to show/hide its line
+const FACTORS=[
+  {key:'g',   emoji:'🔴',label:'Gooblets',   col:'#ee3b2f', on:true},
+  {key:'z',   emoji:'🔵',label:'Zappies',    col:'#3b6cff', on:true},
+  {key:'h',   emoji:'🟥',label:'Humans',     col:'#cf5b54', on:true},
+  {key:'l',   emoji:'🐋',label:'Leviathans', col:'#5a86e6', on:true},
+  {key:'wool',emoji:'🐑',label:'Woolies',    col:'#f2f0e6', on:true},
+  {key:'dl',  emoji:'🐉',label:'Dragonlings',col:'#4fc06a', on:true},
+  {key:'folk',emoji:'🌊',label:'Folk',       col:'#2fd0b8', on:false},
+  {key:'b',   emoji:'🌸',label:'Bushes',     col:'#e86ab0', on:false},
+  {key:'ang', emoji:'👼',label:'Angels',     col:'#ffe07a', on:false},
+  {key:'spec',emoji:'👻',label:'Specters',   col:'#c9bff0', on:false},
+  {key:'fire',emoji:'🔥',label:'Fire',       col:'#ff8a3e', on:false},
+];
 function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if(hist.length<2)return;
-  const mx=Math.max(P.gCap*0.55,...hist.map(h=>h.g)), mz=Math.max(P.zCap*0.6,...hist.map(h=>h.z));
-  const plot=(key,mxv,col)=>{ ggx.strokeStyle=col; ggx.lineWidth=1.5; ggx.beginPath();
-    for(let i=0;i<hist.length;i++){ const x=i/(hist.length-1)*W, y=H-4-(hist[i][key]/mxv)*(H-8); i?ggx.lineTo(x,y):ggx.moveTo(x,y);} ggx.stroke(); };
-  plot('g',mx,'#ee3b2f'); plot('z',mz,'#3b6cff');
+  for(const f of FACTORS){ if(!f.on) continue;
+    let mxv=1; for(const h of hist){ const v=h[f.key]||0; if(v>mxv) mxv=v; }  // each line auto-scaled to its own peak
+    ggx.strokeStyle=f.col; ggx.lineWidth=1.5; ggx.globalAlpha=.9; ggx.beginPath();
+    for(let i=0;i<hist.length;i++){ const x=i/(hist.length-1)*W, y=H-4-((hist[i][f.key]||0)/mxv)*(H-8); i?ggx.lineTo(x,y):ggx.moveTo(x,y); }
+    ggx.stroke();
+  }
+  ggx.globalAlpha=1;
 }
 
 // ---------- loop + interaction ----------
@@ -698,7 +722,9 @@ function simStep(){ frame++; day++;
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
   if(sdirty){ computeSDist(); sdirty=false; }
   if(frame%60===0) driftMoist(0.04);
-  if(frame%6===0){ hist.push({g:goob.length,z:zap.length}); if(hist.length>210) hist.shift(); }
+  if(frame%6===0){ hist.push({g:goob.length,z:zap.length,h:human.length,l:lev.length,wool:wooly.length,dl:dragonling.length,
+    folk:folk.length,b:bushes.filter(x=>x.food>0.35).length,ang:angels.length,spec:spec.length,fire:fire.length});
+    if(hist.length>210) hist.shift(); }
 }
 function loop(){
   if(playing){ acc+=simSpeed; let steps=Math.floor(acc); acc-=steps; if(steps>8)steps=8; for(let s=0;s<steps;s++) simStep(); }
@@ -764,5 +790,12 @@ document.getElementById('speed').oninput=function(){ simSpeed=+this.value; docum
 const VIEWS=['surface','under','sky'], VLABEL={surface:'☀️ Surface',under:'🕳️ Underground',sky:'☁️ Sky Realm'};
 document.getElementById('viewbtn').onclick=function(){ view=VIEWS[(VIEWS.indexOf(view)+1)%3]; const nx=VIEWS[(VIEWS.indexOf(view)+1)%3]; this.textContent='Go to '+VLABEL[nx]; };
 document.getElementById('viewbtn').textContent='Go to '+VLABEL['under'];
+// build the clickable graph legend — one chip per factor, click to show/hide its line
+const gleg=document.getElementById('glegend');
+FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?'':'off';
+  b.innerHTML='<i class="gsw" style="background:'+f.col+'"></i>'+f.emoji+' '+f.label;
+  b.title='Click to show or hide '+f.label+' on the graph';
+  b.onclick=()=>{ f.on=!f.on; b.classList.toggle('off',!f.on); drawGraph(); };
+  gleg.appendChild(b); });
 newWorld(); loop();
 </script></body></html>
