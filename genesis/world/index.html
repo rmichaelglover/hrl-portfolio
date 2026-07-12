@@ -134,9 +134,17 @@ baby after eating <b>15 creatures</b>. And they're territorial: whenever there a
 <b>underlake</b> (brown) with water and glowing <b style="color:#b6ff78">glowfruit</b> to eat. You can't cross the <b>black walls</b>.
 Lurking in the tunnels are the <b style="color:#c9bff0">Specters</b> — pale cave predators that hunt whatever fell in and <i>never
 breed</i>, so as they die off the caves grow quiet. And every <b>500 days</b> a <b>giant black creature</b> rises from the lava pool
-for a few seconds — any creature caught at the pool is turned into a <b style="color:#ff8a3e">fire minion</b> that walks on lava
-unharmed, hunts the fallen, and (like the Specters) never breeds. While you're underground, the drop tools place creatures
+for a few seconds — any Gooblet or Zappy caught at the pool is turned into a <b style="color:#ff8a3e">fire minion</b> that walks on
+lava unharmed, hunts the fallen, and (like the Specters) never breeds. While you're underground, the drop tools place creatures
 <b>down in the caves</b> — feed them to the dark, or grow a colony in the glowfruit lake.
+<br><br>
+<b>The Fire Vessel — a hero's quest.</b> But a <b>Human</b> caught in the Giant's reach doesn't burn — he's <b>possessed</b> and
+becomes a <b style="color:#ff4a10">🔥 Fire Vessel</b> who climbs to the <b>surface</b> and <b>terrorizes</b> the land, slaying
+Gooblets and Zappies. To end him, <b>7 Humans</b> must team up beside him — a <b>50/50</b> duel. If they lose, all seven fall and he
+rages on; if they <b>win</b>, one hero is handed a <b style="color:#ffdd55">🗡️ Fire Sword</b> and dons <b style="color:#ff9a2e">orange
+robes</b>. That swordsman then marches <b>back down to the lava pit</b>, walks the fire unharmed, and <b>destroys the Fire King</b>
+himself — rising as the <b style="color:#ff2030">👑 Red King</b>. Humans flock to him, don <b style="color:#c23030">red robes</b>,
+and raise his settlements. (Slay the Fire King and the Giant <b>never rises again</b>.)
 <br><br>
 <b>The Humans get rich.</b> As Humans mine, they collect <b>stone</b> and sometimes strike <b>valuables</b>. They carry it all up
 top: the stone becomes grey <b>stone walls</b> that keep the Zappies out, and the valuables go into the <b>💎 treasury</b>. Once the
@@ -322,7 +330,33 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=b
 }
 function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
 function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=buildHash(bushes,6); const max=human.length*2;
+  const slain=new Set(), vEatG=new Set(), vEatZ=new Set();                             // vessel-fight casualties & the vessel's prey
   for(const m of human){ if(m.d && m.d!=='up'){ next.push(m); continue; } m.age++; m.E-=P.hMeta; m.W-=P.hThirst;
+    if(m.vessel){                                                                     // FIRE VESSEL — a possessed human terrorizing the surface
+      const near=[]; for(let j=0;j<human.length;j++){ const h=human[j]; if(h!==m && !h.vessel && (!h.d||h.d==='up') && (h.x-m.x)**2+(h.y-m.y)**2<64) near.push(j); }
+      if(near.length>=7){                                                             // 7 humans team up -> a 50/50 duel
+        if(rnd()<0.5){ human[near[0]].fireSword=true; continue; }                     // humans win: the champion takes the Fire Sword; the vessel is slain
+        else { near.slice(0,7).forEach(j=>slain.add(human[j])); next.push(m); continue; } // vessel wins: those 7 fall, it rages on
+      }
+      let tx=null,ty=null,bd=1e9,tk=null,ti=-1;                                        // else terrorize: hunt & kill the nearest Gooblet/Zappy
+      goob.forEach((g,j)=>{ if((!g.d||g.d==='up')&&!vEatG.has(j)){ const d=(g.x-m.x)**2+(g.y-m.y)**2; if(d<bd){bd=d;tx=g.x;ty=g.y;tk='g';ti=j;} } });
+      zap.forEach((z,j)=>{ if((!z.d||z.d==='up')&&!vEatZ.has(j)){ const d=(z.x-m.x)**2+(z.y-m.y)**2; if(d<bd){bd=d;tx=z.x;ty=z.y;tk='z';ti=j;} } });
+      let dx,dy; if(tx!==null){ const l=Math.hypot(tx-m.x,ty-m.y)||1; dx=(tx-m.x)/l; dy=(ty-m.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+      clampMoveH(m,m.x+dx*P.hSpeed*1.15,m.y+dy*P.hSpeed*1.15);
+      if(tx!==null && bd<2.4){ if(tk==='g')vEatG.add(ti); else vEatZ.add(ti); }
+      m.E=Math.max(m.E,1); next.push(m); continue;                                     // the fire sustains it
+    }
+    if(m.fireSword && !m.redKing){                                                     // FIRE SWORDSMAN — rush to a hole and descend to the lava pit
+      let bh0=null,bd0=1e9; for(const h of holes){ const dd=(m.x-h.sx)**2+(m.y-h.sy)**2; if(dd<bd0){bd0=dd;bh0=h;} }
+      if(bh0){ const l=Math.hypot(bh0.sx-m.x,bh0.sy-m.y)||1; clampMoveH(m,m.x+(bh0.sx-m.x)/l*P.hSpeed,m.y+(bh0.sy-m.y)/l*P.hSpeed); }
+      if(m.fallCd>0)m.fallCd--; else for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.4){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; break; } }
+      m.E=Math.max(m.E,0.5); m.W=Math.max(m.W,0.5); next.push(m); continue;
+    }
+    if(m.redKing){                                                                     // RED KING — roams his land; nearby humans join him in red robes
+      const a=rnd()*6.283; clampMoveH(m,m.x+Math.cos(a)*0.3,m.y+Math.sin(a)*0.3);
+      human.forEach(h=>{ if(h!==m && !h.redKing && !h.vessel && !h.fireSword && (!h.d||h.d==='up') && (h.x-m.x)**2+(h.y-m.y)**2<120 && rnd()<0.03) h.redFolk=true; });
+      m.E=Math.max(m.E,0.6); m.W=Math.max(m.W,0.6); next.push(m); continue;
+    }
     if(m.king){                                                                       // the King: build his keep, then stay home; servants feed him
       if(!castleBuilt){ buildKingCastle(m); castleBuilt=true; }
       if(kingHome){ const l=Math.hypot(kingHome.x-m.x,kingHome.y-m.y); if(l>0.6) clampMoveH(m,m.x+(kingHome.x-m.x)/l*0.5,m.y+(kingHome.y-m.y)/l*0.5); }
@@ -356,6 +390,7 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     else if(m.boat){ const d=waterDir(m.x,m.y); dx=d[0];dy=d[1]; moved=true; }                // a boat sails out to fish
     else if(m.E<P.hHunger){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; moved=true; } } // hungry -> bush
     else if(m.wood<P.hBuild){ if(fdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,fdAt); dx=d[0];dy=d[1]; moved=true; } }              // need wood -> forest
+    else if(m.redFolk){ const rk=human.find(h=>h.redKing); if(rk){ const l=Math.hypot(rk.x-m.x,rk.y-m.y)||1; if(l>4){ dx=(rk.x-m.x)/l; dy=(rk.y-m.y)/l; moved=true; } } } // red folk gather to the Red King's settlement
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     if(m.boat) clampMoveBoat(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed); else clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
     { if(m.fallCd>0) m.fallCd--; else { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } } // fell down a hole
@@ -373,7 +408,10 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     if(m.E<=0||m.W<=0||m.age>P.hMaxAge) continue;
     if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
     next.push(m);
-  } human=next;
+  }
+  human = slain.size ? next.filter(m=>!slain.has(m)) : next;                            // the vessel-fight fallen
+  if(vEatG.size) goob=goob.filter((_,i)=>!vEatG.has(i));                                // the vessel's prey
+  if(vEatZ.size) zap=zap.filter((_,i)=>!vEatZ.has(i));
 }
 function stepLev(){ if(!lev.length) return;
   const gh=buildHash(goob,P.levVision,true), hh=buildHash(human,P.levVision,true); const eatenG=new Set(), deadLev=new Set();
@@ -425,12 +463,14 @@ function stepUnder(){                                                           
   const glowH=buildHash(glow,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set(), deadS=new Set();
   const moveCreature=(c,species)=>{ c.uAge=(c.uAge||0)+1;
     let dx,dy;
-    if(c.uAge>90){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
+    if(c.fireSword && !c.redKing && poolX>=0){ const l=Math.hypot(poolX+0.5-c.x,poolY+0.5-c.y)||1; dx=(poolX+0.5-c.x)/l; dy=(poolY+0.5-c.y)/l; } // the Fire Swordsman marches to the lava pit
+    else if(c.uAge>90){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
     else { const [gi]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi>=0){ const g=glow[gi]; const l=Math.hypot(g.x-c.x,g.y-c.y)||1; dx=(g.x-c.x)/l; dy=(g.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } }
     if(species==='human' && uZoneAt(c.x,c.y)===MINING && rnd()<0.14){ const dirs=[[1,0],[-1,0],[0,1],[0,-1]], dd=dirs[(rnd()*4)|0], nx=(c.x+dd[0])|0, ny=(c.y+dd[1])|0, j=cidx(nx,ny); if(uwall[j] && nx>0&&nx<GW-1&&ny>0&&ny<GH-1){ uwall[j]=0; c.stone=(c.stone||0)+1; if(rnd()<0.08) c.loot=(c.loot||0)+1; } } // mine: dig a tunnel, gain stone (+ rare valuables)
     const nx=c.x+dx*0.9, ny=c.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ c.x=nx; c.y=ny; }
     else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283, mx=c.x+Math.cos(a)*0.9, my=c.y+Math.sin(a)*0.9; if(mx>=0&&mx<GW&&my>=0&&my<GH&&!uWall(mx,my)){ c.x=mx; c.y=my; break; } } } // don't get stuck on walls
-    if(ulava[cidx(c.x,c.y)]) return true;                                              // walked into lava -> dies
+    if(c.fireSword && !c.redKing && poolX>=0 && (c.x-(poolX+0.5))**2+(c.y-(poolY+0.5))**2<9){ fireKingDead=true; giantActive=false; fire=[]; c.fireSword=false; c.redKing=true; c.uAge=95; } // reach the pit -> DESTROY the Fire King, become the Red King, climb out
+    if(ulava[cidx(c.x,c.y)] && !c.fireSword && !c.redKing) return true;                 // walked into lava -> dies (but the fire-blessed are immune)
     const [gi2,gd2]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi2>=0 && gd2<1.6){ const g=glow[gi2]; if(g.food>0.2){ if(c.E!=null)c.E=Math.min(4,c.E+g.food*1.5); if(c.ate!=null)c.ate++; g.food=0; } } // eat glowfruit
     if(uwater[cidx(c.x,c.y)] && c.W!=null) c.W=1;
     if(c.uAge>80){ for(const h of holes){ if((c.x-h.ux)**2+(c.y-h.uy)**2<2.2){ c.d='up'; c.x=h.sx; c.y=h.sy; c.uAge=0; c.fallCd=40; break; } } } // climb back to the surface (with a cooldown so it doesn't fall right back)
@@ -451,12 +491,12 @@ function stepUnder(){                                                           
     if(pi>=0){ const p=prey[pi]; if((p.x-s.x)**2+(p.y-s.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } } // caught it
     if(s.age>6000) deadS.add(si);                                                       // Specters age out and never reproduce
   });
-  // THE GIANT — surfaces from the lava pool every 500 days for a spell; anything at the pool becomes a fire minion
-  if(day-lastGiant>=500 && !giantActive){ lastGiant=day; giantActive=true; giantTimer=160; }
+  // THE GIANT (Fire Monarch) — surfaces from the lava pool every 500 days; Gooblets/Zappies become fire minions, but a HUMAN becomes a Fire Vessel
+  if(!fireKingDead && day-lastGiant>=500 && !giantActive){ lastGiant=day; giantActive=true; giantTimer=160; }
   if(giantActive){ if(--giantTimer<=0) giantActive=false;
     const px=poolX+0.5, py=poolY+0.5, R2=121;
     goob.forEach((c,i)=>{ if(c.d==='under'&&!deadG.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadG.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
-    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadH.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&!c.vessel&&(c.x-px)**2+(c.y-py)**2<R2){ c.vessel=true; c.uAge=95; } }); // POSSESSED -> a Fire Vessel that climbs up to terrorize the surface
     zap.forEach((c,i)=>{ if(c.d==='under'&&!deadZ.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadZ.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
   }
   // FIRE MINIONS — hunt the fallen, walk on lava unharmed, never reproduce
@@ -547,7 +587,7 @@ function immigrate(){
 // ---------- THE UNDERGROUND (a second world reached through holes) ----------
 const MINING=0, LAVA=1, LAKE=2;
 const uwall=new Uint8Array(N), uzone=new Uint8Array(N), ulava=new Uint8Array(N), uwater=new Uint8Array(N);
-let glow=[], holes=[], spec=[], fire=[], view='surface', poolX=-1, poolY=-1, giantActive=false, giantTimer=0, lastGiant=0;
+let glow=[], holes=[], spec=[], fire=[], view='surface', poolX=-1, poolY=-1, giantActive=false, giantTimer=0, lastGiant=0, fireKingDead=false;
 const uWall=(x,y)=>uwall[cidx(x,y)]===1;
 const uZoneAt=(x,y)=>uzone[cidx(x,y)];
 function genUnderground(){
@@ -565,7 +605,7 @@ function genUnderground(){
   for(let w=0;w<16;w++){ let x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); const len=200+((rnd()*240)|0);
     for(let s=0;s<len;s++){ uwall[idx(x,y)]=0; if(rnd()<0.45 && x<GW-1) uwall[idx(x+1,y)]=0;
       const dr=(rnd()*4)|0; x+= dr===0?1:dr===1?-1:0; y+= dr===2?1:dr===3?-1:0; x=Math.max(1,Math.min(GW-2,x)); y=Math.max(1,Math.min(GH-2,y)); } }
-  ulava.fill(0); uwater.fill(0); fire=[]; giantActive=false; giantTimer=0; lastGiant=0;
+  ulava.fill(0); uwater.fill(0); fire=[]; giantActive=false; giantTimer=0; lastGiant=0; fireKingDead=false;
   for(let i=0;i<N;i++){ if(!uwall[i] && uzone[i]===LAKE && rnd()<0.14) uwater[i]=1; }                // scattered water in the underlake
   poolX=-1; poolY=-1;                                                                                // ONE big lava pool in the lava lands
   for(let t=0;t<500;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(uzone[idx(x,y)]===LAVA){ poolX=x; poolY=y; break; } }
@@ -877,11 +917,15 @@ function drawCreatures(){
   // HUMANS — dark red, calm faces; build brown settlements and hide on them
   for(const m of human){ if(lyr(m)!==view) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
     if(m.boat){ ctx.fillStyle='#6b4420'; ctx.beginPath(); ctx.moveTo(x-r*1.15,y+r*0.15); ctx.lineTo(x+r*1.15,y+r*0.15); ctx.lineTo(x+r*0.7,y+r*0.95); ctx.lineTo(x-r*0.7,y+r*0.95); ctx.closePath(); ctx.fill(); } // fishing boat
-    ctx.fillStyle=m.king?'#ffd23a':(m.servant?'#2e4a9e':'#8b1a1a'); ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); // King yellow, servants blue-robed
+    if(m.vessel){ ctx.shadowColor='#ff5a1e'; ctx.shadowBlur=12; }                       // the Fire Vessel burns
+    ctx.fillStyle = m.vessel?'#ff4a10' : m.fireSword?'#ff9a2e' : m.redKing?'#d01020' : m.redFolk?'#c23030' : m.king?'#ffd23a':(m.servant?'#2e4a9e':'#8b1a1a'); // vessel/sword=orange · red king/folk=red · King yellow · servants blue
+    ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
-    ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
-    ctx.fillStyle='#160a0a'; twoDots(x-ex,x+ex,ey,pr);
+    ctx.fillStyle=(m.vessel||m.fireSword)?'#ffe6b0':'#fff'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle=m.vessel?'#4a0a00':'#160a0a'; twoDots(x-ex,x+ex,ey,pr);
+    if(m.fireSword){ ctx.strokeStyle='#ffdd55'; ctx.lineWidth=Math.max(1.5,r*0.22); ctx.lineCap='round'; ctx.shadowColor='#ff8a1e'; ctx.shadowBlur=8; ctx.beginPath(); ctx.moveTo(x+r*0.7,y+r*0.7); ctx.lineTo(x+r*1.5,y-r*1.1); ctx.stroke(); ctx.shadowBlur=0; } // 🗡️ the Fire Sword
     if(m.king){ ctx.fillStyle='#ffb000'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.15); ctx.lineTo(x,y-r*0.78); ctx.lineTo(x+r*0.3,y-r*1.15); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the King
+    if(m.redKing){ ctx.fillStyle='#ff2030'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.2); ctx.lineTo(x,y-r*0.8); ctx.lineTo(x+r*0.3,y-r*1.2); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the Red King
   }
   // LEVIATHANS — big dark-blue ocean monsters (surface only)
   for(const l of lev){ if(view!=='surface') break; const x=l.x*SC,y=l.y*SC, r=SC*1.05;
