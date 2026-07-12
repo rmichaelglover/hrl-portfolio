@@ -135,6 +135,10 @@ And back on the surface there's a <b style="color:#b060e0">purple portal square<
 it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on it is whisked <b>up to the Sky Realm</b> (and can step on
 the glowing sky portal to come back down).
 <br><br>
+<b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
+the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
+servants</b> shuttle wheat from the farm to feed him while he rules from inside his walls.
+<br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
 </div>
@@ -259,7 +263,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=bui
 function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=buildHash(human,P.zVision,true); const eatG=new Set(), eatH=new Set();
   for(const z of zap){ if(z.d && z.d!=='up'){ next.push(z); continue; } z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
     const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
-      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y))continue; } else if(eatG.has(i))continue; const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } };
+      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y)||list[i].king||list[i].servant)continue; } else if(eatG.has(i))continue; const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } }; // the King & his servants are protected
     scan(gh,goob,false); scan(hh,human,true);
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
@@ -274,6 +278,26 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=b
 function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
 function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=buildHash(bushes,6); const max=human.length*2;
   for(const m of human){ if(m.d && m.d!=='up'){ next.push(m); continue; } m.age++; m.E-=P.hMeta; m.W-=P.hThirst;
+    if(m.king){                                                                       // the King: build his keep, then stay home; servants feed him
+      if(!castleBuilt){ buildKingCastle(m); castleBuilt=true; }
+      if(kingHome){ const l=Math.hypot(kingHome.x-m.x,kingHome.y-m.y); if(l>0.6) clampMoveH(m,m.x+(kingHome.x-m.x)/l*0.5,m.y+(kingHome.y-m.y)/l*0.5); }
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);
+      if(m.E<0.4) m.E=0.4; if(m.W<0.4) m.W=0.4;                                        // the King endures (servants keep him fed)
+      next.push(m); continue;
+    }
+    if(m.servant){                                                                    // servants fetch wheat and carry it to the King
+      const kg=human.find(h=>h.king);
+      if(!kg){ m.servant=false; next.push(m); continue; }
+      let dx=0,dy=0;
+      if(!m.carrying){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,7); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; } }
+      else { const l=Math.hypot(kg.x-m.x,kg.y-m.y)||1; dx=(kg.x-m.x)/l; dy=(kg.y-m.y)/l; }
+      clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+      if(!m.carrying){ const [b2,d2]=nearestIdx(m.x,m.y,bushes,bh,7); if(b2>=0&&d2<1.6){ const b=bushes[b2]; if(b.food>0.3){ b.food=0; m.carrying=true; m.E=Math.min(4,m.E+0.6); } } }
+      else if((kg.x-m.x)**2+(kg.y-m.y)**2<2.4){ kg.E=Math.min(4,kg.E+2); m.carrying=false; }
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);
+      if(m.E<0.4) m.E=0.4; if(m.W<0.4) m.W=0.4;
+      next.push(m); continue;
+    }
     const onS=isSettle(m.x,m.y);
     const [zi,zd]=nearestIdx(m.x,m.y,zap,zh,P.hFlee);
     let dx=0,dy=0,moved=false;
@@ -379,7 +403,7 @@ function stepUnder(){                                                           
 function stepSky(){
   if(dragon && dragon.alive){                                                           // 10 humans on the dragon island -> a 50/50 battle
     const near=[]; human.forEach((m,i)=>{ if(m.d==='sky' && (m.x-dragon.x)**2+(m.y-dragon.y)**2<120) near.push(i); });
-    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!kingExists){ human[near[0]].king=true; kingExists=true; } } // humans win -> crown a King
+    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!kingExists){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants
       else { const dead=new Set(near.slice(0,10)); human=human.filter((_,i)=>!dead.has(i)); } }                          // dragon wins -> that group dies
   }
   const angelH=buildHash(angels,8); const deadG=new Set(),deadZ=new Set(),deadH=new Set();
@@ -387,7 +411,8 @@ function stepSky(){
   const move=(c,species,i,dead)=>{
     if(c.E!=null) c.E-=0.003;
     let dx,dy,moved=false;
-    if(species==='human' && !c.king && king && rnd()<0.5){ const l=Math.hypot(king.x-c.x,king.y-c.y)||1; dx=(king.x-c.x)/l; dy=(king.y-c.y)/l; moved=true; } // humans protect the King
+    if((c.king||c.servant) && portalUX>=0){ const l=Math.hypot(portalUX-c.x,portalUY-c.y)||1; dx=(portalUX-c.x)/l; dy=(portalUY-c.y)/l; moved=true; } // the King's court wants to get home to the surface
+    else if(species==='human' && !c.king && king && rnd()<0.5){ const l=Math.hypot(king.x-c.x,king.y-c.y)||1; dx=(king.x-c.x)/l; dy=(king.y-c.y)/l; moved=true; } // humans protect the King
     else if(c.E!=null && c.E<1.3){ const [ai]=nearestIdx(c.x,c.y,angels,angelH,8); if(ai>=0){ const a=angels[ai]; const l=Math.hypot(a.x-c.x,a.y-c.y)||1; dx=(a.x-c.x)/l; dy=(a.y-c.y)/l; moved=true; } } // hungry -> an angel
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     const nx=c.x+dx*0.85, ny=c.y+dy*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&skyLand(nx,ny)){ c.x=nx; c.y=ny; }
@@ -402,6 +427,14 @@ function stepSky(){
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
+}
+function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
+  const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
+  for(let dy=-2;dy<=1;dy++)for(let dx=-2;dx<=1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]===WATER)continue;
+    if(dx===-2||dx===1||dy===-2||dy===1){ if(!settle[i]){ settle[i]=1; settleList.push(i); } } } // walls = the outer ring, hollow inside
+  sdirty=true;
+  for(let k=0;k<28;k++){ const a=k/28*6.283, rr=3.5+rnd()*1.6, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr; if(x>1&&x<GW-1&&y>1&&y<GH-1 && goodBushCell(x,y)) bushes.push({x,y,food:0.9}); } // wheat
+  m.x=kingHome.x; m.y=kingHome.y;
 }
 const upCount=a=>{ let c=0; for(const o of a) if(!o.d||o.d==='up') c++; return c; };
 function immigrate(){
@@ -473,6 +506,7 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N);
 let angels=[], dragon=null, kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
+let kingHome=null, castleBuilt=false;
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
   sky.fill(0); skyRed.fill(0); angels=[]; dragon=null; kingExists=false;
@@ -512,7 +546,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
   settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); treasury=0; swallCount=0; view='surface';
   genUnderground(); genSky();
-  goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0;
+  goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0; castleBuilt=false; kingHome=null;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
   p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
@@ -558,7 +592,7 @@ function drawCreatures(){
   // HUMANS — dark red, calm faces; build brown settlements and hide on them
   for(const m of human){ if(lyr(m)!==view) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
     if(m.boat){ ctx.fillStyle='#6b4420'; ctx.beginPath(); ctx.moveTo(x-r*1.15,y+r*0.15); ctx.lineTo(x+r*1.15,y+r*0.15); ctx.lineTo(x+r*0.7,y+r*0.95); ctx.lineTo(x-r*0.7,y+r*0.95); ctx.closePath(); ctx.fill(); } // fishing boat
-    ctx.fillStyle=m.king?'#ffd23a':'#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); // the King's body turns yellow
+    ctx.fillStyle=m.king?'#ffd23a':(m.servant?'#2e4a9e':'#8b1a1a'); ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); // King yellow, servants blue-robed
     const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
     ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
     ctx.fillStyle='#160a0a'; twoDots(x-ex,x+ex,ey,pr);
