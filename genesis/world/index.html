@@ -26,7 +26,7 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
 .speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
-.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e} .ctreas{color:#ffd76a} .cang{color:#fff2b0} .cfolk{color:#2fd0b8} .csn{color:#d9b483} .cclaw{color:#c9203a} .ctree{color:#6fae55} .cwell{color:#7dff9e}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e} .ctreas{color:#ffd76a} .cang{color:#fff2b0} .cfolk{color:#2fd0b8} .csn{color:#d9b483} .cclaw{color:#c9203a} .ctree{color:#6fae55} .cwell{color:#7dff9e} .cgk{color:#ffd23a}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
 .glegend{display:flex;flex-wrap:wrap;gap:5px 6px;justify-content:center;margin:7px auto 0;max-width:648px}
 .glegend button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 8px;
@@ -65,6 +65,9 @@ a{color:#8fd0ff;text-decoration:none}
   <button data-tool="angel">👼 Drop Angels</button>
   <button data-tool="wooly">🐑 Drop Woolies</button>
   <button data-tool="dragon">🐉 Drop Dragonlings</button>
+  <button data-tool="sniffer">🐭 Sniffers</button>
+  <button data-tool="claw">🐾 Claws</button>
+  <button data-tool="treeman">🌳 Treemen</button>
   <span class="sep"></span>
   <button data-tool="rain">🌧️ Rain</button>
   <button data-tool="drought">☀️ Drought</button>
@@ -75,7 +78,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="viewbtn">🕳️ Go Underground</button>
 </div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 <div class="glegend" id="glegend"></div>
 
@@ -162,7 +165,15 @@ pears</b> pop up and little tan <b>🐭 Sniffers</b> forage; the dark <b>🌿 Wi
 Claws</b> devour any Sniffer — or <i>any</i> creature — that gets <b>lost</b> in there; and open <b>clearings</b>, where brown
 settlements pop up and gentle <b style="color:#6fae55">🌳 Treemen</b> live. The Treemen need nothing but the <b>🌲 wellness of the
 forest</b> — but drop <b>outside creatures</b> into the Grove and they trample and eat their way through it, and the wellness falls.
-Let it sink too low and the settlements <b>collapse</b>; keep it high and new ones <b>bloom</b>.
+Let it sink too low and the settlements <b>collapse</b>; keep it high and new ones <b>bloom</b>. In the Grove you can also
+drop its <b>own</b> creatures — 🐭 Sniffers, 🐾 Claws and 🌳 Treemen — with their tools.
+<br><br>
+<b>The Grove King &amp; the portal.</b> Every <b>2000 days</b> the Treemen <b>elect a King</b> (he wears a 👑), and his mood works a
+<b>portal</b> that links the Grove to the surface — you'll see its square on <b>both</b> maps. A <b style="color:#7fe0a0">🛡️ Safe
+King</b> <b>seals</b> the portal (it shows a grey ✗). An <b style="color:#e8564e">⚔️ Aggressive King</b> throws it open and musters the
+<b style="color:#c9203a">🐾 Claws</b> — they stream through onto the <b>surface</b> and hunt Gooblets, Zappies and Humans. A
+<b style="color:#7fe0a0">🤝 Helpful King</b> opens it the friendly way: <b>Humans</b> who stand on the surface portal cross over to
+<b>live with the Treemen</b>, who build <b>wooden pens</b> and <b>feed</b> every creature in the Grove (no wellness lost while he reigns).
 <br><br>
 <b>The five Monarchs.</b> This world answers to five great <b>Monarchs</b>: the <b style="color:#2fd0b8">🌊 Sea Monarch</b> — a sea
 dragon whose <b>folk</b> raid Gooblets at the shore (the folk must dodge the Leviathans, who leave the Sea Monarch alone — but every
@@ -332,6 +343,9 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
       if(m.E<0.4) m.E=0.4; if(m.W<0.4) m.W=0.4;
       next.push(m); continue;
     }
+    if(groveKingType==='helpful' && gPortalSX>=0){ if(!m.grovebound && rnd()<0.003) m.grovebound=true; } else m.grovebound=false; // a Helpful Grove King draws some Humans to go live there
+    if(m.grovebound && gPortalSX>=0){ const l=Math.hypot(gPortalSX-m.x,gPortalSY-m.y)||1; clampMoveH(m,m.x+(gPortalSX-m.x)/l*P.hSpeed,m.y+(gPortalSY-m.y)/l*P.hSpeed);
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5); if(m.E<0.35) m.E=0.35; if(m.W<0.35) m.W=0.35; next.push(m); continue; } // (stepGrove crosses them at the portal)
     const onS=isSettle(m.x,m.y);
     const [zi,zd]=nearestIdx(m.x,m.y,zap,zh,P.hFlee);
     let dx=0,dy=0,moved=false;
@@ -588,6 +602,7 @@ function drawUnder(){ const d=img.data;
 }
 function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); }
   if(portalSX>=0){ const x=portalSX*SC,y=portalSY*SC,ss=SC*1.7; ctx.fillStyle=portalCharge>=3?'#ffe23a':'#9b30d0'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // purple until charged, then yellow -> to the sky
+  drawGrovePortal(gPortalSX,gPortalSY);                                                  // the surface end of the Grove portal
 }
 
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
@@ -637,8 +652,12 @@ function drawSky(){ const d=img.data;
 // ---------- THE GROVE REALM (an overgrown alternate dimension) ----------
 // three biomes by relaxation: the pear-tree GROVE, the WILD, and CLEARINGs where Treemen settle.
 const GROVE=0, WILD=1, CLEARING=2;
-const gzone=new Uint8Array(N), gsettle=new Uint8Array(N);
+const gzone=new Uint8Array(N), gsettle=new Uint8Array(N), pen=new Uint8Array(N);
 let pears=[], sniffer=[], claw=[], treeman=[], gsettleList=[], natureGiant=null, groveWellness=1, giantClear={x:-1,y:-1};
+// the Treemen elect a King every 2000 days; the king's mood works the Grove↔surface portal
+let groveKingType='none', lastGroveElection=0, lastClawRaid=0;   // 'safe' seals it · 'aggressive' sends Claws out · 'helpful' lets Humans in
+let gPortalSX=-1,gPortalSY=-1,gPortalGX=-1,gPortalGY=-1, gPortalOpen=false;
+const KINGLABEL={none:'— none —',safe:'🛡️ Safe',aggressive:'⚔️ Aggressive',helpful:'🤝 Helpful'};
 const inGroveWild=(x,y)=>gzone[cidx(x,y)]===WILD;
 function dirToZone(x,y,zone){ let best=null,bd=1e9;                                    // step toward the nearest cell of a target zone
   for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1],[2,0],[-2,0],[0,2],[0,-2]]){ const nx=x+dx,ny=y+dy; if(nx<0||ny<0||nx>=GW||ny>=GH)continue;
@@ -663,14 +682,32 @@ function genGrove(){
   claw=[]; let ct=0; while(claw.length<14 && ct<6000){ ct++; const i=(rnd()*N)|0; if(gzone[i]===WILD) claw.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0,ate:0}); } // Claws in the wild
   treeman=[]; let ht=0; while(gsettleList.length<5 && ht<6000){ ht++; const i=(rnd()*N)|0; const x=i%GW,y=(i/GW)|0;
     if(gzone[i]===CLEARING && !gsettle[i] && (x-giantClear.x)**2+(y-giantClear.y)**2>36){ gsettle[i]=1; gsettleList.push(i); treeman.push({x:x+0.5,y:y+0.5,home:i,age:0}); } } // Treemen settlements
+  // the Grove↔surface portal: a grove end + a surface end (starts sealed, until the first election)
+  pen.fill(0); groveKingType='none'; lastGroveElection=0; lastClawRaid=0; gPortalOpen=false;
+  gPortalGX=-1; gPortalGY=-1; for(let t=0;t<5000;t++){ const i=(rnd()*N)|0; if(gzone[i]!==WILD && !gsettle[i]){ gPortalGX=(i%GW)+0.5; gPortalGY=((i/GW)|0)+0.5; break; } }
+  gPortalSX=-1; gPortalSY=-1; for(let t=0;t<5000;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0);
+    if(!inWater(x,y)&&!isSettle(x,y)&&!(portalSX>=0&&Math.abs(portalSX-x)<3&&Math.abs(portalSY-y)<3)&&!holes.some(h=>Math.abs(h.sx-x)<3&&Math.abs(h.sy-y)<3)){ gPortalSX=x+0.5; gPortalSY=y+0.5; break; } }
+}
+function electGroveKing(){                                                              // every 2000 days the Treemen crown a new King
+  for(const t of treeman) t.king=false;
+  groveKingType = treeman.length ? ['safe','aggressive','helpful'][(rnd()*3)|0] : 'none';
+  gPortalOpen = (groveKingType==='aggressive' || groveKingType==='helpful');
+  if(groveKingType!=='helpful') pen.fill(0);                                            // pens only stand under a Helpful King
+  if(treeman.length) treeman[(rnd()*treeman.length)|0].king=true;                       // crown one Treeman
 }
 function stepGrove(){
+  if(day-lastGroveElection>=2000){ lastGroveElection=day; electGroveKing(); }            // the Treemen crown a King every 2000 days
   for(const p of pears) p.food=Math.min(1, p.food+0.006);                               // pears regrow
   const pearH=buildHash(pears,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set();
-  // ---- OUTSIDERS: creatures that got lost in the grove — they despoil it and slowly starve ----
+  const helpful = groveKingType==='helpful';
+  // ---- HELPFUL KING: Humans at the surface portal come to live with the Treemen ----
+  if(helpful && gPortalSX>=0){ human.forEach(m=>{ if((!m.d||m.d==='up') && !(m.fallCd>0) && (m.x-gPortalSX)**2+(m.y-gPortalSY)**2<3){ m.d='grove'; m.x=gPortalGX; m.y=gPortalGY; m.fallCd=40; } }); }
+  // ---- OUTSIDERS: creatures lost in the grove — normally despoil it & starve; under a Helpful King they're fed & safe ----
   let outsiders=0;
-  const wander=(c,i,dead)=>{ outsiders++; if(c.E!=null) c.E-=0.004;
+  const wander=(c,i,dead)=>{ outsiders++;
     const a=rnd()*6.283; const nx=c.x+Math.cos(a)*0.85, ny=c.y+Math.sin(a)*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ c.x=nx; c.y=ny; }
+    if(helpful){ if(c.E!=null) c.E=Math.min(4, c.E + (pen[cidx(c.x,c.y)]?0.03:0.008)); return; } // Treemen feed them (extra at a pen)
+    if(c.E!=null) c.E-=0.004;
     const [pi,pd]=nearestIdx(c.x,c.y,pears,pearH,6); if(pi>=0 && pd<1.6 && pears[pi].food>0.3){ pears[pi].food=0; groveWellness-=0.004; } // taking too much hurts the forest most
     else groveWellness-=0.0002;
     if(natureGiant && (c.x-natureGiant.x)**2+(c.y-natureGiant.y)**2<20){ dead.add(i); return; } // the Giant expels intruders from its clearing
@@ -697,8 +734,10 @@ function stepGrove(){
   zap.forEach((z,i)=>{ if(z.d==='grove'&&!deadZ.has(i)&&inGroveWild(z.x,z.y)) prey.push({a:'z',i,x:z.x,y:z.y}); });
   human.forEach((m,i)=>{ if(m.d==='grove'&&!deadH.has(i)&&inGroveWild(m.x,m.y)) prey.push({a:'h',i,x:m.x,y:m.y}); });
   const preyH=buildHash(prey,8); const deadC=new Set();
-  claw.forEach((c,ci)=>{ c.age++; const [pi]=nearestIdx(c.x,c.y,prey,preyH,8); let dx,dy;
+  claw.forEach((c,ci)=>{ if(c.d==='up') return;                                          // surface claws are handled below
+    c.age++; const [pi]=nearestIdx(c.x,c.y,prey,preyH,8); let dx,dy;
     if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-c.x,p.y-c.y)||1; dx=(p.x-c.x)/l; dy=(p.y-c.y)/l; }
+    else if(groveKingType==='aggressive' && gPortalGX>=0){ const l=Math.hypot(gPortalGX-c.x,gPortalGY-c.y)||1; dx=(gPortalGX-c.x)/l; dy=(gPortalGY-c.y)/l; } // an Aggressive King musters the Claws at the portal
     else if(!inGroveWild(c.x,c.y)){ const g=dirToZone(c.x,c.y,WILD); if(g[0]||g[1]){dx=g[0];dy=g[1];} else {const a=rnd()*6.283;dx=Math.cos(a);dy=Math.sin(a);} } // drift back to the wild
     else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     const nx=c.x+dx, ny=c.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ c.x=nx; c.y=ny; }
@@ -707,6 +746,25 @@ function stepGrove(){
       c.ate=(c.ate||0)+1; if(c.ate>=4 && claw.length<40){ c.ate=0; claw.push({x:c.x,y:c.y,age:0,ate:0}); } } }
     if(c.age>5000) deadC.add(ci);
   });
+  // ---- AGGRESSIVE KING: Claws that reach the grove portal pour out onto the surface ----
+  if(groveKingType==='aggressive' && gPortalGX>=0 && gPortalSX>=0 && day-lastClawRaid>=6){
+    for(const c of claw){ if(c.d) continue; if((c.x-gPortalGX)**2+(c.y-gPortalGY)**2<4){ c.d='up'; c.x=gPortalSX+(rnd()-0.5); c.y=gPortalSY+(rnd()-0.5); c.age=0; lastClawRaid=day; break; } }
+  }
+  // ---- SURFACE CLAWS: the invasion — they hunt Gooblets, Zappies & Humans on the surface ----
+  if(claw.some(c=>c.d==='up')){
+    const sprey=[];
+    goob.forEach((g,i)=>{ if((!g.d||g.d==='up')&&!deadG.has(i)) sprey.push({a:'g',i,x:g.x,y:g.y}); });
+    zap.forEach((z,i)=>{ if((!z.d||z.d==='up')&&!deadZ.has(i)) sprey.push({a:'z',i,x:z.x,y:z.y}); });
+    human.forEach((m,i)=>{ if((!m.d||m.d==='up')&&!deadH.has(i)) sprey.push({a:'h',i,x:m.x,y:m.y}); });
+    const spreyH=buildHash(sprey,8);
+    claw.forEach((c,ci)=>{ if(c.d!=='up') return; c.age++;
+      const [pi]=nearestIdx(c.x,c.y,sprey,spreyH,8); let dx,dy;
+      if(pi>=0){ const p=sprey[pi]; const l=Math.hypot(p.x-c.x,p.y-c.y)||1; dx=(p.x-c.x)/l; dy=(p.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+      const nx=c.x+dx, ny=c.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!inWater(nx,ny)){ c.x=nx; c.y=ny; }
+      if(pi>=0){ const p=sprey[pi]; if((p.x-c.x)**2+(p.y-c.y)**2<1.8){ if(p.a==='g')deadG.add(p.i); else if(p.a==='z')deadZ.add(p.i); else deadH.add(p.i); } }
+      if(c.age>3000) deadC.add(ci);
+    });
+  }
   // ---- TREEMEN: need nothing but the forest's wellness ----
   const deadT=new Set();
   treeman.forEach((t,ti)=>{ t.age++; const hx=(t.home%GW)+0.5, hy=((t.home/GW)|0)+0.5; let dx,dy;
@@ -716,8 +774,11 @@ function stepGrove(){
   if(groveWellness<0.25 && gsettleList.length && rnd()<0.04){ const k=(rnd()*gsettleList.length)|0; gsettle[gsettleList[k]]=0; gsettleList.splice(k,1); } // settlements collapse
   if(groveWellness>0.66 && gsettleList.length<9 && rnd()<0.03){ for(let tr=0;tr<40;tr++){ const i=(rnd()*N)|0; const x=i%GW,y=(i/GW)|0;
     if(gzone[i]===CLEARING && !gsettle[i] && (x-giantClear.x)**2+(y-giantClear.y)**2>36){ gsettle[i]=1; gsettleList.push(i); treeman.push({x:x+0.5,y:y+0.5,home:i,age:0}); break; } } } // ... and pop up when it flourishes
-  // ---- THE NATURE GIANT (5th monarch): the heart of the forest heals it; strangers wear it down ----
-  groveWellness = clamp01(groveWellness + 0.0009 - outsiders*0.00012);
+  // ---- HELPFUL KING: Treemen build pens near home to shelter & feed the other creatures ----
+  if(helpful && treeman.length && rnd()<0.06){ const t=treeman[(rnd()*treeman.length)|0]; const px=Math.round(t.x+(rnd()-0.5)*4), py=Math.round(t.y+(rnd()-0.5)*4);
+    if(px>0&&px<GW&&py>0&&py<GH){ const i=cidx(px,py); if(gzone[i]!==WILD && !gsettle[i]) pen[i]=1; } }
+  // ---- THE NATURE GIANT (5th monarch): the heart of the forest heals it; strangers wear it down (but not under a caring King) ----
+  groveWellness = clamp01(groveWellness + 0.0009 - (helpful?0:outsiders*0.00012));
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
@@ -728,26 +789,35 @@ function stepGrove(){
   if(claw.length<4 && rnd()<0.25){ let t=0; while(t<200){t++;const i=(rnd()*N)|0; if(gzone[i]===WILD){claw.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0,ate:0});break;}} }
   if(pears.length<50){ let t=0; while(pears.length<90&&t<400){t++;const i=(rnd()*N)|0; if(gzone[i]===GROVE)pears.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4});} }
 }
+function drawClawSprite(x,y,r){ ctx.fillStyle='#3a2a44'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); // Claws: bristly predators, red claw-marks + yellow eyes
+  const ex=r*0.4,ey=y-r*0.02,er=r*0.24; ctx.strokeStyle='#c9203a'; ctx.lineWidth=Math.max(1,r*0.16); ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er); ctx.lineTo(x-ex+er*0.5,ey+er*0.2); ctx.moveTo(x+ex+er,ey-er); ctx.lineTo(x+ex-er*0.5,ey+er*0.2); ctx.stroke();
+  ctx.fillStyle='#ffd23a'; twoDots(x-ex,x+ex,ey,er*0.5); }
+function drawGrovePortal(px,py){ if(px<0)return; const x=px*SC,y=py*SC,ss=SC*1.7;
+  const col = gPortalOpen ? (groveKingType==='aggressive'?'#c9203a':'#2fd06a') : '#43503f';   // red=aggressive · green=helpful · grey=sealed
+  if(gPortalOpen){ ctx.shadowColor=col; ctx.shadowBlur=13; } ctx.fillStyle=col; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0;
+  ctx.strokeStyle='#eafff0'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss);
+  if(!gPortalOpen){ ctx.strokeStyle='#20281e'; ctx.beginPath(); ctx.moveTo(x-ss/2,y-ss/2);ctx.lineTo(x+ss/2,y+ss/2); ctx.moveTo(x+ss/2,y-ss/2);ctx.lineTo(x-ss/2,y+ss/2); ctx.stroke(); } } // sealed = an X
 function drawGrove(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(gsettle[i]){ d[o]=120;d[o+1]=78;d[o+2]=44; }                                     // brown Treeman hut
+    else if(pen[i]){ d[o]=170;d[o+1]=140;d[o+2]=90; }                                   // wooden pen (Helpful King)
     else { const z=gzone[i];
       if(z===GROVE){ d[o]=32;d[o+1]=112;d[o+2]=48; }                                    // lush pear-grove green
       else if(z===WILD){ d[o]=44;d[o+1]=66;d[o+2]=26; }                                 // dark overgrown wild
       else { d[o]=150;d[o+1]=170;d[o+2]=92; } }                                         // open clearing (meadow)
     d[o+3]=255; }
   octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+  drawGrovePortal(gPortalGX,gPortalGY);
   for(const p of pears){ if(p.food<0.15)continue; const x=p.x*SC,y=p.y*SC,r=SC*(0.22+0.24*p.food); ctx.fillStyle='#9a3ad0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // purple pears
   for(const s of sniffer){ const x=s.x*SC,y=s.y*SC,r=SC*0.5; ctx.fillStyle='#d9b483'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); // Sniffers: tan foragers with a sniffing nose
     const ex=r*0.36,ey=y-r*0.12,er=r*0.2; ctx.fillStyle='#241810'; twoDots(x-ex,x+ex,ey,er);
     ctx.fillStyle='#a86b4a'; ctx.beginPath();ctx.arc(x,y+r*0.4,r*0.26,0,7);ctx.fill(); }
-  for(const c of claw){ const x=c.x*SC,y=c.y*SC,r=SC*0.72; ctx.fillStyle='#3a2a44'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); // Claws: bristly wild predators
-    const ex=r*0.4,ey=y-r*0.02,er=r*0.24; ctx.strokeStyle='#c9203a'; ctx.lineWidth=Math.max(1,r*0.16); ctx.lineCap='round';
-    ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er); ctx.lineTo(x-ex+er*0.5,ey+er*0.2); ctx.moveTo(x+ex+er,ey-er); ctx.lineTo(x+ex-er*0.5,ey+er*0.2); ctx.stroke();
-    ctx.fillStyle='#ffd23a'; twoDots(x-ex,x+ex,ey,er*0.5); }
-  for(const t of treeman){ const x=t.x*SC,y=t.y*SC,r=SC*0.6; ctx.fillStyle='#4a7a3a'; ctx.fillRect(x-r*0.5,y-r*1.0,r,r*2.0); // Treemen: tall folk of the clearings
+  for(const c of claw){ if(c.d==='up')continue; drawClawSprite(c.x*SC,c.y*SC,SC*0.72); }  // (surface claws draw on the surface view)
+  for(const t of treeman){ const x=t.x*SC,y=t.y*SC,r=SC*0.6; ctx.fillStyle=t.king?'#8fe06a':'#4a7a3a'; ctx.fillRect(x-r*0.5,y-r*1.0,r,r*2.0); // Treemen: tall folk of the clearings (King = brighter)
     ctx.fillStyle='#6fae55'; ctx.beginPath();ctx.arc(x,y-r*0.95,r*0.7,0,7);ctx.fill();
-    const ex=r*0.24,ey=y-r*1.0,er=r*0.12; ctx.fillStyle='#14200e'; twoDots(x-ex,x+ex,ey,er); }
+    const ex=r*0.24,ey=y-r*1.0,er=r*0.12; ctx.fillStyle='#14200e'; twoDots(x-ex,x+ex,ey,er);
+    if(t.king){ ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.moveTo(x-r*0.55,y-r*1.5); ctx.lineTo(x-r*0.28,y-r*1.9); ctx.lineTo(x,y-r*1.55); ctx.lineTo(x+r*0.28,y-r*1.9); ctx.lineTo(x+r*0.55,y-r*1.5); ctx.closePath(); ctx.fill(); } } // 👑 the Grove King
   if(natureGiant && natureGiant.alive){ const x=natureGiant.x*SC,y=natureGiant.y*SC, r=SC*(3.0+2.4*groveWellness); // THE NATURE GIANT — size & glow track wellness
     ctx.shadowColor='#7dff9e'; ctx.shadowBlur=10+22*groveWellness; ctx.fillStyle='#1d5a2a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     ctx.fillStyle='#2f7a3e'; ctx.beginPath();ctx.arc(x,y-r*0.2,r*0.7,0,7);ctx.fill();
@@ -820,7 +890,8 @@ function drawCreatures(){
     ctx.fillStyle='#eaf2ff'; twoDots(x-ex,x+ex,ey,er);
     ctx.fillStyle='#03102b'; twoDots(x-ex,x+ex,ey,pr);
   }
-  if(view==='surface'){                                                                // FOLK + the SEA MONARCH (sea dragon)
+  if(view==='surface'){                                                                // FOLK + the SEA MONARCH (sea dragon) + invading grove CLAWS
+    for(const c of claw){ if(c.d==='up') drawClawSprite(c.x*SC,c.y*SC,SC*0.72); }       // Claws sent up by an Aggressive Grove King
     for(const f of folk){ const x=f.x*SC,y=f.y*SC,r=SC*0.55; ctx.fillStyle='#1fb0a0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.36,ey=y-r*0.05,er=r*0.22; ctx.fillStyle='#06201c'; twoDots(x-ex,x+ex,ey,er); }
     if(seaMonarch && seaMonarch.alive){ const grown=seaMonarch.fromLev?Math.min(1,(day-seaMonarch.bornDay)/500):1; const r=SC*(seaMonarch.fromLev?1.05+0.9*grown:1.95); const x=seaMonarch.x*SC,y=seaMonarch.y*SC; const col=seaMonarch.fromLev?'#6a3ab0':'#118f7a', glow=seaMonarch.fromLev?'#b78aff':'#4fe0c0'; ctx.shadowColor=glow; ctx.shadowBlur=18; ctx.fillStyle=col; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.34,ey=y-r*0.1,er=r*0.15; ctx.shadowColor='#fff'; ctx.shadowBlur=10; ctx.fillStyle='#d4fff0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
   }
@@ -886,6 +957,7 @@ function loop(){
   document.getElementById('nclaw').textContent=claw.length;
   document.getElementById('ntree').textContent=treeman.length;
   document.getElementById('nwell').textContent=Math.round(groveWellness*100)+'%';
+  document.getElementById('ngk').textContent=KINGLABEL[groveKingType];
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
   requestAnimationFrame(loop);
@@ -912,7 +984,10 @@ function applyTool(gxc,gyc){
     else if(tool==='human') drop((x,y)=>({x,y,E:P.hStartE,W:1,wood:0,age:0,ate:0,d:'under',uAge:0}), P.hCap, human);
     return;
   }
-  if(view==='grove'){                                                                 // drop creatures into the grove — they "get lost" and feed the Claws / drain the forest
+  if(view==='grove'){                                                                 // in the grove you can seed its OWN creatures, or drop outsiders that "get lost"
+    if(tool==='sniffer'){ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&sniffer.length<160) sniffer.push({x,y,E:2,age:0,ate:0}); } return; }
+    if(tool==='claw'){ for(let k=0;k<2;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&claw.length<40) claw.push({x,y,age:0,ate:0}); } return; }
+    if(tool==='treeman'){ const i=cidx(gxc,gyc); if(gzone[i]!==WILD){ if(!gsettle[i]){ gsettle[i]=1; gsettleList.push(i); } treeman.push({x:gxc,y:gyc,home:i,age:0}); } return; }
     const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&arr.length<cap) arr.push(mk(x,y)); } };
     if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'grove'}), P.gCap, goob);
     else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'grove'}), P.zCap, zap);
