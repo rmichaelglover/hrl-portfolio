@@ -26,7 +26,7 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
 .speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
-.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
@@ -66,7 +66,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="viewbtn">🕳️ Go Underground</button>
 </div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 
 <div class="legend">
@@ -111,10 +111,13 @@ baby after eating <b>15 creatures</b>. And they're territorial: whenever there a
 <br><br>
 <b>The underground.</b> Scattered dark <b>holes</b> drop any creature that steps on one into the <b>caves</b> below — hit
 <b>🕳️ Go Underground</b> to watch. Down there are three biomes: <b>mining grounds</b> (grey), where Humans dig new tunnels;
-<b>lava lands</b> (purple-brown) dotted with <b style="color:#e87016">lava</b> that kills anything that touches it; and the
+<b>lava lands</b> (purple-brown) with one big pool of <b style="color:#e87016">lava</b> that kills anything that touches it; and the
 <b>underlake</b> (brown) with water and glowing <b style="color:#b6ff78">glowfruit</b> to eat. You can't cross the <b>black walls</b>.
-And lurking in the tunnels are the <b style="color:#c9bff0">Specters</b> — pale cave predators that hunt whatever fell in… and they
-<i>never breed</i>, so as they die off the caves slowly grow quiet.
+Lurking in the tunnels are the <b style="color:#c9bff0">Specters</b> — pale cave predators that hunt whatever fell in and <i>never
+breed</i>, so as they die off the caves grow quiet. And every <b>500 days</b> a <b>giant black creature</b> rises from the lava pool
+for a few seconds — any creature caught at the pool is turned into a <b style="color:#ff8a3e">fire minion</b> that walks on lava
+unharmed, hunts the fallen, and (like the Specters) never breeds. While you're underground, the drop tools place creatures
+<b>down in the caves</b> — feed them to the dark, or grow a colony in the glowfruit lake.
 <br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
@@ -323,11 +326,29 @@ function stepUnder(){                                                           
     if(pi>=0){ const p=prey[pi]; if((p.x-s.x)**2+(p.y-s.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } } // caught it
     if(s.age>6000) deadS.add(si);                                                       // Specters age out and never reproduce
   });
+  // THE GIANT — surfaces from the lava pool every 500 days for a spell; anything at the pool becomes a fire minion
+  if(day-lastGiant>=500 && !giantActive){ lastGiant=day; giantActive=true; giantTimer=160; }
+  if(giantActive){ if(--giantTimer<=0) giantActive=false;
+    const px=poolX+0.5, py=poolY+0.5, R2=121;
+    goob.forEach((c,i)=>{ if(c.d==='under'&&!deadG.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadG.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadH.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+    zap.forEach((c,i)=>{ if(c.d==='under'&&!deadZ.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadZ.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+  }
+  // FIRE MINIONS — hunt the fallen, walk on lava unharmed, never reproduce
+  const deadF=new Set();
+  fire.forEach((f,fi)=>{ f.age++;
+    const [pi]=nearestIdx(f.x,f.y,prey,preyH,8);
+    let dx,dy; if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-f.x,p.y-f.y)||1; dx=(p.x-f.x)/l; dy=(p.y-f.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=f.x+dx*1.05, ny=f.y+dy*1.05; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ f.x=nx; f.y=ny; }
+    if(pi>=0){ const p=prey[pi]; if((p.x-f.x)**2+(p.y-f.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } }
+    if(f.age>4500) deadF.add(fi);
+  });
   for(const g of glow) g.food=Math.min(1,g.food+0.006);
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
   if(deadS.size) spec=spec.filter((_,i)=>!deadS.has(i));
+  if(deadF.size) fire=fire.filter((_,i)=>!deadF.has(i));
 }
 const upCount=a=>{ let c=0; for(const o of a) if(o.d!=='under') c++; return c; };
 function immigrate(){
@@ -339,7 +360,7 @@ function immigrate(){
 // ---------- THE UNDERGROUND (a second world reached through holes) ----------
 const MINING=0, LAVA=1, LAKE=2;
 const uwall=new Uint8Array(N), uzone=new Uint8Array(N), ulava=new Uint8Array(N), uwater=new Uint8Array(N);
-let glow=[], holes=[], spec=[], view='surface';
+let glow=[], holes=[], spec=[], fire=[], view='surface', poolX=-1, poolY=-1, giantActive=false, giantTimer=0, lastGiant=0;
 const uWall=(x,y)=>uwall[cidx(x,y)]===1;
 const uZoneAt=(x,y)=>uzone[cidx(x,y)];
 function genUnderground(){
@@ -357,8 +378,13 @@ function genUnderground(){
   for(let w=0;w<16;w++){ let x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); const len=200+((rnd()*240)|0);
     for(let s=0;s<len;s++){ uwall[idx(x,y)]=0; if(rnd()<0.45 && x<GW-1) uwall[idx(x+1,y)]=0;
       const dr=(rnd()*4)|0; x+= dr===0?1:dr===1?-1:0; y+= dr===2?1:dr===3?-1:0; x=Math.max(1,Math.min(GW-2,x)); y=Math.max(1,Math.min(GH-2,y)); } }
-  ulava.fill(0); uwater.fill(0);
-  for(let i=0;i<N;i++){ if(uwall[i])continue; if(uzone[i]===LAVA && rnd()<0.11) ulava[i]=1; else if(uzone[i]===LAKE && rnd()<0.14) uwater[i]=1; }
+  ulava.fill(0); uwater.fill(0); fire=[]; giantActive=false; giantTimer=0; lastGiant=0;
+  for(let i=0;i<N;i++){ if(!uwall[i] && uzone[i]===LAKE && rnd()<0.14) uwater[i]=1; }                // scattered water in the underlake
+  poolX=-1; poolY=-1;                                                                                // ONE big lava pool in the lava lands
+  for(let t=0;t<500;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(uzone[idx(x,y)]===LAVA){ poolX=x; poolY=y; break; } }
+  if(poolX<0) for(let i=0;i<N;i++){ if(uzone[i]===LAVA){ poolX=i%GW; poolY=(i/GW)|0; break; } }
+  if(poolX<0){ poolX=GW>>1; poolY=GH>>1; }
+  { const R=6; for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=poolX+dx,y=poolY+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); uwall[i]=0; ulava[i]=1; } } }
   glow=[]; let gt=0; while(glow.length<75 && gt<5000){ gt++; const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0), i=idx(x,y); if(!uwall[i] && uzone[i]===LAKE && !uwater[i] && !ulava[i]) glow.push({x:x+0.5,y:y+0.5,food:0.3+rnd()*0.7}); }
   holes=[]; const nH=2+((rnd()*2)|0); let ht=0;                                                   // 2-3 holes: surface pos <-> a tunnel cell below
   while(holes.length<nH && ht<5000){ ht++; const sx=1+((rnd()*(GW-2))|0), sy=1+((rnd()*(GH-2))|0); if(inWater(sx,sy)||isSettle(sx,sy))continue;
@@ -380,6 +406,12 @@ function drawUnder(){ const d=img.data;
   for(const s of spec){ const x=s.x*SC,y=s.y*SC,r=SC*0.75;                                        // Specters — ghostly cave predators
     ctx.shadowColor='#d9ccff'; ctx.shadowBlur=9; ctx.fillStyle='rgba(212,200,242,0.82)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.36, ey=y-r*0.04, er=r*0.24; ctx.fillStyle='#150a2e'; twoDots(x-ex,x+ex,ey,er); }
+  for(const f of fire){ const x=f.x*SC,y=f.y*SC,r=SC*0.7;                                          // Fire minions — born of the Giant
+    ctx.shadowColor='#ff7a1e'; ctx.shadowBlur=10; ctx.fillStyle='rgba(255,120,30,0.92)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34, ey=y-r*0.05, er=r*0.2; ctx.fillStyle='#2a0a00'; twoDots(x-ex,x+ex,ey,er); }
+  if(giantActive && poolX>=0){ const x=(poolX+0.5)*SC,y=(poolY+0.5)*SC,r=SC*4.4;                   // THE GIANT rising from the pool
+    ctx.shadowColor='#ff5a1e'; ctx.shadowBlur=22; ctx.fillStyle='#0a0608'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34, ey=y-r*0.12, er=r*0.13; ctx.shadowColor='#ffb020'; ctx.shadowBlur=14; ctx.fillStyle='#ff5a1e'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
 }
 function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); } }
 
@@ -472,6 +504,7 @@ function loop(){
   document.getElementById('nl').textContent=lev.length;
   document.getElementById('ns').textContent=settleList.length;
   document.getElementById('nspec').textContent=spec.length;
+  document.getElementById('nfire').textContent=fire.length;
   document.getElementById('nb').textContent=bushes.filter(b=>b.food>0.35).length;
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
@@ -482,6 +515,13 @@ function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.
     const w=(a||b)?0.5:1; moistC.g[y*moistC.cw+x]=clamp01(moistC.g[y*moistC.cw+x]+amt*w); }
   computeMoist(); for(let k=0;k<3;k++) relaxBiomes(); computeWDist(); }
 function applyTool(gxc,gyc){
+  if(view==='under'){                                                                 // drop creatures into the caves
+    const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&!uWall(x,y)&&!ulava[cidx(x,y)]&&arr.length<cap) arr.push(mk(x,y)); } };
+    if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'under',uAge:0}), P.gCap, goob);
+    else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'under',uAge:0}), P.zCap, zap);
+    else if(tool==='human') drop((x,y)=>({x,y,E:P.hStartE,W:1,wood:0,age:0,ate:0,d:'under',uAge:0}), P.hCap, human);
+    return;
+  }
   if(tool==='goob'){ for(let k=0;k<8;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnGoob(x,y,P.gStartE+0.4,1.0);} }
   else if(tool==='zap'){ for(let k=0;k<4;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnZap(x,y,P.zStart+0.4);} }
   else if(tool==='human'){ for(let k=0;k<3;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnHuman(x,y,P.hStartE+0.3);} }
