@@ -26,7 +26,7 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
 .speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
 .counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
-.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0}
 #graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
@@ -62,9 +62,11 @@ a{color:#8fd0ff;text-decoration:none}
   <span class="sep"></span>
   <button id="pause">⏸ Pause</button>
   <button id="reset">↺ New world</button>
+  <span class="sep"></span>
+  <button id="viewbtn">🕳️ Go Underground</button>
 </div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 
 <div class="legend">
@@ -106,6 +108,13 @@ to <b>drink at the shore</b>, a nearby Leviathan swims over and <b>eats it</b> �
 who instead <b>fishes the Leviathan</b> and eats it (a big meal that fills both its hunger and its baby-meter!). A Leviathan makes a
 baby after eating <b>15 creatures</b>. And they're territorial: whenever there are <b>more than two</b>, one hunts down another for a
 <b>duel</b> — a 50/50 fight, and the loser is gone. So Leviathans stay rare, and <b>can even go extinct</b> (drop more with the 🐋 tool).
+<br><br>
+<b>The underground.</b> Scattered dark <b>holes</b> drop any creature that steps on one into the <b>caves</b> below — hit
+<b>🕳️ Go Underground</b> to watch. Down there are three biomes: <b>mining grounds</b> (grey), where Humans dig new tunnels;
+<b>lava lands</b> (purple-brown) dotted with <b style="color:#e87016">lava</b> that kills anything that touches it; and the
+<b>underlake</b> (brown) with water and glowing <b style="color:#b6ff78">glowfruit</b> to eat. You can't cross the <b>black walls</b>.
+And lurking in the tunnels are the <b style="color:#c9bff0">Specters</b> — pale cave predators that hunt whatever fell in… and they
+<i>never breed</i>, so as they die off the caves slowly grow quiet.
 <br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
@@ -204,12 +213,12 @@ function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)) ret
 function clampMoveW(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||!inWater(nx,ny)) return; c.x=nx;c.y=ny; }             // leviathans: water only
 function placeLevWater(nx,ny){ for(let t=0;t<30;t++){ const x=(nx==null?rnd()*GW:nx+(rnd()-0.5)*8), y=(ny==null?rnd()*GH:ny+(rnd()-0.5)*8); if(x>=0&&x<GW&&y>=0&&y<GH&&inWater(x,y)) return {x,y}; }
   for(let t=0;t<300;t++){ const x=rnd()*GW,y=rnd()*GH; if(inWater(x,y)) return {x,y}; } return null; }
-function buildHash(list,cell){ const h=new Map(); for(let i=0;i<list.length;i++){ const c=list[i]; const k=(c.x/cell|0)+','+(c.y/cell|0); (h.get(k)||h.set(k,[]).get(k)).push(i);} return h; }
+function buildHash(list,cell,surfaceOnly){ const h=new Map(); for(let i=0;i<list.length;i++){ const c=list[i]; if(surfaceOnly&&c.d==='under')continue; const k=(c.x/cell|0)+','+(c.y/cell|0); (h.get(k)||h.set(k,[]).get(k)).push(i);} return h; }
 function nearestIdx(x,y,list,h,cell){ let bd=1e9,bi=-1; const cx=x/cell|0,cy=y/cell|0;
   for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=h.get((cx+a)+','+(cy+b)); if(!arr)continue;
     for(const i of arr){ const c=list[i]; const d=(c.x-x)**2+(c.y-y)**2; if(d<bd){bd=d;bi=i;} } } return [bi,bd]; }
-function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee), bh=buildHash(bushes,6);
-  for(const g of goob){ g.age++; g.W-=P.gThirst; g.E-=P.gMeta;
+function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=buildHash(bushes,6);
+  for(const g of goob){ if(g.d==='under'){ next.push(g); continue; } g.age++; g.W-=P.gThirst; g.E-=P.gMeta;
     const [zi,zd]=nearestIdx(g.x,g.y,zap,zh,P.gFlee);
     let dx=0,dy=0, moved=false;
     if(zi>=0 && zd<(P.gFlee*0.7)**2){ const z=zap[zi]; const l=Math.hypot(g.x-z.x,g.y-z.y)||1; dx=(g.x-z.x)/l; dy=(g.y-z.y)/l; moved=true; }      // flee
@@ -217,6 +226,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee), bh=buildHas
     else if(g.E<P.gHunger){ const [bi,bd]=nearestIdx(g.x,g.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-g.x,b.y-g.y)||1; dx=(b.x-g.x)/l; dy=(b.y-g.y)/l; moved=true; } } // hungry
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     clampMove(g,g.x+dx*P.gSpeed,g.y+dy*P.gSpeed);
+    { let fell=false; for(const h of holes){ if((g.x-h.sx)**2+(g.y-h.sy)**2<1.2){ g.d='under'; g.x=h.ux; g.y=h.uy; g.uAge=0; fell=true; break; } } if(fell){ next.push(g); continue; } } // fell down a hole
     if(wdAt(g.x,g.y)<=1) g.W=Math.min(1,g.W+0.5);                                    // drink at water's edge
     const [bi2,bd2]=nearestIdx(g.x,g.y,bushes,bh,6);
     if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ g.E+=b.food*P.gEatGain; b.food=0; g.ate++; } } // eat a whole ripe bush
@@ -225,13 +235,14 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee), bh=buildHas
     next.push(g);
   } goob=next;
 }
-function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision), hh=buildHash(human,P.zVision); const eatG=new Set(), eatH=new Set();
-  for(const z of zap){ z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
+function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=buildHash(human,P.zVision,true); const eatG=new Set(), eatH=new Set();
+  for(const z of zap){ if(z.d==='under'){ next.push(z); continue; } z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
     const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
       for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y))continue; } else if(eatG.has(i))continue; const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } };
     scan(gh,goob,false); scan(hh,human,true);
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
+    { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } // fell down a hole
     if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
     z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge) continue;
     if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
@@ -239,8 +250,8 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision), hh=buildH
   } zap=next; if(eatG.size) goob=goob.filter((_,i)=>!eatG.has(i)); if(eatH.size) human=human.filter((_,i)=>!eatH.has(i));
 }
 function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
-function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee), bh=buildHash(bushes,6); const max=human.length*2;
-  for(const m of human){ m.age++; m.E-=P.hMeta; m.W-=P.hThirst;
+function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=buildHash(bushes,6); const max=human.length*2;
+  for(const m of human){ if(m.d==='under'){ next.push(m); continue; } m.age++; m.E-=P.hMeta; m.W-=P.hThirst;
     const onS=isSettle(m.x,m.y);
     const [zi,zd]=nearestIdx(m.x,m.y,zap,zh,P.hFlee);
     let dx=0,dy=0,moved=false;
@@ -252,6 +263,7 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee), bh=buildHa
     else if(m.wood<P.hBuild){ if(fdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,fdAt); dx=d[0];dy=d[1]; moved=true; } }              // need wood -> forest
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+    { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } // fell down a hole
     if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);                                       // drink at the shore
     if(biomeAt(m.x,m.y)===FOREST || fdAt(m.x,m.y)<=1) m.wood+=P.hWoodRate;             // chop wood at the forest
     const [bi2,bd2]=nearestIdx(m.x,m.y,bushes,bh,6);
@@ -263,7 +275,7 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee), bh=buildHa
   } human=next;
 }
 function stepLev(){ if(!lev.length) return;
-  const gh=buildHash(goob,P.levVision), hh=buildHash(human,P.levVision); const eatenG=new Set(), deadLev=new Set();
+  const gh=buildHash(goob,P.levVision,true), hh=buildHash(human,P.levVision,true); const eatenG=new Set(), deadLev=new Set();
   for(let li=0; li<lev.length; li++){ const l=lev[li]; l.age++; l.E-=P.levMeta;
     let bd=P.levVision*P.levVision, tx=null,ty=null, kind=null, ki=-1; const cx=l.x/P.levVision|0,cy=l.y/P.levVision|0;
     const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
@@ -281,17 +293,102 @@ function stepLev(){ if(!lev.length) return;
   lev=lev.filter((_,i)=>!deadLev.has(i)); if(eatenG.size) goob=goob.filter((_,i)=>!eatenG.has(i));
   if(lev.length>2){ const i=rnd()*lev.length|0; let j=rnd()*lev.length|0; if(j===i)j=(j+1)%lev.length; lev.splice(rnd()<0.5?i:j,1); } // >2 -> a 50/50 duel, loser dies
 }
-function immigrate(){
-  if(goob.length<45 && rnd()<0.6){ let n=0,t=0; while(n<3&&t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);n++;}} }
-  if(zap.length<8 && rnd()<0.3){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)){spawnZap(x,y,P.zStart);break;}} }
-  if(human.length<5 && rnd()<0.25){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)&&!isSettle(x,y)){spawnHuman(x,y,P.hStartE);break;}} }
+function stepUnder(){                                                                  // the underground: fallen creatures + Specters
+  const glowH=buildHash(glow,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set(), deadS=new Set();
+  const moveCreature=(c,species)=>{ c.uAge=(c.uAge||0)+1;
+    let dx,dy;
+    if(c.uAge>170){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
+    else { const [gi]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi>=0){ const g=glow[gi]; const l=Math.hypot(g.x-c.x,g.y-c.y)||1; dx=(g.x-c.x)/l; dy=(g.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } }
+    if(species==='human' && uZoneAt(c.x,c.y)===MINING && rnd()<0.14){ const dirs=[[1,0],[-1,0],[0,1],[0,-1]], dd=dirs[(rnd()*4)|0], nx=(c.x+dd[0])|0, ny=(c.y+dd[1])|0, j=cidx(nx,ny); if(uwall[j] && nx>0&&nx<GW-1&&ny>0&&ny<GH-1) uwall[j]=0; } // Humans mine new tunnels
+    const nx=c.x+dx*0.9, ny=c.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ c.x=nx; c.y=ny; }
+    if(ulava[cidx(c.x,c.y)]) return true;                                              // walked into lava -> dies
+    const [gi2,gd2]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi2>=0 && gd2<1.6){ const g=glow[gi2]; if(g.food>0.2){ if(c.E!=null)c.E=Math.min(4,c.E+g.food*1.5); if(c.ate!=null)c.ate++; g.food=0; } } // eat glowfruit
+    if(uwater[cidx(c.x,c.y)] && c.W!=null) c.W=1;
+    if(c.uAge>130){ for(const h of holes){ if((c.x-h.ux)**2+(c.y-h.uy)**2<1.4){ c.d='up'; c.x=h.sx; c.y=h.sy; c.uAge=0; break; } } }
+    return false;
+  };
+  goob.forEach((g,i)=>{ if(g.d==='under' && moveCreature(g,'goob')) deadG.add(i); });
+  zap.forEach((z,i)=>{ if(z.d==='under' && moveCreature(z,'zap')) deadZ.add(i); });
+  human.forEach((m,i)=>{ if(m.d==='under' && moveCreature(m,'human')) deadH.add(i); });
+  const prey=[];                                                                        // Specters hunt whatever fell down here
+  goob.forEach((g,i)=>{ if(g.d==='under'&&!deadG.has(i)) prey.push({a:'g',i,x:g.x,y:g.y}); });
+  human.forEach((m,i)=>{ if(m.d==='under'&&!deadH.has(i)) prey.push({a:'h',i,x:m.x,y:m.y}); });
+  zap.forEach((z,i)=>{ if(z.d==='under'&&!deadZ.has(i)) prey.push({a:'z',i,x:z.x,y:z.y}); });
+  const preyH=buildHash(prey,8);
+  spec.forEach((s,si)=>{ s.age++;
+    const [pi]=nearestIdx(s.x,s.y,prey,preyH,8);
+    let dx,dy; if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-s.x,p.y-s.y)||1; dx=(p.x-s.x)/l; dy=(p.y-s.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=s.x+dx, ny=s.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ s.x=nx; s.y=ny; }
+    if(ulava[cidx(s.x,s.y)]){ deadS.add(si); return; }
+    if(pi>=0){ const p=prey[pi]; if((p.x-s.x)**2+(p.y-s.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } } // caught it
+    if(s.age>6000) deadS.add(si);                                                       // Specters age out and never reproduce
+  });
+  for(const g of glow) g.food=Math.min(1,g.food+0.006);
+  if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
+  if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
+  if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
+  if(deadS.size) spec=spec.filter((_,i)=>!deadS.has(i));
 }
+const upCount=a=>{ let c=0; for(const o of a) if(o.d!=='under') c++; return c; };
+function immigrate(){
+  if(upCount(goob)<45 && rnd()<0.6){ let n=0,t=0; while(n<3&&t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);n++;}} }
+  if(upCount(zap)<8 && rnd()<0.3){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)){spawnZap(x,y,P.zStart);break;}} }
+  if(upCount(human)<5 && rnd()<0.25){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)&&!isSettle(x,y)){spawnHuman(x,y,P.hStartE);break;}} }
+}
+
+// ---------- THE UNDERGROUND (a second world reached through holes) ----------
+const MINING=0, LAVA=1, LAKE=2;
+const uwall=new Uint8Array(N), uzone=new Uint8Array(N), ulava=new Uint8Array(N), uwater=new Uint8Array(N);
+let glow=[], holes=[], spec=[], view='surface';
+const uWall=(x,y)=>uwall[cidx(x,y)]===1;
+const uZoneAt=(x,y)=>uzone[cidx(x,y)];
+function genUnderground(){
+  const nA=coarse(18), nB=coarse(26); let zS=new Float32Array(N*3), zT=new Float32Array(N*3);   // 3 zones by relaxation
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y), a=sample(nA,x,y), b=sample(nB,x,y);
+    let p0=clamp01(1-Math.abs(a-0.30)*2.4)+0.05, p1=clamp01((a-0.62)*3)+0.05, p2=clamp01((b-0.55)*3)+0.05;
+    const s=p0+p1+p2; zS[i*3]=p0/s; zS[i*3+1]=p1/s; zS[i*3+2]=p2/s; }
+  for(let k=0;k<6;k++){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); const sup=[0,0,0]; let cnt=0;
+    const add=j=>{sup[0]+=zS[j];sup[1]+=zS[j+1];sup[2]+=zS[j+2];cnt++;};
+    if(x>0)add(idx(x-1,y)*3); if(x<GW-1)add(idx(x+1,y)*3); if(y>0)add(idx(x,y-1)*3); if(y<GH-1)add(idx(x,y+1)*3);
+    const inv=cnt?1/cnt:0; let z=0; for(let l=0;l<3;l++){ const v=Math.sqrt(zS[i*3+l])*(0.3+sup[l]*inv); zT[i*3+l]=v; z+=v; } for(let l=0;l<3;l++) zT[i*3+l]/=z; }
+    const t=zS; zS=zT; zT=t; }
+  for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<3;l++){ if(zS[i*3+l]>m){m=zS[i*3+l];mi=l;} } uzone[i]=mi; }
+  uwall.fill(1);                                                                                 // carve tunnels (drunkard walks), rest is wall
+  for(let w=0;w<16;w++){ let x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); const len=200+((rnd()*240)|0);
+    for(let s=0;s<len;s++){ uwall[idx(x,y)]=0; if(rnd()<0.45 && x<GW-1) uwall[idx(x+1,y)]=0;
+      const dr=(rnd()*4)|0; x+= dr===0?1:dr===1?-1:0; y+= dr===2?1:dr===3?-1:0; x=Math.max(1,Math.min(GW-2,x)); y=Math.max(1,Math.min(GH-2,y)); } }
+  ulava.fill(0); uwater.fill(0);
+  for(let i=0;i<N;i++){ if(uwall[i])continue; if(uzone[i]===LAVA && rnd()<0.11) ulava[i]=1; else if(uzone[i]===LAKE && rnd()<0.14) uwater[i]=1; }
+  glow=[]; let gt=0; while(glow.length<75 && gt<5000){ gt++; const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0), i=idx(x,y); if(!uwall[i] && uzone[i]===LAKE && !uwater[i] && !ulava[i]) glow.push({x:x+0.5,y:y+0.5,food:0.3+rnd()*0.7}); }
+  holes=[]; const nH=2+((rnd()*2)|0); let ht=0;                                                   // 2-3 holes: surface pos <-> a tunnel cell below
+  while(holes.length<nH && ht<5000){ ht++; const sx=1+((rnd()*(GW-2))|0), sy=1+((rnd()*(GH-2))|0); if(inWater(sx,sy)||isSettle(sx,sy))continue;
+    let ux=-1,uy=-1; for(let t=0;t<300;t++){ const x=Math.max(1,Math.min(GW-2,(sx+(rnd()-0.5)*24)|0)), y=Math.max(1,Math.min(GH-2,(sy+(rnd()-0.5)*24)|0)); if(!uwall[idx(x,y)]){ux=x;uy=y;break;} }
+    if(ux<0)for(let i=0;i<N;i++){ if(!uwall[i]){ux=i%GW;uy=(i/GW)|0;break;} }
+    if(ux>=0){ uwall[idx(ux,uy)]=0; holes.push({sx:sx+0.5,sy:sy+0.5,ux:ux+0.5,uy:uy+0.5}); } }
+  spec=[]; let st=0; while(spec.length<6 && st<3000){ st++; const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0), i=idx(x,y); if(!uwall[i]&&!ulava[i]) spec.push({x:x+0.5,y:y+0.5,age:0}); } // Specters — cave predators, never reproduce
+}
+function drawUnder(){ const d=img.data;
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(uwall[i]){ d[o]=6;d[o+1]=6;d[o+2]=11; }                                                    // black wall
+    else if(ulava[i]){ d[o]=232;d[o+1]=112;d[o+2]=22; }                                           // orange lava
+    else if(uwater[i]){ d[o]=38;d[o+1]=92;d[o+2]=150; }                                           // underground water
+    else { const z=uzone[i]; if(z===MINING){d[o]=124;d[o+1]=124;d[o+2]=132;} else if(z===LAVA){d[o]=92;d[o+1]=62;d[o+2]=70;} else {d[o]=106;d[o+1]=78;d[o+2]=50;} } // grey / purple-brown / brown
+    d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+  for(const g of glow){ if(g.food<0.15)continue; const x=g.x*SC,y=g.y*SC,r=SC*(0.25+0.32*g.food); ctx.shadowColor='#c6ff7a'; ctx.shadowBlur=7; ctx.fillStyle=`rgba(190,255,130,${0.55+0.4*g.food})`; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } ctx.shadowBlur=0;
+  for(const h of holes){ const x=h.ux*SC,y=h.uy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.1,0,7);ctx.fill(); ctx.strokeStyle='#7fe0c0'; ctx.lineWidth=2; ctx.stroke(); }
+  for(const s of spec){ const x=s.x*SC,y=s.y*SC,r=SC*0.75;                                        // Specters — ghostly cave predators
+    ctx.shadowColor='#d9ccff'; ctx.shadowBlur=9; ctx.fillStyle='rgba(212,200,242,0.82)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.36, ey=y-r*0.04, er=r*0.24; ctx.fillStyle='#150a2e'; twoDots(x-ex,x+ex,ey,er); }
+}
+function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); } }
 
 // ---------- world setup ----------
 let day=0;
 function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
   settle.fill(0); settleList=[]; sdirty=true;
+  genUnderground();
   goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
@@ -312,7 +409,7 @@ function drawBushes(){ for(const b of bushes){ if(b.food<0.10)continue; const x=
 function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
 function drawCreatures(){
   // GOOBLETS — red, with big dumb googly eyes (they fade when starving/thirsty)
-  for(const g of goob){ const x=g.x*SC,y=g.y*SC, r=SC*0.6;
+  for(const g of goob){ if((g.d==='under')!==(view==='under')) continue; const x=g.x*SC,y=g.y*SC, r=SC*0.6;
     const cond=Math.min(1,Math.min(g.E/1.6,g.W/0.5));
     ctx.globalAlpha=0.5+0.5*cond;
     ctx.fillStyle='#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
@@ -322,7 +419,7 @@ function drawCreatures(){
   }
   ctx.globalAlpha=1;
   // ZAPPIES — electric blue, mean little eyes + angry brows
-  for(const z of zap){ const x=z.x*SC,y=z.y*SC, r=SC*0.62;
+  for(const z of zap){ if((z.d==='under')!==(view==='under')) continue; const x=z.x*SC,y=z.y*SC, r=SC*0.62;
     ctx.shadowColor='#6f9bff'; ctx.shadowBlur=5;
     ctx.fillStyle='rgba(59,108,255,0.95)'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
     ctx.shadowBlur=0;
@@ -334,14 +431,14 @@ function drawCreatures(){
     ctx.moveTo(x+ex+er*0.9,ey-er*1.15); ctx.lineTo(x+ex-er*0.7,ey-er*0.35); ctx.stroke();
   }
   // HUMANS — dark red, calm faces; build brown settlements and hide on them
-  for(const m of human){ const x=m.x*SC,y=m.y*SC, r=SC*0.62;
+  for(const m of human){ if((m.d==='under')!==(view==='under')) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
     ctx.fillStyle='#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
     const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
     ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
     ctx.fillStyle='#160a0a'; twoDots(x-ex,x+ex,ey,pr);
   }
-  // LEVIATHANS — big dark-blue ocean monsters
-  for(const l of lev){ const x=l.x*SC,y=l.y*SC, r=SC*1.05;
+  // LEVIATHANS — big dark-blue ocean monsters (surface only)
+  for(const l of lev){ if(view==='under') break; const x=l.x*SC,y=l.y*SC, r=SC*1.05;
     ctx.fillStyle='#0b2a63'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
     const ex=r*0.34, ey=y-r*0.1, er=r*0.19, pr=er*0.6;
     ctx.fillStyle='#eaf2ff'; twoDots(x-ex,x+ex,ey,er);
@@ -359,7 +456,7 @@ function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if
 // ---------- loop + interaction ----------
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
-  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); collapseSettlements(); immigrate();
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepUnder(); collapseSettlements(); immigrate();
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
   if(sdirty){ computeSDist(); sdirty=false; }
   if(frame%60===0) driftMoist(0.04);
@@ -367,12 +464,14 @@ function simStep(){ frame++; day++;
 }
 function loop(){
   if(playing){ acc+=simSpeed; let steps=Math.floor(acc); acc-=steps; if(steps>8)steps=8; for(let s=0;s<steps;s++) simStep(); }
-  drawTerrain(); drawBushes(); drawCreatures();
-  document.getElementById('ng').textContent=goob.length;
-  document.getElementById('nz').textContent=zap.length;
-  document.getElementById('nh').textContent=human.length;
+  if(view==='under'){ drawUnder(); } else { drawTerrain(); drawBushes(); drawHolesSurface(); }
+  drawCreatures();
+  document.getElementById('ng').textContent=upCount(goob);
+  document.getElementById('nz').textContent=upCount(zap);
+  document.getElementById('nh').textContent=upCount(human);
   document.getElementById('nl').textContent=lev.length;
   document.getElementById('ns').textContent=settleList.length;
+  document.getElementById('nspec').textContent=spec.length;
   document.getElementById('nb').textContent=bushes.filter(b=>b.food>0.35).length;
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
@@ -401,5 +500,6 @@ document.querySelectorAll('.tools [data-tool]').forEach(b=>b.onclick=()=>{ tool=
 document.getElementById('pause').onclick=function(){ playing=!playing; this.textContent=playing?'⏸ Pause':'▶ Play'; };
 document.getElementById('reset').onclick=newWorld;
 document.getElementById('speed').oninput=function(){ simSpeed=+this.value; document.getElementById('speedval').textContent=simSpeed+'×'; };
+document.getElementById('viewbtn').onclick=function(){ view=view==='under'?'surface':'under'; this.textContent=view==='under'?'☀️ Back to Surface':'🕳️ Go Underground'; };
 newWorld(); loop();
 </script></body></html>
