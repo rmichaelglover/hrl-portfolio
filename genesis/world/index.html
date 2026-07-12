@@ -144,7 +144,9 @@ the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with 
 servants</b> shuttle wheat from the farm to feed him while he rules from inside his walls.
 <br><br>
 <b>The four Monarchs.</b> This world answers to four great <b>Monarchs</b>: the <b style="color:#2fd0b8">🌊 Sea Monarch</b> — a sea
-dragon whose <b>folk</b> raid Gooblets at the shore (but the folk must dodge the Leviathans, who leave the Sea Monarch alone); the
+dragon whose <b>folk</b> raid Gooblets at the shore (the folk must dodge the Leviathans, who leave the Sea Monarch alone — but every
+<b>1000 days</b> one Leviathan <b>challenges</b> the Sea Dragon for the throne in a 50/50 duel to the death; if the Leviathan wins it
+becomes the new Sea King, a <b>different colour</b>, and grows to full size over 500 days); the
 <b style="color:#4fc06a">🐉 Dragon Monarch</b> of the sky islands; the <b style="color:#ffd23a">👑 Human Monarch</b>, the crowned
 King; and the <b style="color:#ff8a3e">🔥 Fire Monarch</b>, the Giant of the lava pool.
 <br><br>
@@ -238,7 +240,7 @@ let goob=[], zap=[], human=[];
 function spawnGoob(x,y,E,W){ if(goob.length<P.gCap) goob.push({x,y,E,W:W==null?P.gStartW:W,age:0,ate:0}); }
 function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0,ate:0}); }
 function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false}); }
-let lev=[], folk=[], seaMonarch=null;
+let lev=[], folk=[], seaMonarch=null, lastSeaChallenge=0;
 function spawnLev(x,y,E){ if(lev.length<P.levCap) lev.push({x,y,E,age:0,ate:0}); }
 function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements + stone walls block
 function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }              // humans on foot: water + their own walls block
@@ -356,6 +358,11 @@ function stepLev(){ if(!lev.length) return;
   if(lev.length>2){ const i=rnd()*lev.length|0; let j=rnd()*lev.length|0; if(j===i)j=(j+1)%lev.length; lev.splice(rnd()<0.5?i:j,1); } // >2 -> a 50/50 duel, loser dies
 }
 function stepSea(){                                                                    // the Sea Monarch (a sea dragon) + its folk
+  if(day-lastSeaChallenge>=1000 && seaMonarch && seaMonarch.alive && lev.length>0){    // every 1000 days a Leviathan challenges for the throne of Sea King
+    lastSeaChallenge=day; const ci=(rnd()*lev.length)|0;
+    if(rnd()<0.5){ lev.splice(ci,1); }                                                  // the Sea King defends -> challenger dies
+    else { const l=lev[ci]; seaMonarch={x:l.x,y:l.y,alive:true,fromLev:true,bornDay:day}; lev.splice(ci,1); } // the Leviathan wins -> new Sea King (small, grows up over 500 days)
+  }
   if(seaMonarch && seaMonarch.alive){
     const a=rnd()*6.283, nx=seaMonarch.x+Math.cos(a)*0.9, ny=seaMonarch.y+Math.sin(a)*0.9; if(inWater(nx,ny)){ seaMonarch.x=nx; seaMonarch.y=ny; }
     if(folk.length<26 && rnd()<0.05){ const w=placeLevWater(seaMonarch.x,seaMonarch.y); if(w) folk.push({x:w.x,y:w.y,E:1.6,age:0}); } // the monarch summons its folk
@@ -612,7 +619,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
   p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
   p=0;tr=0; while(p<3&&tr<8000){tr++;const w=placeLevWater(null,null);if(w){spawnLev(w.x,w.y,P.levStartE);p++;}else break;}
-  folk=[]; { const w=placeLevWater(null,null); seaMonarch=w?{x:w.x,y:w.y,alive:true}:null; }                    // the Sea Monarch rises from the sea
+  folk=[]; lastSeaChallenge=0; { const w=placeLevWater(null,null); seaMonarch=w?{x:w.x,y:w.y,alive:true,fromLev:false,bornDay:-9999}:null; } // the Sea Monarch rises from the sea (full-grown sea dragon)
 }
 
 // ---------- rendering ----------
@@ -669,7 +676,7 @@ function drawCreatures(){
   }
   if(view==='surface'){                                                                // FOLK + the SEA MONARCH (sea dragon)
     for(const f of folk){ const x=f.x*SC,y=f.y*SC,r=SC*0.55; ctx.fillStyle='#1fb0a0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.36,ey=y-r*0.05,er=r*0.22; ctx.fillStyle='#06201c'; twoDots(x-ex,x+ex,ey,er); }
-    if(seaMonarch && seaMonarch.alive){ const x=seaMonarch.x*SC,y=seaMonarch.y*SC,r=SC*1.95; ctx.shadowColor='#4fe0c0'; ctx.shadowBlur=18; ctx.fillStyle='#118f7a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.34,ey=y-r*0.1,er=r*0.15; ctx.shadowColor='#b6fff0'; ctx.shadowBlur=10; ctx.fillStyle='#d4fff0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+    if(seaMonarch && seaMonarch.alive){ const grown=seaMonarch.fromLev?Math.min(1,(day-seaMonarch.bornDay)/500):1; const r=SC*(seaMonarch.fromLev?1.05+0.9*grown:1.95); const x=seaMonarch.x*SC,y=seaMonarch.y*SC; const col=seaMonarch.fromLev?'#6a3ab0':'#118f7a', glow=seaMonarch.fromLev?'#b78aff':'#4fe0c0'; ctx.shadowColor=glow; ctx.shadowBlur=18; ctx.fillStyle=col; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.34,ey=y-r*0.1,er=r*0.15; ctx.shadowColor='#fff'; ctx.shadowBlur=10; ctx.fillStyle='#d4fff0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
   }
 }
 const gcv=document.getElementById('graph'), ggx=gcv.getContext('2d'); const hist=[];
