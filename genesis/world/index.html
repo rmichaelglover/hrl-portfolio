@@ -558,11 +558,11 @@ function drawCreatures(){
   // HUMANS — dark red, calm faces; build brown settlements and hide on them
   for(const m of human){ if(lyr(m)!==view) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
     if(m.boat){ ctx.fillStyle='#6b4420'; ctx.beginPath(); ctx.moveTo(x-r*1.15,y+r*0.15); ctx.lineTo(x+r*1.15,y+r*0.15); ctx.lineTo(x+r*0.7,y+r*0.95); ctx.lineTo(x-r*0.7,y+r*0.95); ctx.closePath(); ctx.fill(); } // fishing boat
-    ctx.fillStyle='#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    ctx.fillStyle=m.king?'#ffd23a':'#8b1a1a'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); // the King's body turns yellow
     const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
     ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);
     ctx.fillStyle='#160a0a'; twoDots(x-ex,x+ex,ey,pr);
-    if(m.king){ ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.15); ctx.lineTo(x,y-r*0.78); ctx.lineTo(x+r*0.3,y-r*1.15); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the King
+    if(m.king){ ctx.fillStyle='#ffb000'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.15); ctx.lineTo(x,y-r*0.78); ctx.lineTo(x+r*0.3,y-r*1.15); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the King
   }
   // LEVIATHANS — big dark-blue ocean monsters (surface only)
   for(const l of lev){ if(view!=='surface') break; const x=l.x*SC,y=l.y*SC, r=SC*1.05;
