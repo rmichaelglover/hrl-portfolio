@@ -137,7 +137,8 @@ And back on the surface there's a <b style="color:#b060e0">purple portal square<
 it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on it is whisked <b>up to the Sky Realm</b> (and can step on
 the glowing sky portal to come back down). Some islands are darker <b>forest islands</b> where fluffy <b>🐑 Woolies</b> graze on
 <b style="color:#e83a3a">red fruit</b>, while <b style="color:#4fc06a">🐉 Dragonlings</b> — tiny dragons — fly across the whole sky
-hunting them (drop your own with the 🐑 and 🐉 tools).
+hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that catches a Wooly carries it home to the <b>Dragon King</b>
+to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne.
 <br><br>
 <b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
 the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
@@ -439,9 +440,10 @@ function stepUnder(){                                                           
   if(deadF.size) fire=fire.filter((_,i)=>!deadF.has(i));
 }
 function stepSky(){
+  if(day-lastDragonCheck>=1000){ lastDragonCheck=day; if((!dragon||!dragon.alive) && dragonling.length>0){ const d0=dragonling[0]; dragon={x:d0.x,y:d0.y,alive:true}; dragonling.splice(0,1); } } // no Dragon King -> a dragonling rises to the throne
   if(dragon && dragon.alive){                                                           // 10 humans on the dragon island -> a 50/50 battle
     const near=[]; human.forEach((m,i)=>{ if(m.d==='sky' && (m.x-dragon.x)**2+(m.y-dragon.y)**2<120) near.push(i); });
-    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!kingExists){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants
+    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!human.some(h=>h.king)){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants (never more than one King)
       else { const dead=new Set(near.slice(0,10)); human=human.filter((_,i)=>!dead.has(i)); } }                          // dragon wins -> that group dies
   }
   const angelH=buildHash(angels,8); const deadG=new Set(),deadZ=new Set(),deadH=new Set();
@@ -479,11 +481,13 @@ function stepSky(){
   });
   if(deadW.size) wooly=wooly.filter((_,i)=>!deadW.has(i));
   const wH=buildHash(wooly,8); const eatenW=new Set(), deadDL=new Set();
-  dragonling.forEach((dg,di)=>{ dg.age++;
-    const [wi]=nearestIdx(dg.x,dg.y,wooly,wH,8); let dx,dy;
-    if(wi>=0){ const w=wooly[wi]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
-    const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }  // dragonlings FLY anywhere (not blocked by void)
-    if(wi>=0 && !eatenW.has(wi)){ const w=wooly[wi]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ eatenW.add(wi); } }
+  dragonling.forEach((dg,di)=>{ dg.age++; let dx,dy;
+    if(dg.carry && dragon && dragon.alive){ const l=Math.hypot(dragon.x-dg.x,dragon.y-dg.y)||1; dx=(dragon.x-dg.x)/l; dy=(dragon.y-dg.y)/l; } // carry the wooly to the Dragon King
+    else if(dg.carry){ dg.carry=false; const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                     // no Dragon King -> eat it, no baby
+    else { const [wi]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi>=0){ const w=wooly[wi]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // hunt a wooly
+    const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }                    // dragonlings FLY anywhere
+    if(dg.carry){ if(dragon && dragon.alive && (dragon.x-dg.x)**2+(dragon.y-dg.y)**2<9){ dg.carry=false; if(dragonling.length<120) dragonling.push({x:dragon.x+(rnd()-0.5)*3,y:dragon.y+(rnd()-0.5)*3,age:0}); } } // delivered -> a new dragonling
+    else { const [wi2]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi2>=0 && !eatenW.has(wi2)){ const w=wooly[wi2]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ eatenW.add(wi2); dg.carry=true; } } } // caught a wooly -> carry it home
     if(dg.age>4500) deadDL.add(di);
   });
   if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
@@ -567,10 +571,10 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N);
 let angels=[], dragon=null, kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
-let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[];
+let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0;
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); angels=[]; dragon=null; kingExists=false; redfruit=[]; wooly=[]; dragonling=[];
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); angels=[]; dragon=null; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
     for(let dy=-R-1;dy<=R+1;dy++)for(let dx=-R-1;dx<=R+1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R+(rnd()*7-3)) sky[idx(x,y)]=1; } }
@@ -605,7 +609,7 @@ function drawSky(){ const d=img.data;
   if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
   for(const rf of redfruit){ if(rf.food<0.15)continue; const x=rf.x*SC,y=rf.y*SC,r=SC*0.3; ctx.fillStyle='#e83a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // red fruit
   for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*0.55; ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er); } // fluffy woolies
-  for(const d of dragonling){ const x=d.x*SC,y=d.y*SC,r=SC*0.6; ctx.shadowColor='#5fe08a'; ctx.shadowBlur=6; ctx.fillStyle='#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); } // tiny dragonlings
+  for(const d of dragonling){ const x=d.x*SC,y=d.y*SC,r=SC*0.6; ctx.shadowColor='#5fe08a'; ctx.shadowBlur=6; ctx.fillStyle='#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings (carrying a wooly = white blob)
 }
 
 // ---------- world setup ----------
