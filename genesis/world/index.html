@@ -130,7 +130,10 @@ hook a Leviathan.
 (drop creatures &amp; 👼 angels up here). The <b>angels</b> trade <b>1 💎 treasure for food</b>, so a starving creature can run to one
 and eat. On the <b>dark-red island</b> lives a <b style="color:#4fc06a">green dragon</b>: gather <b>10 Humans</b> on its island and
 they'll do battle — a <b>50/50</b> fight. Win and the Humans take a <b>👑 crown</b> — one becomes <b>King</b>, and the others rally to
-<b>protect</b> him. Lose, and that whole group is gone.
+<b>protect</b> him. Lose, and that whole group is gone. The islands are joined by <b>bridges</b> so creatures can cross between them.
+And back on the surface there's a <b style="color:#b060e0">purple portal square</b>: have your Humans carry <b>3 treasures</b> to it and
+it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on it is whisked <b>up to the Sky Realm</b> (and can step on
+the glowing sky portal to come back down).
 <br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
@@ -244,6 +247,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=bui
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     clampMove(g,g.x+dx*P.gSpeed,g.y+dy*P.gSpeed);
     { if(g.fallCd>0) g.fallCd--; else { let fell=false; for(const h of holes){ if((g.x-h.sx)**2+(g.y-h.sy)**2<1.2){ g.d='under'; g.x=h.ux; g.y=h.uy; g.uAge=0; fell=true; break; } } if(fell){ next.push(g); continue; } } } // fell down a hole
+    if(!(g.fallCd>0) && portalCharge>=3 && portalSX>=0 && (g.x-portalSX)**2+(g.y-portalSY)**2<1.6){ g.d='sky'; g.x=portalUX; g.y=portalUY; g.fallCd=40; next.push(g); continue; } // through the portal to the sky
     if(wdAt(g.x,g.y)<=1) g.W=Math.min(1,g.W+0.5);                                    // drink at water's edge
     const [bi2,bd2]=nearestIdx(g.x,g.y,bushes,bh,6);
     if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ g.E+=b.food*P.gEatGain; b.food=0; g.ate++; } } // eat a whole ripe bush
@@ -260,6 +264,7 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=b
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
     { if(z.fallCd>0) z.fallCd--; else { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } } // fell down a hole
+    if(!(z.fallCd>0) && portalCharge>=3 && portalSX>=0 && (z.x-portalSX)**2+(z.y-portalSY)**2<1.6){ z.d='sky'; z.x=portalUX; z.y=portalUY; z.fallCd=40; next.push(z); continue; } // through the portal to the sky
     if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
     z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge) continue;
     if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
@@ -282,6 +287,7 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
     if(m.boat) clampMoveBoat(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed); else clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
     { if(m.fallCd>0) m.fallCd--; else { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } } // fell down a hole
+    if(!(m.fallCd>0) && portalCharge>=3 && portalSX>=0 && (m.x-portalSX)**2+(m.y-portalSY)**2<1.6){ m.d='sky'; m.x=portalUX; m.y=portalUY; m.fallCd=40; next.push(m); continue; } // through the portal to the sky
     if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);                                       // drink at the shore
     if(biomeAt(m.x,m.y)===FOREST || fdAt(m.x,m.y)<=1) m.wood+=P.hWoodRate;             // chop wood at the forest
     const [bi2,bd2]=nearestIdx(m.x,m.y,bushes,bh,6);
@@ -291,6 +297,7 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     if(m.stone>0 && !m.boat && rnd()<0.25 && swallCount<300){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && !settle[ci] && !swall[ci]){ swall[ci]=1; swallCount++; m.stone--; } } // lay a stone wall for safety
     if(!m.boat && treasury>=5 && rnd()<0.03){ treasury-=5; m.boat=true; }               // buy a boat with treasury
     if(m.boat && inWater(m.x,m.y)){ m.E=Math.min(4,m.E+0.05); if(rnd()<0.02) treasury++; } // out fishing
+    if(portalSX>=0 && portalCharge<3 && treasury>0 && (m.x-portalSX)**2+(m.y-portalSY)**2<2.5){ treasury--; portalCharge++; } // bring treasure to charge the sky portal
     if(m.E<=0||m.W<=0||m.age>P.hMaxAge) continue;
     if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
     next.push(m);
@@ -386,6 +393,7 @@ function stepSky(){
     const nx=c.x+dx*0.85, ny=c.y+dy*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&skyLand(nx,ny)){ c.x=nx; c.y=ny; }
     else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283,mx=c.x+Math.cos(a)*0.85,my=c.y+Math.sin(a)*0.85; if(mx>=0&&mx<GW&&my>=0&&my<GH&&skyLand(mx,my)){ c.x=mx; c.y=my; break; } } } // stay on the islands
     const [ai2,ad2]=nearestIdx(c.x,c.y,angels,angelH,8); if(ai2>=0 && ad2<2.4 && treasury>0 && c.E!=null && c.E<2.5){ treasury--; c.E=Math.min(4,c.E+2); } // trade 1 treasure for food
+    if(c.fallCd>0) c.fallCd--; else if(portalUX>=0 && (c.x-portalUX)**2+(c.y-portalUY)**2<1.6){ c.d='up'; c.x=portalSX; c.y=portalSY; c.fallCd=40; return; } // step on the sky portal -> back to the surface (after a cooldown so arrivals don't bounce)
     if(c.E!=null && c.E<=0) dead.add(i);
   };
   goob.forEach((g,i)=>{ if(g.d==='sky') move(g,'goob',i,deadG); });
@@ -458,11 +466,13 @@ function drawUnder(){ const d=img.data;
     ctx.shadowColor='#ff5a1e'; ctx.shadowBlur=22; ctx.fillStyle='#0a0608'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.34, ey=y-r*0.12, er=r*0.13; ctx.shadowColor='#ffb020'; ctx.shadowBlur=14; ctx.fillStyle='#ff5a1e'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
 }
-function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); } }
+function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); }
+  if(portalSX>=0){ const x=portalSX*SC,y=portalSY*SC,ss=SC*1.7; ctx.fillStyle=portalCharge>=3?'#ffe23a':'#9b30d0'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // purple until charged, then yellow -> to the sky
+}
 
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N);
-let angels=[], dragon=null, kingExists=false;
+let angels=[], dragon=null, kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
   sky.fill(0); skyRed.fill(0); angels=[]; dragon=null; kingExists=false;
@@ -472,7 +482,13 @@ function genSky(){
   const dc=centers[(rnd()*centers.length)|0], R=dc.R+1;                                  // one island is the dragon's — dark red
   for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=dc.cx+dx,y=dc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyRed[i]=1; } }
   dragon={x:dc.cx+0.5,y:dc.cy+0.5,alive:true};
+  for(let a=0;a<centers.length;a++){ let bn=-1,bd=1e9; for(let b=0;b<centers.length;b++){ if(a===b)continue; const dd=(centers[a].cx-centers[b].cx)**2+(centers[a].cy-centers[b].cy)**2; if(dd<bd){bd=dd;bn=b;} } // bridge each island to its nearest neighbour
+    if(bn>=0){ const x=centers[a].cx,y=centers[a].cy,tx=centers[bn].cx,ty=centers[bn].cy,st=Math.max(1,Math.max(Math.abs(tx-x),Math.abs(ty-y)));
+      for(let s=0;s<=st;s++){ const px=Math.round(x+(tx-x)*s/st), py=Math.round(y+(ty-y)*s/st); if(px>0&&px<GW-1&&py>0&&py<GH-1){ sky[idx(px,py)]=1; if(py+1<GH-1) sky[idx(px,py+1)]=1; } } } }
   let at=0; while(angels.length<5 && at<4000){ at++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]) angels.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); }
+  portalCharge=0; portalUX=-1; portalSX=-1;                                              // the two ends of the sky portal
+  for(let t=0;t<4000;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]){ portalUX=(i%GW)+0.5; portalUY=((i/GW)|0)+0.5; break; } }
+  for(let t=0;t<4000;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(!inWater(x,y)&&!isSettle(x,y)&&!holes.some(h=>Math.abs(h.sx-x)<3&&Math.abs(h.sy-y)<3)){ portalSX=x+0.5; portalSY=y+0.5; break; } }
 }
 function drawSky(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
@@ -487,6 +503,7 @@ function drawSky(){ const d=img.data;
   if(dragon && dragon.alive){ const x=dragon.x*SC,y=dragon.y*SC,r=SC*3.6;                // the GREEN DRAGON
     ctx.shadowColor='#5fe08a'; ctx.shadowBlur=20; ctx.fillStyle='#1f7a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#eaff6a'; ctx.shadowBlur=12; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
 }
 
 // ---------- world setup ----------
