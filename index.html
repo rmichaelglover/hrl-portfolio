@@ -312,12 +312,13 @@ function parseMoves(t){
   let s=t.replace(/\[\w+\s+"[^"]*"\]/g," "); let prev;   // strip header tags only (keep {comments} for [%clk])
   do{prev=s;s=s.replace(/\([^()]*\)/g," ");}while(s!==prev);   // strip variations (may nest; keep mainline comments)
   // ONE tokenizer: a {comment} is matched as a whole FIRST, so its prose is never re-scanned for moves.
-  const re=/(\{[^}]*\})|([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=?[QRBN])?|[a-h]x?[a-h][1-8](?:=?[QRBN])?)([+#]?)/g;
+  const re=/(\{[^}]*\})|(1-0|0-1|1\/2-1\/2|\*)|([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=?[QRBN])?|[a-h]x?[a-h][1-8](?:=?[QRBN])?)([+#]?)/g;
   const out=[];let m;
   while((m=re.exec(s))){
     if(m[1]){ const c=/%clk\s+([\d:]+)/.exec(m[1]); if(c&&out.length) out[out.length-1].clk=c[1]; continue; } // comment: clk -> previous move
-    const san=m[2]; if(!san||/^[0-9.]+$/.test(san))continue;
-    out.push({san:san.replace(/0/g,"O"),suffix:m[3]||"",clk:null});
+    if(m[2]) break;                                                     // first game-result token (1-0 etc.) ends the game — ignore any further games pasted
+    const san=m[3]; if(!san||/^[0-9.]+$/.test(san))continue;
+    out.push({san:san.replace(/0/g,"O"),suffix:m[4]||"",clk:null});
   }
   return out;
 }
@@ -441,7 +442,7 @@ const NARR = {
 };
 function narrate(i){
   if(i===0) return "A new game. You are the Woodland Agents 🌲 — daring and creativity over the engine's book.";
-  const authored = NARR[gameKey] && NARR[gameKey][i];
+  const authored = !branched && NARR[gameKey] && NARR[gameKey][i];   // once you branch with your own OTB moves, drop the scripted prose
   if(authored) return authored;
   const fr=frames[i-1],note=frames[i].note,mv=moves[i-1],mover=note.moverId,t=fr.pieces[mover].type,hero=game.hero;
   let s;
@@ -887,7 +888,7 @@ function buildFrames(mv){
   return fr;
 }
 /* ===================== over-the-board play (perft-validated legal move generation) ===================== */
-let otbOn=false, otbSel=null, otbTargets=[], otbPending=null;
+let otbOn=false, otbSel=null, otbTargets=[], otbPending=null, branched=false;
 const _opp=c=>c==="w"?"b":"w";
 function castleRight(st,side){const c=side[0],ks=side[1]==="K";const kh=(c==="w"?"e1":"e8"),rh=ks?(c==="w"?"h1":"h8"):(c==="w"?"a1":"a8");
   return st.placement[kh]===c+"Ke"&&st.placement[rh]===c+"R"+(ks?"h":"a");}
@@ -936,24 +937,26 @@ function makeOtbMove(from,to,promo){
   frames=frames.slice(0,cur+1);moves=moves.slice(0,cur);
   frames.push({placement:{...st.placement},pieces:JSON.parse(JSON.stringify(st.pieces)),note});
   moves.push({san,suffix,clk:null});
-  cur=frames.length-1;_rhythm=null;_rhythmKey=null;
+  cur=frames.length-1;_rhythm=null;_rhythmKey=null;branched=true;
   document.getElementById("moves").dataset.built="";otbSel=null;otbTargets=[];render();
   if(suffix==="#")setTimeout(()=>alert("Checkmate — "+(mColor==="w"?"White":"Black")+" wins! 🏆"),60);
   else if(!hasLegal(st))setTimeout(()=>alert("Stalemate — it's a draw."),60);}
 function showPromo(from,to){otbPending={from,to};document.getElementById("promoPick").classList.add("on");}
 function load(key){
+  if(typeof stop==="function") stop();                                   // never leave autoplay running across a load
   gameKey=key; game=GAMES[key]; keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
   frames=buildFrames(mv); moves=mv.slice(0,frames.length-1);
   g_increment=parseIncrement(game.tc); _rhythm=null; _rhythmKey=null;     // rebuild rhythm for the new game
+  branched=false; otbSel=null; otbTargets=[];                            // fresh game: clear OTB selection + branch flag
   cur=0; document.getElementById("moves").dataset.built=""; render();
 }
 function loadCustom(text, side){
   const h=parseHeaders(text), mv=parseMoves(text);
   if(!mv.length){ alert("No moves found. Paste a standard PGN (SAN moves; headers optional)."); return; }
+  if(buildFrames(mv).length<2){ alert("Couldn't read the moves — first move '"+(mv[0]&&mv[0].san)+"' failed. Is this standard SAN?"); return; } // validate BEFORE touching the UI
   GAMES._loaded={label:h.Opening||h.Event||"Loaded game", white:h.White||"White", black:h.Black||"Black",
                  hero:side, result:h.Result||"?", tc:h.TimeControl||"", pgn:text};
   load("_loaded");
-  if(frames.length<2){ alert("Couldn't read the moves — first move '"+(mv[0]&&mv[0].san)+"' failed. Is this standard SAN?"); return; }
   const sel=document.getElementById("selGame");
   if(!sel.querySelector('option[value="_loaded"]')){const o=document.createElement("option");o.value="_loaded";sel.appendChild(o);}
   sel.querySelector('option[value="_loaded"]').textContent="★ "+GAMES._loaded.label; sel.value="_loaded";
@@ -1068,7 +1071,10 @@ playBtn.onclick=()=>{ if(timer||playTimers.length){stop();return;}            //
   if(metroOn) (r.clicks||[]).forEach(c=>{ if(c.beat<base-1e-6)return;          // metronome (opt-in): meter made audible
     playTimers.push(setTimeout(()=>click(c.strong), Math.max(0,(c.beat-base)*spb*1000))); });
   playTimers.push(setTimeout(stop, Math.max(0,(onsetOf(N)+beatOf(N)-base)*spb*1000)+500)); };
-document.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){stop();step(1);}else if(e.key==="ArrowLeft"){stop();step(-1);}
+document.addEventListener("keydown",e=>{
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable)return;   // don't hijack typing in the PGN box / selects
+  if(document.getElementById("promoPick").classList.contains("on"))return;                    // ignore nav while the promotion modal is open
+  if(e.key==="ArrowRight"){stop();step(1);}else if(e.key==="ArrowLeft"){stop();step(-1);}
   else if(e.key==="Home"){stop();go(0);}else if(e.key==="End"){stop();go(frames.length-1);}
   else if(e.key===" "){e.preventDefault();playBtn.click();}});
 
@@ -1106,6 +1112,7 @@ boardEl.addEventListener("click",e=>{ if(!otbOn)return; const sd=e.target.closes
 });
 document.getElementById("btnOtb").onclick=function(){ stop(); otbOn=!otbOn; this.classList.toggle("on",otbOn);
   otbSel=null; otbTargets=[]; document.getElementById("otbHint").style.display=otbOn?"block":"none"; render(); };
+document.getElementById("promoPick").onclick=e=>{ if(e.target.id==="promoPick"){ e.currentTarget.classList.remove("on"); otbPending=null; } }; // click the backdrop to cancel
 document.querySelectorAll("#promoPick button").forEach(b=>b.onclick=()=>{ document.getElementById("promoPick").classList.remove("on");
   if(otbPending){ makeOtbMove(otbPending.from,otbPending.to,b.dataset.p); otbPending=null; } });
 document.getElementById("btnExport").onclick=function(){const p=document.getElementById("exportPanel");p.style.display=(p.style.display==="block")?"none":"block";this.classList.toggle("on",p.style.display==="block");};
