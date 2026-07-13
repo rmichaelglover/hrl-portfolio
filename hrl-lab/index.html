@@ -34,7 +34,7 @@ footer a{color:var(--cy);text-decoration:none}
 <div class="eyebrow">Relaxation Labeling · one engine, live in your browser</div>
 <h1>The HRL Lab</h1>
 <p class="tag">The <b>generic</b> HRL engine — a respected prior, a <b>noise / null-reject</b> label, and
- <b>sparse higher-order factors</b> — running right here on three problems at once. Same core each time; only the
+ <b>sparse higher-order factors</b> — running right here on four problems at once. Same core each time; only the
  factors and prior change.</p>
 <div class="crumbs"><a href="../">← the portfolio</a> <a href="../genesis/">Project Genesis</a>
  <a href="https://github.com/mannyglover/relaxation-labeling">the engine ↗</a></div>
@@ -80,7 +80,19 @@ footer a{color:var(--cy);text-decoration:none}
    <span id="graphStat" class="pill" style="color:var(--cy);border-color:#1e4a5e">2 seeds → 6 nodes</span></div>
 </div>
 
-<footer>The same engine powers all three — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>.
+<!-- ============ 4. MNIST ============ -->
+<div class="card">
+  <h2><span class="k">order-2 · few-shot on real data</span>🔢 Handwritten digits by relaxation</h2>
+  <p>Forty <b>real 8×8 handwritten digits</b> (scikit-learn's digits set — MNIST's little cousin — bundled so the page stays
+   offline). A pixel-similarity <b>k-NN graph</b> supplies the factors; just <b>one seed per class</b> is labelled. The field
+   relaxes those labels across the graph — <i>five seeds paint forty digits</i>. Each frame's colour is the label it relaxed to.</p>
+  <canvas id="mnist" height="300"></canvas>
+  <div class="legend" id="mnistLegend"></div>
+  <div class="row"><button id="mnistNew">🎲 new random seeds</button>
+   <span id="mnistStat" class="pill" style="color:var(--gd);border-color:#5e4a1e">…</span></div>
+</div>
+
+<footer>The same engine powers all four — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>.
  Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
 </div>
 <script>
@@ -201,13 +213,89 @@ function graphDraw(){const d=Math.min(2,devicePixelRatio||1),W=gCv.clientWidth,H
 document.getElementById('graphReset').onclick=graphInit;
 graphInit();
 
+// ---------- 4. MNIST: real 8x8 handwritten digits (sklearn), few-shot label propagation ----------
+const DIGIT_CLASSES=[0,1,3,4,7];
+const DIGIT_DATA=[
+  ["005d910000dfaf5003f20b8004c008800580098004b01c7002e5ac00006da000",0,0],
+  ["0019fb0000bg8e6002ga099001g4088004g4088001g51b3000ccaa00001ad300",0,0],
+  ["003db70000bggg2004g91e2004g00g2000g10c8000f90d60009e9e10002cd400",0,0],
+  ["00aeb30004gd6e1004g20b7008g00a5008g00e4008g01g1004g1bf0000bgc300",0,0],
+  ["006ea20000ffdf3002ga0d9001g50c5000g30d6001f56d1000gbea00007gb100",0,0],
+  ["002fd30000afbf0003g60a0004g8038008e3048003f1037000eb6e50004cf600",0,0],
+  ["001fd100007ge80008c92d20079106600590039000f208c0009fdg60000de800",0,0],
+  ["002ef50000aggf1003gaag4005g00e6005g60c7001fd4d6000bggf00002bd400",0,0],
+  ["000cd500000bg900003fg60007fgg200001gg300001gg600001gg600000bga00",1,1],
+  ["0000ed100005gg20000egc0001aggc0003ceg9000005gf000004ge000001dg10",1,1],
+  ["0002gg200004gg20014cgc0007gggc00003age000008gc000006gg200002cf40",1,1],
+  ["0000c5000002gc00001cgb0002cgga0006b5f6000001g9000002gb000003g800",1,1],
+  ["0001b9000007gd00004eg9000agbg8000003g6000003g8000005ga000002e600",1,1],
+  ["0000cd100008gf2000aggc0004gggd000474g6000001g8000001g8000000cc00",1,1],
+  ["0000e700000dg90000agg70007g8g2000156g6000004g6000002g6000000cb00",1,1],
+  ["0001ed100001gg3005bfgg0004fggf000008g700000ag3000008g6000002df20",1,1],
+  ["007fd10008d6f400021dd000002fb1000001cc1000001a8000845e90007dd900",2,3],
+  ["029fe93004d89g800006ef30000be2000002fb0000002f400156dg6002ccdb00",2,3],
+  ["018cfe4003b88cc000002d700002fc100000d50000009d000078ef0000efb200",2,3],
+  ["009gd6000065gg000008f5000005e30000009f2000000bc00048bfc000bec800",2,3],
+  ["01afb1000388bc000005ef10000bf2000004f2000000ca000034ag1000dgfa00",2,3],
+  ["00afe4000046dg200003g9000001g6000000ac0000001g4001956g7000ecfb20",2,3],
+  ["00ege600007agg300005gg100002g8000000cd1000004g700059eg7000dgga10",2,3],
+  ["03gge7100199fg400007gc100009g2000003f70000009f0001aagg3002dgc500",2,3],
+  ["0001b00000078000001d6220007f098005ga0g6004fgdg100003fa000002g400",3,4],
+  ["0008f100001ed11000af3fb007g71g8009gdeg5001afge000001ga00000af400",3,4],
+  ["0000c2000006e100004g780000d90g6006gabg00005adg0000006g000000c800",3,4],
+  ["0009f100004gc00000fe2b3004g94ga009gbdg20009gge000008g6000009g200",3,4],
+  ["0006g400001df10001bg500008ga0a600cg89gc002fggg700004gb000007g300",3,4],
+  ["00099000003g900003ea02000ag57f1002bfgd100007g3000006f0000004g500",3,4],
+  ["0009g400019gd2000ege80001ff5g90005ggg800002dg100000bd000000bd000",3,4],
+  ["0003e100000dc100007g530003fb5g2005gbbg60006cgd300001f7000002g700",3,4],
+  ["0078dgf100774bc000008d100488ff6002bff400000g5000009f100000d50000",4,7],
+  ["0018fa0003dfee0005a0ac000035fa2000ggggc0018ce830000ad000000b9000",4,7],
+  ["0008ee200006afb000000ea0028bcg8008gggg700000bf100009g700000cd100",4,7],
+  ["0009fc0000477e0000000d300498ad1004gfgg600000e3000009c000000b7000",4,7],
+  ["009ggg5001ea8g8000007g30038bfgb008ggfb30002g7000008g100000da0000",4,7],
+  ["003cgg6000ab7gb000002ea005b89g3009gggg900149g600000be000004g5000",4,7],
+  ["006dg60003gefg1000508g2000008g3003fggg9005degb30000cf100004g7000",4,7],
+  ["003ege0000dddg2000109f00009cfga004gggb300049e200002f9000004d1000",4,7],
+];
+const DIGITS=DIGIT_DATA.map(([s,cy,dg])=>({px:[...s].map(ch=>parseInt(ch,36)),y:cy,digit:dg}));
+const DCOL=['#37e6ff','#e8c170','#5fe3a0','#c060ff','#ee5b6b'];
+const mCv=document.getElementById('mnist'), mctx=mCv.getContext('2d');
+function knn(vecs,k){const n=vecs.length,E=new Set();
+  for(let i=0;i<n;i++){const ds=[];for(let j=0;j<n;j++){if(i===j)continue;let s=0;const a=vecs[i],b=vecs[j];for(let t=0;t<64;t++){const dd=a[t]-b[t];s+=dd*dd;}ds.push([s,j]);}
+    ds.sort((p,q)=>p[0]-q[0]);for(let m=0;m<k;m++){const j=ds[m][1];E.add(Math.min(i,j)+','+Math.max(i,j));}}
+  return [...E].map(e=>e.split(',').map(Number));}
+let mnistState, mnistSeeds;
+function mnistInit(rand){const n=DIGITS.length,L=DIGIT_CLASSES.length;
+  const edges=knn(DIGITS.map(d=>d.px),5);
+  const prior=DIGITS.map(()=>new Array(L).fill(1/L)); mnistSeeds=new Set();
+  for(let c=0;c<L;c++){const pool=DIGITS.map((d,i)=>[d,i]).filter(([d])=>d.y===c);
+    const pick=rand?pool[Math.random()*pool.length|0][1]:pool[0][1];
+    prior[pick]=new Array(L).fill(0); prior[pick][c]=1; mnistSeeds.add(pick);}
+  const C=Array.from({length:L},(_,a)=>Array.from({length:L},(_,b)=>a===b?1:0));
+  mnistState={S:prior.map(r=>r.slice()),prior,ps:.6,edges,C};}
+function mnistDraw(){const d=Math.min(2,devicePixelRatio||1),W=mCv.clientWidth,H=300;mCv.width=W*d;mCv.height=H*d;mctx.setTransform(d,0,0,d,0,0);
+  mctx.clearRect(0,0,W,H);const cols=10,rows=4,cw=W/cols,ch=H/rows,bs=Math.min(cw,ch)-16,pp=bs/8;
+  let ok=0,tot=0;
+  DIGITS.forEach((dig,i)=>{const col=i%cols,row=(i/cols|0),x0=col*cw+(cw-bs)/2,y0=row*ch+(ch-bs)/2;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){const g=Math.round(dig.px[r*8+c]/16*255);mctx.fillStyle='rgb('+g+','+g+','+g+')';mctx.fillRect(x0+c*pp,y0+r*pp,pp+.6,pp+.6);}
+    const pred=argmax(mnistState.S[i]),seed=mnistSeeds.has(i);
+    mctx.lineWidth=2;mctx.strokeStyle=DCOL[pred];mctx.strokeRect(x0-2.5,y0-2.5,bs+5,bs+5);
+    if(seed){mctx.lineWidth=2;mctx.strokeStyle='#fff';mctx.strokeRect(x0-5,y0-5,bs+10,bs+10);}
+    if(!seed){tot++;if(pred===dig.y)ok++;}});
+  const st=document.getElementById('mnistStat');
+  st.textContent=tot?('✓ '+ok+'/'+tot+' correct'):'…';
+  const done=ok===tot; st.style.color=done?'var(--gr)':'var(--gd)'; st.style.borderColor=done?'#1e5e3e':'#5e4a1e';}
+document.getElementById('mnistLegend').innerHTML=DIGIT_CLASSES.map((dg,c)=>'<span><i class="dot" style="background:'+DCOL[c]+'"></i>'+dg+'</span>').join('')+' <span style="opacity:.65">· white frame = the one seed</span>';
+document.getElementById('mnistNew').onclick=()=>mnistInit(true);
+mnistInit(false);
+
 // ---------- shared loop: relax slowly so you can watch it settle ----------
 let tick=0;
 function loop(){
   tick++;
-  if(tick%3===0){step(dnaState);step(gState);}
+  if(tick%3===0){step(dnaState);step(gState);step(mnistState);}
   if(chiSpin)chiAng+=0.012;
-  dnaDraw();chiDraw();graphDraw();
+  dnaDraw();chiDraw();graphDraw();mnistDraw();
   requestAnimationFrame(loop);
 }
 addEventListener('resize',()=>{});
