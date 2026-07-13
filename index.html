@@ -38,6 +38,9 @@ h2 .k{color:var(--dim);font:12px ui-monospace,monospace;letter-spacing:3px;text-
 .chip.real{color:var(--gr);border-color:#1e5e3e;background:#0a1a14}
 .chip.sim{color:var(--gd);border-color:#5e4a1e;background:#1a1406}
 .chip.idea{color:var(--pu);border-color:#3a1e5e;background:#140a24}
+.chip.new{color:var(--cy);border-color:#1e4a5e;background:#06141a}
+.fthumb{display:flex;align-items:center;justify-content:center;padding:6px;background:radial-gradient(120% 120% at 50% 0%,#0e1a30,#050a16)}
+.fthumb svg{width:100%;height:100%;display:block}
 table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
 th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left}
 th{color:#fff;font-weight:600} td{color:var(--dim)} td b{color:var(--ink)}
@@ -57,6 +60,7 @@ footer a{color:var(--cy);text-decoration:none}
    field into a mutually consistent labeling. Below: interactive, dark, and mostly built on <b>real data</b>.</p>
   <nav>
     <a href="#featured">Featured</a>
+    <a href="#elbie-latest">New with Elbie</a>
     <a href="genesis/">Project Genesis</a>
     <a href="#engine">The Engine</a>
     <a href="#all">All Projects</a>
@@ -114,6 +118,74 @@ footer a{color:var(--cy);text-decoration:none}
 
   <a class="card" href="simplicial-3d/"><img class="thumb" src="assets/thumbs/simplicial.png" alt="simplicial complex">
    <div class="body"><h3>Simplicial Complexes</h3><p>Higher-order relaxation on a growing 3-D complex.</p><span class="chip idea">topology</span></div></a>
+
+</div>
+</section>
+
+<section id="elbie-latest">
+<h2><span class="k">New with Elbie · Gooblets &amp; Zappies</span>Four fresh features in the little world</h2>
+<p class="lead">The <a href="genesis/world/" style="color:var(--cy)">Gooblets &amp; Zappies</a> world keeps growing — designed hand-in-hand
+ with <b>Elbie</b>. The four newest additions, each a small rule layered onto the same relaxation-labeled world:</p>
+<div class="grid">
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a blue flower with a golden centre">
+     <ellipse cx="80" cy="93" rx="66" ry="10" fill="#123a1e" opacity=".55"/>
+     <path d="M80 92 L80 56" stroke="#2e7d32" stroke-width="4" stroke-linecap="round"/>
+     <path d="M80 74 q-17 -3 -23 -16 q17 -1 23 11 z" fill="#2e7d32"/>
+     <g fill="#3b7cff">
+       <circle cx="80" cy="39" r="12"/><circle cx="94" cy="49" r="12"/><circle cx="89" cy="66" r="12"/>
+       <circle cx="71" cy="66" r="12"/><circle cx="66" cy="49" r="12"/>
+     </g>
+     <circle cx="80" cy="53" r="8.5" fill="#ffd23a"/>
+   </svg></div>
+   <div class="body"><h3>🪻 Blue Flowers</h3><p>A peaceful <b>Nature Gooblet</b> crosses the Grove portal up to the surface under a
+    🤝 Helpful King and plants up to <b>three</b> blue flowers as it roams — a new entry in the Plantiary.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a winged dragon flying home to a red island">
+     <ellipse cx="128" cy="82" rx="32" ry="15" fill="#781c1e"/>
+     <ellipse cx="128" cy="78" rx="27" ry="11" fill="#8f2224"/>
+     <circle cx="86" cy="52" r="1.7" fill="#5fe08a" opacity=".7"/>
+     <circle cx="99" cy="61" r="1.7" fill="#5fe08a" opacity=".5"/>
+     <circle cx="111" cy="69" r="1.7" fill="#5fe08a" opacity=".35"/>
+     <g transform="translate(58,42)">
+       <path d="M-6 0 L-31 -15 L-10 9 Z" fill="#1c8a3c"/>
+       <path d="M6 0 L31 -15 L10 9 Z" fill="#1c8a3c"/>
+       <circle cx="0" cy="0" r="16" fill="#1f8f3f"/>
+       <circle cx="-5.5" cy="-3" r="3.4" fill="#d4ff3a"/><circle cx="5.5" cy="-3" r="3.4" fill="#d4ff3a"/>
+     </g>
+   </svg></div>
+   <div class="body"><h3>🐉 Grown-up Dragonlings</h3><p>Once a Dragonling grows old enough it <b>grows up</b> — bigger, winged — and
+    stops hunting to fly <b>home to the Dragon Island</b> and rule alongside the Dragon King.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="the Red King standing unharmed in lava">
+     <ellipse cx="80" cy="88" rx="64" ry="13" fill="#e87016"/>
+     <path d="M48 86 q4 -18 10 -22 q-2 12 6 14 q6 -6 4 -16 q10 10 6 24 Z" fill="#ff8a1e" opacity=".9"/>
+     <path d="M104 86 q4 -16 9 -20 q-1 10 5 12 q6 -6 4 -14 q9 9 6 22 Z" fill="#ff8a1e" opacity=".9"/>
+     <g transform="translate(80,50)">
+       <path d="M-13 -13 L-7 -25 L0 -16 L7 -25 L13 -13 Z" fill="#ff2030"/>
+       <circle cx="0" cy="0" r="16" fill="#d01020"/>
+       <circle cx="-5.5" cy="-2" r="3.2" fill="#fff"/><circle cx="5.5" cy="-2" r="3.2" fill="#fff"/>
+       <circle cx="-5.5" cy="-2" r="1.6" fill="#160a0a"/><circle cx="5.5" cy="-2" r="1.6" fill="#160a0a"/>
+     </g>
+     <text x="119" y="33" font-size="17">🛡️</text>
+   </svg></div>
+   <div class="body"><h3>👑 A Fireproof Red King</h3><p>The hero who slays the Fire Giant and rises as the <b>Red King</b> now walks
+    through <b>lava and fire completely unharmed</b> — the flames can never touch him again.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><div style="width:90%;background:#0c1226;border:1px solid #2f5aa0;border-radius:8px;padding:8px 9px;font:9px/1.5 ui-monospace,monospace;text-align:left">
+     <div style="color:#ffd27f;margin-bottom:5px;letter-spacing:1px">👑 THE FIVE MONARCHS</div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🌊 Sea</span><span style="color:#ffd27f">🏆 Sea Dragon</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🐉 Dragon</span><span style="color:#ffd27f">🏆 Green Dragon</span></div>
+     <div style="display:flex;justify-content:space-between;color:#8a97b8"><span>👑 Human</span><span>— none —</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🔥 Fire</span><span style="color:#ffd27f">🏆 Red King</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🌲 Nature</span><span style="color:#ffd27f">🏆 Nature Giant</span></div>
+   </div></div>
+   <div class="body"><h3>👑 The Monarch Tracker</h3><p>A new tool opens a <b>live panel</b> naming who wears each of the five crowns —
+    Sea, Dragon, Human, Fire and Nature — or <b>— none —</b> when a throne sits empty.</p><span class="chip new">new</span></div></a>
 
 </div>
 </section>
