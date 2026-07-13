@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat the Engine — HRL Challenges</title>
+<meta name="description" content="Play against the Hierarchical Relaxation Labeling engine: reveal as few digit seeds as you can and still label all 40 (fewest-seeds puzzle), and spot the R enantiomer (why chirality needs the order-3 term). The engine relaxes live in your browser.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;--rd:#ee5b6b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:900px;margin:0 auto;padding:30px 18px 80px}
+.eyebrow{color:var(--cy);letter-spacing:4px;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+h1{font:700 clamp(26px,5vw,44px)/1.05 ui-serif,Georgia,serif;margin:0 0 8px}
+.tag{color:var(--dim);max-width:680px;margin:0 auto 6px}.tag b{color:var(--ink)}
+.crumbs{margin:14px 0 8px;font:12px ui-monospace,monospace}
+.crumbs a{color:var(--cy);text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:5px 12px;margin:0 3px}
+.card{background:#0a1020;border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px;margin:22px auto;text-align:left;max-width:760px}
+.card h2{font:600 21px ui-serif,Georgia,serif;margin:0 0 3px;color:#fff}
+.card h2 .k{color:var(--dim);font:11px ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px}
+.card p{color:var(--dim);font-size:13.5px;margin:0 0 14px}.card p b{color:var(--ink)}.card p i{color:var(--gd);font-style:normal}
+canvas{width:100%;background:#02030a;border:1px solid var(--line);border-radius:12px;display:block;cursor:pointer}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:13px;font:13px ui-monospace,monospace;color:var(--dim)}
+button{background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:9px;padding:8px 14px;cursor:pointer;font:13px ui-monospace,monospace;transition:background .14s,border-color .14s}
+button:hover{background:#1a2c50;border-color:var(--cy)}
+.pill{margin-left:auto;padding:5px 12px;border-radius:16px;border:1px solid;font-weight:bold;letter-spacing:.5px}
+.stat{padding:5px 12px;border-radius:16px;border:1px solid var(--line);background:#070c18}
+.stat b{color:var(--cy)}
+.legend{display:flex;gap:5px 14px;flex-wrap:wrap;justify-content:center;margin-top:9px;font:12px ui-monospace,monospace;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+footer{color:var(--dim);font-size:13px;margin-top:34px}footer a{color:var(--cy);text-decoration:none}
+</style></head><body><div class="wrap">
+<div class="eyebrow">Relaxation Labeling · you vs. the engine</div>
+<h1>Beat the Engine</h1>
+<p class="tag">Two challenges played against the live <b>HRL</b> engine. It relaxes the whole field from your moves in real
+ time — can you out-think it?</p>
+<div class="crumbs"><a href="../hrl-lab/">← the HRL Lab</a> <a href="../">the portfolio</a>
+ <a href="https://github.com/mannyglover/relaxation-labeling">the engine ↗</a></div>
+
+<!-- ============ GAME 1: FEWEST SEEDS ============ -->
+<div class="card">
+  <h2><span class="k">challenge · few-shot</span>🔢 Fewest Seeds</h2>
+  <p>Forty <b>real handwritten digits</b>. <b>Click a digit to reveal its label</b> — that becomes a seed. The engine relaxes
+   the labels across a similarity graph from your seeds. <b>Get all 40 framed correctly using as few reveals as you can.</b>
+   <i>The engine's 5 blind seeds (one per class) land 39/40 — you pick the seeds; can you reach a perfect 40?</i>
+   Click a revealed digit again to hide it.</p>
+  <canvas id="dig" height="300"></canvas>
+  <div class="legend" id="digLegend"></div>
+  <div class="row">
+    <button id="digClear">⟲ clear</button>
+    <span class="stat">reveals <b id="digSeeds">0</b></span>
+    <span class="stat">correct <b id="digCorr">0</b>/40</span>
+    <span id="digPill" class="pill" style="color:var(--gd);border-color:#5e4a1e">keep going…</span>
+  </div>
+</div>
+
+<!-- ============ GAME 2: GUESS THE HAND ============ -->
+<div class="card">
+  <h2><span class="k">challenge · order-3</span>⚗️ Guess the Hand</h2>
+  <p>Two molecules, mirror images of one another — one <b>R</b>, one <b>S</b>. <b>Which one is R?</b> (Lowest priority H points
+   back; trace Br→Cl→F — clockwise is R.) It's genuinely hard by eye — that's the point: handedness lives in the
+   <b>order-3</b> term, and the engine gets it every time. Spin them to help. Build a streak.</p>
+  <canvas id="hand" height="230"></canvas>
+  <div class="row">
+    <button id="handL">◀ left is R</button><button id="handR">right is R ▶</button>
+    <button id="handSpin">⏯ spin</button>
+    <span class="stat">streak <b id="handStreak">0</b></span>
+    <span class="stat">best <b id="handBest">0</b></span>
+    <span id="handPill" class="pill" style="color:var(--dim);border-color:var(--line)">pick one</span>
+  </div>
+</div>
+
+<footer>Same engine, now playable — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>.
+ Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
+</div>
+<script>
+// ---------- the generic HRL engine (JS port) ----------
+const zeros=(n,L)=>Array.from({length:n},()=>new Array(L).fill(0));
+const normRows=M=>M.map(r=>{let s=0;for(const v of r)s+=v;s=s||1;return r.map(v=>v/s);});
+const minmaxRows=M=>M.map(r=>{let lo=1e9,hi=-1e9;for(const v of r){if(v<lo)lo=v;if(v>hi)hi=v;}const sp=hi-lo;return sp>0?r.map(v=>(v-lo)/sp):r.map(()=>0);});
+function addPairwise(S,sup,edges,C){const L=C.length;
+  for(const [i,k] of edges){
+    for(let j=0;j<L;j++){let a=0;for(let l=0;l<L;l++)a+=C[j][l]*S[k][l];sup[i][j]+=a;}
+    for(let l=0;l<L;l++){let a=0;for(let j=0;j<L;j++)a+=C[j][l]*S[i][j];sup[k][l]+=a;}
+  }}
+function step(st){if(!st)return;const n=st.S.length,L=st.S[0].length;let sup=zeros(n,L);
+  addPairwise(st.S,sup,st.edges,st.C);sup=minmaxRows(sup);
+  st.S=normRows(st.S.map((row,i)=>row.map((s,j)=>Math.pow(st.prior[i][j],st.ps)*Math.pow(s,1-st.ps)*(1+sup[i][j]))));}
+const argmax=r=>{let mi=0;for(let i=1;i<r.length;i++)if(r[i]>r[mi])mi=i;return mi;};
+
+// ---------- digit data (real 8x8 handwritten, sklearn) ----------
+const DIGIT_CLASSES=[0,1,3,4,7];
+const DIGIT_DATA=[
+  ["005d910000dfaf5003f20b8004c008800580098004b01c7002e5ac00006da000",0,0],
+  ["0019fb0000bg8e6002ga099001g4088004g4088001g51b3000ccaa00001ad300",0,0],
+  ["003db70000bggg2004g91e2004g00g2000g10c8000f90d60009e9e10002cd400",0,0],
+  ["00aeb30004gd6e1004g20b7008g00a5008g00e4008g01g1004g1bf0000bgc300",0,0],
+  ["006ea20000ffdf3002ga0d9001g50c5000g30d6001f56d1000gbea00007gb100",0,0],
+  ["002fd30000afbf0003g60a0004g8038008e3048003f1037000eb6e50004cf600",0,0],
+  ["001fd100007ge80008c92d20079106600590039000f208c0009fdg60000de800",0,0],
+  ["002ef50000aggf1003gaag4005g00e6005g60c7001fd4d6000bggf00002bd400",0,0],
+  ["000cd500000bg900003fg60007fgg200001gg300001gg600001gg600000bga00",1,1],
+  ["0000ed100005gg20000egc0001aggc0003ceg9000005gf000004ge000001dg10",1,1],
+  ["0002gg200004gg20014cgc0007gggc00003age000008gc000006gg200002cf40",1,1],
+  ["0000c5000002gc00001cgb0002cgga0006b5f6000001g9000002gb000003g800",1,1],
+  ["0001b9000007gd00004eg9000agbg8000003g6000003g8000005ga000002e600",1,1],
+  ["0000cd100008gf2000aggc0004gggd000474g6000001g8000001g8000000cc00",1,1],
+  ["0000e700000dg90000agg70007g8g2000156g6000004g6000002g6000000cb00",1,1],
+  ["0001ed100001gg3005bfgg0004fggf000008g700000ag3000008g6000002df20",1,1],
+  ["007fd10008d6f400021dd000002fb1000001cc1000001a8000845e90007dd900",2,3],
+  ["029fe93004d89g800006ef30000be2000002fb0000002f400156dg6002ccdb00",2,3],
+  ["018cfe4003b88cc000002d700002fc100000d50000009d000078ef0000efb200",2,3],
+  ["009gd6000065gg000008f5000005e30000009f2000000bc00048bfc000bec800",2,3],
+  ["01afb1000388bc000005ef10000bf2000004f2000000ca000034ag1000dgfa00",2,3],
+  ["00afe4000046dg200003g9000001g6000000ac0000001g4001956g7000ecfb20",2,3],
+  ["00ege600007agg300005gg100002g8000000cd1000004g700059eg7000dgga10",2,3],
+  ["03gge7100199fg400007gc100009g2000003f70000009f0001aagg3002dgc500",2,3],
+  ["0001b00000078000001d6220007f098005ga0g6004fgdg100003fa000002g400",3,4],
+  ["0008f100001ed11000af3fb007g71g8009gdeg5001afge000001ga00000af400",3,4],
+  ["0000c2000006e100004g780000d90g6006gabg00005adg0000006g000000c800",3,4],
+  ["0009f100004gc00000fe2b3004g94ga009gbdg20009gge000008g6000009g200",3,4],
+  ["0006g400001df10001bg500008ga0a600cg89gc002fggg700004gb000007g300",3,4],
+  ["00099000003g900003ea02000ag57f1002bfgd100007g3000006f0000004g500",3,4],
+  ["0009g400019gd2000ege80001ff5g90005ggg800002dg100000bd000000bd000",3,4],
+  ["0003e100000dc100007g530003fb5g2005gbbg60006cgd300001f7000002g700",3,4],
+  ["0078dgf100774bc000008d100488ff6002bff400000g5000009f100000d50000",4,7],
+  ["0018fa0003dfee0005a0ac000035fa2000ggggc0018ce830000ad000000b9000",4,7],
+  ["0008ee200006afb000000ea0028bcg8008gggg700000bf100009g700000cd100",4,7],
+  ["0009fc0000477e0000000d300498ad1004gfgg600000e3000009c000000b7000",4,7],
+  ["009ggg5001ea8g8000007g30038bfgb008ggfb30002g7000008g100000da0000",4,7],
+  ["003cgg6000ab7gb000002ea005b89g3009gggg900149g600000be000004g5000",4,7],
+  ["006dg60003gefg1000508g2000008g3003fggg9005degb30000cf100004g7000",4,7],
+  ["003ege0000dddg2000109f00009cfga004gggb300049e200002f9000004d1000",4,7],
+];
+const DIGITS=DIGIT_DATA.map(([s,cy,dg])=>({px:[...s].map(ch=>parseInt(ch,36)),y:cy,digit:dg}));
+const DCOL=['#37e6ff','#e8c170','#5fe3a0','#c060ff','#ee5b6b'];
+function knn(vecs,k){const n=vecs.length,E=new Set();
+  for(let i=0;i<n;i++){const ds=[];for(let j=0;j<n;j++){if(i===j)continue;let s=0;const a=vecs[i],b=vecs[j];for(let t=0;t<64;t++){const dd=a[t]-b[t];s+=dd*dd;}ds.push([s,j]);}
+    ds.sort((p,q)=>p[0]-q[0]);for(let m=0;m<k;m++){const j=ds[m][1];E.add(Math.min(i,j)+','+Math.max(i,j));}}
+  return [...E].map(e=>e.split(',').map(Number));}
+const DIG_EDGES=knn(DIGITS.map(d=>d.px),5), DIG_C=Array.from({length:5},(_,a)=>Array.from({length:5},(_,b)=>a===b?1:0));
+
+// ---------- GAME 1: FEWEST SEEDS ----------
+const digCv=document.getElementById('dig'), gctx=digCv.getContext('2d');
+let seeds={}, digState, digLay={cols:10,rows:4};
+function digRebuild(){const L=5;const prior=DIGITS.map(()=>new Array(L).fill(1/L));
+  for(const k in seeds){prior[k]=new Array(L).fill(0);prior[k][seeds[k]]=1;}
+  digState={S:prior.map(r=>r.slice()),prior,ps:.6,edges:DIG_EDGES,C:DIG_C};}
+function digDraw(){const d=Math.min(2,devicePixelRatio||1),W=digCv.clientWidth,H=300;digCv.width=W*d;digCv.height=H*d;gctx.setTransform(d,0,0,d,0,0);
+  gctx.clearRect(0,0,W,H);const cols=10,rows=4,cw=W/cols,ch=H/rows,bs=Math.min(cw,ch)-16,pp=bs/8;
+  digLay={cols,rows,cw,ch,W};let ok=0;
+  DIGITS.forEach((dig,i)=>{const col=i%cols,row=(i/cols|0),x0=col*cw+(cw-bs)/2,y0=row*ch+(ch-bs)/2;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){const g=Math.round(dig.px[r*8+c]/16*255);gctx.fillStyle='rgb('+g+','+g+','+g+')';gctx.fillRect(x0+c*pp,y0+r*pp,pp+.6,pp+.6);}
+    const pred=argmax(digState.S[i]),seed=(i in seeds);
+    if(pred===dig.y)ok++;
+    gctx.lineWidth=2;gctx.strokeStyle=DCOL[pred];gctx.strokeRect(x0-2.5,y0-2.5,bs+5,bs+5);
+    if(seed){gctx.lineWidth=2.5;gctx.strokeStyle='#fff';gctx.strokeRect(x0-5,y0-5,bs+10,bs+10);
+      gctx.fillStyle=DCOL[seeds[i]];gctx.fillRect(x0+bs-8,y0-8,12,12);}
+  });
+  const ns=Object.keys(seeds).length;
+  document.getElementById('digSeeds').textContent=ns;
+  document.getElementById('digCorr').textContent=ok;
+  const pill=document.getElementById('digPill');
+  if(ok===40){const win=ns<=5;pill.textContent='🏆 perfect 40 in '+ns+(win?' — you beat the engine!':' seeds!');
+    pill.style.color='var(--gr)';pill.style.borderColor='#1e5e3e';}
+  else{pill.textContent='keep going… '+ok+'/40';pill.style.color='var(--gd)';pill.style.borderColor='#5e4a1e';}
+}
+digCv.addEventListener('click',e=>{const r=digCv.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width*digLay.W, y=(e.clientY-r.top)/r.height*300;
+  const col=Math.floor(x/digLay.cw), row=Math.floor(y/digLay.ch), i=row*digLay.cols+col;
+  if(i<0||i>=DIGITS.length||col<0||col>=digLay.cols)return;
+  if(i in seeds) delete seeds[i]; else seeds[i]=DIGITS[i].y;   // reveal = seed with true label; click again to hide
+  digRebuild();});
+document.getElementById('digClear').onclick=()=>{seeds={};digRebuild();};
+document.getElementById('digLegend').innerHTML=DIGIT_CLASSES.map((dg,c)=>'<span><i class="dot" style="background:'+DCOL[c]+'"></i>'+dg+'</span>').join('')+' <span style="opacity:.65">· click a digit to reveal · white frame = your seed</span>';
+digRebuild();
+
+// ---------- GAME 2: GUESS THE HAND ----------
+const handCv=document.getElementById('hand'), hctx=handCv.getContext('2d');
+const SUBS=[{n:'Br',c:'#c0562e'},{n:'Cl',c:'#5fe3a0'},{n:'F',c:'#c060ff'},{n:'H',c:'#cfd8ee'}];
+const CHI=[[0,1,.5],[.866,-.5,.5],[-.866,-.5,.5],[0,0,-1]].map(v=>{const m=Math.hypot(...v);return v.map(x=>x/m);});
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+let leftIsR=true, handAng=0, handSpin=true, streak=0, best=0, answered=false;
+function newHand(){leftIsR=Math.random()<0.5;answered=false;
+  const p=document.getElementById('handPill');p.textContent='which is R?';p.style.color='var(--dim)';p.style.borderColor='var(--line)';}
+function molVecs(mir){let v=CHI.map(p=>mir?[p[0],p[1],-p[2]]:p.slice());
+  const ca=Math.cos(handAng),sa=Math.sin(handAng);
+  return v.map(([x,y,z])=>[x*ca+z*sa,y,-x*sa+z*ca]);}
+function drawMol(cx,cy,R,mir,tag){const v=molVecs(mir);
+  const order=[0,1,2,3].sort((a,b)=>v[a][2]-v[b][2]);
+  hctx.strokeStyle='rgba(150,170,220,.4)';hctx.lineWidth=2;
+  for(const i of order){hctx.beginPath();hctx.moveTo(cx,cy);hctx.lineTo(cx+v[i][0]*R,cy-v[i][1]*R);hctx.stroke();}
+  hctx.fillStyle='#2a3350';hctx.beginPath();hctx.arc(cx,cy,13,0,7);hctx.fill();
+  hctx.fillStyle='#cfd8ee';hctx.font='bold 11px ui-monospace,monospace';hctx.textAlign='center';hctx.textBaseline='middle';hctx.fillText('C',cx,cy);
+  for(const i of order){const x=cx+v[i][0]*R,y=cy-v[i][1]*R,rr=12+5*v[i][2];
+    hctx.fillStyle=SUBS[i].c;hctx.globalAlpha=.6+.4*(v[i][2]+1)/2;hctx.beginPath();hctx.arc(x,y,Math.max(8,rr),0,7);hctx.fill();hctx.globalAlpha=1;
+    hctx.fillStyle='#08111f';hctx.font='bold 11px ui-monospace,monospace';hctx.fillText(SUBS[i].n,x,y);}
+  if(answered){const V=dot(sub(v[0],v[3]),cross(sub(v[1],v[3]),sub(v[2],v[3])));const isR=V<0;
+    hctx.fillStyle=isR?'#5fe3a0':'#c060ff';hctx.font='bold 15px ui-monospace,monospace';hctx.fillText(isR?'R':'S',cx,cy+R+22);}
+  else if(tag){hctx.fillStyle='#6b7699';hctx.font='12px ui-monospace,monospace';hctx.fillText(tag,cx,cy+R+22);}
+}
+function handDraw(){const d=Math.min(2,devicePixelRatio||1),W=handCv.clientWidth,H=230;handCv.width=W*d;handCv.height=H*d;hctx.setTransform(d,0,0,d,0,0);
+  hctx.clearRect(0,0,W,H);const R=Math.min(W/2,H)*0.28;
+  drawMol(W*0.28,H/2-8,R,!leftIsR,'LEFT');drawMol(W*0.72,H/2-8,R,leftIsR,'RIGHT');
+  hctx.strokeStyle='rgba(120,140,190,.2)';hctx.beginPath();hctx.moveTo(W/2,18);hctx.lineTo(W/2,H-18);hctx.stroke();}
+function guess(pickLeftR){if(answered)return;answered=true;
+  const right=(pickLeftR===leftIsR);const p=document.getElementById('handPill');
+  if(right){streak++;best=Math.max(best,streak);p.textContent='✓ correct!';p.style.color='var(--gr)';p.style.borderColor='#1e5e3e';}
+  else{streak=0;p.textContent='✗ that one was S';p.style.color='var(--rd)';p.style.borderColor='#5e1e28';}
+  document.getElementById('handStreak').textContent=streak;document.getElementById('handBest').textContent=best;
+  setTimeout(newHand,1400);}
+document.getElementById('handL').onclick=()=>guess(true);
+document.getElementById('handR').onclick=()=>guess(false);
+document.getElementById('handSpin').onclick=()=>{handSpin=!handSpin;};
+newHand();
+
+// ---------- loop ----------
+let tick=0;
+function loop(){tick++;
+  if(tick%3===0)step(digState);
+  if(handSpin&&!answered)handAng+=0.012;
+  digDraw();handDraw();
+  requestAnimationFrame(loop);}
+loop();
+</script>
+</body></html>
