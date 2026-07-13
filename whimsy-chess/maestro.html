@@ -110,6 +110,19 @@
   .rolerow .rl{font-weight:700;font-size:12px}
   .rolerow .bar{width:52px;height:7px;background:#ececec;border-radius:4px;overflow:hidden;flex:none}
   .rolerow .bar i{display:block;height:100%}
+  .links{padding:6px 12px;font-size:13px;color:var(--mut)}
+  .links a{color:var(--accent2,#2f6db0);text-decoration:none;font-weight:600}
+  .links a:hover{text-decoration:underline}
+  #otbHint{display:none;margin:2px 12px 6px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:rgba(120,160,120,.12);font-size:13px}
+  #otbHint b{color:#2e7d32}
+  #promoPick{display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.4);align-items:center;justify-content:center}
+  #promoPick.on{display:flex}
+  #promoPick button{margin:4px;font-size:15px;padding:9px 13px;cursor:pointer;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .sq.otbsel{box-shadow:inset 0 0 0 4px #3a9d4a !important}
+  .sq.otbdot::after{content:"";position:absolute;left:50%;top:50%;width:26%;height:26%;transform:translate(-50%,-50%);
+    background:rgba(58,157,74,.55);border-radius:50%;pointer-events:none;z-index:3}
+  .sq.otbcap{box-shadow:inset 0 0 0 4px rgba(200,60,60,.6) !important}
+  .sq{position:relative}
 </style>
 </head>
 <body>
@@ -127,8 +140,21 @@
     <button id="btnQcd" class="btnrole" title="QCD disco overlay: the HRL influence field as a full-spectrum colour-charge map — white-control cool, black-control warm, the contested ish seam (Markov blanket) glows">🪩 QCD</button>
     <button id="btnRage" class="btnrole" title="🃏 Rage Comics: pop a classic rage face on captures, checks and checkmate (off by default)">🃏 Rage</button>
     <button id="btnLoad" class="btnrole" title="Load any annotated PGN">📋 Load PGN</button>
+    <button id="btnOtb" class="btnrole" title="Play moves right on the board (hot-seat, both sides)">♟️ Play OTB</button>
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
+  <div class="links">
+    <a href="../">← portfolio</a> · <a href="../hrl-lab/">The HRL Lab</a> · <a href="../play/">Beat the Engine</a> ·
+    <a href="../hrlized/">🎵 HRLized</a> <span style="color:var(--mut)">— the same engine that scores this game, composing music</span>
+  </div>
+  <div id="otbHint">♟️ <b>Play OTB</b> is on — click a piece, then a highlighted square, to move (hot-seat: you play both sides).
+    Moves <b>continue from the current position</b>, so press ⏮ first to play a fresh game from move 1. Load one of your own
+    games and branch off it to explore "what if?".</div>
+  <div id="promoPick"><div class="card2" style="text-align:center">
+    <div style="margin-bottom:8px;color:var(--mut)">Promote to:</div>
+    <button data-p="q">♛ Queen</button><button data-p="r">♜ Rook</button>
+    <button data-p="b">♝ Bishop</button><button data-p="n">♞ Knight</button>
+  </div></div>
 
   <div id="loadPanel"><div class="card2">
     <textarea id="pgnText" placeholder="Paste an annotated PGN here — headers + moves. Comments, [%eval]/[%clk], NAGs (?! ??), and variations are all handled."></textarea>
@@ -257,7 +283,7 @@ function applySAN(state,mv){const p=state.placement,pc=state.pieces,c=state.turn
   if(san==="O-O"||san==="O-O-O"){const r=c==="w"?1:8,ks=san==="O-O";const kf="e"+r,kt=(ks?"g":"c")+r,rf=(ks?"h":"a")+r,rt=(ks?"f":"d")+r;
     note.moverId=p[kf];note.from=kf;note.to=kt;note.castle=ks?"K":"Q";delete p[kf];p[kt]=note.moverId;
     const rid=p[rf];delete p[rf];p[rt]=rid;state.ep=null;state.turn=c==="w"?"b":"w";return note;}
-  let promo=null;const pm=/=([QRBN])$/.exec(san);if(pm){promo=pm[1].toLowerCase();san=san.replace(/=([QRBN])$/,"");}
+  let promo=null;const pm=/=?([QRBN])$/.exec(san);if(pm){promo=pm[1].toLowerCase();san=san.replace(/=?[QRBN]$/,"");}
   const cap=san.includes("x");const cl=san.replace("x","");const dest=cl.slice(-2);const head=cl.slice(0,-2);
   let t="p",dF=null,dR=null;if(head){let h=head;if(/[KQRBN]/.test(h[0])){t=h[0].toLowerCase();h=h.slice(1);}
     for(const ch of h){if(/[a-h]/.test(ch))dF=ch;else if(/[1-8]/.test(ch))dR=parseInt(ch,10);}}
@@ -271,7 +297,7 @@ function applySAN(state,mv){const p=state.placement,pc=state.pieces,c=state.turn
   state.ep=null;if(t==="p"&&Math.abs(ri(dest)-ri(from))===2)state.ep=sqOf(fi(from),(ri(from)+ri(dest))/2);
   if(promo){pc[note.moverId].type=promo;pc[note.moverId].promoted=promo;note.promo=promo;}
   state.turn=c==="w"?"b":"w";return note;}
-function parsePGN(t){const out=[];const re=/([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=[QRBN])?|[a-h]x?[a-h][1-8](?:=[QRBN])?)([+#]?)/g;
+function parsePGN(t){const out=[];const re=/([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=?[QRBN])?|[a-h]x?[a-h][1-8](?:=?[QRBN])?)([+#]?)/g;
   let m;while((m=re.exec(t))){let san=m[1];if(!san||/^[0-9.]+$/.test(san))continue;out.push({san:san.replace(/0/g,"O"),suffix:m[2]||""});}return out;}
 function parseHeaders(t){const h={},re=/\[(\w+)\s+"([^"]*)"\]/g;let m;while((m=re.exec(t)))h[m[1]]=m[2];return h;}
 function cleanMovetext(t){
@@ -283,13 +309,16 @@ function cleanMovetext(t){
 }
 // clock-aware move parser: returns [{san,suffix,clk}] for any annotated PGN
 function parseMoves(t){
-  let s=t.replace(/\[\w+\s+"[^"]*"\]/g," "); let prev;   // strip header tags only (keep [%clk] in comments)
-  do{prev=s;s=s.replace(/\([^()]*\)/g," ");}while(s!==prev);   // strip variations (keep mainline comments)
-  const re=/([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=[QRBN])?|[a-h]x?[a-h][1-8](?:=[QRBN])?)([+#]?)\s*(?:\{([^}]*)\})?/g;
+  let s=t.replace(/\[\w+\s+"[^"]*"\]/g," "); let prev;   // strip header tags only (keep {comments} for [%clk])
+  do{prev=s;s=s.replace(/\([^()]*\)/g," ");}while(s!==prev);   // strip variations (may nest; keep mainline comments)
+  // ONE tokenizer: a {comment} is matched as a whole FIRST, so its prose is never re-scanned for moves.
+  const re=/(\{[^}]*\})|([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=?[QRBN])?|[a-h]x?[a-h][1-8](?:=?[QRBN])?)([+#]?)/g;
   const out=[];let m;
-  while((m=re.exec(s))){const san=m[1];if(!san||/^[0-9.]+$/.test(san))continue;
-    let clk=null;if(m[3]){const c=/%clk\s+([\d:]+)/.exec(m[3]);if(c)clk=c[1];}
-    out.push({san:san.replace(/0/g,"O"),suffix:m[2]||"",clk});}
+  while((m=re.exec(s))){
+    if(m[1]){ const c=/%clk\s+([\d:]+)/.exec(m[1]); if(c&&out.length) out[out.length-1].clk=c[1]; continue; } // comment: clk -> previous move
+    const san=m[2]; if(!san||/^[0-9.]+$/.test(san))continue;
+    out.push({san:san.replace(/0/g,"O"),suffix:m[3]||"",clk:null});
+  }
   return out;
 }
 function clkSec(s){if(!s)return null;const p=s.split(":").map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:p[0];}
@@ -857,6 +886,61 @@ function buildFrames(mv){
     fr.push({placement:{...st.placement},pieces:JSON.parse(JSON.stringify(st.pieces)),note});}
   return fr;
 }
+/* ===================== over-the-board play (perft-validated legal move generation) ===================== */
+let otbOn=false, otbSel=null, otbTargets=[], otbPending=null;
+const _opp=c=>c==="w"?"b":"w";
+function castleRight(st,side){const c=side[0],ks=side[1]==="K";const kh=(c==="w"?"e1":"e8"),rh=ks?(c==="w"?"h1":"h8"):(c==="w"?"a1":"a8");
+  return st.placement[kh]===c+"Ke"&&st.placement[rh]===c+"R"+(ks?"h":"a");}
+function genLegal(st,from){const p=st.placement,pc=st.pieces,id=p[from];if(!id)return[];const o=pc[id];if(o.color!==st.turn)return[];
+  const out=[],c=o.color;
+  for(let f=0;f<8;f++)for(let r=1;r<=8;r++){const to=sqOf(f,r);if(to===from)continue;const occ=p[to];
+    if(occ&&pc[occ].color===c)continue;
+    const isEp=o.type==="p"&&to===st.ep&&fi(to)!==fi(from)&&!occ;
+    if(!reach(p,pc,from,to,!!occ||isEp,st.ep))continue;
+    const epCap=isEp?sqOf(fi(to),ri(to)+(c==="w"?-1:1)):null;
+    if(!legal(p,pc,from,to,epCap?{epCap}:null))continue;
+    if(o.type==="p"&&(r===8||r===1))out.push({to,promo:"q"});else out.push({to});}
+  if(o.type==="k"){const r=ri(from);
+    if(from===(c==="w"?"e1":"e8")&&!att(p,pc,from,_opp(c))){
+      if(castleRight(st,c+"K")&&!p[sqOf(5,r)]&&!p[sqOf(6,r)]&&!att(p,pc,sqOf(5,r),_opp(c))&&!att(p,pc,sqOf(6,r),_opp(c)))out.push({to:sqOf(6,r),castle:"K"});
+      if(castleRight(st,c+"Q")&&!p[sqOf(3,r)]&&!p[sqOf(2,r)]&&!p[sqOf(1,r)]&&!att(p,pc,sqOf(3,r),_opp(c))&&!att(p,pc,sqOf(2,r),_opp(c)))out.push({to:sqOf(2,r),castle:"Q"});}}
+  return out;}
+function otbApply(st,from,to,promo){const p=st.placement,pc=st.pieces,id=p[from],o=pc[id],c=o.color;
+  const note={from,to,moverId:id,captured:null,promo:null,castle:null};
+  if(o.type==="k"&&Math.abs(fi(to)-fi(from))===2){const ks=fi(to)>fi(from),r=ri(from),rf=(ks?"h":"a")+r,rt=(ks?"f":"d")+r,rid=p[rf];
+    delete p[from];p[to]=id;delete p[rf];p[rt]=rid;note.castle=ks?"K":"Q";st.ep=null;st.turn=_opp(c);return note;}
+  let epCap=null;if(o.type==="p"&&fi(to)!==fi(from)&&!p[to]&&to===st.ep)epCap=sqOf(fi(to),ri(to)+(c==="w"?-1:1));
+  const capSq=epCap||(p[to]?to:null);if(capSq){note.captured=p[capSq];delete p[capSq];}
+  delete p[from];p[to]=id;st.ep=null;if(o.type==="p"&&Math.abs(ri(to)-ri(from))===2)st.ep=sqOf(fi(from),(ri(from)+ri(to))/2);
+  if(o.type==="p"&&(ri(to)===8||ri(to)===1)){const pr=promo||"q";o.type=pr;o.promoted=pr;note.promo=pr;}
+  st.turn=_opp(c);return note;}
+function hasLegal(st){for(const sq in st.placement){if(st.pieces[st.placement[sq]].color!==st.turn)continue;if(genLegal(st,sq).length)return true;}return false;}
+function otbState(){const st={placement:startPlacement(),pieces:freshPieces(),turn:"w",ep:null};for(let i=0;i<cur;i++)applySAN(st,moves[i]);return st;}
+function otbSAN(before,from,to,note){
+  if(note.castle)return note.castle==="K"?"O-O":"O-O-O";
+  const p=before.placement,pc=before.pieces,id=p[from],t=pc[id].type,c=pc[id].color;let s="";
+  if(t==="p"){if(note.captured)s=from[0]+"x";s+=to;if(note.promo)s+="="+note.promo.toUpperCase();}
+  else{s=t.toUpperCase();const others=[];
+    for(const sq in p){if(sq===from)continue;const oid=p[sq];if(pc[oid].color!==c||pc[oid].type!==t)continue;
+      if(reach(p,pc,sq,to,!!p[to],before.ep)&&legal(p,pc,sq,to,null))others.push(sq);}
+    if(others.length){const sf=others.some(o=>o[0]===from[0]),sr=others.some(o=>o[1]===from[1]);
+      s+=!sf?from[0]:!sr?from[1]:from;}
+    if(note.captured)s+="x";s+=to;}
+  return s;}
+function otbSuffix(after,moverColor){const oc=after.turn,kc=king(after.placement,oc);
+  if(!kc)return"";if(!att(after.placement,after.pieces,kc,moverColor))return"";return hasLegal(after)?"+":"#";}
+function otbNeedsPromo(from,to){const st=otbState(),id=st.placement[from];return !!id&&st.pieces[id].type==="p"&&(ri(to)===8||ri(to)===1);}
+function makeOtbMove(from,to,promo){
+  const st=otbState(),before={placement:{...st.placement},pieces:JSON.parse(JSON.stringify(st.pieces)),ep:st.ep,turn:st.turn},mColor=st.turn;
+  const note=otbApply(st,from,to,promo),san=otbSAN(before,from,to,note),suffix=otbSuffix(st,mColor);
+  frames=frames.slice(0,cur+1);moves=moves.slice(0,cur);
+  frames.push({placement:{...st.placement},pieces:JSON.parse(JSON.stringify(st.pieces)),note});
+  moves.push({san,suffix,clk:null});
+  cur=frames.length-1;_rhythm=null;_rhythmKey=null;
+  document.getElementById("moves").dataset.built="";otbSel=null;otbTargets=[];render();
+  if(suffix==="#")setTimeout(()=>alert("Checkmate — "+(mColor==="w"?"White":"Black")+" wins! 🏆"),60);
+  else if(!hasLegal(st))setTimeout(()=>alert("Stalemate — it's a draw."),60);}
+function showPromo(from,to){otbPending={from,to};document.getElementById("promoPick").classList.add("on");}
 function load(key){
   gameKey=key; game=GAMES[key]; keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
   frames=buildFrames(mv); moves=mv.slice(0,frames.length-1);
@@ -907,7 +991,8 @@ function render(){
   ranks.forEach((r, rowIdx)=>{
     files.forEach((f, colIdx)=>{
       const sq=sqOf(f,r), light=((f+r)%2===0);
-      const d=document.createElement("div"); d.className="sq "+(light?"l":"d");
+      const d=document.createElement("div"); d.className="sq "+(light?"l":"d"); d.dataset.sq=sq;
+      if(otbOn){ if(sq===otbSel) d.classList.add("otbsel"); else if(otbTargets.includes(sq)) d.classList.add(fr.placement[sq]?"otbcap":"otbdot"); }
       if(note && (note.from===sq||note.to===sq)) d.classList.add("hl");
       if(sq===checkSq) d.classList.add("chk");
       if(terr){const fd=document.createElement("div");fd.className="field";fd.style.background=terr.color[sq];fd.title=terr.type[sq];d.appendChild(fd);}
@@ -958,7 +1043,7 @@ function renderMoves(){
   el.querySelectorAll(".m").forEach(m=>m.classList.toggle("cur",(+m.dataset.k)===cur-1));
   const c=el.querySelector(".m.cur"); if(c) c.scrollIntoView({block:"nearest"});
 }
-function go(n){cur=Math.max(0,Math.min(frames.length-1,n));render();if(musicOn)playStep();rageReact();}
+function go(n){cur=Math.max(0,Math.min(frames.length-1,n));otbSel=null;otbTargets=[];render();if(musicOn)playStep();rageReact();}
 function rageReact(){ if(!rageOn||!window.RAGE||cur<1)return; const mv=moves[cur-1]; if(!mv)return;   // 🃏 opt-in rage overlay
   const san=mv.san+(mv.suffix||""); let ev,cap;
   if(mv.suffix==="#"){ev="mate";cap=san+" — checkmate. Nailed it.";}
@@ -1009,6 +1094,20 @@ document.getElementById("btnLoad").onclick=function(){const p=document.getElemen
 document.getElementById("pgnCancel").onclick=()=>{document.getElementById("loadPanel").style.display="none";document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnLoad").onclick=()=>{stop();loadCustom(document.getElementById("pgnText").value,document.getElementById("pgnSide").value);document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById("pgnText").value=r.result;};r.readAsText(f);};
+// over-the-board play: click a piece then a highlighted square
+boardEl.addEventListener("click",e=>{ if(!otbOn)return; const sd=e.target.closest(".sq"); if(!sd)return; const sq=sd.dataset.sq;
+  const st=otbState(), id=st.placement[sq];
+  if(otbSel){
+    if(sq!==otbSel&&otbTargets.includes(sq)){ if(otbNeedsPromo(otbSel,sq)){showPromo(otbSel,sq);return;} makeOtbMove(otbSel,sq); return; }
+    if(id&&st.pieces[id].color===st.turn){ otbSel=sq; otbTargets=[...new Set(genLegal(st,sq).map(m=>m.to))]; render(); return; }
+    otbSel=null; otbTargets=[]; render(); return;
+  }
+  if(id&&st.pieces[id].color===st.turn){ otbSel=sq; otbTargets=[...new Set(genLegal(st,sq).map(m=>m.to))]; render(); }
+});
+document.getElementById("btnOtb").onclick=function(){ stop(); otbOn=!otbOn; this.classList.toggle("on",otbOn);
+  otbSel=null; otbTargets=[]; document.getElementById("otbHint").style.display=otbOn?"block":"none"; render(); };
+document.querySelectorAll("#promoPick button").forEach(b=>b.onclick=()=>{ document.getElementById("promoPick").classList.remove("on");
+  if(otbPending){ makeOtbMove(otbPending.from,otbPending.to,b.dataset.p); otbPending=null; } });
 document.getElementById("btnExport").onclick=function(){const p=document.getElementById("exportPanel");p.style.display=(p.style.display==="block")?"none":"block";this.classList.toggle("on",p.style.display==="block");};
 document.getElementById("exMidi").onclick=()=>download(fname()+".mid",new Blob([writeMidi()],{type:"audio/midi"}));
 document.getElementById("exSuno").onclick=()=>download(fname()+".suno.txt",new Blob([sunoPrompt()],{type:"text/plain"}));
