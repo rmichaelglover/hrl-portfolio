@@ -60,6 +60,15 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 #bookbtn.ping{position:relative}
 #bookbtn.ping::after{content:'✨';position:absolute;top:-7px;right:-6px;font-size:13px;animation:bsparkle 1.1s ease-in-out infinite}
 #badgebtn{border-color:#ffd23a;color:#ffe07a;animation:bsparkle 1.4s ease-in-out infinite}
+#monarchbtn{border-color:#ffd23a;color:#ffe07a}
+.mrow{display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.memoji{font-size:26px;width:34px;text-align:center;flex:none;filter:grayscale(1) brightness(.65)}
+.mrow.has .memoji{filter:none}
+.mname{flex:1;text-align:left;font:13px ui-monospace,monospace;color:var(--ink)}
+.mrealm{color:var(--dim);font-size:11px}
+.mwho{font:13px ui-monospace,monospace;color:#ffd27f;text-align:right;min-width:118px}
+.mrow:not(.has) .mwho{color:var(--dim)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -107,6 +116,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="badgebtn" style="display:none">🏆 Badge</button>
   <button id="plantbtn">🌿 Plantiary</button>
   <button id="plantbadgebtn" style="display:none">🏆 Badge</button>
+  <button id="monarchbtn">👑 Monarchs</button>
 </div>
 <div class="book" id="book"><div class="bookinner">
   <div class="bookhead"><b>📖 Bestiary</b> <span id="bookprog" class="bdim"></span> <button id="bookx">✕</button></div>
@@ -131,6 +141,11 @@ a{color:#8fd0ff;text-decoration:none}
   <div style="font-size:20px;color:#bfe89a;font-weight:bold;margin-top:6px">Plantiary Complete!</div>
   <div id="plantbadgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every plant in the whole world! 🎉</div>
   <button id="plantbadgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
+</div></div>
+<div class="book" id="monarch"><div class="bookinner">
+  <div class="bookhead"><b>👑 The Five Monarchs</b> <button id="monarchx">✕</button></div>
+  <div id="monarchgrid"></div>
+  <div class="bhint">Who wears each crown <b>right now</b> — it says <b>— none —</b> when a throne sits empty. Watch it change as the world turns!</div>
 </div></div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
 <div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
@@ -348,7 +363,9 @@ const P={ gMeta:0.008,gThirst:0.0045,gHunger:1.5,gDrink:0.40,gRepro:2.4,gReproP:
   hMeta:0.006,hHunger:1.4,hEatGain:2.4,hMaxAge:1500,hStartE:1.4,hSpeed:0.95,hFlee:7,hWoodRate:0.06,hBuild:1.0,hReproAte:6,hCap:70,hThirst:0.0035,hDrink:0.40,hFishGain:2.2,
   levVision:8,levSpeed:0.95,levEat:1.8,levMeta:0.003,levStartE:3.0,levPrey:1.0,levReproAte:15,levMaxAge:4000,levCap:14 };
 let bushes=[];
+let blueFlora=[];                                                                 // 🪻 blue flowers a Nature Gooblet carries up through the Helpful portal (never more than 3 on the surface)
 const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)] && !moat[cidx(x,y)]; };
+const goodBlueCell=(x,y)=>{ const i=cidx(x,y); return biome[i]!==WATER && !settle[i] && !swall[i] && !moat[i]; };
 function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
 function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
@@ -372,7 +389,9 @@ function nearestIdx(x,y,list,h,cell){ let bd=1e9,bi=-1; const cx=x/cell|0,cy=y/c
   for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=h.get((cx+a)+','+(cy+b)); if(!arr)continue;
     for(const i of arr){ const c=list[i]; const d=(c.x-x)**2+(c.y-y)**2; if(d<bd){bd=d;bi=i;} } } return [bi,bd]; }
 function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=buildHash(bushes,6);
-  for(const g of goob){ if(g.d && g.d!=='up'){ next.push(g); continue; } g.age++; g.W-=P.gThirst; g.E-=P.gMeta;
+  for(const g of goob){ if(g.d && g.d!=='up'){ next.push(g); continue; }
+    if(g.nature){ natureGoobSurfaceStep(g); next.push(g); continue; }                     // a Nature Gooblet that crossed up: peaceful, plants blue flowers
+    g.age++; g.W-=P.gThirst; g.E-=P.gMeta;
     const [zi,zd]=nearestIdx(g.x,g.y,zap,zh,P.gFlee);
     let dx=0,dy=0, moved=false;
     if(zi>=0 && zd<(P.gFlee*0.7)**2){ const z=zap[zi]; const l=Math.hypot(g.x-z.x,g.y-z.y)||1; dx=(g.x-z.x)/l; dy=(g.y-z.y)/l; moved=true; }      // flee
@@ -393,7 +412,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=bui
 function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=buildHash(human,P.zVision,true); const eatG=new Set(), eatH=new Set();
   for(const z of zap){ if(z.d && z.d!=='up'){ next.push(z); continue; } z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
     const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
-      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y)||list[i].king||list[i].servant)continue; } else if(eatG.has(i))continue; const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } }; // the King & his servants are protected
+      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y)||list[i].king||list[i].servant)continue; } else { if(eatG.has(i)||list[i].nature)continue; } const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } }; // the King & his servants are protected — and peaceful Nature Gooblets are left be
     scan(gh,goob,false); scan(hh,human,true);
     let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
     clampMove(z,z.x+dx,z.y+dy);
@@ -576,7 +595,7 @@ function stepUnder(){                                                           
   if(giantActive){ if(--giantTimer<=0) giantActive=false;
     const px=poolX+0.5, py=poolY+0.5, R2=121;
     goob.forEach((c,i)=>{ if(c.d==='under'&&!deadG.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadG.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
-    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&!c.vessel&&(c.x-px)**2+(c.y-py)**2<R2){ c.vessel=true; c.uAge=95; } }); // POSSESSED -> a Fire Vessel that climbs up to terrorize the surface
+    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&!c.vessel&&!c.redKing&&(c.x-px)**2+(c.y-py)**2<R2){ c.vessel=true; c.uAge=95; } }); // POSSESSED -> a Fire Vessel (but never the Red King — he's immune to fire & lava)
     zap.forEach((c,i)=>{ if(c.d==='under'&&!deadZ.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadZ.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
   }
   // FIRE MINIONS — hunt the fallen, walk on lava unharmed, never reproduce
@@ -641,6 +660,15 @@ function stepSky(){
   if(deadW.size) wooly=wooly.filter((_,i)=>!deadW.has(i));
   const wH=buildHash(wooly,8); const eatenW=new Set(), deadDL=new Set();
   dragonling.forEach((dg,di)=>{ dg.age++; let dx,dy;
+    if(!dg.grown && dg.age>2500) dg.grown=true;                                           // a Dragonling grows up
+    if(dg.grown){                                                                         // grown Dragonlings fly home to the Dragon Island and roam there in peace (no more hunting)
+      const tx=dragon?dragon.x:dg.x, ty=dragon?dragon.y:dg.y;
+      if((dg.x-tx)**2+(dg.y-ty)**2>20){ const l=Math.hypot(tx-dg.x,ty-dg.y)||1; dx=(tx-dg.x)/l; dy=(ty-dg.y)/l; } // wing back toward the island
+      else { const a=rnd()*6.283; dx=Math.cos(a)*0.5; dy=Math.sin(a)*0.5; }               // home at last — potter about the Dragon King
+      const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }
+      if(dg.age>4500) deadDL.add(di);
+      return;
+    }
     if(dg.carry && dragon && dragon.alive){ const l=Math.hypot(dragon.x-dg.x,dragon.y-dg.y)||1; dx=(dragon.x-dg.x)/l; dy=(dragon.y-dg.y)/l; } // carry the wooly to the Dragon King
     else if(dg.carry){ dg.carry=false; const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                     // no Dragon King -> eat it, no baby
     else { const [wi]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi>=0){ const w=wooly[wi]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // hunt a wooly
@@ -807,7 +835,9 @@ function drawSky(){ const d=img.data;
     if(w.fierce){ ctx.strokeStyle='#6a5636'; ctx.lineWidth=Math.max(1.5,r*0.2); ctx.lineCap='round';
       ctx.beginPath(); ctx.moveTo(x-r*0.5,y-r*0.55); ctx.lineTo(x-r*0.85,y-r*1.05); ctx.moveTo(x+r*0.5,y-r*0.55); ctx.lineTo(x+r*0.85,y-r*1.05); ctx.stroke(); // horns
       ctx.strokeStyle='#2a2a2a'; ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er*1.3); ctx.lineTo(x-ex+er*0.6,ey-er*0.2); ctx.moveTo(x+ex+er,ey-er*1.3); ctx.lineTo(x+ex-er*0.6,ey-er*0.2); ctx.stroke(); } } // angry brows
-  for(const d of dragonling){ const x=d.x*SC,y=d.y*SC,r=SC*0.6; ctx.shadowColor='#5fe08a'; ctx.shadowBlur=6; ctx.fillStyle='#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings (carrying a wooly = white blob)
+  for(const d of dragonling){ const gr=d.grown; const x=d.x*SC,y=d.y*SC,r=SC*(gr?0.9:0.6); ctx.shadowColor='#5fe08a'; ctx.shadowBlur=gr?10:6; ctx.fillStyle=gr?'#1c8a3c':'#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    if(gr){ ctx.fillStyle='#1c8a3c'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.5,y-r*0.75); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.5,y-r*0.75); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); } // grown-up wings
+    const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings grow up bigger, with wings, and fly home to the Dragon Island
 }
 
 // ---------- THE GROVE REALM (an overgrown alternate dimension) ----------
@@ -860,11 +890,21 @@ function electGroveKing(){                                                      
   if(treeman.length) treeman[(rnd()*treeman.length)|0].king=true;                       // crown one Treeman
 }
 function natureGoobStep(g){                                                               // a Nature Gooblet: peaceful, plants flora as it roams
-  const a=rnd()*6.283; const nx=g.x+Math.cos(a)*0.7, ny=g.y+Math.sin(a)*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ g.x=nx; g.y=ny; }
+  if(g.fallCd>0) g.fallCd--;
+  let dx,dy;
+  if(groveKingType==='helpful' && gPortalGX>=0 && !(g.fallCd>0)){ const l=Math.hypot(gPortalGX-g.x,gPortalGY-g.y)||1; dx=(gPortalGX-g.x)/l; dy=(gPortalGY-g.y)/l; } // a Helpful King calls it toward the portal home
+  else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+  const nx=g.x+dx*0.7, ny=g.y+dy*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ g.x=nx; g.y=ny; }
   g.E=Math.min(4,(g.E||2)+0.006);                                                        // the grove sustains it
   const i=cidx(g.x,g.y);
   if(gzone[i]===GROVE && !vine[i] && !rose[i] && vineN<FLORACAP && rnd()<0.10){ vine[i]=1; vineN++; }        // red vine-flower in the pear grove
   else if(gzone[i]===WILD && !bramble[i] && !rose[i] && brambleN<FLORACAP && rnd()<0.10){ bramble[i]=1; brambleN++; } // bramble in the wild
+}
+function natureGoobSurfaceStep(g){                                                        // a Nature Gooblet up on the surface: wanders in peace and plants blue flowers
+  if(g.fallCd>0) g.fallCd--;
+  const a=rnd()*6.283; clampMove(g,g.x+Math.cos(a)*0.6,g.y+Math.sin(a)*0.6);              // peaceful wander (water & walls block)
+  g.E=Math.min(4,(g.E||2)+0.004); if(g.W!=null) g.W=Math.min(1,g.W+0.004);                 // the flower keeps it fed & watered
+  if(blueFlora.length<3 && rnd()<0.03 && goodBlueCell(g.x,g.y)) blueFlora.push({x:g.x,y:g.y}); // plant a 🪻 blue flower — never more than 3 on the surface
 }
 function growFlora(){ let vc=0,bc=0; for(let i=0;i<N;i++){ if(vine[i])vc++; else if(bramble[i])bc++; } // recount for caps (keep them as patches, not a takeover)
   const v0=vine.slice(), b0=bramble.slice();
@@ -897,7 +937,14 @@ function stepGrove(){
     if(c.E!=null && c.E<=0) dead.add(i);
   };
   goob.forEach((g,i)=>{ if(g.d!=='grove') return;
-    if(g.nature){ natureGoobStep(g); return; }                                           // already a Nature Gooblet
+    if(g.nature){                                                                        // a Nature Gooblet
+      if(helpful && gPortalGX>=0 && gPortalSX>=0 && !(g.fallCd>0) && (g.x-gPortalGX)**2+(g.y-gPortalGY)**2<3){ // a Helpful King lets it carry a blue flower back up to the surface
+        g.d='up'; g.x=gPortalSX; g.y=gPortalSY; g.fallCd=40;
+        if(blueFlora.length<3 && goodBlueCell(gPortalSX,gPortalSY)) blueFlora.push({x:gPortalSX,y:gPortalSY});
+        return;
+      }
+      natureGoobStep(g); return;
+    }
     g.groveDays=(g.groveDays||0)+1;
     if(g.groveDays>=50){ g.nature=true; g.E=Math.max(g.E||0,2.5); return; }               // 50 days in the Grove -> becomes a Nature Gooblet
     wander(g,i,deadG);
@@ -1021,7 +1068,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
   settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); moat.fill(0); treasury=0; swallCount=0; view='surface';
   genUnderground(); genSky(); genGrove();
-  goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0; castleBuilt=false; kingHome=null;
+  goob=[]; zap=[]; human=[]; lev=[]; blueFlora=[]; day=0; hist.length=0; castleBuilt=false; kingHome=null;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
   p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
@@ -1041,6 +1088,10 @@ function drawTerrain(){ const d=img.data;
 }
 function drawBushes(){ for(const b of bushes){ if(b.food<0.10)continue; const x=b.x*SC,y=b.y*SC, r=SC*(0.28+0.32*b.food);
   ctx.fillStyle=`rgba(255,110,199,${0.55+0.4*b.food})`; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); } }
+function drawBlueFlora(){ for(const f of blueFlora){ const x=f.x*SC,y=f.y*SC,r=SC*0.44;    // 🪻 blue flower: five petals + a golden heart
+  ctx.shadowColor='#8fb8ff'; ctx.shadowBlur=6; ctx.fillStyle='#3b7cff';
+  for(let k=0;k<5;k++){ const a=k/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(a)*r*0.6,y+Math.sin(a)*r*0.6,r*0.46,0,7); ctx.fill(); }
+  ctx.shadowBlur=0; ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y,r*0.36,0,7); ctx.fill(); } }
 function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
 function drawCreatures(){
   const lyr=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
@@ -1164,7 +1215,21 @@ const PLANTIARY=[
   {key:'bram',  name:'Bramble',         emoji:'🌿', realm:'the Grove',   on:()=>view==='grove'&&bramble.some(v=>v===1)},
   {key:'rose',  name:'Rose Bush',       emoji:'🌹', realm:'the Grove',   on:()=>view==='grove'&&rose.some(v=>v===1)},
   {key:'dsnap', name:'Dragonsnap',      emoji:'🐲🌱',realm:'sky (rare)',  on:()=>view==='sky'&&dsnap.length>0},
+  {key:'blue',  name:'Blue Flower',     emoji:'🪻', realm:'surface',     on:()=>view==='surface'&&blueFlora.length>0},
 ];
+// ---------- the Monarch Tracker: who wears each of the five crowns right now ----------
+const MONARCHS=[
+  {emoji:'🌊', name:'Sea Monarch',    realm:'the ocean',      who:()=> (seaMonarch&&seaMonarch.alive) ? (seaMonarch.fromLev?'a risen Leviathan King':'the Sea Dragon') : null },
+  {emoji:'🐉', name:'Dragon Monarch', realm:'the sky islands', who:()=> (dragon&&dragon.alive) ? 'the Green Dragon' : (goldDrag.length?'a Gold Dragon':null) },
+  {emoji:'👑', name:'Human Monarch',  realm:'the surface',     who:()=> human.some(h=>h.king) ? 'the crowned King' : null },
+  {emoji:'🔥', name:'Fire Monarch',   realm:'the lava pool',   who:()=> human.some(h=>h.redKing) ? 'the Red King' : (!fireKingDead ? 'the Fire Giant' : null) },
+  {emoji:'🌲', name:'Nature Monarch', realm:'the Grove',       who:()=> (natureGiant&&natureGiant.alive) ? 'the Nature Giant' : null },
+];
+let monarchOpen=false;
+function renderMonarchs(){ monarchGrid.innerHTML = MONARCHS.map(m=>{ const who=m.who(), has=!!who;
+  return '<div class="mrow'+(has?' has':'')+'"><span class="memoji">'+m.emoji+'</span>'
+    +'<span class="mname">'+m.name+'<br><span class="mrealm">'+m.realm+'</span></span>'
+    +'<span class="mwho">'+(has?'🏆 '+who:'— none —')+'</span></div>'; }).join(''); }
 // ---------- generic codex (drives both the Bestiary and the Plantiary) ----------
 const E=id=>document.getElementById(id);
 function makeCodex(arr, noun, els){ return {arr, noun, seen:new Set(), newly:new Set(), page:0, done:false, open:false, els}; }
@@ -1194,6 +1259,7 @@ function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.oncli
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
   stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepGrove(); collapseSettlements(); immigrate();
+  if(blueFlora.length && frame%20===0) blueFlora=blueFlora.filter(f=>goodBlueCell(f.x,f.y)); // a blue flower left underwater or under a wall wilts away
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
   if(sdirty){ computeSDist(); sdirty=false; }
   if(frame%60===0) driftMoist(0.04);
@@ -1204,7 +1270,7 @@ function simStep(){ frame++; day++;
 }
 function loop(){
   if(playing){ acc+=simSpeed; let steps=Math.floor(acc); acc-=steps; if(steps>8)steps=8; for(let s=0;s<steps;s++) simStep(); }
-  if(view==='under') drawUnder(); else if(view==='sky') drawSky(); else if(view==='grove') drawGrove(); else { drawTerrain(); drawBushes(); drawHolesSurface(); }
+  if(view==='under') drawUnder(); else if(view==='sky') drawSky(); else if(view==='grove') drawGrove(); else { drawTerrain(); drawBushes(); drawBlueFlora(); drawHolesSurface(); }
   drawCreatures();
   document.getElementById('ng').textContent=upCount(goob);
   document.getElementById('nz').textContent=upCount(zap);
@@ -1228,6 +1294,7 @@ function loop(){
   drawGraph();
   markCodex(bestiary); if(bestiary.open) renderCodex(bestiary);                           // discover creatures & plants as they appear on screen
   markCodex(plantiary); if(plantiary.open) renderCodex(plantiary);
+  if(monarchOpen) renderMonarchs();                                                        // the Monarch Tracker updates live while it's open
   requestAnimationFrame(loop);
 }
 function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.round(gyc/moistC.scale);
@@ -1295,5 +1362,10 @@ FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?
 const bestiary=makeCodex(BESTIARY,'creatures',{overlay:E('book'),grid:E('bookgrid'),pageLbl:E('bookpage'),prog:E('bookprog'),prev:E('bookprev'),next:E('booknext'),btn:E('bookbtn'),close:E('bookx'),badgeBtn:E('badgebtn'),badgeOverlay:E('badge'),badgeClose:E('badgex'),badgeMsg:E('badgemsg')});
 const plantiary=makeCodex(PLANTIARY,'plants',{overlay:E('plant'),grid:E('plantgrid'),pageLbl:E('plantpage'),prog:E('plantprog'),prev:E('plantprev'),next:E('plantnext'),btn:E('plantbtn'),close:E('plantx'),badgeBtn:E('plantbadgebtn'),badgeOverlay:E('plantbadge'),badgeClose:E('plantbadgex'),badgeMsg:E('plantbadgemsg')});
 wireCodex(bestiary); wireCodex(plantiary);
+// the Monarch Tracker overlay
+const monarchOverlay=E('monarch'), monarchGrid=E('monarchgrid');
+E('monarchbtn').onclick=()=>{ monarchOpen=true; renderMonarchs(); monarchOverlay.classList.add('open'); };
+E('monarchx').onclick=()=>{ monarchOpen=false; monarchOverlay.classList.remove('open'); };
+monarchOverlay.onclick=e=>{ if(e.target===monarchOverlay){ monarchOpen=false; monarchOverlay.classList.remove('open'); } };
 newWorld(); loop();
 </script></body></html>
