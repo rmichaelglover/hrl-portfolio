@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The HRL Lab — one engine, live</title>
+<meta name="description" content="Live, in-browser demos of the generic Hierarchical Relaxation Labeling engine: DNA complement by relaxation, order-3 molecular chirality (R/S), and few-shot label propagation. The same sparse prior+noise+higher-order engine, running on the page.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;--rd:#ee5b6b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:900px;margin:0 auto;padding:30px 18px 80px}
+.eyebrow{color:var(--cy);letter-spacing:4px;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+h1{font:700 clamp(26px,5vw,44px)/1.05 ui-serif,Georgia,serif;margin:0 0 8px}
+.tag{color:var(--dim);max-width:680px;margin:0 auto 6px}
+.tag b{color:var(--ink)}
+.crumbs{margin:14px 0 8px;font:12px ui-monospace,monospace}
+.crumbs a{color:var(--cy);text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:5px 12px;margin:0 3px}
+.card{background:#0a1020;border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px;margin:22px auto;text-align:left;max-width:760px}
+.card h2{font:600 21px ui-serif,Georgia,serif;margin:0 0 3px;color:#fff}
+.card h2 .k{color:var(--dim);font:11px ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px}
+.card p{color:var(--dim);font-size:13.5px;margin:0 0 14px}.card p b{color:var(--ink)}.card p i{color:var(--gd);font-style:normal}
+canvas{width:100%;background:#02030a;border:1px solid var(--line);border-radius:12px;display:block}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:13px;font:13px ui-monospace,monospace;color:var(--dim)}
+button{background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:9px;padding:8px 14px;cursor:pointer;font:13px ui-monospace,monospace;transition:background .14s,border-color .14s}
+button:hover{background:#1a2c50;border-color:var(--cy)}
+.pill{margin-left:auto;padding:5px 12px;border-radius:16px;border:1px solid;font-weight:bold;letter-spacing:1px}
+.readout{margin-top:11px;font:12.5px ui-monospace,monospace;color:var(--dim);background:#070c18;border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.readout b{color:var(--cy)} .readout .r{color:var(--gr)} .readout .s{color:var(--pu)}
+footer{color:var(--dim);font-size:13px;margin-top:34px}
+footer a{color:var(--cy);text-decoration:none}
+.legend{display:flex;gap:5px 14px;flex-wrap:wrap;justify-content:center;margin-top:9px;font:12px ui-monospace,monospace;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+</style></head><body><div class="wrap">
+<div class="eyebrow">Relaxation Labeling · one engine, live in your browser</div>
+<h1>The HRL Lab</h1>
+<p class="tag">The <b>generic</b> HRL engine — a respected prior, a <b>noise / null-reject</b> label, and
+ <b>sparse higher-order factors</b> — running right here on three problems at once. Same core each time; only the
+ factors and prior change.</p>
+<div class="crumbs"><a href="../">← the portfolio</a> <a href="../genesis/">Project Genesis</a>
+ <a href="https://github.com/mannyglover/relaxation-labeling">the engine ↗</a></div>
+
+<!-- ============ 1. DNA ============ -->
+<div class="card">
+  <h2><span class="k">order-2 · pairwise</span>🧬 DNA complement by relaxation</h2>
+  <p>Nucleotide positions are the objects; <b>{A,C,G,T}</b> the labels. The top strand is <b>seeded</b>; the bottom
+   starts unknown. One pairwise factor carries the <b>Watson–Crick</b> kernel (A–T, C–G reinforce, the rest suppress),
+   and the field relaxes the bottom strand into the exact <i>complement</i>.</p>
+  <canvas id="dna" height="200"></canvas>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--gr)"></i>A</span>
+    <span><i class="dot" style="background:var(--rd)"></i>T</span>
+    <span><i class="dot" style="background:var(--cy)"></i>C</span>
+    <span><i class="dot" style="background:var(--gd)"></i>G</span>
+  </div>
+  <div class="row"><button id="dnaNew">↺ new random strand</button><button id="dnaReset">⟲ re-seed &amp; relax</button>
+   <span id="dnaStat" class="pill" style="color:var(--gr);border-color:#1e5e3e">relaxing…</span></div>
+</div>
+
+<!-- ============ 2. CHIRALITY ============ -->
+<div class="card">
+  <h2><span class="k">order-3 · trinity</span>⚗️ Chirality — the order-3 term sees handedness</h2>
+  <p>A carbon with four different groups is <b>chiral</b>: R or S. Handedness is the <b>signed volume</b> of the three
+   top-priority bond vectors — the contraction of them against the Levi-Civita tensor, exactly what the engine's
+   <b>order-3 factor</b> computes. Mirror the molecule and it <i>flips</i>. A pairwise term can't: the mirror image has
+   identical distances.</p>
+  <canvas id="chi" height="240"></canvas>
+  <div class="row"><button id="chiMirror">🪞 mirror it</button><button id="chiSpin">⏯ spin</button>
+   <span id="chiPill" class="pill">R</span></div>
+  <div class="readout" id="chiOut"></div>
+</div>
+
+<!-- ============ 3. FEW-SHOT ============ -->
+<div class="card">
+  <h2><span class="k">order-2 · prior</span>🎯 Few-shot label propagation</h2>
+  <p>Two communities joined by a bridge. A homophily rule (neighbours share a label) plus a <b>single seed</b> per
+   side — the whole graph settles into the right two-colouring. Many free rules, few supervised anchors: the
+   data-efficiency thesis, in miniature.</p>
+  <canvas id="graph" height="230"></canvas>
+  <div class="row"><button id="graphReset">⟲ re-seed &amp; relax</button>
+   <span id="graphStat" class="pill" style="color:var(--cy);border-color:#1e4a5e">2 seeds → 6 nodes</span></div>
+</div>
+
+<footer>The same engine powers all three — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>.
+ Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
+</div>
+<script>
+// ---------- the generic HRL engine, ported to JS (prior + pairwise support) ----------
+const zeros=(n,L)=>Array.from({length:n},()=>new Array(L).fill(0));
+const normRows=M=>M.map(r=>{let s=0;for(const v of r)s+=v;s=s||1;return r.map(v=>v/s);});
+const minmaxRows=M=>M.map(r=>{let lo=1e9,hi=-1e9;for(const v of r){if(v<lo)lo=v;if(v>hi)hi=v;}const sp=hi-lo;return sp>0?r.map(v=>(v-lo)/sp):r.map(()=>0);});
+function addPairwise(S,sup,edges,C){const L=C.length;
+  for(const [i,k] of edges){
+    for(let j=0;j<L;j++){let a=0;for(let l=0;l<L;l++)a+=C[j][l]*S[k][l];sup[i][j]+=a;}
+    for(let l=0;l<L;l++){let a=0;for(let j=0;j<L;j++)a+=C[j][l]*S[i][j];sup[k][l]+=a;}
+  }}
+function step(st){const n=st.S.length,L=st.S[0].length;let sup=zeros(n,L);
+  addPairwise(st.S,sup,st.edges,st.C);sup=minmaxRows(sup);
+  const upd=st.S.map((row,i)=>row.map((s,j)=>Math.pow(st.prior[i][j],st.ps)*Math.pow(s,1-st.ps)*(1+sup[i][j])));
+  st.S=normRows(upd);}
+const argmax=r=>{let mi=0;for(let i=1;i<r.length;i++)if(r[i]>r[mi])mi=i;return mi;};
+function dpr(cv){const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);
+  cv.width=r.width*d;cv.height=cv.height*d/(cv._h?1:1);return d;}
+
+// ---------- 1. DNA ----------
+const BASES="ACGT", BCOL={A:'#5fe3a0',C:'#37e6ff',G:'#e8c170',T:'#ee5b6b'}, COMP={A:3,T:0,C:2,G:1};
+const dnaCv=document.getElementById('dna'), dctx=dnaCv.getContext('2d');
+let dnaState, dnaSeq, dnaTop;
+function randSeq(n){let s='';for(let i=0;i<n;i++)s+=BASES[Math.random()*4|0];return s;}
+function dnaInit(seq){dnaSeq=seq;const n=seq.length;dnaTop=n;
+  const C=[[-1,-1,-1,1],[-1,-1,1,-1],[-1,1,-1,-1],[1,-1,-1,-1]]; // WC: A-T,C-G reinforce
+  const edges=[];for(let i=0;i<n;i++)edges.push([i,n+i]);
+  const prior=[];for(let i=0;i<n;i++){const r=[0,0,0,0];r[BASES.indexOf(seq[i])]=1;prior.push(r);}
+  for(let i=0;i<n;i++)prior.push([.25,.25,.25,.25]);
+  const S=prior.map(r=>r.slice());
+  dnaState={S,prior,ps:.9,edges,C};}
+function dnaDraw(){const d=Math.min(2,devicePixelRatio||1),W=dnaCv.clientWidth;dnaCv.width=W*d;dnaCv.height=200*d;dctx.setTransform(d,0,0,d,0,0);
+  dctx.clearRect(0,0,W,200);const n=dnaSeq.length,pad=18,cw=(W-2*pad)/n;
+  const want=[...dnaSeq].map(b=>BASES[COMP[b]]);let ok=0;
+  for(let i=0;i<n;i++){const x=pad+cw*(i+.5);
+    // top (seeded)
+    dctx.font='bold 15px ui-monospace,monospace';dctx.textAlign='center';
+    dctx.fillStyle=BCOL[dnaSeq[i]];dctx.fillText(dnaSeq[i],x,40);
+    // rungs
+    dctx.strokeStyle='rgba(120,140,190,.28)';dctx.beginPath();dctx.moveTo(x,50);dctx.lineTo(x,150);dctx.stroke();
+    // bottom relaxed base
+    const row=dnaState.S[n+i],bi=argmax(row),conf=row[bi],base=BASES[bi];
+    dctx.globalAlpha=.35+.65*Math.min(1,(conf-.25)/.5>0?(conf-.25)/.7:0);
+    dctx.fillStyle=BCOL[base];dctx.fillText(base,x,168);dctx.globalAlpha=1;
+    if(base===want[i])ok++;
+    // 4-way strength bars
+    for(let j=0;j<4;j++){const bh=28*row[j];dctx.fillStyle=BCOL[BASES[j]];dctx.globalAlpha=.85;
+      dctx.fillRect(x-cw*.32+j*(cw*.64/4),120-bh,cw*.64/4-1,bh);}
+    dctx.globalAlpha=1;
+  }
+  dctx.fillStyle='#6b7699';dctx.font='11px ui-monospace,monospace';dctx.textAlign='left';
+  dctx.fillText("5'  top strand (seeded)",pad,20);dctx.fillText("3'  bottom (relaxing)",pad,190);
+  const st=document.getElementById('dnaStat');
+  if(ok===n){st.textContent='✓ complement ('+n+'/'+n+')';st.style.color='var(--gr)';st.style.borderColor='#1e5e3e';}
+  else{st.textContent='relaxing… '+ok+'/'+n;st.style.color='var(--gd)';st.style.borderColor='#5e4a1e';}
+}
+document.getElementById('dnaNew').onclick=()=>dnaInit(randSeq(16));
+document.getElementById('dnaReset').onclick=()=>dnaInit(dnaSeq);
+dnaInit(randSeq(16));
+
+// ---------- 2. CHIRALITY ----------
+const chiCv=document.getElementById('chi'), cctx=chiCv.getContext('2d');
+const SUBS=[{n:'Br',c:'#c0562e',z:35},{n:'Cl',c:'#5fe3a0',z:17},{n:'F',c:'#c060ff',z:9},{n:'H',c:'#cfd8ee',z:1}];
+// (R)-CHFClBr base geometry: H (lowest) points away; Br->Cl->F clockwise from +z
+let CHI=[[0,1,.5],[.866,-.5,.5],[-.866,-.5,.5],[0,0,-1]].map(v=>{const m=Math.hypot(...v);return v.map(x=>x/m);});
+let chiMirror=false, chiSpin=true, chiAng=0;
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+function chiVecs(){let v=CHI.map(p=>chiMirror?[p[0],p[1],-p[2]]:p.slice());
+  const ca=Math.cos(chiAng),sa=Math.sin(chiAng);       // spin about y
+  return v.map(([x,y,z])=>[x*ca+z*sa,y,-x*sa+z*ca]);}
+function chiDraw(){const d=Math.min(2,devicePixelRatio||1),W=chiCv.clientWidth,H=240;chiCv.width=W*d;chiCv.height=H*d;cctx.setTransform(d,0,0,d,0,0);
+  cctx.clearRect(0,0,W,H);const cx=W/2,cy=H/2,R=Math.min(W,H)*0.34;
+  const v=chiVecs();
+  // signed volume in priority order Br,Cl,F,H (already priority-sorted by z)
+  const V=dot(sub(v[0],v[3]),cross(sub(v[1],v[3]),sub(v[2],v[3])));
+  const isR=V<0;
+  // draw bonds + atoms, sorted back-to-front by projected depth (z)
+  const order=[0,1,2,3].sort((a,b)=>v[a][2]-v[b][2]);
+  cctx.strokeStyle='rgba(150,170,220,.4)';cctx.lineWidth=2;
+  for(const i of order){cctx.beginPath();cctx.moveTo(cx,cy);cctx.lineTo(cx+v[i][0]*R,cy-v[i][1]*R);cctx.stroke();}
+  cctx.fillStyle='#2a3350';cctx.beginPath();cctx.arc(cx,cy,15,0,7);cctx.fill();
+  cctx.fillStyle='#cfd8ee';cctx.font='bold 12px ui-monospace,monospace';cctx.textAlign='center';cctx.textBaseline='middle';cctx.fillText('C',cx,cy);
+  for(const i of order){const x=cx+v[i][0]*R,y=cy-v[i][1]*R,rr=13+5*v[i][2];
+    cctx.fillStyle=SUBS[i].c;cctx.globalAlpha=.6+.4*(v[i][2]+1)/2;cctx.beginPath();cctx.arc(x,y,Math.max(8,rr),0,7);cctx.fill();cctx.globalAlpha=1;
+    cctx.fillStyle='#08111f';cctx.font='bold 12px ui-monospace,monospace';cctx.fillText(SUBS[i].n,x,y);}
+  const pill=document.getElementById('chiPill');
+  pill.textContent=isR?'R':'S';pill.style.color=isR?'var(--gr)':'var(--pu)';pill.style.borderColor=isR?'#1e5e3e':'#3a1e5e';
+  document.getElementById('chiOut').innerHTML=
+    'priority Br &gt; Cl &gt; F &gt; H · order-3 signed volume <b>V = '+V.toFixed(2)+'</b> → '
+    +(isR?'<span class="r">R (clockwise)</span>':'<span class="s">S (counter-clockwise)</span>')
+    +'<br>mirror image: <b>V = '+(-V).toFixed(2)+'</b> (flips) · pairwise distances identical → a pairwise term is <b>blind</b>';
+}
+document.getElementById('chiMirror').onclick=()=>{chiMirror=!chiMirror;};
+document.getElementById('chiSpin').onclick=()=>{chiSpin=!chiSpin;};
+
+// ---------- 3. FEW-SHOT GRAPH ----------
+const gCv=document.getElementById('graph'), gctx=gCv.getContext('2d');
+const GCOL=['#37e6ff','#e8c170'];
+const NODES=[[.22,.30],[.14,.62],[.34,.66],[.66,.34],[.86,.40],[.78,.70]];
+const GEDGES=[[0,1],[1,2],[2,0],[3,4],[4,5],[5,3],[2,3]];
+let gState;
+function graphInit(){const prior=[[1,0],[.5,.5],[.5,.5],[0,1],[.5,.5],[.5,.5]];
+  gState={S:prior.map(r=>r.slice()),prior,ps:.85,edges:GEDGES,C:[[1,0],[0,1]]};}
+function graphDraw(){const d=Math.min(2,devicePixelRatio||1),W=gCv.clientWidth,H=230;gCv.width=W*d;gCv.height=H*d;gctx.setTransform(d,0,0,d,0,0);
+  gctx.clearRect(0,0,W,H);
+  gctx.strokeStyle='rgba(150,170,220,.35)';gctx.lineWidth=2;
+  for(const [a,b] of GEDGES){gctx.beginPath();gctx.moveTo(NODES[a][0]*W,NODES[a][1]*H);gctx.lineTo(NODES[b][0]*W,NODES[b][1]*H);gctx.stroke();}
+  for(let i=0;i<6;i++){const x=NODES[i][0]*W,y=NODES[i][1]*H,row=gState.S[i],c=argmax(row),conf=Math.abs(row[0]-row[1]);
+    const seed=(i===0||i===3);
+    gctx.fillStyle=GCOL[c];gctx.globalAlpha=.35+.65*conf;gctx.beginPath();gctx.arc(x,y,17,0,7);gctx.fill();gctx.globalAlpha=1;
+    gctx.lineWidth=seed?3:1.5;gctx.strokeStyle=seed?'#fff':'rgba(255,255,255,.3)';gctx.stroke();
+    if(seed){gctx.fillStyle='#08111f';gctx.font='bold 10px ui-monospace,monospace';gctx.textAlign='center';gctx.textBaseline='middle';gctx.fillText('seed',x,y);}
+  }
+}
+document.getElementById('graphReset').onclick=graphInit;
+graphInit();
+
+// ---------- shared loop: relax slowly so you can watch it settle ----------
+let tick=0;
+function loop(){
+  tick++;
+  if(tick%3===0){step(dnaState);step(gState);}
+  if(chiSpin)chiAng+=0.012;
+  dnaDraw();chiDraw();graphDraw();
+  requestAnimationFrame(loop);
+}
+addEventListener('resize',()=>{});
+loop();
+</script>
+</body></html>
