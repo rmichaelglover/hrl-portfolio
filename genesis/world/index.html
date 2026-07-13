@@ -34,6 +34,25 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .glegend button.off{opacity:.32}
 .glegend button:hover{border-color:#2f5aa0}
 .gsw{width:15px;height:3px;border-radius:2px;display:inline-block}
+.book{display:none;position:fixed;inset:0;background:rgba(4,6,14,.82);z-index:50;align-items:center;justify-content:center}
+.book.open{display:flex}
+.bookinner{background:#0c1226;border:1px solid #2f5aa0;border-radius:14px;padding:16px 18px;width:min(92vw,560px);box-shadow:0 12px 48px rgba(0,0,0,.6)}
+.bookhead{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--ink);margin-bottom:12px}
+.bookhead b{color:#ffd27f}
+.bdim{color:var(--dim);font-size:13px;font-weight:normal}
+.bookhead #bookx{margin-left:auto;background:#0c1226;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px}
+.bookgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:230px}
+.bcard{background:#070c18;border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center;transition:border-color .14s}
+.bcard.seen{border-color:#2f5aa0}
+.bemoji{font-size:34px;line-height:1.1}
+.bcard.locked .bemoji{filter:grayscale(1) brightness(.6)}
+.bname{margin-top:7px;font:12px ui-monospace,monospace;color:var(--ink)}
+.bcard.locked .bname{color:var(--dim)}
+.brealm{font:10px ui-monospace,monospace;color:var(--dim);margin-top:2px}
+.booknav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
+.booknav button{background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:6px 14px;cursor:pointer;font:13px ui-monospace,monospace}
+.booknav button:disabled{opacity:.35;cursor:default}
+.bhint{margin-top:12px;text-align:center;font-size:11.5px;color:var(--dim)}.bhint b{color:#ffd27f}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -76,7 +95,14 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="reset">↺ New world</button>
   <span class="sep"></span>
   <button id="viewbtn">🕳️ Go Underground</button>
+  <button id="bookbtn">📖 Bestiary</button>
 </div>
+<div class="book" id="book"><div class="bookinner">
+  <div class="bookhead"><b>📖 Bestiary</b> <span id="bookprog" class="bdim"></span> <button id="bookx">✕</button></div>
+  <div class="bookgrid" id="bookgrid"></div>
+  <div class="booknav"><button id="bookprev">◀ Prev</button> <span id="bookpage" class="bdim">Page 1</span> <button id="booknext">Next ▶</button></div>
+  <div class="bhint">Creatures you haven't seen on screen yet stay <b>❓ ???</b> — go find them to fill your book!</div>
+</div></div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
 <div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
@@ -195,6 +221,10 @@ who <b>expels</b> any stranger that strays too near its clearing.
 <br><br>
 <b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
 Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
+<br><br>
+<b>The Bestiary.</b> Open the <b>📖 Bestiary</b> to page through a book of every creature in the world. Any creature you haven't
+<b>seen on your own screen yet</b> stays a mystery — a <b>❓ ???</b> — until you find it (or make it appear), so explore every realm
+and trigger every monarch to fill all the pages.
 </div>
 <p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
 </div>
@@ -972,8 +1002,47 @@ function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if
   ggx.globalAlpha=1;
 }
 
+// ---------- the Bestiary: a book of every creature; unseen ones stay ??? ----------
+const layerOf=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
+const seenB=new Set(); let bookPage=0; const BPER=6;
+const anyIn=arr=>arr.some(c=>layerOf(c)===view);
+const BESTIARY=[
+  {key:'goob',   name:'Gooblet',        emoji:'🔴', realm:'anywhere',    on:()=>anyIn(goob)},
+  {key:'zap',    name:'Zappy',          emoji:'🔵', realm:'anywhere',    on:()=>anyIn(zap)},
+  {key:'human',  name:'Human',          emoji:'🟥', realm:'anywhere',    on:()=>human.some(h=>layerOf(h)===view&&!h.vessel&&!h.fireSword&&!h.redKing&&!h.king)},
+  {key:'bush',   name:'Pink Bush',      emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
+  {key:'lev',    name:'Leviathan',      emoji:'🐋', realm:'ocean',       on:()=>view==='surface'&&lev.length>0},
+  {key:'folk',   name:'Sea Folk',       emoji:'🌊', realm:'ocean',       on:()=>view==='surface'&&folk.length>0},
+  {key:'sea',    name:'Sea Monarch',    emoji:'🐉', realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive},
+  {key:'spec',   name:'Specter',        emoji:'👻', realm:'underground', on:()=>view==='under'&&spec.length>0},
+  {key:'firem',  name:'Fire Minion',    emoji:'🔥', realm:'underground', on:()=>view==='under'&&fire.length>0},
+  {key:'giant',  name:'The Fire Giant', emoji:'👹', realm:'underground', on:()=>view==='under'&&giantActive},
+  {key:'wooly',  name:'Wooly',          emoji:'🐑', realm:'sky',         on:()=>view==='sky'&&wooly.length>0},
+  {key:'angel',  name:'Angel',          emoji:'👼', realm:'sky',         on:()=>view==='sky'&&angels.length>0},
+  {key:'dling',  name:'Dragonling',     emoji:'🐲', realm:'sky',         on:()=>view==='sky'&&dragonling.length>0},
+  {key:'dragon', name:'Green Dragon',   emoji:'🐉', realm:'sky',         on:()=>view==='sky'&&dragon&&dragon.alive},
+  {key:'sniffer',name:'Sniffer',        emoji:'🐭', realm:'the Grove',   on:()=>view==='grove'&&sniffer.length>0},
+  {key:'claw',   name:'Claw',           emoji:'🐾', realm:'the Grove',   on:()=>claw.some(c=>c.d==='up'?view==='surface':view==='grove')},
+  {key:'treeman',name:'Treeman',        emoji:'🌳', realm:'the Grove',   on:()=>view==='grove'&&treeman.length>0},
+  {key:'nature', name:'Nature Giant',   emoji:'🌲', realm:'the Grove',   on:()=>view==='grove'&&natureGiant&&natureGiant.alive},
+  {key:'king',   name:'The King',       emoji:'👑', realm:'sky/surface', on:()=>human.some(h=>h.king&&layerOf(h)===view)},
+  {key:'vessel', name:'Fire Vessel',    emoji:'🔥', realm:'surface',     on:()=>human.some(h=>h.vessel&&layerOf(h)===view)},
+  {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
+  {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
+];
+function markSeen(){ for(const b of BESTIARY) if(b.on()) seenB.add(b.key); }              // called each frame from the map you're watching
+function renderBook(){ const grid=document.getElementById('bookgrid'); const pages=Math.ceil(BESTIARY.length/BPER);
+  bookPage=Math.max(0,Math.min(bookPage,pages-1));
+  const start=bookPage*BPER, slice=BESTIARY.slice(start,start+BPER);
+  grid.innerHTML=slice.map(b=>{ const s=seenB.has(b.key);
+    return '<div class="bcard '+(s?'seen':'locked')+'"><div class="bemoji">'+(s?b.emoji:'❓')+'</div><div class="bname">'+(s?b.name:'???')+'</div><div class="brealm">'+(s?b.realm:'&nbsp;')+'</div></div>'; }).join('');
+  document.getElementById('bookpage').textContent='Page '+(bookPage+1)+' / '+pages;
+  document.getElementById('bookprog').textContent='('+seenB.size+' / '+BESTIARY.length+' discovered)';
+  document.getElementById('bookprev').disabled=bookPage<=0; document.getElementById('booknext').disabled=bookPage>=pages-1;
+}
+
 // ---------- loop + interaction ----------
-let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
+let playing=true, frame=0, tool='goob', simSpeed=1, acc=0, bookOpen=false;
 function simStep(){ frame++; day++;
   stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepGrove(); collapseSettlements(); immigrate();
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
@@ -1008,6 +1077,7 @@ function loop(){
   document.getElementById('ngk').textContent=KINGLABEL[groveKingType];
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
+  markSeen(); if(bookOpen) renderBook();                                                 // discover creatures as they appear on screen
   requestAnimationFrame(loop);
 }
 function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.round(gyc/moistC.scale);
@@ -1070,5 +1140,14 @@ FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?
   b.title='Click to show or hide '+f.label+' on the graph';
   b.onclick=()=>{ f.on=!f.on; b.classList.toggle('off',!f.on); drawGraph(); };
   gleg.appendChild(b); });
+// the Bestiary book
+const bookEl=document.getElementById('book');
+function openBook(){ bookOpen=true; renderBook(); bookEl.classList.add('open'); }
+function closeBook(){ bookOpen=false; bookEl.classList.remove('open'); }
+document.getElementById('bookbtn').onclick=openBook;
+document.getElementById('bookx').onclick=closeBook;
+bookEl.onclick=e=>{ if(e.target===bookEl) closeBook(); };                                 // click the backdrop to close
+document.getElementById('bookprev').onclick=()=>{ bookPage--; renderBook(); };
+document.getElementById('booknext').onclick=()=>{ bookPage++; renderBook(); };
 newWorld(); loop();
 </script></body></html>
