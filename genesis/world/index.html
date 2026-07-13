@@ -616,6 +616,8 @@ function stepUnder(){                                                           
 }
 function stepSky(){
   if(day-lastDragonCheck>=1000){ lastDragonCheck=day; if((!dragon||!dragon.alive) && dragonling.length>0){ const d0=dragonling[0]; dragon={x:d0.x,y:d0.y,alive:true}; dragonling.splice(0,1); } } // no Dragon King -> a dragonling rises to the throne
+  if(dragon && dragon.alive && dragonIsleX>=0){ const dd=(dragon.x-dragonIsleX)**2+(dragon.y-dragonIsleY)**2; // the Dragon King flies home to the red island (a risen dragonling walks back from wherever it rose)
+    if(dd>4){ const l=Math.hypot(dragonIsleX-dragon.x,dragonIsleY-dragon.y)||1; dragon.x+=(dragonIsleX-dragon.x)/l*0.6; dragon.y+=(dragonIsleY-dragon.y)/l*0.6; } }
   if(dragon && dragon.alive){                                                           // 10 humans on the dragon island -> a 50/50 battle
     const near=[]; human.forEach((m,i)=>{ if(m.d==='sky' && (m.x-dragon.x)**2+(m.y-dragon.y)**2<120) near.push(i); });
     if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!human.some(h=>h.king)){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants (never more than one King)
@@ -694,6 +696,28 @@ function stepSky(){
     });
     if(deadGD.size) goldDrag=goldDrag.filter((_,i)=>!deadGD.has(i));
   }
+}
+function stepPurple(){                                                                     // 🟣🐉 Purple Dragons — born in the sky, they ride the portal down to visit the blue flowers
+  if(purpleDrag.length<6 && rnd()<0.012){ for(let t=0;t<200;t++){ const i=(rnd()*N)|0; if(sky[i]){ purpleDrag.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,d:'sky',age:0}); break; } } } // born on a sky island
+  if(!purpleDrag.length) return;
+  const dead=new Set();
+  purpleDrag.forEach((p,pi)=>{ p.age++; let dx,dy;
+    if(p.d==='sky'){
+      if(blueFlora.length>0 && portalUX>=0){ const l=Math.hypot(portalUX-p.x,portalUY-p.y)||1; dx=(portalUX-p.x)/l; dy=(portalUY-p.y)/l; } // blue flowers below -> head for the sky portal
+      else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                        // none yet -> roam the sky
+      const nx=p.x+dx*0.9, ny=p.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&skyLand(nx,ny)){ p.x=nx; p.y=ny; }
+      else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283,mx=p.x+Math.cos(a)*0.9,my=p.y+Math.sin(a)*0.9; if(mx>=0&&mx<GW&&my>=0&&my<GH&&skyLand(mx,my)){p.x=mx;p.y=my;break;} } }
+      if(p.fallCd>0)p.fallCd--; else if(portalUX>=0 && blueFlora.length>0 && portalSX>=0 && (p.x-portalUX)**2+(p.y-portalUY)**2<1.8){ p.d='up'; p.x=portalSX; p.y=portalSY; p.fallCd=40; } // ride the portal down to the surface
+    } else {                                                                               // on the surface: fly to the nearest blue flower and hover
+      if(p.fallCd>0)p.fallCd--;
+      let tx=null,ty=null,bd=1e9; for(const f of blueFlora){ const dd=(f.x-p.x)**2+(f.y-p.y)**2; if(dd<bd){bd=dd;tx=f.x;ty=f.y;} }
+      if(tx!==null){ if(bd>1.3){ const l=Math.hypot(tx-p.x,ty-p.y)||1; dx=(tx-p.x)/l; dy=(ty-p.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.3; dy=Math.sin(a)*0.3; } } // hover at the flower
+      else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                        // flowers gone -> wander
+      const nx=p.x+dx, ny=p.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ p.x=nx; p.y=ny; }         // purple dragons FLY anywhere on the surface
+    }
+    if(p.age>4000) dead.add(pi);
+  });
+  if(dead.size) purpleDrag=purpleDrag.filter((_,i)=>!dead.has(i));
 }
 function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
   const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
@@ -777,16 +801,17 @@ const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(
 let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
 let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0, dsnap=[];  // dsnap = rare Dragonsnap plants
+let purpleDrag=[], dragonIsleX=-1, dragonIsleY=-1;   // 🟣🐉 Purple Dragons (born in the sky, visit the blue flowers) + the Dragon King's home red island
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[];
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[]; purpleDrag=[];
   goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
     for(let dy=-R-1;dy<=R+1;dy++)for(let dx=-R-1;dx<=R+1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R+(rnd()*7-3)) sky[idx(x,y)]=1; } }
   const dc=centers[(rnd()*centers.length)|0], R=dc.R+1;                                  // one island is the dragon's — dark red
   for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=dc.cx+dx,y=dc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyRed[i]=1; } }
-  dragon={x:dc.cx+0.5,y:dc.cy+0.5,alive:true};
+  dragon={x:dc.cx+0.5,y:dc.cy+0.5,alive:true}; dragonIsleX=dc.cx+0.5; dragonIsleY=dc.cy+0.5;   // remember the red island so the Dragon King can always fly home
   let gc=null; for(let k=0;k<centers.length;k++){ if(centers[k]!==dc){ gc=centers[k]; break; } } // a SECOND special island — the Gold Dragon's (yellow), with a golden egg
   if(gc){ const gR=gc.R+1; for(let dy=-gR;dy<=gR;dy++)for(let dx=-gR;dx<=gR;dx++){ const x=gc.cx+dx,y=gc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=gR*gR){ const i=idx(x,y); sky[i]=1; skyGold[i]=1; } }
     goldEggX=gc.cx+0.5; goldEggY=gc.cy+0.5; goldEgg=true; }
@@ -838,6 +863,7 @@ function drawSky(){ const d=img.data;
   for(const d of dragonling){ const gr=d.grown; const x=d.x*SC,y=d.y*SC,r=SC*(gr?0.9:0.6); ctx.shadowColor='#5fe08a'; ctx.shadowBlur=gr?10:6; ctx.fillStyle=gr?'#1c8a3c':'#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     if(gr){ ctx.fillStyle='#1c8a3c'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.5,y-r*0.75); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.5,y-r*0.75); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); } // grown-up wings
     const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings grow up bigger, with wings, and fly home to the Dragon Island
+  for(const p of purpleDrag){ if(p.d==='sky') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); }     // 🟣🐉 Purple Dragons up in the sky
 }
 
 // ---------- THE GROVE REALM (an overgrown alternate dimension) ----------
@@ -904,7 +930,8 @@ function natureGoobSurfaceStep(g){                                              
   if(g.fallCd>0) g.fallCd--;
   const a=rnd()*6.283; clampMove(g,g.x+Math.cos(a)*0.6,g.y+Math.sin(a)*0.6);              // peaceful wander (water & walls block)
   g.E=Math.min(4,(g.E||2)+0.004); if(g.W!=null) g.W=Math.min(1,g.W+0.004);                 // the flower keeps it fed & watered
-  if(blueFlora.length<3 && rnd()<0.03 && goodBlueCell(g.x,g.y)) blueFlora.push({x:g.x,y:g.y}); // plant a 🪻 blue flower — never more than 3 on the surface
+  const farFromPortal = gPortalSX<0 || (g.x-gPortalSX)**2+(g.y-gPortalSY)**2>36;            // plant the flowers AWAY from the portal (Elbie), once it has wandered off
+  if(blueFlora.length<3 && farFromPortal && rnd()<0.03 && goodBlueCell(g.x,g.y)) blueFlora.push({x:g.x,y:g.y}); // plant a 🪻 blue flower — never more than 3 on the surface
 }
 function growFlora(){ let vc=0,bc=0; for(let i=0;i<N;i++){ if(vine[i])vc++; else if(bramble[i])bc++; } // recount for caps (keep them as patches, not a takeover)
   const v0=vine.slice(), b0=bramble.slice();
@@ -939,8 +966,7 @@ function stepGrove(){
   goob.forEach((g,i)=>{ if(g.d!=='grove') return;
     if(g.nature){                                                                        // a Nature Gooblet
       if(helpful && gPortalGX>=0 && gPortalSX>=0 && !(g.fallCd>0) && (g.x-gPortalGX)**2+(g.y-gPortalGY)**2<3){ // a Helpful King lets it carry a blue flower back up to the surface
-        g.d='up'; g.x=gPortalSX; g.y=gPortalSY; g.fallCd=40;
-        if(blueFlora.length<3 && goodBlueCell(gPortalSX,gPortalSY)) blueFlora.push({x:gPortalSX,y:gPortalSY});
+        g.d='up'; g.x=gPortalSX; g.y=gPortalSY; g.fallCd=40;                                // it plants its blue flowers later, once it has wandered away from the portal
         return;
       }
       natureGoobStep(g); return;
@@ -1093,6 +1119,10 @@ function drawBlueFlora(){ for(const f of blueFlora){ const x=f.x*SC,y=f.y*SC,r=S
   for(let k=0;k<5;k++){ const a=k/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(a)*r*0.6,y+Math.sin(a)*r*0.6,r*0.46,0,7); ctx.fill(); }
   ctx.shadowBlur=0; ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y,r*0.36,0,7); ctx.fill(); } }
 function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
+function drawPurpleSprite(x,y,r){ ctx.fillStyle='#7a1fb0'; // little purple wings behind
+  ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.1); ctx.lineTo(x-r*1.35,y-r*0.6); ctx.lineTo(x-r*0.7,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.1); ctx.lineTo(x+r*1.35,y-r*0.6); ctx.lineTo(x+r*0.7,y+r*0.35); ctx.closePath(); ctx.fill();
+  ctx.shadowColor='#c77aff'; ctx.shadowBlur=7; ctx.fillStyle='#9a3ad0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; // purple body + glow
+  const ex=r*0.34,ey=y-r*0.06,er=r*0.17; ctx.fillStyle='#ffe23a'; twoDots(x-ex,x+ex,ey,er); } // gold eyes
 function drawCreatures(){
   const lyr=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
   // GOOBLETS — red, with big dumb googly eyes (they fade when starving/thirsty)
@@ -1139,6 +1169,7 @@ function drawCreatures(){
     ctx.fillStyle='#03102b'; twoDots(x-ex,x+ex,ey,pr);
   }
   if(view==='surface'){                                                                // FOLK + the SEA MONARCH (sea dragon) + invading grove CLAWS
+    for(const p of purpleDrag){ if(p.d==='up') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); } // 🟣🐉 Purple Dragons visiting the blue flowers
     for(const c of claw){ if(c.d==='up') drawClawSprite(c.x*SC,c.y*SC,SC*0.72); }       // Claws sent up by an Aggressive Grove King
     for(const f of folk){ const x=f.x*SC,y=f.y*SC,r=SC*0.55; ctx.fillStyle='#1fb0a0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.36,ey=y-r*0.05,er=r*0.22; ctx.fillStyle='#06201c'; twoDots(x-ex,x+ex,ey,er); }
     if(seaMonarch && seaMonarch.alive){ const grown=seaMonarch.fromLev?Math.min(1,(day-seaMonarch.bornDay)/500):1; const r=SC*(seaMonarch.fromLev?1.05+0.9*grown:1.95); const x=seaMonarch.x*SC,y=seaMonarch.y*SC; const col=seaMonarch.fromLev?'#6a3ab0':'#118f7a', glow=seaMonarch.fromLev?'#b78aff':'#4fe0c0'; ctx.shadowColor=glow; ctx.shadowBlur=18; ctx.fillStyle=col; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.34,ey=y-r*0.1,er=r*0.15; ctx.shadowColor='#fff'; ctx.shadowBlur=10; ctx.fillStyle='#d4fff0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
@@ -1204,6 +1235,7 @@ const BESTIARY=[
   {key:'vessel', name:'Fire Vessel',    emoji:'🔥', realm:'surface',     on:()=>human.some(h=>h.vessel&&layerOf(h)===view)},
   {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
   {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
+  {key:'pdrag',  name:'Purple Dragon',  emoji:'🟣🐉',realm:'sky/surface', on:()=>purpleDrag.some(p=> p.d==='sky'?view==='sky':view==='surface')},
 ];
 // ---------- the Plantiary: the same idea, for the world's plants ----------
 const PLANTIARY=[
@@ -1258,7 +1290,7 @@ function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.oncli
 // ---------- loop + interaction ----------
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
-  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepGrove(); collapseSettlements(); immigrate();
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepGrove(); collapseSettlements(); immigrate();
   if(blueFlora.length && frame%20===0) blueFlora=blueFlora.filter(f=>goodBlueCell(f.x,f.y)); // a blue flower left underwater or under a wall wilts away
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
   if(sdirty){ computeSDist(); sdirty=false; }
