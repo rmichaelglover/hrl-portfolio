@@ -205,11 +205,15 @@ the glowing sky portal to come back down). Some islands are darker <b>forest isl
 hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that catches a Wooly carries it home to the <b>Dragon King</b>
 to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Drop a
 <b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
-the death — a <b>50/50</b> clash of titans.
+the death — a <b>50/50</b> clash of titans. The Gold Dragon has its own <b style="color:#d0b840">golden island</b> where a
+<b style="color:#ffe07a">🥚 golden egg</b> rests: every <b>5000 days</b> it hatches a fresh Gold Dragon and a new egg is laid, so the
+gold line never dies out.
 <br><br>
 <b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
 the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
-servants</b> shuttle wheat from the farm to feed him while he rules from inside his walls.
+servants</b> shuttle wheat from the farm to feed him while he rules from inside his walls. Sometimes the keep is ringed by a
+<b style="color:#3fa0e0">💧 water moat</b> that keeps the Zappies out (his own people can still cross it), and sometimes it's just
+open ground — it varies each time.
 <br><br>
 <b>The Grove — an alternate dimension.</b> Cycle the view button once more to slip into the <b style="color:#3fd06a">🌲 Grove</b>, an
 <b>overgrown</b> world of three biomes: the lush <b style="color:#3fd06a">pear-tree grove</b> where <b style="color:#9a3ad0">purple
@@ -300,7 +304,7 @@ const inWater=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.mi
 const biomeAt=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
 
 // ---------- settlements (brown, human-built) + forest/settlement distance fields ----------
-const settle=new Uint8Array(N), swall=new Uint8Array(N); let settleList=[], sdirty=true, treasury=0, swallCount=0;
+const settle=new Uint8Array(N), swall=new Uint8Array(N), moat=new Uint8Array(N); let settleList=[], sdirty=true, treasury=0, swallCount=0;
 const cidx=(x,y)=>idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)));
 const isSettle=(x,y)=>settle[cidx(x,y)]===1;
 const fdist=new Int16Array(N), sdist=new Int16Array(N);
@@ -320,7 +324,7 @@ const P={ gMeta:0.008,gThirst:0.0045,gHunger:1.5,gDrink:0.40,gRepro:2.4,gReproP:
   hMeta:0.006,hHunger:1.4,hEatGain:2.4,hMaxAge:1500,hStartE:1.4,hSpeed:0.95,hFlee:7,hWoodRate:0.06,hBuild:1.0,hReproAte:6,hCap:70,hThirst:0.0035,hDrink:0.40,hFishGain:2.2,
   levVision:8,levSpeed:0.95,levEat:1.8,levMeta:0.003,levStartE:3.0,levPrey:1.0,levReproAte:15,levMaxAge:4000,levCap:14 };
 let bushes=[];
-const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)]; };
+const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)] && !moat[cidx(x,y)]; };
 function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
 function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
@@ -333,7 +337,7 @@ function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0,ate:0}); }
 function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false}); }
 let lev=[], folk=[], seaMonarch=null, lastSeaChallenge=0;
 function spawnLev(x,y,E){ if(lev.length<P.levCap) lev.push({x,y,E,age:0,ate:0}); }
-function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements + stone walls block
+function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)||swall[cidx(nx,ny)]||moat[cidx(nx,ny)]) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements + stone walls + the King's moat block (Humans can still cross their own moat)
 function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }              // humans on foot: water + their own walls block
 function clampMoveBoat(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }        // a boat may go on water
 function clampMoveW(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||!inWater(nx,ny)) return; c.x=nx;c.y=ny; }             // leviathans: water only
@@ -620,6 +624,8 @@ function stepSky(){
   });
   if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
   if(deadDL.size) dragonling=dragonling.filter((_,i)=>!deadDL.has(i));
+  // THE GOLDEN EGG — every 5000 days it hatches a new Gold Dragon, and a fresh egg is laid on the island
+  if(goldEgg && goldEggX>=0 && day-lastGoldHatch>=5000){ lastGoldHatch=day; goldDrag.push({x:goldEggX,y:goldEggY,age:0}); }
   // GOLD DRAGONS — they hunt ONLY the Green Dragon and duel it to the death (50/50); nothing else concerns them
   if(goldDrag.length){ const deadGD=new Set();
     goldDrag.forEach((gd,gi)=>{ gd.age=(gd.age||0)+1;
@@ -636,7 +642,8 @@ function buildKingCastle(m){                                                    
   for(let dy=-2;dy<=1;dy++)for(let dx=-2;dx<=1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]===WATER)continue;
     if(dx===-2||dx===1||dy===-2||dy===1){ if(!settle[i]){ settle[i]=1; settleList.push(i); } } } // walls = the outer ring, hollow inside
   sdirty=true;
-  for(let k=0;k<28;k++){ const a=k/28*6.283, rr=3.5+rnd()*1.6, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr; if(x>1&&x<GW-1&&y>1&&y<GH-1 && goodBushCell(x,y)) bushes.push({x,y,food:0.9}); } // wheat
+  if(rnd()<0.5){ for(let dy=-3;dy<=2;dy++)for(let dx=-3;dx<=2;dx++){ if(dx===-3||dx===2||dy===-3||dy===2){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]!==WATER && !settle[i] && !swall[i]) moat[i]=1; } } } // ...sometimes ringed by a water moat, sometimes plain ground
+  for(let k=0;k<28;k++){ const a=k/28*6.283, rr=3.9+rnd()*1.6, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr; if(x>1&&x<GW-1&&y>1&&y<GH-1 && goodBushCell(x,y)) bushes.push({x,y,food:0.9}); } // wheat (beyond the moat)
   m.x=kingHome.x; m.y=kingHome.y;
 }
 const upCount=a=>{ let c=0; for(const o of a) if(!o.d||o.d==='up') c++; return c; };
@@ -708,18 +715,23 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 }
 
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
-const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N);
+const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N);
 let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
+let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
 let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0;
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
+  goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
     for(let dy=-R-1;dy<=R+1;dy++)for(let dx=-R-1;dx<=R+1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R+(rnd()*7-3)) sky[idx(x,y)]=1; } }
   const dc=centers[(rnd()*centers.length)|0], R=dc.R+1;                                  // one island is the dragon's — dark red
   for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=dc.cx+dx,y=dc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyRed[i]=1; } }
   dragon={x:dc.cx+0.5,y:dc.cy+0.5,alive:true};
+  let gc=null; for(let k=0;k<centers.length;k++){ if(centers[k]!==dc){ gc=centers[k]; break; } } // a SECOND special island — the Gold Dragon's (yellow), with a golden egg
+  if(gc){ const gR=gc.R+1; for(let dy=-gR;dy<=gR;dy++)for(let dx=-gR;dx<=gR;dx++){ const x=gc.cx+dx,y=gc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=gR*gR){ const i=idx(x,y); sky[i]=1; skyGold[i]=1; } }
+    goldEggX=gc.cx+0.5; goldEggY=gc.cy+0.5; goldEgg=true; }
   for(let a=0;a<centers.length;a++){ let bn=-1,bd=1e9; for(let b=0;b<centers.length;b++){ if(a===b)continue; const dd=(centers[a].cx-centers[b].cx)**2+(centers[a].cy-centers[b].cy)**2; if(dd<bd){bd=dd;bn=b;} } // bridge each island to its nearest neighbour
     if(bn>=0){ const x=centers[a].cx,y=centers[a].cy,tx=centers[bn].cx,ty=centers[bn].cy,st=Math.max(1,Math.max(Math.abs(tx-x),Math.abs(ty-y)));
       for(let s=0;s<=st;s++){ const px=Math.round(x+(tx-x)*s/st), py=Math.round(y+(ty-y)*s/st); if(px>0&&px<GW-1&&py>0&&py<GH-1){ sky[idx(px,py)]=1; if(py+1<GH-1) sky[idx(px,py+1)]=1; } } } }
@@ -727,13 +739,14 @@ function genSky(){
   portalCharge=0; portalUX=-1; portalSX=-1;                                              // the two ends of the sky portal
   for(let t=0;t<4000;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]){ portalUX=(i%GW)+0.5; portalUY=((i/GW)|0)+0.5; break; } }
   for(let t=0;t<4000;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(!inWater(x,y)&&!isSettle(x,y)&&!holes.some(h=>Math.abs(h.sx-x)<3&&Math.abs(h.sy-y)<3)){ portalSX=x+0.5; portalSY=y+0.5; break; } }
-  let fc=0; for(let k=0;k<centers.length && fc<3;k++){ if(centers[k]===dc)continue; const c=centers[k], R=c.R;   // some islands are FOREST islands (woolies' home)
-    for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=c.cx+dx,y=c.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); if(sky[i]&&!skyRed[i]) skyForest[i]=1; } } fc++; }
+  let fc=0; for(let k=0;k<centers.length && fc<3;k++){ if(centers[k]===dc||centers[k]===gc)continue; const c=centers[k], R=c.R;   // some islands are FOREST islands (woolies' home)
+    for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=c.cx+dx,y=c.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); if(sky[i]&&!skyRed[i]&&!skyGold[i]) skyForest[i]=1; } } fc++; }
   let rt=0; while(redfruit.length<64 && rt<6000){ rt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i] && (skyForest[i]||rnd()<0.25)) redfruit.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4+rnd()*0.6}); } // red fruit
 }
 function drawSky(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(skyRed[i]){ d[o]=120;d[o+1]=28;d[o+2]=30; }                                       // dark-red dragon island
+    else if(skyGold[i]){ d[o]=150;d[o+1]=132;d[o+2]=58; }                                 // golden dragon island
     else if(skyForest[i]){ d[o]=48;d[o+1]=118;d[o+2]=62; }                               // darker-green forest island
     else if(sky[i]){ d[o]=96;d[o+1]=176;d[o+2]=104; }                                    // green floating island
     else { d[o]=18;d[o+1]=26;d[o+2]=56; }                                                // open sky / void
@@ -748,6 +761,9 @@ function drawSky(){ const d=img.data;
   for(const gd of goldDrag){ const x=gd.x*SC,y=gd.y*SC,r=SC*3.4;                          // the GOLD DRAGON — foe of the Green Dragon
     ctx.shadowColor='#ffe23a'; ctx.shadowBlur=20; ctx.fillStyle='#caa018'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#fff2a0'; ctx.shadowBlur=12; ctx.fillStyle='#fff6d0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  if(goldEgg && goldEggX>=0){ const x=goldEggX*SC,y=goldEggY*SC;                           // the GOLDEN EGG on the gold island
+    ctx.shadowColor='#ffe23a'; ctx.shadowBlur=11; ctx.fillStyle='#ffe488'; ctx.beginPath(); ctx.ellipse(x,y,SC*0.85,SC*1.15,0,0,7); ctx.fill(); ctx.shadowBlur=0;
+    ctx.strokeStyle='#b8901c'; ctx.lineWidth=1.5; ctx.stroke(); ctx.fillStyle='#c99a1c'; ctx.beginPath(); ctx.arc(x-SC*0.25,y-SC*0.2,SC*0.16,0,7); ctx.arc(x+SC*0.28,y+SC*0.25,SC*0.13,0,7); ctx.fill(); } // speckled shell
   if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
   for(const rf of redfruit){ if(rf.food<0.15)continue; const x=rf.x*SC,y=rf.y*SC,r=SC*0.3; ctx.fillStyle='#e83a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // red fruit
   for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*0.55; ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er); } // fluffy woolies
@@ -933,7 +949,7 @@ function drawGrove(){ const d=img.data;
 let day=0;
 function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
-  settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); treasury=0; swallCount=0; view='surface';
+  settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); moat.fill(0); treasury=0; swallCount=0; view='surface';
   genUnderground(); genSky(); genGrove();
   goob=[]; zap=[]; human=[]; lev=[]; day=0; hist.length=0; castleBuilt=false; kingHome=null;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
@@ -947,6 +963,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
 function drawTerrain(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(settle[i]){ d[o]=138; d[o+1]=92; d[o+2]=48; }                                  // brown settlement block
+    else if(moat[i]){ d[o]=40; d[o+1]=120; d[o+2]=190; }                              // the King's water moat
     else if(swall[i]){ d[o]=150; d[o+1]=150; d[o+2]=156; }                            // grey stone wall
     else { const b=biome[i]; d[o]=BCOL[b][0]; d[o+1]=BCOL[b][1]; d[o+2]=BCOL[b][2]; }
     d[o+3]=255; }
@@ -1054,6 +1071,7 @@ const BESTIARY=[
   {key:'dling',  name:'Dragonling',     emoji:'🐲', realm:'sky',         on:()=>view==='sky'&&dragonling.length>0},
   {key:'dragon', name:'Green Dragon',   emoji:'🐉', realm:'sky',         on:()=>view==='sky'&&dragon&&dragon.alive},
   {key:'gold',   name:'Gold Dragon',    emoji:'🟡🐉',realm:'sky',         on:()=>view==='sky'&&goldDrag.length>0},
+  {key:'egg',    name:'Dragon Egg',     emoji:'🥚', realm:'sky',         on:()=>view==='sky'&&goldEgg},
   {key:'sniffer',name:'Sniffer',        emoji:'🐭', realm:'the Grove',   on:()=>view==='grove'&&sniffer.length>0},
   {key:'claw',   name:'Claw',           emoji:'🐾', realm:'the Grove',   on:()=>claw.some(c=>c.d==='up'?view==='surface':view==='grove')},
   {key:'treeman',name:'Treeman',        emoji:'🌳', realm:'the Grove',   on:()=>view==='grove'&&treeman.length>0},
