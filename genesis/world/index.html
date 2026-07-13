@@ -53,6 +53,13 @@ h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
 .booknav button{background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:6px 14px;cursor:pointer;font:13px ui-monospace,monospace}
 .booknav button:disabled{opacity:.35;cursor:default}
 .bhint{margin-top:12px;text-align:center;font-size:11.5px;color:var(--dim)}.bhint b{color:#ffd27f}
+.bcard{position:relative}
+.bcard.sparkle{border-color:#ffd23a;animation:bsparkle 1.1s ease-in-out infinite}
+@keyframes bsparkle{0%,100%{box-shadow:0 0 3px #ffd23a}50%{box-shadow:0 0 15px #ffe23a}}
+.bnew{position:absolute;top:5px;right:6px;font:9px ui-monospace,monospace;color:#221800;background:#ffd23a;border-radius:6px;padding:1px 5px;font-weight:bold}
+#bookbtn.ping{position:relative}
+#bookbtn.ping::after{content:'✨';position:absolute;top:-7px;right:-6px;font-size:13px;animation:bsparkle 1.1s ease-in-out infinite}
+#badgebtn{border-color:#ffd23a;color:#ffe07a;animation:bsparkle 1.4s ease-in-out infinite}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
  font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -84,6 +91,7 @@ a{color:#8fd0ff;text-decoration:none}
   <button data-tool="angel">👼 Drop Angels</button>
   <button data-tool="wooly">🐑 Drop Woolies</button>
   <button data-tool="dragon">🐉 Drop Dragonlings</button>
+  <button data-tool="golddragon">🟡 Gold Dragon</button>
   <button data-tool="sniffer">🐭 Sniffers</button>
   <button data-tool="claw">🐾 Claws</button>
   <button data-tool="treeman">🌳 Treemen</button>
@@ -96,12 +104,19 @@ a{color:#8fd0ff;text-decoration:none}
   <span class="sep"></span>
   <button id="viewbtn">🕳️ Go Underground</button>
   <button id="bookbtn">📖 Bestiary</button>
+  <button id="badgebtn" style="display:none">🏆 Badge</button>
 </div>
 <div class="book" id="book"><div class="bookinner">
   <div class="bookhead"><b>📖 Bestiary</b> <span id="bookprog" class="bdim"></span> <button id="bookx">✕</button></div>
   <div class="bookgrid" id="bookgrid"></div>
   <div class="booknav"><button id="bookprev">◀ Prev</button> <span id="bookpage" class="bdim">Page 1</span> <button id="booknext">Next ▶</button></div>
   <div class="bhint">Creatures you haven't seen on screen yet stay <b>❓ ???</b> — go find them to fill your book!</div>
+</div></div>
+<div class="book" id="badge"><div class="bookinner" style="text-align:center;max-width:420px">
+  <div style="font-size:76px;line-height:1.1;filter:drop-shadow(0 0 14px #ffd23a)">🏆</div>
+  <div style="font-size:20px;color:#ffd27f;font-weight:bold;margin-top:6px">Bestiary Complete!</div>
+  <div id="badgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every creature in the whole world. A true naturalist of Elbie's realm! 🎉</div>
+  <button id="badgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
 </div></div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
 <div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
@@ -188,7 +203,9 @@ it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on
 the glowing sky portal to come back down). Some islands are darker <b>forest islands</b> where fluffy <b>🐑 Woolies</b> graze on
 <b style="color:#e83a3a">red fruit</b>, while <b style="color:#4fc06a">🐉 Dragonlings</b> — tiny dragons — fly across the whole sky
 hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that catches a Wooly carries it home to the <b>Dragon King</b>
-to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne.
+to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Drop a
+<b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
+the death — a <b>50/50</b> clash of titans.
 <br><br>
 <b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
 the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
@@ -224,7 +241,8 @@ Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spre
 <br><br>
 <b>The Bestiary.</b> Open the <b>📖 Bestiary</b> to page through a book of every creature in the world. Any creature you haven't
 <b>seen on your own screen yet</b> stays a mystery — a <b>❓ ???</b> — until you find it (or make it appear), so explore every realm
-and trigger every monarch to fill all the pages.
+and trigger every monarch to fill all the pages. Each brand-new find <b style="color:#ffd23a">✨ sparkles</b> in the book, and once
+you've discovered <b>all</b> of them you earn a <b>🏆 badge</b> you can open to celebrate.
 </div>
 <p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
 </div>
@@ -602,6 +620,16 @@ function stepSky(){
   });
   if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
   if(deadDL.size) dragonling=dragonling.filter((_,i)=>!deadDL.has(i));
+  // GOLD DRAGONS — they hunt ONLY the Green Dragon and duel it to the death (50/50); nothing else concerns them
+  if(goldDrag.length){ const deadGD=new Set();
+    goldDrag.forEach((gd,gi)=>{ gd.age=(gd.age||0)+1;
+      if(dragon && dragon.alive){ const l=Math.hypot(dragon.x-gd.x,dragon.y-gd.y)||1; const nx=gd.x+(dragon.x-gd.x)/l*1.1, ny=gd.y+(dragon.y-gd.y)/l*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } // fly straight at the Green Dragon
+        if((dragon.x-gd.x)**2+(dragon.y-gd.y)**2<16){ if(rnd()<0.5) dragon.alive=false; else deadGD.add(gi); } } // clash: the loser dies
+      else { const a=rnd()*6.283, nx=gd.x+Math.cos(a)*0.85, ny=gd.y+Math.sin(a)*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } } // no Green Dragon -> roam the sky
+      if(gd.age>9000) deadGD.add(gi);
+    });
+    if(deadGD.size) goldDrag=goldDrag.filter((_,i)=>!deadGD.has(i));
+  }
 }
 function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
   const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
@@ -681,11 +709,11 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N);
-let angels=[], dragon=null, kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
+let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0;
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); angels=[]; dragon=null; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
     for(let dy=-R-1;dy<=R+1;dy++)for(let dx=-R-1;dx<=R+1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R+(rnd()*7-3)) sky[idx(x,y)]=1; } }
@@ -717,6 +745,9 @@ function drawSky(){ const d=img.data;
   if(dragon && dragon.alive){ const x=dragon.x*SC,y=dragon.y*SC,r=SC*3.6;                // the GREEN DRAGON
     ctx.shadowColor='#5fe08a'; ctx.shadowBlur=20; ctx.fillStyle='#1f7a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
     const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#eaff6a'; ctx.shadowBlur=12; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  for(const gd of goldDrag){ const x=gd.x*SC,y=gd.y*SC,r=SC*3.4;                          // the GOLD DRAGON — foe of the Green Dragon
+    ctx.shadowColor='#ffe23a'; ctx.shadowBlur=20; ctx.fillStyle='#caa018'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#fff2a0'; ctx.shadowBlur=12; ctx.fillStyle='#fff6d0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
   if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
   for(const rf of redfruit){ if(rf.food<0.15)continue; const x=rf.x*SC,y=rf.y*SC,r=SC*0.3; ctx.fillStyle='#e83a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // red fruit
   for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*0.55; ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er); } // fluffy woolies
@@ -1004,7 +1035,7 @@ function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if
 
 // ---------- the Bestiary: a book of every creature; unseen ones stay ??? ----------
 const layerOf=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
-const seenB=new Set(); let bookPage=0; const BPER=6;
+const seenB=new Set(), newlyB=new Set(); let bookPage=0, bestiaryDone=false; const BPER=6;
 const anyIn=arr=>arr.some(c=>layerOf(c)===view);
 const BESTIARY=[
   {key:'goob',   name:'Gooblet',        emoji:'🔴', realm:'anywhere',    on:()=>anyIn(goob)},
@@ -1013,7 +1044,8 @@ const BESTIARY=[
   {key:'bush',   name:'Pink Bush',      emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
   {key:'lev',    name:'Leviathan',      emoji:'🐋', realm:'ocean',       on:()=>view==='surface'&&lev.length>0},
   {key:'folk',   name:'Sea Folk',       emoji:'🌊', realm:'ocean',       on:()=>view==='surface'&&folk.length>0},
-  {key:'sea',    name:'Sea Monarch',    emoji:'🐉', realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive},
+  {key:'sea',    name:'Sea Monarch',    emoji:'🐉', realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive&&!seaMonarch.fromLev},
+  {key:'levking',name:'Leviathan King', emoji:'🐋👑',realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive&&seaMonarch.fromLev},
   {key:'spec',   name:'Specter',        emoji:'👻', realm:'underground', on:()=>view==='under'&&spec.length>0},
   {key:'firem',  name:'Fire Minion',    emoji:'🔥', realm:'underground', on:()=>view==='under'&&fire.length>0},
   {key:'giant',  name:'The Fire Giant', emoji:'👹', realm:'underground', on:()=>view==='under'&&giantActive},
@@ -1021,6 +1053,7 @@ const BESTIARY=[
   {key:'angel',  name:'Angel',          emoji:'👼', realm:'sky',         on:()=>view==='sky'&&angels.length>0},
   {key:'dling',  name:'Dragonling',     emoji:'🐲', realm:'sky',         on:()=>view==='sky'&&dragonling.length>0},
   {key:'dragon', name:'Green Dragon',   emoji:'🐉', realm:'sky',         on:()=>view==='sky'&&dragon&&dragon.alive},
+  {key:'gold',   name:'Gold Dragon',    emoji:'🟡🐉',realm:'sky',         on:()=>view==='sky'&&goldDrag.length>0},
   {key:'sniffer',name:'Sniffer',        emoji:'🐭', realm:'the Grove',   on:()=>view==='grove'&&sniffer.length>0},
   {key:'claw',   name:'Claw',           emoji:'🐾', realm:'the Grove',   on:()=>claw.some(c=>c.d==='up'?view==='surface':view==='grove')},
   {key:'treeman',name:'Treeman',        emoji:'🌳', realm:'the Grove',   on:()=>view==='grove'&&treeman.length>0},
@@ -1030,12 +1063,16 @@ const BESTIARY=[
   {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
   {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
 ];
-function markSeen(){ for(const b of BESTIARY) if(b.on()) seenB.add(b.key); }              // called each frame from the map you're watching
+function markSeen(){                                                                       // called each frame from the map you're watching
+  for(const b of BESTIARY) if(b.on() && !seenB.has(b.key)){ seenB.add(b.key); newlyB.add(b.key); } // a brand-new discovery
+  document.getElementById('bookbtn').classList.toggle('ping', newlyB.size>0);             // ✨ on the button when something new waits
+  if(!bestiaryDone && seenB.size>=BESTIARY.length){ bestiaryDone=true; document.getElementById('badgebtn').style.display=''; } // completed -> unlock the badge
+}
 function renderBook(){ const grid=document.getElementById('bookgrid'); const pages=Math.ceil(BESTIARY.length/BPER);
   bookPage=Math.max(0,Math.min(bookPage,pages-1));
   const start=bookPage*BPER, slice=BESTIARY.slice(start,start+BPER);
-  grid.innerHTML=slice.map(b=>{ const s=seenB.has(b.key);
-    return '<div class="bcard '+(s?'seen':'locked')+'"><div class="bemoji">'+(s?b.emoji:'❓')+'</div><div class="bname">'+(s?b.name:'???')+'</div><div class="brealm">'+(s?b.realm:'&nbsp;')+'</div></div>'; }).join('');
+  grid.innerHTML=slice.map(b=>{ const s=seenB.has(b.key), fresh=newlyB.has(b.key);
+    return '<div class="bcard '+(s?'seen':'locked')+(fresh?' sparkle':'')+'">'+(fresh?'<span class="bnew">✨ NEW</span>':'')+'<div class="bemoji">'+(s?b.emoji:'❓')+'</div><div class="bname">'+(s?b.name:'???')+'</div><div class="brealm">'+(s?b.realm:'&nbsp;')+'</div></div>'; }).join('');
   document.getElementById('bookpage').textContent='Page '+(bookPage+1)+' / '+pages;
   document.getElementById('bookprog').textContent='('+seenB.size+' / '+BESTIARY.length+' discovered)';
   document.getElementById('bookprev').disabled=bookPage<=0; document.getElementById('booknext').disabled=bookPage>=pages-1;
@@ -1089,6 +1126,7 @@ function applyTool(gxc,gyc){
     if(tool==='angel'){ if(skyLand(gxc,gyc)) angels.push({x:gxc,y:gyc}); return; }
     if(tool==='wooly'){ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(skyLand(x,y)&&wooly.length<200) wooly.push({x,y,E:2,age:0,ate:0}); } return; }
     if(tool==='dragon'){ for(let k=0;k<2;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH) dragonling.push({x,y,age:0}); } return; }
+    if(tool==='golddragon'){ if(gxc>0&&gxc<GW&&gyc>0&&gyc<GH) goldDrag.push({x:gxc,y:gyc,age:0}); return; } // a Gold Dragon: hunts only the Green Dragon
     const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&skyLand(x,y)&&arr.length<cap) arr.push(mk(x,y)); } };
     if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'sky'}), P.gCap, goob);
     else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'sky'}), P.zCap, zap);
@@ -1143,11 +1181,16 @@ FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?
 // the Bestiary book
 const bookEl=document.getElementById('book');
 function openBook(){ bookOpen=true; renderBook(); bookEl.classList.add('open'); }
-function closeBook(){ bookOpen=false; bookEl.classList.remove('open'); }
+function closeBook(){ bookOpen=false; bookEl.classList.remove('open'); newlyB.clear(); document.getElementById('bookbtn').classList.remove('ping'); } // acknowledge the new finds
 document.getElementById('bookbtn').onclick=openBook;
 document.getElementById('bookx').onclick=closeBook;
 bookEl.onclick=e=>{ if(e.target===bookEl) closeBook(); };                                 // click the backdrop to close
 document.getElementById('bookprev').onclick=()=>{ bookPage--; renderBook(); };
 document.getElementById('booknext').onclick=()=>{ bookPage++; renderBook(); };
+// the completion badge
+const badgeEl=document.getElementById('badge');
+document.getElementById('badgebtn').onclick=()=>{ document.getElementById('badgemsg').innerHTML='You discovered all <b>'+BESTIARY.length+'</b> creatures in the whole world. A true naturalist of Elbie’s realm! 🎉'; badgeEl.classList.add('open'); };
+document.getElementById('badgex').onclick=()=>badgeEl.classList.remove('open');
+badgeEl.onclick=e=>{ if(e.target===badgeEl) badgeEl.classList.remove('open'); };
 newWorld(); loop();
 </script></body></html>
