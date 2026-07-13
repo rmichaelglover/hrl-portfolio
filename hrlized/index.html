@@ -62,11 +62,16 @@ footer{color:var(--dim);font-size:13px;margin-top:30px}footer a{color:var(--cy);
       <input id="adv" type="range" min="0" max="1" step="0.05" value="0.5"></div>
     <div class="ctrl">voice
       <span class="seg" id="wave"><button data-w="triangle" class="on">▲ soft</button><button data-w="square">■ chip</button><button data-w="sawtooth">◣ reed</button></span></div>
+    <div class="ctrl" style="min-width:180px">your progression <b id="progName">I–V–vi–IV</b>
+      <input id="progIn" value="I V vi IV" title="Roman numerals: I ii iii IV V vi vii (or 1-7). Try your own song's progression." style="width:160px;background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:5px 8px;font:12px ui-monospace,monospace"></div>
+    <div class="ctrl">key
+      <select id="keySel" style="background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:12px ui-monospace,monospace"></select></div>
   </div>
 </div>
 
 <div class="note">
-<b>How it composes.</b> Sixteen beats over a <b id="progName">I–V–vi–IV</b> progression. Two voices are relaxed in
+<b>How it composes.</b> Sixteen beats over <b>your chosen progression</b> (type Roman numerals — <i>I ii iii IV V vi vii</i> — into
+ the box, e.g. one of your own songs' progressions, in any <b>key</b>). Two voices are relaxed in
  <b>one field</b>: the <b style="color:#8f5cff">melody</b> (16 objects) and the <b style="color:var(--gd)">bass</b> (16 more),
  the eight scale pitches as labels. A pairwise <b>smoothness</b> factor rewards stepwise motion in each voice; a per-beat
  <b>prior</b> pulls the melody toward the bar's chord tones (and the bass toward its root), first/last beats anchored to the
@@ -74,6 +79,19 @@ footer{color:var(--dim);font-size:13px;margin-top:30px}footer a{color:var(--cy);
  (thirds, fifths, sixths reward; seconds and sevenths suppress). A second relaxation over <b>onset / hold</b> labels gives the
  melody its <b>rhythm</b>. Then Web Audio plays it. Every <b>🎲 Generate</b> reseeds the prior — a new tune each time. It's the
  <b>real engine</b> (<a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>), singing in two parts.
+</div>
+
+<div class="stage" style="text-align:left">
+  <h2 style="font:600 20px ui-serif,Georgia,serif;margin:0 0 4px;color:#fff">🎧 The human original — Manny Glover</h2>
+  <p style="color:var(--dim);font-size:13.5px;margin:0 0 12px">The engine relaxes <i>toward</i> music; here's the real thing that inspired it — the
+   <b>human</b> songwriter behind the portfolio. Seed the generator above with one of these songs' progressions to hear the two meet.</p>
+  <iframe title="Manny Glover on Spotify" style="border-radius:12px;border:0" src="https://open.spotify.com/embed/artist/4YCfGtxKRNC53cA6svluT0?utm_source=generator&theme=0"
+    width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  <div class="crumbs" style="margin-top:12px">
+    <a href="https://open.spotify.com/artist/4YCfGtxKRNC53cA6svluT0">Spotify ↗</a>
+    <a href="https://www.youtube.com/user/mannyglover">YouTube ↗</a>
+    <a href="https://funding.plaiddogrecording.com/manny-glovers-studio-album">Studio album (Plaid Dog) ↗</a>
+  </div>
 </div>
 
 <footer>HRLized — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>, composing.
@@ -95,15 +113,29 @@ const MAJOR={semi:[0,2,4,5,7,9,11,12],root:60,chords:[[0,2,4,7],[1,4,6],[0,2,5,7
 const MINOR={semi:[0,2,3,5,7,8,10,12],root:57,chords:[[0,2,4],[5,0,2],[2,4,6],[6,1,3]],roots:[0,5,2,6],
   names:['A','B','C','D','E','F','G','A'],prog:'i–VI–III–VII'};
 let scale=MAJOR, melody=new Array(16).fill(0), bass=new Array(16).fill(0), rhythm=new Array(16).fill(0);
+let prog=[0,4,5,3], keyOff=0;                                   // progression as scale degrees (0=I) + transpose in semitones
+const CHROM=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const RNSYM=['I','II','III','IV','V','VI','VII'];
+const chordFor=bar=>{const d=prog[bar%prog.length];return [d%7,(d+2)%7,(d+4)%7];};   // diatonic triad on degree d
+const rootFor=bar=>prog[bar%prog.length];
+const baseMidi=()=>scale.root+keyOff;
+const noteNm=d=>CHROM[(scale.root+keyOff+scale.semi[d])%12];
+function setProg(str){const RN={i:0,ii:1,iii:2,iv:3,v:4,vi:5,vii:6};
+  const ds=str.trim().split(/[\s,|]+/).filter(Boolean).map(t=>{const k=t.toLowerCase().replace(/[^ivx1-7]/g,'');
+    if(/^[1-7]$/.test(k))return +k-1; return RN[k]!=null?RN[k]:null;}).filter(d=>d!=null);
+  prog=ds.length?ds.slice(0,4):[0,4,5,3];
+  document.getElementById('progName').textContent=prog.map(d=>{const s=RNSYM[d];const bar=prog.indexOf(d);
+    // minor-ish degrees (ii,iii,vi,vii in major) shown lowercase for flavour
+    return (scale===MINOR? (d===0||d===3||d===4?s.toLowerCase():s) : (d===1||d===2||d===5||d===6?s.toLowerCase():s));}).join('–');}
 function smoothC(){const semi=scale.semi,C=[];for(let j=0;j<8;j++){C.push([]);for(let l=0;l<8;l++){const d=Math.abs(semi[j]-semi[l]);
   C[j].push(d===0?0.25:d<=2?1:d<=4?0.72:d<=7?0.45:0.2);}}return C;}
 function consC(){const semi=scale.semi,C=[];for(let j=0;j<8;j++){C.push([]);for(let l=0;l<8;l++){const iv=((semi[j]-semi[l])%12+12)%12;
   C[j].push([0,3,4,7,8,9].includes(iv)?1:0.25);}}return C;}
 function genVoices(){const n=16,adv=+document.getElementById('adv').value;const mP=[],bP=[];
-  for(let s=0;s<n;s++){const bar=s/4|0,ch=scale.chords[bar];
-    const rm=new Array(8).fill(0.05);for(const d of ch)rm[d%8]+=0.6;rm[0]+=0.04;for(let d=0;d<8;d++)rm[d]+=Math.random()*0.6*adv;mP.push(rm);
-    const rb=new Array(8).fill(0.05);rb[scale.roots[bar]]+=1.0;rb[(scale.roots[bar]+4)%7]+=0.4;for(let d=0;d<8;d++)rb[d]+=Math.random()*0.3*adv;bP.push(rb);}
-  mP[0]=new Array(8).fill(0.02);mP[0][0]=1;mP[15]=new Array(8).fill(0.02);mP[15][0]=1;
+  for(let s=0;s<n;s++){const bar=s/4|0,ch=chordFor(bar),rt=rootFor(bar);
+    const rm=new Array(8).fill(0.05);for(const d of ch)rm[d%8]+=0.6;rm[rt]+=0.04;for(let d=0;d<8;d++)rm[d]+=Math.random()*0.6*adv;mP.push(rm);
+    const rb=new Array(8).fill(0.05);rb[rt]+=1.0;rb[(rt+4)%7]+=0.4;for(let d=0;d<8;d++)rb[d]+=Math.random()*0.3*adv;bP.push(rb);}
+  mP[0]=new Array(8).fill(0.02);mP[0][rootFor(0)]=1;mP[15]=new Array(8).fill(0.02);mP[15][rootFor(3)]=1; // start/end on the bar's chord root
   const prior=[...mP,...bP].map(norm);
   const mE=[],bE=[],xE=[];for(let s=0;s<n-1;s++){mE.push([s,s+1]);bE.push([16+s,17+s]);}for(let s=0;s<n;s++)xE.push([s,16+s]);
   const st={S:prior.map(r=>r.slice()),prior,ps:0.5,factors:[{edges:mE,C:smoothC()},{edges:bE,C:smoothC()},{edges:xE,C:consC()}]};
@@ -125,9 +157,9 @@ function voice(midi,when,dur,type,gain){const f=440*Math.pow(2,(midi-69)/12);
 function stopAll(){voices.forEach(o=>{try{o.stop()}catch(e){}});voices=[];playing=false;}
 function playMelody(){ensure();stopAll();playing=true;
   const bpm=+document.getElementById('tempo').value, beat=60/bpm; const t0=actx.currentTime+0.06; startT=t0; dur16=16*beat;
-  for(let bar=0;bar<4;bar++){const ch=scale.chords[bar];ch.slice(0,3).forEach(d=>voice(scale.root+scale.semi[d%8]-12,t0+bar*4*beat,4*beat*0.98,'sine',0.045));} // soft pads
-  for(let s=0;s<16;s+=2)voice(scale.root+scale.semi[bass[s]]-12,t0+s*beat,2*beat*0.97,'triangle',0.14);   // BASS voice (half notes)
-  for(const e of melodyEvents())voice(scale.root+scale.semi[e.deg],t0+e.slot*beat,e.len*beat*0.93,curWave,0.22); // MELODY w/ rhythm
+  for(let bar=0;bar<4;bar++){const ch=chordFor(bar);ch.slice(0,3).forEach(d=>voice(baseMidi()+scale.semi[d%8]-12,t0+bar*4*beat,4*beat*0.98,'sine',0.045));} // soft pads
+  for(let s=0;s<16;s+=2)voice(baseMidi()+scale.semi[bass[s]]-12,t0+s*beat,2*beat*0.97,'triangle',0.14);   // BASS voice (half notes)
+  for(const e of melodyEvents())voice(baseMidi()+scale.semi[e.deg],t0+e.slot*beat,e.len*beat*0.93,curWave,0.22); // MELODY w/ rhythm
   setTimeout(()=>{if(actx.currentTime>=t0+dur16-0.05)playing=false;},dur16*1000+250);
 }
 
@@ -136,7 +168,7 @@ const rollCv=document.getElementById('roll'), rx=rollCv.getContext('2d');
 const PITCHCOL=d=>`hsl(${265-d*20},80%,${58+d*3}%)`;
 function rollDraw(){const dpr=Math.min(2,devicePixelRatio||1),W=rollCv.clientWidth,H=300;rollCv.width=W*dpr;rollCv.height=H*dpr;rx.setTransform(dpr,0,0,dpr,0,0);
   rx.clearRect(0,0,W,H);const cols=16,rows=8,cw=W/cols,pad=8,gh=(H-2*pad)/rows;
-  for(let s=0;s<cols;s++){const chord=scale.chords[s/4|0];for(let d=0;d<rows;d++){if(chord.includes(d%8)||chord.includes(d)){rx.fillStyle='rgba(120,90,220,.10)';rx.fillRect(s*cw,pad+(rows-1-d)*gh,cw,gh);}}}
+  for(let s=0;s<cols;s++){const chord=chordFor(s/4|0);for(let d=0;d<rows;d++){if(chord.includes(d%8)||chord.includes(d)){rx.fillStyle='rgba(120,90,220,.10)';rx.fillRect(s*cw,pad+(rows-1-d)*gh,cw,gh);}}}
   rx.strokeStyle='rgba(150,170,220,.18)';rx.lineWidth=1;for(let b=0;b<=4;b++){const x=b*4*cw;rx.beginPath();rx.moveTo(x,0);rx.lineTo(x,H);rx.stroke();}
   let head=-1;if(playing&&actx){const el=actx.currentTime-startT;head=Math.floor(el/(dur16/16));if(head<0||head>=16)head=-1;}
   if(head>=0){rx.fillStyle='rgba(143,92,255,.16)';rx.fillRect(head*cw,0,cw,H);}
@@ -152,7 +184,7 @@ function rollDraw(){const dpr=Math.min(2,devicePixelRatio||1),W=rollCv.clientWid
     rx.fillStyle=PITCHCOL(e.deg);rx.globalAlpha=on?1:0.9;rx.fillRect(x+cw*0.1,y+2,w-cw*0.2,gh-4);rx.globalAlpha=1;
     if(on){rx.strokeStyle='#fff';rx.lineWidth=2;rx.strokeRect(x+cw*0.1,y+2,w-cw*0.2,gh-4);}});
   rx.fillStyle='#5a6685';rx.font='9px ui-monospace,monospace';rx.textAlign='left';rx.textBaseline='middle';
-  for(let d=0;d<rows;d++)rx.fillText(scale.names[d],2,pad+(rows-1-d)*gh+gh/2);
+  for(let d=0;d<rows;d++)rx.fillText(noteNm(d),2,pad+(rows-1-d)*gh+gh/2);
   requestAnimationFrame(rollDraw);
 }
 
@@ -163,8 +195,15 @@ document.getElementById('stop').onclick=stopAll;
 document.getElementById('tempo').oninput=function(){document.getElementById('tempoV').textContent=this.value;};
 document.getElementById('adv').oninput=function(){document.getElementById('advV').textContent=(+this.value).toFixed(2);};
 document.querySelectorAll('#mood button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mood button').forEach(o=>o.classList.toggle('on',o===b));
-  scale=b.dataset.m==='min'?MINOR:MAJOR;document.getElementById('progName').textContent=scale.prog;generate();});
+  scale=b.dataset.m==='min'?MINOR:MAJOR; const def=scale===MINOR?'i VI III VII':'I V vi IV';
+  document.getElementById('progIn').value=def; setProg(def); generate();});
 document.querySelectorAll('#wave button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#wave button').forEach(o=>o.classList.toggle('on',o===b));curWave=b.dataset.w;});
+// your progression + key (transpose)
+document.getElementById('progIn').oninput=function(){ setProg(this.value); generate(); };
+const keySel=document.getElementById('keySel');
+for(let k=0;k<12;k++){const o=document.createElement('option');o.value=k;o.textContent=CHROM[(scale.root+k)%12];keySel.appendChild(o);}
+keySel.onchange=function(){ keyOff=+this.value; [...keySel.options].forEach(o=>o.textContent=CHROM[(scale.root+ +o.value)%12]); };
+setProg(document.getElementById('progIn').value);
 generate();rollDraw();
 </script>
 </body></html>
