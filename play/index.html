@@ -69,6 +69,23 @@ footer{color:var(--dim);font-size:13px;margin-top:34px}footer a{color:var(--cy);
   </div>
 </div>
 
+<!-- ============ GAME 3: FRUSTRATED! ============ -->
+<div class="card">
+  <h2><span class="k">challenge · frustrated systems</span>😖 Frustrated!</h2>
+  <p>Every line is a <b>rule</b> between two nodes: <b>=</b> wants them the <b>same</b> colour, <b>≠</b> wants them
+   <b>different</b>. <b>Click a node to flip its colour.</b> Satisfy every rule (line turns <b style="color:var(--gr)">green</b>) —
+   but some puzzles are <i>frustrated</i>: no assignment satisfies them all (brute-force-proven), so aim for the
+   <b>best possible</b>. Kin to the <a href="../frustrated/">Frustrated Systems</a> demo.</p>
+  <canvas id="frus" height="300"></canvas>
+  <div class="row">
+    <button id="frusSolvable">🎲 new (solvable)</button>
+    <button id="frusFrust">😖 new (frustrated)</button>
+    <button id="frusSolve">🤖 engine solves it</button>
+    <span class="stat">satisfied <b id="frusSat">0</b>/<b id="frusTot">0</b></span>
+    <span id="frusPill" class="pill" style="color:var(--gd);border-color:#5e4a1e">flip nodes…</span>
+  </div>
+</div>
+
 <footer>Same engine, now playable — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>.
  Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
 </div>
@@ -215,12 +232,60 @@ document.getElementById('handR').onclick=()=>guess(false);
 document.getElementById('handSpin').onclick=()=>{handSpin=!handSpin;};
 newHand();
 
+// ---------- GAME 3: FRUSTRATED! (constraint satisfaction / spin-glass ground state) ----------
+const frCv=document.getElementById('frus'), fctx=frCv.getContext('2d');
+const FRN=9, SPCOL=['#37e6ff','#e8c170'];   // node index 8 = centre
+let frPos=[], frEdges=[], frSpin=[], frOpt=0, frOptAssign=[], frLay={};
+function frLayout(){frPos=[];const R=0.36;
+  for(let i=0;i<8;i++){const a=i/8*6.283-1.5708;frPos.push([0.5+Math.cos(a)*R,0.5+Math.sin(a)*R]);}
+  frPos.push([0.5,0.5]);}
+function frCount(sp){let c=0;for(const e of frEdges)if(e.s*sp[e.a]*sp[e.b]>0)c++;return c;}
+function frBrute(){let best=-1,ba=null;for(let m=0;m<(1<<FRN);m++){const sp=[];for(let i=0;i<FRN;i++)sp.push((m>>i&1)?1:-1);const c=frCount(sp);if(c>best){best=c;ba=sp;}}return[best,ba];}
+function frGen(wantFrust){frLayout();
+  for(let t=0;t<600;t++){
+    frEdges=[];const rs=()=>Math.random()<0.5?1:-1;
+    for(let i=0;i<8;i++)frEdges.push({a:i,b:(i+1)%8,s:rs()});     // outer ring
+    for(let i=0;i<8;i+=2)frEdges.push({a:i,b:8,s:rs()});          // spokes to the centre
+    frEdges.push({a:0,b:4,s:rs()});frEdges.push({a:2,b:6,s:rs()});// two chords
+    const [opt,assign]=frBrute();
+    if((opt<frEdges.length)===wantFrust){frOpt=opt;frOptAssign=assign;break;}
+  }
+  frSpin=frPos.map(()=>Math.random()<0.5?1:-1);
+  document.getElementById('frusTot').textContent=frEdges.length;}
+function frDraw(){const d=Math.min(2,devicePixelRatio||1),W=frCv.clientWidth,H=300;frCv.width=W*d;frCv.height=H*d;fctx.setTransform(d,0,0,d,0,0);
+  fctx.clearRect(0,0,W,H);frLay={W,H,r:Math.min(W,H)*0.052};
+  const P=frPos.map(([x,y])=>[x*W,y*H]);
+  for(const e of frEdges){const [x1,y1]=P[e.a],[x2,y2]=P[e.b],sat=e.s*frSpin[e.a]*frSpin[e.b]>0;
+    fctx.setLineDash(sat?[]:[5,5]);fctx.lineWidth=sat?3:2;
+    fctx.strokeStyle=sat?'rgba(95,227,160,.9)':'rgba(238,91,107,.85)';
+    fctx.beginPath();fctx.moveTo(x1,y1);fctx.lineTo(x2,y2);fctx.stroke();fctx.setLineDash([]);
+    const mx=(x1+x2)/2,my=(y1+y2)/2;fctx.fillStyle='#0a1020';fctx.beginPath();fctx.arc(mx,my,9,0,7);fctx.fill();
+    fctx.fillStyle=sat?'#9fe8c0':'#f2a0aa';fctx.font='bold 13px ui-monospace,monospace';fctx.textAlign='center';fctx.textBaseline='middle';
+    fctx.fillText(e.s>0?'=':'≠',mx,my);}
+  P.forEach(([x,y],i)=>{fctx.fillStyle=SPCOL[frSpin[i]>0?0:1];fctx.beginPath();fctx.arc(x,y,frLay.r,0,7);fctx.fill();
+    fctx.lineWidth=2;fctx.strokeStyle='rgba(255,255,255,.35)';fctx.stroke();});
+  const sat=frCount(frSpin);document.getElementById('frusSat').textContent=sat;
+  const pill=document.getElementById('frusPill'),E=frEdges.length;
+  if(sat===frOpt){const perfect=frOpt===E;
+    pill.textContent=perfect?'✓ perfect — every rule satisfied!':('✓ best possible ('+frOpt+'/'+E+') — this one is frustrated');
+    pill.style.color=perfect?'var(--gr)':'var(--pu)';pill.style.borderColor=perfect?'#1e5e3e':'#3a1e5e';}
+  else{pill.textContent='keep flipping… '+sat+'/'+E;pill.style.color='var(--gd)';pill.style.borderColor='#5e4a1e';}
+}
+frCv.addEventListener('click',e=>{const r=frCv.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width*frLay.W, y=(e.clientY-r.top)/r.height*frLay.H;
+  let bi=-1,bd=1e9;frPos.forEach(([px,py],i)=>{const dx=px*frLay.W-x,dy=py*frLay.H-y,dd=dx*dx+dy*dy;if(dd<bd){bd=dd;bi=i;}});
+  if(bi>=0&&bd<(frLay.r*1.8)**2)frSpin[bi]*=-1;});
+document.getElementById('frusSolvable').onclick=()=>frGen(false);
+document.getElementById('frusFrust').onclick=()=>frGen(true);
+document.getElementById('frusSolve').onclick=()=>{frSpin=frOptAssign.slice();};
+frGen(false);
+
 // ---------- loop ----------
 let tick=0;
 function loop(){tick++;
   if(tick%3===0)step(digState);
   if(handSpin&&!answered)handAng+=0.012;
-  digDraw();handDraw();
+  digDraw();handDraw();frDraw();
   requestAnimationFrame(loop);}
 loop();
 </script>
