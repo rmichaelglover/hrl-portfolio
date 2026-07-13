@@ -142,7 +142,8 @@ lava unharmed, hunts the fallen, and (like the Specters) never breeds. While you
 becomes a <b style="color:#ff4a10">🔥 Fire Vessel</b> who climbs to the <b>surface</b> and <b>terrorizes</b> the land, slaying
 Gooblets and Zappies. To end him, <b>7 Humans</b> must team up beside him — a <b>50/50</b> duel. If they lose, all seven fall and he
 rages on; if they <b>win</b>, one hero is handed a <b style="color:#ffdd55">🗡️ Fire Sword</b> and dons <b style="color:#ff9a2e">orange
-robes</b>. That swordsman then marches <b>back down to the lava pit</b>, walks the fire unharmed, and <b>destroys the Fire King</b>
+robes</b>. That swordsman then marches <b>back down to the lava pit</b> — <b>burning through</b> any settlement or wall in his path —
+walks the fire unharmed, and <b>destroys the Fire King</b>
 himself — rising as the <b style="color:#ff2030">👑 Red King</b>. Humans flock to him, don <b style="color:#c23030">red robes</b>,
 and raise his settlements. (Slay the Fire King and the Giant <b>never rises again</b>.)
 <br><br>
@@ -348,7 +349,10 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     }
     if(m.fireSword && !m.redKing){                                                     // FIRE SWORDSMAN — rush to a hole and descend to the lava pit
       let bh0=null,bd0=1e9; for(const h of holes){ const dd=(m.x-h.sx)**2+(m.y-h.sy)**2; if(dd<bd0){bd0=dd;bh0=h;} }
-      if(bh0){ const l=Math.hypot(bh0.sx-m.x,bh0.sy-m.y)||1; clampMoveH(m,m.x+(bh0.sx-m.x)/l*P.hSpeed,m.y+(bh0.sy-m.y)/l*P.hSpeed); }
+      if(bh0){ const l=Math.hypot(bh0.sx-m.x,bh0.sy-m.y)||1, dx=(bh0.sx-m.x)/l, dy=(bh0.sy-m.y)/l;   // the Fire Sword burns through settlements & stone walls — only water stops him
+        const nx=m.x+dx*P.hSpeed, ny=m.y+dy*P.hSpeed;
+        if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!inWater(nx,ny)){ m.x=nx; m.y=ny; }
+        else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283, mx=m.x+Math.cos(a)*P.hSpeed, my=m.y+Math.sin(a)*P.hSpeed; if(mx>=0&&mx<GW&&my>=0&&my<GH&&!inWater(mx,my)){ m.x=mx; m.y=my; break; } } } } // wiggle round water
       if(m.fallCd>0)m.fallCd--; else for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.4){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; break; } }
       m.E=Math.max(m.E,0.5); m.W=Math.max(m.W,0.5); next.push(m); continue;
     }
