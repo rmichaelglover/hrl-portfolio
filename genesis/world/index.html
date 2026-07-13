@@ -217,7 +217,10 @@ it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on
 the glowing sky portal to come back down). Some islands are darker <b>forest islands</b> where fluffy <b>🐑 Woolies</b> graze on
 <b style="color:#e83a3a">red fruit</b>, while <b style="color:#4fc06a">🐉 Dragonlings</b> — tiny dragons — fly across the whole sky
 hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that catches a Wooly carries it home to the <b>Dragon King</b>
-to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Drop a
+to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Scattered rarely across the
+islands are <b style="color:#c94a4a">🐲🌱 Dragonsnaps</b> — snapping plants the Dragonlings munch. But if a <b>Wooly</b> eats one
+first, it evolves into a horned <b style="color:#c9a06a">🐏 Fierce Woolie</b> that no longer flees — it <b>fends off</b> any
+Dragonling that dares attack it. Drop a
 <b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
 the death — a <b>50/50</b> clash of titans. The Gold Dragon has its own <b style="color:#d0b840">golden island</b> where a
 <b style="color:#ffe07a">🥚 golden egg</b> rests: every <b>5000 days</b> it hatches a fresh Gold Dragon and a new egg is laid, so the
@@ -621,13 +624,16 @@ function stepSky(){
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
   for(const rf of redfruit) rf.food=Math.min(1,rf.food+0.005);
-  const rfH=buildHash(redfruit,6), dlH=buildHash(dragonling,7); const deadW=new Set();
+  const rfH=buildHash(redfruit,6), dlH=buildHash(dragonling,7), snapH=buildHash(dsnap,7); const deadW=new Set(), eatenSnap=new Set();
   wooly.forEach((w,wi)=>{ w.age++; w.E-=0.004;
     let dx,dy,moved=false;
-    const [di,dd]=nearestIdx(w.x,w.y,dragonling,dlH,7); if(di>=0&&dd<30){ const dg=dragonling[di]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; moved=true; } // flee a dragonling
-    else if(w.E<1.6){ const [ri]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri>=0){ const rf=redfruit[ri]; const l=Math.hypot(rf.x-w.x,rf.y-w.y)||1; dx=(rf.x-w.x)/l; dy=(rf.y-w.y)/l; moved=true; } } // seek red fruit
+    const [di,dd]=nearestIdx(w.x,w.y,dragonling,dlH,7);
+    if(di>=0&&dd<30 && !w.fierce){ const dg=dragonling[di]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; moved=true; } // a normal wooly flees dragonlings (a Fierce one stands its ground)
+    if(!moved && !w.fierce){ const [si]=nearestIdx(w.x,w.y,dsnap,snapH,7); if(si>=0 && !eatenSnap.has(si)){ const s=dsnap[si]; const l=Math.hypot(s.x-w.x,s.y-w.y)||1; dx=(s.x-w.x)/l; dy=(s.y-w.y)/l; moved=true; } } // seek a rare Dragonsnap to evolve
+    if(!moved && w.E<1.6){ const [ri]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri>=0){ const rf=redfruit[ri]; const l=Math.hypot(rf.x-w.x,rf.y-w.y)||1; dx=(rf.x-w.x)/l; dy=(rf.y-w.y)/l; moved=true; } } // seek red fruit
     if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
-    const nx=w.x+dx*0.8, ny=w.y+dy*0.8; if(skyLand(nx,ny)){ w.x=nx; w.y=ny; } else { for(let t=0;t<4;t++){ const a=rnd()*6.283,mx=w.x+Math.cos(a)*0.8,my=w.y+Math.sin(a)*0.8; if(skyLand(mx,my)){w.x=mx;w.y=my;break;} } }
+    const spd=w.fierce?0.95:0.8; const nx=w.x+dx*spd, ny=w.y+dy*spd; if(skyLand(nx,ny)){ w.x=nx; w.y=ny; } else { for(let t=0;t<4;t++){ const a=rnd()*6.283,mx=w.x+Math.cos(a)*spd,my=w.y+Math.sin(a)*spd; if(skyLand(mx,my)){w.x=mx;w.y=my;break;} } }
+    const [si2,sd2]=nearestIdx(w.x,w.y,dsnap,snapH,6); if(si2>=0&&sd2<1.7 && !eatenSnap.has(si2) && !w.fierce){ eatenSnap.add(si2); w.fierce=true; w.E=Math.min(4,w.E+1.5); } // ate a Dragonsnap -> FIERCE WOOLIE
     const [ri2,rd2]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri2>=0&&rd2<1.6){ const rf=redfruit[ri2]; if(rf.food>0.3){ rf.food=0; w.E=Math.min(4,w.E+1.4); w.ate=(w.ate||0)+1; } }
     if(w.ate>=5 && wooly.length<200){ w.ate=0; w.E*=0.7; wooly.push({x:w.x,y:w.y,E:1.2,age:0,ate:0}); }
     if(w.E<=0||w.age>3000) deadW.add(wi);
@@ -639,12 +645,15 @@ function stepSky(){
     else if(dg.carry){ dg.carry=false; const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                     // no Dragon King -> eat it, no baby
     else { const [wi]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi>=0){ const w=wooly[wi]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // hunt a wooly
     const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }                    // dragonlings FLY anywhere
+    const [dsi,dsd]=nearestIdx(dg.x,dg.y,dsnap,snapH,7); if(dsi>=0&&dsd<1.7 && !eatenSnap.has(dsi)) eatenSnap.add(dsi); // dragonlings munch Dragonsnaps too (racing the woolies for them)
     if(dg.carry){ if(dragon && dragon.alive && (dragon.x-dg.x)**2+(dragon.y-dg.y)**2<9){ dg.carry=false; if(dragonling.length<120) dragonling.push({x:dragon.x+(rnd()-0.5)*3,y:dragon.y+(rnd()-0.5)*3,age:0}); } } // delivered -> a new dragonling
-    else { const [wi2]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi2>=0 && !eatenW.has(wi2)){ const w=wooly[wi2]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ eatenW.add(wi2); dg.carry=true; } } } // caught a wooly -> carry it home
+    else { const [wi2]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi2>=0 && !eatenW.has(wi2)){ const w=wooly[wi2]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ if(w.fierce){ deadDL.add(di); } else { eatenW.add(wi2); dg.carry=true; } } } } // caught a wooly -> carry home; but a FIERCE Woolie fends it off (the dragonling dies)
     if(dg.age>4500) deadDL.add(di);
   });
   if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
   if(deadDL.size) dragonling=dragonling.filter((_,i)=>!deadDL.has(i));
+  if(eatenSnap.size) dsnap=dsnap.filter((_,i)=>!eatenSnap.has(i));                        // eaten Dragonsnaps
+  if(dsnap.length<5 && rnd()<0.006){ for(let t=0;t<400;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ dsnap.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); break; } } } // they regrow, but only rarely
   // THE GOLDEN EGG — every 5000 days it hatches a new Gold Dragon, and a fresh egg is laid on the island
   if(goldEgg && goldEggX>=0 && day-lastGoldHatch>=5000){ lastGoldHatch=day; goldDrag.push({x:goldEggX,y:goldEggY,age:0}); }
   // GOLD DRAGONS — they hunt ONLY the Green Dragon and duel it to the death (50/50); nothing else concerns them
@@ -739,10 +748,10 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N);
 let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
-let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0;
+let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0, dsnap=[];  // dsnap = rare Dragonsnap plants
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0;
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[];
   goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
@@ -763,6 +772,7 @@ function genSky(){
   let fc=0; for(let k=0;k<centers.length && fc<3;k++){ if(centers[k]===dc||centers[k]===gc)continue; const c=centers[k], R=c.R;   // some islands are FOREST islands (woolies' home)
     for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=c.cx+dx,y=c.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); if(sky[i]&&!skyRed[i]&&!skyGold[i]) skyForest[i]=1; } } fc++; }
   let rt=0; while(redfruit.length<64 && rt<6000){ rt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i] && (skyForest[i]||rnd()<0.25)) redfruit.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4+rnd()*0.6}); } // red fruit
+  let dt=0; while(dsnap.length<5 && dt<6000){ dt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]) dsnap.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); } // rare Dragonsnap plants
 }
 function drawSky(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
@@ -787,7 +797,16 @@ function drawSky(){ const d=img.data;
     ctx.strokeStyle='#b8901c'; ctx.lineWidth=1.5; ctx.stroke(); ctx.fillStyle='#c99a1c'; ctx.beginPath(); ctx.arc(x-SC*0.25,y-SC*0.2,SC*0.16,0,7); ctx.arc(x+SC*0.28,y+SC*0.25,SC*0.13,0,7); ctx.fill(); } // speckled shell
   if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
   for(const rf of redfruit){ if(rf.food<0.15)continue; const x=rf.x*SC,y=rf.y*SC,r=SC*0.3; ctx.fillStyle='#e83a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // red fruit
-  for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*0.55; ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er); } // fluffy woolies
+  for(const s of dsnap){ const x=s.x*SC,y=s.y*SC,r=SC*0.55;                                // DRAGONSNAP — a rare snapping plant
+    ctx.strokeStyle='#2e7d32'; ctx.lineWidth=Math.max(1.5,r*0.3); ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(x,y+r*0.9); ctx.lineTo(x,y-r*0.1); ctx.stroke(); // green stem
+    ctx.fillStyle='#b0202c'; ctx.beginPath(); ctx.arc(x,y-r*0.35,r*0.55,0.15,3.0); ctx.fill(); ctx.beginPath(); ctx.arc(x,y-r*0.35,r*0.55,3.28,6.13); ctx.fill(); // red snapping jaws
+    ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x-r*0.16,y-r*0.5,r*0.09,0,7); ctx.arc(x+r*0.16,y-r*0.5,r*0.09,0,7); ctx.fill(); } // fangs
+  for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*(w.fierce?0.62:0.55);                 // WOOLIES (fierce ones are bigger, horned, angry)
+    ctx.fillStyle=w.fierce?'#d6c8ad':'#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();
+    const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er);
+    if(w.fierce){ ctx.strokeStyle='#6a5636'; ctx.lineWidth=Math.max(1.5,r*0.2); ctx.lineCap='round';
+      ctx.beginPath(); ctx.moveTo(x-r*0.5,y-r*0.55); ctx.lineTo(x-r*0.85,y-r*1.05); ctx.moveTo(x+r*0.5,y-r*0.55); ctx.lineTo(x+r*0.85,y-r*1.05); ctx.stroke(); // horns
+      ctx.strokeStyle='#2a2a2a'; ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er*1.3); ctx.lineTo(x-ex+er*0.6,ey-er*0.2); ctx.moveTo(x+ex+er,ey-er*1.3); ctx.lineTo(x+ex-er*0.6,ey-er*0.2); ctx.stroke(); } } // angry brows
   for(const d of dragonling){ const x=d.x*SC,y=d.y*SC,r=SC*0.6; ctx.shadowColor='#5fe08a'; ctx.shadowBlur=6; ctx.fillStyle='#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings (carrying a wooly = white blob)
 }
 
@@ -796,7 +815,7 @@ function drawSky(){ const d=img.data;
 const GROVE=0, WILD=1, CLEARING=2;
 const gzone=new Uint8Array(N), gsettle=new Uint8Array(N), pen=new Uint8Array(N);
 const vine=new Uint8Array(N), bramble=new Uint8Array(N), rose=new Uint8Array(N);  // Nature-Gooblet flora: red vine-flowers (grove), bramble (wild), rose bush (where they meet)
-let vineN=0, brambleN=0; const FLORACAP=340;                                      // cached counts (cap the flora so it stays patches, not a takeover)
+let vineN=0, brambleN=0; const FLORACAP=130;                                      // cached counts (cap the flora so it stays small, restricted patches)
 let pears=[], sniffer=[], claw=[], treeman=[], gsettleList=[], natureGiant=null, groveWellness=1, giantClear={x:-1,y:-1};
 // the Treemen elect a King every 2000 days; the king's mood works the Grove↔surface portal
 let groveKingType='none', lastGroveElection=0, lastClawRaid=0;   // 'safe' seals it · 'aggressive' sends Claws out · 'helpful' lets Humans in
@@ -844,8 +863,8 @@ function natureGoobStep(g){                                                     
   const a=rnd()*6.283; const nx=g.x+Math.cos(a)*0.7, ny=g.y+Math.sin(a)*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ g.x=nx; g.y=ny; }
   g.E=Math.min(4,(g.E||2)+0.006);                                                        // the grove sustains it
   const i=cidx(g.x,g.y);
-  if(gzone[i]===GROVE && !vine[i] && !rose[i] && vineN<FLORACAP && rnd()<0.18){ vine[i]=1; vineN++; }        // red vine-flower in the pear grove
-  else if(gzone[i]===WILD && !bramble[i] && !rose[i] && brambleN<FLORACAP && rnd()<0.18){ bramble[i]=1; brambleN++; } // bramble in the wild
+  if(gzone[i]===GROVE && !vine[i] && !rose[i] && vineN<FLORACAP && rnd()<0.10){ vine[i]=1; vineN++; }        // red vine-flower in the pear grove
+  else if(gzone[i]===WILD && !bramble[i] && !rose[i] && brambleN<FLORACAP && rnd()<0.10){ bramble[i]=1; brambleN++; } // bramble in the wild
 }
 function growFlora(){ let vc=0,bc=0; for(let i=0;i<N;i++){ if(vine[i])vc++; else if(bramble[i])bc++; } // recount for caps (keep them as patches, not a takeover)
   const v0=vine.slice(), b0=bramble.slice();
@@ -1119,7 +1138,8 @@ const BESTIARY=[
   {key:'spec',   name:'Specter',        emoji:'👻', realm:'underground', on:()=>view==='under'&&spec.length>0},
   {key:'firem',  name:'Fire Minion',    emoji:'🔥', realm:'underground', on:()=>view==='under'&&fire.length>0},
   {key:'giant',  name:'The Fire Giant', emoji:'👹', realm:'underground', on:()=>view==='under'&&giantActive},
-  {key:'wooly',  name:'Wooly',          emoji:'🐑', realm:'sky',         on:()=>view==='sky'&&wooly.length>0},
+  {key:'wooly',  name:'Wooly',          emoji:'🐑', realm:'sky',         on:()=>view==='sky'&&wooly.some(w=>!w.fierce)},
+  {key:'fwool',  name:'Fierce Woolie',  emoji:'🐏', realm:'sky',         on:()=>view==='sky'&&wooly.some(w=>w.fierce)},
   {key:'angel',  name:'Angel',          emoji:'👼', realm:'sky',         on:()=>view==='sky'&&angels.length>0},
   {key:'dling',  name:'Dragonling',     emoji:'🐲', realm:'sky',         on:()=>view==='sky'&&dragonling.length>0},
   {key:'dragon', name:'Green Dragon',   emoji:'🐉', realm:'sky',         on:()=>view==='sky'&&dragon&&dragon.alive},
@@ -1143,6 +1163,7 @@ const PLANTIARY=[
   {key:'vine',  name:'Red Vine-Flower', emoji:'🌺', realm:'the Grove',   on:()=>view==='grove'&&vine.some(v=>v===1)},
   {key:'bram',  name:'Bramble',         emoji:'🌿', realm:'the Grove',   on:()=>view==='grove'&&bramble.some(v=>v===1)},
   {key:'rose',  name:'Rose Bush',       emoji:'🌹', realm:'the Grove',   on:()=>view==='grove'&&rose.some(v=>v===1)},
+  {key:'dsnap', name:'Dragonsnap',      emoji:'🐲🌱',realm:'sky (rare)',  on:()=>view==='sky'&&dsnap.length>0},
 ];
 // ---------- generic codex (drives both the Bestiary and the Plantiary) ----------
 const E=id=>document.getElementById(id);
