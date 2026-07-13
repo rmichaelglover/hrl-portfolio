@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HRLized — music by relaxation</title>
-<meta name="description" content="HRLized: an HRL-powered music generator. The same relaxation-labeling engine that labels galaxies and genomes composes a melody — pitches are the labels, melodic smoothness and chord tones are the constraints — and plays it in your browser. A tiny answer to Suno, built on one engine.">
+<meta name="description" content="HRLized: an HRL-powered music generator. The relaxation-labeling engine composes two voices at once — a melody and a bass — with rhythm, then plays them in your browser. Pitches are labels; melodic smoothness, chord tones and cross-voice consonance are the constraints. A tiny answer to Suno, on one engine.">
 <style>
 :root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;--rd:#ee5b6b}
 *{box-sizing:border-box}
@@ -27,20 +27,27 @@ input[type=range]{width:150px;accent-color:var(--pu)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .seg button{border:0;border-radius:0;background:#0c1226;padding:6px 12px}
 .seg button.on{background:#3a1e6e;color:#fff}
+.legend{display:flex;gap:5px 16px;flex-wrap:wrap;justify-content:center;margin-top:10px;font:12px ui-monospace,monospace;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}.legend i{width:13px;height:4px;border-radius:2px;display:inline-block}
 .note{color:var(--dim);font-size:12.5px;max-width:720px;margin:18px auto 0;text-align:left;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .note b{color:var(--pu)}.note i{color:var(--gd);font-style:normal}
 footer{color:var(--dim);font-size:13px;margin-top:30px}footer a{color:var(--cy);text-decoration:none}
 </style></head><body><div class="wrap">
 <div class="eyebrow">Relaxation Labeling · music you hear</div>
 <h1>HRLized</h1>
-<p class="tag">A melody is a <b>labeling problem</b>: give each beat a pitch so the whole line is
- <b>mutually consistent</b> — stepwise, in key, resting on the chord. So the same <b>HRL engine</b> that labels galaxies
- and genomes can <b>compose</b>. Press play. <span style="color:var(--pu)">A tiny answer to Suno, on one engine.</span></p>
+<p class="tag">A melody is a <b>labeling problem</b>. So the same <b>HRL engine</b> that labels galaxies and genomes now
+ composes <b>two voices at once</b> — a melody and a bass, kept consonant — with <b>rhythm</b>. Press play.
+ <span style="color:var(--pu)">A tiny answer to Suno, on one engine.</span></p>
 <div class="crumbs"><a href="../">← the portfolio</a> <a href="../hrl-lab/">The HRL Lab</a>
- <a href="../play/">Beat the Engine</a> <a href="https://github.com/mannyglover/relaxation-labeling">the engine ↗</a></div>
+ <a href="../play/">Beat the Engine</a> <a href="../whimsy-chess/maestro.html">Chess Maestro</a></div>
 
 <div class="stage">
-  <canvas id="roll" height="260"></canvas>
+  <canvas id="roll" height="300"></canvas>
+  <div class="legend">
+    <span><i style="background:#8f5cff"></i>melody</span>
+    <span><i style="background:#e8c170"></i>bass</span>
+    <span style="opacity:.7">wider block = longer note · shaded = chord tones</span>
+  </div>
   <div class="transport">
     <button id="gen" class="big">🎲 Generate</button>
     <button id="play" class="big">▶ Play</button>
@@ -59,49 +66,57 @@ footer{color:var(--dim);font-size:13px;margin-top:30px}footer a{color:var(--cy);
 </div>
 
 <div class="note">
-<b>How it composes.</b> Sixteen beats (four bars of a <b id="progName">I–V–vi–IV</b> progression) are the <b>objects</b>; the
- eight scale pitches are the <b>labels</b>. A pairwise <b>smoothness</b> factor between neighbouring beats rewards
- <i>stepwise motion</i> and gentle leaps over static repeats and big jumps; a per-beat <b>prior</b> pulls each beat toward
- the <i>chord tones</i> of its bar, and the first and last beats are <b>anchored to the tonic</b>. The engine relaxes the whole
- line into agreement — a melody — which Web Audio then plays over soft chord pads. Every <b>🎲 Generate</b> reseeds the prior,
- so you get a new tune each time. Honest MVP: symbolic, diatonic, one rhythm — but it's the <b>real engine</b>
- (<a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>), singing.
+<b>How it composes.</b> Sixteen beats over a <b id="progName">I–V–vi–IV</b> progression. Two voices are relaxed in
+ <b>one field</b>: the <b style="color:#8f5cff">melody</b> (16 objects) and the <b style="color:var(--gd)">bass</b> (16 more),
+ the eight scale pitches as labels. A pairwise <b>smoothness</b> factor rewards stepwise motion in each voice; a per-beat
+ <b>prior</b> pulls the melody toward the bar's chord tones (and the bass toward its root), first/last beats anchored to the
+ <b>tonic</b>; and a <b>cross-voice consonance</b> factor between the aligned melody and bass beats keeps the two in agreement
+ (thirds, fifths, sixths reward; seconds and sevenths suppress). A second relaxation over <b>onset / hold</b> labels gives the
+ melody its <b>rhythm</b>. Then Web Audio plays it. Every <b>🎲 Generate</b> reseeds the prior — a new tune each time. It's the
+ <b>real engine</b> (<a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>), singing in two parts.
 </div>
 
 <footer>HRLized — <a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>, composing.
  Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
 </div>
 <script>
-// ---------- the generic HRL engine (JS port) ----------
+// ---------- the generic HRL engine (JS port, multi-factor) ----------
 const zeros=(n,L)=>Array.from({length:n},()=>new Array(L).fill(0));
-const normRows=M=>M.map(r=>{let s=0;for(const v of r)s+=v;s=s||1;return r.map(v=>v/s);});
+const norm=r=>{const t=r.reduce((a,b)=>a+b,0)||1;return r.map(v=>v/t);};
+const normRows=M=>M.map(norm);
 const minmaxRows=M=>M.map(r=>{let lo=1e9,hi=-1e9;for(const v of r){if(v<lo)lo=v;if(v>hi)hi=v;}const sp=hi-lo;return sp>0?r.map(v=>(v-lo)/sp):r.map(()=>0);});
 function addPairwise(S,sup,edges,C){const L=C.length;for(const[i,k]of edges){for(let j=0;j<L;j++){let a=0;for(let l=0;l<L;l++)a+=C[j][l]*S[k][l];sup[i][j]+=a;}for(let l=0;l<L;l++){let a=0;for(let j=0;j<L;j++)a+=C[j][l]*S[i][j];sup[k][l]+=a;}}}
-function step(st){const n=st.S.length,L=st.S[0].length;let sup=zeros(n,L);addPairwise(st.S,sup,st.edges,st.C);sup=minmaxRows(sup);st.S=normRows(st.S.map((row,i)=>row.map((s,j)=>Math.pow(st.prior[i][j],st.ps)*Math.pow(s,1-st.ps)*(1+sup[i][j]))));}
+function step(st){const n=st.S.length,L=st.S[0].length;let sup=zeros(n,L);for(const f of st.factors)addPairwise(st.S,sup,f.edges,f.C);sup=minmaxRows(sup);st.S=normRows(st.S.map((row,i)=>row.map((s,j)=>Math.pow(st.prior[i][j],st.ps)*Math.pow(s,1-st.ps)*(1+sup[i][j]))));}
 const argmax=r=>{let mi=0;for(let i=1;i<r.length;i++)if(r[i]>r[mi])mi=i;return mi;};
 
 // ---------- music model ----------
-const MAJOR={semi:[0,2,4,5,7,9,11,12],root:60,chords:[[0,2,4,7],[1,4,6],[0,2,5,7],[0,3,5]],
-  names:['C','D','E','F','G','A','B','C'],chordNames:['C','G','Am','F'],prog:'I–V–vi–IV'};
-const MINOR={semi:[0,2,3,5,7,8,10,12],root:57,chords:[[0,2,4],[5,0,2],[2,4,6],[6,1,3]],
-  names:['A','B','C','D','E','F','G','A'],chordNames:['Am','F','C','G'],prog:'i–VI–III–VII'};
-let scale=MAJOR, melody=new Array(16).fill(0);
-function smoothC(){const semi=scale.semi,L=8,C=[];for(let j=0;j<L;j++){C.push([]);for(let l=0;l<L;l++){const d=Math.abs(semi[j]-semi[l]);
-  let v; if(d===0)v=0.25; else if(d<=2)v=1.0; else if(d<=4)v=0.72; else if(d<=7)v=0.45; else v=0.2; C[j].push(v);}}return C;}
-function genMelody(){const n=16,L=8,adv=+document.getElementById('adv').value;
-  const prior=[];for(let s=0;s<n;s++){const chord=scale.chords[s/4|0];const r=new Array(L).fill(0.05);
-    for(const d of chord)r[d%8]+=0.6; r[0]+=0.04;
-    for(let d=0;d<L;d++)r[d]+=Math.random()*0.6*adv; prior.push(r);}
-  prior[0]=new Array(L).fill(0.02);prior[0][0]=1;      // start on the tonic
-  prior[15]=new Array(L).fill(0.02);prior[15][0]=1;    // resolve to the tonic
-  const P=prior.map(r=>{const t=r.reduce((a,b)=>a+b,0);return r.map(v=>v/t);});
-  const edges=[];for(let s=0;s<n-1;s++)edges.push([s,s+1]);
-  const st={S:P.map(r=>r.slice()),prior:P,ps:0.5,edges,C:smoothC()};
-  for(let i=0;i<80;i++)step(st);
-  melody=st.S.map(argmax);}
+const MAJOR={semi:[0,2,4,5,7,9,11,12],root:60,chords:[[0,2,4,7],[1,4,6],[0,2,5,7],[0,3,5]],roots:[0,4,5,3],
+  names:['C','D','E','F','G','A','B','C'],prog:'I–V–vi–IV'};
+const MINOR={semi:[0,2,3,5,7,8,10,12],root:57,chords:[[0,2,4],[5,0,2],[2,4,6],[6,1,3]],roots:[0,5,2,6],
+  names:['A','B','C','D','E','F','G','A'],prog:'i–VI–III–VII'};
+let scale=MAJOR, melody=new Array(16).fill(0), bass=new Array(16).fill(0), rhythm=new Array(16).fill(0);
+function smoothC(){const semi=scale.semi,C=[];for(let j=0;j<8;j++){C.push([]);for(let l=0;l<8;l++){const d=Math.abs(semi[j]-semi[l]);
+  C[j].push(d===0?0.25:d<=2?1:d<=4?0.72:d<=7?0.45:0.2);}}return C;}
+function consC(){const semi=scale.semi,C=[];for(let j=0;j<8;j++){C.push([]);for(let l=0;l<8;l++){const iv=((semi[j]-semi[l])%12+12)%12;
+  C[j].push([0,3,4,7,8,9].includes(iv)?1:0.25);}}return C;}
+function genVoices(){const n=16,adv=+document.getElementById('adv').value;const mP=[],bP=[];
+  for(let s=0;s<n;s++){const bar=s/4|0,ch=scale.chords[bar];
+    const rm=new Array(8).fill(0.05);for(const d of ch)rm[d%8]+=0.6;rm[0]+=0.04;for(let d=0;d<8;d++)rm[d]+=Math.random()*0.6*adv;mP.push(rm);
+    const rb=new Array(8).fill(0.05);rb[scale.roots[bar]]+=1.0;rb[(scale.roots[bar]+4)%7]+=0.4;for(let d=0;d<8;d++)rb[d]+=Math.random()*0.3*adv;bP.push(rb);}
+  mP[0]=new Array(8).fill(0.02);mP[0][0]=1;mP[15]=new Array(8).fill(0.02);mP[15][0]=1;
+  const prior=[...mP,...bP].map(norm);
+  const mE=[],bE=[],xE=[];for(let s=0;s<n-1;s++){mE.push([s,s+1]);bE.push([16+s,17+s]);}for(let s=0;s<n;s++)xE.push([s,16+s]);
+  const st={S:prior.map(r=>r.slice()),prior,ps:0.5,factors:[{edges:mE,C:smoothC()},{edges:bE,C:smoothC()},{edges:xE,C:consC()}]};
+  for(let i=0;i<80;i++)step(st);const a=st.S.map(argmax);melody=a.slice(0,16);bass=a.slice(16,32);}
+function genRhythm(){const n=16,prior=[];for(let s=0;s<n;s++)prior.push(s%4===0?[0.85,0.15]:s%2===0?[0.55,0.45]:[0.4,0.6]);
+  prior[0]=[1,0.001];prior[15]=[1,0.001];const edges=[];for(let s=0;s<n-1;s++)edges.push([s,s+1]);
+  const st={S:prior.map(norm),prior:prior.map(norm),ps:0.55,factors:[{edges,C:[[0.5,1],[1,0.5]]}]};
+  for(let i=0;i<60;i++)step(st);rhythm=st.S.map(argmax);rhythm[0]=0;}
+function generate(){genVoices();genRhythm();}
+function melodyEvents(){const ev=[];let s=0;while(s<16){let len=1;while(s+len<16&&rhythm[s+len]===1)len++;ev.push({slot:s,deg:melody[s],len});s+=len;}return ev;}
 
 // ---------- Web Audio playback ----------
-let actx=null, master=null, voices=[], playing=false, startT=0, dur16=0;
+let actx=null, master=null, voices=[], playing=false, startT=0, dur16=0, curWave='triangle';
 function ensure(){if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();master=actx.createGain();master.gain.value=0.9;master.connect(actx.destination);}if(actx.state==='suspended')actx.resume();}
 function voice(midi,when,dur,type,gain){const f=440*Math.pow(2,(midi-69)/12);
   const o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(master);
@@ -109,53 +124,47 @@ function voice(midi,when,dur,type,gain){const f=440*Math.pow(2,(midi-69)/12);
   g.gain.exponentialRampToValueAtTime(0.0001,when+dur);o.start(when);o.stop(when+dur+0.03);voices.push(o);}
 function stopAll(){voices.forEach(o=>{try{o.stop()}catch(e){}});voices=[];playing=false;}
 function playMelody(){ensure();stopAll();playing=true;
-  const bpm=+document.getElementById('tempo').value, beat=60/bpm, wave=curWave;
-  const t0=actx.currentTime+0.06; startT=t0; dur16=16*beat;
-  for(let bar=0;bar<4;bar++){const ch=scale.chords[bar];ch.slice(0,3).forEach((d,k)=>
-    voice(scale.root+scale.semi[d%8]-12,t0+bar*4*beat,4*beat*0.98,'sine',0.07));}   // chord pads
-  melody.forEach((deg,s)=>voice(scale.root+scale.semi[deg],t0+s*beat,beat*0.92,wave,0.22)); // melody
-  setTimeout(()=>{if(playing&&actx.currentTime>=t0+dur16-0.05)playing=false;},dur16*1000+200);
+  const bpm=+document.getElementById('tempo').value, beat=60/bpm; const t0=actx.currentTime+0.06; startT=t0; dur16=16*beat;
+  for(let bar=0;bar<4;bar++){const ch=scale.chords[bar];ch.slice(0,3).forEach(d=>voice(scale.root+scale.semi[d%8]-12,t0+bar*4*beat,4*beat*0.98,'sine',0.045));} // soft pads
+  for(let s=0;s<16;s+=2)voice(scale.root+scale.semi[bass[s]]-12,t0+s*beat,2*beat*0.97,'triangle',0.14);   // BASS voice (half notes)
+  for(const e of melodyEvents())voice(scale.root+scale.semi[e.deg],t0+e.slot*beat,e.len*beat*0.93,curWave,0.22); // MELODY w/ rhythm
+  setTimeout(()=>{if(actx.currentTime>=t0+dur16-0.05)playing=false;},dur16*1000+250);
 }
 
 // ---------- piano-roll visualization ----------
 const rollCv=document.getElementById('roll'), rx=rollCv.getContext('2d');
 const PITCHCOL=d=>`hsl(${265-d*20},80%,${58+d*3}%)`;
-function rollDraw(){const dpr=Math.min(2,devicePixelRatio||1),W=rollCv.clientWidth,H=260;rollCv.width=W*dpr;rollCv.height=H*dpr;rx.setTransform(dpr,0,0,dpr,0,0);
+function rollDraw(){const dpr=Math.min(2,devicePixelRatio||1),W=rollCv.clientWidth,H=300;rollCv.width=W*dpr;rollCv.height=H*dpr;rx.setTransform(dpr,0,0,dpr,0,0);
   rx.clearRect(0,0,W,H);const cols=16,rows=8,cw=W/cols,pad=8,gh=(H-2*pad)/rows;
-  // chord-tone shading per bar
-  for(let s=0;s<cols;s++){const chord=scale.chords[s/4|0];
-    for(let d=0;d<rows;d++){if(chord.includes(d%8)||chord.includes(d)){rx.fillStyle='rgba(120,90,220,.10)';rx.fillRect(s*cw,pad+(rows-1-d)*gh,cw,gh);}}}
-  // bar dividers
-  rx.strokeStyle='rgba(150,170,220,.18)';rx.lineWidth=1;
-  for(let b=0;b<=4;b++){const x=b*4*cw;rx.beginPath();rx.moveTo(x,0);rx.lineTo(x,H);rx.stroke();}
-  // playhead
+  for(let s=0;s<cols;s++){const chord=scale.chords[s/4|0];for(let d=0;d<rows;d++){if(chord.includes(d%8)||chord.includes(d)){rx.fillStyle='rgba(120,90,220,.10)';rx.fillRect(s*cw,pad+(rows-1-d)*gh,cw,gh);}}}
+  rx.strokeStyle='rgba(150,170,220,.18)';rx.lineWidth=1;for(let b=0;b<=4;b++){const x=b*4*cw;rx.beginPath();rx.moveTo(x,0);rx.lineTo(x,H);rx.stroke();}
   let head=-1;if(playing&&actx){const el=actx.currentTime-startT;head=Math.floor(el/(dur16/16));if(head<0||head>=16)head=-1;}
-  if(head>=0){rx.fillStyle='rgba(143,92,255,.18)';rx.fillRect(head*cw,0,cw,H);}
-  // contour line
-  rx.strokeStyle='rgba(143,92,255,.55)';rx.lineWidth=2;rx.beginPath();
-  melody.forEach((deg,s)=>{const x=s*cw+cw/2,y=pad+(rows-1-deg)*gh+gh/2;s?rx.lineTo(x,y):rx.moveTo(x,y);});rx.stroke();
-  // note blocks
-  melody.forEach((deg,s)=>{const x=s*cw,y=pad+(rows-1-deg)*gh;const on=(s===head);
-    rx.fillStyle=PITCHCOL(deg);rx.globalAlpha=on?1:0.9;rx.fillRect(x+cw*0.12,y+2,cw*0.76,gh-4);rx.globalAlpha=1;
-    if(on){rx.strokeStyle='#fff';rx.lineWidth=2;rx.strokeRect(x+cw*0.12,y+2,cw*0.76,gh-4);}});
-  // pitch labels (left)
+  if(head>=0){rx.fillStyle='rgba(143,92,255,.16)';rx.fillRect(head*cw,0,cw,H);}
+  // bass voice — gold stepped line + dots
+  rx.strokeStyle='rgba(232,193,112,.75)';rx.lineWidth=2;rx.beginPath();
+  bass.forEach((deg,s)=>{const x=s*cw+cw/2,y=pad+(rows-1-deg)*gh+gh/2;s?rx.lineTo(x,y):rx.moveTo(x,y);});rx.stroke();
+  for(let s=0;s<16;s+=2){const deg=bass[s],x=s*cw+cw/2,y=pad+(rows-1-deg)*gh+gh/2;rx.fillStyle='#e8c170';rx.beginPath();rx.arc(x,y,3.5,0,7);rx.fill();}
+  // melody — contour + rhythm blocks
+  const ev=melodyEvents();
+  rx.strokeStyle='rgba(143,92,255,.5)';rx.lineWidth=2;rx.beginPath();
+  ev.forEach((e,i)=>{const x=e.slot*cw+cw/2,y=pad+(rows-1-e.deg)*gh+gh/2;i?rx.lineTo(x,y):rx.moveTo(x,y);});rx.stroke();
+  ev.forEach(e=>{const x=e.slot*cw,y=pad+(rows-1-e.deg)*gh,w=e.len*cw,on=(head>=e.slot&&head<e.slot+e.len);
+    rx.fillStyle=PITCHCOL(e.deg);rx.globalAlpha=on?1:0.9;rx.fillRect(x+cw*0.1,y+2,w-cw*0.2,gh-4);rx.globalAlpha=1;
+    if(on){rx.strokeStyle='#fff';rx.lineWidth=2;rx.strokeRect(x+cw*0.1,y+2,w-cw*0.2,gh-4);}});
   rx.fillStyle='#5a6685';rx.font='9px ui-monospace,monospace';rx.textAlign='left';rx.textBaseline='middle';
   for(let d=0;d<rows;d++)rx.fillText(scale.names[d],2,pad+(rows-1-d)*gh+gh/2);
   requestAnimationFrame(rollDraw);
 }
 
 // ---------- controls ----------
-let curWave='triangle';
-document.getElementById('gen').onclick=()=>{genMelody();playMelody();};
+document.getElementById('gen').onclick=()=>{generate();playMelody();};
 document.getElementById('play').onclick=()=>playMelody();
 document.getElementById('stop').onclick=stopAll;
 document.getElementById('tempo').oninput=function(){document.getElementById('tempoV').textContent=this.value;};
 document.getElementById('adv').oninput=function(){document.getElementById('advV').textContent=(+this.value).toFixed(2);};
-document.querySelectorAll('#mood button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#mood button').forEach(o=>o.classList.toggle('on',o===b));
-  scale=b.dataset.m==='min'?MINOR:MAJOR;document.getElementById('progName').textContent=scale.prog;genMelody();});
-document.querySelectorAll('#wave button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#wave button').forEach(o=>o.classList.toggle('on',o===b));curWave=b.dataset.w;});
-genMelody();rollDraw();
+document.querySelectorAll('#mood button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mood button').forEach(o=>o.classList.toggle('on',o===b));
+  scale=b.dataset.m==='min'?MINOR:MAJOR;document.getElementById('progName').textContent=scale.prog;generate();});
+document.querySelectorAll('#wave button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#wave button').forEach(o=>o.classList.toggle('on',o===b));curWave=b.dataset.w;});
+generate();rollDraw();
 </script>
 </body></html>
