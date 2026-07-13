@@ -105,6 +105,8 @@ a{color:#8fd0ff;text-decoration:none}
   <button id="viewbtn">🕳️ Go Underground</button>
   <button id="bookbtn">📖 Bestiary</button>
   <button id="badgebtn" style="display:none">🏆 Badge</button>
+  <button id="plantbtn">🌿 Plantiary</button>
+  <button id="plantbadgebtn" style="display:none">🏆 Badge</button>
 </div>
 <div class="book" id="book"><div class="bookinner">
   <div class="bookhead"><b>📖 Bestiary</b> <span id="bookprog" class="bdim"></span> <button id="bookx">✕</button></div>
@@ -117,6 +119,18 @@ a{color:#8fd0ff;text-decoration:none}
   <div style="font-size:20px;color:#ffd27f;font-weight:bold;margin-top:6px">Bestiary Complete!</div>
   <div id="badgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every creature in the whole world. A true naturalist of Elbie's realm! 🎉</div>
   <button id="badgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
+</div></div>
+<div class="book" id="plant"><div class="bookinner">
+  <div class="bookhead"><b>🌿 Plantiary</b> <span id="plantprog" class="bdim"></span> <button id="plantx">✕</button></div>
+  <div class="bookgrid" id="plantgrid"></div>
+  <div class="booknav"><button id="plantprev">◀ Prev</button> <span id="plantpage" class="bdim">Page 1</span> <button id="plantnext">Next ▶</button></div>
+  <div class="bhint">Plants you haven't seen on screen yet stay <b>❓ ???</b> — grow the world to fill it!</div>
+</div></div>
+<div class="book" id="plantbadge"><div class="bookinner" style="text-align:center;max-width:420px">
+  <div style="font-size:76px;line-height:1.1;filter:drop-shadow(0 0 14px #6fd06a)">🏆</div>
+  <div style="font-size:20px;color:#bfe89a;font-weight:bold;margin-top:6px">Plantiary Complete!</div>
+  <div id="plantbadgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every plant in the whole world! 🎉</div>
+  <button id="plantbadgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
 </div></div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
 <div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
@@ -224,6 +238,11 @@ forest</b> — but drop <b>outside creatures</b> into the Grove and they trample
 Let it sink too low and the settlements <b>collapse</b>; keep it high and new ones <b>bloom</b>. In the Grove you can also
 drop its <b>own</b> creatures — 🐭 Sniffers, 🐾 Claws and 🌳 Treemen — with their tools.
 <br><br>
+<b>Nature Gooblets &amp; flora.</b> Drop a 🔴 Gooblet in the Grove and if it survives <b>50 days</b> it turns into a
+<b style="color:#4fae4a">🌱 Nature Gooblet</b> — a peaceful green one wearing a flower, that Claws no longer touch. As it roams it
+plants <b style="color:#e8395a">🌺 red vine-flowers</b> across the pear grove and <b style="color:#7a6a2a">🌿 bramble</b> across the
+wild. Where a vine and a bramble <b>meet at the border</b>, they merge into a <b style="color:#e24a7e">🌹 rose bush</b>.
+<br><br>
 <b>The Grove King &amp; the portal.</b> Every <b>2000 days</b> the Treemen <b>elect a King</b> (he wears a 👑), and his mood works a
 <b>portal</b> that links the Grove to the surface — you'll see its square on <b>both</b> maps. A <b style="color:#7fe0a0">🛡️ Safe
 King</b> <b>seals</b> the portal (it shows a grey ✗). An <b style="color:#e8564e">⚔️ Aggressive King</b> throws it open and musters the
@@ -246,7 +265,9 @@ Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spre
 <b>The Bestiary.</b> Open the <b>📖 Bestiary</b> to page through a book of every creature in the world. Any creature you haven't
 <b>seen on your own screen yet</b> stays a mystery — a <b>❓ ???</b> — until you find it (or make it appear), so explore every realm
 and trigger every monarch to fill all the pages. Each brand-new find <b style="color:#ffd23a">✨ sparkles</b> in the book, and once
-you've discovered <b>all</b> of them you earn a <b>🏆 badge</b> you can open to celebrate.
+you've discovered <b>all</b> of them you earn a <b>🏆 badge</b> you can open to celebrate. There's a matching
+<b>🌿 Plantiary</b> too — a second book for all the world's <b>plants</b> (pears, bushes, fruit, glowfruit, vine-flowers, bramble and
+roses), with its own sparkles and completion badge.
 </div>
 <p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
 </div>
@@ -774,6 +795,8 @@ function drawSky(){ const d=img.data;
 // three biomes by relaxation: the pear-tree GROVE, the WILD, and CLEARINGs where Treemen settle.
 const GROVE=0, WILD=1, CLEARING=2;
 const gzone=new Uint8Array(N), gsettle=new Uint8Array(N), pen=new Uint8Array(N);
+const vine=new Uint8Array(N), bramble=new Uint8Array(N), rose=new Uint8Array(N);  // Nature-Gooblet flora: red vine-flowers (grove), bramble (wild), rose bush (where they meet)
+let vineN=0, brambleN=0; const FLORACAP=340;                                      // cached counts (cap the flora so it stays patches, not a takeover)
 let pears=[], sniffer=[], claw=[], treeman=[], gsettleList=[], natureGiant=null, groveWellness=1, giantClear={x:-1,y:-1};
 // the Treemen elect a King every 2000 days; the king's mood works the Grove↔surface portal
 let groveKingType='none', lastGroveElection=0, lastClawRaid=0;   // 'safe' seals it · 'aggressive' sends Claws out · 'helpful' lets Humans in
@@ -795,6 +818,7 @@ function genGrove(){
     const inv=cnt?1/cnt:0; let z=0; for(let l=0;l<3;l++){ const v=Math.sqrt(zS[i*3+l])*(0.3+sup[l]*inv); zT[i*3+l]=v; z+=v; } for(let l=0;l<3;l++) zT[i*3+l]/=z; }
     const t=zS; zS=zT; zT=t; }
   for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<3;l++){ if(zS[i*3+l]>m){m=zS[i*3+l];mi=l;} } gzone[i]=mi; }
+  vine.fill(0); bramble.fill(0); rose.fill(0); vineN=0; brambleN=0;
   gsettle.fill(0); gsettleList=[]; giantClear={x:GW>>1,y:GH>>1}; let bd=1e9;                     // the Giant's clearing: the CLEARING cell nearest the centre
   for(let i=0;i<N;i++){ if(gzone[i]===CLEARING){ const x=i%GW,y=(i/GW)|0, dd=(x-GW/2)**2+(y-GH/2)**2; if(dd<bd){bd=dd;giantClear={x,y};} } }
   natureGiant={x:giantClear.x+0.5,y:giantClear.y+0.5,alive:true}; groveWellness=1;
@@ -816,8 +840,27 @@ function electGroveKing(){                                                      
   if(groveKingType!=='helpful') pen.fill(0);                                            // pens only stand under a Helpful King
   if(treeman.length) treeman[(rnd()*treeman.length)|0].king=true;                       // crown one Treeman
 }
+function natureGoobStep(g){                                                               // a Nature Gooblet: peaceful, plants flora as it roams
+  const a=rnd()*6.283; const nx=g.x+Math.cos(a)*0.7, ny=g.y+Math.sin(a)*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ g.x=nx; g.y=ny; }
+  g.E=Math.min(4,(g.E||2)+0.006);                                                        // the grove sustains it
+  const i=cidx(g.x,g.y);
+  if(gzone[i]===GROVE && !vine[i] && !rose[i] && vineN<FLORACAP && rnd()<0.18){ vine[i]=1; vineN++; }        // red vine-flower in the pear grove
+  else if(gzone[i]===WILD && !bramble[i] && !rose[i] && brambleN<FLORACAP && rnd()<0.18){ bramble[i]=1; brambleN++; } // bramble in the wild
+}
+function growFlora(){ let vc=0,bc=0; for(let i=0;i<N;i++){ if(vine[i])vc++; else if(bramble[i])bc++; } // recount for caps (keep them as patches, not a takeover)
+  const v0=vine.slice(), b0=bramble.slice();
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y);
+    if(v0[i] && vc<FLORACAP && rnd()<0.03){ const d=[[1,0],[-1,0],[0,1],[0,-1]][(rnd()*4)|0], nx=x+d[0],ny=y+d[1]; if(nx>=0&&ny>=0&&nx<GW&&ny<GH){ const j=idx(nx,ny); if(!vine[j]&&!bramble[j]&&!rose[j]&&gzone[j]!==WILD){ vine[j]=1; vc++; } } } // vines creep through the grove and out into the clearings (border)
+    if(b0[i] && bc<FLORACAP && rnd()<0.03){ const d=[[1,0],[-1,0],[0,1],[0,-1]][(rnd()*4)|0], nx=x+d[0],ny=y+d[1]; if(nx>=0&&ny>=0&&nx<GW&&ny<GH){ const j=idx(nx,ny); if(!vine[j]&&!bramble[j]&&!rose[j]&&gzone[j]!==GROVE){ bramble[j]=1; bc++; } } } // bramble creeps through the wild and out into the clearings
+  }
+  vineN=vc; brambleN=bc;
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); if(!vine[i])continue;     // vine meets bramble at the border -> a ROSE BUSH
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){ const nx=x+dx,ny=y+dy; if(nx<0||ny<0||nx>=GW||ny>=GH)continue; const j=idx(nx,ny); if(bramble[j]){ vine[i]=0; bramble[j]=0; rose[i]=1; rose[j]=1; break; } }
+  }
+}
 function stepGrove(){
   if(day-lastGroveElection>=2000){ lastGroveElection=day; electGroveKing(); }            // the Treemen crown a King every 2000 days
+  if(frame%6===0) growFlora();
   for(const p of pears) p.food=Math.min(1, p.food+0.006);                               // pears regrow
   const pearH=buildHash(pears,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set();
   const helpful = groveKingType==='helpful';
@@ -834,7 +877,12 @@ function stepGrove(){
     if(natureGiant && (c.x-natureGiant.x)**2+(c.y-natureGiant.y)**2<20){ dead.add(i); return; } // the Giant expels intruders from its clearing
     if(c.E!=null && c.E<=0) dead.add(i);
   };
-  goob.forEach((g,i)=>{ if(g.d==='grove') wander(g,i,deadG); });
+  goob.forEach((g,i)=>{ if(g.d!=='grove') return;
+    if(g.nature){ natureGoobStep(g); return; }                                           // already a Nature Gooblet
+    g.groveDays=(g.groveDays||0)+1;
+    if(g.groveDays>=50){ g.nature=true; g.E=Math.max(g.E||0,2.5); return; }               // 50 days in the Grove -> becomes a Nature Gooblet
+    wander(g,i,deadG);
+  });
   zap.forEach((z,i)=>{ if(z.d==='grove') wander(z,i,deadZ); });
   human.forEach((m,i)=>{ if(m.d==='grove') wander(m,i,deadH); });
   // ---- SNIFFERS: forage pears in the grove, hurry out of the wild ----
@@ -851,7 +899,7 @@ function stepGrove(){
   // ---- CLAWS: wild predators; eat Sniffers AND any outsider that gets lost in the wild ----
   const prey=[];
   sniffer.forEach((s,i)=>{ if(!deadSn.has(i)&&inGroveWild(s.x,s.y)) prey.push({a:'sn',i,x:s.x,y:s.y}); });
-  goob.forEach((g,i)=>{ if(g.d==='grove'&&!deadG.has(i)&&inGroveWild(g.x,g.y)) prey.push({a:'g',i,x:g.x,y:g.y}); });
+  goob.forEach((g,i)=>{ if(g.d==='grove'&&!g.nature&&!deadG.has(i)&&inGroveWild(g.x,g.y)) prey.push({a:'g',i,x:g.x,y:g.y}); }); // Nature Gooblets are one with the grove — Claws leave them be
   zap.forEach((z,i)=>{ if(z.d==='grove'&&!deadZ.has(i)&&inGroveWild(z.x,z.y)) prey.push({a:'z',i,x:z.x,y:z.y}); });
   human.forEach((m,i)=>{ if(m.d==='grove'&&!deadH.has(i)&&inGroveWild(m.x,m.y)) prey.push({a:'h',i,x:m.x,y:m.y}); });
   const preyH=buildHash(prey,8); const deadC=new Set();
@@ -923,6 +971,9 @@ function drawGrove(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(gsettle[i]){ d[o]=120;d[o+1]=78;d[o+2]=44; }                                     // brown Treeman hut
     else if(pen[i]){ d[o]=170;d[o+1]=140;d[o+2]=90; }                                   // wooden pen (Helpful King)
+    else if(rose[i]){ d[o]=226;d[o+1]=74;d[o+2]=126; }                                  // 🌹 rose bush (vine + bramble merged)
+    else if(vine[i]){ d[o]=178;d[o+1]=44;d[o+2]=62; }                                   // red vine-flowers
+    else if(bramble[i]){ d[o]=58;d[o+1]=48;d[o+2]=26; }                                 // dark thorny bramble
     else { const z=gzone[i];
       if(z===GROVE){ d[o]=32;d[o+1]=112;d[o+2]=48; }                                    // lush pear-grove green
       else if(z===WILD){ d[o]=44;d[o+1]=66;d[o+2]=26; }                                 // dark overgrown wild
@@ -977,11 +1028,12 @@ function drawCreatures(){
   // GOOBLETS — red, with big dumb googly eyes (they fade when starving/thirsty)
   for(const g of goob){ if(lyr(g)!==view) continue; const x=g.x*SC,y=g.y*SC, r=SC*0.6;
     const cond=Math.min(1,Math.min(g.E/1.6,g.W/0.5));
-    ctx.globalAlpha=0.5+0.5*cond;
-    ctx.fillStyle='#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    ctx.globalAlpha=g.nature?1:0.5+0.5*cond;
+    ctx.fillStyle=g.nature?'#4fae4a':'#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();  // Nature Gooblets are green
     const ex=r*0.42, ey=y-r*0.12, er=r*0.38, pr=er*0.5;
     ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);                 // wide white eyes
     ctx.fillStyle='#241018'; twoDots(x-ex,x+ex,ey,pr);              // pupils
+    if(g.nature){ ctx.fillStyle='#e83a5a'; ctx.beginPath(); ctx.arc(x,y-r*0.95,r*0.32,0,7); ctx.fill(); ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y-r*0.95,r*0.12,0,7); ctx.fill(); } // a little red flower crown
   }
   ctx.globalAlpha=1;
   // ZAPPIES — electric blue, mean little eyes + angry brows
@@ -1052,10 +1104,11 @@ function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if
 
 // ---------- the Bestiary: a book of every creature; unseen ones stay ??? ----------
 const layerOf=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
-const seenB=new Set(), newlyB=new Set(); let bookPage=0, bestiaryDone=false; const BPER=6;
+const BPER=6;
 const anyIn=arr=>arr.some(c=>layerOf(c)===view);
 const BESTIARY=[
-  {key:'goob',   name:'Gooblet',        emoji:'🔴', realm:'anywhere',    on:()=>anyIn(goob)},
+  {key:'goob',   name:'Gooblet',        emoji:'🔴', realm:'anywhere',    on:()=>goob.some(g=>!g.nature&&layerOf(g)===view)},
+  {key:'ngoob',  name:'Nature Gooblet', emoji:'🌱', realm:'the Grove',   on:()=>goob.some(g=>g.nature&&layerOf(g)===view)},
   {key:'zap',    name:'Zappy',          emoji:'🔵', realm:'anywhere',    on:()=>anyIn(zap)},
   {key:'human',  name:'Human',          emoji:'🟥', realm:'anywhere',    on:()=>human.some(h=>layerOf(h)===view&&!h.vessel&&!h.fireSword&&!h.redKing&&!h.king)},
   {key:'bush',   name:'Pink Bush',      emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
@@ -1081,23 +1134,43 @@ const BESTIARY=[
   {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
   {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
 ];
-function markSeen(){                                                                       // called each frame from the map you're watching
-  for(const b of BESTIARY) if(b.on() && !seenB.has(b.key)){ seenB.add(b.key); newlyB.add(b.key); } // a brand-new discovery
-  document.getElementById('bookbtn').classList.toggle('ping', newlyB.size>0);             // ✨ on the button when something new waits
-  if(!bestiaryDone && seenB.size>=BESTIARY.length){ bestiaryDone=true; document.getElementById('badgebtn').style.display=''; } // completed -> unlock the badge
+// ---------- the Plantiary: the same idea, for the world's plants ----------
+const PLANTIARY=[
+  {key:'pbush', name:'Pink Bush',       emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
+  {key:'pear',  name:'Purple Pear',     emoji:'🍐', realm:'the Grove',   on:()=>view==='grove'&&pears.some(p=>p.food>0.1)},
+  {key:'redfr', name:'Red Fruit',       emoji:'🍎', realm:'sky',         on:()=>view==='sky'&&redfruit.some(r=>r.food>0.1)},
+  {key:'glow',  name:'Glowfruit',       emoji:'🟢', realm:'underground', on:()=>view==='under'&&glow.some(g=>g.food>0.1)},
+  {key:'vine',  name:'Red Vine-Flower', emoji:'🌺', realm:'the Grove',   on:()=>view==='grove'&&vine.some(v=>v===1)},
+  {key:'bram',  name:'Bramble',         emoji:'🌿', realm:'the Grove',   on:()=>view==='grove'&&bramble.some(v=>v===1)},
+  {key:'rose',  name:'Rose Bush',       emoji:'🌹', realm:'the Grove',   on:()=>view==='grove'&&rose.some(v=>v===1)},
+];
+// ---------- generic codex (drives both the Bestiary and the Plantiary) ----------
+const E=id=>document.getElementById(id);
+function makeCodex(arr, noun, els){ return {arr, noun, seen:new Set(), newly:new Set(), page:0, done:false, open:false, els}; }
+function markCodex(cx){ for(const b of cx.arr) if(b.on() && !cx.seen.has(b.key)){ cx.seen.add(b.key); cx.newly.add(b.key); }
+  cx.els.btn.classList.toggle('ping', cx.newly.size>0);
+  if(!cx.done && cx.seen.size>=cx.arr.length){ cx.done=true; cx.els.badgeBtn.style.display=''; }
 }
-function renderBook(){ const grid=document.getElementById('bookgrid'); const pages=Math.ceil(BESTIARY.length/BPER);
-  bookPage=Math.max(0,Math.min(bookPage,pages-1));
-  const start=bookPage*BPER, slice=BESTIARY.slice(start,start+BPER);
-  grid.innerHTML=slice.map(b=>{ const s=seenB.has(b.key), fresh=newlyB.has(b.key);
+function renderCodex(cx){ const pages=Math.ceil(cx.arr.length/BPER); cx.page=Math.max(0,Math.min(cx.page,pages-1));
+  const slice=cx.arr.slice(cx.page*BPER, cx.page*BPER+BPER);
+  cx.els.grid.innerHTML=slice.map(b=>{ const s=cx.seen.has(b.key), fresh=cx.newly.has(b.key);
     return '<div class="bcard '+(s?'seen':'locked')+(fresh?' sparkle':'')+'">'+(fresh?'<span class="bnew">✨ NEW</span>':'')+'<div class="bemoji">'+(s?b.emoji:'❓')+'</div><div class="bname">'+(s?b.name:'???')+'</div><div class="brealm">'+(s?b.realm:'&nbsp;')+'</div></div>'; }).join('');
-  document.getElementById('bookpage').textContent='Page '+(bookPage+1)+' / '+pages;
-  document.getElementById('bookprog').textContent='('+seenB.size+' / '+BESTIARY.length+' discovered)';
-  document.getElementById('bookprev').disabled=bookPage<=0; document.getElementById('booknext').disabled=bookPage>=pages-1;
+  cx.els.pageLbl.textContent='Page '+(cx.page+1)+' / '+pages;
+  cx.els.prog.textContent='('+cx.seen.size+' / '+cx.arr.length+' discovered)';
+  cx.els.prev.disabled=cx.page<=0; cx.els.next.disabled=cx.page>=pages-1;
+}
+function openCodex(cx){ cx.open=true; renderCodex(cx); cx.els.overlay.classList.add('open'); }
+function closeCodex(cx){ cx.open=false; cx.els.overlay.classList.remove('open'); cx.newly.clear(); cx.els.btn.classList.remove('ping'); }
+function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.onclick=()=>closeCodex(cx);
+  cx.els.overlay.onclick=e=>{ if(e.target===cx.els.overlay) closeCodex(cx); };
+  cx.els.prev.onclick=()=>{ cx.page--; renderCodex(cx); }; cx.els.next.onclick=()=>{ cx.page++; renderCodex(cx); };
+  cx.els.badgeBtn.onclick=()=>{ cx.els.badgeMsg.innerHTML='You discovered all <b>'+cx.arr.length+'</b> '+cx.noun+' in the whole world! 🎉'; cx.els.badgeOverlay.classList.add('open'); };
+  cx.els.badgeClose.onclick=()=>cx.els.badgeOverlay.classList.remove('open');
+  cx.els.badgeOverlay.onclick=e=>{ if(e.target===cx.els.badgeOverlay) cx.els.badgeOverlay.classList.remove('open'); };
 }
 
 // ---------- loop + interaction ----------
-let playing=true, frame=0, tool='goob', simSpeed=1, acc=0, bookOpen=false;
+let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
   stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepGrove(); collapseSettlements(); immigrate();
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
@@ -1132,7 +1205,8 @@ function loop(){
   document.getElementById('ngk').textContent=KINGLABEL[groveKingType];
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
-  markSeen(); if(bookOpen) renderBook();                                                 // discover creatures as they appear on screen
+  markCodex(bestiary); if(bestiary.open) renderCodex(bestiary);                           // discover creatures & plants as they appear on screen
+  markCodex(plantiary); if(plantiary.open) renderCodex(plantiary);
   requestAnimationFrame(loop);
 }
 function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.round(gyc/moistC.scale);
@@ -1196,19 +1270,9 @@ FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?
   b.title='Click to show or hide '+f.label+' on the graph';
   b.onclick=()=>{ f.on=!f.on; b.classList.toggle('off',!f.on); drawGraph(); };
   gleg.appendChild(b); });
-// the Bestiary book
-const bookEl=document.getElementById('book');
-function openBook(){ bookOpen=true; renderBook(); bookEl.classList.add('open'); }
-function closeBook(){ bookOpen=false; bookEl.classList.remove('open'); newlyB.clear(); document.getElementById('bookbtn').classList.remove('ping'); } // acknowledge the new finds
-document.getElementById('bookbtn').onclick=openBook;
-document.getElementById('bookx').onclick=closeBook;
-bookEl.onclick=e=>{ if(e.target===bookEl) closeBook(); };                                 // click the backdrop to close
-document.getElementById('bookprev').onclick=()=>{ bookPage--; renderBook(); };
-document.getElementById('booknext').onclick=()=>{ bookPage++; renderBook(); };
-// the completion badge
-const badgeEl=document.getElementById('badge');
-document.getElementById('badgebtn').onclick=()=>{ document.getElementById('badgemsg').innerHTML='You discovered all <b>'+BESTIARY.length+'</b> creatures in the whole world. A true naturalist of Elbie’s realm! 🎉'; badgeEl.classList.add('open'); };
-document.getElementById('badgex').onclick=()=>badgeEl.classList.remove('open');
-badgeEl.onclick=e=>{ if(e.target===badgeEl) badgeEl.classList.remove('open'); };
+// the two codices — Bestiary (creatures) and Plantiary (plants)
+const bestiary=makeCodex(BESTIARY,'creatures',{overlay:E('book'),grid:E('bookgrid'),pageLbl:E('bookpage'),prog:E('bookprog'),prev:E('bookprev'),next:E('booknext'),btn:E('bookbtn'),close:E('bookx'),badgeBtn:E('badgebtn'),badgeOverlay:E('badge'),badgeClose:E('badgex'),badgeMsg:E('badgemsg')});
+const plantiary=makeCodex(PLANTIARY,'plants',{overlay:E('plant'),grid:E('plantgrid'),pageLbl:E('plantpage'),prog:E('plantprog'),prev:E('plantprev'),next:E('plantnext'),btn:E('plantbtn'),close:E('plantx'),badgeBtn:E('plantbadgebtn'),badgeOverlay:E('plantbadge'),badgeClose:E('plantbadgex'),badgeMsg:E('plantbadgemsg')});
+wireCodex(bestiary); wireCodex(plantiary);
 newWorld(); loop();
 </script></body></html>
