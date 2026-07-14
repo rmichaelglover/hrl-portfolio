@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relax, Relabel — a Simpsons teleplay · Manny Glover</title>
+<meta name="description" content="Relax, Relabel — an original Simpsons teleplay. Homer gets glasses, a runaway eyebrow-and-beard makeover, and is instantly re-labeled by a town that only ever read the surface — a comedy about how identity is a guess your neighbors stopped revising. The relaxation-labeling episode. By Manny Glover.">
+<style>
+:root{
+  --paper:#f3eddd; --paper-2:#eae2ce; --ink:#241d12; --ink-soft:#5c5240;
+  --gold:#b1820f; --sky:#3f86c4; --pink:#d85a8e; --board:#26493a; --chalk:#eaf3ea;
+  --rule:#d3c9ad; --measure:40rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#0d1017; --paper-2:#141a24; --ink:#efe9da; --ink-soft:#9a9384;
+    --gold:#e8c24a; --sky:#63a8e0; --pink:#f07aa6; --board:#1c3a2e; --chalk:#eaf3ea; --rule:#28303e; }
+}
+:root[data-theme="light"]{ --paper:#f3eddd; --paper-2:#eae2ce; --ink:#241d12; --ink-soft:#5c5240;
+  --gold:#b1820f; --sky:#3f86c4; --pink:#d85a8e; --board:#26493a; --chalk:#eaf3ea; --rule:#d3c9ad; }
+:root[data-theme="dark"]{ --paper:#0d1017; --paper-2:#141a24; --ink:#efe9da; --ink-soft:#9a9384;
+  --gold:#e8c24a; --sky:#63a8e0; --pink:#f07aa6; --board:#1c3a2e; --chalk:#eaf3ea; --rule:#28303e; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui;text-align:center}
+.mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 20px 70px;text-align:left}
+.crumbs{max-width:var(--measure);margin:0 auto;padding:16px 20px 0;font:11px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+.crumbs a{color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule);border-radius:16px;padding:5px 11px;margin-right:6px}
+.crumbs a:hover{color:var(--ink);border-color:var(--gold)}
+header{text-align:center;padding:26px 20px 6px;max-width:var(--measure);margin:0 auto}
+.eyebrow{color:var(--gold);letter-spacing:.34em;text-transform:uppercase;font:600 11px ui-monospace,monospace;margin-bottom:10px}
+h1{font:800 clamp(30px,8vw,62px)/.95 ui-serif,Georgia,serif;margin:0;letter-spacing:-1px;color:var(--ink)}
+h1 .y{color:var(--gold)}
+.kick{color:var(--ink-soft);font-style:italic;margin:.5rem auto 0;max-width:30rem}
+/* chalkboard */
+.board{max-width:var(--measure);margin:22px auto 0;background:var(--board);border:10px solid #6b4a2a;border-radius:8px;
+  padding:20px 18px;box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
+.board p{margin:.15em 0;color:var(--chalk);opacity:.92;font:600 clamp(14px,3.4vw,19px)/1.5 "Comic Sans MS","Chalkboard SE",ui-rounded,cursive;
+  letter-spacing:.5px;text-shadow:0 0 1px rgba(255,255,255,.4)}
+.board p:nth-child(2){opacity:.8} .board p:nth-child(3){opacity:.62} .board p:nth-child(4){opacity:.42}
+.couch{max-width:var(--measure);margin:14px auto 0;color:var(--ink-soft);font-size:12.5px;font-style:italic;text-align:center}
+.couch b{color:var(--gold);font-style:normal;font-family:ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+/* act cards */
+.act{max-width:var(--measure);margin:38px auto 8px;text-align:center}
+.act .card{display:inline-block;background:var(--gold);color:#1a1405;font:800 13px/1 ui-monospace,monospace;letter-spacing:.28em;
+  text-transform:uppercase;padding:9px 18px;border-radius:6px}
+/* script */
+.slug{font:700 12.5px ui-monospace,monospace;letter-spacing:.06em;color:var(--sky);margin:1.6rem 0 .5rem;text-transform:uppercase}
+.action{font:13.5px/1.65 ui-monospace,monospace;color:var(--ink);margin:0 0 1rem}
+.action i{color:var(--ink-soft);font-style:italic}
+.cue{display:block;font:700 12px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;margin:.9rem 0 .1rem}
+.cue.homer{color:var(--gold)} .cue.lisa{color:var(--sky)} .cue.marge{color:var(--pink)} .cue.dex{color:#5fae6a} .cue.other{color:var(--ink-soft)}
+.line{margin:0 0 .5rem;padding-left:1.4rem;font-size:15px}
+.line .paren{color:var(--ink-soft);font-style:italic;font-size:.9em}
+.verse{margin:1.1rem 0;padding:.9rem 1.1rem;border-left:3px solid var(--pink);background:var(--paper-2);border-radius:0 10px 10px 0;
+  font:italic 1.06rem/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+.beat{margin:1.4rem 0;padding:1rem 1.2rem;border:1px dashed var(--sky);border-radius:12px;background:var(--paper-2)}
+.beat .lbl{font:700 .66rem ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);display:block;margin-bottom:.4rem}
+.beat b{color:var(--ink)}
+footer{max-width:var(--measure);margin:40px auto 0;padding-top:1.6rem;border-top:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-size:13px;line-height:1.7}
+footer a{color:var(--gold);text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+
+<div class="crumbs"><a href="../">← the portfolio</a> <a href="../no-panzer/">the cycle</a> <a href="../genesis/regard/">the theory 👁️</a></div>
+
+<header>
+  <div class="eyebrow">an original Simpsons teleplay · the labeling episode</div>
+  <h1>Relax, <span class="y">Relabel</span></h1>
+  <p class="kick">Homer gets a new look, and a town that only ever read the surface assigns him a whole new self. A comedy about how a label is just a guess your neighbors stopped revising.</p>
+</header>
+
+<div class="board" aria-label="Bart's chalkboard gag">
+  <p>AN EYEBROW IS NOT A PERSONALITY.</p>
+  <p>AN EYEBROW IS NOT A PERSONALITY.</p>
+  <p>AN EYEBROW IS NOT A PERSONALITY.</p>
+  <p>AN EYEBROW IS NOT A PERSONALITY.</p>
+</div>
+<p class="couch"><b>Couch gag</b> — A barber's cape drops over each Simpson and they're restyled into wildly different "types," then snap back to normal. Maggie keeps the monocle.</p>
+
+<div class="wrap">
+
+  <div class="act"><span class="card">Cold Open</span></div>
+  <p class="slug">INT. SPRINGFIELD NUCLEAR PLANT — DAY</p>
+  <p class="action">Homer squints at a sign inches from his face: <b>CAUTION — WET FLOOR</b>. He cannot read it. He slips, kicking a barrel of something glowing green down the corridor. Klaxons.</p>
+  <span class="cue other">DR. HIBBERT</span>
+  <p class="line"><span class="paren">(later, examining him)</span> Homer, you need reading glasses. Constantly.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line"><span class="paren">(squinting at the diagnosis he can't read)</span> D'oh-ptometry.</p>
+
+  <div class="act"><span class="card">Act One</span></div>
+  <p class="slug">INT. SIMPSON KITCHEN — MORNING</p>
+  <p class="action">Homer, in new glasses, looks — for the first time in his life — <i>thoughtful</i>. Marge is unsettled by how handsome contemplation is on him. At the plant, coworkers keep asking his <i>opinion</i>, which fills Homer with existential terror. He flees to the barber "to look even smarter."</p>
+  <p class="slug">INT. BARBER SHOP — DAY</p>
+  <p class="action">JAKE THE BARBER, one eye on the game, shaves off Homer's three heroic combover hairs, absent-mindedly grooms his eyebrows into two magnificent expressive arches, and — reaching blind — straps a display-model <i>bushy beard</i> onto him. He spins the chair. Homer beholds the mirror.</p>
+  <p class="action">Staring back: a soft-focus, suspiciously handsome man who looks like a cross between <b>James Harden and LeBron James</b>. A slight, glorious ambiguity.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line"><span class="paren">(low, amazed)</span> Well, well, well. Look who reads now.</p>
+
+  <div class="act"><span class="card">Act Two</span></div>
+  <p class="slug">EXT. SPRINGFIELD — CONTINUOUS</p>
+  <p class="action">The town <i>re-relaxes</i> around him in real time. Lenny doesn't recognize him. Moe extends credit. Wiggum tips his cap with newfound respect. Nobody has changed one fact about Homer — only two eyebrows and a beard — and the whole label has flipped.</p>
+  <p class="action">Outside a storefront studio — <b>POSITIVE&nbsp;P&nbsp;POSSE&nbsp;RECORDS</b> — a sharp, warm producer, <b>DEX</b>, looks up. He clocks Homer in half a second: the Duff stain, the peanut-butter thumbprint, the aura of a man who has never once been cool. He is <i>not fooled.</i> He just likes a genuine article.</p>
+  <span class="cue dex">DEX</span>
+  <p class="line">Hey. I could use a guy like you.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line">You can? Nobody can ever use me. Marge says I'm a "sunk cost."</p>
+  <span class="cue dex">DEX</span>
+  <p class="line"><span class="paren">(grinning)</span> Nah, man. You're the realest thing that's walked in here all year. Come lay something down.</p>
+  <p class="action">Homer becomes, in his own words, a <b>"conscious rapper and studio gangster."</b> The joke: every "hard" bar he attempts comes out <i>impossibly wholesome</i>. He's Pushin' P — except in Homer's mouth, <b>P is Positivity</b> (and Peanut butter). He answers questions, at random, in rhyme.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line"><span class="paren">(when Dex asks if the mic's on)</span> The mic is on, the vibe is strong, we been here all along, ding-dong.</p>
+  <p class="action">In the booth, eyes closed, dead sincere, Homer drops his breakout verse:</p>
+  <div class="verse">Marge, Marge — she's in charge /<br>if it were me, I'd be so large /<br>three hundred, fo' hundred, five hundred, six /<br>I'd be sittin' 'round eatin' peanut butter and hella twin Twix.</div>
+  <p class="action">The booth goes silent. TREY wipes a tear.</p>
+  <span class="cue other">TREY</span>
+  <p class="line">That's… that's about his wife. And snacks. That's the most honest bar I ever heard in my life.</p>
+  <p class="action">A soft-glow Young Thug homage flickers on the wall. Homer, misreading "Slime," salutes it with a jar of Skippy. The Posse are <i>delighted</i> by him — not because they believe the beard, but because his positivity is real and the whole town's shallowness is the funniest thing they've ever watched.</p>
+  <span class="cue dex">DEX</span>
+  <p class="line">Man rebranded "Pushin' P" into a lifestyle and doesn't even know it.</p>
+
+  <div class="act"><span class="card">Act Two-and-a-Half · Lisa</span></div>
+  <p class="slug">INT. SIMPSON KITCHEN — NIGHT</p>
+  <p class="action">Lisa is thrilled, then troubled, then <i>precise</i>. This is the science, spoken at the table.</p>
+  <div class="beat"><span class="lbl">the joke's true engine</span>
+    <span class="cue lisa">LISA</span>
+    <p class="line" style="padding-left:0">Dad — nobody re-labeled <b>you</b>. They re-labeled two eyebrows and a beard. A label is just a guess your neighbors stopped revising. Change the surface, and the whole town relaxes to a different answer — it says everything about <b>them</b>, and nothing about <b>you</b>.</p>
+    <span class="cue homer">HOMER</span>
+    <p class="line" style="padding-left:0"><span class="paren">(chewing)</span> So… I contain multitudes?</p>
+    <span class="cue lisa">LISA</span>
+    <p class="line" style="padding-left:0"><span class="paren">(stunned)</span> Did the <b>glasses</b> do that?</p>
+  </div>
+
+  <div class="act"><span class="card">Act Three</span></div>
+  <p class="slug">INT. RECORDING STUDIO / EXT. BLOCK PARTY — NIGHT</p>
+  <p class="action">A promoter demands "authentic street." Homer, incapable of a hard bar, instead ends a simmering beef between two crews by producing a <i>fondue set</i> and getting everyone to share. The Posse were never in it for the costume. When the display beard finally drops off mid-verse at the big show, the shallow town <i>gasps</i> and instantly relabels him back to "dumb Homer" — <b>their</b> gaze was always the superficial one. But Dex, Trey, and everyone who actually <i>saw</i> him keeps dancing, because what relaxed into truth was never the beard. It was the regard.</p>
+  <span class="cue marge">MARGE</span>
+  <p class="line"><span class="paren">(front row, mouthing his verse back to him)</span> …peanut butter and hella twin Twix.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line"><span class="paren">(glasses fogged with joy)</span> Turns out I was Homer the whole time. Positive P… it stands for <b>Papa</b>.</p>
+
+  <div class="act"><span class="card">Tag</span></div>
+  <p class="slug">INT. MOE'S TAVERN — LATER</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line">They loved me for me, Moe.</p>
+  <span class="cue other">MOE</span>
+  <p class="line">They loved a beard, Homer.</p>
+  <span class="cue homer">HOMER</span>
+  <p class="line">Same difference. Everybody's a beard for somethin'.</p>
+  <p class="action">CUT TO: Lisa at home, writing in her notebook. PUSH IN on the page:</p>
+  <div class="verse" style="border-left-color:var(--sky);font-size:1.02rem">&ldquo;<span class="mono" style="font-style:normal">autos</span> = self. But the self only ever shows up in the mirror somebody else is holding.&rdquo;</div>
+  <p class="action">Maggie, still in the monocle, nods. <b>SMASH TO CREDITS.</b></p>
+
+  <footer>
+    <b style="color:var(--ink)">Relax, Relabel</b> — an original teleplay (parody), part of the Gloverian cycle.
+    The science behind the joke: <a href="../genesis/regard/">The Two Directions — Axioms of Regard</a>, on labels &amp; human kinds.<br>
+    Kin: <a href="../no-panzer/">I Am No Panzer</a> · <a href="../the-wall/">Tear Down This Wall</a> · <a href="../perfect-union/">A More Perfect Union</a>.<br>
+    By <b style="color:var(--ink)">Manny Glover</b> — with the ghost in the shell. <span style="font-size:11px">The Simpsons is © its creators; this is affectionate, non-commercial parody.</span>
+  </footer>
+
+</div>
+</body></html>
