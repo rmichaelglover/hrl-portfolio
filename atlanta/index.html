@@ -2,9 +2,9 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Atlanta — the Great Water Cycle</title>
-<meta name="description" content="HRLize Atlanta: the city's transportation & economy modeled as a great water cycle. Two monumental gyres — an outward clockwise Skywheel above the city and an inward counter-clockwise Undertow below — circulate commuters like water, with MARTA/WARTA/Cobblincan arms, Vroome express jets, real creeks, and a relaxation-smoothed congestion field.">
+<meta name="description" content="HRLize Atlanta: the city's transportation & economy modeled as a great water cycle. Two monumental gyres — an outward clockwise Skywheel above the city and an inward counter-clockwise Undertow below — circulate commuters like water, with MARTA/WARTA/Cobblincan arms, Vroome express jets, real creeks, and a relaxation-smoothed congestion field. Now with the WARTA water network: navigable rivers, canals and daylit creeks, water hubs, and ferries that carry the tide.">
 <style>
-:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;--rd:#ee5b6b;--marta:#ff8a3e;--warta:#c060ff;--cobb:#5fe3a0;--vroome:#ff5b9e}
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;--rd:#ee5b6b;--marta:#ff8a3e;--warta:#c060ff;--cobb:#5fe3a0;--vroome:#ff5b9e;--water:#2f8fd0;--daylit:#49d0ff;--canal:#3fb0e0;--hub:#ffe07a}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0a1428,var(--bg));color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui;text-align:center}
 .wrap{max-width:860px;margin:0 auto;padding:28px 16px 80px}
@@ -15,7 +15,7 @@ h1{font:700 clamp(24px,5vw,42px)/1.05 ui-serif,Georgia,serif;margin:0 0 8px}
 .crumbs a{color:var(--cy);text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:5px 12px;margin:0 3px}
 #c{width:100%;max-width:600px;aspect-ratio:1;background:#02030a;border:1px solid var(--line);border-radius:16px;display:block;margin:14px auto 0;cursor:crosshair;touch-action:none}
 .phase{font:13px ui-monospace,monospace;color:var(--dim);margin-top:8px}.phase b{color:var(--gd)}
-.tools{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:12px auto 6px;max-width:640px}
+.tools{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:12px auto 6px;max-width:660px}
 .tools button{background:#0c1226;color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font:12.5px ui-monospace,monospace;cursor:pointer}
 .tools button.on{background:#15213e;color:#fff}
 .tools .sep{width:1px;background:var(--line);margin:2px 3px}
@@ -24,14 +24,15 @@ h1{font:700 clamp(24px,5vw,42px)/1.05 ui-serif,Georgia,serif;margin:0 0 8px}
 .legend{display:flex;gap:5px 14px;flex-wrap:wrap;justify-content:center;margin-top:9px;font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:5px}.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
 .note{color:var(--dim);font-size:12.5px;max-width:740px;margin:16px auto 0;text-align:left;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.note b{color:var(--cy)}.note i{color:var(--gd);font-style:normal}
+.note b{color:var(--cy)}.note i{color:var(--gd);font-style:normal}.note em{color:var(--daylit);font-style:normal}
 footer{color:var(--dim);font-size:13px;margin-top:28px}footer a{color:var(--cy);text-decoration:none}
 </style></head><body><div class="wrap">
 <div class="eyebrow">Relaxation Labeling · a city that moves like water</div>
 <h1>Atlanta — the Great Water Cycle</h1>
 <p class="tag">The metro's commute reimagined as a <b>hydrological cycle</b>. Two monumental gyres circulate the city:
  an <b style="color:var(--gd)">outward, clockwise Skywheel</b> above and an <b style="color:var(--cy)">inward, counter-clockwise
- Undertow</b> below — breathing riders <b>in</b> to downtown each morning and <b>out</b> to the suburbs each evening.</p>
+ Undertow</b> below — breathing riders <b>in</b> to downtown each morning and <b>out</b> to the suburbs each evening — all
+ threaded onto a real <b style="color:var(--daylit)">WARTA water network</b> of rivers, canals and daylit creeks.</p>
 <div class="crumbs"><a href="../">← the portfolio</a> <a href="../hrl-lab/">The HRL Lab</a> <a href="../hrlized/">HRLized</a></div>
 
 <canvas id="c" width="600" height="600"></canvas>
@@ -39,36 +40,57 @@ footer{color:var(--dim);font-size:13px;margin-top:28px}footer a{color:var(--cy);
 
 <div class="tools" id="tools">
   <button data-t="marta" class="on">🟠 MARTA arm</button>
-  <button data-t="warta">🟣 WARTA arm</button>
+  <button data-t="warta">🟣 WARTA line</button>
   <button data-t="cobb">🟢 Cobblincan arm</button>
   <button data-t="vroome">💗 Vroome jet</button>
+  <span class="sep"></span>
+  <button data-t="canal">🛶 Canal</button>
+  <button data-t="hub">🚉 Water hub</button>
+  <button data-t="daylight">🌞 Daylight creek</button>
   <button data-t="erase">🧽 Erase</button>
   <span class="sep"></span>
-  <button id="literal">💧 Show creeks</button>
+  <button id="water" class="on">💧 Water net</button>
   <button id="congest" class="on">🌡️ Congestion</button>
+  <button id="autotide" class="on">🌗 Auto-tide</button>
+  <button id="trails" class="on">✨ Trails</button>
   <span class="sep"></span>
   <button id="pause">⏸ Pause</button>
   <button id="reset">↺ Reset</button>
 </div>
-<div class="speedrow">🌗 day–night <input id="day" type="range" min="0" max="3" step="0.1" value="1"> &nbsp; 🚦 flow <input id="flow" type="range" min="0.4" max="2.4" step="0.1" value="1.2"></div>
+<div class="speedrow">🌀 tide <input id="tide" type="range" min="0" max="1" step="0.02" value="0.5" title="drag: inhale the city IN ↔ exhale it OUT">
+  &nbsp; 🌪️ swirl <input id="swirl" type="range" min="0" max="1.7" step="0.05" value="0.95"></div>
+<div class="speedrow">🚦 flow <input id="flow" type="range" min="0.3" max="3.2" step="0.1" value="1.3">
+  &nbsp; 👥 riders <input id="riders" type="range" min="120" max="1600" step="40" value="760"></div>
 <div class="legend">
   <span><i style="background:var(--cy)"></i>inbound rider</span>
   <span><i style="background:var(--gd)"></i>outbound rider</span>
   <span><i style="background:#2f6db0"></i>downtown reservoir</span>
-  <span><i style="background:var(--marta)"></i>MARTA</span><span><i style="background:var(--warta)"></i>WARTA</span>
+  <span><i style="background:var(--marta)"></i>MARTA</span><span><i style="background:var(--warta)"></i>WARTA line</span>
   <span><i style="background:var(--cobb)"></i>Cobblincan</span><span><i style="background:var(--vroome)"></i>Vroome</span>
+  <span><i style="background:var(--water)"></i>river/creek</span>
+  <span><i style="background:var(--canal)"></i>canal</span>
+  <span><i style="background:#5a6478"></i>buried creek</span>
+  <span><i style="background:var(--daylit)"></i>daylit creek</span>
+  <span><i style="background:var(--hub)"></i>water hub</span>
   <span><i style="background:var(--rd)"></i>congestion eddy</span>
 </div>
 
 <div class="note">
 <b>How it's an HRL model.</b> The metro is a grid of cells (the <i>objects</i>); each relaxes toward a <b>circulation role</b> —
  <i>inward-conduit · outward-conduit · reservoir · congestion-eddy · off-network (noise)</i> — under a compatibility that
- conserves flow, follows the demand gradient, and honours the two gyres' opposite <b>winding directions</b> (an orientation
- term — the same handedness the engine's order-3 factor sees). Riders are droplets advected by the blended gyre field;
- <b>MARTA / WARTA / Cobblincan</b> arms are fast conduits you paint onto the field, and <b>Vroome</b> jets fire express currents
- point-to-point. The <b>congestion</b> layer is a density field <b>relaxed</b> (neighbour-smoothed) each frame — the red
- <b>eddies</b> are where capacity is overrun. Where the gyres cross the real <b>creeks</b> (Chattahoochee, Peachtree Creek,
- South River), the figurative flow taps literal water. Same engine as the rest of the portfolio
+ conserves flow, follows the demand gradient, and honours the two gyres' opposite <b>winding directions</b>. Riders are droplets
+ advected by the blended gyre field; <b>MARTA / Cobblincan</b> arms are fast conduits you paint onto the field, and <b>Vroome</b>
+ jets fire express currents point-to-point. The <b>congestion</b> layer is a density field <b>relaxed</b> (neighbour-smoothed)
+ each frame — the red <b>eddies</b> are where capacity is overrun.
+<br><br>
+<b>The WARTA water network.</b> WARTA is the <i>Water-MARTA</i>: transit that runs on real water. The
+ <b style="color:var(--water)">rivers &amp; creeks</b> (Chattahoochee, Peachtree Creek, South River) and the
+ <b style="color:var(--canal)">canals</b> you draw form a <b>navigable network</b>; drop <b style="color:var(--hub)">water hubs</b>
+ on it and lay <b style="color:var(--warta)">WARTA lines</b> that snap to the water, and <b>ferries</b> shuttle between the hubs,
+ calling at each. Riders near a WARTA line are <b>caught by the current</b> and carried along it — inbound on the morning tide,
+ outbound on the evening one — a water express woven into the gyre. And Atlanta's <b style="color:#5a6478">buried creeks</b> can be
+ <em>daylighted</em>: click <b>🌞 Daylight</b> on a culverted stream to <em>reopen it to the sky</em>, and it joins the living
+ water network — reconnecting the flow through the city core. Same engine as the rest of the portfolio
  (<a href="https://github.com/mannyglover/relaxation-labeling">hrl_generic</a>) — a whole city labelling its own flow.
 </div>
 
@@ -76,69 +98,142 @@ footer{color:var(--dim);font-size:13px;margin-top:28px}footer a{color:var(--cy);
 </div>
 <script>
 const cv=document.getElementById('c'), x=cv.getContext('2d'), W=600,H=600, cx=300, cy=300;
-let playing=true, tool='marta', showCreeks=false, showCong=true, phase=0, t=0;
-// ---------- creeks (literal water): stylized polylines ----------
+let playing=true, tool='marta', showWater=true, showCong=true, phase=0, t=0, autoTide=true, trails=true, swirlVal=0.95;
+// ---------- rivers & creeks (literal water): stylized polylines ----------
 const CREEKS=[
   {name:'Chattahoochee', pts:[[70,540],[120,430],[150,330],[210,230],[300,150],[400,90]]},   // NW arc
   {name:'Peachtree Creek', pts:[[300,150],[330,220],[300,300]]},
   {name:'South River', pts:[[300,300],[360,400],[430,470],[520,520]]},
 ];
+// ---------- buried creeks (culverted) — a 🌞 Daylight project can reopen them ----------
+const BURIED=[
+  {name:'Tanyard Branch',    pts:[[210,230],[250,268],[300,300]], open:false},   // NW arc -> downtown core
+  {name:'Clear Creek',       pts:[[300,300],[362,268],[430,250]], open:false},   // core -> NE
+  {name:'Intrenchment Creek',pts:[[300,300],[302,362],[344,408]], open:false},   // core -> SE toward South River
+];
+// ---------- the WARTA water network the user builds ----------
+let canals=[];      // [ [{x,y}...] ]   engineered channels
+let hubs=[];        // [ {x,y} ]        water interchange nodes
+let wartaLines=[];  // [ {pts:[{x,y}], vessels:[{u,dir,wait,cool}]} ]  ferry routes on water
+let curCanal=null, curWarta=null;
 // ---------- transit arms (fast conduits) + Vroome jets ----------
-let arms=[];   // {kind, pts:[{x,y}]}
+let arms=[];   // {kind:'marta'|'cobb', pts:[{x,y}]}
 let jets=[];   // {ax,ay,bx,by}
 let curArm=null, vroomeA=null;
-const ARMCOL={marta:'#ff8a3e',warta:'#c060ff',cobb:'#5fe3a0'};
+const ARMCOL={marta:'#ff8a3e',cobb:'#5fe3a0'};
 // ---------- droplets (riders) ----------
 const N=760; let drops=[];
 function spawn(mid){ const a=Math.random()*6.283, r= mid? (60+Math.random()*180) : (250+Math.random()*40);
   return {x:cx+Math.cos(a)*r, y:cy+Math.sin(a)*r, out:Math.random()<0.5}; }
 function initDrops(){ drops=[]; for(let i=0;i<N;i++) drops.push(spawn(true)); }
+
+// ---------- water geometry helpers ----------
+// nearest point on a segment; returns squared distance, the foot point, and the unit tangent
+function segNear(px,py,ax,ay,bx,by){ const dx=bx-ax,dy=by-ay, L2=dx*dx+dy*dy||1;
+  let tt=((px-ax)*dx+(py-ay)*dy)/L2; tt=tt<0?0:tt>1?1:tt;
+  const qx=ax+dx*tt, qy=ay+dy*tt, len=Math.hypot(dx,dy)||1;
+  return {d2:(px-qx)**2+(py-qy)**2, qx, qy, tx:dx/len, ty:dy/len}; }
+function nearestOnPolys(px,py,polys){ let best=null;
+  for(const poly of polys){ for(let i=1;i<poly.length;i++){ const s=segNear(px,py,poly[i-1][0],poly[i-1][1],poly[i][0],poly[i][1]);
+    if(!best||s.d2<best.d2) best=s; } }
+  return best; }
+// every navigable stretch of water, as arrays of [x,y]
+function navPolys(){ const out=[];
+  for(const c of CREEKS) out.push(c.pts);
+  for(const c of canals) out.push(c.map(p=>[p.x,p.y]));
+  for(const b of BURIED) if(b.open) out.push(b.pts);
+  return out; }
+const wartaPolys=()=>wartaLines.map(l=>l.pts.map(p=>[p.x,p.y]));
+// arclength walk along a polyline (for ferries)
+function lineLen(pts){ let L=0; for(let i=1;i<pts.length;i++) L+=Math.hypot(pts[i].x-pts[i-1].x, pts[i].y-pts[i-1].y); return L; }
+function lineAt(pts,u){ if(pts.length<2) return {x:pts[0].x,y:pts[0].y};
+  for(let i=1;i<pts.length;i++){ const seg=Math.hypot(pts[i].x-pts[i-1].x, pts[i].y-pts[i-1].y);
+    if(u<=seg||i===pts.length-1){ const f=seg?u/seg:0; return {x:pts[i-1].x+(pts[i].x-pts[i-1].x)*f, y:pts[i-1].y+(pts[i].y-pts[i-1].y)*f}; } u-=seg; }
+  return {x:pts[pts.length-1].x, y:pts[pts.length-1].y}; }
+// snap a painted point onto the nearest navigable water within reach (keeps WARTA on the water)
+function snapToWater(px,py,reach){ const n=nearestOnPolys(px,py,navPolys()); if(n&&n.d2<reach*reach) return {x:n.qx,y:n.qy}; return {x:px,y:py}; }
+
 // ---------- the blended gyre field ----------
 function field(px,py){ let dx=px-cx, dy=py-cy; let r=Math.hypot(dx,dy)||1; const ux=dx/r, uy=dy/r;
-  // Skywheel (above): outward + clockwise ; Undertow (below): inward + counter-clockwise  (screen y is down)
-  const swirl=0.95, rad=0.85;
-  const Ax=ux*rad + uy*swirl,  Ay=uy*rad - ux*swirl;      // outward + CW
-  const Bx=-ux*rad - uy*swirl, By=-uy*rad + ux*swirl;     // inward + CCW
+  const swirl=swirlVal, rad=0.85;
+  const Ax=ux*rad + uy*swirl,  Ay=uy*rad - ux*swirl;      // outward + CW  (Skywheel)
+  const Bx=-ux*rad - uy*swirl, By=-uy*rad + ux*swirl;     // inward + CCW  (Undertow)
   let fx=(1-phase)*Bx + phase*Ax, fy=(1-phase)*By + phase*Ay;
-  // fast conduits: near an arm, funnel harder toward downtown along the field
-  for(const arm of arms){ for(const p of arm.pts){ const d2=(p.x-px)**2+(p.y-py)**2; if(d2<900){ const b=1.8*(1-d2/900); fx+=fx*b; fy+=fy*b; } } }
+  for(const arm of arms){ for(const p of arm.pts){ const d2=(p.x-px)**2+(p.y-py)**2; if(d2<1700){ const b=2.8*(1-d2/1700); fx+=fx*b; fy+=fy*b; } } }
   return [fx,fy,r];
 }
 // ---------- congestion grid (relaxation-smoothed density) ----------
 const G=26, cong=new Float32Array(G*G), tmp=new Float32Array(G*G);
-function relaxCong(){ // bin droplets -> density, then a few neighbour-smoothing (relaxation) passes
-  cong.fill(0); for(const d of drops){ const gx=Math.min(G-1,Math.max(0,d.x/W*G|0)), gy=Math.min(G-1,Math.max(0,d.y/H*G|0)); cong[gy*G+gx]+=1; }
+function relaxCong(){ cong.fill(0); for(const d of drops){ const gx=Math.min(G-1,Math.max(0,d.x/W*G|0)), gy=Math.min(G-1,Math.max(0,d.y/H*G|0)); cong[gy*G+gx]+=1; }
   for(let it=0;it<3;it++){ for(let yy=0;yy<G;yy++)for(let xx=0;xx<G;xx++){ let s=cong[yy*G+xx],n=1;
     if(xx>0){s+=cong[yy*G+xx-1];n++;} if(xx<G-1){s+=cong[yy*G+xx+1];n++;} if(yy>0){s+=cong[(yy-1)*G+xx];n++;} if(yy<G-1){s+=cong[(yy+1)*G+xx];n++;}
     tmp[yy*G+xx]=s/n; } cong.set(tmp); } }
 // ---------- step + draw ----------
-function step(dt){ t+=dt; phase=0.5+0.5*Math.sin(t*0.15*(+document.getElementById('day').value));
+function step(dt){ t+=dt;
+  phase = autoTide ? 0.5+0.5*Math.sin(t*0.16) : +document.getElementById('tide').value;
+  swirlVal = +document.getElementById('swirl').value;
   const spd=+document.getElementById('flow').value;
+  const target=+document.getElementById('riders').value|0;
+  while(drops.length<target) drops.push(spawn(true)); if(drops.length>target) drops.length=target;
   for(const d of drops){ const [fx,fy,r]=field(d.x,d.y); d.x+=fx*spd; d.y+=fy*spd; d.out=(fx*(d.x-cx)+fy*(d.y-cy))>0;
     if(r<14||r>296||d.x<0||d.x>W||d.y<0||d.y>H){ Object.assign(d,spawn(phase>0.5?false:true)); } }
+  // WARTA water express: riders near a ferry line are caught by its current — inbound on the flood tide, outbound on the ebb
+  const wp=wartaPolys();
+  if(wp.length){ const want = phase>0.5 ? 1 : -1;                                  // +1 = carry outward (evening), -1 = inward (morning)
+    for(const d of drops){ const n=nearestOnPolys(d.x,d.y,wp); if(n&&n.d2<900){ const b=1-n.d2/900;
+      let tx=n.tx, ty=n.ty; const radial=(n.qx-cx)*tx+(n.qy-cy)*ty; if(Math.sign(radial)!==want){ tx=-tx; ty=-ty; }
+      d.x+=tx*spd*2.4*b; d.y+=ty*spd*2.4*b; } } }
+  // ferries shuttle along each WARTA line, calling at the hubs
+  for(const line of wartaLines){ const L=lineLen(line.pts); if(L<8){ line.vessels=[]; continue; }
+    if(!line.vessels.length) line.vessels.push({u:L*0.5,dir:1,wait:0,cool:0});
+    for(const v of line.vessels){ if(v.wait>0){ v.wait--; continue; } if(v.cool>0) v.cool--;
+      v.u+=v.dir*1.6*spd; if(v.u>=L){ v.u=L; v.dir=-1; } else if(v.u<=0){ v.u=0; v.dir=1; }
+      const pos=lineAt(line.pts,v.u);
+      if(v.cool<=0){ for(const h of hubs){ if((h.x-pos.x)**2+(h.y-pos.y)**2<90){ v.wait=26; v.cool=70; break; } } } // call at a hub
+    } }
   // Vroome jets fire express currents along their segment
-  for(const j of jets){ if(Math.random()<0.4){ const f=Math.random(); const near=drops[(Math.random()*N)|0];
-    near.x=j.ax+(j.bx-j.ax)*f + (Math.random()-0.5)*8; near.y=j.ay+(j.by-j.ay)*f + (Math.random()-0.5)*8; } }
+  for(const j of jets){ if(Math.random()<0.5){ const f=Math.random(); const near=drops[(Math.random()*drops.length)|0]; if(near){
+    near.x=j.ax+(j.bx-j.ax)*f + (Math.random()-0.5)*8; near.y=j.ay+(j.by-j.ay)*f + (Math.random()-0.5)*8; } } }
   relaxCong();
 }
-function draw(){ x.clearRect(0,0,W,H);
+function strokePoly(pts, get){ x.beginPath(); pts.forEach((p,i)=>{ const gx=get?get(p):p; i?x.lineTo(gx[0],gx[1]):x.moveTo(gx[0],gx[1]); }); x.stroke(); }
+function draw(){ if(trails){ x.fillStyle='rgba(2,3,10,0.2)'; x.fillRect(0,0,W,H); } else x.clearRect(0,0,W,H);
   // congestion field (relaxed density) — warm where crowded, red eddies at the peaks
   if(showCong){ let mx=1; for(let i=0;i<cong.length;i++) if(cong[i]>mx)mx=cong[i]; const cw=W/G;
-    for(let yy=0;yy<G;yy++)for(let xx=0;xx<G;xx++){ const v=cong[yy*G+xx]/mx; if(v<0.42)continue;   // only the genuinely crowded cells glow
+    for(let yy=0;yy<G;yy++)for(let xx=0;xx<G;xx++){ const v=cong[yy*G+xx]/mx; if(v<0.42)continue;
       x.fillStyle=`rgba(${190+v*60|0},${140-v*90|0},${70-v*50|0},${0.03+(v-0.42)*0.32})`; x.fillRect(xx*cw,yy*cw,cw+1,cw+1);
       if(v>0.9){ x.strokeStyle='rgba(238,91,107,.7)'; x.lineWidth=1.5; x.beginPath(); x.arc(xx*cw+cw/2,yy*cw+cw/2,cw*0.36,0,7); x.stroke(); } } }
-  // creeks (literal water)
-  if(showCreeks){ x.strokeStyle='rgba(47,208,184,.55)'; x.lineWidth=3; x.lineCap='round';
-    for(const ck of CREEKS){ x.beginPath(); ck.pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1])); x.stroke(); } }
-  // transit arms (fast conduits)
+  // ---- the water network ----
+  if(showWater){
+    x.lineCap='round'; x.lineJoin='round';
+    // buried creeks: faint, dashed — waiting to be daylighted
+    x.setLineDash([5,6]); x.lineWidth=2.4;
+    for(const b of BURIED){ if(b.open)continue; x.strokeStyle='rgba(90,100,120,.6)'; strokePoly(b.pts); } x.setLineDash([]);
+    // rivers & creeks
+    x.strokeStyle='rgba(47,143,208,.7)'; x.lineWidth=3.4; for(const ck of CREEKS) strokePoly(ck.pts);
+    // canals
+    x.strokeStyle='rgba(63,176,224,.85)'; x.lineWidth=3; for(const c of canals) strokePoly(c, p=>[p.x,p.y]);
+    // daylit creeks: reopened to the sky — bright and glowing
+    x.shadowColor='#49d0ff'; x.shadowBlur=8; x.strokeStyle='rgba(73,208,255,.95)'; x.lineWidth=3.4;
+    for(const b of BURIED){ if(b.open) strokePoly(b.pts); } x.shadowBlur=0;
+  }
+  // ---- water hubs ----
+  for(const h of hubs){ x.fillStyle='rgba(10,18,38,.9)'; x.beginPath(); x.arc(h.x,h.y,6.5,0,7); x.fill();
+    x.strokeStyle='#ffe07a'; x.lineWidth=2; x.beginPath(); x.arc(h.x,h.y,6.5,0,7); x.stroke();
+    x.fillStyle='#ffe07a'; x.beginPath(); x.arc(h.x,h.y,2.4,0,7); x.fill(); }
+  // ---- transit arms (fast conduits) ----
   for(const arm of arms){ x.strokeStyle=ARMCOL[arm.kind]; x.lineWidth=3.5; x.lineCap='round'; x.globalAlpha=.9;
-    x.beginPath(); arm.pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y)); x.stroke();
+    strokePoly(arm.pts, p=>[p.x,p.y]);
     for(const p of arm.pts){ x.fillStyle=ARMCOL[arm.kind]; x.beginPath(); x.arc(p.x,p.y,2.5,0,7); x.fill(); } x.globalAlpha=1; }
-  // Vroome jets
+  // ---- WARTA ferry lines (on the water) ----
+  for(const line of wartaLines){ x.strokeStyle='rgba(192,96,255,.92)'; x.lineWidth=3.2; x.lineCap='round'; strokePoly(line.pts, p=>[p.x,p.y]);
+    for(const v of line.vessels){ const pos=lineAt(line.pts,v.u); x.fillStyle= v.wait>0 ? '#fff0a0' : '#e6c8ff';   // the ferry (gold while calling at a hub)
+      x.strokeStyle='#c060ff'; x.lineWidth=1.5; x.beginPath(); x.arc(pos.x,pos.y,3.6,0,7); x.fill(); x.stroke(); } }
+  // ---- Vroome jets ----
   for(const j of jets){ x.strokeStyle='#ff5b9e'; x.lineWidth=2.5; x.setLineDash([6,5]); x.beginPath(); x.moveTo(j.ax,j.ay); x.lineTo(j.bx,j.by); x.stroke(); x.setLineDash([]); }
-  // droplets (riders)
+  // ---- droplets (riders) ----
   for(const d of drops){ x.fillStyle=d.out?'rgba(232,193,112,.92)':'rgba(55,230,255,.92)'; x.fillRect(d.x-1.3,d.y-1.3,2.6,2.6); }
-  // downtown reservoir
+  // ---- downtown reservoir ----
   const g=x.createRadialGradient(cx,cy,2,cx,cy,34); g.addColorStop(0,'rgba(90,150,230,.95)'); g.addColorStop(1,'rgba(47,109,176,0)');
   x.fillStyle=g; x.beginPath(); x.arc(cx,cy,34,0,7); x.fill();
   x.fillStyle='#bcd6ff'; x.font='bold 10px ui-monospace,monospace'; x.textAlign='center'; x.fillText('DOWNTOWN',cx,cy+3);
@@ -152,19 +247,33 @@ function loop(){ if(playing) step(1); draw();
 function xy(e){ const r=cv.getBoundingClientRect(); const px=(e.touches?e.touches[0].clientX:e.clientX)-r.left, py=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return [px/r.width*W, py/r.height*H]; }
 let drawing=false;
 cv.addEventListener('pointerdown',e=>{ const [px,py]=xy(e);
-  if(tool==='erase'){ arms=arms.filter(a=>a.pts.every(p=>(p.x-px)**2+(p.y-py)**2>400)); jets=jets.filter(j=>((j.ax+j.bx)/2-px)**2+((j.ay+j.by)/2-py)**2>900); return; }
+  if(tool==='erase'){ arms=arms.filter(a=>a.pts.every(p=>(p.x-px)**2+(p.y-py)**2>400));
+    canals=canals.filter(c=>c.every(p=>(p.x-px)**2+(p.y-py)**2>400));
+    wartaLines=wartaLines.filter(l=>l.pts.every(p=>(p.x-px)**2+(p.y-py)**2>400));
+    hubs=hubs.filter(h=>(h.x-px)**2+(h.y-py)**2>260);
+    jets=jets.filter(j=>((j.ax+j.bx)/2-px)**2+((j.ay+j.by)/2-py)**2>900); return; }
+  if(tool==='daylight'){ let best=null; for(const b of BURIED){ if(b.open)continue; const n=nearestOnPolys(px,py,[b.pts]); if(n&&(!best||n.d2<best.d2)){ best={d2:n.d2,b}; } }
+    if(best&&best.d2<900) best.b.open=true; return; }                                        // 🌞 reopen the nearest culverted creek
+  if(tool==='hub'){ hubs.push(snapToWater(px,py,60)); return; }                              // a water hub snaps onto the network
   if(tool==='vroome'){ if(!vroomeA){ vroomeA=[px,py]; } else { jets.push({ax:vroomeA[0],ay:vroomeA[1],bx:px,by:py}); vroomeA=null; } return; }
+  if(tool==='canal'){ drawing=true; curCanal=[{x:px,y:py}]; canals.push(curCanal); return; }
+  if(tool==='warta'){ drawing=true; curWarta={pts:[snapToWater(px,py,40)],vessels:[]}; wartaLines.push(curWarta); return; } // WARTA hugs the water
   drawing=true; curArm={kind:tool,pts:[{x:px,y:py}]}; arms.push(curArm);
 });
-cv.addEventListener('pointermove',e=>{ if(!drawing||!curArm)return; const [px,py]=xy(e); const l=curArm.pts[curArm.pts.length-1];
-  if((l.x-px)**2+(l.y-py)**2>120) curArm.pts.push({x:px,y:py}); });
-addEventListener('pointerup',()=>{ drawing=false; curArm=null; });
+cv.addEventListener('pointermove',e=>{ if(!drawing)return; const [px,py]=xy(e);
+  if(curCanal){ const l=curCanal[curCanal.length-1]; if((l.x-px)**2+(l.y-py)**2>120) curCanal.push({x:px,y:py}); return; }
+  if(curWarta){ const l=curWarta.pts[curWarta.pts.length-1]; if((l.x-px)**2+(l.y-py)**2>140) curWarta.pts.push(snapToWater(px,py,40)); return; }
+  if(curArm){ const l=curArm.pts[curArm.pts.length-1]; if((l.x-px)**2+(l.y-py)**2>120) curArm.pts.push({x:px,y:py}); } });
+addEventListener('pointerup',()=>{ drawing=false; curArm=null; curCanal=null; curWarta=null; });
 document.querySelectorAll('#tools [data-t]').forEach(b=>b.onclick=()=>{ tool=b.dataset.t; vroomeA=null;
   document.querySelectorAll('#tools [data-t]').forEach(o=>o.classList.toggle('on',o===b)); });
-document.getElementById('literal').onclick=function(){ showCreeks=!showCreeks; this.classList.toggle('on',showCreeks); };
+document.getElementById('water').onclick=function(){ showWater=!showWater; this.classList.toggle('on',showWater); };
 document.getElementById('congest').onclick=function(){ showCong=!showCong; this.classList.toggle('on',showCong); };
+document.getElementById('autotide').onclick=function(){ autoTide=!autoTide; this.classList.toggle('on',autoTide); };
+document.getElementById('trails').onclick=function(){ trails=!trails; this.classList.toggle('on',trails); };
+document.getElementById('tide').oninput=function(){ autoTide=false; document.getElementById('autotide').classList.remove('on'); };
 document.getElementById('pause').onclick=function(){ playing=!playing; this.textContent=playing?'⏸ Pause':'▶ Play'; };
-document.getElementById('reset').onclick=()=>{ arms=[]; jets=[]; vroomeA=null; initDrops(); };
+document.getElementById('reset').onclick=()=>{ arms=[]; jets=[]; canals=[]; hubs=[]; wartaLines=[]; vroomeA=null; for(const b of BURIED) b.open=false; initDrops(); };
 initDrops(); loop();
 </script>
 </body></html>
