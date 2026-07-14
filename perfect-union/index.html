@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A More Perfect Union — a novella · Manny Glover</title>
+<meta name="description" content="A More Perfect Union — the sequel to 'I Am No Panzer.' President Miguel Manuel Glover Ia makes the two old parties settle their wars at the chessboard (where perfect play always draws), freeing the impossible Catholic-Muslim-Communist-Libertarian coalition to build the greenways, waterways, and fireways of a reunited North and South. By Manny Glover.">
+<style>
+:root{
+  --paper:#f1eee4; --paper-2:#e6e2d4; --ink:#1c2230; --ink-soft:#4d5568;
+  --green:#3a9d5d; --water:#2f80b8; --fire:#c85a2c; --gold:#bf942a;
+  --accent:#2f80b8; --accent-deep:#245f88; --rule:#d1ccbc; --measure:34rem;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0b1120; --paper-2:#111a2c; --ink:#e6e9f2; --ink-soft:#9aa4bc;
+    --green:#54c07a; --water:#4aa2df; --fire:#e2804a; --gold:#e0b653;
+    --accent:#4aa2df; --accent-deep:#2f80b8; --rule:#26314a;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#f1eee4; --paper-2:#e6e2d4; --ink:#1c2230; --ink-soft:#4d5568;
+  --green:#3a9d5d; --water:#2f80b8; --fire:#c85a2c; --gold:#bf942a;
+  --accent:#2f80b8; --accent-deep:#245f88; --rule:#d1ccbc;
+}
+:root[data-theme="dark"]{
+  --paper:#0b1120; --paper-2:#111a2c; --ink:#e6e9f2; --ink-soft:#9aa4bc;
+  --green:#54c07a; --water:#4aa2df; --fire:#e2804a; --gold:#e0b653;
+  --accent:#4aa2df; --accent-deep:#2f80b8; --rule:#26314a;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 1.075rem/1.72 "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.4rem 5rem}
+a{color:var(--accent)}
+
+.crumbs{max-width:var(--measure);margin:0 auto;padding:1.1rem 1.4rem .2rem;
+  font:11px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+.crumbs a{color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule);border-radius:16px;padding:5px 11px;margin-right:6px}
+.crumbs a:hover{color:var(--ink);border-color:var(--accent)}
+
+.hero{position:relative;max-width:100%;overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--paper-2);margin-top:.8rem}
+.hero canvas{display:block;width:100%;height:260px}
+.hero .veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:1.5rem;background:radial-gradient(120% 90% at 50% 42%, transparent 28%, var(--paper-2) 92%)}
+.eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin:0 0 .1rem;padding-left:.4em}
+.title{font-weight:400;font-size:clamp(2.2rem,6.6vw,3.7rem);line-height:1.0;margin:.2rem 0 .3rem;letter-spacing:.005em;text-wrap:balance}
+.title .g{color:var(--green)} .title .w{color:var(--water)} .title .f{color:var(--fire)}
+.kicker{color:var(--ink-soft);font-style:italic;font-size:1.0rem;margin:0;max-width:26rem}
+
+.epigraph{max-width:var(--measure);margin:3rem auto 1rem;padding:0 1.4rem;text-align:center}
+.epigraph .clause{font:600 .68rem/1.5 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.epigraph blockquote{margin:0;font-style:italic;font-size:1.22rem;line-height:1.52;color:var(--ink)}
+.epigraph .attr{margin-top:1rem;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.starbreak{display:flex;gap:.7rem;align-items:center;justify-content:center;margin:2.6rem 0;font-size:.7rem;letter-spacing:.3em}
+.starbreak::before,.starbreak::after{content:"";height:1px;width:3rem;background:var(--rule)}
+.starbreak .g{color:var(--green)} .starbreak .w{color:var(--water)} .starbreak .f{color:var(--fire)}
+
+.chap{margin-top:3.4rem}
+.chap-head{margin:0 0 1.4rem;text-align:center}
+.chap-num{font-size:.72rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+.chap-title{font-weight:400;font-size:1.58rem;line-height:1.15;margin:.35rem 0 0;letter-spacing:.01em;text-wrap:balance}
+.chap-title.g{color:var(--green)} .chap-title.w{color:var(--water)} .chap-title.f{color:var(--fire)}
+.chap p{margin:0 0 1.15rem}
+.chap p+p:not(.first){text-indent:1.5em}
+.chap p.first::first-letter{float:left;font-size:3.5em;line-height:.74;padding:.06em .09em 0 0;color:var(--gold);
+  font-family:"Iowan Old Style",Palatino,Georgia,serif}
+.chap.g p.first::first-letter{color:var(--green)} .chap.w p.first::first-letter{color:var(--water)} .chap.f p.first::first-letter{color:var(--fire)}
+.pull{color:var(--ink-soft)}
+.disp{text-align:center;font-style:italic;color:var(--accent);margin:1.6rem 0;font-size:1.05rem}
+
+.colophon{margin-top:4.5rem;padding-top:1.8rem;border-top:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-size:.86rem;line-height:1.7}
+.colophon .mono{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.colophon a{color:var(--accent)}
+
+@media (max-width:640px){ .hero canvas{height:220px} .epigraph blockquote{font-size:1.1rem} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style></head><body>
+
+<div class="crumbs"><a href="../">← the portfolio</a> <a href="../no-panzer/">Book I · I Am No Panzer</a> <a href="../atlanta/">the ways 🌀</a></div>
+
+<div class="hero">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="veil">
+    <p class="eyebrow mono">a novella · book II · the second labeling</p>
+    <h1 class="title">A More Perfect <span class="w">Union</span></h1>
+    <p class="kicker">President Miguel Manuel Glover&nbsp;Ia and the Coalition of Impossible Friends</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="epigraph">
+    <div class="clause">Article XXVIII &middot; The Chess Amendment</div>
+    <blockquote>&ldquo;A draw is not a failure. A draw is two forces that have agreed, at last, to stop pretending either can win&mdash;<br>and it is the quietest room in which to finally get some work done.&rdquo;</blockquote>
+    <div class="attr mono">Miguel Manuel Glover Ia &middot; first inaugural</div>
+  </div>
+
+  <div class="starbreak mono"><span class="g">▲</span> <span class="w">▲</span> <span class="f">▲</span></div>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">I</div><h2 class="chap-title">The Grandson of the Meadow</h2></div>
+    <p class="first">Two generations after the composer burned a clean line across a Georgia meadow and reunited a peninsula seven thousand miles away, his grandson inherited the meadow, the method, and the mislabel. Miguel Manuel Glover was raised at the lip of the same beautiful field, in a country that had, over his grandfather's lifetime and his own, quietly stopped believing in the hyphens inside its own name. He grew up soft, like all the Glovers, and fierce about the same one thing: that a thing finds its true name not by force but by patient agreement with its neighbors.</p>
+    <p>Where the grandfather had turned the method on grass and gene and galaxy and, at the last, on a border, the grandson turned it on the largest instrument still audibly out of tune&mdash;the government of <i lang="es">Los Estados Unidos Americanos, Nortes y Southes</i>, a union that spoke four languages before breakfast and had spent two centuries pretending its North and its South were two different songs. The people could not pronounce his full name and could not stop loving him, so they made it a dynasty and a vowel at once and called him <b>Glover Ia</b>&mdash;the First. The first Gloverian-American president. He took the oath in a suit the color of wet slate and swore it, his family will tell you, in the key of D.</p>
+  </section>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">II</div><h2 class="chap-title">The Chess Amendment</h2></div>
+    <p class="first">He had studied his grandfather's old papers on the game&mdash;the ones that labeled a position by the roles its pieces agreed to play&mdash;and he had drawn from them a single, ruinous, load-bearing truth: between two forces that are exactly equal and exactly opposed, perfect play is a draw. Not a stalemate of exhaustion. A <em>draw</em>: the honest, symmetrical, unimprovable peace of two powers who have finally calculated that neither can win.</p>
+    <p>So he wrote it into the Constitution. Whensoever the Democrats and the Republicans found themselves opposed&mdash;which was to say, always&mdash;they would settle it at the board. Sixty-four squares. A clock. The cameras the country had once pointed at war. And because the two old parties were, in the end, precisely as matched and precisely as unwilling to lose as his grandfather's theory required, the games ended&mdash;every one of them&mdash;in a draw. Threefold repetition. The dead position. Perpetual check, that gentlest of eternities, in which each side forever threatens and forever spares the other.</p>
+    <p class="disp">And the republic exhaled, because a draw is a ceasefire you are not required to win.</p>
+  </section>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">III</div><h2 class="chap-title">The Coalition of Impossible Friends</h2></div>
+    <p class="first">While the two old parties sat honorably absorbed at the board, the actual work of the republic fell&mdash;first by default, then by open delight&mdash;to the only faction that had never been able to afford pride. It had begun as the setup to a bad joke. A Catholic, a Muslim, a Communist, and a Libertarian walk into a legislature. It became the governing majority of the hemisphere, because they discovered, to the horror of everyone who had built a career on their enmity, that they agreed about nearly everything that could actually be <em>built</em>.</p>
+    <p>The Catholic wanted to feed the poor. The Muslim wanted to feed the poor. The Communist wanted to feed the poor and hold title to the spoon. The Libertarian wanted the spoon exquisitely made and available to all at cost. They fought about God and about property until the sun went down, and then, having settled nothing eternal, they went out and built things until it came back up. Miguel called them, in the one speech that made his enemies weep in spite of themselves, <span class="pull">&ldquo;my proof that difference was never the problem&mdash;only the refusal to relax it.&rdquo;</span> The noise label, he said, was seated at the head of the table now. Every object welcome. Nothing thrown away for failing to match.</p>
+  </section>
+
+  <section class="chap g">
+    <div class="chap-head"><div class="chap-num mono">IV</div><h2 class="chap-title g">Greenways</h2></div>
+    <p class="first">First they built the greenways. Bike paths and walkways braided along every abandoned rail and forgotten ridge, the old Atlanta beltline gone first national and then continental&mdash;a green seam a citizen could walk from the reunited North to the reunited South without once touching a car. The Libertarian insisted the routes be free and the Communist insisted they be free and, for once, the argument ended early. The Catholic planted the shade trees. The Muslim oriented the resting-places toward the morning. Children grew up believing, incorrectly and wonderfully, that a country was a thing you were meant to be able to walk across.</p>
+  </section>
+
+  <section class="chap w">
+    <div class="chap-head"><div class="chap-num mono">V</div><h2 class="chap-title w">Waterways</h2></div>
+    <p class="first">Then they built the waterways. They daylighted the buried creeks of a thousand cities the way the old composer had daylighted his one, tearing the culverts off the drowned streams and letting them up to the sky; they cut canals that stitched the separate rivers into a single navigable body; and the ferries ran on the living water and called at the hubs and carried the people and the freight and, on the seventh day, carried nothing at all but music. A barge captain in the Nortes and a barge captain in the Southes, it was noticed, kept the same charts now, because the water had stopped agreeing to be two countries some years before the men on it did.</p>
+  </section>
+
+  <section class="chap f">
+    <div class="chap-head"><div class="chap-num mono">VI</div><h2 class="chap-title f">Fireways</h2></div>
+    <p class="first">And then&mdash;because the coalition had learned that the boldest thing you can do with a dangerous force is befriend it&mdash;they built the fir​eways. The prescribed burns that keep a forest from ever having to burn; the tended flame that opens the sealed cones and clears the smothering dead and calls the meadow back greener; fire as a gardener, never a general. The Catholic blessed it. The Muslim timed it to the turning of the season. The Communist scheduled it to the hour. The Libertarian would not rest until every last citizen had been taught to carry a drip-torch as carefully as a candle.</p>
+    <p>Miguel signed the Fireways Act standing in the family meadow at Bellemeade, which burned in one clean line every autumn now and came back, every spring, greener than the year before. <span class="pull">&ldquo;My grandfather spent his whole life proving he was no Panzer,&rdquo;</span> he said. &ldquo;We are his argument, continued by other means. Fire that builds instead of burns. Force that opens instead of ends. That is the whole of the Gloverian idea, and it is not soft&mdash;it is simply the only kind of strength that leaves anything standing.&rdquo;</p>
+  </section>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">VII</div><h2 class="chap-title">The Long Draw</h2></div>
+    <p class="first">The years went kindly. The chess between the two old parties became the most beloved institution in the land&mdash;a permanent, televised, immaculate draw that the country watched the way it had once watched its wars, except that no one died, and the pieces went back in their box at dusk, and everyone walked home along a greenway. Children learned the drawn endings by heart the way older children had once learned battles. The parties, released at last from the obligation to win, became&mdash;and this is the part no almanac had predicted&mdash;gracious.</p>
+    <p>A Democrat and a Republican, having drawn for the ten-thousandth time, were photographed shaking hands over the board and then leaving together to plant a mile of greenway, and the photograph ran in no paper, because by then no one could find the part of it that was supposed to be news.</p>
+  </section>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">VIII</div><h2 class="chap-title">A More Perfect Union</h2></div>
+    <p class="first">And the union relaxed. Not into sameness&mdash;the method had never once asked for sameness&mdash;but into <em>consistency</em>, which is the only unity a fugue permits: every voice still entirely itself, and all of them, at the last, in agreement about the key. <i lang="es">Los Estados Unidos Americanos, Nortes y Southes</i>, the North and the South that had spent two centuries insisting they were two melodies, resolved&mdash;the way a suspended chord resolves, the way a border becomes a hand, the way noise becomes a meadow once it has finally been allowed to speak to its neighbors.</p>
+    <p>They said President Glover Ia governed by relaxation, and they did not always mean it as praise. His enemies, who had called his grandfather a Panzer and had kept the word warm for the grandson too&mdash;a tank, a bulldozer, a soft man with a dangerous amount of patience&mdash;found, once again, that the word would not stick. It slid off him the way it had slid off the composer in the burned grass. You cannot armor a man whose whole program is building more ways for you to leave, and then leaving the door open, and then walking with you if you go.</p>
+  </section>
+
+  <div class="starbreak mono"><span class="g">▲</span> <span class="w">▲</span> <span class="f">▲</span></div>
+
+  <section class="chap">
+    <div class="chap-head"><div class="chap-num mono">Coda</div><h2 class="chap-title">The Three Ways</h2></div>
+    <p class="first">The meadow at Bellemeade is the first mile of the first greenway now, with a small plaque no one reads and a fog that still leaves the field slowly, on purpose, toward the northwest. Where the burned line runs, three ways set out together and never quite come apart: a green path for the walkers, a blue channel for the boats, and&mdash;every autumn, briefly, tended by hands taught to be careful&mdash;a bright line of fire that clears the way for next year. Green, and blue, and flame, braided into one heading, the way three voices resolve into one chord that no single one of them could have reached alone.</p>
+    <p>The composer wrote the piece that taught two voices they had always been one. The grandson built the union that kept them singing. Two Glovers, one method, one long unbroken relaxation&mdash;from a beautiful meadow, across a burned and greening line, to a more perfect union that was never, not for one measure, no matter how many times they said it, a Panzer.</p>
+  </section>
+
+  <div class="colophon">
+    <p class="mono">A More Perfect Union &middot; Book II of the Gloverian cycle</p>
+    <p>The sequel to <a href="../no-panzer/">I Am No Panzer</a>. By <b>Manny Glover</b> &mdash; still in the key of reunion.<br>
+    For the impossible friends, who fought about heaven and then built the earth.</p>
+    <p style="margin-top:1.2rem"><a href="../no-panzer/">← Book I</a> &nbsp;·&nbsp; <a href="../">the portfolio</a></p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var cv=document.getElementById('field'); if(!cv) return;
+  var ctx=cv.getContext('2d'); var DPR=Math.min(2,window.devicePixelRatio||1);
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var W,H,pts;
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function resize(){ W=cv.clientWidth; H=cv.clientHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); build(); }
+  // three ways (green/water/fire) that braid toward one union line across the band
+  function unionY(x){ return H*0.5; }
+  function build(){ pts=[]; var n=Math.round(W/4);
+    for(var i=0;i<n;i++){ var lane=i%3; var tx=Math.random()*W;
+      pts.push({ lane:lane, x:Math.random()*W, y:Math.random()*H, tx:tx, phase:Math.random()*6.28,
+        r:Math.random()*1.3+0.35, v:0.01+Math.random()*0.02 }); } }
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    var cols=[css('--green')||'#3a9d5d', css('--water')||'#2f80b8', css('--fire')||'#c85a2c'];
+    // faint union line
+    ctx.strokeStyle=css('--gold')||'#bf942a'; ctx.globalAlpha=0.14; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,H*0.5); ctx.lineTo(W,H*0.5); ctx.stroke(); ctx.globalAlpha=1;
+    var tt=(t||0)*0.0009;
+    for(var i=0;i<pts.length;i++){ var p=pts[i];
+      // braid: three lanes weave around the union line, tightening toward the right
+      var braidAmp = H*0.22*(1 - p.tx/W*0.7);
+      var lanePhase = p.lane*2.094;
+      var ty = H*0.5 + Math.sin(p.tx*0.02 + lanePhase + (reduce?0:tt*6)) * braidAmp;
+      if(!reduce){ p.x+=(p.tx-p.x)*p.v; p.y+=(ty-p.y)*p.v;
+        if(Math.abs(p.tx-p.x)<0.8 && Math.random()<0.005){ p.x=Math.random()*W*0.3; p.y=Math.random()*H; } }
+      else { p.x=p.tx; p.y=ty; }
+      ctx.fillStyle=cols[p.lane];
+      ctx.globalAlpha= 0.28 + (p.tx/W)*0.35;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize',resize);
+  resize(); if(reduce){ frame(0); } else { requestAnimationFrame(frame); }
+})();
+</script>
+</body></html>
