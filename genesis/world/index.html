@@ -148,7 +148,7 @@ a{color:#8fd0ff;text-decoration:none}
   <div class="bhint">Who wears each crown <b>right now</b> — it says <b>— none —</b> when a throne sits empty. Watch it change as the world turns!</div>
 </div></div>
 <div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
-<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span style="color:#b39ddb">🕯️ Fallen <b id="ndeath">0</b></span> &nbsp;·&nbsp; <span style="color:#8fd0ff">💙🐉 Dragons Lost <b id="ndragdeath">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
 <canvas id="graph" width="630" height="64"></canvas>
 <div class="glegend" id="glegend"></div>
 
@@ -184,7 +184,9 @@ drink in you) and a Gooblet makes a baby — but go too long without food <i>or<
 away, especially by darting to the water), and after zapping <b>5 Gooblets</b> a Zappy makes a baby of its own.
 Too many Zappies and the Gooblets crash; then the Zappies starve and crash too, and the Gooblets bounce back — a
 <b>boom-and-bust</b> that never quite ends (a few new critters wander in from off-screen so the world never fully dies). A fun toy
-<i>ecosystem</i>, not real biology.
+<i>ecosystem</i>, not real biology. And the world keeps a quiet tally of <b>all</b> its dead: for every <b>5000 creatures</b> that
+fall, a <b style="color:#8f6ab0">🥀 Flower of Lament</b> blooms on the very spot where the last of them died — a little monument to
+the fallen.
 <br><br>
 <b>The Humans.</b> <b style="color:#cf5b54">Humans</b> (dark red) also eat the pink bushes, but they gather <b>wood</b> from the
 forest and spend it to build <b style="color:#c9925a">brown settlement blocks</b>. A Human standing on a settlement is <b>safe from
@@ -239,7 +241,9 @@ Dragonling that dares attack it. Drop a
 <b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
 the death — a <b>50/50</b> clash of titans. The Gold Dragon has its own <b style="color:#d0b840">golden island</b> where a
 <b style="color:#ffe07a">🥚 golden egg</b> rests: every <b>5000 days</b> it hatches a fresh Gold Dragon and a new egg is laid, so the
-gold line never dies out.
+gold line never dies out. And a darker legend haunts the heavens: once <b>500 dragons</b> have died across all the ages, the sky
+<b>tears open</b> and a baby-blue <b style="color:#7fbfff">💙🐉 Soul Dragon</b> glides out — sorrowful and alone — to <b>hunt down
+the Dragonlings</b>, raising its own lonely <b style="color:#8f5ad0">purple island</b> in the void.
 <br><br>
 <b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
 the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
@@ -366,6 +370,11 @@ let bushes=[];
 let blueFlora=[];                                                                 // 🪻 blue flowers a Nature Gooblet carries up through the Helpful portal (never more than 3 on the surface)
 const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)] && !moat[cidx(x,y)]; };
 const goodBlueCell=(x,y)=>{ const i=cidx(x,y); return biome[i]!==WATER && !settle[i] && !swall[i] && !moat[i]; };
+let laments=[], deaths=0, dragonDeaths=0;                                         // 🥀 the Flower of Lament + a running tally of every creature (and every dragon) that has died
+function died(x,y){ if(++deaths % 5000 === 0) placeLament(x,y); }                 // count a death; every 5000th blooms a Flower of Lament where it fell
+function placeLament(x,y){ if(goodBlueCell(x,y)){ laments.push({x,y,born:day}); return; } // the grief surfaces on the nearest solid ground
+  for(let r=1;r<=8;r++)for(let t=0;t<12;t++){ const a=rnd()*6.283, nx=x+Math.cos(a)*r, ny=y+Math.sin(a)*r; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&goodBlueCell(nx,ny)){ laments.push({x:nx,y:ny,born:day}); return; } } }
+const dieAll=(set,list)=>{ if(set.size) set.forEach(i=>died(list[i].x,list[i].y)); }; // record a whole batch of removed creatures (indices into list)
 function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
 function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
 function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
@@ -404,7 +413,7 @@ function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=bui
     if(wdAt(g.x,g.y)<=1) g.W=Math.min(1,g.W+0.5);                                    // drink at water's edge
     const [bi2,bd2]=nearestIdx(g.x,g.y,bushes,bh,6);
     if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ g.E+=b.food*P.gEatGain; b.food=0; g.ate++; } } // eat a whole ripe bush
-    if(g.E<=0||g.W<=0||g.age>P.gMaxAge) continue;
+    if(g.E<=0||g.W<=0||g.age>P.gMaxAge){ died(g.x,g.y); continue; }
     if(g.ate>=5 && g.W>0.35){ g.ate=0; g.E*=0.7; spawnGoob(g.x+(rnd()-0.5),g.y+(rnd()-0.5),P.gStartE,g.W*0.8); } // 5 bushes -> a baby
     next.push(g);
   } goob=next;
@@ -419,10 +428,10 @@ function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=b
     { if(z.fallCd>0) z.fallCd--; else { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } } // fell down a hole
     if(!(z.fallCd>0) && portalCharge>=3 && portalSX>=0 && (z.x-portalSX)**2+(z.y-portalSY)**2<1.6){ z.d='sky'; z.x=portalUX; z.y=portalUY; z.fallCd=40; next.push(z); continue; } // through the portal to the sky
     if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
-    z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge) continue;
+    z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge){ died(z.x,z.y); continue; }
     if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
     next.push(z);
-  } zap=next; if(eatG.size) goob=goob.filter((_,i)=>!eatG.has(i)); if(eatH.size) human=human.filter((_,i)=>!eatH.has(i));
+  } zap=next; dieAll(eatG,goob); dieAll(eatH,human); if(eatG.size) goob=goob.filter((_,i)=>!eatG.has(i)); if(eatH.size) human=human.filter((_,i)=>!eatH.has(i));
 }
 function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
 function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=buildHash(bushes,6); const max=human.length*2;
@@ -504,10 +513,11 @@ function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=bu
     if(!m.boat && treasury>=5 && rnd()<0.03){ treasury-=5; m.boat=true; }               // buy a boat with treasury
     if(m.boat && inWater(m.x,m.y)){ m.E=Math.min(4,m.E+0.05); if(rnd()<0.02) treasury++; } // out fishing
     if(portalSX>=0 && portalCharge<3 && treasury>0 && (m.x-portalSX)**2+(m.y-portalSY)**2<2.5){ treasury--; portalCharge++; } // bring treasure to charge the sky portal
-    if(m.E<=0||m.W<=0||m.age>P.hMaxAge) continue;
+    if(m.E<=0||m.W<=0||m.age>P.hMaxAge){ died(m.x,m.y); continue; }
     if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
     next.push(m);
   }
+  slain.forEach(m=>died(m.x,m.y)); dieAll(vEatG,goob); dieAll(vEatZ,zap);
   human = slain.size ? next.filter(m=>!slain.has(m)) : next;                            // the vessel-fight fallen
   if(vEatG.size) goob=goob.filter((_,i)=>!vEatG.has(i));                                // the vessel's prey
   if(vEatZ.size) zap=zap.filter((_,i)=>!vEatZ.has(i));
@@ -528,13 +538,14 @@ function stepLev(){ if(!lev.length) return;
     if(l.E<=0||l.age>P.levMaxAge){ deadLev.add(li); continue; }
     if(l.ate>=P.levReproAte){ l.ate=0; const w=placeLevWater(l.x,l.y); if(w) spawnLev(w.x,w.y,P.levStartE); } // 15 creatures -> a baby
   }
+  dieAll(deadLev,lev); dieAll(eatenG,goob);
   lev=lev.filter((_,i)=>!deadLev.has(i)); if(eatenG.size) goob=goob.filter((_,i)=>!eatenG.has(i));
-  if(lev.length>2){ const i=rnd()*lev.length|0; let j=rnd()*lev.length|0; if(j===i)j=(j+1)%lev.length; lev.splice(rnd()<0.5?i:j,1); } // >2 -> a 50/50 duel, loser dies
+  if(lev.length>2){ const i=rnd()*lev.length|0; let j=rnd()*lev.length|0; if(j===i)j=(j+1)%lev.length; const k=rnd()<0.5?i:j; died(lev[k].x,lev[k].y); lev.splice(k,1); } // >2 -> a 50/50 duel, loser dies
 }
 function stepSea(){                                                                    // the Sea Monarch (a sea dragon) + its folk
   if(day-lastSeaChallenge>=1000 && seaMonarch && seaMonarch.alive && lev.length>0){    // every 1000 days a Leviathan challenges for the throne of Sea King
     lastSeaChallenge=day; const ci=(rnd()*lev.length)|0;
-    if(rnd()<0.5){ lev.splice(ci,1); }                                                  // the Sea King defends -> challenger dies
+    if(rnd()<0.5){ died(lev[ci].x,lev[ci].y); lev.splice(ci,1); }                        // the Sea King defends -> challenger dies
     else { const l=lev[ci]; seaMonarch={x:l.x,y:l.y,alive:true,fromLev:true,bornDay:day}; lev.splice(ci,1); } // the Leviathan wins -> new Sea King (small, grows up over 500 days)
   }
   if(seaMonarch && seaMonarch.alive){
@@ -555,6 +566,7 @@ function stepSea(){                                                             
     if(li>=0 && (lev[li].x-f.x)**2+(lev[li].y-f.y)**2<2.2){ deadF.add(fi); }             // a Leviathan caught it
     if(f.E<=0||f.age>3500) deadF.add(fi);
   });
+  dieAll(eatenG,goob); dieAll(deadF,folk);
   if(eatenG.size) goob=goob.filter((_,i)=>!eatenG.has(i));
   if(deadF.size) folk=folk.filter((_,i)=>!deadF.has(i));
 }
@@ -608,6 +620,7 @@ function stepUnder(){                                                           
     if(f.age>4500) deadF.add(fi);
   });
   for(const g of glow) g.food=Math.min(1,g.food+0.006);
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human); dieAll(deadS,spec); dieAll(deadF,fire);
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
@@ -620,8 +633,8 @@ function stepSky(){
     if(dd>4){ const l=Math.hypot(dragonIsleX-dragon.x,dragonIsleY-dragon.y)||1; dragon.x+=(dragonIsleX-dragon.x)/l*0.6; dragon.y+=(dragonIsleY-dragon.y)/l*0.6; } }
   if(dragon && dragon.alive){                                                           // 10 humans on the dragon island -> a 50/50 battle
     const near=[]; human.forEach((m,i)=>{ if(m.d==='sky' && (m.x-dragon.x)**2+(m.y-dragon.y)**2<120) near.push(i); });
-    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; if(!human.some(h=>h.king)){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants (never more than one King)
-      else { const dead=new Set(near.slice(0,10)); human=human.filter((_,i)=>!dead.has(i)); } }                          // dragon wins -> that group dies
+    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; dragonDeaths++; if(!human.some(h=>h.king)){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants (never more than one King)
+      else { const dead=new Set(near.slice(0,10)); dead.forEach(i=>died(human[i].x,human[i].y)); human=human.filter((_,i)=>!dead.has(i)); } }                          // dragon wins -> that group dies
   }
   const angelH=buildHash(angels,8); const deadG=new Set(),deadZ=new Set(),deadH=new Set();
   let king=kingExists?human.find(m=>m.king && m.d==='sky'):null;
@@ -641,6 +654,7 @@ function stepSky(){
   goob.forEach((g,i)=>{ if(g.d==='sky') move(g,'goob',i,deadG); });
   zap.forEach((z,i)=>{ if(z.d==='sky') move(z,'zap',i,deadZ); });
   human.forEach((m,i)=>{ if(m.d==='sky') move(m,'human',i,deadH); });
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human);
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
@@ -659,6 +673,7 @@ function stepSky(){
     if(w.ate>=5 && wooly.length<200){ w.ate=0; w.E*=0.7; wooly.push({x:w.x,y:w.y,E:1.2,age:0,ate:0}); }
     if(w.E<=0||w.age>3000) deadW.add(wi);
   });
+  dieAll(deadW,wooly);
   if(deadW.size) wooly=wooly.filter((_,i)=>!deadW.has(i));
   const wH=buildHash(wooly,8); const eatenW=new Set(), deadDL=new Set();
   dragonling.forEach((dg,di)=>{ dg.age++; let dx,dy;
@@ -680,6 +695,7 @@ function stepSky(){
     else { const [wi2]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi2>=0 && !eatenW.has(wi2)){ const w=wooly[wi2]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ if(w.fierce){ deadDL.add(di); } else { eatenW.add(wi2); dg.carry=true; } } } } // caught a wooly -> carry home; but a FIERCE Woolie fends it off (the dragonling dies)
     if(dg.age>4500) deadDL.add(di);
   });
+  dieAll(eatenW,wooly); dieAll(deadDL,dragonling); dragonDeaths+=deadDL.size;             // fallen Dragonlings count toward the Soul Dragon's awakening
   if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
   if(deadDL.size) dragonling=dragonling.filter((_,i)=>!deadDL.has(i));
   if(eatenSnap.size) dsnap=dsnap.filter((_,i)=>!eatenSnap.has(i));                        // eaten Dragonsnaps
@@ -690,10 +706,11 @@ function stepSky(){
   if(goldDrag.length){ const deadGD=new Set();
     goldDrag.forEach((gd,gi)=>{ gd.age=(gd.age||0)+1;
       if(dragon && dragon.alive){ const l=Math.hypot(dragon.x-gd.x,dragon.y-gd.y)||1; const nx=gd.x+(dragon.x-gd.x)/l*1.1, ny=gd.y+(dragon.y-gd.y)/l*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } // fly straight at the Green Dragon
-        if((dragon.x-gd.x)**2+(dragon.y-gd.y)**2<16){ if(rnd()<0.5) dragon.alive=false; else deadGD.add(gi); } } // clash: the loser dies
+        if((dragon.x-gd.x)**2+(dragon.y-gd.y)**2<16){ if(rnd()<0.5){ dragon.alive=false; dragonDeaths++; } else deadGD.add(gi); } } // clash: the loser dies
       else { const a=rnd()*6.283, nx=gd.x+Math.cos(a)*0.85, ny=gd.y+Math.sin(a)*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } } // no Green Dragon -> roam the sky
       if(gd.age>9000) deadGD.add(gi);
     });
+    dieAll(deadGD,goldDrag); dragonDeaths+=deadGD.size;                                    // fallen Gold Dragons count too
     if(deadGD.size) goldDrag=goldDrag.filter((_,i)=>!deadGD.has(i));
   }
 }
@@ -717,7 +734,28 @@ function stepPurple(){                                                          
     }
     if(p.age>4000) dead.add(pi);
   });
+  dieAll(dead,purpleDrag); dragonDeaths+=dead.size;                                         // Purple Dragons are dragons too
   if(dead.size) purpleDrag=purpleDrag.filter((_,i)=>!dead.has(i));
+}
+function stepSoul(){                                                                        // 💙🐉 THE SOUL DRAGON — after 500 dragons have died, the sky tears open
+  if(!soulDone && dragonDeaths>=500){ soulDone=true; summonSoulDragon(); }
+  if(!soulDragon || !soulDragon.alive) return;
+  let bd=1e9, ti=-1; for(let i=0;i<dragonling.length;i++){ const dg=dragonling[i]; const d=(dg.x-soulDragon.x)**2+(dg.y-soulDragon.y)**2; if(d<bd){bd=d;ti=i;} } // stalk the nearest Dragonling
+  let dx,dy;
+  if(ti>=0){ const t=dragonling[ti]; const l=Math.hypot(t.x-soulDragon.x,t.y-soulDragon.y)||1; dx=(t.x-soulDragon.x)/l; dy=(t.y-soulDragon.y)/l; }
+  else if(soulHomeX>=0){ const dd=(soulDragon.x-soulHomeX)**2+(soulDragon.y-soulHomeY)**2; // none left -> brood over the purple island
+    if(dd>16){ const l=Math.hypot(soulHomeX-soulDragon.x,soulHomeY-soulDragon.y)||1; dx=(soulHomeX-soulDragon.x)/l; dy=(soulHomeY-soulDragon.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.5; dy=Math.sin(a)*0.5; } }
+  else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+  const nx=soulDragon.x+dx*1.15, ny=soulDragon.y+dy*1.15; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ soulDragon.x=nx; soulDragon.y=ny; } // it flies anywhere in the sky
+  if(ti>=0 && bd<9){ const t=dragonling[ti]; died(t.x,t.y); dragonDeaths++; dragonling.splice(ti,1); } // devours a Dragonling
+}
+function summonSoulDragon(){                                                                // tear a sky portal open + carve the Soul Dragon's purple island around it
+  let cx=-1,cy=-1;
+  for(let t=0;t<3000;t++){ const x=8+((rnd()*(GW-16))|0), y=8+((rnd()*(GH-16))|0); if(!sky[idx(x,y)]){ cx=x; cy=y; break; } } // prefer open void so a NEW island rises
+  if(cx<0)for(let t=0;t<3000;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ cx=i%GW; cy=(i/GW)|0; break; } }
+  if(cx<0){ cx=GW>>1; cy=GH>>1; }
+  const R=5; for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyPurple[i]=1; skyRed[i]=0; skyGold[i]=0; skyForest[i]=0; } }
+  soulHomeX=cx+0.5; soulHomeY=cy+0.5; soulDragon={x:soulHomeX,y:soulHomeY,alive:true};
 }
 function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
   const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
@@ -797,14 +835,16 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 }
 
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
-const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N);
+const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N), skyPurple=new Uint8Array(N);
+let soulDragon=null, soulDone=false, soulHomeX=-1, soulHomeY=-1;   // 💙🐉 the Soul Dragon + its purple island (born once 500 dragons have died)
 let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
 let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0, dsnap=[];  // dsnap = rare Dragonsnap plants
 let purpleDrag=[], dragonIsleX=-1, dragonIsleY=-1;   // 🟣🐉 Purple Dragons (born in the sky, visit the blue flowers) + the Dragon King's home red island
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
-  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[]; purpleDrag=[];
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); skyPurple.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[]; purpleDrag=[];
+  soulDragon=null; soulDone=false; soulHomeX=-1; soulHomeY=-1;
   goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
@@ -826,10 +866,13 @@ function genSky(){
     for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=c.cx+dx,y=c.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); if(sky[i]&&!skyRed[i]&&!skyGold[i]) skyForest[i]=1; } } fc++; }
   let rt=0; while(redfruit.length<64 && rt<6000){ rt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i] && (skyForest[i]||rnd()<0.25)) redfruit.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4+rnd()*0.6}); } // red fruit
   let dt=0; while(dsnap.length<5 && dt<6000){ dt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]) dsnap.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); } // rare Dragonsnap plants
+  let wt=0; while(wooly.length<12 && wt<5000){ wt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i] && (skyForest[i]||rnd()<0.3)) wooly.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,E:2,age:0,ate:0}); } // a starting flock of Woolies
+  for(let k=0;k<6;k++)for(let t=0;t<300;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ dragonling.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0}); break; } } // ...and a few Dragonlings to hunt them
 }
 function drawSky(){ const d=img.data;
   for(let i=0;i<N;i++){ const o=i*4;
     if(skyRed[i]){ d[o]=120;d[o+1]=28;d[o+2]=30; }                                       // dark-red dragon island
+    else if(skyPurple[i]){ d[o]=96;d[o+1]=40;d[o+2]=140; }                                // the Soul Dragon's purple island
     else if(skyGold[i]){ d[o]=150;d[o+1]=132;d[o+2]=58; }                                 // golden dragon island
     else if(skyForest[i]){ d[o]=48;d[o+1]=118;d[o+2]=62; }                               // darker-green forest island
     else if(sky[i]){ d[o]=96;d[o+1]=176;d[o+2]=104; }                                    // green floating island
@@ -864,6 +907,11 @@ function drawSky(){ const d=img.data;
     if(gr){ ctx.fillStyle='#1c8a3c'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.5,y-r*0.75); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.5,y-r*0.75); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); } // grown-up wings
     const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings grow up bigger, with wings, and fly home to the Dragon Island
   for(const p of purpleDrag){ if(p.d==='sky') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); }     // 🟣🐉 Purple Dragons up in the sky
+  if(soulHomeX>=0){ const x=soulHomeX*SC,y=soulHomeY*SC,r=SC*1.5; ctx.strokeStyle='#bfe4ff'; ctx.shadowColor='#8fd0ff'; ctx.shadowBlur=16; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.shadowBlur=0; } // the soul portal, torn open over the purple island
+  if(soulDragon && soulDragon.alive){ const x=soulDragon.x*SC,y=soulDragon.y*SC,r=SC*3.4;   // 💙🐉 THE SOUL DRAGON — baby blue
+    ctx.fillStyle='#a9d6ff'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.6,y-r*0.8); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.6,y-r*0.8); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); // broad wings
+    ctx.shadowColor='#aee0ff'; ctx.shadowBlur=22; ctx.fillStyle='#7fbfff'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; // baby-blue body + glow
+    const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#ffffff'; ctx.shadowBlur=12; ctx.fillStyle='#ffffff'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; } // pale mournful eyes
 }
 
 // ---------- THE GROVE REALM (an overgrown alternate dimension) ----------
@@ -1040,6 +1088,7 @@ function stepGrove(){
     if(px>0&&px<GW&&py>0&&py<GH){ const i=cidx(px,py); if(gzone[i]!==WILD && !gsettle[i]) pen[i]=1; } }
   // ---- THE NATURE GIANT (5th monarch): the heart of the forest heals it; strangers wear it down (but not under a caring King) ----
   groveWellness = clamp01(groveWellness + 0.0009 - (helpful?0:outsiders*0.00012));
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human); dieAll(deadSn,sniffer); dieAll(deadC,claw); dieAll(deadT,treeman);
   if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
   if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
   if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
@@ -1094,7 +1143,7 @@ function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); compute
   for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
   settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); moat.fill(0); treasury=0; swallCount=0; view='surface';
   genUnderground(); genSky(); genGrove();
-  goob=[]; zap=[]; human=[]; lev=[]; blueFlora=[]; day=0; hist.length=0; castleBuilt=false; kingHome=null;
+  goob=[]; zap=[]; human=[]; lev=[]; blueFlora=[]; laments=[]; deaths=0; dragonDeaths=0; day=0; hist.length=0; castleBuilt=false; kingHome=null;
   let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
   p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
   p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
@@ -1118,6 +1167,11 @@ function drawBlueFlora(){ for(const f of blueFlora){ const x=f.x*SC,y=f.y*SC,r=S
   ctx.shadowColor='#8fb8ff'; ctx.shadowBlur=6; ctx.fillStyle='#3b7cff';
   for(let k=0;k<5;k++){ const a=k/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(a)*r*0.6,y+Math.sin(a)*r*0.6,r*0.46,0,7); ctx.fill(); }
   ctx.shadowBlur=0; ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y,r*0.36,0,7); ctx.fill(); } }
+function drawLaments(){ for(const f of laments){ const x=f.x*SC,y=f.y*SC,r=SC*0.5;         // 🥀 Flower of Lament — a drooping, mournful bloom for the fallen
+  ctx.strokeStyle='#3a5a4a'; ctx.lineWidth=Math.max(1.5,r*0.26); ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(x,y+r*1.1); ctx.quadraticCurveTo(x+r*0.55,y+r*0.15,x+r*0.15,y-r*0.35); ctx.stroke(); // bowed stem
+  ctx.shadowColor='#9a6ab0'; ctx.shadowBlur=7; ctx.fillStyle='#6a4a86';                    // drooping violet-grey petals
+  for(let k=0;k<5;k++){ const a=k/5*6.283+1.2; ctx.beginPath(); ctx.ellipse(x+r*0.15+Math.cos(a)*r*0.4, y-r*0.35+Math.sin(a)*r*0.5, r*0.26, r*0.4, a, 0, 7); ctx.fill(); }
+  ctx.shadowBlur=0; ctx.fillStyle='#c9b3d9'; ctx.beginPath(); ctx.arc(x+r*0.15,y-r*0.35,r*0.16,0,7); ctx.fill(); } }
 function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
 function drawPurpleSprite(x,y,r){ ctx.fillStyle='#7a1fb0'; // little purple wings behind
   ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.1); ctx.lineTo(x-r*1.35,y-r*0.6); ctx.lineTo(x-r*0.7,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.1); ctx.lineTo(x+r*1.35,y-r*0.6); ctx.lineTo(x+r*0.7,y+r*0.35); ctx.closePath(); ctx.fill();
@@ -1236,6 +1290,7 @@ const BESTIARY=[
   {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
   {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
   {key:'pdrag',  name:'Purple Dragon',  emoji:'🟣🐉',realm:'sky/surface', on:()=>purpleDrag.some(p=> p.d==='sky'?view==='sky':view==='surface')},
+  {key:'soul',   name:'Soul Dragon',    emoji:'💙🐉',realm:'sky',         on:()=>view==='sky'&&soulDragon&&soulDragon.alive},
 ];
 // ---------- the Plantiary: the same idea, for the world's plants ----------
 const PLANTIARY=[
@@ -1248,6 +1303,7 @@ const PLANTIARY=[
   {key:'rose',  name:'Rose Bush',       emoji:'🌹', realm:'the Grove',   on:()=>view==='grove'&&rose.some(v=>v===1)},
   {key:'dsnap', name:'Dragonsnap',      emoji:'🐲🌱',realm:'sky (rare)',  on:()=>view==='sky'&&dsnap.length>0},
   {key:'blue',  name:'Blue Flower',     emoji:'🪻', realm:'surface',     on:()=>view==='surface'&&blueFlora.length>0},
+  {key:'lament',name:'Flower of Lament',emoji:'🥀', realm:'surface',     on:()=>view==='surface'&&laments.length>0},
 ];
 // ---------- the Monarch Tracker: who wears each of the five crowns right now ----------
 const MONARCHS=[
@@ -1290,8 +1346,9 @@ function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.oncli
 // ---------- loop + interaction ----------
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
-  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepGrove(); collapseSettlements(); immigrate();
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepSoul(); stepGrove(); collapseSettlements(); immigrate();
   if(blueFlora.length && frame%20===0) blueFlora=blueFlora.filter(f=>goodBlueCell(f.x,f.y)); // a blue flower left underwater or under a wall wilts away
+  if(laments.length && frame%20===0) laments=laments.filter(f=>goodBlueCell(f.x,f.y));      // a Flower of Lament lost to flood or wall fades too
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
   if(sdirty){ computeSDist(); sdirty=false; }
   if(frame%60===0) driftMoist(0.04);
@@ -1302,7 +1359,7 @@ function simStep(){ frame++; day++;
 }
 function loop(){
   if(playing){ acc+=simSpeed; let steps=Math.floor(acc); acc-=steps; if(steps>8)steps=8; for(let s=0;s<steps;s++) simStep(); }
-  if(view==='under') drawUnder(); else if(view==='sky') drawSky(); else if(view==='grove') drawGrove(); else { drawTerrain(); drawBushes(); drawBlueFlora(); drawHolesSurface(); }
+  if(view==='under') drawUnder(); else if(view==='sky') drawSky(); else if(view==='grove') drawGrove(); else { drawTerrain(); drawBushes(); drawBlueFlora(); drawLaments(); drawHolesSurface(); }
   drawCreatures();
   document.getElementById('ng').textContent=upCount(goob);
   document.getElementById('nz').textContent=upCount(zap);
@@ -1322,6 +1379,8 @@ function loop(){
   document.getElementById('ntree').textContent=treeman.length;
   document.getElementById('nwell').textContent=Math.round(groveWellness*100)+'%';
   document.getElementById('ngk').textContent=KINGLABEL[groveKingType];
+  document.getElementById('ndeath').textContent=deaths;
+  document.getElementById('ndragdeath').textContent=dragonDeaths;
   document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
   drawGraph();
   markCodex(bestiary); if(bestiary.open) renderCodex(bestiary);                           // discover creatures & plants as they appear on screen
