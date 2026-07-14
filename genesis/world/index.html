@@ -237,7 +237,8 @@ hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that cat
 to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Scattered rarely across the
 islands are <b style="color:#c94a4a">🐲🌱 Dragonsnaps</b> — snapping plants the Dragonlings munch. But if a <b>Wooly</b> eats one
 first, it evolves into a horned <b style="color:#c9a06a">🐏 Fierce Woolie</b> that no longer flees — it <b>fends off</b> any
-Dragonling that dares attack it. Drop a
+Dragonling that dares attack it. A Fierce Woolie also paws up a <b style="color:#7d5836">🟫 dirt mound</b>, and a gentle
+<b style="color:#5aa76a">🌸🐉 Flower Dragon</b> drifts over to sow it with little white <b>💮 Sylvies</b>. Drop a
 <b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
 the death — a <b>50/50</b> clash of titans. The Gold Dragon has its own <b style="color:#d0b840">golden island</b> where a
 <b style="color:#ffe07a">🥚 golden egg</b> rests: every <b>5000 days</b> it hatches a fresh Gold Dragon and a new egg is laid, so the
@@ -671,6 +672,7 @@ function stepSky(){
     const [si2,sd2]=nearestIdx(w.x,w.y,dsnap,snapH,6); if(si2>=0&&sd2<1.7 && !eatenSnap.has(si2) && !w.fierce){ eatenSnap.add(si2); w.fierce=true; w.E=Math.min(4,w.E+1.5); } // ate a Dragonsnap -> FIERCE WOOLIE
     const [ri2,rd2]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri2>=0&&rd2<1.6){ const rf=redfruit[ri2]; if(rf.food>0.3){ rf.food=0; w.E=Math.min(4,w.E+1.4); w.ate=(w.ate||0)+1; } }
     if(w.ate>=5 && wooly.length<200){ w.ate=0; w.E*=0.7; wooly.push({x:w.x,y:w.y,E:1.2,age:0,ate:0}); }
+    if(w.fierce && mounds.length<8 && rnd()<0.003 && skyLand(w.x,w.y) && !mounds.some(md=>(md.x-w.x)**2+(md.y-w.y)**2<25)){ mounds.push({x:w.x,y:w.y,sylvies:0}); } // a Fierce Woolie paws up a dirt mound
     if(w.E<=0||w.age>3000) deadW.add(wi);
   });
   dieAll(deadW,wooly);
@@ -757,6 +759,20 @@ function summonSoulDragon(){                                                    
   const R=5; for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyPurple[i]=1; skyRed[i]=0; skyGold[i]=0; skyForest[i]=0; } }
   soulHomeX=cx+0.5; soulHomeY=cy+0.5; soulDragon={x:soulHomeX,y:soulHomeY,alive:true};
 }
+function stepFlower(){                                                                      // 🌸🐉 Flower Dragons — they drift to the Fierce Woolies' dirt mounds and sow white Sylvies
+  if(flowerDrag.length<3 && mounds.length>0 && rnd()<0.02){ for(let t=0;t<200;t++){ const i=(rnd()*N)|0; if(sky[i]){ flowerDrag.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0}); break; } } } // one drifts in when there's a mound to tend
+  if(!flowerDrag.length) return;
+  const dead=new Set();
+  flowerDrag.forEach((fd,fi)=>{ fd.age++;
+    let bd=1e9,tm=null; for(const md of mounds){ if(md.sylvies>=6)continue; const d=(md.x-fd.x)**2+(md.y-fd.y)**2; if(d<bd){bd=d;tm=md;} } // the nearest mound still wanting flowers
+    let dx,dy;
+    if(tm){ if(bd>1.6){ const l=Math.hypot(tm.x-fd.x,tm.y-fd.y)||1; dx=(tm.x-fd.x)/l; dy=(tm.y-fd.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.3; dy=Math.sin(a)*0.3; if(rnd()<0.08) tm.sylvies++; } } // hover over the mound & sow a Sylvie
+    else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                            // no mounds -> roam the sky
+    const nx=fd.x+dx, ny=fd.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ fd.x=nx; fd.y=ny; }         // Flower Dragons fly anywhere
+    if(fd.age>5000) dead.add(fi);
+  });
+  if(dead.size){ dead.forEach(i=>died(flowerDrag[i].x,flowerDrag[i].y)); flowerDrag=flowerDrag.filter((_,i)=>!dead.has(i)); }
+}
 function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
   const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
   for(let dy=-2;dy<=1;dy++)for(let dx=-2;dx<=1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]===WATER)continue;
@@ -837,6 +853,7 @@ function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; c
 // ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
 const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N), skyPurple=new Uint8Array(N);
 let soulDragon=null, soulDone=false, soulHomeX=-1, soulHomeY=-1;   // 💙🐉 the Soul Dragon + its purple island (born once 500 dragons have died)
+let flowerDrag=[], mounds=[];   // 🌸🐉 Flower Dragons + the dirt mounds Fierce Woolies raise, which they sow with white Sylvies
 let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
 let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
 let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0, dsnap=[];  // dsnap = rare Dragonsnap plants
@@ -844,7 +861,7 @@ let purpleDrag=[], dragonIsleX=-1, dragonIsleY=-1;   // 🟣🐉 Purple Dragons 
 const skyLand=(x,y)=>sky[cidx(x,y)]===1;
 function genSky(){
   sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); skyPurple.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[]; purpleDrag=[];
-  soulDragon=null; soulDone=false; soulHomeX=-1; soulHomeY=-1;
+  soulDragon=null; soulDone=false; soulHomeX=-1; soulHomeY=-1; flowerDrag=[]; mounds=[];
   goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
   const centers=[], nIsles=7+((rnd()*4)|0);
   for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
@@ -907,6 +924,17 @@ function drawSky(){ const d=img.data;
     if(gr){ ctx.fillStyle='#1c8a3c'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.5,y-r*0.75); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.5,y-r*0.75); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); } // grown-up wings
     const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings grow up bigger, with wings, and fly home to the Dragon Island
   for(const p of purpleDrag){ if(p.d==='sky') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); }     // 🟣🐉 Purple Dragons up in the sky
+  for(const md of mounds){ const x=md.x*SC,y=md.y*SC,r=SC*0.85;                              // dirt mounds raised by the Fierce Woolies
+    ctx.fillStyle='#6b4a2a'; ctx.beginPath(); ctx.ellipse(x,y+r*0.35,r,r*0.62,0,Math.PI,2*Math.PI); ctx.fill();
+    ctx.fillStyle='#7d5836'; ctx.beginPath(); ctx.ellipse(x,y+r*0.35,r*0.66,r*0.4,0,Math.PI,2*Math.PI); ctx.fill();
+    for(let k=0;k<md.sylvies;k++){ const sx=x+(k-(md.sylvies-1)/2)*r*0.44, sy=y-r*0.12, sr=SC*0.2;  // 💮 white Sylvies on the mound
+      ctx.fillStyle='#ffffff'; for(let p=0;p<5;p++){ const pa=p/5*6.283-1.57; ctx.beginPath(); ctx.arc(sx+Math.cos(pa)*sr*0.5,sy+Math.sin(pa)*sr*0.5,sr*0.42,0,7); ctx.fill(); }
+      ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(sx,sy,sr*0.34,0,7); ctx.fill(); } }
+  for(const fd of flowerDrag){ const x=fd.x*SC,y=fd.y*SC,r=SC*0.72;                           // 🌸🐉 the Flower Dragon — mossy green, wearing a white bloom
+    ctx.fillStyle='#3f7a4a'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.1); ctx.lineTo(x-r*1.3,y-r*0.6); ctx.lineTo(x-r*0.7,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.1); ctx.lineTo(x+r*1.3,y-r*0.6); ctx.lineTo(x+r*0.7,y+r*0.35); ctx.closePath(); ctx.fill(); // leafy wings
+    ctx.shadowColor='#9fe0a0'; ctx.shadowBlur=7; ctx.fillStyle='#5aa76a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.32,ey=y-r*0.05,er=r*0.15; ctx.fillStyle='#241810'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle='#ffffff'; for(let p=0;p<5;p++){ const pa=p/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(pa)*r*0.32,y-r*0.92+Math.sin(pa)*r*0.32,r*0.24,0,7); ctx.fill(); } ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y-r*0.92,r*0.17,0,7); ctx.fill(); } // white flower crown
   if(soulHomeX>=0){ const x=soulHomeX*SC,y=soulHomeY*SC,r=SC*1.5; ctx.strokeStyle='#bfe4ff'; ctx.shadowColor='#8fd0ff'; ctx.shadowBlur=16; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.shadowBlur=0; } // the soul portal, torn open over the purple island
   if(soulDragon && soulDragon.alive){ const x=soulDragon.x*SC,y=soulDragon.y*SC,r=SC*3.4;   // 💙🐉 THE SOUL DRAGON — baby blue
     ctx.fillStyle='#a9d6ff'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.6,y-r*0.8); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.6,y-r*0.8); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); // broad wings
@@ -1291,6 +1319,7 @@ const BESTIARY=[
   {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
   {key:'pdrag',  name:'Purple Dragon',  emoji:'🟣🐉',realm:'sky/surface', on:()=>purpleDrag.some(p=> p.d==='sky'?view==='sky':view==='surface')},
   {key:'soul',   name:'Soul Dragon',    emoji:'💙🐉',realm:'sky',         on:()=>view==='sky'&&soulDragon&&soulDragon.alive},
+  {key:'fdrag',  name:'Flower Dragon',  emoji:'🌸🐉',realm:'sky',         on:()=>view==='sky'&&flowerDrag.length>0},
 ];
 // ---------- the Plantiary: the same idea, for the world's plants ----------
 const PLANTIARY=[
@@ -1304,6 +1333,7 @@ const PLANTIARY=[
   {key:'dsnap', name:'Dragonsnap',      emoji:'🐲🌱',realm:'sky (rare)',  on:()=>view==='sky'&&dsnap.length>0},
   {key:'blue',  name:'Blue Flower',     emoji:'🪻', realm:'surface',     on:()=>view==='surface'&&blueFlora.length>0},
   {key:'lament',name:'Flower of Lament',emoji:'🥀', realm:'surface',     on:()=>view==='surface'&&laments.length>0},
+  {key:'sylvie',name:'Sylvie',          emoji:'💮', realm:'sky',         on:()=>view==='sky'&&mounds.some(md=>md.sylvies>0)},
 ];
 // ---------- the Monarch Tracker: who wears each of the five crowns right now ----------
 const MONARCHS=[
@@ -1346,7 +1376,7 @@ function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.oncli
 // ---------- loop + interaction ----------
 let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
 function simStep(){ frame++; day++;
-  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepSoul(); stepGrove(); collapseSettlements(); immigrate();
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepSoul(); stepFlower(); stepGrove(); collapseSettlements(); immigrate();
   if(blueFlora.length && frame%20===0) blueFlora=blueFlora.filter(f=>goodBlueCell(f.x,f.y)); // a blue flower left underwater or under a wall wilts away
   if(laments.length && frame%20===0) laments=laments.filter(f=>goodBlueCell(f.x,f.y));      // a Flower of Lament lost to flood or wall fades too
   if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
