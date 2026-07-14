@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tear Down This Wall — an interlude · Manny Glover</title>
+<meta name="description" content="Tear Down This Wall — an interlude in the Gloverian cycle. The anti-Panzer answer to a famous demand: you do not topple a wall in triumph; you outnumber it with ways — greenways, waterways, fireways, a chord — until it forgets it was a wall and becomes a hand held open. Addressed to Mr. Kim Jong Un. By Manny Glover.">
+<style>
+:root{
+  --paper:#e8e7e2; --paper-2:#dcdbd4; --ink:#1e222a; --ink-soft:#565c66;
+  --green:#3a9d5d; --water:#2f80b8; --fire:#c85a2c; --gold:#bd8f27;
+  --accent:#c85a2c; --accent-deep:#9c431d; --rule:#c8c5bc; --measure:34rem;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0f1218; --paper-2:#161a22; --ink:#e8eaee; --ink-soft:#98a0ac;
+    --green:#54c07a; --water:#4aa2df; --fire:#e2804a; --gold:#dcb24f;
+    --accent:#e2804a; --accent-deep:#c85a2c; --rule:#262b35;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#e8e7e2; --paper-2:#dcdbd4; --ink:#1e222a; --ink-soft:#565c66;
+  --green:#3a9d5d; --water:#2f80b8; --fire:#c85a2c; --gold:#bd8f27;
+  --accent:#c85a2c; --accent-deep:#9c431d; --rule:#c8c5bc;
+}
+:root[data-theme="dark"]{
+  --paper:#0f1218; --paper-2:#161a22; --ink:#e8eaee; --ink-soft:#98a0ac;
+  --green:#54c07a; --water:#4aa2df; --fire:#e2804a; --gold:#dcb24f;
+  --accent:#e2804a; --accent-deep:#c85a2c; --rule:#262b35;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 1.075rem/1.72 "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.4rem 5rem}
+a{color:var(--accent)}
+
+.crumbs{max-width:var(--measure);margin:0 auto;padding:1.1rem 1.4rem .2rem;
+  font:11px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+.crumbs a{color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule);border-radius:16px;padding:5px 11px;margin-right:6px}
+.crumbs a:hover{color:var(--ink);border-color:var(--accent)}
+
+.hero{position:relative;max-width:100%;overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--paper-2);margin-top:.8rem}
+.hero canvas{display:block;width:100%;height:250px}
+.hero .veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:1.5rem;background:radial-gradient(120% 90% at 50% 44%, transparent 26%, var(--paper-2) 92%)}
+.eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin:0 0 .1rem;padding-left:.4em}
+.title{font-weight:400;font-size:clamp(2.1rem,6.4vw,3.5rem);line-height:1.02;margin:.2rem 0 .3rem;letter-spacing:.005em;text-wrap:balance}
+.title em{font-style:italic;color:var(--accent-deep)}
+.kicker{color:var(--ink-soft);font-style:italic;font-size:1.0rem;margin:0;max-width:27rem}
+
+.wrap .lead{margin-top:3rem}
+.lead p{margin:0 0 1.15rem}
+.lead p.first::first-letter{float:left;font-size:3.4em;line-height:.74;padding:.06em .09em 0 0;color:var(--accent-deep);
+  font-family:"Iowan Old Style",Palatino,Georgia,serif}
+.pull{color:var(--ink-soft)}
+
+.fourwords{margin:2.4rem 0;padding:1.6rem 1.2rem;border-left:3px solid var(--accent);background:var(--paper-2);
+  border-radius:0 10px 10px 0}
+.fourwords .lbl{font:600 .64rem/1 ui-monospace,monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.fourwords blockquote{margin:0;font-style:italic;font-size:1.5rem;line-height:1.28;color:var(--ink);text-wrap:balance}
+
+.speech{margin:1.6rem 0 0}
+.speech p{margin:0 0 1.1rem}
+.ways{margin:1.4rem 0;padding-left:0;list-style:none}
+.ways li{margin:0 0 .7rem;padding-left:1.6rem;position:relative;color:var(--ink)}
+.ways li::before{content:"";position:absolute;left:0;top:.62em;width:.7rem;height:2px;border-radius:2px}
+.ways li.g::before{background:var(--green)} .ways li.w::before{background:var(--water)} .ways li.f::before{background:var(--fire)}
+.disp{text-align:center;font-style:italic;color:var(--water);margin:1.8rem 0;font-size:1.08rem;text-wrap:balance}
+
+.starbreak{display:flex;gap:.7rem;align-items:center;justify-content:center;margin:2.6rem 0;font-size:.7rem;letter-spacing:.3em}
+.starbreak::before,.starbreak::after{content:"";height:1px;width:3rem;background:var(--rule)}
+.starbreak .g{color:var(--green)} .starbreak .w{color:var(--water)} .starbreak .f{color:var(--fire)}
+
+.colophon{margin-top:3.6rem;padding-top:1.8rem;border-top:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-size:.86rem;line-height:1.7}
+.colophon .mono{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.colophon a{color:var(--accent)}
+
+@media (max-width:640px){ .hero canvas{height:210px} .fourwords blockquote{font-size:1.24rem} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style></head><body>
+
+<div class="crumbs"><a href="../">← the portfolio</a> <a href="../no-panzer/">← Book I</a> <a href="../perfect-union/">Book II →</a></div>
+
+<div class="hero">
+  <canvas id="wall" aria-hidden="true"></canvas>
+  <div class="veil">
+    <p class="eyebrow mono">an interlude · between the books</p>
+    <h1 class="title">Tear Down This <em>Wall</em></h1>
+    <p class="kicker">the Gloverian answer to a famous demand</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <p class="first">They came to the last wall on earth expecting thunder. They had heard how it was done in the old century&mdash;a great man at a great gate, four words like artillery, and the enemy's stone coming down in the rubble of his defeat. They wanted that again. They wanted the Panzer's music: <span class="pull">the demand that topples</span>.</p>
+    <p>A Glover climbed to the microphone. And he gave them, first, exactly the four words they had waited three generations to hear.</p>
+  </div>
+
+  <div class="fourwords">
+    <div class="lbl mono">at the wall</div>
+    <blockquote>&ldquo;Mr. Kim Jong Un&mdash;tear down this wall.&rdquo;</blockquote>
+  </div>
+
+  <div class="speech">
+    <p>And then, because he was a Glover, he did not stop there, and he did not mean by it what they thought he meant.</p>
+    <p>&ldquo;I am not here to defeat you,&rdquo; he said. &ldquo;A wall thrown down in triumph is only rubble, and rubble is what we pour into the next wall. That is the Panzer's arithmetic&mdash;every wall the monument to somebody's victory over somebody. <b>I am no Panzer.</b> I did not come to win. I came to make this wall unnecessary.</p>
+    <p>&ldquo;So tear it down&mdash;but not with tanks, and not with shame, and not with the long slow siege of a hungry people. Tear it down the way a chord resolves. The way a fist becomes a hand.&rdquo;</p>
+    <ul class="ways">
+      <li class="g">Send one child through it on a bicycle, on a <b>greenway</b>, and let the guards on both sides pretend not to see.</li>
+      <li class="w">Cut one <b>canal</b> beneath it until the river remembers no one ever asked it which country it belonged to.</li>
+      <li class="f">Light one careful <b>fire</b> on your side and one on mine in the same still week, and let the smoke meet and agree over the top.</li>
+    </ul>
+    <p>&ldquo;Do it so gently, and so patiently, and so many times, that one grey morning the wall looks down its own length and cannot find a single brick still doing the work of division&mdash;and it steps aside. Not because it was pushed. Because it was, at last, <em>outnumbered by ways</em>.&rdquo;</p>
+    <p>He let the wind take that. Then, quieter, the thing he had actually climbed up there to say:</p>
+    <p class="disp">&ldquo;I am not asking you to lose. I am asking you to be a voice we cannot finish the song without.&rdquo;</p>
+    <p>&ldquo;There is a high line kept on your side of this stone and a low line kept on mine, and they have been, for five thousand years, the same song pretending to be two. Tear down this wall&mdash;and let us find, the way two voices always find when they are finally let into the same room, that we were only ever one.&rdquo;</p>
+  </div>
+
+  <div class="starbreak mono"><span class="g">▲</span> <span class="w">▲</span> <span class="f">▲</span></div>
+
+  <div class="speech">
+    <p class="first">They say no stone fell that day. They say something better happened, which no camera could sell as victory: the wall began, very slowly, to be <em>forgotten</em>&mdash;walked through, sailed under, burned around, sung over&mdash;until a season came when the cranes flew the line it used to mark and no one beneath them could remember, exactly, what it had been for.</p>
+    <p>A wall, after all, is only a label the world has stopped revising. Give it long enough among its neighbors, and enough ways to change its mind, and even a wall will relax&mdash;into a gate, into a seam, into a hand held open across the very place it was built to divide.</p>
+  </div>
+
+  <div class="colophon">
+    <p class="mono">Tear Down This Wall &middot; an interlude in the Gloverian cycle</p>
+    <p>Between <a href="../no-panzer/">Book I &middot; I Am No Panzer</a> and <a href="../perfect-union/">Book II &middot; A More Perfect Union</a>.<br>
+    By <b>Manny Glover</b> &mdash; the words that turned a private miracle into a public creed.</p>
+    <p style="margin-top:1.2rem"><a href="../">the portfolio</a></p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var cv=document.getElementById('wall'); if(!cv) return;
+  var ctx=cv.getContext('2d'); var DPR=Math.min(2,window.devicePixelRatio||1);
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var W,H,bricks,motes;
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function resize(){ W=cv.clientWidth; H=cv.clientHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); build(); }
+  function build(){
+    // a brick lattice on the left that thins as it goes right; motes peel off into three-way streams
+    bricks=[]; var bw=46, bh=15;
+    for(var y=0;y<H+bh;y+=bh){ var row=Math.round(y/bh); var off=(row%2)?bw/2:0;
+      for(var x=-bw;x<W;x+=bw){ var solid = (x/W) < (0.62 - (y/H)*0.1);
+        bricks.push({x:x+off, y:y, w:bw-3, h:bh-3, solid:solid, seed:Math.random()}); } }
+    motes=[]; var n=Math.round(W/6);
+    for(var i=0;i<n;i++){ motes.push({ lane:i%3, x:Math.random()*W*0.6, y:Math.random()*H,
+      vx:0.3+Math.random()*0.7, amp:6+Math.random()*14, ph:Math.random()*6.28, r:Math.random()*1.2+0.4 }); }
+  }
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    var rule=css('--rule')||'#c8c5bc', inks=css('--ink-soft')||'#565c66';
+    var cols=[css('--green')||'#3a9d5d', css('--water')||'#2f80b8', css('--fire')||'#c85a2c'];
+    // bricks (fading to the right)
+    for(var i=0;i<bricks.length;i++){ var b=bricks[i]; if(!b.solid) continue;
+      var fade = 1 - (b.x/W); if(fade<0) fade=0;
+      ctx.fillStyle=inks; ctx.globalAlpha=0.06+0.10*fade;
+      ctx.fillRect(b.x, b.y, b.w, b.h);
+      ctx.strokeStyle=rule; ctx.globalAlpha=0.10+0.10*fade; ctx.lineWidth=1;
+      ctx.strokeRect(b.x, b.y, b.w, b.h);
+    }
+    ctx.globalAlpha=1;
+    // motes drifting right, peeling off the wall into three colored streams
+    var tt=(t||0)*0.001;
+    for(var m=0;m<motes.length;m++){ var p=motes[m];
+      if(!reduce){ p.x+=p.vx; if(p.x>W){ p.x=Math.random()*W*0.35; p.y=Math.random()*H; } }
+      var laneY = H*0.5 + (p.lane-1)*H*0.16;
+      var yy = reduce ? laneY : (p.y + Math.sin(p.x*0.02 + p.ph + tt)*p.amp*(p.x/W));
+      // relax the mote's y toward its lane as it moves right
+      p.y += ((laneY - p.y) * 0.02 * (p.x/W));
+      ctx.fillStyle=cols[p.lane]; ctx.globalAlpha=0.18 + (p.x/W)*0.4;
+      ctx.beginPath(); ctx.arc(p.x, yy, p.r, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize',resize);
+  resize(); if(reduce){ frame(0); } else { requestAnimationFrame(frame); }
+})();
+</script>
+</body></html>
