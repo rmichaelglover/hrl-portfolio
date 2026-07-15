@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In the Beginning — a seven-day voxel telling · Project Genesis</title>
+<meta name="description" content="The seven days of Genesis, built block by block as an isometric voxel diorama you drive with a Minecraft-style hotbar. The coloring-book version — for those who like to color between the lines. By Manny Glover.">
+<style>
+  :root{
+    /* --- palette: the deep, the light, the blocks --- */
+    --void:#0a0a12;
+    --ground:#101018;      /* page ground (night) */
+    --panel:#181a24;
+    --panel-2:#20222e;
+    --edge:#2c2f3d;
+    --ink:#e8e4d8;         /* warm parchment — the sacred voice */
+    --muted:#8b8d9c;
+    --gold:#f5c542;        /* glowstone / light */
+    --gold-deep:#c8971f;
+    --grass:#7fb238;
+    --water:#3a6fd8;
+    --tip-a:#4b2aa0;       /* MC tooltip purple */
+    --tip-b:#2a0f5b;
+    --slot:#2a2c38;
+    --slot-hi:#f2efe6;
+    --focus:#f5c542;
+    --hud:'SFMono-Regular',"SF Mono","Cascadia Mono",Consolas,"Liberation Mono",ui-monospace,monospace;
+    --verse:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --ground:#e9e2cf;--panel:#f5efe0;--panel-2:# efe7d4;--panel-2:#efe7d4;
+      --edge:#d3c9ad;--ink:#221f18;--muted:#6c6550;
+      --slot:#e6dcc2;--slot-hi:#221f18;
+      color-scheme:light;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#101018;--panel:#181a24;--panel-2:#20222e;--edge:#2c2f3d;
+    --ink:#e8e4d8;--muted:#8b8d9c;--slot:#2a2c38;--slot-hi:#f2efe6;color-scheme:dark;
+  }
+  :root[data-theme="light"]{
+    --ground:#e9e2cf;--panel:#f5efe0;--panel-2:#efe7d4;--edge:#d3c9ad;
+    --ink:#221f18;--muted:#6c6550;--slot:#e6dcc2;--slot-hi:#221f18;color-scheme:light;
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .app{
+    min-height:100vh;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(245,197,66,.06), transparent 60%),
+      var(--ground);
+    color:var(--ink);
+    font-family:var(--verse);
+    display:flex;flex-direction:column;align-items:center;
+    padding:clamp(14px,3vw,30px);
+    gap:clamp(14px,2.4vw,22px);
+  }
+
+  /* ---- masthead ---- */
+  .mast{width:100%;max-width:1060px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .title{
+    font-family:var(--hud);font-weight:700;
+    font-size:clamp(20px,3.4vw,30px);letter-spacing:.18em;text-transform:uppercase;
+    margin:0;text-wrap:balance;
+    display:flex;align-items:center;gap:.5em;
+  }
+  .title .pip{
+    width:.72em;height:.72em;flex:0 0 auto;
+    background:var(--gold);
+    box-shadow:inset -0.18em -0.18em 0 rgba(0,0,0,.35), inset .18em .18em 0 rgba(255,255,255,.4);
+  }
+  .sub{font-family:var(--hud);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+  .theme-btn{
+    font-family:var(--hud);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--panel);color:var(--muted);border:1px solid var(--edge);
+    padding:8px 12px;cursor:pointer;
+  }
+  .theme-btn:hover{color:var(--ink);border-color:var(--gold);}
+
+  /* ---- stage / canvas ---- */
+  .stage{
+    position:relative;width:100%;max-width:1060px;
+    aspect-ratio:16/9;
+    border:1px solid var(--edge);
+    background:var(--void);
+    overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+  @media (prefers-color-scheme:light){ .stage{box-shadow:0 20px 44px rgba(60,45,10,.18);} }
+  #world{position:absolute;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;}
+  .daycount{
+    position:absolute;top:12px;left:14px;z-index:3;
+    font-family:var(--hud);text-transform:uppercase;
+    letter-spacing:.16em;font-size:12px;color:#fff;
+    text-shadow:2px 2px 0 rgba(0,0,0,.7);
+    display:flex;flex-direction:column;gap:2px;pointer-events:none;
+  }
+  .daycount b{font-size:15px;letter-spacing:.2em;}
+  .daycount span{color:#d9d2b8;}
+  .stagehint{
+    position:absolute;bottom:10px;right:14px;z-index:3;
+    font-family:var(--hud);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);text-shadow:1px 1px 0 rgba(0,0,0,.6);pointer-events:none;
+  }
+
+  /* ---- verse sign (oak) + flavor ---- */
+  .scroll{
+    width:100%;max-width:1060px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:16px;align-items:stretch;
+  }
+  @media (max-width:720px){ .scroll{grid-template-columns:1fr;} }
+
+  .sign{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.03), transparent 40%),
+      var(--panel);
+    border:1px solid var(--edge);
+    /* tooltip purple accent, used ONLY here */
+    box-shadow:inset 0 0 0 2px transparent;
+    padding:22px 24px;
+    display:flex;flex-direction:column;gap:12px;min-height:150px;
+  }
+  .sign::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+    background:linear-gradient(180deg,var(--tip-a),var(--tip-b));
+  }
+  .sign .ref{font-family:var(--hud);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+  .verse{
+    font-family:var(--verse);font-size:clamp(17px,2.3vw,22px);line-height:1.5;
+    margin:0;max-width:60ch;text-wrap:pretty;
+    font-style:italic;
+  }
+  .verse .lead{font-style:normal;font-weight:700;letter-spacing:.01em;}
+
+  .flavor{
+    background:var(--panel-2);border:1px solid var(--edge);
+    padding:20px 22px;display:flex;flex-direction:column;gap:10px;
+    font-family:var(--hud);
+  }
+  .flavor h3{margin:0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .flavor ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .flavor li{
+    font-size:13px;letter-spacing:.02em;color:var(--ink);
+    display:flex;align-items:center;gap:10px;
+    opacity:0;transform:translateY(4px);
+    animation:linein .4s ease forwards;
+  }
+  .flavor li .b{width:12px;height:12px;flex:0 0 auto;box-shadow:inset -3px -3px 0 rgba(0,0,0,.32), inset 3px 3px 0 rgba(255,255,255,.28);}
+  @keyframes linein{to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){ .flavor li{animation:none;opacity:1;transform:none;} }
+
+  /* ---- controls + hotbar ---- */
+  .controls{width:100%;max-width:1060px;display:flex;flex-direction:column;gap:14px;align-items:center;}
+  .buttons{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .mc-btn{
+    font-family:var(--hud);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink);
+    background:var(--panel-2);
+    border:none;
+    box-shadow:inset -3px -3px 0 rgba(0,0,0,.45), inset 3px 3px 0 rgba(255,255,255,.14);
+    padding:12px 18px;cursor:pointer;
+    transition:filter .12s ease, transform .05s ease;
+  }
+  .mc-btn:hover{filter:brightness(1.16);}
+  .mc-btn:active{transform:translate(1px,1px);box-shadow:inset 3px 3px 0 rgba(0,0,0,.45), inset -3px -3px 0 rgba(255,255,255,.1);}
+  .mc-btn.primary{color:#1a1406;background:var(--gold);box-shadow:inset -3px -3px 0 var(--gold-deep), inset 3px 3px 0 rgba(255,255,255,.5);}
+  .mc-btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  .mc-btn[disabled]{opacity:.4;cursor:not-allowed;filter:none;}
+
+  .hotbar{
+    display:flex;gap:6px;padding:6px;
+    background:rgba(0,0,0,.28);
+    border:1px solid var(--edge);
+  }
+  @media (prefers-color-scheme:light){ .hotbar{background:rgba(120,100,50,.14);} }
+  .slot{
+    position:relative;width:clamp(50px,9vw,72px);height:clamp(50px,9vw,72px);
+    background:var(--slot);
+    box-shadow:inset -3px -3px 0 rgba(0,0,0,.4), inset 3px 3px 0 rgba(255,255,255,.12);
+    border:2px solid transparent;
+    cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    color:var(--slot-hi);
+  }
+  .slot .num{font-family:var(--hud);font-size:10px;letter-spacing:.1em;opacity:.8;}
+  .slot .cube{width:40%;height:40%;box-shadow:inset -4px -4px 0 rgba(0,0,0,.35), inset 4px 4px 0 rgba(255,255,255,.35);}
+  .slot .lab{font-family:var(--hud);font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.72;}
+  .slot:hover{filter:brightness(1.14);}
+  .slot[aria-selected="true"]{border-color:var(--slot-hi);box-shadow:inset -3px -3px 0 rgba(0,0,0,.4), inset 3px 3px 0 rgba(255,255,255,.2), 0 0 0 2px rgba(245,197,66,.35);}
+  .slot:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+
+  .foot{font-family:var(--hud);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center;max-width:1060px;line-height:1.7;}
+  .foot a{color:var(--gold);text-decoration:none;}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="mast">
+    <h1 class="title"><span class="pip" aria-hidden="true"></span>Genesis · Block by Block</h1>
+    <button class="theme-btn" id="themeToggle" type="button">◐ Theme</button>
+  </header>
+
+  <section class="stage">
+    <canvas id="world"></canvas>
+    <div class="daycount" id="daycount"><b>DAY 0</b><span>the formless deep</span></div>
+    <div class="stagehint">← → to move days · space to create</div>
+  </section>
+
+  <section class="scroll">
+    <div class="sign">
+      <div class="ref" id="ref">GENESIS 1:1–2</div>
+      <p class="verse" id="verse"><span class="lead">In the beginning</span> God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep.</p>
+    </div>
+    <div class="flavor">
+      <h3 id="flavorHead">Server log</h3>
+      <ul id="flavorList"></ul>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="buttons">
+      <button class="mc-btn" id="prev" type="button">◀ Prev</button>
+      <button class="mc-btn primary" id="play" type="button">▶ Let there be…</button>
+      <button class="mc-btn" id="next" type="button">Next ▶</button>
+      <button class="mc-btn" id="reset" type="button">↺ Void</button>
+    </div>
+    <div class="hotbar" id="hotbar" role="tablist" aria-label="Seven days of creation"></div>
+  </section>
+
+  <p class="foot">
+    An isometric telling of the seven days · text from the King James Version, Genesis 1–2 ·
+    rendered live in voxels, no world download required.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- content ---------------- */
+  const DAYS = [
+    { // 0 — void
+      tag:"DAY 0", name:"the formless deep", ref:"GENESIS 1:1–2",
+      lead:"In the beginning", verse:" God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep.",
+      cube:"#3a3f52", log:[]
+    },
+    { // 1 light
+      tag:"DAY I", name:"light", ref:"GENESIS 1:3–4",
+      lead:"And God said,", verse:" Let there be light: and there was light. And God saw the light, that it was good: and God divided the light from the darkness.",
+      cube:"#f5c542",
+      log:[["#f5c542","placed  Glowstone ×1"],["#1b2a4a","divided  light ⁄ darkness"]]
+    },
+    { // 2 firmament
+      tag:"DAY II", name:"firmament", ref:"GENESIS 1:6–8",
+      lead:"And God made the firmament,", verse:" and divided the waters which were under the firmament from the waters which were above the firmament: and God called the firmament Heaven.",
+      cube:"#8fb7e8",
+      log:[["#eef2fa","raised  Sky (Firmament)"],["#3a6fd8","waters below  divided"],["#ffffff","spawned  Clouds ×5"]]
+    },
+    { // 3 land + plants
+      tag:"DAY III", name:"land & seed", ref:"GENESIS 1:9–12",
+      lead:"And God said,", verse:" Let the dry land appear… And the earth brought forth grass, and the herb yielding seed, and the tree yielding fruit: and God saw that it was good.",
+      cube:"#7fb238",
+      log:[["#7fb238","placed  Grass Block ×many"],["#8b5a2b","placed  Dirt · Stone"],["#5a4429","planted  Oak Tree ×5"]]
+    },
+    { // 4 lights
+      tag:"DAY IV", name:"sun, moon & stars", ref:"GENESIS 1:16",
+      lead:"And God made", verse:" two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.",
+      cube:"#ffe08a",
+      log:[["#ffe08a","set  Sun  (rule day)"],["#d7deea","set  Moon  (rule night)"],["#ffffff","scattered  Stars ×∞"]]
+    },
+    { // 5 fish + birds
+      tag:"DAY V", name:"fish & fowl", ref:"GENESIS 1:20–21",
+      lead:"And God said,", verse:" Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth in the open firmament of heaven.",
+      cube:"#e08a3c",
+      log:[["#e08a3c","spawned  Salmon ×4"],["#6fe0a0","spawned  Parrot ×3"],["#3a6fd8","filled  the seas"]]
+    },
+    { // 6 beasts + humankind
+      tag:"DAY VI", name:"beasts & humankind", ref:"GENESIS 1:24–27",
+      lead:"And God said,", verse:" Let the earth bring forth the living creature after his kind… So God created man in his own image, in the image of God created he him.",
+      cube:"#17a0a0",
+      log:[["#efe9df","spawned  Sheep"],["#5a4432","spawned  Cow"],["#17a0a0","spawned  Player  (in His image)"]]
+    },
+    { // 7 rest
+      tag:"DAY VII", name:"rest", ref:"GENESIS 2:2–3",
+      lead:"And on the seventh day", verse:" God ended his work which he had made; and he rested… And God blessed the seventh day, and sanctified it.",
+      cube:"#f5c542",
+      log:[["#f5c542","/gamerule doDaylightCycle false"],["#c8971f","blessed  the seventh day"],["#e8e4d8","he rested."]]
+    }
+  ];
+  const SHORT = ["VOID","LIGHT","SKY","LAND","LIGHTS","LIFE","BEASTS","REST"];
+
+  /* ---------------- world model ---------------- */
+  const N = 10, CX = 5, CZ = 5;
+  const map = [];
+  for(let x=0;x<=N;x++){ map[x]=[]; for(let z=0;z<=N;z++){
+    const dx=x-CX, dz=z-CZ, d=Math.sqrt(dx*dx+dz*dz);
+    let e = 2.7 - d*0.62 + 0.7*Math.sin(x*0.8+0.6)*Math.cos(z*0.7-0.3);
+    const top = Math.floor(e);
+    map[x][z] = top>=1 ? {land:true, top:Math.min(top,3)} : {land:false, top:0};
+  }}
+  const isLand=(x,z)=> x>=0&&x<=N&&z>=0&&z<=N&&map[x][z].land;
+  const landTop=(x,z)=> map[x][z].top;
+
+  // deterministic tree columns
+  const treeCols = [[4,4],[6,5],[5,7],[3,6],[7,3]].filter(([x,z])=>isLand(x,z));
+  // beasts on land
+  const sheepAt = [4,6], cowAt = [7,4], steveAt = [5,4];
+  // fish in sea (non-land)
+  const fishCols = [[1,3],[9,7],[2,8],[8,2]];
+  // birds (fractional x for motion), high in sky
+  const birdSeed = [[2,2,2.2],[7,6,3.0],[4,8,2.6]];
+  // stars
+  const stars = [];
+  for(let i=0;i<70;i++){ stars.push({x:Math.random(), y:Math.random()*0.6, r:Math.random()<0.2?2:1, ph:Math.random()*6.28}); }
+  // rest motes
+  const motes = [];
+  for(let i=0;i<26;i++){ motes.push({x:Math.random(), y:Math.random(), sp:0.2+Math.random()*0.5, ph:Math.random()*6.28}); }
+
+  /* ---------------- palette helpers ---------------- */
+  const BLOCKS = {
+    water:  ["#3f74dd","#2f57ad","#274a91"],
+    grass:  ["#7fb238","#6b4a2b","#573c22"],
+    dirt:   ["#8b5a2b","#6b4a2b","#573c22"],
+    stone:  ["#9a9a9a","#7e7e7e","#6a6a6a"],
+    trunk:  ["#7a5e38","#5a4429","#4a381f"],
+    leaf:   ["#5a8a2e","#436a22","#33511c"],
+    cloud:  ["#ffffff","#e6e9ef","#d3d7e0"],
+    sheep:  ["#f4efe6","#d9d2c4","#c7bfae"],
+    sheepH: ["#e9e2d4","#3a3730","#2c2a24"],
+    cow:    ["#6a5236","#4a381f","#3a2c18"],
+    cowW:   ["#efe9df","#cfc7ba","#bcb4a5"],
+    steveL: ["#33449b","#26357a","#1e2c66"],
+    steveT: ["#1fb0a8","#178a86","#127370"],
+    steveH: ["#caa06d","#a07d4e","#8a6a3f"],
+    salmon: ["#e08a3c","#c06f2b","#a35e22"],
+    parrot: ["#6fe0a0","#3fb0d8","#e05a5a"]
+  };
+
+  /* ---------------- canvas ---------------- */
+  const canvas = document.getElementById("world");
+  const ctx = canvas.getContext("2d");
+  let W=0, H=0, DPR=1, unit=28, ox=0, oy=0;
+
+  function resize(){
+    const r = canvas.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio||1, 2);
+    W = Math.max(320, r.width|0); H = Math.max(180, r.height|0);
+    canvas.width = W*DPR; canvas.height = H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    unit = Math.max(16, Math.min(W/16, H/9));
+    ox = W/2;
+    oy = H*0.30;
+    if(!running) draw(perfNow());
+  }
+
+  // iso projection of a block's top-face center
+  function proj(gx,gy,gz){
+    const hw=unit, hh=unit*0.5;
+    return { cx: ox + (gx-gz)*hw, cy: oy + (gx+gz)*hh - gy*unit };
+  }
+
+  function cube(gx,gy,gz, cols, alpha=1, yoff=0){
+    const hw=unit, hh=unit*0.5, u=unit;
+    const cx = ox + (gx-gz)*hw;
+    const cy = oy + (gx+gz)*hh - gy*u + yoff;
+    ctx.globalAlpha = alpha;
+    // top
+    ctx.fillStyle = cols[0];
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-hh); ctx.lineTo(cx+hw, cy); ctx.lineTo(cx, cy+hh); ctx.lineTo(cx-hw, cy);
+    ctx.closePath(); ctx.fill();
+    // left
+    ctx.fillStyle = cols[1];
+    ctx.beginPath();
+    ctx.moveTo(cx-hw, cy); ctx.lineTo(cx, cy+hh); ctx.lineTo(cx, cy+hh+u); ctx.lineTo(cx-hw, cy+u);
+    ctx.closePath(); ctx.fill();
+    // right
+    ctx.fillStyle = cols[2];
+    ctx.beginPath();
+    ctx.moveTo(cx, cy+hh); ctx.lineTo(cx+hw, cy); ctx.lineTo(cx+hw, cy+u); ctx.lineTo(cx, cy+hh+u);
+    ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  /* ---------------- state / animation ---------------- */
+  let day = 0;
+  let running = false;
+  const spawnAt = new Array(8).fill(-1); // when each day's group appeared (ms) ; -1 not yet
+  let startTime = 0;
+  function perfNow(){ return (typeof performance!=="undefined" ? performance.now() : 0); }
+
+  // easing
+  const easeOut = t => 1-Math.pow(1-t,3);
+
+  // group appear progress for a given day-tier (with per-index stagger)
+  function grp(tier, i=0){
+    if(spawnAt[tier] < 0) return 0;
+    if(reduce) return 1;
+    const t = (perfNow() - spawnAt[tier] - i*45) / 520;
+    return t<=0 ? 0 : t>=1 ? 1 : easeOut(t);
+  }
+  function dropY(p){ return (1-p) * -unit*3.2; }
+
+  /* ---------------- sky ---------------- */
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function hex(h){ h=h.replace('#',''); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; }
+  function mix(c1,c2,t){ const a=hex(c1),b=hex(c2); return `rgb(${lerp(a[0],b[0],t)|0},${lerp(a[1],b[1],t)|0},${lerp(a[2],b[2],t)|0})`; }
+
+  function drawSky(now){
+    // lit factor: 0 at day0 -> 1 by day1
+    const lit = grp(1) > 0 || day>=1 ? (day>=1 ? Math.max(0.001, grp(1)||1) : 0) : 0;
+    const L = day>=1 ? (spawnAt[1]<0?1:(reduce?1:Math.min(1,(perfNow()-spawnAt[1])/900))) : 0;
+    // top/bottom sky colors interpolate void -> dusk
+    const top = mix("#06060c", day>=4? "#123" : "#1a3b7a", L);
+    const topLit = mix("#06060c", "#2b5fb0", L);
+    const bot = mix("#0a0a12", "#e9b06a", L*(day>=1?1:0)); // warm horizon when lit
+    const g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0, mix("#05050b", "#183a78", L));
+    g.addColorStop(0.55, mix("#07070f", "#3f74c8", L));
+    g.addColorStop(1, mix("#0a0a12", "#f0c98a", L));
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+    // stars (day>=4)
+    if(day>=4){
+      const p = grp(4);
+      for(const s of stars){
+        const tw = reduce?1:(0.55+0.45*Math.sin(now*0.002 + s.ph));
+        ctx.globalAlpha = p*tw*0.9;
+        ctx.fillStyle = "#fdfbe8";
+        ctx.fillRect((s.x*W)|0,(s.y*H)|0, s.r, s.r);
+      }
+      ctx.globalAlpha=1;
+    }
+    // sun + moon (day>=4)
+    if(day>=4){
+      const p = grp(4);
+      // sun
+      const sx=W*0.80, sy=H*0.20, sr=unit*0.9;
+      const gg=ctx.createRadialGradient(sx,sy,0,sx,sy,sr*2.4);
+      gg.addColorStop(0,`rgba(255,224,138,${0.9*p})`); gg.addColorStop(1,"rgba(255,224,138,0)");
+      ctx.fillStyle=gg; ctx.fillRect(sx-sr*2.4,sy-sr*2.4,sr*4.8,sr*4.8);
+      ctx.globalAlpha=p; ctx.fillStyle="#ffe08a"; ctx.fillRect(sx-sr/2,sy-sr/2,sr,sr);
+      ctx.strokeStyle="rgba(0,0,0,.15)"; ctx.strokeRect(sx-sr/2,sy-sr/2,sr,sr);
+      // moon
+      const mx=W*0.16, my=H*0.15, mr=unit*0.62;
+      ctx.globalAlpha=p*0.9; ctx.fillStyle="#dbe2ee"; ctx.fillRect(mx-mr/2,my-mr/2,mr,mr);
+      ctx.fillStyle="#c2cad9"; ctx.fillRect(mx-mr/2+mr*0.55,my-mr/2+mr*0.15,mr*0.25,mr*0.25);
+      ctx.globalAlpha=1;
+    }
+  }
+
+  /* ---------------- scene objects into a depth list ---------------- */
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+    drawSky(now);
+
+    if(day===0){
+      // faint formless waters — a dark ripple grid barely visible
+      ctx.globalAlpha=0.5;
+      for(let x=0;x<=N;x++) for(let z=0;z<=N;z++){
+        const bob = Math.sin((x+z)*0.6 + now*0.001)*1.4;
+        cube(x, -0.06 + bob*0.02, z, ["#12131d","#0d0e17","#0a0b12"], 0.5);
+      }
+      ctx.globalAlpha=1;
+      return;
+    }
+
+    const items = [];
+    const water = day>=1, land = day>=3;
+
+    // water plane (day>=1)
+    if(water){
+      const p = grp(1);
+      for(let x=0;x<=N;x++) for(let z=0;z<=N;z++){
+        if(land && isLand(x,z)) continue; // land replaces water column surface
+        const bob = reduce?0:Math.sin((x*0.7+z*0.9) + now*0.0016)*0.05;
+        items.push({d:(x+z), gy:0, fn:()=>cube(x, bob, z, BLOCKS.water, 0.86*p)});
+      }
+    }
+    // land columns (day>=3)
+    if(land){
+      for(let x=0;x<=N;x++) for(let z=0;z<=N;z++){
+        if(!isLand(x,z)) continue;
+        const t = landTop(x,z);
+        const p = grp(3, (x+z));
+        const yo = dropY(p), al = p;
+        for(let gy=1; gy<=t; gy++){
+          const col = gy===t ? BLOCKS.grass : (gy===1?BLOCKS.stone:BLOCKS.dirt);
+          items.push({d:(x+z), gy, fn:()=>cube(x,gy,z,col,al,yo)});
+        }
+      }
+      // trees
+      treeCols.forEach(([x,z],ti)=>{
+        const base = landTop(x,z);
+        const p = grp(3, 6+ti);
+        const yo=dropY(p), al=p;
+        for(let k=1;k<=2;k++) items.push({d:(x+z), gy:base+k, fn:()=>cube(x,base+k,z,BLOCKS.trunk,al,yo)});
+        const lt = base+3;
+        const leaf = [[0,0,0],[1,0,0],[-1,0,0],[0,0,1],[0,0,-1],[0,1,0]];
+        leaf.forEach(([dx,dy,dz])=> items.push({d:(x+dx)+(z+dz)+0.1, gy:lt+dy, fn:()=>cube(x+dx,lt+dy,z+dz,BLOCKS.leaf,al*0.98,yo)}));
+      });
+    }
+
+    // fish (day>=5) — sit at sea surface, swim
+    if(day>=5){
+      const p = grp(5);
+      fishCols.forEach(([x,z],i)=>{
+        const sw = reduce?0:Math.sin(now*0.002 + i)*1.2;
+        const fx = x + (reduce?0:Math.sin(now*0.0009+i*2)*0.6);
+        items.push({d:(fx+z)+0.2, gy:0.2, fn:()=>cube(fx,0.2+sw*0.03,z,BLOCKS.salmon,p*0.95)});
+      });
+    }
+    // beasts + player (day>=6)
+    if(day>=6){
+      const p = grp(6);
+      // sheep
+      {const [x,z]=sheepAt,b=landTop(x,z),yo=dropY(grp(6,0));
+       items.push({d:(x+z)+0.3, gy:b+1, fn:()=>cube(x,b+1,z,BLOCKS.sheep,p,yo)});
+       items.push({d:(x+z)+0.35, gy:b+1, fn:()=>cube(x+0.55,b+1,z,BLOCKS.sheepH,p,yo)});}
+      // cow
+      {const [x,z]=cowAt,b=landTop(x,z),yo=dropY(grp(6,2));
+       items.push({d:(x+z)+0.3, gy:b+1, fn:()=>cube(x,b+1,z,BLOCKS.cow,p,yo)});
+       items.push({d:(x+z)+0.36, gy:b+1, fn:()=>cube(x+0.55,b+1,z,BLOCKS.cowW,p,yo)});}
+      // player (two blocks: legs+torso, head)
+      {const [x,z]=steveAt,b=landTop(x,z),yo=dropY(grp(6,4));
+       const bob = reduce?0:Math.sin(now*0.003)*0.04;
+       items.push({d:(x+z)+0.4, gy:b+1, fn:()=>cube(x,b+1+bob,z,BLOCKS.steveT,p,yo)});
+       items.push({d:(x+z)+0.42, gy:b+2, fn:()=>cube(x,b+2+bob,z,BLOCKS.steveH,p*0.6+0.4,yo)});}
+    }
+
+    // depth sort & draw
+    items.sort((a,b)=> (a.d-b.d) || (a.gy-b.gy));
+    for(const it of items) it.fn();
+
+    // birds (day>=5) — drawn on top (they fly high)
+    if(day>=5 && !reduce){
+      const p=grp(5);
+      birdSeed.forEach(([sx,sz,sy],i)=>{
+        const bx = ((sx + now*0.0006 + i) % (N+2)) - 1;
+        const flap = Math.sin(now*0.02 + i*2)*0.6;
+        const pr = proj(bx, sy, sz);
+        ctx.globalAlpha=p; ctx.fillStyle=["#6fe0a0","#3fb0d8","#e0b85a"][i%3];
+        ctx.fillRect(pr.cx-3, pr.cy-3, 3,3);
+        ctx.fillRect(pr.cx+2+flap, pr.cy-4, 2,2);
+        ctx.fillRect(pr.cx-4-flap, pr.cy-4, 2,2);
+      });
+      ctx.globalAlpha=1;
+    } else if(day>=5 && reduce){
+      const p=grp(5);
+      birdSeed.forEach(([sx,sz,sy],i)=>{ const pr=proj(sx,sy,sz); ctx.globalAlpha=p; ctx.fillStyle="#6fe0a0"; ctx.fillRect(pr.cx-3,pr.cy-3,3,3);});
+      ctx.globalAlpha=1;
+    }
+
+    // clouds (day>=2) — high white blocks, gentle drift; draw above scene
+    if(day>=2){
+      const p=grp(2);
+      const cl=[[1,-1],[3,0],[6,-1],[8,1],[4,2]];
+      cl.forEach(([cxg,czg],i)=>{
+        const drift = reduce?0:Math.sin(now*0.0004+i)*0.5;
+        cube(cxg+drift, 6.2 + (i%2)*0.4, czg, BLOCKS.cloud, p*0.9, 0);
+      });
+    }
+
+    // rest glow (day>=7)
+    if(day>=7){
+      const p = reduce?1:Math.min(1,(perfNow()-spawnAt[7])/1100);
+      const gg=ctx.createRadialGradient(W/2,H*0.42,0,W/2,H*0.42,Math.max(W,H)*0.7);
+      gg.addColorStop(0,`rgba(245,197,66,${0.16*p})`);
+      gg.addColorStop(1,"rgba(245,197,66,0)");
+      ctx.fillStyle=gg; ctx.fillRect(0,0,W,H);
+      if(!reduce){
+        for(const m of motes){
+          const my = ((m.y - now*0.00004*m.sp)%1+1)%1;
+          ctx.globalAlpha = 0.5*Math.sin(now*0.001*m.sp+m.ph)**2 * p;
+          ctx.fillStyle="#f7e6a8";
+          ctx.fillRect((m.x*W)|0,(my*H)|0,2,2);
+        }
+        ctx.globalAlpha=1;
+      }
+    }
+  }
+
+  /* ---------------- render loop ---------------- */
+  function needsLoop(){
+    if(reduce) return false;
+    // animate while any group still appearing, or when living things present
+    const appearing = spawnAt.some((t,i)=> t>=0 && (perfNow()-t) < 1200);
+    return appearing || day>=1; // water/creatures/clouds keep moving
+  }
+  function tick(now){
+    draw(now);
+    if(needsLoop()){ raf = requestAnimationFrame(tick); running=true; }
+    else { running=false; }
+  }
+  let raf=0;
+  function kick(){ if(!running){ running=true; cancelAnimationFrame(raf); raf=requestAnimationFrame(tick);} }
+
+  /* ---------------- UI ---------------- */
+  const elDay=document.getElementById("daycount");
+  const elRef=document.getElementById("ref");
+  const elVerse=document.getElementById("verse");
+  const elLead=elVerse.querySelector(".lead");
+  const elFlist=document.getElementById("flavorList");
+  const hotbar=document.getElementById("hotbar");
+
+  // build hotbar
+  for(let i=1;i<=7;i++){
+    const d=DAYS[i];
+    const b=document.createElement("button");
+    b.className="slot"; b.type="button"; b.setAttribute("role","tab");
+    b.setAttribute("aria-selected","false");
+    b.dataset.day=String(i);
+    b.innerHTML=`<span class="num">${["I","II","III","IV","V","VI","VII"][i-1]}</span>
+      <span class="cube" style="background:${d.cube}"></span>
+      <span class="lab">${SHORT[i]}</span>`;
+    b.addEventListener("click",()=>goto(i));
+    hotbar.appendChild(b);
+  }
+
+  function renderPanel(){
+    const d=DAYS[day];
+    elDay.innerHTML=`<b>${d.tag}</b><span>${d.name}</span>`;
+    elRef.textContent=d.ref;
+    elLead.textContent=d.lead;
+    // rebuild verse keeping lead span
+    elVerse.innerHTML=`<span class="lead">${d.lead}</span>${d.verse}`;
+    // flavor log
+    elFlist.innerHTML="";
+    d.log.forEach((row,i)=>{
+      const li=document.createElement("li");
+      li.style.animationDelay=(i*0.09)+"s";
+      li.innerHTML=`<span class="b" style="background:${row[0]}"></span>${row[1]}`;
+      elFlist.appendChild(li);
+    });
+    if(d.log.length===0){ const li=document.createElement("li"); li.style.opacity=.55; li.textContent="— awaiting the Word —"; elFlist.appendChild(li);}
+    // hotbar selection
+    [...hotbar.children].forEach(c=> c.setAttribute("aria-selected", String(+c.dataset.day===day)));
+    document.getElementById("prev").disabled = day<=0;
+    document.getElementById("next").disabled = day>=7;
+  }
+
+  function setDay(n, animate=true){
+    n=Math.max(0,Math.min(7,n));
+    // mark spawn times for all groups up to n
+    for(let i=1;i<=7;i++){
+      if(i<=n){ if(spawnAt[i]<0) spawnAt[i] = animate && i===n ? perfNow() : perfNow()-2000; }
+      else spawnAt[i]=-1;
+    }
+    if(animate && n>0){ spawnAt[n]=perfNow(); } // (re)animate the newest tier
+    day=n;
+    renderPanel();
+    kick();
+    if(reduce) draw(perfNow());
+  }
+  function goto(n){ setDay(n, n>day); if(n<day) setDay(n,false); }
+
+  document.getElementById("next").addEventListener("click",()=> setDay(day+1,true));
+  document.getElementById("prev").addEventListener("click",()=> setDay(day-1,false));
+  document.getElementById("reset").addEventListener("click",()=>{ for(let i=0;i<8;i++) spawnAt[i]=-1; setDay(0,false); });
+
+  // auto-play creation
+  let playing=false, playTimer=0;
+  const playBtn=document.getElementById("play");
+  function stopPlay(){ playing=false; clearTimeout(playTimer); playBtn.textContent="▶ Let there be…"; }
+  playBtn.addEventListener("click",()=>{
+    if(playing){ stopPlay(); return; }
+    playing=true; playBtn.textContent="⏸ Pause";
+    if(day>=7){ for(let i=0;i<8;i++) spawnAt[i]=-1; setDay(0,false); }
+    const step=()=>{
+      if(!playing) return;
+      if(day>=7){ stopPlay(); return; }
+      setDay(day+1,true);
+      playTimer=setTimeout(step, reduce?900:2100);
+    };
+    playTimer=setTimeout(step, 350);
+  });
+
+  // keyboard
+  window.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"){ e.preventDefault(); stopPlay(); setDay(day+1,true); }
+    else if(e.key==="ArrowLeft"){ e.preventDefault(); stopPlay(); setDay(day-1,false); }
+    else if(e.key===" "){ e.preventDefault(); playBtn.click(); }
+  });
+
+  // theme toggle
+  const root=document.documentElement;
+  document.getElementById("themeToggle").addEventListener("click",()=>{
+    const cur=root.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+    root.setAttribute("data-theme", cur==="dark"?"light":"dark");
+  });
+
+  /* ---------------- boot ---------------- */
+  const ro = new ResizeObserver(resize); ro.observe(canvas);
+  window.addEventListener("resize", resize);
+  resize();
+  setDay(0,false);
+  // gentle: leave on the void; user presses to create
+})();
+</script>
+
+</body></html>
