@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scrabble — a dataset you can read · Project Genesis</title>
+<meta name="description" content="A rotating isometric ASCII voxel data-viz where every tile is a lettered Scrabble tile and the letter encodes its category. Bundled with a real HRL body-position cloud (600 pts) whose three predicted classes tile as E, A, T. Pure text, no images, no Mojang. By Manny Glover.">
+<style>
+  :root{
+    --bg:#0b0d0a; --panel:#12160f; --edge:#26311d; --edge2:#3a4a2b;
+    --ink:#ece7d2; --dim:#8a9472; --tile:#e8dfc2; --tileink:#1a1710;
+    --mono:"SFMono-Regular","SF Mono","JetBrains Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:light){
+    :root{ --bg:#e9e6d6; --panel:#f3efe0; --edge:#d3ccb2; --edge2:#c1b894; --ink:#23200f; --dim:#6f6a4d; }
+  }
+  :root[data-theme="dark"]{ --bg:#0b0d0a;--panel:#12160f;--edge:#26311d;--edge2:#3a4a2b;--ink:#ece7d2;--dim:#8a9472;color-scheme:dark;}
+  :root[data-theme="light"]{ --bg:#e9e6d6;--panel:#f3efe0;--edge:#d3ccb2;--edge2:#c1b894;--ink:#23200f;--dim:#6f6a4d;color-scheme:light;}
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;}
+  .page{min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--mono);
+    display:flex;flex-direction:column;align-items:center;gap:16px;padding:clamp(12px,2.4vw,26px);}
+  .mast{width:100%;max-width:1060px;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;}
+  .lhs{display:flex;flex-direction:column;gap:5px;}
+  .kick{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);}
+  h1{margin:0;font-size:clamp(18px,3vw,26px);letter-spacing:.02em;color:var(--ink);font-weight:700;}
+  h1 .sep{color:#c9a227;}
+  .by{font-size:11px;color:var(--dim);letter-spacing:.1em;}
+  .back{font-size:11px;letter-spacing:.1em;color:var(--dim);text-decoration:none;margin-bottom:2px;}
+  .back:hover{color:#c9a227;}
+  .tbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--dim);border:1px solid var(--edge);padding:8px 12px;cursor:pointer;}
+  .tbtn:hover{color:var(--ink);border-color:var(--edge2);}
+  .stage{width:100%;max-width:1060px;border:1px solid var(--edge2);background:#07080a;position:relative;overflow:hidden;aspect-ratio:16/9;box-shadow:0 24px 60px rgba(0,0,0,.45);cursor:grab;}
+  .stage.grab{cursor:grabbing;}
+  #screen{position:absolute;inset:0;margin:auto;white-space:pre;font-family:var(--mono);line-height:1;color:#4a6b4a;padding:8px 0;text-shadow:0 0 6px rgba(180,220,120,.14);}
+  .deck{width:100%;max-width:1060px;display:grid;grid-template-columns:1.4fr 1fr;gap:14px;}
+  @media (max-width:760px){.deck{grid-template-columns:1fr;}}
+  .panel{background:var(--panel);border:1px solid var(--edge);padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
+  .panel h3{margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+  .rack{display:flex;gap:8px;flex-wrap:wrap;}
+  .tile{width:44px;height:44px;background:var(--tile);color:var(--tileink);position:relative;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:20px;border-radius:3px;box-shadow:inset -3px -3px 0 rgba(0,0,0,.22),inset 3px 3px 0 rgba(255,255,255,.5);}
+  .tile .sc{position:absolute;right:3px;bottom:1px;font-size:9px;font-weight:600;}
+  .tile .cd{position:absolute;left:4px;top:2px;width:8px;height:8px;border-radius:2px;}
+  .leg{display:flex;flex-direction:column;gap:7px;font-size:12px;}
+  .leg .li{display:flex;align-items:center;gap:9px;}
+  .leg .sw{width:12px;height:12px;box-shadow:inset -3px -3px 0 rgba(0,0,0,.3),inset 3px 3px 0 rgba(255,255,255,.25);}
+  .leg b{font-weight:700;}
+  .stat{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);}
+  .stat b{color:var(--ink);font-variant-numeric:tabular-nums;}
+  .hint{font-size:10.5px;color:var(--dim);line-height:1.7;}
+  .hint kbd{border:1px solid var(--edge2);border-bottom-width:2px;border-radius:3px;padding:0 5px;color:var(--ink);}
+  footer{max-width:1060px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <div class="lhs">
+      <a class="back" href="../">← Project Genesis</a>
+      <div class="kick">data as tiles</div>
+      <h1>Scrabble <span class="sep">//</span> a dataset you can read</h1>
+      <div class="by">every voxel is a lettered tile — the letter is its category. rotating ASCII, no images.</div>
+    </div>
+    <button class="tbtn" id="theme" type="button">◐ theme</button>
+  </header>
+
+  <section class="stage" id="stage"><pre id="screen" aria-hidden="true"></pre></section>
+
+  <section class="deck">
+    <div class="panel">
+      <h3>the rack — letters encode classes</h3>
+      <div class="rack" id="rack"></div>
+      <div class="leg" id="leg"></div>
+    </div>
+    <div class="panel">
+      <h3>board</h3>
+      <div class="stat"><span>dataset</span><b id="dset">body-position cloud</b></div>
+      <div class="stat"><span>tiles placed</span><b id="ntiles">—</b></div>
+      <div class="stat"><span>fps</span><b id="fps">—</b></div>
+      <div class="hint"><kbd>drag</kbd> to rotate the board · letters ride the tiles in 3-D.</div>
+    </div>
+  </section>
+
+  <footer>data · <b>HRL body-position cloud (real, 600 pts)</b> &nbsp;·&nbsp; letters map to HRL's predicted class &nbsp;·&nbsp; ASCII voxel engine by Manny Glover</footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SAMPLE={"pts3d":[{"v":[-0.83,-5.54,7.16],"p":6},{"v":[-0.91,-6.15,7.19],"p":6},{"v":[-1.03,-5.96,7.33],"p":6},{"v":[-1.16,-6.05,7.23],"p":6},{"v":[-0.34,-6.02,7.28],"p":6},{"v":[-1.02,-6.16,7.13],"p":6},{"v":[-0.95,-5.31,7.85],"p":6},{"v":[-0.46,-4.7,8.33],"p":6},{"v":[-1.33,-5.37,7.74],"p":6},{"v":[-1.3,-5.22,7.87],"p":6},{"v":[-0.9,-5.01,8.08],"p":6},{"v":[-1.05,-5.11,7.98],"p":6},{"v":[-0.64,-5.13,8.02],"p":6},{"v":[-1.03,-5.34,7.83],"p":6},{"v":[-1.39,-5.34,7.77],"p":6},{"v":[-1.32,-5.32,7.8],"p":6},{"v":[-1.32,-5.29,7.81],"p":6},{"v":[-0.57,-5.06,8.08],"p":6},{"v":[-0.54,-4.92,8.18],"p":6},{"v":[-1.01,-5.19,7.94],"p":6},{"v":[-1.46,-5.38,7.72],"p":6},{"v":[-0.96,-5.12,8],"p":6},{"v":[-0.95,-5.04,8.06],"p":6},{"v":[-0.92,-5.06,8.05],"p":6},{"v":[-0.78,-4.96,8.13],"p":6},{"v":[-1.06,-5.2,7.93],"p":6},{"v":[-1.05,-5.19,7.94],"p":6},{"v":[-1.03,-5.15,7.97],"p":6},{"v":[-1.02,-5.17,7.95],"p":6},{"v":[-1.01,-5.22,7.92],"p":6},{"v":[-0.75,-5.44,7.78],"p":6},{"v":[-0.89,-5.32,7.86],"p":6},{"v":[-0.14,-4.91,8.17],"p":6},{"v":[-0.88,-5.12,8.01],"p":6},{"v":[-0.97,-5.05,8.05],"p":6},{"v":[-1,-5.08,8.03],"p":6},{"v":[-0.67,-4.95,8.14],"p":6},{"v":[-0.53,-5,8.13],"p":6},{"v":[-0.79,-4.99,8.11],"p":6},{"v":[-0.27,-5.12,6.99],"p":6},{"v":[-0.49,-6.24,6.57],"p":6},{"v":[-0.54,-5.9,7.36],"p":6},{"v":[-0.47,-5.99,7.38],"p":6},{"v":[-0.88,-5.82,7.47],"p":6},{"v":[-0.42,-5.78,7.51],"p":6},{"v":[-0.36,-5.37,7.89],"p":6},{"v":[-0.31,-5.3,7.92],"p":6},{"v":[0.09,-4.76,8.32],"p":6},{"v":[-0.03,-5.18,8.03],"p":6},{"v":[-0.31,-5.58,7.71],"p":6},{"v":[-1.19,-5.99,7.29],"p":6},{"v":[-0.58,-5.7,7.61],"p":6},{"v":[-0.8,-5.79,7.5],"p":6},{"v":[-1.27,-6.04,7.22],"p":6},{"v":[-2.5,-3.31,8.43],"p":6},{"v":[-3.28,-2.33,8.76],"p":6},{"v":[-3.27,-2.15,8.83],"p":6},{"v":[-3.94,-1.77,8.64],"p":6},{"v":[-4.22,-1.75,8.52],"p":6},{"v":[-3.22,-2.41,8.67],"p":6},{"v":[-3.66,-1.82,8.75],"p":6},{"v":[-3.86,-1.86,8.66],"p":6},{"v":[-3.64,-2,8.69],"p":6},{"v":[-3.7,-1.81,8.74],"p":6},{"v":[-3.78,-1.76,8.72],"p":6},{"v":[-3.37,-2.49,8.68],"p":6},{"v":[-3.36,-1.94,8.85],"p":6},{"v":[-3.4,-1.84,8.87],"p":6},{"v":[-3.46,-2.51,8.6],"p":6},{"v":[-3.58,-2.39,8.64],"p":6},{"v":[-3.6,-2.4,8.62],"p":6},{"v":[-3.6,-2.38,8.62],"p":6},{"v":[-2.88,0.71,8.81],"p":12},{"v":[-2.46,3.5,8.96],"p":12},{"v":[-3.01,3.27,8.86],"p":12},{"v":[-3.39,3.14,8.76],"p":12},{"v":[-1.42,7.32,6.58],"p":12},{"v":[-1.34,7.68,6.45],"p":12},{"v":[-1.35,7.71,6.42],"p":12},{"v":[-1.37,7.47,6.66],"p":12},{"v":[-1.49,7.38,6.74],"p":12},{"v":[-1.49,7.39,6.73],"p":12},{"v":[-1.48,7.39,6.73],"p":12},{"v":[-1.47,7.38,6.73],"p":12},{"v":[-1.46,7.32,6.8],"p":12},{"v":[-1.18,6.75,7.39],"p":12},{"v":[-1.16,6.7,7.43],"p":12},{"v":[-1.17,6.68,7.45],"p":12},{"v":[-1.16,6.62,7.5],"p":12},{"v":[-1.17,6.62,7.5],"p":12},{"v":[-1.15,6.59,7.52],"p":12},{"v":[-1.16,6.59,7.52],"p":12},{"v":[-1.18,6.61,7.5],"p":12},{"v":[-1.17,6.55,7.55],"p":12},{"v":[-1.16,6.53,7.57],"p":12},{"v":[-1.17,6.54,7.56],"p":12},{"v":[-1.19,6.48,7.6],"p":12},{"v":[-1.18,5.97,7.97],"p":12},{"v":[-1.17,5.67,8.19],"p":12},{"v":[-1.15,5.66,8.2],"p":12},{"v":[-1.15,5.68,8.18],"p":12},{"v":[-1.15,5.64,8.21],"p":12},{"v":[-1.14,5.61,8.23],"p":12},{"v":[-0.99,5.41,8.37],"p":12},{"v":[-1.18,5.47,8.32],"p":12},{"v":[-1.34,5.43,8.31],"p":12},{"v":[-1.67,5,8.49],"p":12},{"v":[-1.69,5,8.49],"p":12},{"v":[-1.64,5,8.5],"p":12},{"v":[-1.62,5.01,8.5],"p":12},{"v":[-1.61,5.02,8.49],"p":12},{"v":[-1.61,5.04,8.48],"p":12},{"v":[-1.69,5,8.5],"p":12},{"v":[-1.83,4.91,8.51],"p":12},{"v":[-1.87,4.84,8.53],"p":12},{"v":[-1.94,4.71,8.58],"p":12},{"v":[-1.97,4.74,8.56],"p":12},{"v":[-1.98,4.74,8.56],"p":12},{"v":[-2.01,4.74,8.55],"p":12},{"v":[-2.02,4.74,8.54],"p":12},{"v":[-1.98,4.75,8.55],"p":12},{"v":[-1.98,4.74,8.56],"p":12},{"v":[-1.99,4.75,8.55],"p":12},{"v":[-1.99,4.74,8.55],"p":12},{"v":[-2,4.72,8.56],"p":12},{"v":[-1.99,4.72,8.56],"p":12},{"v":[-2,4.72,8.56],"p":12},{"v":[-2,4.72,8.56],"p":12},{"v":[-1.98,4.53,8.65],"p":12},{"v":[-2.12,4.38,8.69],"p":12},{"v":[-2.07,4.44,8.67],"p":12},{"v":[-2.08,4.45,8.67],"p":12},{"v":[-2.07,4.44,8.67],"p":12},{"v":[-2.07,4.45,8.67],"p":12},{"v":[-2.04,4.43,8.69],"p":12},{"v":[-2.07,4.48,8.66],"p":12},{"v":[-2.06,4.49,8.65],"p":12},{"v":[-2.06,4.51,8.64],"p":12},{"v":[-2.15,4.48,8.63],"p":12},{"v":[-2.2,4.44,8.64],"p":12},{"v":[-2.19,4.46,8.64],"p":12},{"v":[-2.18,4.45,8.64],"p":12},{"v":[-2.18,4.45,8.65],"p":12},{"v":[-2.18,4.43,8.65],"p":12},{"v":[-2.14,4.45,8.66],"p":12},{"v":[-2.13,4.44,8.66],"p":12},{"v":[-2.13,4.45,8.66],"p":12},{"v":[-2.14,4.43,8.67],"p":12},{"v":[-2.16,4.45,8.65],"p":12},{"v":[-2.15,4.46,8.65],"p":12},{"v":[-2.14,4.45,8.66],"p":12},{"v":[-2.14,4.43,8.67],"p":12},{"v":[-2.14,4.44,8.66],"p":12},{"v":[-2.14,4.43,8.66],"p":12},{"v":[-2.13,4.44,8.66],"p":12},{"v":[-2.13,4.42,8.67],"p":12},{"v":[-2.13,4.45,8.66],"p":12},{"v":[-2.48,4.34,8.61],"p":12},{"v":[-2.55,4.29,8.61],"p":12},{"v":[-2.54,4.26,8.63],"p":12},{"v":[-2.52,4.25,8.64],"p":12},{"v":[-2.5,4.27,8.64],"p":12},{"v":[-2.43,4.24,8.67],"p":12},{"v":[-2.35,4.25,8.69],"p":12},{"v":[-2.36,4.29,8.67],"p":12},{"v":[-2.37,4.31,8.66],"p":12},{"v":[-2.35,4.31,8.66],"p":12},{"v":[-2.43,4.33,8.63],"p":12},{"v":[-2.42,4.31,8.64],"p":12},{"v":[-2.41,4.31,8.65],"p":12},{"v":[-2.42,4.31,8.64],"p":12},{"v":[-2.44,4.3,8.64],"p":12},{"v":[-2.42,4.3,8.65],"p":12},{"v":[-2.37,4.25,8.68],"p":12},{"v":[-2.41,4.27,8.66],"p":12},{"v":[-2.45,4.33,8.62],"p":12},{"v":[-2.09,4.64,8.56],"p":12},{"v":[-2.97,4.41,8.39],"p":12},{"v":[-3.63,4.55,8.07],"p":12},{"v":[-3.6,4.59,8.07],"p":12},{"v":[-3.59,4.62,8.06],"p":12},{"v":[-3.56,4.61,8.08],"p":12},{"v":[-3.55,4.62,8.08],"p":12},{"v":[-3.54,4.63,8.07],"p":12},{"v":[-3.56,4.64,8.06],"p":12},{"v":[-3.54,4.64,8.07],"p":12},{"v":[-3.51,4.62,8.1],"p":12},{"v":[-3.5,4.68,8.07],"p":12},{"v":[-3.48,4.66,8.08],"p":12},{"v":[-3.46,4.63,8.11],"p":12},{"v":[-3.48,4.67,8.09],"p":12},{"v":[-3.59,4.62,8.06],"p":12},{"v":[-3.69,4.44,8.09],"p":12},{"v":[-3.69,4.41,8.11],"p":12},{"v":[-3.67,4.4,8.13],"p":12},{"v":[-3.76,4.23,8.16],"p":12},{"v":[-3.71,4.21,8.2],"p":12},{"v":[-4.01,4.11,8.1],"p":12},{"v":[-3.99,4.16,8.09],"p":12},{"v":[-4.01,4.14,8.08],"p":12},{"v":[-4.02,4.14,8.08],"p":12},{"v":[-4.04,4.15,8.07],"p":12},{"v":[-4.04,4.15,8.07],"p":12},{"v":[-4.04,4.15,8.06],"p":12},{"v":[-4.03,4.14,8.07],"p":12},{"v":[-4.05,4.15,8.06],"p":12},{"v":[-4.05,4.14,8.06],"p":12},{"v":[-4.04,4.12,8.08],"p":12},{"v":[-4.1,4.1,8.05],"p":12},{"v":[-4.19,4.01,8.05],"p":12},{"v":[-4.23,3.97,8.05],"p":12},{"v":[-3.65,4.25,8.17],"p":12},{"v":[-3.52,4.2,8.29],"p":12},{"v":[-4.6,1.86,8.44],"p":12},{"v":[-4.68,1.6,8.47],"p":12},{"v":[-4.58,1.52,8.53],"p":12},{"v":[-4.58,1.44,8.55],"p":12},{"v":[-4.58,1.39,8.55],"p":12},{"v":[-4.6,1.38,8.54],"p":12},{"v":[-4.6,1.35,8.54],"p":12},{"v":[-4.58,1.33,8.55],"p":12},{"v":[-4.57,1.3,8.56],"p":12},{"v":[-4.55,1.3,8.57],"p":12},{"v":[-4.23,0.69,8.77],"p":12},{"v":[-4.33,0.71,8.73],"p":12},{"v":[-4.36,0.74,8.71],"p":12},{"v":[-4.36,0.74,8.71],"p":12},{"v":[-4.37,0.73,8.71],"p":12},{"v":[-4.37,0.75,8.7],"p":12},{"v":[-4.36,0.73,8.71],"p":12},{"v":[-4.36,0.73,8.71],"p":12},{"v":[-4.37,0.72,8.71],"p":12},{"v":[-4.65,0.56,8.55],"p":12},{"v":[-2.03,-4.06,7.83],"p":6},{"v":[-1.14,-5.61,7.61],"p":6},{"v":[-1.42,-5.61,7.55],"p":6},{"v":[-1.49,-5.52,7.6],"p":6},{"v":[-1.56,-5.68,7.38],"p":6},{"v":[-1.72,-5.52,7.55],"p":6},{"v":[-1.72,-5.53,7.54],"p":6},{"v":[-1.73,-5.56,7.52],"p":6},{"v":[-1.72,-5.54,7.54],"p":6},{"v":[-0.78,-5.07,8],"p":6},{"v":[-1.61,-5.65,7.45],"p":6},{"v":[-1.05,-5.31,7.83],"p":6},{"v":[-0.98,-5.15,7.97],"p":6},{"v":[-1.05,-5.16,7.95],"p":6},{"v":[-0.87,-5.06,8.04],"p":6},{"v":[-1.01,-5.18,7.94],"p":6},{"v":[-1.06,-5.28,7.86],"p":6},{"v":[-0.88,-5.31,7.86],"p":6},{"v":[-0.99,-5.21,7.92],"p":6},{"v":[-1.17,-5.62,7.57],"p":6},{"v":[-1.1,-5.32,7.83],"p":6},{"v":[-1.16,-5.38,7.77],"p":6},{"v":[-0.35,-5.28,7.93],"p":6},{"v":[-0.5,-5.2,7.97],"p":6},{"v":[-1.24,-5.5,7.62],"p":6},{"v":[-1.26,-5.29,7.81],"p":6},{"v":[-1.09,-5.27,7.86],"p":6},{"v":[-1.15,-5.21,7.9],"p":6},{"v":[-1.07,-5.21,7.9],"p":6},{"v":[-1.04,-5.22,7.91],"p":6},{"v":[-0.25,-4.93,8.17],"p":6},{"v":[-0.72,-5.04,8.05],"p":6},{"v":[-0.95,-5.24,7.89],"p":6},{"v":[-1.15,-5.31,7.82],"p":6},{"v":[-0.12,-5.63,7.12],"p":6},{"v":[5.66,-7.37,1.9],"p":3},{"v":[5.3,-7.6,2.05],"p":6},{"v":[5.33,-7.67,1.71],"p":6},{"v":[5.46,-7.73,0.87],"p":3},{"v":[5.62,-7.61,0.73],"p":3},{"v":[6.26,-7.12,0.83],"p":3},{"v":[5.36,-7.09,3.3],"p":6},{"v":[4.88,-7.21,3.86],"p":6},{"v":[4.75,-7.23,3.98],"p":6},{"v":[4.72,-7.27,3.94],"p":6},{"v":[4.67,-7.23,4.07],"p":6},{"v":[4.04,-7.3,4.54],"p":6},{"v":[3.84,-7.2,4.88],"p":6},{"v":[3.81,-7.1,5.07],"p":6},{"v":[3.73,-7.03,5.23],"p":6},{"v":[3.72,-6.85,5.48],"p":6},{"v":[3.52,-6.77,5.66],"p":6},{"v":[3.44,-6.85,5.63],"p":6},{"v":[3.26,-7.1,5.39],"p":6},{"v":[3.54,-6.94,5.45],"p":6},{"v":[3.62,-6.79,5.58],"p":6},{"v":[4.01,-7.67,3.82],"p":6},{"v":[3.44,-7.5,4.66],"p":6},{"v":[3.33,-6.9,5.62],"p":6},{"v":[3.2,-6.78,5.84],"p":6},{"v":[3.25,-6.56,6.06],"p":6},{"v":[3.29,-6.89,5.66],"p":6},{"v":[3.48,-6.25,6.3],"p":6},{"v":[3.28,-6.75,5.83],"p":6},{"v":[3.52,-6.79,5.65],"p":6},{"v":[3.49,-6.56,5.93],"p":6},{"v":[3.67,-7.03,5.19],"p":6},{"v":[5.45,-6.73,0.9],"p":3},{"v":[6.22,-6.16,-3.91],"p":3},{"v":[6.35,-6.29,-3.44],"p":3},{"v":[6.02,-6.58,-2.43],"p":3},{"v":[6.29,-7.15,0.41],"p":3},{"v":[6.34,-7.11,0.39],"p":3},{"v":[5.1,-7.05,2.76],"p":6},{"v":[5.21,-7.05,3.7],"p":6},{"v":[5.12,-7,3.91],"p":6},{"v":[5.1,-7.06,3.83],"p":6},{"v":[5.12,-7.1,3.74],"p":6},{"v":[5.08,-7.06,3.87],"p":6},{"v":[5.05,-7.1,3.84],"p":6},{"v":[4.99,-7.27,3.34],"p":6},{"v":[5.08,-7.46,2.73],"p":6},{"v":[5.47,-7.5,1.47],"p":3},{"v":[5.27,-7.55,1.58],"p":3},{"v":[4.22,-7.77,3.39],"p":6},{"v":[2.88,-7.98,4.16],"p":6},{"v":[4.13,-7.91,2.12],"p":6},{"v":[4.48,-7.85,1.81],"p":6},{"v":[5.01,-8,0.54],"p":3},{"v":[3.94,-7.97,2.4],"p":6},{"v":[2.91,-7.93,4.23],"p":6},{"v":[2.82,-7.93,4.29],"p":6},{"v":[2.24,-7.96,4.47],"p":6},{"v":[3.38,-7.29,4.83],"p":6},{"v":[3.13,-7.32,5.12],"p":6},{"v":[2.37,-7.79,4.8],"p":6},{"v":[2.21,-7.89,4.69],"p":6},{"v":[2.19,-7.9,4.68],"p":6},{"v":[2.6,-7.28,5.39],"p":6},{"v":[2.85,-6.61,6.19],"p":6},{"v":[2.77,-6.83,5.98],"p":6},{"v":[2.92,-7.03,5.67],"p":6},{"v":[2.94,-6.99,5.71],"p":6},{"v":[3.14,-7.22,5.31],"p":6},{"v":[3.53,-7.47,4.62],"p":6},{"v":[3.19,-7.35,5.03],"p":6},{"v":[2.47,-7.33,5.45],"p":6},{"v":[2.12,-7.78,4.9],"p":6},{"v":[1.74,-7.82,5],"p":6},{"v":[1.73,-7.93,4.81],"p":6},{"v":[1.44,-7.86,5.02],"p":6},{"v":[1.4,-7.84,5.07],"p":6},{"v":[1.4,-7.84,5.03],"p":6},{"v":[1.04,-7.61,5.5],"p":6},{"v":[1.06,-7.63,5.46],"p":6},{"v":[1.28,-7.74,5.26],"p":6},{"v":[1.2,-7.65,5.42],"p":6},{"v":[0.95,-7.67,5.42],"p":6},{"v":[0.62,-7.36,5.86],"p":6},{"v":[-0.28,-7.07,6.27],"p":6},{"v":[0.28,-6.95,6.42],"p":6},{"v":[0.15,-6.88,6.5],"p":6},{"v":[0.04,-6.81,6.59],"p":6},{"v":[-0.24,-7.31,5.98],"p":6},{"v":[-0.41,-7.14,6.18],"p":6},{"v":[-0.44,-7.14,6.17],"p":6},{"v":[-0.64,-6.83,6.51],"p":6},{"v":[1.74,-5.36,7.56],"p":6},{"v":[1.5,-5.83,7.36],"p":6},{"v":[0.47,-6.36,6.99],"p":6},{"v":[-0.6,-6.91,6.43],"p":6},{"v":[1.13,-5.93,7.28],"p":6},{"v":[1.18,-6.12,7.19],"p":6},{"v":[-0.45,-6.67,6.59],"p":6},{"v":[-0.19,-5.15,7.99],"p":6},{"v":[-0.8,-5.24,7.92],"p":6},{"v":[-1.43,-4.96,8.03],"p":6},{"v":[-1.38,-4.76,8.17],"p":6},{"v":[-1.26,-4.82,8.15],"p":6},{"v":[-1.23,-4.97,8.06],"p":6},{"v":[-1.13,-4.74,8.22],"p":6},{"v":[-1.44,-4.73,8.17],"p":6},{"v":[-1.36,-4.58,8.27],"p":6},{"v":[-1.57,-4.61,8.22],"p":6},{"v":[-1.57,-4.61,8.23],"p":6},{"v":[-1.57,-4.67,8.19],"p":6},{"v":[-1.61,-4.62,8.21],"p":6},{"v":[-1.59,-4.62,8.21],"p":6},{"v":[-1.57,-4.32,8.4],"p":6},{"v":[-1.57,-4.31,8.41],"p":6},{"v":[-1.44,-4.49,8.18],"p":6},{"v":[-3.23,-1.37,9.02],"p":6},{"v":[-3.45,-1.25,8.98],"p":6},{"v":[-3.31,-1.26,9.03],"p":6},{"v":[-3.37,-1.27,9],"p":6},{"v":[-3.1,-1.47,9.06],"p":6},{"v":[-3.5,-1.41,8.93],"p":6},{"v":[-3.48,-1.15,8.98],"p":6},{"v":[-3.6,-1.05,8.95],"p":6},{"v":[-3.32,-1.05,9.06],"p":6},{"v":[-3.15,-1.06,9.13],"p":6},{"v":[-3.29,-1.11,9.06],"p":6},{"v":[-3.34,-1.17,9.03],"p":6},{"v":[-3.25,-1.17,9.07],"p":6},{"v":[-3.26,-1.19,9.06],"p":6},{"v":[-3.35,-1.31,9],"p":6},{"v":[-3.29,-1.58,8.97],"p":6},{"v":[-3.31,-1.47,8.98],"p":6},{"v":[-3.51,-1.35,8.94],"p":6},{"v":[-3.57,-1.42,8.89],"p":6},{"v":[-3.76,-1.47,8.8],"p":6},{"v":[-3.6,-1.51,8.86],"p":6},{"v":[-3.54,-1.49,8.89],"p":6},{"v":[-3.64,-1.43,8.86],"p":6},{"v":[-3.42,-1.37,8.96],"p":6},{"v":[-3.2,-1.5,9.02],"p":6},{"v":[-3.4,-1.55,8.94],"p":6},{"v":[-3.21,-1.44,9.02],"p":6},{"v":[-3.25,-1.34,9.03],"p":6},{"v":[-3.11,-1.74,8.93],"p":6},{"v":[-3.36,-2.04,8.82],"p":6},{"v":[-3.23,-2.04,8.87],"p":6},{"v":[-3.13,-1.97,8.93],"p":6},{"v":[-3.24,-1.98,8.89],"p":6},{"v":[-3.19,-1.98,8.91],"p":6},{"v":[-3.1,-1.99,8.93],"p":6},{"v":[-3,-1.99,8.97],"p":6},{"v":[-2.74,-2.64,8.75],"p":6},{"v":[-3.18,-2.16,8.86],"p":6},{"v":[-1.66,-3.86,8.08],"p":6},{"v":[0.05,-6.12,7.07],"p":6},{"v":[-0.75,-6.04,7.3],"p":6},{"v":[-0.74,-5.97,7.35],"p":6},{"v":[-0.85,-6.14,7.17],"p":6},{"v":[-0.93,-6.22,7.1],"p":6},{"v":[-0.9,-6.19,7.13],"p":6},{"v":[-0.9,-6.15,7.17],"p":6},{"v":[-0.88,-6.1,7.22],"p":6},{"v":[-0.84,-6.04,7.28],"p":6},{"v":[-1.01,-5.99,7.29],"p":6},{"v":[-1.02,-6.01,7.28],"p":6},{"v":[-1.02,-6,7.29],"p":6},{"v":[-1,-6.04,7.26],"p":6},{"v":[-0.91,-6.26,7.02],"p":6},{"v":[-1.26,-6.16,7.1],"p":6},{"v":[-1.26,-6.14,7.12],"p":6},{"v":[-1.23,-6.07,7.19],"p":6},{"v":[-1.02,-5.64,7.59],"p":6},{"v":[-0.86,-5.85,7.44],"p":6},{"v":[-0.97,-5.89,7.39],"p":6},{"v":[-0.85,-5.77,7.51],"p":6},{"v":[-0.56,-5.62,7.66],"p":6},{"v":[-0.67,-5.57,7.69],"p":6},{"v":[-0.99,-5.51,7.7],"p":6},{"v":[-1,-5.61,7.62],"p":6},{"v":[1.63,-6.59,6.39],"p":6},{"v":[5.65,-6.38,3.19],"p":6},{"v":[6.85,-6.39,1.94],"p":3},{"v":[7.11,-5.94,1.37],"p":3},{"v":[8.03,-5.27,0.85],"p":3},{"v":[7.75,-5.55,1.26],"p":3},{"v":[7.79,-5.53,1.15],"p":3},{"v":[7.47,-5.88,1.38],"p":3},{"v":[7.1,-6.14,1.92],"p":3},{"v":[7,-6.27,1.82],"p":3},{"v":[6.22,-6.87,2.13],"p":3},{"v":[5.54,-7.33,2.37],"p":6},{"v":[5.41,-7.41,2.5],"p":6},{"v":[5.23,-7.53,2.42],"p":6},{"v":[5.72,-7.19,2.29],"p":6},{"v":[5.34,-7.4,2.66],"p":6},{"v":[4.8,-7.64,2.9],"p":6},{"v":[4.65,-7.67,3.05],"p":6},{"v":[4.36,-7.64,3.49],"p":6},{"v":[4.24,-7.72,3.14],"p":6},{"v":[4.21,-7.69,3.56],"p":6},{"v":[3.88,-7.78,3.73],"p":6},{"v":[4.03,-7.69,3.73],"p":6},{"v":[4.99,-7.23,3.61],"p":6},{"v":[5.08,-7.13,3.72],"p":6},{"v":[4.74,-7.28,3.83],"p":6},{"v":[4.28,-7.56,3.8],"p":6},{"v":[4.7,-7.41,3.5],"p":6},{"v":[4.82,-7.39,3.5],"p":6},{"v":[4.27,-7.72,3.45],"p":6},{"v":[4.1,-7.67,3.74],"p":6},{"v":[4.02,-7.6,3.99],"p":6},{"v":[4.39,-7.45,3.88],"p":6},{"v":[4.3,-7.46,3.97],"p":6},{"v":[3.44,-7.71,4.27],"p":6},{"v":[3.08,-7.45,4.89],"p":6},{"v":[3.86,-7.23,4.34],"p":6},{"v":[3.03,-7.31,4.73],"p":6},{"v":[2.9,-6.77,5.72],"p":6},{"v":[3.14,-6.72,5.92],"p":6},{"v":[2.75,-7.42,5.17],"p":6},{"v":[1.99,-7.8,4.91],"p":6},{"v":[2.23,-7.45,5.35],"p":6},{"v":[2.57,-7.49,5.1],"p":6},{"v":[3.03,-7.91,4.19],"p":6},{"v":[3.07,-7.31,5.02],"p":6},{"v":[3.4,-6.94,5.38],"p":6},{"v":[2.26,-7.77,4.85],"p":6},{"v":[2.51,-7.88,4.55],"p":6},{"v":[2.94,-7.66,4.66],"p":6},{"v":[2.58,-7.81,4.64],"p":6},{"v":[2.5,-7.8,4.7],"p":6},{"v":[2.48,-7.8,4.71],"p":6},{"v":[2.78,-7.59,4.88],"p":6},{"v":[3.15,-7.14,5.39],"p":6},{"v":[2.82,-7.12,5.58],"p":6},{"v":[3.18,-7.3,5.08],"p":6},{"v":[3.06,-7.37,5.09],"p":6},{"v":[3.02,-7.36,4.63],"p":6},{"v":[7.8,-5.51,0.73],"p":3},{"v":[8.25,-4.97,0.54],"p":3},{"v":[8.25,-5.01,0.33],"p":3},{"v":[8.01,-5.33,0.54],"p":3},{"v":[7.89,-5.51,0.52],"p":3},{"v":[7.8,-5.62,0.45],"p":3},{"v":[7.77,-5.67,0.37],"p":3},{"v":[7.74,-5.7,0.28],"p":3},{"v":[7.7,-5.76,0.2],"p":3},{"v":[7.7,-5.76,0.18],"p":3},{"v":[7.71,-5.74,0.17],"p":3},{"v":[7.7,-5.76,0.15],"p":3},{"v":[7.72,-5.74,0.18],"p":3},{"v":[7.71,-5.74,0.15],"p":3},{"v":[7.73,-5.73,0.18],"p":3},{"v":[7.75,-5.71,0.18],"p":3},{"v":[7.72,-5.73,0.17],"p":3},{"v":[7.76,-5.69,0.2],"p":3},{"v":[7.77,-5.68,0.21],"p":3},{"v":[7.76,-5.69,0.2],"p":3},{"v":[7.76,-5.68,0.18],"p":3},{"v":[7.76,-5.69,0.17],"p":3},{"v":[7.76,-5.69,0.19],"p":3},{"v":[7.76,-5.7,0.18],"p":3},{"v":[7.76,-5.69,0.18],"p":3},{"v":[7.76,-5.69,0.18],"p":3},{"v":[7.73,-5.73,0.17],"p":3},{"v":[7.74,-5.71,0.19],"p":3},{"v":[7.74,-5.71,0.19],"p":3},{"v":[7.75,-5.7,0.18],"p":3},{"v":[7.75,-5.7,0.18],"p":3},{"v":[7.75,-5.7,0.21],"p":3},{"v":[7.75,-5.69,0.18],"p":3},{"v":[7.75,-5.69,0.16],"p":3},{"v":[7.75,-5.69,0.09],"p":3},{"v":[7.75,-5.69,0.12],"p":3},{"v":[7.77,-5.67,0.15],"p":3},{"v":[7.76,-5.67,0.2],"p":3},{"v":[7.78,-5.65,0.18],"p":3},{"v":[7.78,-5.65,0.2],"p":3},{"v":[7.78,-5.65,0.18],"p":3},{"v":[7.77,-5.67,0.19],"p":3},{"v":[7.74,-5.7,0.18],"p":3},{"v":[7.91,-5.49,0.04],"p":3},{"v":[7.92,-5.48,0.08],"p":3},{"v":[7.88,-5.53,0.13],"p":3},{"v":[7.88,-5.53,0.09],"p":3},{"v":[7.87,-5.55,0.12],"p":3},{"v":[7.85,-5.57,0.15],"p":3},{"v":[7.78,-5.65,0.27],"p":3},{"v":[7.76,-5.67,0.28],"p":3},{"v":[7.7,-5.74,0.38],"p":3},{"v":[7.69,-5.76,0.36],"p":3},{"v":[7.68,-5.76,0.36],"p":3},{"v":[7.58,-5.72,0.09],"p":3},{"v":[6.01,-6.11,-4.3],"p":3},{"v":[6.01,-6.21,-4.15],"p":3},{"v":[5.96,-6.27,-4.11],"p":3},{"v":[5.95,-6.28,-4.11],"p":3},{"v":[5.96,-6.27,-4.1],"p":3},{"v":[6.04,-6.35,-3.84],"p":3},{"v":[6.07,-6.46,-3.6],"p":3},{"v":[6.01,-6.49,-3.65],"p":3},{"v":[6,-6.51,-3.63],"p":3},{"v":[6,-6.5,-3.65],"p":3},{"v":[6.01,-6.49,-3.64],"p":3},{"v":[6,-6.5,-3.66],"p":3},{"v":[5.99,-6.5,-3.64],"p":3},{"v":[5.99,-6.51,-3.64],"p":3},{"v":[5.96,-6.52,-3.67],"p":3},{"v":[5.96,-6.53,-3.65],"p":3},{"v":[5.94,-6.54,-3.65],"p":3},{"v":[5.93,-6.55,-3.64],"p":3},{"v":[5.93,-6.55,-3.65],"p":3},{"v":[5.9,-6.58,-3.64],"p":3},{"v":[5.58,-7.14,-0.79],"p":3},{"v":[5.05,-7.68,2.3],"p":6},{"v":[5.03,-7.65,2.42],"p":6},{"v":[5.03,-7.67,2.39],"p":6},{"v":[4.96,-7.67,2.5],"p":6},{"v":[4.92,-7.67,2.6],"p":6},{"v":[4.9,-7.67,2.62],"p":6},{"v":[4.89,-7.68,2.62],"p":6},{"v":[4.88,-7.68,2.63],"p":6},{"v":[4.88,-7.69,2.63],"p":6},{"v":[4.88,-7.68,2.64],"p":6},{"v":[4.87,-7.68,2.65],"p":6},{"v":[4.88,-7.66,2.69],"p":6},{"v":[2.76,-7.36,3.68],"p":6},{"v":[-2.71,-5.79,6.94],"p":6},{"v":[-2.66,-5.34,7.39],"p":6},{"v":[-2.16,-5.66,7.16],"p":6},{"v":[-1.87,-5.71,7.33],"p":6}]};
+
+  /* ---- classes -> letters (spells E A T for the 3 body-pos classes) ---- */
+  const LETTERS=["E","A","T","R","S","I","N","O","L","D"];
+  const SCORE={A:1,E:1,I:1,O:1,N:1,R:1,S:1,T:1,L:1,U:1,D:2,G:2};
+  const COLORS=["#4ec0a0","#e0a83c","#d06fb0","#5c9ce0","#c85a5a","#7fb238","#c9a227","#9aa0ac"];
+
+  // build labeled point list + class meta
+  const CREAM=[232,223,194];
+  const hexA=h=>{h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
+  const mixA=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+  const scl=(a,f)=>[a[0]*f,a[1]*f,a[2]*f];
+  const rs=a=>`rgb(${a[0]|0},${a[1]|0},${a[2]|0})`;
+  const codes=[...new Set(SAMPLE.pts3d.map(o=>o.p))].sort((a,b)=>a-b);
+  const cidx=Object.fromEntries(codes.map((c,i)=>[c,i]));
+  const classes=codes.map((c,i)=>{
+    const base=hexA(COLORS[i%COLORS.length]); const top=mixA(CREAM,base,0.30);   // cream tile, class-tinted
+    return {code:c, letter:LETTERS[i]||"?", color:COLORS[i%COLORS.length], score:SCORE[LETTERS[i]]||1,
+      topStr:rs(top), s1Str:rs(scl(top,0.76)), s2Str:rs(scl(top,0.60)), inkStr:rs(scl(base,0.55))};
+  });
+
+  /* ---- voxelize (coarse so tiles are legible) ---- */
+  function voxelize(pts, target){
+    let mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9];
+    for(const p of pts) for(let k=0;k<3;k++){mn[k]=Math.min(mn[k],p.v[k]);mx[k]=Math.max(mx[k],p.v[k]);}
+    const ext=Math.max(mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2])||1, s=target/ext;
+    const cx=(mn[0]+mx[0])/2, cz=(mn[2]+mx[2])/2;
+    const seen=new Map();
+    for(const p of pts){
+      const gx=Math.round((p.v[0]-cx)*s), gy=Math.round((p.v[1]-mn[1])*s), gz=Math.round((p.v[2]-cz)*s);
+      const key=gx+","+gy+","+gz;
+      if(!seen.has(key)) seen.set(key,{x:gx,y:gy,z:gz,c:cidx[p.p]});
+    }
+    return [...seen.values()];
+  }
+  const blocks=voxelize(SAMPLE.pts3d, 11);
+  document.getElementById("ntiles").textContent=blocks.length;
+
+  /* ---- iso ASCII renderer ---- */
+  const COLS=140, ROWS=72, CELLS=COLS*ROWS;
+  const ch=new Array(CELLS), col=new Array(CELLS); const z=new Float32Array(CELLS);
+  const screen=document.getElementById("screen");
+  let unit=4, ox=COLS/2, oy=ROWS*0.42;
+  let yaw=0.7, pitch=0.5, dragging=false, autow=true;
+
+  function rot(x,y,zc){
+    const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+    const x1=x*cy+zc*sy, z1=-x*sy+zc*cy, y1=y;
+    return [x1, y1*cp - z1*sp, y1*sp + z1*cp];
+  }
+  // center of data for nicer framing
+  let cbx=0,cby=0,cbz=0;
+  for(const b of blocks){cbx+=b.x;cby+=b.y;cbz+=b.z;} cbx/=blocks.length;cby/=blocks.length;cbz/=blocks.length;
+  // auto-fit tile size so the whole board stays in frame at any rotation
+  (function fitUnit(){
+    let mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9];
+    for(const b of blocks){const p=[b.x,b.y,b.z];for(let k=0;k<3;k++){mn[k]=Math.min(mn[k],p[k]);mx[k]=Math.max(mx[k],p[k]);}}
+    const dx=mx[0]-mn[0]+1, dy=mx[1]-mn[1]+1, dz=mx[2]-mn[2]+1;
+    const uW=(COLS*0.86)/Math.max(1,(dx+dz));
+    const uH=(ROWS*0.86)/Math.max(1,((dx+dz)*0.5 + dy));
+    unit=Math.max(2, Math.min(uW,uH));
+  })();
+  oy=ROWS*0.5;
+
+  function put(c,r,character,color,depth){
+    if(c<0||c>=COLS||r<0||r>=ROWS) return; const i=r*COLS+c;
+    if(depth>z[i]){ z[i]=depth; ch[i]=character; col[i]=color; }
+  }
+  const S=4, A=[]; for(let i=0;i<S;i++) A.push(-1+2*(i+0.5)/S);
+
+  function shade(hex,f){ const h=hex.replace('#',''); const r=parseInt(h.slice(0,2),16)*f|0,g=parseInt(h.slice(2,4),16)*f|0,b=parseInt(h.slice(4,6),16)*f|0; return `rgb(${r},${g},${b})`; }
+
+  function frame(now){
+    for(let i=0;i<CELLS;i++){ch[i]=null;z[i]=-1e9;}
+    if(autow&&!dragging&&!reduce) yaw+=0.005;
+    // sort back-to-front
+    const order=blocks.map((b,i)=>{const p=rot(b.x-cbx,b.y-cby,b.z-cbz); return {b,depth:p[2]};}).sort((a,b)=>a.depth-b.depth);
+    const hw=unit, hh=unit*0.5, u=unit;
+    for(const {b} of order){
+      const cls=classes[b.c];
+      // each block is a little Scrabble tile: cream top, beveled sides
+      const faces=[
+        {n:[0,1,0],fill:'█',col:cls.topStr},   // top = the tile face
+        {n:[1,0,0],fill:'▓',col:cls.s1Str},    // side bevel
+        {n:[0,0,1],fill:'▓',col:cls.s2Str},    // side bevel (darker)
+      ];
+      // iso projection of a rotated point -> [screenCol, screenRow, depth]
+      const sc=(p)=>[ ox + p[0]*hw, oy + p[2]*hh - p[1]*u, p[2] ];
+      for(const f of faces){
+        // face center offset by 0.5*normal, sample across the two in-plane axes
+        const nrm=f.n, up=[nrm[1],nrm[2],nrm[0]], vp=[nrm[2],nrm[0],nrm[1]];
+        for(const a of A) for(const bb of A){
+          const dx=0.5*nrm[0]+a*0.5*up[0]+bb*0.5*vp[0];
+          const dy=0.5*nrm[1]+a*0.5*up[1]+bb*0.5*vp[1];
+          const dz=0.5*nrm[2]+a*0.5*up[2]+bb*0.5*vp[2];
+          const p=rot(b.x-cbx+dx,b.y-cby+dy,b.z-cbz+dz);
+          const scr=sc(p);
+          put(scr[0]|0, scr[1]|0, f.fill, f.col, scr[2]);
+        }
+      }
+      // the LETTER on the top face centre (bright), drawn slightly toward the near/top
+      const topP=rot(b.x-cbx, b.y-cby+0.5, b.z-cbz);
+      const ts=sc(topP);
+      put(ts[0]|0, ts[1]|0, cls.letter, cls.inkStr, topP[2]+0.9);
+    }
+    // serialize (RLE by colour)
+    let out="";
+    for(let r=0;r<ROWS;r++){ let line="",run="",key=-2;
+      for(let c=0;c<COLS;c++){ const i=r*COLS+c;
+        if(ch[i]==null){ if(key!==-1){ if(run){line+=wrap(key,run);run="";} key=-1;} run+=" "; }
+        else { const k=col[i]; if(k!==key){ if(run){line+=wrap(key,run);run="";} key=k;} run+=ch[i]; }
+      }
+      if(run) line+=wrap(key,run); out+=line+"\n";
+    }
+    screen.innerHTML=out;
+    fc++; if(now-ft>500){ document.getElementById("fps").textContent=Math.round(fc*1000/(now-ft)); fc=0; ft=now; }
+    requestAnimationFrame(frame);
+  }
+  function wrap(k,txt){ return k===-1?txt:`<span style="color:${k}">${txt}</span>`; }
+  let fc=0,ft=performance.now();
+
+  function fit(){
+    const st=document.getElementById("stage"); const w=st.clientWidth, h=st.clientHeight;
+    const fs=Math.max(6,Math.min(Math.floor(w/(COLS*0.6)), Math.floor(h/ROWS)));
+    screen.style.fontSize=fs+"px"; screen.style.width=(COLS*0.6*fs)+"px"; screen.style.height=(ROWS*fs)+"px";
+  }
+  new ResizeObserver(fit).observe(document.getElementById("stage")); fit();
+
+  /* ---- UI: rack + legend ---- */
+  const NAMES={3:"class 3",6:"class 6",12:"class 12"};
+  const rack=document.getElementById("rack"), leg=document.getElementById("leg");
+  for(const c of classes){
+    const t=document.createElement("div"); t.className="tile";
+    t.innerHTML=`<span class="cd" style="background:${c.color}"></span>${c.letter}<span class="sc">${c.score}</span>`;
+    rack.appendChild(t);
+    const li=document.createElement("div"); li.className="li";
+    li.innerHTML=`<span class="sw" style="background:${c.color}"></span><b>${c.letter}</b> &nbsp;=&nbsp; ${NAMES[c.code]||("class "+c.code)} <span style="color:var(--dim)">· HRL prediction</span>`;
+    leg.appendChild(li);
+  }
+
+  /* ---- drag to rotate ---- */
+  const stage=document.getElementById("stage"); let px=0,py=0;
+  stage.addEventListener("pointerdown",e=>{dragging=true;stage.classList.add("grab");px=e.clientX;py=e.clientY;stage.setPointerCapture(e.pointerId);});
+  stage.addEventListener("pointermove",e=>{ if(!dragging)return; yaw+=(e.clientX-px)*0.01; pitch=Math.max(0.12,Math.min(1.2,pitch-(e.clientY-py)*0.006)); px=e.clientX;py=e.clientY; });
+  const end=()=>{dragging=false;stage.classList.remove("grab");};
+  stage.addEventListener("pointerup",end); stage.addEventListener("pointercancel",end);
+
+  const root=document.documentElement;
+  document.getElementById("theme").addEventListener("click",()=>{ const cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"); root.setAttribute("data-theme",cur==="dark"?"light":"dark"); });
+
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
