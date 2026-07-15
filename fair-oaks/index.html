@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fair Oaks — a growth sketch · nonprofit school, Marietta GA</title>
+<meta name="description" content="A growth-plan sketch for Fair Oaks: a nonprofit, accredited learning community rooted at Fair Oaks Park (510 Bellemeade Dr SW, Marietta GA 30008), grown one ring at a time from small schools into a college, a university, and a lifelong teaching-researching-learning-playing-raising-up institute. By Manny Glover.">
+<style>
+  :root{
+    --paper:#eef1e6; --card:#f7f8f1; --ink:#20261b; --muted:#586150; --line:#d5dbc7;
+    --green:#2f6b3d; --green-deep:#1f4a2a; --leaf:#5f923f; --acorn:#a9631a; --bark:#4a3a28;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --paper:#11150e; --card:#181e13; --ink:#e9ecdd; --muted:#95a086; --line:#2a331f;
+      --green:#77b46f; --green-deep:#5a9a54; --leaf:#8fc86a; --acorn:#e0a24a; --bark:#c9b590; color-scheme:dark; }
+  }
+  :root[data-theme="light"]{ --paper:#eef1e6;--card:#f7f8f1;--ink:#20261b;--muted:#586150;--line:#d5dbc7;--green:#2f6b3d;--green-deep:#1f4a2a;--leaf:#5f923f;--acorn:#a9631a;--bark:#4a3a28;color-scheme:light;}
+  :root[data-theme="dark"]{ --paper:#11150e;--card:#181e13;--ink:#e9ecdd;--muted:#95a086;--line:#2a331f;--green:#77b46f;--green-deep:#5a9a54;--leaf:#8fc86a;--acorn:#e0a24a;--bark:#c9b590;color-scheme:dark;}
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .doc{background:
+      radial-gradient(120% 60% at 100% -10%, color-mix(in srgb, var(--green) 12%, transparent), transparent 60%),
+      var(--paper);
+    color:var(--ink);font-family:var(--sans);line-height:1.62;
+    padding:clamp(20px,5vw,64px) clamp(18px,5vw,40px);}
+  .wrap{max-width:940px;margin:0 auto;}
+  .measure{max-width:66ch;}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,7vw,64px);line-height:1.02;margin:.24em 0 .1em;letter-spacing:-.01em;text-wrap:balance;color:var(--ink);}
+  h1 .oaks{color:var(--green);font-style:italic;}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3.4vw,30px);margin:0 0 .3em;letter-spacing:-.01em;text-wrap:balance;}
+  h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 .25em;}
+  p{margin:0 0 1em;}
+  a{color:var(--green);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--green) 35%,transparent);}
+  a:hover{border-bottom-color:var(--green);}
+  .lede{font-family:var(--serif);font-size:clamp(18px,2.5vw,23px);line-height:1.5;color:var(--ink);}
+  .sub{color:var(--muted);}
+
+  header.mast{border-bottom:2px solid var(--line);padding-bottom:26px;margin-bottom:12px;position:relative;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+  .addr{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em;text-align:right;line-height:1.5;}
+  .theme{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 11px;cursor:pointer;}
+  .theme:hover{color:var(--ink);border-color:var(--green);}
+  .backlink{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-decoration:none;border:0;}
+  .backlink:hover{color:var(--green);}
+  .rings-badge{position:absolute;right:0;top:34px;opacity:.9;}
+  @media (max-width:640px){ .rings-badge{display:none;} }
+
+  section{margin:46px 0;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .kicker::after{content:"";height:1px;flex:1;background:var(--line);}
+
+  /* the four rings roadmap */
+  .rings{display:flex;flex-direction:column;gap:0;}
+  .ring{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line);}
+  .ring:last-child{border-bottom:1px solid var(--line);}
+  .ring .mark{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .ring .num{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--green);line-height:1;}
+  .ring .glyph svg{display:block;}
+  .ring .stage{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--acorn);}
+  .ring .horizon{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.04em;}
+  .ring .name{color:var(--muted);font-style:italic;font-family:var(--serif);}
+  .ring ul{margin:.5em 0 0;padding-left:1.1em;color:var(--muted);}
+  .ring ul li{margin:.2em 0;}
+  .ring b{color:var(--ink);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;}
+  .card .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
+  .card p{margin:0;color:var(--muted);font-size:14.5px;}
+  .card.lead-in{border-left:3px solid var(--acorn);}
+
+  .scaffold{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .scaffold .card{display:flex;flex-direction:column;gap:6px;}
+  .scaffold h3{margin:0;}
+  .scaffold .card p{font-size:14px;}
+  .pathway{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .pathway li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:13.5px;color:var(--muted);align-items:baseline;}
+  .pathway .step{font-family:var(--mono);font-size:11px;color:var(--acorn);white-space:nowrap;}
+  .pathway b{color:var(--ink);}
+
+  .values{background:var(--green-deep);color:#f2f5ea;border-radius:14px;padding:30px clamp(20px,4vw,38px);}
+  .values .eyebrow{color:color-mix(in srgb,#f2f5ea 70%,transparent);}
+  .values .verbs{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:12px;}
+  .values .verbs span{font-family:var(--serif);font-size:clamp(20px,3.4vw,30px);font-weight:600;}
+  .values .verbs span::before{content:"·";color:var(--acorn);margin-right:.5em;font-style:normal;}
+  .values .verbs span:first-child::before{content:"";margin:0;}
+  .values p{color:color-mix(in srgb,#f2f5ea 82%,transparent);margin-top:12px;}
+
+  .next{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:step;}
+  .next .item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px 16px;position:relative;}
+  .next .item::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--acorn);letter-spacing:.1em;}
+  .next .item h4{font-family:var(--serif);font-size:16px;margin:.3em 0 .2em;font-weight:600;}
+  .next .item p{margin:0;font-size:13.5px;color:var(--muted);}
+
+  .note{border-left:3px solid var(--green);background:color-mix(in srgb,var(--green) 8%,transparent);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14px;color:var(--muted);}
+  .note b{color:var(--ink);}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;color:var(--muted);}
+  footer .refs{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 14px;font-family:var(--mono);font-size:11.5px;}
+  footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.06em;}
+</style>
+</head>
+<body>
+<article class="doc"><div class="wrap">
+
+  <header class="mast">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <a href="../" class="backlink">← Portfolio</a>
+        <span class="eyebrow">A growth sketch · v0.1 · draft for discussion</span>
+      </div>
+      <button class="theme" id="theme" type="button">◐ theme</button>
+    </div>
+    <svg class="rings-badge" width="86" height="86" viewBox="0 0 86 86" fill="none" aria-hidden="true">
+      <g stroke="var(--green)" fill="none">
+        <circle cx="43" cy="43" r="7" stroke-width="2"/>
+        <circle cx="43" cy="43" r="16" stroke-width="1.6" opacity=".8"/>
+        <circle cx="43" cy="43" r="26" stroke-width="1.3" opacity=".55"/>
+        <circle cx="43" cy="43" r="37" stroke-width="1.1" opacity=".35"/>
+      </g>
+      <circle cx="43" cy="43" r="2.6" fill="var(--acorn)"/>
+    </svg>
+    <h1>Fair <span class="oaks">Oaks</span></h1>
+    <p class="lede measure">A nonprofit, accredited learning community, rooted at Fair Oaks Park — grown the way an oak grows: <b>one ring at a time.</b> A family of small schools that federate into a college, mature into a university, and widen into a lifelong institute for teaching, researching, learning, playing, and raising one another up.</p>
+    <p class="addr" style="text-align:left;margin-top:14px;">Fair Oaks Park · 510 Bellemeade Dr SW · Marietta, GA 30008</p>
+  </header>
+
+  <section>
+    <div class="kicker">The idea in one breath</div>
+    <p class="lede measure sub">You don't plant a university. You plant an <b style="color:var(--acorn)">acorn</b> — a small, real school that works — and you let it add a ring each season. Each ring is a whole, self-sufficient thing before the next one starts. Nothing here requires the final form to exist before the first classroom opens.</p>
+  </section>
+
+  <section>
+    <div class="kicker">The four rings — a growth path</div>
+    <div class="rings">
+
+      <div class="ring">
+        <div class="mark">
+          <div class="num">I</div>
+          <div class="glyph"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><ellipse cx="13" cy="15" rx="6" ry="8" fill="var(--acorn)"/><path d="M7 9 h12 v2 a6 6 0 0 1-12 0z" fill="var(--bark)"/><path d="M13 7 v-3" stroke="var(--bark)" stroke-width="1.5"/></svg></div>
+          <div class="stage">Acorn</div>
+        </div>
+        <div>
+          <div class="horizon">Years 0–3 · attainable now</div>
+          <h3>A family of small Schools <span class="name">— the seeds</span></h3>
+          <p class="sub measure">Open two to four <b>micro-schools</b> — small, multi-age academies (a dozen to a few dozen learners each), each with its own character but a shared ethos and a shared home at the park. This is the literal "different schools." Legally: a Georgia nonprofit with 501(c)(3) status; each school pursuing K–12 accreditation.</p>
+          <ul>
+            <li><b>Prove one school works</b> before adding the next — real families, real learning, real place.</li>
+            <li>Incorporate the nonprofit; seat a founding board; secure space at / beside Fair Oaks Park.</li>
+            <li>Begin candidacy with a K–12 accreditor (<b>GISA</b>, <b>Cognia</b>, <b>SAIS</b>, or <b>GAC</b>).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ring">
+        <div class="mark">
+          <div class="num">II</div>
+          <div class="glyph"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 24 V10" stroke="var(--bark)" stroke-width="2"/><path d="M13 12 q-7-2-8-8 q7 1 8 8z M13 10 q6-3 8-7 q-3 7-8 7z" fill="var(--leaf)"/></svg></div>
+          <div class="stage">Sapling</div>
+        </div>
+        <div>
+          <div class="horizon">Years 2–5 · the federation</div>
+          <h3>Fair Oaks College <span class="name">— the schools, joined</span></h3>
+          <p class="sub measure">The schools braid into one accredited institution — a <b>collegium</b> in the old sense: a community of schools under shared governance, a coherent K–12 program, one accreditation, one campus culture. The parts stay distinct; the whole becomes legible.</p>
+          <ul>
+            <li>Achieve full K–12 accreditation; unify enrollment, calendar, and governance.</li>
+            <li>Establish an endowment seed and an income-adjusted tuition model.</li>
+            <li><b>Name note:</b> "College" is used here in its classical, pre-degree sense — see the naming caveat below.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ring">
+        <div class="mark">
+          <div class="num">III</div>
+          <div class="glyph"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 25 V13" stroke="var(--bark)" stroke-width="2.4"/><circle cx="13" cy="9" r="8" fill="var(--leaf)"/><circle cx="7" cy="12" r="4.5" fill="var(--green)"/><circle cx="19" cy="12" r="4.5" fill="var(--green)"/></svg></div>
+          <div class="stage">Oak</div>
+        </div>
+        <div>
+          <div class="horizon">Years 5–10 · post-secondary</div>
+          <h3>Fair Oaks University <span class="name">— teaching beyond childhood</span></h3>
+          <p class="sub measure">Add grown-up learning: adult & community education, teacher formation, then certificates and — once accredited — degrees and research. This ring is <b>earned, not declared</b>, and it is the longest one.</p>
+          <ul>
+            <li>Secure <b>GNPEC</b> authorization to operate post-secondary programs in Georgia (and to use "University" in the name).</li>
+            <li>Start with <b>non-degree</b> certificates & programs under GNPEC's permitted programming while pursuing accreditation.</li>
+            <li>Pursue <b>SACSCOC</b> (US-DOE-recognized) accreditation — the multi-year candidacy that unlocks <b>degrees</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ring">
+        <div class="mark">
+          <div class="num">IV</div>
+          <div class="glyph"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M6 25V15M13 25V11M20 25V15" stroke="var(--bark)" stroke-width="1.8"/><circle cx="6" cy="13" r="4.5" fill="var(--green)"/><circle cx="20" cy="13" r="4.5" fill="var(--green)"/><circle cx="13" cy="9" r="6" fill="var(--leaf)"/></svg></div>
+          <div class="stage">Grove</div>
+        </div>
+        <div>
+          <div class="horizon">Years 10+ · the mature form</div>
+          <h3>Fair Oaks Institute <span class="name">— a grove, not a tree</span></h3>
+          <p class="sub measure">The whole ecosystem, integrated cradle-to-elder: school, college, university, research labs, community programs, and open play — a self-sustaining <b>grove</b> rooted in the park, where the same people teach, research, learn, play, and raise the next ring up.</p>
+          <ul>
+            <li>Research institutes & fellowships alongside the classrooms; town-and-gown as one.</li>
+            <li>Lifelong membership: the four-year-old and the ninety-year-old on the same grounds.</li>
+            <li>Steward the park itself as living campus and public good.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The seed schools — illustrative, swap freely</div>
+    <p class="sub measure">A starting set, each a small academy that could open on its own and later become a “department” of the College. Tuned to the maker/naturalist/quantitative spirit already in your work — trade any of them for what your first families actually need.</p>
+    <div class="grid">
+      <div class="card lead-in"><div class="tag">open first</div><h3>Making &amp; Play</h3><p>Hands, tools, art, games, building — where curiosity gets a workbench. The natural first acorn.</p></div>
+      <div class="card"><div class="tag">place-based</div><h3>Field &amp; Water</h3><p>Fair Oaks Park as the classroom: ecology, gardens, the watershed, the seasons.</p></div>
+      <div class="card"><div class="tag">quantitative</div><h3>Number &amp; Pattern</h3><p>Math, computation, and the logic of how order emerges from simple rules.</p></div>
+      <div class="card"><div class="tag">humane</div><h3>Word &amp; Story</h3><p>Reading, writing, the classics and scripture — learning to say true things well.</p></div>
+      <div class="card"><div class="tag">embodied</div><h3>Body &amp; Motion</h3><p>Movement, health, sport, and rest — the school that remembers we are creatures.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The scaffolding — what holds the tree up</div>
+    <div class="scaffold">
+      <div class="card">
+        <h3>Nonprofit foundation</h3>
+        <p>Incorporate as a Georgia nonprofit corporation; adopt a mission &amp; bylaws; seat a founding board; file for IRS <b>501(c)(3)</b> tax-exempt status. Everything else hangs from this.</p>
+      </div>
+      <div class="card">
+        <h3>Accreditation pathway</h3>
+        <ul class="pathway">
+          <li><span class="step">K–12</span><span><b>GISA / Cognia / SAIS / GAC</b> — candidacy → full accreditation as the schools open.</span></li>
+          <li><span class="step">Operate</span><span><b>GNPEC</b> authorization to run post-secondary programs in GA (and to use "College/University").</span></li>
+          <li><span class="step">Degrees</span><span><b>SACSCOC</b> (US-DOE-recognized) accreditation — required before granting <b>any</b> degree in Georgia.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Campus &amp; place</h3>
+        <p>Anchored at <b>Fair Oaks Park</b>, 510 Bellemeade Dr SW, Marietta. Indoor rooms + the park itself as outdoor campus. Place is the curriculum, not just the setting.</p>
+      </div>
+      <div class="card">
+        <h3>Access &amp; funding</h3>
+        <p>Income-adjusted tuition, donors, grants, and an endowment seeded early. Nonprofit means mission-first: no family priced out of the first ring.</p>
+      </div>
+      <div class="card">
+        <h3>Governance &amp; community</h3>
+        <p>A board that holds the mission; families, neighbors, and park stewards who hold the day-to-day. The community <i>is</i> the institution.</p>
+      </div>
+      <div class="card">
+        <h3>The naming caveat</h3>
+        <p>In Georgia you must clear the words <b>"College"</b> and <b>"University"</b> with GNPEC for post-secondary use, and you can't grant degrees without recognized accreditation. Use the names as <i>aspiration &amp; classical sense</i> until each is earned.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-wrap">
+    <div class="values">
+      <div class="eyebrow">What the Institute is for</div>
+      <div class="verbs"><span>Teaching</span><span>Researching</span><span>Learning</span><span>Playing</span><span>Raising up</span></div>
+      <p class="measure">Five verbs, one grove. The Institute isn't a building you graduate away from — it's a place you keep coming back to, at every age, to do all five. The four-year-old plays and learns; the researcher teaches and learns; everyone, always, is raising the next ring up.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The first 90 days — concrete</div>
+    <div class="next">
+      <div class="item"><h4>Name &amp; mission</h4><p>One page: what Fair Oaks is for, who it serves, and the non-negotiables.</p></div>
+      <div class="item"><h4>Incorporate</h4><p>File the Georgia nonprofit; draft bylaws; seat 3–5 founding board members.</p></div>
+      <div class="item"><h4>501(c)(3)</h4><p>Prepare and file the IRS application; open the nonprofit's books.</p></div>
+      <div class="item"><h4>First school</h4><p>Pick the single acorn to open first; find its teacher and its first families.</p></div>
+      <div class="item"><h4>Space</h4><p>Secure a room and park access; confirm zoning &amp; use for a school at the site.</p></div>
+      <div class="item"><h4>Accreditor intro</h4><p>Open a candidacy conversation with one K–12 accreditor; learn their timeline.</p></div>
+    </div>
+  </section>
+
+  <div class="note measure">
+    <b>Honest footing.</b> This is a v0.1 sketch, not legal or accreditation advice. Every body below sets its own current requirements, fees, and timelines — confirm directly with each before relying on anything here. The proposed schools and horizons are starting points meant to be argued with.
+  </div>
+
+  <footer>
+    <div class="eyebrow" style="color:var(--muted)">References — verify current requirements directly</div>
+    <div class="refs">
+      <a href="https://www.gisaschools.org/">GISA</a>
+      <a href="https://www.cognia.org/">Cognia</a>
+      <a href="https://www.sais.org/">SAIS</a>
+      <a href="http://gac.coe.uga.edu/">Georgia Accrediting Commission</a>
+      <a href="https://gnpec.georgia.gov/">GNPEC</a>
+      <a href="https://sacscoc.org/">SACSCOC</a>
+    </div>
+    <div class="stamp">Fair Oaks · a growth sketch · Marietta, Georgia · drafted with Manny Glover</div>
+  </footer>
+
+</div></article>
+
+<script>
+  document.getElementById("theme").addEventListener("click",()=>{
+    const r=document.documentElement;
+    const cur=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+    r.setAttribute("data-theme",cur==="dark"?"light":"dark");
+  });
+</script>
+
+</body></html>
