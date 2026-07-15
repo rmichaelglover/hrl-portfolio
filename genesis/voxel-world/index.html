@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoxelData — walk any dataset as a Minecraft-like world · Project Genesis</title>
+<meta name="description" content="A zero-dependency WebGL first-person voxel engine that turns any dataset into a walkable Minecraft-like world — with a live generative bandoneón tango soundtrack. Our own engine and blocks, no Mojang code. Bundled worlds: procedural terrain and a real HRL body-position cloud. By Manny Glover.">
+<style>
+  :root{
+    --bg:#0c1016; --panel:#121824cc; --edge:#26303f; --edge2:#39485c;
+    --ink:#e8eef6; --dim:#8b9bb0; --accent:#5cc8ff; --gold:#f5c542;
+    --mono:"SFMono-Regular","SF Mono","JetBrains Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);}
+  #app{position:fixed;inset:0;}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;}
+
+  /* crosshair */
+  .cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none;z-index:5;opacity:.7;}
+  .cross::before,.cross::after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000;}
+  .cross::before{left:8px;top:0;width:2px;height:18px;}
+  .cross::after{top:8px;left:0;height:2px;width:18px;}
+
+  /* HUD panels */
+  .hud{position:absolute;z-index:6;font-family:var(--mono);}
+  .panel{background:var(--panel);border:1px solid var(--edge);backdrop-filter:blur(8px);padding:14px 16px;}
+  #topleft{top:14px;left:14px;max-width:340px;display:flex;flex-direction:column;gap:12px;}
+  .brand{display:flex;align-items:baseline;gap:8px;}
+  .brand h1{margin:0;font-size:15px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
+  .brand .v{font-size:10px;color:var(--dim);letter-spacing:.14em;}
+  .back{font-family:var(--mono);font-size:11px;color:var(--dim);text-decoration:none;letter-spacing:.08em;align-self:flex-start;}
+  .back:hover{color:var(--accent);}
+  .tag{font-size:11px;color:var(--dim);line-height:1.5;font-family:var(--sans);}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  label.lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
+  select,button,.filebtn{font-family:var(--mono);font-size:12px;color:var(--ink);background:#182234;
+    border:1px solid var(--edge2);padding:8px 10px;cursor:pointer;}
+  select{min-width:0;flex:1;}
+  button:hover,.filebtn:hover{border-color:var(--accent);}
+  button.primary{background:var(--accent);color:#06121c;border-color:var(--accent);font-weight:700;}
+  .stat{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);}
+  .stat b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+  .legend{display:flex;flex-direction:column;gap:6px;}
+  .legend .li{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--ink);}
+  .legend .sw{width:13px;height:13px;flex:0 0 auto;box-shadow:inset -3px -3px 0 rgba(0,0,0,.35),inset 3px 3px 0 rgba(255,255,255,.25);}
+  .hint{font-size:10.5px;color:var(--dim);line-height:1.7;}
+  .hint kbd{font-family:var(--mono);border:1px solid var(--edge2);border-bottom-width:2px;border-radius:3px;padding:0 5px;color:var(--ink);}
+  #fps{position:absolute;top:14px;right:14px;padding:7px 11px;font-size:11px;letter-spacing:.1em;color:var(--dim);}
+  #fps b{color:var(--gold);}
+
+  /* click-to-start veil */
+  #veil{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(60% 60% at 50% 45%, #0c1016aa, #0c1016ee);backdrop-filter:blur(2px);cursor:pointer;}
+  #veil .card{text-align:center;pointer-events:none;}
+  #veil h2{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;font-size:18px;margin:0 0 8px;}
+  #veil p{color:var(--dim);font-size:13px;margin:0;font-family:var(--mono);}
+  #veil .keys{margin-top:16px;color:var(--dim);font-size:12px;font-family:var(--mono);line-height:2;}
+  #veil kbd{font-family:var(--mono);border:1px solid var(--edge2);border-bottom-width:2px;border-radius:3px;padding:1px 6px;color:var(--ink);margin:0 1px;}
+  .hidden{display:none!important;}
+
+  /* paste modal */
+  #paste{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:#0c1016d8;}
+  #paste .box{width:min(680px,92vw);background:#0f1520;border:1px solid var(--edge2);padding:18px;display:flex;flex-direction:column;gap:12px;font-family:var(--mono);}
+  #paste h3{margin:0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+  #paste textarea{width:100%;height:220px;background:#0a0f17;color:var(--ink);border:1px solid var(--edge);font-family:var(--mono);font-size:12px;padding:10px;resize:vertical;}
+  #paste .fmt{font-size:11px;color:var(--dim);line-height:1.6;}
+  #paste .fmt code{color:var(--accent);}
+  #paste .actions{display:flex;gap:10px;justify-content:flex-end;}
+  #err{color:#ff8a72;font-size:11px;min-height:1.2em;}
+
+  #drop{position:absolute;inset:0;z-index:7;border:3px dashed var(--accent);background:#5cc8ff18;
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:18px;letter-spacing:.1em;pointer-events:none;}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="gl"></canvas>
+  <div class="cross"></div>
+
+  <div class="hud panel" id="topleft">
+    <a class="back" href="../">← Portfolio</a>
+    <div class="brand"><h1>VoxelData</h1><span class="v">webgl · generative</span></div>
+    <div class="tag">Any dataset, walked as a Minecraft-like world. Zero dependencies — our engine, our blocks, no Mojang code.</div>
+
+    <div class="row">
+      <span class="lbl">World</span>
+      <select id="worldSel" title="choose a world"></select>
+    </div>
+    <div class="row">
+      <label class="filebtn">Load JSON…<input id="file" type="file" accept="application/json,.json" hidden></label>
+      <button id="pasteBtn" type="button">Paste</button>
+      <button id="regen" type="button" title="regenerate procedural world">↻</button>
+    </div>
+    <div class="row">
+      <button id="musicBtn" type="button" title="generative bandoneón tango — synthesized live">♪ tango · on</button>
+    </div>
+
+    <div class="stat"><span>blocks</span><b id="nblocks">—</b></div>
+    <div class="stat"><span>world size</span><b id="wsize">—</b></div>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="hint">
+      <kbd>click</kbd> look · <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move ·
+      <kbd>Space</kbd>/<kbd>Shift</kbd> up·down · <kbd>scroll</kbd> speed · <kbd>Esc</kbd> release
+    </div>
+    <div class="hint" style="opacity:.6;margin-top:2px">engine &amp; music by Manny Glover · our code &amp; blocks, no Mojang</div>
+  </div>
+
+  <div class="hud" id="fps"><b id="fpsv">–</b> fps</div>
+
+  <div id="veil"><div class="card">
+    <h2>VoxelData</h2>
+    <p id="veilName">walk your data as a voxel world</p>
+    <div class="keys"><kbd>click</kbd> to enter · <kbd>W A S D</kbd> fly · <kbd>Space</kbd>/<kbd>Shift</kbd> up·down · <kbd>Esc</kbd> to release the mouse</div>
+  </div></div>
+
+  <div id="paste" class="hidden"><div class="box">
+    <h3>Paste world JSON</h3>
+    <textarea id="pasteText" spellcheck="false" placeholder='{"palette":[{"name":"a","hex":"#7fb238"}],"blocks":[[0,0,0,0],[1,0,0,0]]}'></textarea>
+    <div class="fmt">Accepted shapes (auto-detected):
+      <br>• <code>{ palette:[{name,hex}], blocks:[[x,y,z,colorIdx],…] }</code> — raw voxels
+      <br>• <code>{ pts:[[x,y,z],…], labels?:[…] }</code> or <code>[[x,y,z],…]</code> — 3-D point cloud
+      <br>• <code>{ pts3d:[{v:[x,y,z],p,g}],… }</code> — labeled cloud (HRL format)
+      <br>• <code>{ N, x:[…], y:[…], cls:[…] }</code> — 2-D field (extruded by class)
+    </div>
+    <div id="err"></div>
+    <div class="actions"><button id="pasteCancel" type="button">Cancel</button><button id="pasteLoad" class="primary" type="button">Load world</button></div>
+  </div></div>
+
+  <div id="drop" class="hidden">drop .json to load</div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const SAMPLE_BODYPOS = {"pts3d":[{"v":[-0.83,-5.54,7.16],"p":6,"g":6},{"v":[-0.91,-6.15,7.19],"p":6,"g":6},{"v":[-1.03,-5.96,7.33],"p":6,"g":6},{"v":[-1.16,-6.05,7.23],"p":6,"g":6},{"v":[-0.34,-6.02,7.28],"p":6,"g":6},{"v":[-1.02,-6.16,7.13],"p":6,"g":6},{"v":[-0.95,-5.31,7.85],"p":6,"g":6},{"v":[-0.46,-4.7,8.33],"p":6,"g":6},{"v":[-1.33,-5.37,7.74],"p":6,"g":6},{"v":[-1.3,-5.22,7.87],"p":6,"g":6},{"v":[-0.9,-5.01,8.08],"p":6,"g":6},{"v":[-1.05,-5.11,7.98],"p":6,"g":6},{"v":[-0.64,-5.13,8.02],"p":6,"g":6},{"v":[-1.03,-5.34,7.83],"p":6,"g":6},{"v":[-1.39,-5.34,7.77],"p":6,"g":6},{"v":[-1.32,-5.32,7.8],"p":6,"g":6},{"v":[-1.32,-5.29,7.81],"p":6,"g":6},{"v":[-0.57,-5.06,8.08],"p":6,"g":6},{"v":[-0.54,-4.92,8.18],"p":6,"g":6},{"v":[-1.01,-5.19,7.94],"p":6,"g":6},{"v":[-1.46,-5.38,7.72],"p":6,"g":6},{"v":[-0.96,-5.12,8],"p":6,"g":6},{"v":[-0.95,-5.04,8.06],"p":6,"g":6},{"v":[-0.92,-5.06,8.05],"p":6,"g":6},{"v":[-0.78,-4.96,8.13],"p":6,"g":6},{"v":[-1.06,-5.2,7.93],"p":6,"g":6},{"v":[-1.05,-5.19,7.94],"p":6,"g":6},{"v":[-1.03,-5.15,7.97],"p":6,"g":6},{"v":[-1.02,-5.17,7.95],"p":6,"g":6},{"v":[-1.01,-5.22,7.92],"p":6,"g":6},{"v":[-0.75,-5.44,7.78],"p":6,"g":6},{"v":[-0.89,-5.32,7.86],"p":6,"g":6},{"v":[-0.14,-4.91,8.17],"p":6,"g":6},{"v":[-0.88,-5.12,8.01],"p":6,"g":6},{"v":[-0.97,-5.05,8.05],"p":6,"g":6},{"v":[-1,-5.08,8.03],"p":6,"g":6},{"v":[-0.67,-4.95,8.14],"p":6,"g":6},{"v":[-0.53,-5,8.13],"p":6,"g":6},{"v":[-0.79,-4.99,8.11],"p":6,"g":6},{"v":[-0.27,-5.12,6.99],"p":6,"g":6},{"v":[-0.49,-6.24,6.57],"p":6,"g":6},{"v":[-0.54,-5.9,7.36],"p":6,"g":6},{"v":[-0.47,-5.99,7.38],"p":6,"g":6},{"v":[-0.88,-5.82,7.47],"p":6,"g":6},{"v":[-0.42,-5.78,7.51],"p":6,"g":6},{"v":[-0.36,-5.37,7.89],"p":6,"g":6},{"v":[-0.31,-5.3,7.92],"p":6,"g":6},{"v":[0.09,-4.76,8.32],"p":6,"g":6},{"v":[-0.03,-5.18,8.03],"p":6,"g":6},{"v":[-0.31,-5.58,7.71],"p":6,"g":6},{"v":[-1.19,-5.99,7.29],"p":6,"g":6},{"v":[-0.58,-5.7,7.61],"p":6,"g":6},{"v":[-0.8,-5.79,7.5],"p":6,"g":6},{"v":[-1.27,-6.04,7.22],"p":6,"g":6},{"v":[-2.5,-3.31,8.43],"p":6,"g":6},{"v":[-3.28,-2.33,8.76],"p":6,"g":6},{"v":[-3.27,-2.15,8.83],"p":6,"g":6},{"v":[-3.94,-1.77,8.64],"p":6,"g":6},{"v":[-4.22,-1.75,8.52],"p":6,"g":6},{"v":[-3.22,-2.41,8.67],"p":6,"g":6},{"v":[-3.66,-1.82,8.75],"p":6,"g":6},{"v":[-3.86,-1.86,8.66],"p":6,"g":6},{"v":[-3.64,-2,8.69],"p":6,"g":6},{"v":[-3.7,-1.81,8.74],"p":6,"g":6},{"v":[-3.78,-1.76,8.72],"p":6,"g":6},{"v":[-3.37,-2.49,8.68],"p":6,"g":6},{"v":[-3.36,-1.94,8.85],"p":6,"g":6},{"v":[-3.4,-1.84,8.87],"p":6,"g":6},{"v":[-3.46,-2.51,8.6],"p":6,"g":6},{"v":[-3.58,-2.39,8.64],"p":6,"g":6},{"v":[-3.6,-2.4,8.62],"p":6,"g":6},{"v":[-3.6,-2.38,8.62],"p":6,"g":6},{"v":[-2.88,0.71,8.81],"p":12,"g":6},{"v":[-2.46,3.5,8.96],"p":12,"g":12},{"v":[-3.01,3.27,8.86],"p":12,"g":12},{"v":[-3.39,3.14,8.76],"p":12,"g":12},{"v":[-1.42,7.32,6.58],"p":12,"g":12},{"v":[-1.34,7.68,6.45],"p":12,"g":12},{"v":[-1.35,7.71,6.42],"p":12,"g":12},{"v":[-1.37,7.47,6.66],"p":12,"g":12},{"v":[-1.49,7.38,6.74],"p":12,"g":12},{"v":[-1.49,7.39,6.73],"p":12,"g":12},{"v":[-1.48,7.39,6.73],"p":12,"g":12},{"v":[-1.47,7.38,6.73],"p":12,"g":12},{"v":[-1.46,7.32,6.8],"p":12,"g":12},{"v":[-1.18,6.75,7.39],"p":12,"g":12},{"v":[-1.16,6.7,7.43],"p":12,"g":12},{"v":[-1.17,6.68,7.45],"p":12,"g":12},{"v":[-1.16,6.62,7.5],"p":12,"g":12},{"v":[-1.17,6.62,7.5],"p":12,"g":12},{"v":[-1.15,6.59,7.52],"p":12,"g":12},{"v":[-1.16,6.59,7.52],"p":12,"g":12},{"v":[-1.18,6.61,7.5],"p":12,"g":12},{"v":[-1.17,6.55,7.55],"p":12,"g":12},{"v":[-1.16,6.53,7.57],"p":12,"g":12},{"v":[-1.17,6.54,7.56],"p":12,"g":12},{"v":[-1.19,6.48,7.6],"p":12,"g":12},{"v":[-1.18,5.97,7.97],"p":12,"g":12},{"v":[-1.17,5.67,8.19],"p":12,"g":12},{"v":[-1.15,5.66,8.2],"p":12,"g":12},{"v":[-1.15,5.68,8.18],"p":12,"g":12},{"v":[-1.15,5.64,8.21],"p":12,"g":12},{"v":[-1.14,5.61,8.23],"p":12,"g":12},{"v":[-0.99,5.41,8.37],"p":12,"g":12},{"v":[-1.18,5.47,8.32],"p":12,"g":12},{"v":[-1.34,5.43,8.31],"p":12,"g":12},{"v":[-1.67,5,8.49],"p":12,"g":12},{"v":[-1.69,5,8.49],"p":12,"g":12},{"v":[-1.64,5,8.5],"p":12,"g":12},{"v":[-1.62,5.01,8.5],"p":12,"g":12},{"v":[-1.61,5.02,8.49],"p":12,"g":12},{"v":[-1.61,5.04,8.48],"p":12,"g":12},{"v":[-1.69,5,8.5],"p":12,"g":12},{"v":[-1.83,4.91,8.51],"p":12,"g":12},{"v":[-1.87,4.84,8.53],"p":12,"g":12},{"v":[-1.94,4.71,8.58],"p":12,"g":12},{"v":[-1.97,4.74,8.56],"p":12,"g":12},{"v":[-1.98,4.74,8.56],"p":12,"g":12},{"v":[-2.01,4.74,8.55],"p":12,"g":12},{"v":[-2.02,4.74,8.54],"p":12,"g":12},{"v":[-1.98,4.75,8.55],"p":12,"g":12},{"v":[-1.98,4.74,8.56],"p":12,"g":12},{"v":[-1.99,4.75,8.55],"p":12,"g":12},{"v":[-1.99,4.74,8.55],"p":12,"g":12},{"v":[-2,4.72,8.56],"p":12,"g":12},{"v":[-1.99,4.72,8.56],"p":12,"g":12},{"v":[-2,4.72,8.56],"p":12,"g":12},{"v":[-2,4.72,8.56],"p":12,"g":12},{"v":[-1.98,4.53,8.65],"p":12,"g":12},{"v":[-2.12,4.38,8.69],"p":12,"g":12},{"v":[-2.07,4.44,8.67],"p":12,"g":12},{"v":[-2.08,4.45,8.67],"p":12,"g":12},{"v":[-2.07,4.44,8.67],"p":12,"g":12},{"v":[-2.07,4.45,8.67],"p":12,"g":12},{"v":[-2.04,4.43,8.69],"p":12,"g":12},{"v":[-2.07,4.48,8.66],"p":12,"g":12},{"v":[-2.06,4.49,8.65],"p":12,"g":12},{"v":[-2.06,4.51,8.64],"p":12,"g":12},{"v":[-2.15,4.48,8.63],"p":12,"g":12},{"v":[-2.2,4.44,8.64],"p":12,"g":12},{"v":[-2.19,4.46,8.64],"p":12,"g":12},{"v":[-2.18,4.45,8.64],"p":12,"g":12},{"v":[-2.18,4.45,8.65],"p":12,"g":12},{"v":[-2.18,4.43,8.65],"p":12,"g":12},{"v":[-2.14,4.45,8.66],"p":12,"g":12},{"v":[-2.13,4.44,8.66],"p":12,"g":12},{"v":[-2.13,4.45,8.66],"p":12,"g":12},{"v":[-2.14,4.43,8.67],"p":12,"g":12},{"v":[-2.16,4.45,8.65],"p":12,"g":12},{"v":[-2.15,4.46,8.65],"p":12,"g":12},{"v":[-2.14,4.45,8.66],"p":12,"g":12},{"v":[-2.14,4.43,8.67],"p":12,"g":12},{"v":[-2.14,4.44,8.66],"p":12,"g":12},{"v":[-2.14,4.43,8.66],"p":12,"g":12},{"v":[-2.13,4.44,8.66],"p":12,"g":12},{"v":[-2.13,4.42,8.67],"p":12,"g":12},{"v":[-2.13,4.45,8.66],"p":12,"g":12},{"v":[-2.48,4.34,8.61],"p":12,"g":12},{"v":[-2.55,4.29,8.61],"p":12,"g":12},{"v":[-2.54,4.26,8.63],"p":12,"g":12},{"v":[-2.52,4.25,8.64],"p":12,"g":12},{"v":[-2.5,4.27,8.64],"p":12,"g":12},{"v":[-2.43,4.24,8.67],"p":12,"g":12},{"v":[-2.35,4.25,8.69],"p":12,"g":12},{"v":[-2.36,4.29,8.67],"p":12,"g":12},{"v":[-2.37,4.31,8.66],"p":12,"g":12},{"v":[-2.35,4.31,8.66],"p":12,"g":12},{"v":[-2.43,4.33,8.63],"p":12,"g":12},{"v":[-2.42,4.31,8.64],"p":12,"g":12},{"v":[-2.41,4.31,8.65],"p":12,"g":12},{"v":[-2.42,4.31,8.64],"p":12,"g":12},{"v":[-2.44,4.3,8.64],"p":12,"g":12},{"v":[-2.42,4.3,8.65],"p":12,"g":12},{"v":[-2.37,4.25,8.68],"p":12,"g":12},{"v":[-2.41,4.27,8.66],"p":12,"g":12},{"v":[-2.45,4.33,8.62],"p":12,"g":12},{"v":[-2.09,4.64,8.56],"p":12,"g":12},{"v":[-2.97,4.41,8.39],"p":12,"g":12},{"v":[-3.63,4.55,8.07],"p":12,"g":12},{"v":[-3.6,4.59,8.07],"p":12,"g":12},{"v":[-3.59,4.62,8.06],"p":12,"g":12},{"v":[-3.56,4.61,8.08],"p":12,"g":12},{"v":[-3.55,4.62,8.08],"p":12,"g":12},{"v":[-3.54,4.63,8.07],"p":12,"g":12},{"v":[-3.56,4.64,8.06],"p":12,"g":12},{"v":[-3.54,4.64,8.07],"p":12,"g":12},{"v":[-3.51,4.62,8.1],"p":12,"g":12},{"v":[-3.5,4.68,8.07],"p":12,"g":12},{"v":[-3.48,4.66,8.08],"p":12,"g":12},{"v":[-3.46,4.63,8.11],"p":12,"g":12},{"v":[-3.48,4.67,8.09],"p":12,"g":12},{"v":[-3.59,4.62,8.06],"p":12,"g":12},{"v":[-3.69,4.44,8.09],"p":12,"g":12},{"v":[-3.69,4.41,8.11],"p":12,"g":12},{"v":[-3.67,4.4,8.13],"p":12,"g":12},{"v":[-3.76,4.23,8.16],"p":12,"g":12},{"v":[-3.71,4.21,8.2],"p":12,"g":12},{"v":[-4.01,4.11,8.1],"p":12,"g":12},{"v":[-3.99,4.16,8.09],"p":12,"g":12},{"v":[-4.01,4.14,8.08],"p":12,"g":12},{"v":[-4.02,4.14,8.08],"p":12,"g":12},{"v":[-4.04,4.15,8.07],"p":12,"g":12},{"v":[-4.04,4.15,8.07],"p":12,"g":12},{"v":[-4.04,4.15,8.06],"p":12,"g":12},{"v":[-4.03,4.14,8.07],"p":12,"g":12},{"v":[-4.05,4.15,8.06],"p":12,"g":12},{"v":[-4.05,4.14,8.06],"p":12,"g":12},{"v":[-4.04,4.12,8.08],"p":12,"g":12},{"v":[-4.1,4.1,8.05],"p":12,"g":12},{"v":[-4.19,4.01,8.05],"p":12,"g":12},{"v":[-4.23,3.97,8.05],"p":12,"g":12},{"v":[-3.65,4.25,8.17],"p":12,"g":12},{"v":[-3.52,4.2,8.29],"p":12,"g":12},{"v":[-4.6,1.86,8.44],"p":12,"g":6},{"v":[-4.68,1.6,8.47],"p":12,"g":6},{"v":[-4.58,1.52,8.53],"p":12,"g":6},{"v":[-4.58,1.44,8.55],"p":12,"g":6},{"v":[-4.58,1.39,8.55],"p":12,"g":6},{"v":[-4.6,1.38,8.54],"p":12,"g":6},{"v":[-4.6,1.35,8.54],"p":12,"g":6},{"v":[-4.58,1.33,8.55],"p":12,"g":6},{"v":[-4.57,1.3,8.56],"p":12,"g":6},{"v":[-4.55,1.3,8.57],"p":12,"g":6},{"v":[-4.23,0.69,8.77],"p":12,"g":6},{"v":[-4.33,0.71,8.73],"p":12,"g":6},{"v":[-4.36,0.74,8.71],"p":12,"g":6},{"v":[-4.36,0.74,8.71],"p":12,"g":6},{"v":[-4.37,0.73,8.71],"p":12,"g":6},{"v":[-4.37,0.75,8.7],"p":12,"g":6},{"v":[-4.36,0.73,8.71],"p":12,"g":6},{"v":[-4.36,0.73,8.71],"p":12,"g":6},{"v":[-4.37,0.72,8.71],"p":12,"g":6},{"v":[-4.65,0.56,8.55],"p":12,"g":6},{"v":[-2.03,-4.06,7.83],"p":6,"g":6},{"v":[-1.14,-5.61,7.61],"p":6,"g":6},{"v":[-1.42,-5.61,7.55],"p":6,"g":6},{"v":[-1.49,-5.52,7.6],"p":6,"g":6},{"v":[-1.56,-5.68,7.38],"p":6,"g":6},{"v":[-1.72,-5.52,7.55],"p":6,"g":6},{"v":[-1.72,-5.53,7.54],"p":6,"g":6},{"v":[-1.73,-5.56,7.52],"p":6,"g":6},{"v":[-1.72,-5.54,7.54],"p":6,"g":6},{"v":[-0.78,-5.07,8],"p":6,"g":6},{"v":[-1.61,-5.65,7.45],"p":6,"g":6},{"v":[-1.05,-5.31,7.83],"p":6,"g":6},{"v":[-0.98,-5.15,7.97],"p":6,"g":6},{"v":[-1.05,-5.16,7.95],"p":6,"g":6},{"v":[-0.87,-5.06,8.04],"p":6,"g":6},{"v":[-1.01,-5.18,7.94],"p":6,"g":6},{"v":[-1.06,-5.28,7.86],"p":6,"g":6},{"v":[-0.88,-5.31,7.86],"p":6,"g":6},{"v":[-0.99,-5.21,7.92],"p":6,"g":6},{"v":[-1.17,-5.62,7.57],"p":6,"g":6},{"v":[-1.1,-5.32,7.83],"p":6,"g":6},{"v":[-1.16,-5.38,7.77],"p":6,"g":6},{"v":[-0.35,-5.28,7.93],"p":6,"g":6},{"v":[-0.5,-5.2,7.97],"p":6,"g":6},{"v":[-1.24,-5.5,7.62],"p":6,"g":6},{"v":[-1.26,-5.29,7.81],"p":6,"g":6},{"v":[-1.09,-5.27,7.86],"p":6,"g":6},{"v":[-1.15,-5.21,7.9],"p":6,"g":6},{"v":[-1.07,-5.21,7.9],"p":6,"g":6},{"v":[-1.04,-5.22,7.91],"p":6,"g":6},{"v":[-0.25,-4.93,8.17],"p":6,"g":6},{"v":[-0.72,-5.04,8.05],"p":6,"g":6},{"v":[-0.95,-5.24,7.89],"p":6,"g":6},{"v":[-1.15,-5.31,7.82],"p":6,"g":6},{"v":[-0.12,-5.63,7.12],"p":6,"g":6},{"v":[5.66,-7.37,1.9],"p":3,"g":6},{"v":[5.3,-7.6,2.05],"p":6,"g":6},{"v":[5.33,-7.67,1.71],"p":6,"g":6},{"v":[5.46,-7.73,0.87],"p":3,"g":6},{"v":[5.62,-7.61,0.73],"p":3,"g":6},{"v":[6.26,-7.12,0.83],"p":3,"g":6},{"v":[5.36,-7.09,3.3],"p":6,"g":6},{"v":[4.88,-7.21,3.86],"p":6,"g":6},{"v":[4.75,-7.23,3.98],"p":6,"g":6},{"v":[4.72,-7.27,3.94],"p":6,"g":6},{"v":[4.67,-7.23,4.07],"p":6,"g":6},{"v":[4.04,-7.3,4.54],"p":6,"g":6},{"v":[3.84,-7.2,4.88],"p":6,"g":6},{"v":[3.81,-7.1,5.07],"p":6,"g":6},{"v":[3.73,-7.03,5.23],"p":6,"g":6},{"v":[3.72,-6.85,5.48],"p":6,"g":6},{"v":[3.52,-6.77,5.66],"p":6,"g":6},{"v":[3.44,-6.85,5.63],"p":6,"g":6},{"v":[3.26,-7.1,5.39],"p":6,"g":6},{"v":[3.54,-6.94,5.45],"p":6,"g":6},{"v":[3.62,-6.79,5.58],"p":6,"g":6},{"v":[4.01,-7.67,3.82],"p":6,"g":6},{"v":[3.44,-7.5,4.66],"p":6,"g":6},{"v":[3.33,-6.9,5.62],"p":6,"g":6},{"v":[3.2,-6.78,5.84],"p":6,"g":6},{"v":[3.25,-6.56,6.06],"p":6,"g":6},{"v":[3.29,-6.89,5.66],"p":6,"g":6},{"v":[3.48,-6.25,6.3],"p":6,"g":6},{"v":[3.28,-6.75,5.83],"p":6,"g":6},{"v":[3.52,-6.79,5.65],"p":6,"g":6},{"v":[3.49,-6.56,5.93],"p":6,"g":6},{"v":[3.67,-7.03,5.19],"p":6,"g":6},{"v":[5.45,-6.73,0.9],"p":3,"g":6},{"v":[6.22,-6.16,-3.91],"p":3,"g":3},{"v":[6.35,-6.29,-3.44],"p":3,"g":3},{"v":[6.02,-6.58,-2.43],"p":3,"g":3},{"v":[6.29,-7.15,0.41],"p":3,"g":6},{"v":[6.34,-7.11,0.39],"p":3,"g":6},{"v":[5.1,-7.05,2.76],"p":6,"g":6},{"v":[5.21,-7.05,3.7],"p":6,"g":6},{"v":[5.12,-7,3.91],"p":6,"g":6},{"v":[5.1,-7.06,3.83],"p":6,"g":6},{"v":[5.12,-7.1,3.74],"p":6,"g":6},{"v":[5.08,-7.06,3.87],"p":6,"g":6},{"v":[5.05,-7.1,3.84],"p":6,"g":6},{"v":[4.99,-7.27,3.34],"p":6,"g":6},{"v":[5.08,-7.46,2.73],"p":6,"g":6},{"v":[5.47,-7.5,1.47],"p":3,"g":6},{"v":[5.27,-7.55,1.58],"p":3,"g":6},{"v":[4.22,-7.77,3.39],"p":6,"g":6},{"v":[2.88,-7.98,4.16],"p":6,"g":6},{"v":[4.13,-7.91,2.12],"p":6,"g":6},{"v":[4.48,-7.85,1.81],"p":6,"g":6},{"v":[5.01,-8,0.54],"p":3,"g":6},{"v":[3.94,-7.97,2.4],"p":6,"g":6},{"v":[2.91,-7.93,4.23],"p":6,"g":6},{"v":[2.82,-7.93,4.29],"p":6,"g":6},{"v":[2.24,-7.96,4.47],"p":6,"g":6},{"v":[3.38,-7.29,4.83],"p":6,"g":6},{"v":[3.13,-7.32,5.12],"p":6,"g":6},{"v":[2.37,-7.79,4.8],"p":6,"g":6},{"v":[2.21,-7.89,4.69],"p":6,"g":6},{"v":[2.19,-7.9,4.68],"p":6,"g":6},{"v":[2.6,-7.28,5.39],"p":6,"g":6},{"v":[2.85,-6.61,6.19],"p":6,"g":6},{"v":[2.77,-6.83,5.98],"p":6,"g":6},{"v":[2.92,-7.03,5.67],"p":6,"g":6},{"v":[2.94,-6.99,5.71],"p":6,"g":6},{"v":[3.14,-7.22,5.31],"p":6,"g":6},{"v":[3.53,-7.47,4.62],"p":6,"g":6},{"v":[3.19,-7.35,5.03],"p":6,"g":6},{"v":[2.47,-7.33,5.45],"p":6,"g":6},{"v":[2.12,-7.78,4.9],"p":6,"g":6},{"v":[1.74,-7.82,5],"p":6,"g":6},{"v":[1.73,-7.93,4.81],"p":6,"g":6},{"v":[1.44,-7.86,5.02],"p":6,"g":6},{"v":[1.4,-7.84,5.07],"p":6,"g":6},{"v":[1.4,-7.84,5.03],"p":6,"g":6},{"v":[1.04,-7.61,5.5],"p":6,"g":6},{"v":[1.06,-7.63,5.46],"p":6,"g":6},{"v":[1.28,-7.74,5.26],"p":6,"g":6},{"v":[1.2,-7.65,5.42],"p":6,"g":6},{"v":[0.95,-7.67,5.42],"p":6,"g":6},{"v":[0.62,-7.36,5.86],"p":6,"g":6},{"v":[-0.28,-7.07,6.27],"p":6,"g":6},{"v":[0.28,-6.95,6.42],"p":6,"g":6},{"v":[0.15,-6.88,6.5],"p":6,"g":6},{"v":[0.04,-6.81,6.59],"p":6,"g":6},{"v":[-0.24,-7.31,5.98],"p":6,"g":6},{"v":[-0.41,-7.14,6.18],"p":6,"g":6},{"v":[-0.44,-7.14,6.17],"p":6,"g":6},{"v":[-0.64,-6.83,6.51],"p":6,"g":6},{"v":[1.74,-5.36,7.56],"p":6,"g":6},{"v":[1.5,-5.83,7.36],"p":6,"g":6},{"v":[0.47,-6.36,6.99],"p":6,"g":6},{"v":[-0.6,-6.91,6.43],"p":6,"g":6},{"v":[1.13,-5.93,7.28],"p":6,"g":6},{"v":[1.18,-6.12,7.19],"p":6,"g":6},{"v":[-0.45,-6.67,6.59],"p":6,"g":6},{"v":[-0.19,-5.15,7.99],"p":6,"g":6},{"v":[-0.8,-5.24,7.92],"p":6,"g":6},{"v":[-1.43,-4.96,8.03],"p":6,"g":6},{"v":[-1.38,-4.76,8.17],"p":6,"g":6},{"v":[-1.26,-4.82,8.15],"p":6,"g":6},{"v":[-1.23,-4.97,8.06],"p":6,"g":6},{"v":[-1.13,-4.74,8.22],"p":6,"g":6},{"v":[-1.44,-4.73,8.17],"p":6,"g":6},{"v":[-1.36,-4.58,8.27],"p":6,"g":6},{"v":[-1.57,-4.61,8.22],"p":6,"g":6},{"v":[-1.57,-4.61,8.23],"p":6,"g":6},{"v":[-1.57,-4.67,8.19],"p":6,"g":6},{"v":[-1.61,-4.62,8.21],"p":6,"g":6},{"v":[-1.59,-4.62,8.21],"p":6,"g":6},{"v":[-1.57,-4.32,8.4],"p":6,"g":6},{"v":[-1.57,-4.31,8.41],"p":6,"g":6},{"v":[-1.44,-4.49,8.18],"p":6,"g":6},{"v":[-3.23,-1.37,9.02],"p":6,"g":6},{"v":[-3.45,-1.25,8.98],"p":6,"g":6},{"v":[-3.31,-1.26,9.03],"p":6,"g":6},{"v":[-3.37,-1.27,9],"p":6,"g":6},{"v":[-3.1,-1.47,9.06],"p":6,"g":6},{"v":[-3.5,-1.41,8.93],"p":6,"g":6},{"v":[-3.48,-1.15,8.98],"p":6,"g":6},{"v":[-3.6,-1.05,8.95],"p":6,"g":6},{"v":[-3.32,-1.05,9.06],"p":6,"g":6},{"v":[-3.15,-1.06,9.13],"p":6,"g":6},{"v":[-3.29,-1.11,9.06],"p":6,"g":6},{"v":[-3.34,-1.17,9.03],"p":6,"g":6},{"v":[-3.25,-1.17,9.07],"p":6,"g":6},{"v":[-3.26,-1.19,9.06],"p":6,"g":6},{"v":[-3.35,-1.31,9],"p":6,"g":6},{"v":[-3.29,-1.58,8.97],"p":6,"g":6},{"v":[-3.31,-1.47,8.98],"p":6,"g":6},{"v":[-3.51,-1.35,8.94],"p":6,"g":6},{"v":[-3.57,-1.42,8.89],"p":6,"g":6},{"v":[-3.76,-1.47,8.8],"p":6,"g":6},{"v":[-3.6,-1.51,8.86],"p":6,"g":6},{"v":[-3.54,-1.49,8.89],"p":6,"g":6},{"v":[-3.64,-1.43,8.86],"p":6,"g":6},{"v":[-3.42,-1.37,8.96],"p":6,"g":6},{"v":[-3.2,-1.5,9.02],"p":6,"g":6},{"v":[-3.4,-1.55,8.94],"p":6,"g":6},{"v":[-3.21,-1.44,9.02],"p":6,"g":6},{"v":[-3.25,-1.34,9.03],"p":6,"g":6},{"v":[-3.11,-1.74,8.93],"p":6,"g":6},{"v":[-3.36,-2.04,8.82],"p":6,"g":6},{"v":[-3.23,-2.04,8.87],"p":6,"g":6},{"v":[-3.13,-1.97,8.93],"p":6,"g":6},{"v":[-3.24,-1.98,8.89],"p":6,"g":6},{"v":[-3.19,-1.98,8.91],"p":6,"g":6},{"v":[-3.1,-1.99,8.93],"p":6,"g":6},{"v":[-3,-1.99,8.97],"p":6,"g":6},{"v":[-2.74,-2.64,8.75],"p":6,"g":6},{"v":[-3.18,-2.16,8.86],"p":6,"g":6},{"v":[-1.66,-3.86,8.08],"p":6,"g":6},{"v":[0.05,-6.12,7.07],"p":6,"g":6},{"v":[-0.75,-6.04,7.3],"p":6,"g":6},{"v":[-0.74,-5.97,7.35],"p":6,"g":6},{"v":[-0.85,-6.14,7.17],"p":6,"g":6},{"v":[-0.93,-6.22,7.1],"p":6,"g":6},{"v":[-0.9,-6.19,7.13],"p":6,"g":6},{"v":[-0.9,-6.15,7.17],"p":6,"g":6},{"v":[-0.88,-6.1,7.22],"p":6,"g":6},{"v":[-0.84,-6.04,7.28],"p":6,"g":6},{"v":[-1.01,-5.99,7.29],"p":6,"g":6},{"v":[-1.02,-6.01,7.28],"p":6,"g":6},{"v":[-1.02,-6,7.29],"p":6,"g":6},{"v":[-1,-6.04,7.26],"p":6,"g":6},{"v":[-0.91,-6.26,7.02],"p":6,"g":6},{"v":[-1.26,-6.16,7.1],"p":6,"g":6},{"v":[-1.26,-6.14,7.12],"p":6,"g":6},{"v":[-1.23,-6.07,7.19],"p":6,"g":6},{"v":[-1.02,-5.64,7.59],"p":6,"g":6},{"v":[-0.86,-5.85,7.44],"p":6,"g":6},{"v":[-0.97,-5.89,7.39],"p":6,"g":6},{"v":[-0.85,-5.77,7.51],"p":6,"g":6},{"v":[-0.56,-5.62,7.66],"p":6,"g":6},{"v":[-0.67,-5.57,7.69],"p":6,"g":6},{"v":[-0.99,-5.51,7.7],"p":6,"g":6},{"v":[-1,-5.61,7.62],"p":6,"g":6},{"v":[1.63,-6.59,6.39],"p":6,"g":6},{"v":[5.65,-6.38,3.19],"p":6,"g":6},{"v":[6.85,-6.39,1.94],"p":3,"g":6},{"v":[7.11,-5.94,1.37],"p":3,"g":6},{"v":[8.03,-5.27,0.85],"p":3,"g":3},{"v":[7.75,-5.55,1.26],"p":3,"g":3},{"v":[7.79,-5.53,1.15],"p":3,"g":3},{"v":[7.47,-5.88,1.38],"p":3,"g":3},{"v":[7.1,-6.14,1.92],"p":3,"g":6},{"v":[7,-6.27,1.82],"p":3,"g":6},{"v":[6.22,-6.87,2.13],"p":3,"g":6},{"v":[5.54,-7.33,2.37],"p":6,"g":6},{"v":[5.41,-7.41,2.5],"p":6,"g":6},{"v":[5.23,-7.53,2.42],"p":6,"g":6},{"v":[5.72,-7.19,2.29],"p":6,"g":6},{"v":[5.34,-7.4,2.66],"p":6,"g":6},{"v":[4.8,-7.64,2.9],"p":6,"g":6},{"v":[4.65,-7.67,3.05],"p":6,"g":6},{"v":[4.36,-7.64,3.49],"p":6,"g":6},{"v":[4.24,-7.72,3.14],"p":6,"g":6},{"v":[4.21,-7.69,3.56],"p":6,"g":6},{"v":[3.88,-7.78,3.73],"p":6,"g":6},{"v":[4.03,-7.69,3.73],"p":6,"g":6},{"v":[4.99,-7.23,3.61],"p":6,"g":6},{"v":[5.08,-7.13,3.72],"p":6,"g":6},{"v":[4.74,-7.28,3.83],"p":6,"g":6},{"v":[4.28,-7.56,3.8],"p":6,"g":6},{"v":[4.7,-7.41,3.5],"p":6,"g":6},{"v":[4.82,-7.39,3.5],"p":6,"g":6},{"v":[4.27,-7.72,3.45],"p":6,"g":6},{"v":[4.1,-7.67,3.74],"p":6,"g":6},{"v":[4.02,-7.6,3.99],"p":6,"g":6},{"v":[4.39,-7.45,3.88],"p":6,"g":6},{"v":[4.3,-7.46,3.97],"p":6,"g":6},{"v":[3.44,-7.71,4.27],"p":6,"g":6},{"v":[3.08,-7.45,4.89],"p":6,"g":6},{"v":[3.86,-7.23,4.34],"p":6,"g":6},{"v":[3.03,-7.31,4.73],"p":6,"g":6},{"v":[2.9,-6.77,5.72],"p":6,"g":6},{"v":[3.14,-6.72,5.92],"p":6,"g":6},{"v":[2.75,-7.42,5.17],"p":6,"g":6},{"v":[1.99,-7.8,4.91],"p":6,"g":6},{"v":[2.23,-7.45,5.35],"p":6,"g":6},{"v":[2.57,-7.49,5.1],"p":6,"g":6},{"v":[3.03,-7.91,4.19],"p":6,"g":6},{"v":[3.07,-7.31,5.02],"p":6,"g":6},{"v":[3.4,-6.94,5.38],"p":6,"g":6},{"v":[2.26,-7.77,4.85],"p":6,"g":6},{"v":[2.51,-7.88,4.55],"p":6,"g":6},{"v":[2.94,-7.66,4.66],"p":6,"g":6},{"v":[2.58,-7.81,4.64],"p":6,"g":6},{"v":[2.5,-7.8,4.7],"p":6,"g":6},{"v":[2.48,-7.8,4.71],"p":6,"g":6},{"v":[2.78,-7.59,4.88],"p":6,"g":6},{"v":[3.15,-7.14,5.39],"p":6,"g":6},{"v":[2.82,-7.12,5.58],"p":6,"g":6},{"v":[3.18,-7.3,5.08],"p":6,"g":6},{"v":[3.06,-7.37,5.09],"p":6,"g":6},{"v":[3.02,-7.36,4.63],"p":6,"g":6},{"v":[7.8,-5.51,0.73],"p":3,"g":3},{"v":[8.25,-4.97,0.54],"p":3,"g":3},{"v":[8.25,-5.01,0.33],"p":3,"g":3},{"v":[8.01,-5.33,0.54],"p":3,"g":3},{"v":[7.89,-5.51,0.52],"p":3,"g":3},{"v":[7.8,-5.62,0.45],"p":3,"g":3},{"v":[7.77,-5.67,0.37],"p":3,"g":3},{"v":[7.74,-5.7,0.28],"p":3,"g":3},{"v":[7.7,-5.76,0.2],"p":3,"g":3},{"v":[7.7,-5.76,0.18],"p":3,"g":3},{"v":[7.71,-5.74,0.17],"p":3,"g":3},{"v":[7.7,-5.76,0.15],"p":3,"g":3},{"v":[7.72,-5.74,0.18],"p":3,"g":3},{"v":[7.71,-5.74,0.15],"p":3,"g":3},{"v":[7.73,-5.73,0.18],"p":3,"g":3},{"v":[7.75,-5.71,0.18],"p":3,"g":3},{"v":[7.72,-5.73,0.17],"p":3,"g":3},{"v":[7.76,-5.69,0.2],"p":3,"g":3},{"v":[7.77,-5.68,0.21],"p":3,"g":3},{"v":[7.76,-5.69,0.2],"p":3,"g":3},{"v":[7.76,-5.68,0.18],"p":3,"g":3},{"v":[7.76,-5.69,0.17],"p":3,"g":3},{"v":[7.76,-5.69,0.19],"p":3,"g":3},{"v":[7.76,-5.7,0.18],"p":3,"g":3},{"v":[7.76,-5.69,0.18],"p":3,"g":3},{"v":[7.76,-5.69,0.18],"p":3,"g":3},{"v":[7.73,-5.73,0.17],"p":3,"g":3},{"v":[7.74,-5.71,0.19],"p":3,"g":3},{"v":[7.74,-5.71,0.19],"p":3,"g":3},{"v":[7.75,-5.7,0.18],"p":3,"g":3},{"v":[7.75,-5.7,0.18],"p":3,"g":3},{"v":[7.75,-5.7,0.21],"p":3,"g":3},{"v":[7.75,-5.69,0.18],"p":3,"g":3},{"v":[7.75,-5.69,0.16],"p":3,"g":3},{"v":[7.75,-5.69,0.09],"p":3,"g":3},{"v":[7.75,-5.69,0.12],"p":3,"g":3},{"v":[7.77,-5.67,0.15],"p":3,"g":3},{"v":[7.76,-5.67,0.2],"p":3,"g":3},{"v":[7.78,-5.65,0.18],"p":3,"g":3},{"v":[7.78,-5.65,0.2],"p":3,"g":3},{"v":[7.78,-5.65,0.18],"p":3,"g":3},{"v":[7.77,-5.67,0.19],"p":3,"g":3},{"v":[7.74,-5.7,0.18],"p":3,"g":3},{"v":[7.91,-5.49,0.04],"p":3,"g":3},{"v":[7.92,-5.48,0.08],"p":3,"g":3},{"v":[7.88,-5.53,0.13],"p":3,"g":3},{"v":[7.88,-5.53,0.09],"p":3,"g":3},{"v":[7.87,-5.55,0.12],"p":3,"g":3},{"v":[7.85,-5.57,0.15],"p":3,"g":3},{"v":[7.78,-5.65,0.27],"p":3,"g":3},{"v":[7.76,-5.67,0.28],"p":3,"g":3},{"v":[7.7,-5.74,0.38],"p":3,"g":3},{"v":[7.69,-5.76,0.36],"p":3,"g":3},{"v":[7.68,-5.76,0.36],"p":3,"g":3},{"v":[7.58,-5.72,0.09],"p":3,"g":3},{"v":[6.01,-6.11,-4.3],"p":3,"g":6},{"v":[6.01,-6.21,-4.15],"p":3,"g":6},{"v":[5.96,-6.27,-4.11],"p":3,"g":6},{"v":[5.95,-6.28,-4.11],"p":3,"g":6},{"v":[5.96,-6.27,-4.1],"p":3,"g":6},{"v":[6.04,-6.35,-3.84],"p":3,"g":6},{"v":[6.07,-6.46,-3.6],"p":3,"g":6},{"v":[6.01,-6.49,-3.65],"p":3,"g":6},{"v":[6,-6.51,-3.63],"p":3,"g":6},{"v":[6,-6.5,-3.65],"p":3,"g":6},{"v":[6.01,-6.49,-3.64],"p":3,"g":6},{"v":[6,-6.5,-3.66],"p":3,"g":6},{"v":[5.99,-6.5,-3.64],"p":3,"g":6},{"v":[5.99,-6.51,-3.64],"p":3,"g":6},{"v":[5.96,-6.52,-3.67],"p":3,"g":6},{"v":[5.96,-6.53,-3.65],"p":3,"g":6},{"v":[5.94,-6.54,-3.65],"p":3,"g":6},{"v":[5.93,-6.55,-3.64],"p":3,"g":6},{"v":[5.93,-6.55,-3.65],"p":3,"g":6},{"v":[5.9,-6.58,-3.64],"p":3,"g":6},{"v":[5.58,-7.14,-0.79],"p":3,"g":6},{"v":[5.05,-7.68,2.3],"p":6,"g":6},{"v":[5.03,-7.65,2.42],"p":6,"g":6},{"v":[5.03,-7.67,2.39],"p":6,"g":6},{"v":[4.96,-7.67,2.5],"p":6,"g":6},{"v":[4.92,-7.67,2.6],"p":6,"g":6},{"v":[4.9,-7.67,2.62],"p":6,"g":6},{"v":[4.89,-7.68,2.62],"p":6,"g":6},{"v":[4.88,-7.68,2.63],"p":6,"g":6},{"v":[4.88,-7.69,2.63],"p":6,"g":6},{"v":[4.88,-7.68,2.64],"p":6,"g":6},{"v":[4.87,-7.68,2.65],"p":6,"g":6},{"v":[4.88,-7.66,2.69],"p":6,"g":6},{"v":[2.76,-7.36,3.68],"p":6,"g":6},{"v":[-2.71,-5.79,6.94],"p":6,"g":6},{"v":[-2.66,-5.34,7.39],"p":6,"g":6},{"v":[-2.16,-5.66,7.16],"p":6,"g":0},{"v":[-1.87,-5.71,7.33],"p":6,"g":6}]};
+
+  /* ============================ math ============================ */
+  const V = {
+    sub:(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],
+    cross:(a,b)=>[a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]],
+    dot:(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],
+    norm:a=>{const m=Math.hypot(a[0],a[1],a[2])||1;return [a[0]/m,a[1]/m,a[2]/m];},
+    scale:(a,s)=>[a[0]*s,a[1]*s,a[2]*s],
+    add:(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],
+  };
+  function perspective(fovy,aspect,near,far){
+    const f=1/Math.tan(fovy/2), nf=1/(near-far);
+    return [f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,2*far*near*nf,0];
+  }
+  function viewMat(eye,fwd,up){
+    const z=V.norm([-fwd[0],-fwd[1],-fwd[2]]);
+    const x=V.norm(V.cross(up,z));
+    const y=V.cross(z,x);
+    return [ x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0,
+             -V.dot(x,eye),-V.dot(y,eye),-V.dot(z,eye),1 ];
+  }
+  function mul(a,b){ // 4x4 column-major a*b
+    const o=new Array(16);
+    for(let c=0;c<4;c++)for(let r=0;r<4;r++){
+      let s=0; for(let k=0;k<4;k++) s+=a[k*4+r]*b[c*4+k]; o[c*4+r]=s;
+    } return o;
+  }
+
+  /* ============================ webgl ============================ */
+  const canvas=document.getElementById("gl");
+  const gl=canvas.getContext("webgl2",{antialias:true});
+  if(!gl){ document.getElementById("veil").innerHTML='<div class="card"><h2>No WebGL2</h2><p>This browser can’t run the voxel engine.</p></div>'; return; }
+
+  const VS=`#version 300 es
+  precision highp float;
+  in vec3 aPos; in vec3 aNormal; in vec3 aOffset; in vec3 aColor;
+  uniform mat4 uVP; uniform vec3 uEye;
+  out vec3 vColor; out vec3 vNormal; out float vDist;
+  void main(){
+    vec3 world = aPos*0.5 + aOffset;
+    gl_Position = uVP * vec4(world,1.0);
+    vColor=aColor; vNormal=aNormal; vDist=length(world-uEye);
+  }`;
+  const FS=`#version 300 es
+  precision highp float;
+  in vec3 vColor; in vec3 vNormal; in float vDist;
+  uniform vec3 uSun; uniform vec3 uFogColor; uniform float uFogNear; uniform float uFogFar;
+  out vec4 frag;
+  void main(){
+    vec3 n=normalize(vNormal);
+    float diff=max(dot(n,uSun),0.0);
+    float amb=0.42;
+    // gentle face bias so top faces read brightest, like MC
+    float topBias = 0.10*max(n.y,0.0);
+    vec3 col = vColor*(amb+0.72*diff+topBias);
+    float fog = clamp((vDist-uFogNear)/(uFogFar-uFogNear),0.0,1.0);
+    col = mix(col, uFogColor, fog);
+    frag=vec4(col,1.0);
+  }`;
+  function sh(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+  const prog=gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS)); gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));
+  gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+
+  // unit cube: 6 faces * 2 tris * 3 verts, pos in [-1,1], with normals
+  const CUBE=(()=>{
+    const f=[ // normal, 4 corners (ccw)
+      [[0,0,1],[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]],
+      [[0,0,-1],[[1,-1,-1],[-1,-1,-1],[-1,1,-1],[1,1,-1]]],
+      [[1,0,0],[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]]],
+      [[-1,0,0],[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]]],
+      [[0,1,0],[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]]],
+      [[0,-1,0],[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]]],
+    ];
+    const arr=[];
+    for(const [n,c] of f){
+      const tri=[0,1,2,0,2,3];
+      for(const i of tri){ arr.push(c[i][0],c[i][1],c[i][2], n[0],n[1],n[2]); }
+    }
+    return new Float32Array(arr);
+  })();
+
+  const vao=gl.createVertexArray(); gl.bindVertexArray(vao);
+  const cubeBuf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,cubeBuf);
+  gl.bufferData(gl.ARRAY_BUFFER,CUBE,gl.STATIC_DRAW);
+  const aPos=gl.getAttribLocation(prog,"aPos"), aNormal=gl.getAttribLocation(prog,"aNormal");
+  gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos,3,gl.FLOAT,false,24,0);
+  gl.enableVertexAttribArray(aNormal); gl.vertexAttribPointer(aNormal,3,gl.FLOAT,false,24,12);
+
+  const instBuf=gl.createBuffer();
+  const aOffset=gl.getAttribLocation(prog,"aOffset"), aColor=gl.getAttribLocation(prog,"aColor");
+  let instCount=0;
+  function uploadInstances(data){ // Float32Array [ox,oy,oz,r,g,b]*N
+    gl.bindVertexArray(vao);
+    gl.bindBuffer(gl.ARRAY_BUFFER,instBuf);
+    gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(aOffset); gl.vertexAttribPointer(aOffset,3,gl.FLOAT,false,24,0); gl.vertexAttribDivisor(aOffset,1);
+    gl.enableVertexAttribArray(aColor);  gl.vertexAttribPointer(aColor,3,gl.FLOAT,false,24,12); gl.vertexAttribDivisor(aColor,1);
+    instCount=data.length/6;
+  }
+  const uVP=gl.getUniformLocation(prog,"uVP"), uEye=gl.getUniformLocation(prog,"uEye"),
+        uSun=gl.getUniformLocation(prog,"uSun"), uFogColor=gl.getUniformLocation(prog,"uFogColor"),
+        uFogNear=gl.getUniformLocation(prog,"uFogNear"), uFogFar=gl.getUniformLocation(prog,"uFogFar");
+
+  gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+  const SKY=[0.53,0.73,0.92];
+  gl.clearColor(SKY[0],SKY[1],SKY[2],1);
+
+  /* ============================ world build ============================ */
+  const hex2rgb=h=>{h=h.replace('#','');return [parseInt(h.slice(0,2),16)/255,parseInt(h.slice(2,4),16)/255,parseInt(h.slice(4,6),16)/255];};
+  let world=null, bounds=null;
+
+  function setWorld(w){
+    world=w;
+    // palette rgb
+    const pcols=w.palette.map(p=>hex2rgb(p.hex));
+    // instance data + bounds
+    const N=w.blocks.length;
+    const data=new Float32Array(N*6);
+    let mn=[1e9,1e9,1e9], mx=[-1e9,-1e9,-1e9];
+    for(let i=0;i<N;i++){
+      const b=w.blocks[i]; const c=pcols[b[3]]||[1,0,1];
+      const o=i*6;
+      data[o]=b[0]; data[o+1]=b[1]; data[o+2]=b[2];
+      data[o+3]=c[0]; data[o+4]=c[1]; data[o+5]=c[2];
+      for(let k=0;k<3;k++){ mn[k]=Math.min(mn[k],b[k]); mx[k]=Math.max(mx[k],b[k]); }
+    }
+    uploadInstances(data);
+    bounds={mn,mx,size:[mx[0]-mn[0]+1,mx[1]-mn[1]+1,mx[2]-mn[2]+1],
+            ctr:[(mn[0]+mx[0])/2,(mn[1]+mx[1])/2,(mn[2]+mx[2])/2]};
+    // fog based on size
+    const diag=Math.hypot(bounds.size[0],bounds.size[1],bounds.size[2]);
+    fog=[Math.max(20,diag*0.35), Math.max(60,diag*1.15)];
+    // camera start: back and above, looking at center
+    const s=bounds.size;
+    eye=[bounds.ctr[0], bounds.ctr[1]+s[1]*0.35+4, bounds.ctr[2]+s[2]*0.85+8];
+    yaw=Math.PI; pitch=-0.35;
+    aimAtCenter();
+    // HUD
+    document.getElementById("nblocks").textContent=N.toLocaleString();
+    document.getElementById("wsize").textContent=`${s[0]}×${s[1]}×${s[2]}`;
+    document.getElementById("veilName").textContent=w.name||"walk your data";
+    renderLegend();
+  }
+  function aimAtCenter(){
+    const d=V.norm(V.sub(bounds.ctr,eye));
+    pitch=Math.asin(Math.max(-1,Math.min(1,d[1])));
+    yaw=Math.atan2(d[0],-d[2]);
+  }
+  function renderLegend(){
+    const el=document.getElementById("legend"); el.innerHTML="";
+    for(const p of world.palette){
+      const d=document.createElement("div"); d.className="li";
+      d.innerHTML=`<span class="sw" style="background:${p.hex}"></span>${p.name}`;
+      el.appendChild(d);
+    }
+  }
+
+  /* ============================ adapters ============================ */
+  function fit(pts, target=92){ // returns {scaled:[[gx,gy,gz]], } normalized ints, y>=0, centered x/z
+    let mn=[1e9,1e9,1e9], mx=[-1e9,-1e9,-1e9];
+    for(const p of pts) for(let k=0;k<3;k++){ mn[k]=Math.min(mn[k],p[k]); mx[k]=Math.max(mx[k],p[k]); }
+    const ext=Math.max(mx[0]-mn[0], mx[1]-mn[1], mx[2]-mn[2])||1;
+    const s=target/ext;
+    const cx=(mn[0]+mx[0])/2, cz=(mn[2]+mx[2])/2;
+    return pts.map(p=>[Math.round((p[0]-cx)*s), Math.round((p[1]-mn[1])*s), Math.round((p[2]-cz)*s)]);
+  }
+  function dedupe(coords, colorIdx){
+    const seen=new Set(), out=[];
+    for(let i=0;i<coords.length;i++){ const c=coords[i]; const k=c[0]+","+c[1]+","+c[2];
+      if(seen.has(k))continue; seen.add(k); out.push([c[0],c[1],c[2], colorIdx?colorIdx[i]:0]); }
+    return out;
+  }
+  const PAL8=[ "#5cc8ff","#f5c542","#7fb238","#e0503f","#c85ad0","#3fb8c0","#ff8a3c","#9aa0ac" ]
+    .map((h,i)=>({name:"class "+i,hex:h}));
+
+  function detect(j){
+    // raw
+    if(j && Array.isArray(j.blocks) && Array.isArray(j.palette))
+      return {name:j.name||"Custom world", palette:j.palette, blocks:j.blocks};
+    // HRL pts3d
+    if(j && Array.isArray(j.pts3d) && j.pts3d[0] && j.pts3d[0].v){
+      const codes=[...new Set(j.pts3d.map(o=>o.p))].sort((a,b)=>a-b);
+      const idx=Object.fromEntries(codes.map((c,i)=>[c,i]));
+      const coords=fit(j.pts3d.map(o=>o.v));
+      const ci=j.pts3d.map(o=> (o.g!==undefined && o.p!==o.g) ? codes.length : idx[o.p]);
+      const pal=codes.map((c,i)=>({name:"label "+c,hex:PAL8[i%8].hex}));
+      pal.push({name:"misclassified",hex:"#e0503f"});
+      return {name:"Labeled cloud — "+j.pts3d.length+" pts", palette:pal, blocks:dedupe(coords,ci)};
+    }
+    // pts + labels
+    if(j && Array.isArray(j.pts) && Array.isArray(j.pts[0])){
+      const coords=fit(j.pts);
+      let ci=null,pal=[{name:"points",hex:"#5cc8ff"}];
+      if(Array.isArray(j.labels) && j.labels.length===j.pts.length){
+        const u=[...new Set(j.labels)]; const idx=Object.fromEntries(u.map((c,i)=>[c,i]));
+        ci=j.labels.map(l=>idx[l]); pal=u.map((c,i)=>({name:String(c),hex:PAL8[i%8].hex}));
+      }
+      return {name:"Point cloud — "+j.pts.length+" pts", palette:pal, blocks:dedupe(coords,ci)};
+    }
+    // bare array of triples
+    if(Array.isArray(j) && Array.isArray(j[0]) && j[0].length>=3){
+      const coords=fit(j.map(p=>[p[0],p[1],p[2]]));
+      return {name:"Point cloud — "+j.length+" pts", palette:[{name:"points",hex:"#5cc8ff"}], blocks:dedupe(coords,null)};
+    }
+    // 2-D field (sdss): x,y,cls -> extrude by class
+    if(j && Array.isArray(j.x) && Array.isArray(j.y)){
+      const n=j.x.length; let mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9;
+      for(let i=0;i<n;i++){ mnx=Math.min(mnx,j.x[i]);mxx=Math.max(mxx,j.x[i]);mny=Math.min(mny,j.y[i]);mxy=Math.max(mxy,j.y[i]); }
+      const s=90/Math.max(mxx-mnx,mxy-mny||1);
+      const cls=j.cls||new Array(n).fill(0);
+      const heights={0:1,1:4,2:10}; // void/filament/cluster
+      const seen=new Map();
+      for(let i=0;i<n;i++){
+        const gx=Math.round((j.x[i]-mnx)*s)-45, gz=Math.round((j.y[i]-mny)*s)-45;
+        const h=heights[cls[i]]||1; const k=gx+","+gz;
+        const prev=seen.get(k)||0; if(h>prev) seen.set(k,{h,c:cls[i]}); else if(!seen.get(k)) seen.set(k,{h,c:cls[i]});
+      }
+      const blocks=[];
+      for(const [k,val] of seen){ const [gx,gz]=k.split(",").map(Number);
+        for(let y=0;y<val.h;y++) blocks.push([gx,y,gz,val.c]); }
+      return {name:"2-D field — "+n+" points, extruded by class",
+        palette:[{name:"void",hex:"#26324a"},{name:"filament",hex:"#5cc8ff"},{name:"cluster",hex:"#f5c542"}], blocks};
+    }
+    throw new Error("Unrecognized JSON shape — see the accepted formats.");
+  }
+
+  /* ============================ procedural terrain ============================ */
+  let terrainSeed=1337;
+  function rngFrom(seed){ let s=seed>>>0; return ()=>{ s=(s*1664525+1013904223)>>>0; return s/4294967296; }; }
+  function terrain(seed){
+    const R=rngFrom(seed);
+    // a few sine octaves w/ seeded phases
+    const ph=[R()*6.28,R()*6.28,R()*6.28,R()*6.28];
+    const W=72, H=72, WATER=5;
+    const pal=[{name:"grass",hex:"#7fb238"},{name:"dirt",hex:"#8b5a2b"},{name:"stone",hex:"#8a8f98"},
+      {name:"sand",hex:"#e0d29a"},{name:"water",hex:"#3a6fd8"},{name:"trunk",hex:"#6e5433"},{name:"leaf",hex:"#4e7a2a"}];
+    const blocks=[];
+    const hmap=[];
+    for(let x=0;x<W;x++){ hmap[x]=[];
+      for(let z=0;z<H;z++){
+        const nx=x/W, nz=z/H;
+        let e = 8
+          + 6*Math.sin(nx*6.2+ph[0])*Math.cos(nz*5.1+ph[1])
+          + 3*Math.sin(nx*13.0+ph[2])*Math.cos(nz*11.0+ph[3])
+          + 2*Math.sin((nx+nz)*9.0+ph[0]);
+        let h=Math.max(1,Math.round(e));
+        hmap[x][z]=h;
+        for(let y=0;y<=h;y++){
+          let c;
+          if(y===h){ c = h<=WATER+1 ? 3 : 0; }        // sand near water else grass
+          else if(y>h-3){ c=1; } else { c=2; }          // dirt then stone
+          blocks.push([x-W/2, y, z-H/2, c]);
+        }
+        // water fill
+        for(let y=h+1;y<=WATER;y++) blocks.push([x-W/2, y, z-H/2, 4]);
+      }
+    }
+    // trees on grass above water
+    const R2=rngFrom(seed^0x9e3779b9);
+    for(let t=0;t<40;t++){
+      const x=2+((R2()*(W-4))|0), z=2+((R2()*(H-4))|0), h=hmap[x][z];
+      if(h<=WATER+1) continue;
+      for(let k=1;k<=3;k++) blocks.push([x-W/2,h+k,z-H/2,5]);
+      const lt=h+4;
+      for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++) blocks.push([x-W/2+dx,lt,z-H/2+dz,6]);
+      blocks.push([x-W/2,lt+1,z-H/2,6]);
+    }
+    return {name:"Procedural terrain (seed "+seed+")", palette:pal, blocks};
+  }
+
+  /* ============================ camera / input ============================ */
+  let eye=[0,20,40], yaw=Math.PI, pitch=-0.3, fog=[40,160];
+  let speed=18; const keys={};
+  const forward=()=>[Math.cos(pitch)*Math.sin(yaw), Math.sin(pitch), -Math.cos(pitch)*Math.cos(yaw)];
+
+  const veil=document.getElementById("veil");
+  canvas.addEventListener("click",()=>{ if(!pasteOpen) canvas.requestPointerLock(); });
+  veil.addEventListener("click",()=>canvas.requestPointerLock());
+  document.addEventListener("pointerlockchange",()=>{
+    const locked=document.pointerLockElement===canvas;
+    veil.classList.toggle("hidden",locked);
+  });
+  document.addEventListener("mousemove",e=>{
+    if(document.pointerLockElement!==canvas) return;
+    yaw += e.movementX*0.0022;
+    pitch -= e.movementY*0.0022;
+    pitch=Math.max(-1.5,Math.min(1.5,pitch));
+  });
+  addEventListener("keydown",e=>{ keys[e.code]=true; if(["Space","ShiftLeft"].includes(e.code))e.preventDefault(); });
+  addEventListener("keyup",e=>{ keys[e.code]=false; });
+  addEventListener("wheel",e=>{ speed=Math.max(4,Math.min(120, speed*(e.deltaY>0?0.9:1.11))); },{passive:true});
+
+  function move(dt){
+    if(document.pointerLockElement!==canvas) return;
+    const f=forward(), up=[0,1,0];
+    const right=V.norm(V.cross(f,up));
+    let d=[0,0,0];
+    if(keys.KeyW) d=V.add(d,f); if(keys.KeyS) d=V.sub(d,f);
+    if(keys.KeyD) d=V.add(d,right); if(keys.KeyA) d=V.sub(d,right);
+    if(keys.Space) d=V.add(d,up); if(keys.ShiftLeft||keys.ShiftRight) d=V.sub(d,up);
+    if(d[0]||d[1]||d[2]){ d=V.norm(d); eye=V.add(eye,V.scale(d,speed*dt)); }
+  }
+
+  /* ============================ loop ============================ */
+  function resize(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    const w=canvas.clientWidth*dpr|0, h=canvas.clientHeight*dpr|0;
+    if(canvas.width!==w||canvas.height!==h){ canvas.width=w; canvas.height=h; }
+  }
+  let last=performance.now(), fpsT=last, fpsN=0;
+  const sun=V.norm([0.5,0.85,0.35]);
+  function frame(now){
+    const dt=Math.min(0.05,(now-last)/1000); last=now;
+    move(dt);
+    resize();
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    const aspect=canvas.width/canvas.height||1;
+    const P=perspective(1.15,aspect,0.1,600);
+    const Vm=viewMat(eye,forward(),[0,1,0]);
+    const VP=mul(P,Vm);
+    gl.useProgram(prog); gl.bindVertexArray(vao);
+    gl.uniformMatrix4fv(uVP,false,VP);
+    gl.uniform3fv(uEye,eye); gl.uniform3fv(uSun,sun);
+    gl.uniform3fv(uFogColor,SKY); gl.uniform1f(uFogNear,fog[0]); gl.uniform1f(uFogFar,fog[1]);
+    if(instCount) gl.drawArraysInstanced(gl.TRIANGLES,0,36,instCount);
+    fpsN++; if(now-fpsT>500){ document.getElementById("fpsv").textContent=Math.round(fpsN*1000/(now-fpsT)); fpsN=0; fpsT=now; }
+    requestAnimationFrame(frame);
+  }
+
+  /* ============================ worlds registry / UI ============================ */
+  const worlds={
+    terrain:()=>terrain(terrainSeed),
+    bodypos:()=>detect(SAMPLE_BODYPOS),
+  };
+  const sel=document.getElementById("worldSel");
+  [["terrain","Procedural terrain"],["bodypos","Body-position cloud (real HRL data)"]].forEach(([v,t])=>{
+    const o=document.createElement("option"); o.value=v; o.textContent=t; sel.appendChild(o);
+  });
+  sel.addEventListener("change",()=>loadKey(sel.value));
+  function loadKey(k){ try{ setWorld(worlds[k]()); }catch(e){ console.error(e); } }
+  document.getElementById("regen").addEventListener("click",()=>{ terrainSeed=(terrainSeed*1103515245+12345)>>>0; if(sel.value!=="terrain"){sel.value="terrain";} loadKey("terrain"); });
+
+  // file + drag/drop
+  document.getElementById("file").addEventListener("change",e=>{
+    const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+    r.onload=()=>loadJSONText(r.result, f.name); r.readAsText(f);
+  });
+  const drop=document.getElementById("drop");
+  addEventListener("dragover",e=>{ e.preventDefault(); drop.classList.remove("hidden"); });
+  addEventListener("dragleave",e=>{ if(e.clientX===0&&e.clientY===0) drop.classList.add("hidden"); });
+  addEventListener("drop",e=>{ e.preventDefault(); drop.classList.add("hidden");
+    const f=e.dataTransfer.files[0]; if(!f) return; const r=new FileReader();
+    r.onload=()=>loadJSONText(r.result,f.name); r.readAsText(f); });
+
+  function loadJSONText(txt,name){
+    try{ const j=JSON.parse(txt); const w=detect(j); if(name) w.name=(w.name||"world")+" · "+name;
+      addCustom(w); }
+    catch(e){ alert("Could not load: "+e.message); }
+  }
+  function addCustom(w){
+    let o=[...sel.options].find(x=>x.value==="__custom");
+    if(!o){ o=document.createElement("option"); o.value="__custom"; sel.appendChild(o); }
+    o.textContent=w.name.slice(0,42); sel.value="__custom"; worlds.__custom=()=>w; setWorld(w);
+  }
+
+  // paste modal
+  let pasteOpen=false;
+  const pasteEl=document.getElementById("paste");
+  document.getElementById("pasteBtn").addEventListener("click",()=>{ pasteOpen=true; pasteEl.classList.remove("hidden"); document.exitPointerLock&&document.exitPointerLock(); });
+  document.getElementById("pasteCancel").addEventListener("click",()=>{ pasteOpen=false; pasteEl.classList.add("hidden"); });
+  document.getElementById("pasteLoad").addEventListener("click",()=>{
+    const err=document.getElementById("err"); err.textContent="";
+    try{ const j=JSON.parse(document.getElementById("pasteText").value); const w=detect(j);
+      addCustom(w); pasteOpen=false; pasteEl.classList.add("hidden"); }
+    catch(e){ err.textContent=e.message; }
+  });
+
+  /* ============================ boot ============================ */
+  loadKey("terrain");
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+/* ---- generative bandoneón tango-chill · Web Audio, no files, no CDN ---- */
+(() => {
+  "use strict";
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if(!AC) return;
+  let ctx, master, revIn, started=false, enabled=true, timerId=0, nextTime=0, step=0, noiseBuf;
+  const BPM=76, spb=60/BPM, sixteenth=spb/4;
+  const mtof=m=>440*Math.pow(2,(m-69)/12);
+
+  // i – iv – V7 – i in A minor: Am, Dm, E7, Am  (bass root/fifth, pad voicing, melody scale)
+  const PROG=[
+    {b:45,f:52,pad:[57,60,64],   scale:[57,60,62,64,67]},   // Am
+    {b:50,f:57,pad:[62,65,69],   scale:[62,65,67,69,72]},   // Dm
+    {b:40,f:47,pad:[64,68,71,74],scale:[64,68,71,73,76]},   // E7 (G# leading-tone = caliente)
+    {b:45,f:52,pad:[57,60,64],   scale:[57,60,62,64,67]},   // Am
+  ];
+
+  function makeReverb(){
+    const len=(ctx.sampleRate*2.6)|0, buf=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(let ch=0;ch<2;ch++){ const d=buf.getChannelData(ch);
+      for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.4); }
+    const cv=ctx.createConvolver(); cv.buffer=buf; return cv;
+  }
+  function init(){
+    ctx=new AC();
+    master=ctx.createGain(); master.gain.value=0.0001;
+    const comp=ctx.createDynamicsCompressor();
+    master.connect(comp); comp.connect(ctx.destination);
+    const rev=makeReverb(); revIn=ctx.createGain(); const revOut=ctx.createGain(); revOut.gain.value=0.9;
+    revIn.connect(rev); rev.connect(revOut); revOut.connect(master);
+    const nlen=(ctx.sampleRate*0.5)|0; noiseBuf=ctx.createBuffer(1,nlen,ctx.sampleRate);
+    const nd=noiseBuf.getChannelData(0); for(let i=0;i<nlen;i++) nd[i]=Math.random()*2-1;
+  }
+  function pad(ch,t){
+    const dur=4*spb, g=ctx.createGain();
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.linearRampToValueAtTime(0.12,t+0.7);
+    g.gain.setValueAtTime(0.12,t+dur-0.9);
+    g.gain.linearRampToValueAtTime(0.0001,t+dur);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=950; lp.Q.value=0.6;
+    const lfo=ctx.createOscillator(); lfo.frequency.value=0.13;
+    const lg=ctx.createGain(); lg.gain.value=340; lfo.connect(lg); lg.connect(lp.frequency);
+    lfo.start(t); lfo.stop(t+dur+0.1);
+    g.connect(lp);
+    const send=ctx.createGain(); send.gain.value=0.35;
+    lp.connect(master); lp.connect(send); send.connect(revIn);
+    for(const m of ch.pad) for(const det of [-6,6]){
+      const o=ctx.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.detune.value=det;
+      o.connect(g); o.start(t); o.stop(t+dur+0.1);
+    }
+  }
+  function bass(m,t,dur){
+    const o=ctx.createOscillator(); o.type="triangle"; o.frequency.value=mtof(m);
+    const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t);
+    g.gain.linearRampToValueAtTime(0.22,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=420;
+    o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t+dur+0.05);
+  }
+  function pluck(m,t){
+    const o=ctx.createOscillator(); o.type="triangle"; const o2=ctx.createOscillator(); o2.type="sine";
+    const f=mtof(m); o.frequency.setValueAtTime(f*0.994,t); o.frequency.setTargetAtTime(f,t,0.035); o2.frequency.value=f;
+    const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t);
+    g.gain.linearRampToValueAtTime(0.15,t+0.015); g.gain.exponentialRampToValueAtTime(0.0001,t+0.9);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2200;
+    o.connect(lp); o2.connect(lp); lp.connect(g);
+    const send=ctx.createGain(); send.gain.value=0.6;
+    g.connect(master); g.connect(send); send.connect(revIn);
+    o.start(t); o2.start(t); o.stop(t+1); o2.stop(t+1);
+  }
+  function hat(t){
+    const s=ctx.createBufferSource(); s.buffer=noiseBuf;
+    const hp=ctx.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=6500;
+    const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t);
+    g.gain.linearRampToValueAtTime(0.028,t+0.005); g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);
+    s.connect(hp); hp.connect(g); g.connect(master); s.start(t); s.stop(t+0.12);
+  }
+  function schedule(){
+    while(nextTime < ctx.currentTime+0.12){
+      const bar=(step>>4)%4, local=step%16, ch=PROG[bar];
+      if(local===0){ pad(ch,nextTime); bass(ch.b,nextTime,spb*1.1); }
+      if(local===6)  bass(ch.f,nextTime,spb*0.6);
+      if(local===8)  bass(ch.b,nextTime,spb*0.7);
+      if(local===12) bass(ch.f,nextTime,spb*0.6);
+      if(local===4||local===12) hat(nextTime);
+      if((bar===1||bar===3) && (local===2||local===7||local===10||local===14) && Math.random()<0.6){
+        pluck(ch.scale[(Math.random()*ch.scale.length)|0]+12, nextTime);
+      } else if(bar===2 && local===8 && Math.random()<0.5){
+        pluck(ch.scale[1]+12, nextTime);
+      }
+      nextTime+=sixteenth; step++;
+    }
+  }
+  function setGain(){ if(!ctx) return; const g=enabled?0.26:0.0001;
+    master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(g,ctx.currentTime,0.25); }
+  function start(){
+    if(started) return; started=true;
+    if(!ctx) init();
+    if(ctx.state==="suspended") ctx.resume();
+    nextTime=ctx.currentTime+0.15; step=0; setGain();
+    timerId=setInterval(schedule,25);
+  }
+  const canvas=document.getElementById("gl"), veil=document.getElementById("veil");
+  const onGesture=()=>{ if(enabled) start(); };
+  canvas&&canvas.addEventListener("click",onGesture);
+  veil&&veil.addEventListener("click",onGesture);
+  const btn=document.getElementById("musicBtn");
+  btn&&btn.addEventListener("click",()=>{ enabled=!enabled;
+    btn.textContent = enabled ? "♪ tango · on" : "♪ tango · off";
+    if(enabled) start(); setGain();
+  });
+})();
+</script>
+
+</body></html>
