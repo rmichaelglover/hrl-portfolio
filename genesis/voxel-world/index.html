@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VoxelData — walk any dataset as a Minecraft-like world · Project Genesis</title>
-<meta name="description" content="A zero-dependency WebGL first-person voxel engine that turns any dataset into a walkable Minecraft-like world — with a live generative bandoneón tango soundtrack. Our own engine and blocks, no Mojang code. Bundled worlds: procedural terrain and a real HRL body-position cloud. By Manny Glover.">
+<meta name="description" content="A zero-dependency WebGL first-person voxel engine that turns any dataset into a walkable Minecraft-like world — chunked greedy-mesh rendering with ambient occlusion and frustum culling, plus a live generative bandoneon tango. Our own engine and blocks, no Mojang code. By Manny Glover.">
 <style>
   :root{
     --bg:#0c1016; --panel:#121824cc; --edge:#26303f; --edge2:#39485c;
@@ -98,6 +98,7 @@
 
     <div class="stat"><span>blocks</span><b id="nblocks">—</b></div>
     <div class="stat"><span>world size</span><b id="wsize">—</b></div>
+    <div class="stat"><span>mesh</span><b id="meshinfo">—</b></div>
 
     <div class="legend" id="legend"></div>
 
@@ -108,7 +109,7 @@
     <div class="hint" style="opacity:.6;margin-top:2px">engine &amp; music by Manny Glover · our code &amp; blocks, no Mojang</div>
   </div>
 
-  <div class="hud" id="fps"><b id="fpsv">–</b> fps</div>
+  <div class="hud" id="fps"><b id="fpsv">–</b> fps · <span id="visc">–</span> chunks</div>
 
   <div id="veil"><div class="card">
     <h2>VoxelData</h2>
@@ -171,13 +172,12 @@
 
   const VS=`#version 300 es
   precision highp float;
-  in vec3 aPos; in vec3 aNormal; in vec3 aOffset; in vec3 aColor;
+  in vec3 aPos; in vec3 aNormal; in vec3 aColor;
   uniform mat4 uVP; uniform vec3 uEye;
   out vec3 vColor; out vec3 vNormal; out float vDist;
   void main(){
-    vec3 world = aPos*0.5 + aOffset;
-    gl_Position = uVP * vec4(world,1.0);
-    vColor=aColor; vNormal=aNormal; vDist=length(world-uEye);
+    gl_Position = uVP * vec4(aPos,1.0);
+    vColor=aColor; vNormal=aNormal; vDist=length(aPos-uEye);
   }`;
   const FS=`#version 300 es
   precision highp float;
@@ -203,47 +203,151 @@
   if(!gl.getProgramParameter(prog,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
   gl.useProgram(prog);
 
-  // unit cube: 6 faces * 2 tris * 3 verts, pos in [-1,1], with normals
-  const CUBE=(()=>{
-    const f=[ // normal, 4 corners (ccw)
-      [[0,0,1],[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]],
-      [[0,0,-1],[[1,-1,-1],[-1,-1,-1],[-1,1,-1],[1,1,-1]]],
-      [[1,0,0],[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]]],
-      [[-1,0,0],[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]]],
-      [[0,1,0],[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]]],
-      [[0,-1,0],[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]]],
-    ];
-    const arr=[];
-    for(const [n,c] of f){
-      const tri=[0,1,2,0,2,3];
-      for(const i of tri){ arr.push(c[i][0],c[i][1],c[i][2], n[0],n[1],n[2]); }
+  const aPos=gl.getAttribLocation(prog,"aPos"), aNormal=gl.getAttribLocation(prog,"aNormal"), aColor=gl.getAttribLocation(prog,"aColor");
+
+  /* ---- chunked greedy-mesh pipeline (hidden-face culling + face merge) ---- */
+  const CS=24;                        // chunk edge, in blocks
+  let chunks=[], totalTris=0;
+
+  // Greedy-mesh one chunk region [lo,hi) in local grid coords. colorAt is GLOBAL so
+  // faces on chunk borders cull against neighbours; each border face is emitted by
+  // exactly one chunk (the one that owns the solid voxel).
+  function meshChunk(colorAt, lo, hi){
+    const solid=(x,y,z)=>colorAt(x,y,z)>=0;
+    const quads=[];
+    for(let d=0; d<3; d++){
+      const u=(d+1)%3, v=(d+2)%3;
+      const eu=[0,0,0]; eu[u]=1; const ev=[0,0,0]; ev[v]=1;
+      const Wu=hi[u]-lo[u], Hv=hi[v]-lo[v];
+      if(Wu<=0||Hv<=0) continue;
+      const mask=new Array(Wu*Hv);   // null | {color,dir,ao[4],key}
+      for(let s=lo[d]; s<=hi[d]; s++){
+        let n=0;
+        for(let jv=lo[v]; jv<hi[v]; jv++){
+          for(let iu=lo[u]; iu<hi[u]; iu++, n++){
+            const A=[0,0,0]; A[u]=iu; A[v]=jv; A[d]=s-1;
+            const B=[0,0,0]; B[u]=iu; B[v]=jv; B[d]=s;
+            const a=colorAt(A[0],A[1],A[2]), b=colorAt(B[0],B[1],B[2]);
+            let rec=null;
+            if((a>=0)!==(b>=0)){
+              let owner=null, color=-1, dir=0;
+              if(a>=0){ if(s-1>=lo[d] && s-1<hi[d]){ owner=A; color=a; dir=1; } }
+              else    { if(s  >=lo[d] && s  <hi[d]){ owner=B; color=b; dir=-1; } }
+              if(owner){
+                const no=[0,0,0]; no[d]=dir;              // outward (empty) side
+                const oc=(dx,dy,dz)=> solid(owner[0]+no[0]+dx, owner[1]+no[1]+dy, owner[2]+no[2]+dz)?1:0;
+                const cAO=(su,sv)=>{                       // 0fps ambient-occlusion
+                  const s1=oc(su*eu[0],su*eu[1],su*eu[2]);
+                  const s2=oc(sv*ev[0],sv*ev[1],sv*ev[2]);
+                  const cr=oc(su*eu[0]+sv*ev[0], su*eu[1]+sv*ev[1], su*eu[2]+sv*ev[2]);
+                  return (s1&&s2)?0:(3-(s1+s2+cr));
+                };
+                const ao=[cAO(-1,-1),cAO(1,-1),cAO(1,1),cAO(-1,1)]; // ll, hl, hh, lh
+                rec={color,dir,ao,key:color+"|"+dir+"|"+ao[0]+ao[1]+ao[2]+ao[3]};
+              }
+            }
+            mask[n]=rec;
+          }
+        }
+        // merge cells with identical (color,dir,AO) into maximal quads
+        n=0;
+        for(let jv=0; jv<Hv; jv++){
+          for(let iu=0; iu<Wu;){
+            const rec=mask[n];
+            if(rec){
+              const key=rec.key;
+              let w=1; while(iu+w<Wu && mask[n+w] && mask[n+w].key===key) w++;
+              let h=1, stop=false;
+              while(jv+h<Hv){ for(let k=0;k<w;k++){ const m=mask[n+k+h*Wu]; if(!m||m.key!==key){stop=true;break;} } if(stop)break; h++; }
+              const p=[0,0,0]; p[d]=s; p[u]=lo[u]+iu; p[v]=lo[v]+jv;
+              const du=[0,0,0]; du[u]=w; const dv=[0,0,0]; dv[v]=h;
+              quads.push({p,du,dv,d,dir:rec.dir,color:rec.color,ao:rec.ao});
+              for(let l=0;l<h;l++) for(let k=0;k<w;k++) mask[n+k+l*Wu]=null;
+              iu+=w; n+=w;
+            } else { iu++; n++; }
+          }
+        }
+      }
     }
-    return new Float32Array(arr);
-  })();
+    return quads;
+  }
 
-  const vao=gl.createVertexArray(); gl.bindVertexArray(vao);
-  const cubeBuf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,cubeBuf);
-  gl.bufferData(gl.ARRAY_BUFFER,CUBE,gl.STATIC_DRAW);
-  const aPos=gl.getAttribLocation(prog,"aPos"), aNormal=gl.getAttribLocation(prog,"aNormal");
-  gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos,3,gl.FLOAT,false,24,0);
-  gl.enableVertexAttribArray(aNormal); gl.vertexAttribPointer(aNormal,3,gl.FLOAT,false,24,12);
+  function buildWorldMesh(w, mn, mx){
+    for(const c of chunks){ gl.deleteVertexArray(c.vao); gl.deleteBuffer(c.buf); }
+    chunks=[]; totalTris=0;
+    const dims=[mx[0]-mn[0]+1, mx[1]-mn[1]+1, mx[2]-mn[2]+1];
+    const vol=dims[0]*dims[1]*dims[2];
+    const rgb=w.palette.map(p=>hex2rgb(p.hex));
+    let colorAt;
+    if(vol<=8000000){
+      const grid=new Int32Array(vol);
+      const gidx=(x,y,z)=>((x*dims[1])+y)*dims[2]+z;
+      for(const b of w.blocks) grid[gidx(b[0]-mn[0],b[1]-mn[1],b[2]-mn[2])]=(b[3]|0)+1;
+      colorAt=(x,y,z)=> (x<0||y<0||z<0||x>=dims[0]||y>=dims[1]||z>=dims[2]) ? -1 : grid[gidx(x,y,z)]-1;
+    } else {
+      const map=new Map();
+      for(const b of w.blocks) map.set((b[0]-mn[0])+"_"+(b[1]-mn[1])+"_"+(b[2]-mn[2]), b[3]|0);
+      colorAt=(x,y,z)=>{ const val=map.get(x+"_"+y+"_"+z); return val===undefined?-1:val; };
+    }
+    const nc=[Math.ceil(dims[0]/CS),Math.ceil(dims[1]/CS),Math.ceil(dims[2]/CS)];
+    for(let cx=0;cx<nc[0];cx++)for(let cy=0;cy<nc[1];cy++)for(let cz=0;cz<nc[2];cz++){
+      const lo=[cx*CS,cy*CS,cz*CS];
+      const hi=[Math.min(lo[0]+CS,dims[0]),Math.min(lo[1]+CS,dims[1]),Math.min(lo[2]+CS,dims[2])];
+      const quads=meshChunk(colorAt,lo,hi);
+      if(!quads.length) continue;
+      const verts=[];
+      for(const q of quads){
+        const base=rgb[q.color]||[1,0,1];
+        const o=[mn[0]+q.p[0], mn[1]+q.p[1], mn[2]+q.p[2]];
+        const P0=o,
+              P1=[o[0]+q.du[0],o[1]+q.du[1],o[2]+q.du[2]],
+              P2=[o[0]+q.du[0]+q.dv[0],o[1]+q.du[1]+q.dv[1],o[2]+q.du[2]+q.dv[2]],
+              P3=[o[0]+q.dv[0],o[1]+q.dv[1],o[2]+q.dv[2]];
+        const nrm=[0,0,0]; nrm[q.d]=q.dir;
+        const ao=q.ao;
+        const C=i=>{ const b=0.5+(ao[i]/3)*0.5; return [base[0]*b,base[1]*b,base[2]*b]; }; // AO → corner brightness
+        const V0=[P0,C(0)],V1=[P1,C(1)],V2=[P2,C(2)],V3=[P3,C(3)];
+        // flip the split so the darker diagonal is shared (kills AO interpolation artifacts)
+        const tri = (ao[0]+ao[2] > ao[1]+ao[3]) ? [V1,V2,V3,V1,V3,V0] : [V0,V1,V2,V0,V2,V3];
+        for(const [P,c] of tri) verts.push(P[0],P[1],P[2], nrm[0],nrm[1],nrm[2], c[0],c[1],c[2]);
+      }
+      const arr=new Float32Array(verts);
+      const vao=gl.createVertexArray(); gl.bindVertexArray(vao);
+      const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf); gl.bufferData(gl.ARRAY_BUFFER,arr,gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(aPos);    gl.vertexAttribPointer(aPos,3,gl.FLOAT,false,36,0);
+      gl.enableVertexAttribArray(aNormal); gl.vertexAttribPointer(aNormal,3,gl.FLOAT,false,36,12);
+      gl.enableVertexAttribArray(aColor);  gl.vertexAttribPointer(aColor,3,gl.FLOAT,false,36,24);
+      const count=arr.length/9;
+      chunks.push({vao,buf,count, mn:[mn[0]+lo[0],mn[1]+lo[1],mn[2]+lo[2]], mx:[mn[0]+hi[0],mn[1]+hi[1],mn[2]+hi[2]]});
+      totalTris+=count/3;
+    }
+  }
 
-  const instBuf=gl.createBuffer();
-  const aOffset=gl.getAttribLocation(prog,"aOffset"), aColor=gl.getAttribLocation(prog,"aColor");
-  let instCount=0;
-  function uploadInstances(data){ // Float32Array [ox,oy,oz,r,g,b]*N
-    gl.bindVertexArray(vao);
-    gl.bindBuffer(gl.ARRAY_BUFFER,instBuf);
-    gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(aOffset); gl.vertexAttribPointer(aOffset,3,gl.FLOAT,false,24,0); gl.vertexAttribDivisor(aOffset,1);
-    gl.enableVertexAttribArray(aColor);  gl.vertexAttribPointer(aColor,3,gl.FLOAT,false,24,12); gl.vertexAttribDivisor(aColor,1);
-    instCount=data.length/6;
+  // frustum planes from a column-major VP; conservative AABB test via p-vertex
+  function frustumPlanes(m){
+    const r0=[m[0],m[4],m[8],m[12]], r1=[m[1],m[5],m[9],m[13]], r2=[m[2],m[6],m[10],m[14]], r3=[m[3],m[7],m[11],m[15]];
+    const raw=[
+      [r3[0]+r0[0],r3[1]+r0[1],r3[2]+r0[2],r3[3]+r0[3]],
+      [r3[0]-r0[0],r3[1]-r0[1],r3[2]-r0[2],r3[3]-r0[3]],
+      [r3[0]+r1[0],r3[1]+r1[1],r3[2]+r1[2],r3[3]+r1[3]],
+      [r3[0]-r1[0],r3[1]-r1[1],r3[2]-r1[2],r3[3]-r1[3]],
+      [r3[0]+r2[0],r3[1]+r2[1],r3[2]+r2[2],r3[3]+r2[3]],
+      [r3[0]-r2[0],r3[1]-r2[1],r3[2]-r2[2],r3[3]-r2[3]],
+    ];
+    return raw.map(p=>{ const n=Math.hypot(p[0],p[1],p[2])||1; return [p[0]/n,p[1]/n,p[2]/n,p[3]/n]; });
+  }
+  function aabbIn(planes,mn,mx){
+    for(const p of planes){
+      const px=p[0]>=0?mx[0]:mn[0], py=p[1]>=0?mx[1]:mn[1], pz=p[2]>=0?mx[2]:mn[2];
+      if(p[0]*px+p[1]*py+p[2]*pz+p[3] < 0) return false;
+    }
+    return true;
   }
   const uVP=gl.getUniformLocation(prog,"uVP"), uEye=gl.getUniformLocation(prog,"uEye"),
         uSun=gl.getUniformLocation(prog,"uSun"), uFogColor=gl.getUniformLocation(prog,"uFogColor"),
         uFogNear=gl.getUniformLocation(prog,"uFogNear"), uFogFar=gl.getUniformLocation(prog,"uFogFar");
 
-  gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+  gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE); // meshed quads carry explicit normals
   const SKY=[0.53,0.73,0.92];
   gl.clearColor(SKY[0],SKY[1],SKY[2],1);
 
@@ -253,20 +357,10 @@
 
   function setWorld(w){
     world=w;
-    // palette rgb
-    const pcols=w.palette.map(p=>hex2rgb(p.hex));
-    // instance data + bounds
     const N=w.blocks.length;
-    const data=new Float32Array(N*6);
     let mn=[1e9,1e9,1e9], mx=[-1e9,-1e9,-1e9];
-    for(let i=0;i<N;i++){
-      const b=w.blocks[i]; const c=pcols[b[3]]||[1,0,1];
-      const o=i*6;
-      data[o]=b[0]; data[o+1]=b[1]; data[o+2]=b[2];
-      data[o+3]=c[0]; data[o+4]=c[1]; data[o+5]=c[2];
-      for(let k=0;k<3;k++){ mn[k]=Math.min(mn[k],b[k]); mx[k]=Math.max(mx[k],b[k]); }
-    }
-    uploadInstances(data);
+    for(let i=0;i<N;i++){ const b=w.blocks[i]; for(let k=0;k<3;k++){ mn[k]=Math.min(mn[k],b[k]); mx[k]=Math.max(mx[k],b[k]); } }
+    buildWorldMesh(w, mn, mx);
     bounds={mn,mx,size:[mx[0]-mn[0]+1,mx[1]-mn[1]+1,mx[2]-mn[2]+1],
             ctr:[(mn[0]+mx[0])/2,(mn[1]+mx[1])/2,(mn[2]+mx[2])/2]};
     // fog based on size
@@ -280,6 +374,7 @@
     // HUD
     document.getElementById("nblocks").textContent=N.toLocaleString();
     document.getElementById("wsize").textContent=`${s[0]}×${s[1]}×${s[2]}`;
+    document.getElementById("meshinfo").textContent=`${totalTris.toLocaleString()} tris · ${chunks.length} chunks`;
     document.getElementById("veilName").textContent=w.name||"walk your data";
     renderLegend();
   }
@@ -461,12 +556,13 @@
     const P=perspective(1.15,aspect,0.1,600);
     const Vm=viewMat(eye,forward(),[0,1,0]);
     const VP=mul(P,Vm);
-    gl.useProgram(prog); gl.bindVertexArray(vao);
+    gl.useProgram(prog);
     gl.uniformMatrix4fv(uVP,false,VP);
     gl.uniform3fv(uEye,eye); gl.uniform3fv(uSun,sun);
     gl.uniform3fv(uFogColor,SKY); gl.uniform1f(uFogNear,fog[0]); gl.uniform1f(uFogFar,fog[1]);
-    if(instCount) gl.drawArraysInstanced(gl.TRIANGLES,0,36,instCount);
-    fpsN++; if(now-fpsT>500){ document.getElementById("fpsv").textContent=Math.round(fpsN*1000/(now-fpsT)); fpsN=0; fpsT=now; }
+    const planes=frustumPlanes(VP); let vis=0;
+    for(const c of chunks){ if(!aabbIn(planes,c.mn,c.mx)) continue; gl.bindVertexArray(c.vao); gl.drawArrays(gl.TRIANGLES,0,c.count); vis++; }
+    fpsN++; if(now-fpsT>500){ document.getElementById("fpsv").textContent=Math.round(fpsN*1000/(now-fpsT)); document.getElementById("visc").textContent=vis+"/"+chunks.length; fpsN=0; fpsT=now; }
     requestAnimationFrame(frame);
   }
 
