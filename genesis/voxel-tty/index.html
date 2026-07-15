@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In the Beginning, in a Terminal — an ASCII voxel engine · Project Genesis</title>
+<meta name="description" content="The same seven days, rendered by a hand-written ASCII/Unicode voxel engine straight into a terminal: a rotating 3-D diorama with a quaternion camera that slerps between the days. Rotation & interpolation math inspired by David Harrison (mr-mocap), Metro Atlanta. By Manny Glover.">
+<style>
+  :root{
+    --bg:#0a0c0b;            /* page frame — deep phosphor black */
+    --frame:#0e1210;
+    --panel:#0c100e;
+    --edge:#1c2621;
+    --edge-2:#2a3a32;
+    --dim:#4f6b5c;           /* dim phosphor */
+    --fg:#9be6b8;            /* phosphor green */
+    --bright:#d7ffe8;
+    --amber:#f5c542;         /* honey / the current day / light */
+    --amber-dim:#9c7e26;
+    --danger:#e0705a;
+    --mono:"SFMono-Regular","SF Mono","JetBrains Mono","Cascadia Mono",Consolas,"Liberation Mono",ui-monospace,monospace;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:light){
+    :root{ --bg:#e7e3d4; --frame:#f2eee1; --panel:#efe9d9; --edge:#d6cfb8; --edge-2:#c3b998;
+      --dim:#7a7658; --fg:#2f5d43; --bright:#1f3d2c; --amber:#b07d16; --amber-dim:#c8a544; color-scheme:light; }
+  }
+  :root[data-theme="dark"]{ --bg:#0a0c0b;--frame:#0e1210;--panel:#0c100e;--edge:#1c2621;--edge-2:#2a3a32;
+    --dim:#4f6b5c;--fg:#9be6b8;--bright:#d7ffe8;--amber:#f5c542;--amber-dim:#9c7e26;color-scheme:dark; }
+  :root[data-theme="light"]{ --bg:#e7e3d4;--frame:#f2eee1;--panel:#efe9d9;--edge:#d6cfb8;--edge-2:#c3b998;
+    --dim:#7a7658;--fg:#2f5d43;--bright:#1f3d2c;--amber:#b07d16;--amber-dim:#c8a544;color-scheme:light; }
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .page{
+    min-height:100vh;background:var(--bg);color:var(--fg);font-family:var(--mono);
+    display:flex;flex-direction:column;align-items:center;
+    padding:clamp(14px,2.6vw,30px);gap:clamp(14px,2vw,20px);
+    background-image:radial-gradient(120% 90% at 50% -20%, rgba(155,230,184,.05), transparent 55%);
+  }
+
+  /* masthead */
+  .mast{width:100%;max-width:1180px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+  .mast .lhs{display:flex;flex-direction:column;gap:6px;}
+  .kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);}
+  h1{margin:0;font-size:clamp(19px,3vw,28px);letter-spacing:.02em;color:var(--bright);font-weight:600;text-wrap:balance;}
+  h1 .sep{color:var(--amber);}
+  .byline{font-size:11px;letter-spacing:.14em;color:var(--dim);}
+  .tbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
+    color:var(--dim);border:1px solid var(--edge);padding:8px 12px;cursor:pointer;}
+  .tbtn:hover{color:var(--fg);border-color:var(--edge-2);}
+  .tbtn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+
+  /* terminal window */
+  .term{width:100%;max-width:1180px;border:1px solid var(--edge-2);background:#05060500;box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  @media (prefers-color-scheme:light){ .term{box-shadow:0 22px 50px rgba(80,70,30,.18);} }
+  .titlebar{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--frame);border-bottom:1px solid var(--edge);}
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.r{background:#e0705a;} .dot.y{background:#e0b34a;} .dot.g{background:#5ac07a;}
+  .titlebar .path{margin-left:8px;font-size:12px;color:var(--dim);letter-spacing:.04em;}
+  .titlebar .path b{color:var(--fg);font-weight:500;}
+  .titlebar .spacer{flex:1;}
+  .titlebar .meta{font-size:11px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;}
+
+  /* the screen (dark CRT — deliberately single-world regardless of page theme) */
+  .screen-wrap{position:relative;background:#05070a;overflow:hidden;}
+  #screen{
+    display:block;margin:0 auto;white-space:pre;font-family:var(--mono);
+    line-height:1;letter-spacing:0;color:#4a6b7a;
+    padding:10px 0;
+    text-shadow:0 0 6px rgba(120,255,180,.16);
+    -webkit-font-smoothing:none;
+  }
+  .crt-scan{position:absolute;inset:0;pointer-events:none;z-index:2;mix-blend-mode:overlay;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,.05) 0 1px, transparent 1px 3px);}
+  .crt-vig{position:absolute;inset:0;pointer-events:none;z-index:3;
+    background:radial-gradient(130% 110% at 50% 45%, transparent 55%, rgba(0,0,0,.55));}
+  @media (prefers-reduced-motion:no-preference){
+    .screen-wrap.grab{cursor:grabbing;}
+  }
+  .screen-wrap{cursor:grab;}
+
+  /* status bar */
+  .statusbar{display:flex;align-items:center;gap:14px;padding:8px 12px;background:var(--frame);border-top:1px solid var(--edge);
+    font-size:12px;letter-spacing:.06em;flex-wrap:wrap;}
+  .statusbar .seg{display:flex;align-items:center;gap:7px;color:var(--dim);}
+  .statusbar .seg b{color:var(--amber);font-weight:600;letter-spacing:.12em;}
+  .statusbar .seg .name{color:var(--bright);}
+  .statusbar .push{flex:1;}
+  .statusbar kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--edge-2);border-bottom-width:2px;
+    padding:1px 5px;color:var(--fg);background:rgba(255,255,255,.03);border-radius:3px;}
+  .statusbar .hint{color:var(--dim);}
+
+  /* lower deck: console + controls */
+  .deck{width:100%;max-width:1180px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:stretch;}
+  @media (max-width:800px){ .deck{grid-template-columns:1fr;} }
+
+  .console{background:var(--panel);border:1px solid var(--edge);padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-height:160px;}
+  .console .ref{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);}
+  .verse{font-size:clamp(14px,1.7vw,16px);line-height:1.6;color:var(--bright);margin:0;min-height:3.2em;}
+  .verse .cur{display:inline-block;width:.55ch;height:1.05em;background:var(--fg);vertical-align:-2px;margin-left:1px;
+    animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion:reduce){ .verse .cur{animation:none;} }
+  .log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:12.5px;}
+  .log li{display:flex;align-items:center;gap:9px;color:var(--fg);opacity:0;transform:translateX(-4px);animation:logi .34s ease forwards;}
+  .log li .k{color:var(--dim);}
+  .log li .sw{width:10px;height:10px;flex:0 0 auto;box-shadow:inset -3px -3px 0 rgba(0,0,0,.3),inset 3px 3px 0 rgba(255,255,255,.25);}
+  @keyframes logi{to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){ .log li{animation:none;opacity:1;transform:none;} }
+
+  .rack{display:flex;flex-direction:column;gap:14px;}
+  .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .key{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);
+    background:var(--frame);border:1px solid var(--edge-2);border-bottom-width:3px;padding:11px 10px;cursor:pointer;
+    transition:filter .1s,transform .05s;}
+  .key:hover{filter:brightness(1.25);}
+  .key:active{transform:translateY(1px);border-bottom-width:2px;}
+  .key.wide{grid-column:1 / -1;}
+  .key.go{color:#10160f;background:var(--amber);border-color:var(--amber-dim);}
+  .key:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  .key[disabled]{opacity:.4;cursor:not-allowed;filter:none;}
+
+  .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .day{position:relative;font-family:var(--mono);cursor:pointer;background:var(--frame);border:1px solid var(--edge);
+    padding:8px 2px 7px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--dim);}
+  .day .n{font-size:12px;letter-spacing:.06em;color:var(--fg);}
+  .day .sw{width:60%;height:9px;box-shadow:inset -3px -3px 0 rgba(0,0,0,.3),inset 3px 3px 0 rgba(255,255,255,.25);}
+  .day .t{font-size:8px;letter-spacing:.05em;text-transform:uppercase;}
+  .day:hover{border-color:var(--edge-2);}
+  .day[aria-current="true"]{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 1px var(--amber-dim) inset;}
+  .day:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  .rack .cap{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+  footer{max-width:1180px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);text-align:center;line-height:1.9;}
+  footer b{color:var(--fg);font-weight:500;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <div class="lhs">
+      <div class="kicker">Genesis <span style="color:var(--amber)">·</span> seven days</div>
+      <h1>voxel <span class="sep">//</span> ascii engine</h1>
+      <div class="byline">a 3d renderer that rasterizes into a text terminal — no gpu, no images, just characters. quaternion camera glides between the days.</div>
+    </div>
+    <button class="tbtn" id="theme" type="button">◐ theme</button>
+  </header>
+
+  <section class="term" aria-label="terminal">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="path">~/genesis <b>$</b> ./create --days 7 --render ascii-voxel</span>
+      <span class="spacer"></span>
+      <span class="meta" id="fps">— fps</span>
+    </div>
+    <div class="screen-wrap" id="screenWrap">
+      <pre id="screen" aria-hidden="true"></pre>
+      <div class="crt-scan"></div>
+      <div class="crt-vig"></div>
+    </div>
+    <div class="statusbar">
+      <span class="seg"><b id="stDay">DAY 0/7</b></span>
+      <span class="seg">›&nbsp;<span class="name" id="stName">the formless deep</span></span>
+      <span class="push"></span>
+      <span class="hint"><kbd>drag</kbd> rotate&nbsp;&nbsp;<kbd>←</kbd><kbd>→</kbd> days&nbsp;&nbsp;<kbd>space</kbd> create</span>
+    </div>
+  </section>
+
+  <section class="deck">
+    <div class="console">
+      <div class="ref" id="ref">GENESIS 1:1–2</div>
+      <p class="verse" id="verse"></p>
+      <ul class="log" id="log"></ul>
+    </div>
+    <div class="rack">
+      <div class="btns">
+        <button class="key" id="prev" type="button">◀ prev</button>
+        <button class="key" id="next" type="button">next ▶</button>
+        <button class="key go wide" id="play" type="button">▶ let there be…</button>
+        <button class="key wide" id="reset" type="button">↺ return to void</button>
+      </div>
+      <div>
+        <div class="cap" style="margin-bottom:7px;">days · the hotbar of creation</div>
+        <div class="days" id="days" role="tablist"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    text · <b>king james version, genesis 1–2</b> &nbsp;·&nbsp; engine · <b>hand-written ascii voxel rasterizer</b> &nbsp;·&nbsp; zero dependencies, static-host ready<br>
+    quaternion camera &amp; slerp day-transitions inspired by <b><a href="https://github.com/mr-mocap" target="_blank" rel="noopener">MathLib &amp; the dual-quaternion interpolator</a></b> of <b>MrMocap — David Harrison, Metro Atlanta, Georgia</b>
+  </footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ============ grid / buffers ============ */
+  const COLS = 104, ROWS = 46, CELLS = COLS*ROWS;
+  const chBuf = new Int16Array(CELLS);   // ramp index, -1 empty
+  const colBuf= new Int16Array(CELLS);   // color key
+  const zBuf  = new Float32Array(CELLS);
+  const RAMP = ["·","░","▒","▓","█"];
+
+  /* ============ materials ============ */
+  const MAT = {}; let matN=0;
+  function mat(name, rgb){ MAT[name]={id:matN, rgb}; return matN++; }
+  mat("water",[63,116,221]); mat("grass",[127,178,56]); mat("dirt",[139,90,43]);
+  mat("stone",[154,154,154]); mat("trunk",[122,94,56]); mat("leaf",[78,122,42]);
+  mat("cloud",[210,216,224]); mat("sun",[255,224,138]); mat("moon",[219,226,238]);
+  mat("light",[245,230,150]); mat("salmon",[224,138,60]); mat("bird",[111,224,160]);
+  mat("sheep",[238,231,216]); mat("sheepH",[60,58,52]); mat("cow",[106,82,54]);
+  mat("cowW",[239,233,223]); mat("playerT",[31,176,168]); mat("playerH",[202,160,109]);
+  mat("gold",[245,197,66]); mat("star",[220,232,245]); mat("void",[40,58,66]);
+  const MATS = Object.values(MAT).sort((a,b)=>a.id-b.id);
+
+  const LEVELS=6;
+  // COLOR[matId][level] -> css. warm[] = rest-tinted variant
+  const COLOR=[], WARM=[];
+  function shade(rgb,b){ return `rgb(${Math.min(255,rgb[0]*b)|0},${Math.min(255,rgb[1]*b)|0},${Math.min(255,rgb[2]*b)|0})`; }
+  MATS.forEach(m=>{
+    const c=[],w=[];
+    for(let l=0;l<LEVELS;l++){
+      const b=0.4+0.6*l/(LEVELS-1);
+      c.push(shade(m.rgb,b));
+      const wr=[ (m.rgb[0]*0.7+245*0.3), (m.rgb[1]*0.7+197*0.3), (m.rgb[2]*0.7+66*0.3) ];
+      w.push(shade(wr,b*1.05));
+    }
+    COLOR.push(c); WARM.push(w);
+  });
+  const key=(matId,lvl)=> matId*LEVELS+lvl;
+  const keyMat=k=>(k/LEVELS)|0, keyLvl=k=>k%LEVELS;
+
+  /* ============ scene ============ */
+  const R=5;
+  const terrain=[]; const props=[];
+  const heightAt={};
+  for(let x=-R;x<=R;x++) for(let z=-R;z<=R;z++){
+    const d=Math.hypot(x,z);
+    const e=2.75 - d*0.62 + 0.7*Math.sin(x*0.8+0.6)*Math.cos(z*0.7-0.3);
+    const top=Math.floor(e);
+    if(top>=1){ const h=Math.min(top,3); heightAt[x+","+z]=h; }
+  }
+  const isLand=(x,z)=> (x+","+z) in heightAt;
+  const H=(x,z)=> heightAt[x+","+z]||0;
+
+  // water (day2) — the deep, below the firmament
+  for(let x=-R;x<=R;x++) for(let z=-R;z<=R;z++){
+    terrain.push({x,y:0,z,m:MAT.water.id,day:2,solid:true});
+  }
+  // land (day3)
+  for(const k in heightAt){ const [x,z]=k.split(",").map(Number); const h=heightAt[k];
+    for(let y=1;y<=h;y++){ const m = y===h?MAT.grass.id : (y===1?MAT.stone.id:MAT.dirt.id);
+      terrain.push({x,y,z,m,day:3,solid:true}); } }
+  // trees (day3)
+  [[-1,-1],[2,1],[1,-3],[-3,1],[3,-1]].forEach(([x,z])=>{
+    if(!isLand(x,z)) return; const b=H(x,z);
+    terrain.push({x,y:b+1,z,m:MAT.trunk.id,day:3,solid:true});
+    terrain.push({x,y:b+2,z,m:MAT.trunk.id,day:3,solid:true});
+    const lt=b+3;
+    [[0,0,0],[1,0,0],[-1,0,0],[0,0,1],[0,0,-1],[0,1,0]].forEach(([dx,dy,dz])=>
+      terrain.push({x:x+dx,y:lt+dy,z:z+dz,m:MAT.leaf.id,day:3,solid:true}));
+  });
+
+  // props (no occupancy culling)
+  // first light (day1) — a lone glowstone, retired when the sun rises (day4)
+  props.push({x:0,y:5,z:0,m:MAT.light.id,day:1,hide:4});
+  // firmament clouds (day2)
+  [[-4,1],[-1,-1],[2,2],[4,-1],[0,3]].forEach(([x,z],i)=>
+    props.push({x,y:6,z,m:MAT.cloud.id,day:2,anim:t=>[Math.sin(t*0.4+i)*0.4,0,0]}));
+  // sun (day4) 2x2x2 cluster + moon + stars
+  for(let a=0;a<2;a++)for(let b=0;b<2;b++)for(let c=0;c<2;c++)
+    props.push({x:6+a,y:7+b,z:-4+c,m:MAT.sun.id,day:4});
+  props.push({x:-6,y:7,z:4,m:MAT.moon.id,day:4});
+  props.push({x:-6,y:8,z:4,m:MAT.moon.id,day:4});
+  // fish (day5)
+  [[-3,3],[3,3],[-4,-2],[4,2]].forEach(([x,z],i)=>
+    props.push({x,y:0,z,m:MAT.salmon.id,day:5,anim:t=>[Math.sin(t*0.7+i)*1.1,0.35,Math.cos(t*0.5+i)*0.6]}));
+  // birds (day5)
+  [[-2,-2],[1,-3],[3,1]].forEach(([x,z],i)=>
+    props.push({x,y:6,z,m:MAT.bird.id,day:5,anim:t=>[Math.sin(t*0.6+i*2)*1.6,Math.sin(t*1.5+i)*0.3,Math.cos(t*0.6+i*2)*1.0]}));
+  // beasts + player (day6)
+  (()=>{ let x=1,z=2; if(isLand(x,z)){const b=H(x,z);
+    props.push({x,y:b+1,z,m:MAT.sheep.id,day:6}); props.push({x:x+1,y:b+1,z,m:MAT.sheepH.id,day:6});} })();
+  (()=>{ let x=-2,z=-1; if(isLand(x,z)){const b=H(x,z);
+    props.push({x,y:b+1,z,m:MAT.cow.id,day:6}); props.push({x:x+1,y:b+1,z,m:MAT.cowW.id,day:6});} })();
+  (()=>{ let x=0,z=0; const b=isLand(x,z)?H(x,z):3;
+    props.push({x,y:b+1,z,m:MAT.playerT.id,day:6,anim:t=>[0,Math.sin(t*1.2)*0.06,0]});
+    props.push({x,y:b+2,z,m:MAT.playerH.id,day:6,anim:t=>[0,Math.sin(t*1.2)*0.06,0]}); })();
+
+  const ALL = terrain.concat(props);
+  // reveal ordering per day group (bottom-up, outward)
+  const groups={};
+  ALL.forEach(v=>{ (groups[v.day]=groups[v.day]||[]).push(v); });
+  for(const d in groups){ groups[d].sort((a,b)=> a.y-b.y || (Math.abs(a.x)+Math.abs(a.z))-(Math.abs(b.x)+Math.abs(b.z)) );
+    groups[d].forEach((v,i)=> v.ord=i); }
+
+  // occupancy set for face culling (rebuilt per day)
+  let occ = new Set();
+  function rebuildOcc(day){ occ=new Set(); terrain.forEach(v=>{ if(v.day<=day) occ.add(v.x+"|"+v.y+"|"+v.z); }); }
+
+  /* ============ face defs ============ */
+  const FACES=[
+    {n:[1,0,0], u:[0,1,0], v:[0,0,1]},
+    {n:[-1,0,0],u:[0,1,0], v:[0,0,1]},
+    {n:[0,1,0], u:[1,0,0], v:[0,0,1]},
+    {n:[0,-1,0],u:[1,0,0], v:[0,0,1]},
+    {n:[0,0,1], u:[1,0,0], v:[0,1,0]},
+    {n:[0,0,-1],u:[1,0,0], v:[0,1,0]},
+  ];
+  const L=(()=>{ const v=[-0.4,0.68,0.62]; const m=Math.hypot(...v); return [v[0]/m,v[1]/m,v[2]/m]; })();
+  const S=6;
+  const A=[]; for(let i=0;i<S;i++) A.push(-1 + 2*(i+0.5)/S);
+
+  /* ============ camera / render ============ */
+  const SCx=4.35, SCy=2.35, CXs=COLS/2, CYs=ROWS*0.54;
+  let yaw=0.7, pitch=0.52, autoYaw=true, dragging=false;
+
+  /* --- quaternion camera --------------------------------------------------
+     Inspired by MathLib & the dual-quaternion interpolator of MrMocap —
+     David Harrison, Metro Atlanta, Georgia (github.com/mr-mocap).
+     Independent JS re-implementation of standard quaternion algebra
+     (Hamilton) and slerp (Shoemake); no source copied.                     */
+  function qaxis(ax,ang){ const h=ang/2, s=Math.sin(h); return [Math.cos(h), ax[0]*s, ax[1]*s, ax[2]*s]; }
+  function qmul(a,b){ return [
+    a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],
+    a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],
+    a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],
+    a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0] ]; }
+  function qnorm(q){ const m=Math.hypot(q[0],q[1],q[2],q[3])||1; return [q[0]/m,q[1]/m,q[2]/m,q[3]/m]; }
+  // rotate vector v by unit quaternion q (v' = q v q*), optimized form
+  function qrot(q,v){
+    const w=q[0],x=q[1],y=q[2],z=q[3];
+    const tx=2*(y*v[2]-z*v[1]), ty=2*(z*v[0]-x*v[2]), tz=2*(x*v[1]-y*v[0]);
+    return [ v[0]+w*tx+(y*tz-z*ty), v[1]+w*ty+(z*tx-x*tz), v[2]+w*tz+(x*ty-y*tx) ];
+  }
+  // shortest-path slerp; handles the antipodal / near-parallel cases
+  // (the 0–180° edge his MathLib README flags on slerp())
+  function qslerp(a,b,t){
+    let d=a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3];
+    if(d<0){ b=[-b[0],-b[1],-b[2],-b[3]]; d=-d; }        // pick the short arc
+    if(d>0.9995){ return qnorm([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1]),a[2]+t*(b[2]-a[2]),a[3]+t*(b[3]-a[3])]); }
+    const th=Math.acos(d), s=Math.sin(th), wa=Math.sin((1-t)*th)/s, wb=Math.sin(t*th)/s;
+    return [a[0]*wa+b[0]*wb, a[1]*wa+b[1]*wb, a[2]*wa+b[2]*wb, a[3]*wa+b[3]*wb];
+  }
+  const camQuat=(y,p)=> qmul(qaxis([1,0,0],p), qaxis([0,1,0],y)); // yaw about Y, then pitch about X
+  const easeInOut=t=> t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+
+  // a hand-framed viewpoint per day; the camera slerps to it on each change
+  const FRAME=[
+    {y:0.70,p:0.52}, // 0 void
+    {y:0.55,p:0.40}, // 1 look up toward first light
+    {y:0.95,p:0.50}, // 2 firmament
+    {y:0.60,p:0.58}, // 3 island revealed
+    {y:-0.85,p:0.44},// 4 swing to the sun
+    {y:1.20,p:0.50}, // 5 over the seas
+    {y:0.32,p:0.63}, // 6 look down on the creatures
+    {y:0.70,p:0.50}, // 7 settle for rest
+  ];
+  let slerpState=null;
+  function startSlerp(now,ty,tp){
+    const from = slerpState ? slerpState.cur.slice() : camQuat(yaw,pitch);
+    slerpState = { from, to:camQuat(ty,tp), t0:now, dur:1200, ty, tp, cur:from.slice() };
+  }
+  function computeCamera(now,dt){
+    if(slerpState){
+      let tt=(now-slerpState.t0)/slerpState.dur;
+      if(tt>=1){ yaw=slerpState.ty; pitch=slerpState.tp; slerpState=null; return camQuat(yaw,pitch); }
+      const q=qslerp(slerpState.from, slerpState.to, easeInOut(tt)); slerpState.cur=q; return q;
+    }
+    if(autoYaw && !dragging && !reduce) yaw += 0.0003*dt; // gentle ambient spin
+    return camQuat(yaw,pitch);
+  }
+  function renderNow(){ render(performance.now(), slerpState?slerpState.cur:camQuat(yaw,pitch)); }
+  function rampChar(b){ return b<0.2?0 : b<0.42?1 : b<0.62?2 : b<0.8?3 : 4; }
+  function lvlOf(b){ let l=Math.floor(b*LEVELS); return l<0?0:l>LEVELS-1?LEVELS-1:l; }
+
+  let curDay=0, dayT0=0, warm=false;
+  function nowMs(){ return performance.now(); }
+
+  function render(now,q){
+    chBuf.fill(-1); zBuf.fill(-1e9);
+    const t = now*0.001;
+
+    // per-face rotated basis + shading (shared across voxels)
+    const F=[];
+    for(const f of FACES){
+      const rn=qrot(q,f.n);
+      const vis = rn[2] > 0.001;
+      const dot = rn[0]*L[0]+rn[1]*L[1]+rn[2]*L[2];
+      const bright = 0.24 + 0.76*Math.max(0,dot);
+      const ru=qrot(q,f.u);
+      const rv=qrot(q,f.v);
+      // precompute scaled sample vectors (half-unit)
+      const su=A.map(a=>[a*0.5*ru[0], a*0.5*ru[1], a*0.5*ru[2]]);
+      const sv=A.map(a=>[a*0.5*rv[0], a*0.5*rv[1], a*0.5*rv[2]]);
+      F.push({vis,bright,rc:rampChar(bright),lvl:lvlOf(bright),
+        hn:[0.5*rn[0],0.5*rn[1],0.5*rn[2]], su, sv, nkey:f.n});
+    }
+
+    const revealCount = reduce ? 1e9 : Math.floor((now-dayT0)/9);
+
+    for(const v of ALL){
+      if(v.day>curDay) continue;
+      if(v.hide && curDay>=v.hide) continue;
+      if(v.day===curDay && v.ord>revealCount) continue;
+      let cx=v.x, cy=v.y, cz=v.z;
+      if(v.anim && !reduce){ const o=v.anim(t); cx+=o[0]; cy+=o[1]; cz+=o[2]; }
+      const cr=qrot(q,[cx,cy,cz]);
+      for(let fi=0;fi<6;fi++){
+        const f=F[fi]; if(!f.vis) continue;
+        if(v.solid){ const nk=(v.x+f.nkey[0])+"|"+(v.y+f.nkey[1])+"|"+(v.z+f.nkey[2]); if(occ.has(nk)) continue; }
+        const bx=cr[0]+f.hn[0], by=cr[1]+f.hn[1], bz=cr[2]+f.hn[2];
+        const rc=f.rc, ck=key(v.m, f.lvl);
+        for(let i=0;i<S;i++){
+          const ux=bx+f.su[i][0], uy=by+f.su[i][1], uz=bz+f.su[i][2];
+          for(let j=0;j<S;j++){
+            const px=ux+f.sv[j][0], py=uy+f.sv[j][1], pz=uz+f.sv[j][2];
+            const col=(CXs+px*SCx)|0, row=(CYs - py*SCy)|0;
+            if(col<0||col>=COLS||row<0||row>=ROWS) continue;
+            const idx=row*COLS+col;
+            if(pz>zBuf[idx]){ zBuf[idx]=pz; chBuf[idx]=rc; colBuf[idx]=ck; }
+          }
+        }
+      }
+    }
+
+    // backdrop: the deep (day<2) faint drift; stars (day>=4)
+    drawBackdrop(now);
+    // rest glow motes (day>=7)
+    if(curDay>=7 && !reduce) drawMotes(now);
+
+    serialize();
+  }
+
+  const starField=[]; // fixed pseudo-random
+  (()=>{ let s=1234567; const rnd=()=>{ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; };
+    for(let i=0;i<120;i++) starField.push({c:(rnd()*COLS)|0, r:(rnd()*ROWS*0.5)|0, ph:rnd()*6.28, big:rnd()<0.15});
+  })();
+  const motePts=[]; (()=>{ let s=987; const rnd=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+    for(let i=0;i<40;i++) motePts.push({c:(rnd()*COLS)|0, r0:rnd(), sp:0.3+rnd()*0.7, ph:rnd()*6.28}); })();
+
+  function put(col,row,ramp,ck){ if(col<0||col>=COLS||row<0||row>=ROWS)return; const i=row*COLS+col;
+    if(chBuf[i]===-1){ chBuf[i]=ramp; colBuf[i]=ck; } }
+
+  function drawBackdrop(now){
+    if(curDay===0 || curDay===1){
+      // the formless deep — faint drifting specks
+      const t=now*0.001;
+      for(let i=0;i<70;i++){
+        const c=((i*37 + (t*4|0)) % COLS);
+        const r=((i*53 + (i*i))%ROWS);
+        put(c|0, r|0, 0, key(MAT.void.id, curDay===1?3:1));
+      }
+    }
+    if(curDay>=4){
+      const tw=reduce?1:1;
+      for(const st of starField){
+        const b= reduce?0.8:(0.45+0.55*Math.sin(now*0.002+st.ph));
+        put(st.c, st.r, st.big?1:0, key(MAT.star.id, lvlOf(b)));
+      }
+    }
+  }
+  function drawMotes(now){
+    for(const m of motePts){
+      const rr=((m.r0 - now*0.00003*m.sp)%1+1)%1;
+      const b=0.4+0.5*Math.sin(now*0.001*m.sp+m.ph)**2;
+      put(m.c, (rr*ROWS)|0, 0, key(MAT.gold.id, lvlOf(b)));
+    }
+  }
+
+  /* ============ serialize (RLE by color) ============ */
+  const screen=document.getElementById("screen");
+  const PAL = ()=> warm?WARM:COLOR;
+  function serialize(){
+    const pal=PAL(); let out="";
+    for(let r=0;r<ROWS;r++){
+      let line="", run="", curKey=-2;
+      for(let c=0;c<COLS;c++){
+        const i=r*COLS+c, ch=chBuf[i];
+        if(ch===-1){ // empty
+          if(curKey!==-1){ if(run){ line+=span(curKey,run,pal); run=""; } curKey=-1; }
+          run+=" ";
+        } else {
+          const ck=colBuf[i];
+          if(ck!==curKey){ if(run){ line+=span(curKey,run,pal); run=""; } curKey=ck; }
+          run+=RAMP[ch];
+        }
+      }
+      if(run) line+=span(curKey,run,pal);
+      out+=line+"\n";
+    }
+    screen.innerHTML=out;
+  }
+  function span(k,txt,pal){
+    if(k===-1) return txt; // empty -> default fg
+    return `<span style="color:${pal[keyMat(k)][keyLvl(k)]}">${txt}</span>`;
+  }
+
+  /* ============ loop ============ */
+  let raf=0, lastF=0, fpsT=0, fpsN=0;
+  const fpsEl=document.getElementById("fps");
+  function frame(now){
+    if(now-lastF >= (reduce?1000:33)){
+      const dt=(now-lastF)||16;
+      const q=computeCamera(now,dt);
+      render(now,q);
+      // fps
+      fpsN++; if(now-fpsT>500){ fpsEl.textContent=Math.round(fpsN*1000/(now-fpsT))+" fps"; fpsN=0; fpsT=now; }
+      lastF=now;
+    }
+    raf=requestAnimationFrame(frame);
+  }
+
+  /* ============ content / UI ============ */
+  const DAYS=[
+    {tag:"DAY 0/7",name:"the formless deep",ref:"GENESIS 1:1–2",
+     verse:"In the beginning God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep.",
+     sw:"#283a42",log:[]},
+    {tag:"DAY 1/7",name:"light",ref:"GENESIS 1:3–4",
+     verse:"And God said, Let there be light: and there was light. And God divided the light from the darkness.",
+     sw:"#f5e696",log:[["#f5e696","placed  glowstone × 1"],["#1b2a4a","divided  light ⁄ dark"]]},
+    {tag:"DAY 2/7",name:"the firmament",ref:"GENESIS 1:6–8",
+     verse:"And God made the firmament, and divided the waters which were under the firmament from the waters above: and God called the firmament Heaven.",
+     sw:"#3f74dd",log:[["#d2d8e0","raised  firmament"],["#3f74dd","gathered  the waters"],["#d2d8e0","spawned  clouds × 5"]]},
+    {tag:"DAY 3/7",name:"land & seed",ref:"GENESIS 1:9–12",
+     verse:"Let the dry land appear… And the earth brought forth grass, and the herb yielding seed, and the tree yielding fruit.",
+     sw:"#7fb238",log:[["#7fb238","raised  grass × many"],["#8b5a2b","stacked  dirt · stone"],["#4e7a2a","planted  oak × 5"]]},
+    {tag:"DAY 4/7",name:"sun, moon & stars",ref:"GENESIS 1:16",
+     verse:"And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.",
+     sw:"#ffe08a",log:[["#ffe08a","set  sun  (rule day)"],["#dbe2ee","set  moon  (rule night)"],["#dce8f5","scattered  stars × ∞"]]},
+    {tag:"DAY 5/7",name:"fish & fowl",ref:"GENESIS 1:20–21",
+     verse:"Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth.",
+     sw:"#e08a3c",log:[["#e08a3c","spawned  salmon × 4"],["#6fe0a0","spawned  parrot × 3"],["#3f74dd","filled  the seas"]]},
+    {tag:"DAY 6/7",name:"beasts & humankind",ref:"GENESIS 1:24–27",
+     verse:"Let the earth bring forth the living creature after his kind… So God created man in his own image.",
+     sw:"#1fb0a8",log:[["#eee7d8","spawned  sheep"],["#6a5236","spawned  cow"],["#1fb0a8","spawned  player  // imago dei"]]},
+    {tag:"DAY 7/7",name:"rest",ref:"GENESIS 2:2–3",
+     verse:"And on the seventh day God ended his work; and he rested… And God blessed the seventh day, and sanctified it.",
+     sw:"#f5c542",log:[["#f5c542","gamerule doDaylightCycle false"],["#9c7e26","blessed  the seventh day"],["#d7ffe8","he rested."]]},
+  ];
+  const SHORT=["void","light","sky","land","lights","life","beasts","rest"];
+
+  const refEl=document.getElementById("ref"), verseEl=document.getElementById("verse"),
+        logEl=document.getElementById("log"), stDay=document.getElementById("stDay"),
+        stName=document.getElementById("stName"), daysEl=document.getElementById("days");
+
+  // build day tabs
+  for(let i=0;i<7;i++){ const d=DAYS[i+1];
+    const b=document.createElement("button"); b.className="day"; b.type="button"; b.setAttribute("role","tab");
+    b.innerHTML=`<span class="n">${["I","II","III","IV","V","VI","VII"][i]}</span>
+      <span class="sw" style="background:${d.sw}"></span><span class="t">${SHORT[i+1]}</span>`;
+    b.addEventListener("click",()=>{ stopPlay(); goDay(i+1); });
+    daysEl.appendChild(b);
+  }
+
+  // typewriter
+  let twTimer=0;
+  function typeVerse(text){
+    clearTimeout(twTimer);
+    if(reduce){ verseEl.innerHTML=text+'<span class="cur"></span>'; return; }
+    let n=0; const step=()=>{ n++; verseEl.innerHTML=text.slice(0,n)+'<span class="cur"></span>';
+      if(n<text.length) twTimer=setTimeout(step, 12); };
+    step();
+  }
+
+  function renderPanel(){
+    const d=DAYS[curDay];
+    stDay.textContent=d.tag; stName.textContent=d.name; refEl.textContent=d.ref;
+    typeVerse(d.verse);
+    logEl.innerHTML="";
+    d.log.forEach((row,i)=>{ const li=document.createElement("li"); li.style.animationDelay=(0.25+i*0.14)+"s";
+      li.innerHTML=`<span class="k">›</span><span class="sw" style="background:${row[0]}"></span>${row[1]}`; logEl.appendChild(li); });
+    if(!d.log.length){ const li=document.createElement("li"); li.innerHTML='<span class="k">›</span> awaiting the Word…'; li.style.color="var(--dim)"; logEl.appendChild(li); }
+    [...daysEl.children].forEach((c,i)=> c.setAttribute("aria-current", String(i+1===curDay)));
+    document.getElementById("prev").disabled=curDay<=0;
+    document.getElementById("next").disabled=curDay>=7;
+  }
+
+  function goDay(n){
+    curDay=Math.max(0,Math.min(7,n)); dayT0=nowMs(); warm=(curDay>=7);
+    rebuildOcc(curDay); renderPanel();
+    const f=FRAME[curDay];
+    if(reduce){ yaw=f.y; pitch=f.p; slerpState=null; renderNow(); }
+    else startSlerp(nowMs(), f.y, f.p);   // glide the camera to this day's framing
+  }
+
+  document.getElementById("next").addEventListener("click",()=>{ stopPlay(); goDay(curDay+1); });
+  document.getElementById("prev").addEventListener("click",()=>{ stopPlay(); goDay(curDay-1); });
+  document.getElementById("reset").addEventListener("click",()=>{ stopPlay(); goDay(0); });
+
+  let playing=false, playTimer=0; const playBtn=document.getElementById("play");
+  function stopPlay(){ playing=false; clearTimeout(playTimer); playBtn.textContent="▶ let there be…"; }
+  playBtn.addEventListener("click",()=>{
+    if(playing){ stopPlay(); return; }
+    playing=true; playBtn.textContent="⏸ pause";
+    if(curDay>=7) goDay(0);
+    const step=()=>{ if(!playing) return; if(curDay>=7){ stopPlay(); return; }
+      goDay(curDay+1); playTimer=setTimeout(step, reduce?1000:2300); };
+    playTimer=setTimeout(step, 400);
+  });
+
+  addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"){ e.preventDefault(); stopPlay(); goDay(curDay+1); }
+    else if(e.key==="ArrowLeft"){ e.preventDefault(); stopPlay(); goDay(curDay-1); }
+    else if(e.key===" "){ e.preventDefault(); playBtn.click(); }
+  });
+
+  // drag to rotate
+  const wrap=document.getElementById("screenWrap");
+  let px=0,py=0;
+  wrap.addEventListener("pointerdown",e=>{ dragging=true; slerpState=null; wrap.classList.add("grab"); px=e.clientX; py=e.clientY; wrap.setPointerCapture(e.pointerId); });
+  wrap.addEventListener("pointermove",e=>{ if(!dragging)return; slerpState=null; yaw += (e.clientX-px)*0.01; pitch=Math.max(0.05,Math.min(1.2, pitch - (e.clientY-py)*0.006)); px=e.clientX; py=e.clientY; if(reduce) renderNow(); });
+  const endDrag=e=>{ if(!dragging)return; dragging=false; wrap.classList.remove("grab"); };
+  wrap.addEventListener("pointerup",endDrag); wrap.addEventListener("pointercancel",endDrag);
+
+  // theme
+  const root=document.documentElement;
+  document.getElementById("theme").addEventListener("click",()=>{
+    const cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+    root.setAttribute("data-theme", cur==="dark"?"light":"dark");
+  });
+
+  /* ============ fit font ============ */
+  function fit(){
+    const wrapW=wrap.clientWidth || 900;
+    // monospace advance ≈ 0.6em; fill width
+    let fs=Math.floor(wrapW/(COLS*0.6));
+    fs=Math.max(6,Math.min(fs,16));
+    screen.style.fontSize=fs+"px";
+  }
+  new ResizeObserver(fit).observe(wrap);
+  addEventListener("resize",fit);
+
+  /* ============ boot ============ */
+  fit(); goDay(0); rebuildOcc(0);
+  raf=requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
