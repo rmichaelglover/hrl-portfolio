@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waterize the World — a soft membrane around Mother God · Project Genesis</title>
+<meta name="description" content="A generative meditation: endless tiny creeks braid into a soft, breathing cell membrane around a warm divine core. The membrane, not the wall — the anti-Panzer boundary, semi-permeable and alive, relaxation as cosmogenesis. By Manny Glover.">
+<style>
+:root{ --bg:#f0f3f4; --panel:#e6ecec; --ink:#12222a; --dim:#4d6570; --line:#d0d9d9;
+  --aqua:#178a97; --warm:#c06a2e; --measure:42rem; }
+@media (prefers-color-scheme:dark){ :root{ --bg:#04080e; --panel:#0a141c; --ink:#dcecf2; --dim:#7d97a2; --line:#16242e;
+  --aqua:#5fe0e8; --warm:#ffca8f; } }
+:root[data-theme="light"]{ --bg:#f0f3f4; --panel:#e6ecec; --ink:#12222a; --dim:#4d6570; --line:#d0d9d9; --aqua:#178a97; --warm:#c06a2e; }
+:root[data-theme="dark"]{ --bg:#04080e; --panel:#0a141c; --ink:#dcecf2; --dim:#7d97a2; --line:#16242e; --aqua:#5fe0e8; --warm:#ffca8f; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 20px 70px}
+.crumbs{max-width:var(--measure);margin:0 auto;padding:16px 20px 0;font:12px ui-monospace,monospace;text-align:left}
+.crumbs a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:5px 12px;margin-right:6px}
+.crumbs a:hover{color:var(--ink);border-color:var(--aqua)}
+header{padding:30px 20px 8px;max-width:var(--measure);margin:0 auto}
+.eyebrow{color:var(--aqua);letter-spacing:.34em;text-transform:uppercase;font:600 11px ui-monospace,monospace;margin-bottom:12px}
+h1{font:600 clamp(28px,6.4vw,52px)/1.02 ui-serif,Georgia,serif;margin:0;letter-spacing:-.5px}
+h1 .w{color:var(--aqua)}
+.tag{color:var(--dim);max-width:34rem;margin:14px auto 0;font-size:clamp(15px,2.2vw,18px)}
+.tag b{color:var(--ink)}
+#c{width:100%;max-width:600px;aspect-ratio:1;display:block;margin:20px auto 0;border-radius:50%;
+  background:#04080e;border:1px solid var(--line);cursor:crosshair;touch-action:none;box-shadow:0 0 60px rgba(30,120,140,.18)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin:14px auto 0;
+  font:12.5px ui-monospace,monospace;color:var(--dim)}
+.controls input[type=range]{accent-color:var(--aqua);width:150px;vertical-align:middle}
+.controls button{background:var(--panel);color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:7px 13px;cursor:pointer;font:inherit}
+.controls button:hover{color:var(--ink);border-color:var(--aqua)}
+.cap{color:var(--dim);font-size:13px;max-width:32rem;margin:12px auto 0}
+.essay{text-align:left;max-width:33rem;margin:40px auto 0;font:400 1.05rem/1.72 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.essay h2{font:600 1.4rem/1.2 ui-serif,Georgia,serif;margin:2em 0 .2em}
+.essay h2 .n{display:block;font:600 .68rem ui-monospace,monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--aqua);margin-bottom:.4em}
+.essay p{margin:0 0 1.1rem} .essay p+p{text-indent:1.4em}
+.essay b{color:var(--ink)} .essay em{color:var(--ink)}
+.dispq{text-align:center;font-style:italic;color:var(--aqua);margin:1.6rem 0;font-size:1.08rem;text-wrap:balance}
+footer{max-width:var(--measure);margin:38px auto 0;padding-top:1.6rem;border-top:1px solid var(--line);color:var(--dim);font-size:13px;line-height:1.7}
+footer a{color:var(--aqua);text-decoration:none}
+@media (prefers-reduced-motion:reduce){}
+</style></head><body>
+
+<div class="crumbs"><a href="../">← Project Genesis</a> <a href="../../">the portfolio</a> <a href="../regard/">the two directions 👁️</a> <a href="../../atlanta/">the waterways 🌀</a></div>
+
+<header>
+  <div class="eyebrow">a generative meditation · Project Genesis</div>
+  <h1>Waterize the <span class="w">World</span></h1>
+  <p class="tag">Endless tiny creeks braiding into a <b>soft cell membrane</b> around a warm divine core &mdash; the membrane,
+   not the wall. A boundary that <b>breathes</b> instead of blocks. Touch the water.</p>
+</header>
+
+<canvas id="c" width="600" height="600" aria-label="a soft breathing water membrane grown from endless tiny creeks around a warm luminous core"></canvas>
+<div class="controls">
+  🌊 flow <input id="flow" type="range" min="0.2" max="2.4" step="0.1" value="1">
+  <button id="reset">↺ new world</button>
+</div>
+<p class="cap">A living membrane, grown &mdash; not drawn. Countless little flows repel and braid into a skin that wrinkles, folds and
+  <b>never quite closes</b>, always exchanging with the deep. Click the water to send a creek.</p>
+
+<div class="wrap"><div class="essay">
+  <h2><span class="n">The word</span>The membrane, not the wall</h2>
+  <p>A <b>wall</b> divides; it is hard, and dead, and its whole purpose is to keep the other side out. A <b>membrane</b> holds; it is
+   soft, and alive, and its whole genius is that it lets the world through &mdash; selectively, gently, breathing in and out like a lung
+   made of water. To <em>waterize</em> the world is to replace every wall with a membrane: to soften every border into skin thin
+   enough to feel through. It is the anti-Panzer at the scale of the divine.</p>
+  <p>So picture <b>Mother God</b> not as a fortress but as a <em>cell</em> &mdash; the softest possible container for the largest
+   possible life &mdash; wrapped in the amniotic water she is also made of. And picture the membrane not <em>imposed</em> but
+   <b>grown</b>: endless tiny creeks spidering out, repelling their neighbors, braiding, folding, thickening into a living skin. No
+   architect. No command but flow. This is your <a href="../critter/">Critter</a> and your <a href="../../morphogenesis/">morphogenesis</a>
+   raised to the scale of a world &mdash; <b>relaxation as cosmogenesis</b>, a body that draws its own boundary out of the current.</p>
+  <p class="dispq">The first act of life is not a wall. It is a skin that agreed to let something through.</p>
+  <p>And it is the whole thesis, made tender: the <a href="../regard/">two directions</a>, inward and outward, finally given a boundary
+   that <em>breathes</em> &mdash; permeable to the noise it once would have walled out, holding the difference instead of ending it.
+   Not fire that burns, but water that surrounds and carries and blesses. A world waterized is a world where nothing, and no one, is
+   kept out by a wall &mdash; only ever held, loosely, in a skin made of creeks.</p>
+</div></div>
+
+<footer>
+  <b style="color:var(--ink)">Waterize the World</b> &mdash; a generative meditation in <a href="../">Project Genesis</a>.
+  Kin: <a href="../regard/">the Two Directions</a> · <a href="../critter/">the Critter</a> · <a href="../../morphogenesis/">Morphogenesis</a> ·
+  <a href="../../atlanta/">the waterways</a> · the cycle (<a href="../../no-panzer/">I Am No Panzer</a>).<br>
+  By <b style="color:var(--ink)">Manny Glover</b> &mdash; with the ghost in the shell.
+</footer>
+
+<script>
+(function(){
+const cv=document.getElementById('c'), g=cv.getContext('2d');
+const TAU=Math.PI*2, DPR=Math.min(2,window.devicePixelRatio||1);
+let W,H,CX,CY,S,baseR, pts=[], parts=[], creeks=[], t=0, flow=1;
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function resize(){ const r=cv.getBoundingClientRect(); W=cv.width=Math.round(r.width*DPR); H=cv.height=Math.round(r.width*DPR);
+  g.setTransform(1,0,0,1,0,0); CX=W/2; CY=H/2; S=W; baseR=S*0.30; init(); }
+function init(){
+  pts=[]; const N=150; for(let i=0;i<N;i++){ const a=i/N*TAU; pts.push({x:CX+Math.cos(a)*baseR, y:CY+Math.sin(a)*baseR}); }
+  parts=[]; for(let i=0;i<180;i++) parts.push({e:(Math.random()*N)|0, f:Math.random(), sp:0.004+Math.random()*0.016, r:0.4+Math.random()*1.1});
+  flows=[]; for(let i=0;i<40;i++) newFlow(i);
+  creeks=[]; seedCreeks();
+}
+let flows=[];
+function newFlow(i){ const a=Math.random()*TAU, dir=Math.random()<0.5?-1:1;
+  flows[i]={a, r: baseR*(0.2+Math.random()*0.9), dir, sp:(0.2+Math.random()*0.7)*S*0.001, life:0, max:120+Math.random()*160}; }
+function seedCreeks(){ creeks=[]; const n=pts.length; for(let k=0;k<44;k++){ const i=(Math.random()*n)|0; const seg=[];
+    let x=pts[i].x, y=pts[i].y; const rr=Math.hypot(x-CX,y-CY)||1; let ux=(x-CX)/rr, uy=(y-CY)/rr; let ang=Math.atan2(uy,ux);
+    const outward=Math.random()<0.6?1:-1, steps=3+((Math.random()*5)|0), len=S*0.012;
+    for(let s=0;s<steps;s++){ seg.push([x,y]); ang+=(Math.random()-0.5)*0.9; x+=Math.cos(ang)*len*outward; y+=Math.sin(ang)*len*outward; }
+    creeks.push(seg); } }
+function step(){
+  t+=0.016*flow;
+  const breath=1+0.055*Math.sin(t*0.55);
+  const Rc=baseR*breath, band=S*0.055, Rmin=Rc-band, Rmax=Rc+band;
+  const n=pts.length; if(n<3) return;
+  const cell=Math.max(6,S*0.028), grid=new Map();
+  for(let i=0;i<n;i++){ const k=(Math.floor(pts[i].x/cell))+','+(Math.floor(pts[i].y/cell)); (grid.get(k)||grid.set(k,[]).get(k)).push(i); }
+  const dsp=new Array(n);
+  for(let i=0;i<n;i++){ const p=pts[i], a=pts[(i-1+n)%n], b=pts[(i+1)%n]; let fx=0,fy=0;
+    fx+=((a.x+b.x)/2-p.x)*0.20; fy+=((a.y+b.y)/2-p.y)*0.20;                 // cohesion
+    const gx=Math.floor(p.x/cell), gy=Math.floor(p.y/cell);
+    for(let ox=-1;ox<=1;ox++)for(let oy=-1;oy<=1;oy++){ const arr=grid.get((gx+ox)+','+(gy+oy)); if(!arr)continue;
+      for(const j of arr){ if(j===i)continue; const dx=p.x-pts[j].x, dy=p.y-pts[j].y, d2=dx*dx+dy*dy;
+        if(d2>0.001 && d2<cell*cell){ const d=Math.sqrt(d2), f=(1-d/cell)*1.15; fx+=dx/d*f; fy+=dy/d*f; } } }   // repulsion
+    const ddx=p.x-CX, ddy=p.y-CY, r=Math.hypot(ddx,ddy)||1, ux=ddx/r, uy=ddy/r;
+    if(r>Rmax){ fx+=(Rmax-r)*ux*0.09; fy+=(Rmax-r)*uy*0.09; } else if(r<Rmin){ fx+=(Rmin-r)*ux*0.09; fy+=(Rmin-r)*uy*0.09; } // radial band
+    let mx=fx*0.5, my=fy*0.5; const mm=Math.hypot(mx,my), capm=S*0.02; if(mm>capm){ mx=mx/mm*capm; my=my/mm*capm; }
+    dsp[i]={x:mx,y:my};
+  }
+  for(let i=0;i<n;i++){ pts[i].x+=dsp[i].x; pts[i].y+=dsp[i].y; }
+  // differential growth: insert midpoints on stretched segments, up to a cap
+  if(pts.length<470){ const out=[]; for(let i=0;i<n;i++){ const p=pts[i], b=pts[(i+1)%n]; out.push(p);
+      if(out.length<470 && Math.hypot(b.x-p.x,b.y-p.y)>S*0.042) out.push({x:(p.x+b.x)/2,y:(p.y+b.y)/2}); } pts=out; }
+}
+function drawMembranePath(){ const n=pts.length; g.beginPath(); g.moveTo(pts[0].x,pts[0].y);
+  for(let i=1;i<n;i++){ const p=pts[i], pm=pts[(i-1)]; g.quadraticCurveTo(pm.x,pm.y,(pm.x+p.x)/2,(pm.y+p.y)/2); }
+  g.closePath(); }
+function draw(){
+  const AQ=css('--aqua')||'#5fe0e8', WM=css('--warm')||'#ffca8f';
+  // deep water background
+  let bg=g.createRadialGradient(CX,CY,S*0.05,CX,CY,S*0.62);
+  bg.addColorStop(0,'#0a1e28'); bg.addColorStop(0.6,'#061119'); bg.addColorStop(1,'#03070d');
+  g.fillStyle=bg; g.fillRect(0,0,W,H);
+  // creeks (faint tributaries)
+  g.strokeStyle='rgba(150,210,225,0.10)'; g.lineWidth=Math.max(1,S*0.0016); g.lineCap='round';
+  for(const seg of creeks){ g.beginPath(); for(let i=0;i<seg.length;i++){ i?g.lineTo(seg[i][0],seg[i][1]):g.moveTo(seg[i][0],seg[i][1]); } g.stroke(); }
+  // membrane fill (skin sheen)
+  drawMembranePath(); g.fillStyle='rgba(95,224,232,0.05)'; g.fill();
+  // warm divine core, breathing
+  const breath=1+0.06*Math.sin(t*0.55), cr=S*0.13*breath;
+  let core=g.createRadialGradient(CX,CY,1,CX,CY,cr);
+  core.addColorStop(0,'rgba(255,246,232,0.95)'); core.addColorStop(0.35,'rgba(255,200,140,0.55)');
+  core.addColorStop(0.75,'rgba(230,140,90,0.14)'); core.addColorStop(1,'rgba(230,140,90,0)');
+  g.fillStyle=core; g.beginPath(); g.arc(CX,CY,cr,0,TAU); g.fill();
+  // exchange flows drifting across the membrane
+  for(let i=0;i<flows.length;i++){ const f=flows[i]; f.life++; f.r+=f.dir*f.sp; if(f.life>f.max||f.r<S*0.14||f.r>baseR*1.3){ newFlow(i); continue; }
+    const x=CX+Math.cos(f.a)*f.r, y=CY+Math.sin(f.a)*f.r; const al=0.4*Math.sin(Math.PI*f.life/f.max);
+    g.fillStyle='rgba(180,240,255,'+al.toFixed(3)+')'; g.beginPath(); g.arc(x,y,S*0.0022,0,TAU); g.fill(); }
+  // membrane stroke — soft glow + bright thread
+  drawMembranePath();
+  g.shadowColor=AQ; g.shadowBlur=S*0.03; g.strokeStyle='rgba(95,224,232,0.30)'; g.lineWidth=Math.max(2,S*0.010); g.stroke();
+  g.shadowBlur=0; g.strokeStyle='rgba(200,250,255,0.85)'; g.lineWidth=Math.max(1,S*0.0022); g.stroke();
+  // water motes shimmering along the membrane
+  const n=pts.length;
+  for(const p of parts){ p.f+=p.sp*flow; if(p.f>=1){ p.f-=1; p.e=(p.e+1)%n; } const i=p.e%n, j=(i+1)%n;
+    const x=pts[i].x+(pts[j].x-pts[i].x)*p.f, y=pts[i].y+(pts[j].y-pts[i].y)*p.f;
+    g.fillStyle='rgba(200,248,255,'+(0.3+0.4*Math.random()).toFixed(2)+')'; g.beginPath(); g.arc(x,y,p.r*DPR*0.7,0,TAU); g.fill(); }
+}
+function loop(){ step(); draw(); requestAnimationFrame(loop); }
+// interaction: send a creek / bulge the membrane where you touch
+cv.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect(); const px=(e.clientX-r.left)/r.width*W, py=(e.clientY-r.top)/r.height*H;
+  const ang=Math.atan2(py-CY,px-CX);
+  for(const p of pts){ const pa=Math.atan2(p.y-CY,p.x-CX); let d=Math.abs(pa-ang); if(d>Math.PI)d=TAU-d;
+    if(d<0.5){ const rr=Math.hypot(p.x-CX,p.y-CY)||1, w=(0.5-d)*2; p.x+=(p.x-CX)/rr*S*0.03*w; p.y+=(p.y-CY)/rr*S*0.03*w; } }
+  // a little burst of creeks near the touch
+  for(let k=0;k<5;k++){ const a=ang+(Math.random()-0.5)*0.6; const seg=[]; let x=CX+Math.cos(a)*baseR, y=CY+Math.sin(a)*baseR, an=a;
+    for(let s=0;s<5;s++){ seg.push([x,y]); an+=(Math.random()-0.5)*0.8; x+=Math.cos(an)*S*0.014; y+=Math.sin(an)*S*0.014; } creeks.push(seg); if(creeks.length>90)creeks.shift(); }
+});
+document.getElementById('flow').oninput=function(){ flow=+this.value; };
+document.getElementById('reset').onclick=init;
+addEventListener('resize',resize);
+resize(); loop();
+})();
+</script>
+</body></html>
