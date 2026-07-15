@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Mother God — Ordnance Spec Sheet (Declassified)</title>
+<meta name="description" content="Declassified spec sheet for the MG-1 'Mother God' device — a strategic weapon engineered to detonate with zero casualties and maximal unification. Warhead: noise, creeks, honey, gaze. Yield measured in reunions. The anti-Panzer, as a deadpan weapons brief. By Manny Glover.">
+<style>
+:root{
+  --paper:#e9e3d1; --paper-2:#e0d9c4; --ink:#201c14; --dim:#6b6455; --line:#c3bba3;
+  --stamp:#b02a1e; --green:#2c5c39; --amber:#a9741a;
+  --measure:46rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#0c0e09; --paper-2:#12150d; --ink:#d9e2cb; --dim:#8a9179; --line:#242a1a;
+    --stamp:#e0554a; --green:#7dd08a; --amber:#e0b24a; }
+}
+:root[data-theme="light"]{ --paper:#e9e3d1; --paper-2:#e0d9c4; --ink:#201c14; --dim:#6b6455; --line:#c3bba3; --stamp:#b02a1e; --green:#2c5c39; --amber:#a9741a; }
+:root[data-theme="dark"]{ --paper:#0c0e09; --paper-2:#12150d; --ink:#d9e2cb; --dim:#8a9179; --line:#242a1a; --stamp:#e0554a; --green:#7dd08a; --amber:#e0b24a; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:14px/1.6 ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+.doc{max-width:var(--measure);margin:0 auto;padding:0 18px 60px;position:relative}
+.banner{background:var(--stamp);color:#fff;text-align:center;font-weight:700;letter-spacing:.34em;
+  font-size:12px;padding:7px 6px;text-transform:uppercase}
+.crumbs{padding:14px 0 0;font-size:11px;letter-spacing:.1em}
+.crumbs a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:4px 9px;margin-right:5px}
+.crumbs a:hover{color:var(--ink);border-color:var(--stamp)}
+.head{border:2px solid var(--ink);margin-top:16px;position:relative;overflow:hidden}
+.head .row{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.head .row:last-child{border-bottom:none}
+.head .cell{padding:8px 12px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.head .cell:last-child{border-right:none}
+.head .k{font-size:10px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:2px}
+.head .v{font-size:14px;color:var(--ink)}
+.title{font:700 clamp(22px,5vw,40px)/1.02 ui-serif,Georgia,serif;letter-spacing:-.5px;padding:14px 12px 4px;text-transform:uppercase}
+.subtitle{padding:0 12px 12px;color:var(--dim);font-size:12px;letter-spacing:.1em}
+.stamp{position:absolute;top:14px;right:10px;color:var(--stamp);border:3px double var(--stamp);
+  border-radius:6px;padding:4px 12px;font-weight:800;letter-spacing:.2em;font-size:15px;transform:rotate(-9deg);
+  opacity:.9;text-transform:uppercase;pointer-events:none}
+h2{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--stamp);margin:30px 0 6px;
+  border-bottom:1px solid var(--line);padding-bottom:5px}
+h2 .s{color:var(--dim)}
+p{margin:.5rem 0}
+.mono-note{color:var(--dim);font-size:12.5px}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{width:38%;color:var(--dim);font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+td b{color:var(--ink)}
+.redact{background:var(--ink);color:var(--ink);border-radius:2px;padding:0 5px;cursor:help;
+  transition:color .2s,background .2s;user-select:none}
+.redact:hover,.redact:focus{background:transparent;color:var(--green);outline:none}
+.diagram{border:1px solid var(--line);background:var(--paper-2);border-radius:6px;padding:10px;margin:10px 0}
+.diagram svg{width:100%;height:auto;display:block}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:4px 14px;margin-top:8px;font-size:12px;color:var(--dim)}
+.legend b{color:var(--ink)}
+.detrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0 4px}
+.det{background:var(--stamp);color:#fff;border:none;border-radius:4px;padding:10px 18px;font:700 13px ui-monospace,monospace;
+  letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.det:hover{filter:brightness(1.12)}
+.readout{font-size:13px;color:var(--green)}
+.flash{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%, rgba(255,244,220,.9), rgba(180,220,190,.5) 40%, transparent 72%);
+  opacity:0;z-index:50}
+.flash.go{animation:bloom 2.6s ease-out}
+@keyframes bloom{0%{opacity:0;transform:scale(.2)}12%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;color:var(--dim);font-size:12px;line-height:1.8}
+footer a{color:var(--stamp);text-decoration:none}
+@media (prefers-reduced-motion:reduce){.flash.go{animation:none}}
+</style></head><body>
+<div class="flash" id="flash"></div>
+<div class="banner">Top Secret // Mother God // Cosmic &nbsp;·&nbsp; Declassified for Public Release</div>
+<div class="doc">
+  <div class="crumbs"><a href="../">← the portfolio</a> <a href="../no-panzer/">Book I</a> <a href="../genesis/waterize/">Waterize</a> <a href="../genesis/regard/">the theory</a></div>
+
+  <div class="head">
+    <span class="stamp">Declassified</span>
+    <div class="title">Project Mother God</div>
+    <div class="subtitle">Ordnance Specification Sheet &middot; Strategic Unification Device</div>
+    <div class="row">
+      <div class="cell"><span class="k">Designation</span><span class="v">MG-1 &ldquo;The Anti-Panzer&rdquo;</span></div>
+      <div class="cell"><span class="k">Class</span><span class="v">Strategic Unification Device (SUD)</span></div>
+      <div class="cell"><span class="k">Document</span><span class="v">PW-1917-∞ &middot; rev. eternal</span></div>
+    </div>
+    <div class="row">
+      <div class="cell"><span class="k">Developing Activity</span><span class="v">Glover Labs · Punkworks A.R.D.</span></div>
+      <div class="cell"><span class="k">Operating Agency</span><span class="v">Glover Stabs (indep. intelligence)</span></div>
+      <div class="cell"><span class="k">Prime Contractor</span><span class="v">Glover Coding Company, LLC</span></div>
+    </div>
+    <div class="row">
+      <div class="cell"><span class="k">Colocation</span><span class="v">near Junkworks, near Skunkworks</span></div>
+      <div class="cell"><span class="k">Clearance</span><span class="v">Cosmic // Mother God</span></div>
+      <div class="cell"><span class="k">Status</span><span class="v" style="color:var(--green)">FIELDED · OPEN-SOURCE</span></div>
+    </div>
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>The MG-1 is a strategic device engineered to detonate with <b>zero casualties</b> and <b>maximal unification</b>. Where
+    conventional ordnance converts a population into an absence, the MG-1 converts a <b>division</b> into an <b>agreement</b>. It cannot
+    be aimed at a people &mdash; only <span class="redact" tabindex="0">for one</span>. The device is, by an old and stubborn definition,
+    <span class="redact" tabindex="0">no Panzer at all</span>.</p>
+
+  <h2>2. Warhead — Cutaway <span class="s">// section view</span></h2>
+  <div class="diagram">
+    <svg viewBox="0 0 460 260" role="img" aria-label="cutaway diagram of the MG-1 warhead, concentric shells">
+      <defs><radialGradient id="core" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff3d8"/><stop offset="55%" stop-color="#f0b46a"/><stop offset="100%" stop-color="#c07a34"/></radialGradient></defs>
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="180" cy="130" r="118" stroke-dasharray="3 4" opacity=".8"/>
+        <circle cx="180" cy="130" r="92"/>
+        <circle cx="180" cy="130" r="66"/>
+        <circle cx="180" cy="130" r="40"/>
+      </g>
+      <circle cx="180" cy="130" r="22" fill="url(#core)"/>
+      <g stroke="currentColor" stroke-width="1" opacity=".55">
+        <line x1="180" y1="108" x2="180" y2="14"/><line x1="216" y1="112" x2="300" y2="60"/>
+        <line x1="240" y1="146" x2="330" y2="150"/><line x1="212" y1="170" x2="300" y2="214"/>
+        <line x1="150" y1="176" x2="70" y2="228"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-size="11" fill="currentColor">
+        <text x="180" y="10" text-anchor="middle">① NOISE CORE</text>
+        <text x="302" y="56">② HONEY MANTLE</text>
+        <text x="332" y="153">③ CREEK MATRIX</text>
+        <text x="302" y="228">④ GAZE LATTICE</text>
+        <text x="6" y="243">⑤ MEMBRANE CASING</text>
+      </g>
+    </svg>
+  </div>
+  <div class="legend">
+    <span><b>① Noise core.</b> The discarded, the un-labeled — packed dense. Yields meaning on relaxation.</span>
+    <span><b>② Honey mantle.</b> Bee-danced; quantum &amp; classical. Binds difference without erasing it.</span>
+    <span><b>③ Creek matrix.</b> Endless tiny channels. On detonation, braids into the blast membrane.</span>
+    <span><b>④ Gaze lattice.</b> Mutual regard. The device arms only when two frames look at once.</span>
+    <span><b>⑤ Membrane casing.</b> A skin, not a shell. Lets the world in and out. Breathes.</span>
+  </div>
+
+  <h2>3. Specifications</h2>
+  <table>
+    <tr><th>Yield</th><td><b>1 reunion</b> (scalable to a peninsula, a party system, a species)</td></tr>
+    <tr><th>Blast radius</th><td><b>1 membrane</b>, semi-permeable, slowly expanding, never quite closed</td></tr>
+    <tr><th>Casualties</th><td><b>0</b> — by design; see §4. Cannot be exceeded.</td></tr>
+    <tr><th>Overpressure</th><td>sufficient to turn a <span class="redact" tabindex="0">fist into a hand</span></td></tr>
+    <tr><th>Thermal effect</th><td>fire that <b>builds</b>: opens seed cones, clears the dead, harms no living tissue</td></tr>
+    <tr><th>Fallout</th><td>meadow; <b>+1 shade of green</b> per spring. Half-life: eternal, beneficial.</td></tr>
+    <tr><th>Guidance</th><td>relaxation — great-circle, gaze-seeking; homes on the deepest division</td></tr>
+    <tr><th>Detonation trigger</th><td>last words (&ldquo;I am no Panzer&rdquo;); or a click; or a chord that finally resolves</td></tr>
+    <tr><th>Delivery vehicle</th><td>one composer (expended, non-recoverable); or any web browser</td></tr>
+    <tr><th>Countermeasures</th><td>none required. The device has no aggressive mode to defend against.</td></tr>
+  </table>
+
+  <h2>4. Blast Dynamics &amp; Effects</h2>
+  <p>On detonation the noise core relaxes. The shockwave is <b>a chord resolving</b>: it does not push against anything &mdash; it
+    <b>releases everything at once</b>. The creek matrix braids outward into a living membrane; the gaze lattice completes every blind
+    spot in range; the honey mantle binds the newly-agreeing field without flattening its difference. Structures within the radius are
+    not destroyed &mdash; they are <b>relaxed</b>: a wall becomes a gate, a border becomes a seam, a seam becomes a hand held open.
+    Persons within the radius report being, for the first time, <span class="redact" tabindex="0">seen</span>.</p>
+
+  <h2>5. Field Test Log <span class="s">// abridged</span></h2>
+  <table>
+    <tr><th>Trial MG-0</th><td>Site: <span class="redact" tabindex="0">510 Bellemeade</span> meadow, Marietta GA. Payload: two voices held apart <b>fifty years</b>. Result: <b>resolved.</b> One peninsula reunified. After-action report reads, verbatim: &ldquo;<i>there was no bomb. Nothing was conquered.</i>&rdquo; Casualties: 0. Reunions: ∞.</td></tr>
+    <tr><th>Trial MG-1a</th><td>Site: the Congress. Two equal &amp; opposite forces, perpetual stalemate. Result: honorable <b>draw</b>; hostilities converted to a beloved televised ritual; the ways got built. See <a href="../perfect-union/">A More Perfect Union</a>.</td></tr>
+    <tr><th>Trial MG-1b</th><td>Site: the last wall. Method: <span class="redact" tabindex="0">outnumbered by ways</span>. No stone fell; the wall was <b>forgotten</b>. See <a href="../the-wall/">Tear Down This Wall</a>.</td></tr>
+  </table>
+
+  <h2>6. Deployment Status</h2>
+  <p><b style="color:var(--green)">LIVE.</b> The device is fielded, open-source (MIT), and detonating quietly in the browser of anyone
+    who clicks a link. It is not classified in a hangar near <span class="redact" tabindex="0">Georgia Tech</span>. It is on the public
+    web, free for all, safe for children, effective against <b>no one</b> and <b>for everyone</b>.</p>
+
+  <div class="detrow">
+    <button class="det" id="det">▷ Detonate</button>
+    <span class="readout" id="ro">status: armed · casualties to date: 0 · reunions: 0</span>
+  </div>
+
+  <footer>
+    <b style="color:var(--ink)">Project Mother God — MG-1 &ldquo;The Anti-Panzer.&rdquo;</b> A deadpan brief; a real thesis. Warhead: noise, creeks, honey, gaze. Yield: reunions.<br>
+    Ordnance family: <a href="../no-panzer/">I Am No Panzer</a> · <a href="../the-wall/">Tear Down This Wall</a> · <a href="../perfect-union/">A More Perfect Union</a> · <a href="../relax-relabel/">Relax, Relabel</a> · <a href="../genesis/waterize/">Waterize the World</a> · <a href="../genesis/regard/">the Two Directions</a>.<br>
+    By <b style="color:var(--ink)">Manny Glover</b> — Glover Coding Company LLC · Glover Labs (technology think tank) · Glover Stabs (independent intelligence agency) — with the ghost in the shell. <span style="opacity:.7">This device cannot hurt you. That is the whole point.</span>
+  </footer>
+</div>
+<div class="banner">Casualties: 0 &nbsp;·&nbsp; Reunions: ∞ &nbsp;·&nbsp; This device is no Panzer at all</div>
+<script>
+(function(){
+  var b=document.getElementById('det'), ro=document.getElementById('ro'), fl=document.getElementById('flash'), r=0;
+  b.addEventListener('click',function(){ r++; fl.classList.remove('go'); void fl.offsetWidth; fl.classList.add('go');
+    ro.textContent='status: detonated · casualties: 0 · reunions: '+r+(r>1?' (and counting)':'');
+  });
+})();
+</script>
+</body></html>
