@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>4-D Scrabble — the fourth axis is the truth · Project Genesis</title>
-<meta name="description" content="A four-dimensional ASCII Scrabble board: every tile’s letter is its HRL-predicted class, and its position in the 4th dimension is its true class. The board rotates through 4-D (double rotation, perspective-projected) so misclassified tiles drift into the wrong layer, glowing red. Real body-position data, pure text. By Manny Glover.">
+<meta name="description" content="A four-dimensional ASCII Scrabble board: every tile’s letter is its HRL-predicted class, its position in the 4th dimension is its true class. The board rotates through 4-D so misclassified tiles drift into the wrong layer and pulse red — in time with "Plastic Copy", a live generative soundtrack (Am·B7·Dm·Em·F·A·C·D). Real body-position data, pure text + Web Audio. By Manny Glover.">
 <style>
   :root{
     --bg:#0b0d0a; --panel:#12160f; --edge:#26311d; --edge2:#3a4a2b;
@@ -57,6 +57,7 @@
       <div class="kick">data in four dimensions</div>
       <h1>4-D Scrabble <span class="sep">//</span> the fourth axis is the truth</h1>
       <div class="by">every tile's letter is its <b>predicted</b> class; its position in the 4th dimension is its <b>true</b> class. The board rotates through 4-D — misfiled tiles drift into the wrong layer.</div>
+      <div class="by" id="lyric" style="color:#c9a227;min-height:1.35em;letter-spacing:.04em;">♪ press or drag the board to play “Plastic Copy”</div>
     </div>
     <button class="tbtn" id="theme" type="button">◐ theme</button>
   </header>
@@ -77,6 +78,7 @@
       <div class="stat"><span>misfiled (p≠truth)</span><b id="nmis">—</b></div>
       <div class="stat"><span>fps</span><b id="fps">—</b></div>
       <div class="hint"><kbd>drag</kbd> spin the 3-D view · the <b>4th</b> rotation runs on its own · <kbd>space</kbd> pause 4-D</div>
+      <button id="music" class="tbtn" type="button" style="align-self:flex-start;">♪ plastic copy · on</button>
     </div>
   </section>
 
@@ -136,7 +138,7 @@
   const screen=document.getElementById("screen");
   const ox=COLS/2, oy=ROWS*0.5;
   const AX=COLS*0.24, AY=ROWS*0.24, AZ=ROWS*0.12, D4=2.7;
-  let yaw=0.6, pitch=0.5, w4=0, dragging=false, spin4=true;
+  let yaw=0.6, pitch=0.5, w4=0, dragging=false, spin4=true, beatEnv=0;
 
   function proj(x,y,z,w,t){
     let nx=(x-cx)/hx, ny=(y-cy)/hy, nz=(z-cz)/hz, nw=(w-cw)/hw;
@@ -159,6 +161,7 @@
   let fc=0,ft=performance.now(),last=performance.now();
   function frame(now){
     for(let i=0;i<CELLS;i++){ch[i]=null;zb[i]=-1e9;}
+    beatEnv*=0.90;
     if(spin4&&!reduce) w4+=(now-last)*0.00035; last=now;
     if(!dragging&&!reduce) yaw+=0.0035;
     // sort back-to-front by projected depth
@@ -167,7 +170,7 @@
       const cls=classes[b.c]; const c0=s[0]|0, r0=s[1]|0, d=s[2];
       // a little tile: cream flanks, letter in the middle
       put(c0-1,r0,'▓',cls.topStr,d); put(c0+1,r0,'▓',cls.topStr,d);
-      put(c0,r0, cls.letter, b.mis?'#e0503f':cls.inkStr, d+0.5);   // misfiled letters glow red
+      put(c0,r0, cls.letter, b.mis?misColor():cls.inkStr, d+0.5);   // misfiled letters pulse red on the beat
     }
     // RLE serialize
     let out="";
@@ -200,13 +203,66 @@
 
   // input
   const stage=document.getElementById("stage");let px=0,py=0;
-  stage.addEventListener("pointerdown",e=>{dragging=true;stage.classList.add("grab");px=e.clientX;py=e.clientY;stage.setPointerCapture(e.pointerId);});
+  stage.addEventListener("pointerdown",e=>{dragging=true;startMusic();stage.classList.add("grab");px=e.clientX;py=e.clientY;stage.setPointerCapture(e.pointerId);});
   stage.addEventListener("pointermove",e=>{if(!dragging)return;yaw+=(e.clientX-px)*0.01;pitch=Math.max(0.12,Math.min(1.3,pitch-(e.clientY-py)*0.006));px=e.clientX;py=e.clientY;});
   const end=()=>{dragging=false;stage.classList.remove("grab");};
   stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);
   addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();spin4=!spin4;}});
   const root=document.documentElement;
   document.getElementById("theme").addEventListener("click",()=>{const cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");root.setAttribute("data-theme",cur==="dark"?"light":"dark");});
+
+  /* ================= "Plastic Copy" — generative soundtrack (Web Audio, no files) ================= */
+  const lyricEl=document.getElementById("lyric"), musicBtn=document.getElementById("music");
+  const LYRICS=["I'm not the real me","it's not him who you see","this is a plastic copy","the real me's not so off-key","I know you don't know what ya see","ya think it's meee","it's not the real thing","won't be revealing…"];
+  function misColor(){ const e=beatEnv<0?0:beatEnv>1?1:beatEnv; return `rgb(${224+31*e|0},${80+90*e|0},${63+80*e|0})`; }
+  const AC=window.AudioContext||window.webkitAudioContext;
+  let actx,mMaster,mRev,mStarted=false,mOn=true,mTimer=0,mNext=0,mStep=0,mNoise;
+  const BPM=100, SPB=60/BPM, SIX=SPB/4, mtof=m=>440*Math.pow(2,(m-69)/12);
+  // your changes: Am · B7 · Dm · Em · F · A · C · D — over and over
+  const PROG=[
+    {pad:[57,60,64],   bass:45}, {pad:[59,63,66,69],bass:47}, {pad:[62,65,69],bass:50}, {pad:[64,67,71],bass:52},
+    {pad:[65,69,72],   bass:53}, {pad:[57,61,64],   bass:45}, {pad:[60,64,67],bass:48}, {pad:[62,66,69],bass:50},
+  ];
+  const beatQ=[], lyricQ=[];
+  function mReverb(){ const len=(actx.sampleRate*2.4)|0,b=actx.createBuffer(2,len,actx.sampleRate);
+    for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5);}
+    const cv=actx.createConvolver(); cv.buffer=b; return cv; }
+  function mInit(){ actx=new AC(); mMaster=actx.createGain(); mMaster.gain.value=0.0001;
+    const comp=actx.createDynamicsCompressor(); mMaster.connect(comp); comp.connect(actx.destination);
+    const rv=mReverb(); mRev=actx.createGain(); const ro=actx.createGain(); ro.gain.value=0.85; mRev.connect(rv); rv.connect(ro); ro.connect(mMaster);
+    const nl=(actx.sampleRate*0.5)|0; mNoise=actx.createBuffer(1,nl,actx.sampleRate); const nd=mNoise.getChannelData(0); for(let i=0;i<nl;i++)nd[i]=Math.random()*2-1; }
+  function mPad(ch,t){ const dur=4*SPB,g=actx.createGain();
+    g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.10,t+0.5); g.gain.setValueAtTime(0.10,t+dur-0.7); g.gain.linearRampToValueAtTime(0.0001,t+dur);
+    const lp=actx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=1300; g.connect(lp);
+    const send=actx.createGain(); send.gain.value=0.32; lp.connect(mMaster); lp.connect(send); send.connect(mRev);
+    for(const m of ch.pad) for(const det of [-7,7]){ const o=actx.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.detune.value=det; o.connect(g); o.start(t); o.stop(t+dur+0.1); } }
+  function mBass(m,t,dur){ const o=actx.createOscillator(); o.type="triangle"; o.frequency.value=mtof(m);
+    const g=actx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.24,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    const lp=actx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=500; o.connect(lp); lp.connect(g); g.connect(mMaster); o.start(t); o.stop(t+dur+0.05); }
+  function mLead(m,t){ // vocal-ish lead + a slightly-sharp "plastic copy" double
+    const g=actx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.11,t+0.03); g.gain.exponentialRampToValueAtTime(0.0001,t+0.7);
+    const lp=actx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2400; lp.connect(g);
+    const send=actx.createGain(); send.gain.value=0.5; g.connect(mMaster); g.connect(send); send.connect(mRev);
+    const o1=actx.createOscillator(); o1.type="triangle"; o1.frequency.value=mtof(m); o1.connect(lp);
+    const o2=actx.createOscillator(); o2.type="triangle"; o2.frequency.value=mtof(m); o2.detune.value=16; o2.connect(lp);
+    o1.start(t); o2.start(t); o1.stop(t+0.75); o2.stop(t+0.75); }
+  function mClick(t){ const s=actx.createBufferSource(); s.buffer=mNoise; const hp=actx.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=5000;
+    const g=actx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.02,t+0.004); g.gain.exponentialRampToValueAtTime(0.0001,t+0.08);
+    s.connect(hp); hp.connect(g); g.connect(mMaster); s.start(t); s.stop(t+0.1); }
+  function mSchedule(){ while(mNext<actx.currentTime+0.12){ const bar=(mStep>>4)%8, local=mStep%16, ch=PROG[bar];
+    if(local===0){ mPad(ch,mNext); mBass(ch.bass,mNext,SPB*1.4); lyricQ.push({bar,t:mNext}); }
+    if(local===8) mBass(ch.bass,mNext,SPB*0.8);
+    if(local%4===0){ mClick(mNext); beatQ.push(mNext); }
+    if(local===2||local===6||local===10||local===13){ const n=ch.pad; mLead(n[((local/2)|0)%n.length]+12, mNext); }
+    mNext+=SIX; mStep++; } }
+  function mClock(){ if(!actx) return; const now=actx.currentTime;
+    while(beatQ.length&&beatQ[0]<=now){ beatQ.shift(); beatEnv=1; }
+    while(lyricQ.length&&lyricQ[0].t<=now){ const L=lyricQ.shift(); if(lyricEl) lyricEl.textContent="♪ "+LYRICS[L.bar]; }
+    requestAnimationFrame(mClock); }
+  function mGain(){ if(!actx)return; mMaster.gain.cancelScheduledValues(actx.currentTime); mMaster.gain.setTargetAtTime(mOn?0.32:0.0001,actx.currentTime,0.2); }
+  function startMusic(){ if(mStarted||!mOn) return; mStarted=true; if(!actx) mInit(); if(actx.state==="suspended") actx.resume();
+    mNext=actx.currentTime+0.12; mStep=0; mGain(); mTimer=setInterval(mSchedule,25); requestAnimationFrame(mClock); }
+  if(musicBtn) musicBtn.addEventListener("click",()=>{ mOn=!mOn; musicBtn.textContent=mOn?"♪ plastic copy · on":"♪ plastic copy · off"; if(mOn) startMusic(); mGain(); });
 
   requestAnimationFrame(frame);
 })();
