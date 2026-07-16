@@ -26,7 +26,7 @@ capture** and to a **syncretistic, weighted consensus of physical models**.
 **→ https://rmichaelglover.github.io/hrl-portfolio/** — a dark-themed, interactive home page with the
 full gallery (prettiest graphics first). Highlights:
 
-- **[Project Genesis](https://rmichaelglover.github.io/hrl-portfolio/genesis/)** — a 14-piece series
+- **[Project Genesis](https://rmichaelglover.github.io/hrl-portfolio/genesis/)** — a 24-piece series
   applying the engine to **real** cosmology, neuroscience, and econometrics: the [cosmic web](https://rmichaelglover.github.io/hrl-portfolio/genesis/sdss/)
   (25k SDSS galaxies), [dark-matter rotation curves](https://rmichaelglover.github.io/hrl-portfolio/genesis/sparc/),
   the [*C. elegans* connectome](https://rmichaelglover.github.io/hrl-portfolio/genesis/brain/), an
