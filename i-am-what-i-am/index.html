@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Am What I Am — the answer song · Manny Glover</title>
+<meta name="description" content="A bright, major-key generative anthem (Web Audio, no files) — the answer to "Plastic Copy". The type glitches PANZER → PANXER → PANTER, then plants its feet on I AM WHAT I AM. Spinach, spam, strong to the finish. By Manny Glover.">
+<style>
+  :root{
+    --ground:#123a1f; --ground2:#0e2e18; --cream:#f4f0d8; --gold:#ffcf3f; --leaf:#6cc24a; --red:#e0503f;
+    --dim:#8fb389;
+    --disp:"Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;}
+  body{background:
+      radial-gradient(120% 80% at 50% -10%, rgba(108,194,74,.18), transparent 55%),
+      radial-gradient(100% 60% at 50% 120%, rgba(255,207,63,.10), transparent 60%),
+      var(--ground);
+    color:var(--cream);font-family:var(--mono);overflow:hidden;}
+  .app{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,30px);padding:20px;text-align:center;}
+
+  .eyebrow{font-family:var(--mono);font-size:clamp(10px,1.4vw,13px);letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
+  .word{
+    font-family:var(--disp);font-weight:900;
+    font-size:clamp(38px,13vw,150px);line-height:.9;letter-spacing:-.02em;
+    text-transform:uppercase;color:var(--cream);
+    transition:color .12s ease;
+    text-shadow:0 6px 0 rgba(0,0,0,.25);
+    max-width:14ch;
+    will-change:transform;
+  }
+  .word.affirm{color:var(--gold);}
+  .word .caret{color:var(--leaf);}
+
+  .eq{display:flex;align-items:flex-end;gap:clamp(3px,1vw,7px);height:clamp(28px,7vh,60px);}
+  .eq .bar{width:clamp(5px,1.4vw,11px);background:linear-gradient(180deg,var(--leaf),var(--gold));border-radius:3px 3px 0 0;height:12%;transform-origin:bottom;}
+
+  .lyric{font-family:var(--mono);font-size:clamp(12px,2vw,17px);letter-spacing:.06em;color:var(--cream);min-height:1.4em;opacity:.92;}
+  .lyric .spam{color:var(--red);}
+
+  .play{
+    font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.04em;
+    font-size:clamp(15px,2.4vw,22px);color:var(--ground);background:var(--gold);
+    border:none;border-radius:999px;padding:14px 30px;cursor:pointer;
+    box-shadow:0 6px 0 #c99a1f, 0 12px 24px rgba(0,0,0,.3);
+    transition:transform .06s ease, box-shadow .06s ease;
+  }
+  .play:hover{filter:brightness(1.05);}
+  .play:active{transform:translateY(4px);box-shadow:0 2px 0 #c99a1f,0 6px 14px rgba(0,0,0,.3);}
+  .play.playing{background:var(--leaf);box-shadow:0 6px 0 #4d9433,0 12px 24px rgba(0,0,0,.3);}
+
+  .foot{position:fixed;left:0;right:0;bottom:12px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+  .foot a{color:var(--leaf);text-decoration:none;}
+  .badge{position:fixed;top:14px;right:16px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;}
+  .back{position:fixed;top:14px;left:16px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;text-decoration:none;}
+  .back:hover{color:var(--gold);}
+  @media (prefers-reduced-motion:reduce){ .word,.eq .bar{transition:none;} }
+</style>
+</head>
+<body>
+<div class="app">
+  <a class="back" href="../">← Portfolio</a>
+  <div class="badge" id="bpm">the answer song</div>
+
+  <div class="eyebrow">an answer to “plastic copy”</div>
+  <div class="word" id="word">I&nbsp;AM&nbsp;WHAT&nbsp;I&nbsp;AM</div>
+  <div class="eq" id="eq"></div>
+  <div class="lyric" id="lyric">press play — spinach required</div>
+  <button class="play" id="play" type="button">▶ I AM WHAT I AM</button>
+</div>
+
+<div class="foot">“I yam what I yam” · a bright-major generative anthem · Web Audio, no files · by <b style="color:var(--cream)">Manny Glover</b></div>
+
+<script>
+(() => {
+  "use strict";
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wordEl=document.getElementById("word"), lyricEl=document.getElementById("lyric"),
+        eqEl=document.getElementById("eq"), playBtn=document.getElementById("play");
+
+  // equalizer bars
+  const NB=17, bars=[];
+  for(let i=0;i<NB;i++){ const d=document.createElement("div"); d.className="bar"; eqEl.appendChild(d); bars.push(d); }
+
+  // word morph per bar of the 8-bar loop: the glitch, then the affirmation
+  const WORDS=["PANZER","PANZER","PANXER","PANTER","I AM WHAT I AM","I AM WHAT I AM","I AM WHAT I AM","I AM WHAT I AM"];
+  const LYRICS=["I am what I am","and that's what I am","I eat my spinach","with a side of spam",
+                "I am what I am","and that's all that I am","strong to the finish","'cause that's what I am"];
+
+  let beatEnv=0, curBar=-1;
+  function setWord(bar){
+    if(bar===curBar) return; curBar=bar;
+    const w=WORDS[bar%8]; const affirm=w.startsWith("I AM");
+    wordEl.textContent=w.replace(/ /g," ");
+    wordEl.classList.toggle("affirm",affirm);
+  }
+  function setLyric(bar){ lyricEl.innerHTML = LYRICS[bar%8].replace(/(spam|spinach)/,'<span class="spam">$1</span>'); }
+
+  /* ---------- bright-major generative anthem ---------- */
+  const AC=window.AudioContext||window.webkitAudioContext;
+  let ctx,master,rev,started=false,timer=0,next=0,step=0,noise;
+  const BPM=126, SPB=60/BPM, SIX=SPB/4, mtof=m=>440*Math.pow(2,(m-69)/12);
+  document.getElementById("bpm").textContent=BPM+" bpm · C major";
+  // C – F – G – C – F – G7 – C – C  (sure of itself, lands home)
+  const PROG=[
+    {pad:[60,64,67],bass:48},{pad:[65,69,72],bass:53},{pad:[67,71,74],bass:55},{pad:[60,64,67],bass:48},
+    {pad:[65,69,72],bass:53},{pad:[67,71,74,77],bass:55},{pad:[60,64,67],bass:48},{pad:[60,64,67],bass:48},
+  ];
+  // "I-AM-WHAT-I-AM" rising motif (bright), played on the affirmation bars
+  const HOOK=[67,72,72,67,72];
+  const beatQ=[], barQ=[];
+
+  function mkRev(){ const len=(ctx.sampleRate*1.6)|0,b=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
+    const cv=ctx.createConvolver();cv.buffer=b;return cv; }
+  function init(){ ctx=new AC(); master=ctx.createGain(); master.gain.value=0.0001;
+    const comp=ctx.createDynamicsCompressor(); master.connect(comp); comp.connect(ctx.destination);
+    const r=mkRev(); rev=ctx.createGain(); const ro=ctx.createGain(); ro.gain.value=0.5; rev.connect(r); r.connect(ro); ro.connect(master);
+    const nl=(ctx.sampleRate*0.5)|0; noise=ctx.createBuffer(1,nl,ctx.sampleRate); const nd=noise.getChannelData(0); for(let i=0;i<nl;i++)nd[i]=Math.random()*2-1; }
+  function pad(ch,t){ const dur=4*SPB,g=ctx.createGain();
+    g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.07,t+0.15); g.gain.setValueAtTime(0.07,t+dur-0.5); g.gain.linearRampToValueAtTime(0.0001,t+dur);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2200; g.connect(lp); lp.connect(master);
+    for(const m of ch.pad) for(const det of [-5,5]){ const o=ctx.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.detune.value=det; o.connect(g); o.start(t); o.stop(t+dur+0.05); } }
+  function bass(m,t,dur){ const o=ctx.createOscillator(); o.type="triangle"; o.frequency.value=mtof(m);
+    const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.30,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=650; o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t+dur+0.05); }
+  function stab(ch,t){ const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.09,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2600; lp.connect(g); g.connect(master);
+    for(const m of ch.pad){ const o=ctx.createOscillator(); o.type="square"; o.frequency.value=mtof(m+12); o.connect(lp); o.start(t); o.stop(t+0.2); } }
+  function lead(m,t,dur){ const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.13,t+0.02); g.gain.setValueAtTime(0.13,t+dur*0.6); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    const lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=3200; lp.connect(g);
+    const send=ctx.createGain(); send.gain.value=0.25; g.connect(master); g.connect(send); send.connect(rev);
+    const o=ctx.createOscillator(); o.type="square"; o.frequency.value=mtof(m); o.connect(lp);
+    const o2=ctx.createOscillator(); o2.type="sawtooth"; o2.frequency.value=mtof(m); o2.detune.value=8; const g2=ctx.createGain(); g2.gain.value=0.5; o2.connect(g2); g2.connect(lp);
+    o.start(t); o2.start(t); o.stop(t+dur); o2.stop(t+dur); }
+  function clap(t){ const s=ctx.createBufferSource(); s.buffer=noise; const bp=ctx.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=1600; bp.Q.value=0.8;
+    const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.14,t+0.005); g.gain.exponentialRampToValueAtTime(0.0001,t+0.12);
+    s.connect(bp); bp.connect(g); g.connect(master); s.start(t); s.stop(t+0.14); }
+
+  function schedule(){ while(next<ctx.currentTime+0.12){ const bar=(step>>4)%8, local=step%16, ch=PROG[bar];
+    if(local===0){ pad(ch,next); barQ.push({bar,t:next}); }
+    if(local===0||local===8) bass(ch.bass,next,SPB*0.9);          // oom
+    if(local===4||local===12){ stab(ch,next); clap(next); }        // pah + clap
+    if(local%4===0) beatQ.push(next);
+    // lead: confident quarter-notes; the rising hook on the affirmation bars
+    if(bar>=4){ if(local%4===0){ lead(HOOK[(local/4)|0]||72, next, SPB*0.9); } }
+    else { if(local===0||local===8) lead(ch.pad[2], next, SPB*0.8); }
+    next+=SIX; step++; } }
+  function clock(){ if(!ctx) return; const now=ctx.currentTime;
+    while(beatQ.length&&beatQ[0]<=now){ beatQ.shift(); beatEnv=1; }
+    while(barQ.length&&barQ[0].t<=now){ const B=barQ.shift(); setWord(B.bar); setLyric(B.bar); }
+    requestAnimationFrame(clock); }
+  function start(){ if(started) return; started=true; if(!ctx) init(); if(ctx.state==="suspended") ctx.resume();
+    next=ctx.currentTime+0.12; step=0; master.gain.setTargetAtTime(0.34,ctx.currentTime,0.15);
+    timer=setInterval(schedule,25); requestAnimationFrame(clock); playBtn.classList.add("playing"); playBtn.textContent="❚❚ STRONG TO THE FINISH"; }
+  function stop(){ if(!started) return; started=false; clearInterval(timer); if(ctx) master.gain.setTargetAtTime(0.0001,ctx.currentTime,0.15);
+    playBtn.classList.remove("playing"); playBtn.textContent="▶ I AM WHAT I AM"; }
+  playBtn.addEventListener("click",()=>{ started?stop():start(); });
+
+  /* ---------- visuals ---------- */
+  function frame(now){
+    beatEnv*=0.88;
+    const pump=1+beatEnv*0.16;
+    wordEl.style.transform=`scale(${pump.toFixed(3)})`;
+    for(let i=0;i<NB;i++){
+      const wobble=reduce?0.3:(0.35+0.35*Math.sin(now*0.006 + i*0.7));
+      const h=8 + (beatEnv*72*(0.5+wobble)) + wobble*14;
+      bars[i].style.height=Math.min(100,h).toFixed(1)+"%";
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
