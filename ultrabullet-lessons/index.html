@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ultrabullet Lessons — Manny Glover</title>
+<meta name="description" content="Fast-chess lessons from Manny Glover's games: budget the clock, scan forcing moves, respect long diagonals, and confirm the mate.">
+<style>
+:root{--bg:#090d16;--panel:#111827;--ink:#eef4ff;--dim:#9bacbf;--line:#28364b;--cyan:#51d8ff;--gold:#ffd166;--red:#ff667a;--green:#70e6a1;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--serif:Georgia,serif}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#19304e 0,transparent 42%),var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}.wrap{width:min(980px,calc(100% - 32px));margin:auto;padding:24px 0 80px}a{color:var(--cyan)}nav{display:flex;justify-content:space-between;align-items:center;font:12px var(--mono);text-transform:uppercase;letter-spacing:.1em}nav a{text-decoration:none}.hero{padding:10vh 0 7vh}.kicker{color:var(--cyan);font:12px var(--mono);letter-spacing:.2em;text-transform:uppercase}.hero h1{font:700 clamp(54px,12vw,124px)/.85 var(--serif);letter-spacing:-.06em;margin:.15em 0}.hero p{max-width:650px;color:var(--dim);font-size:clamp(18px,2.4vw,24px)}.clock{display:inline-grid;grid-template-columns:repeat(4,auto);gap:5px;margin-top:22px;font:700 18px var(--mono)}.clock span{padding:8px 11px;background:#06101e;border:1px solid var(--line)}.clock .danger{color:var(--red);border-color:#723143}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:linear-gradient(145deg,#131e30,#0d1421);border:1px solid var(--line);padding:24px;min-height:240px}.n{font:11px var(--mono);color:var(--gold);letter-spacing:.15em}.card h2{font:600 29px/1.1 var(--serif);margin:.35em 0}.card p{color:var(--dim)}.line{font:14px/1.8 var(--mono);background:#080d16;border-left:3px solid var(--cyan);padding:14px 16px;color:#d8e8ff;overflow:auto}.bad{color:var(--red)}.good{color:var(--green)}section{margin-top:70px}section>h2{font:600 clamp(34px,6vw,60px)/1 var(--serif);letter-spacing:-.03em}.rule{border:1px solid var(--line);padding:28px;background:#0d1421}.rule strong{display:block;color:var(--gold);font:700 clamp(22px,4vw,36px)/1.2 var(--mono)}.choices{display:grid;gap:10px;margin-top:20px}.choices button{appearance:none;text-align:left;background:#101b2b;color:var(--ink);border:1px solid var(--line);padding:15px;font:14px var(--mono);cursor:pointer}.choices button:hover,.choices button:focus{border-color:var(--cyan)}#answer{min-height:52px;margin-top:16px;color:var(--dim)}.meter{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:22px 0}.meter div{padding:14px;text-align:center;border:1px solid var(--line);font:12px var(--mono)}.meter b{display:block;color:var(--cyan);font-size:22px}.manifesto{font:italic clamp(24px,4vw,42px)/1.35 var(--serif);max-width:780px}.foot{margin-top:80px;border-top:1px solid var(--line);padding-top:24px;color:var(--dim);font:12px/1.8 var(--mono)}@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding-top:8vh}.meter{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<nav><a href="../">← HRL Portfolio</a><span>Mannyfresher · fast-chess notebook</span></nav>
+<header class="hero">
+  <div class="kicker">Pattern first · panic never</div>
+  <h1>Ultrabullet<br>Lessons</h1>
+  <p>Fast chess is not ordinary chess played carelessly. It is a discipline of recognition: preserve enough time to see the one position that matters.</p>
+  <div class="clock" aria-label="Clock countdown"><span>10:00</span><span>06:52</span><span class="danger">00:55</span><span class="danger">00:01</span></div>
+</header>
+
+<main>
+<div class="grid">
+  <article class="card"><div class="n">LESSON 01</div><h2>Give every minute a job</h2><p>In <em>The Great Hesitation</em>, one opening decision consumed almost six minutes. The move worked; the clock did not.</p><div class="line">opening ≤ 20%<br>middlegame ≥ 50%<br>finish ≥ 30%</div></article>
+  <article class="card"><div class="n">LESSON 02</div><h2>Checks before stories</h2><p>When the king is loose, calculate every forcing move before inventing a positional narrative.</p><div class="line"><span class="good">CHECKS</span> → CAPTURES → THREATS<br>then choose the shortest proof</div></article>
+  <article class="card"><div class="n">LESSON 03</div><h2>Scan the longest lines</h2><p>A bishop crossed the entire board and took the a8 rook. Before moving a central pawn, look from every bishop, rook, and queen to the edge.</p><div class="line">g2 — f3 — e4 — d5 — c6 — b7 — <span class="bad">a8</span></div></article>
+  <article class="card"><div class="n">LESSON 04</div><h2>Confirm the mate</h2><p>A forced sequence and a later mate-in-one both appeared. The final scan is simple: checking square, escape squares, captures, interpositions.</p><div class="line">21…Nc6+! 22 Qxc6+ Nxc6+<br>23 Ke6 <span class="good">Rf6#</span></div></article>
+</div>
+
+<section><h2>Two games, one lesson</h2>
+  <div class="grid">
+    <article class="card"><div class="n">THE CREEPY CRAWLY</div><h2>Let the opponent overextend</h2><p>The unusual shell survived a pawn storm. Once Black sacrificed both knights, simple captures converted the position.</p><div class="line">14…Nf4 15 gxf4<br>20…Nxf5 21 exf5<br>24…Qxd3 <span class="good">25 Qxd3+</span></div></article>
+    <article class="card"><div class="n">THE GREAT HESITATION</div><h2>Winning is not yet won</h2><p>Black created mating geometry while living on seconds. Calculation found the attack; time pressure repeatedly broke its execution.</p><div class="line">king exposed + forcing pieces<br>− usable clock<br>= pattern seen too late</div></article>
+  </div>
+</section>
+
+<section><h2>The three-second scan</h2>
+  <div class="meter"><div><b>1</b>Am I in check?</div><div><b>2</b>Do I have mate?</div><div><b>3</b>What hangs?</div></div>
+  <div class="rule"><strong>POSITION: after 21 Ke5</strong><p>Black to move. Which thought belongs first?</p>
+    <div class="choices">
+      <button data-answer="no">Protect the queenside pawns.</button>
+      <button data-answer="yes">List every check: …Nc6+, …Qf3, and rook checks.</button>
+      <button data-answer="no">Trade queens and enter an endgame.</button>
+    </div><div id="answer" aria-live="polite"></div>
+  </div>
+</section>
+
+<section><h2>Clock covenant</h2><p class="manifesto">I will not spend the game proving one move. I will preserve enough time to recognize the position the earlier moves were trying to create.</p></section>
+</main>
+
+<footer class="foot">Built from games by Manny Glover · “mannyfresher” on Lichess.<br>Analysis is instructional, not an engine verdict. Fast chess rewards pattern recognition, clock discipline, and joy.</footer>
+</div><script>
+document.querySelectorAll('[data-answer]').forEach(function(b){b.addEventListener('click',function(){var ok=b.dataset.answer==='yes';document.getElementById('answer').innerHTML=ok?'<span class="good">Yes.</span> Forcing moves first. …Nc6+ begins the mating proof.':'<span class="bad">Not first.</span> The exposed king makes checks the urgent candidate set.';});});
+</script></body></html>
