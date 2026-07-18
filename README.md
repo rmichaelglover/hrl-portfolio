@@ -19,6 +19,11 @@ This repository is a working, tested core plus a runnable demo. It's the spine
 of a larger portfolio applying relaxation labeling to **markerless motion
 capture** and to a **syncretistic, weighted consensus of physical models**.
 
+The general information-processing architecture is called
+**[Simplicial Relax](SIMPLICIAL_RELAX.md)**: sparse pairwise and higher-order
+compatibility, respected priors, an honest null/noise label, and shared TUI/GUI
+surfaces over the same relaxed field.
+
 ---
 
 ## ▶ Live portfolio
