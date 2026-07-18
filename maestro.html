@@ -123,6 +123,17 @@
     background:rgba(58,157,74,.55);border-radius:50%;pointer-events:none;z-index:3}
   .sq.otbcap{box-shadow:inset 0 0 0 4px rgba(200,60,60,.6) !important}
   .sq{position:relative}
+  #flagPanel{max-width:980px;margin:0 auto;padding:4px 16px 8px;display:none}
+  #flagPanel .card2{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}
+  #flagPanel .flaghelp{color:var(--mut);font-size:12px;margin-top:7px}
+  #flagPanel .pending{color:#9a5b00;font-weight:700}
+  .flagbadge{position:absolute;right:2px;top:2px;z-index:8;font-size:clamp(13px,3.2vw,23px);line-height:1;
+    filter:drop-shadow(0 1px 1px #fff) drop-shadow(0 1px 2px #0008);pointer-events:none}
+  .sqflag{right:auto;top:auto;left:2px;bottom:2px;font-size:clamp(13px,3.2vw,23px);opacity:.92}
+  .flag-arrows{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none;overflow:visible}
+  .flag-arrow-line{stroke:#17233c;stroke-width:1.35;stroke-linecap:round;opacity:.78;filter:drop-shadow(0 0 .5px #fff)}
+  .flag-arrow-label{font-size:4.8px;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#fff;stroke-width:.7px;stroke-linejoin:round}
+  .sq.flagpick{box-shadow:inset 0 0 0 4px #f3b51b !important}
 </style>
 </head>
 <body>
@@ -141,6 +152,7 @@
     <button id="btnRage" class="btnrole" title="🃏 Rage Comics: pop a classic rage face on captures, checks and checkmate (off by default)">🃏 Rage</button>
     <button id="btnLoad" class="btnrole" title="Load any annotated PGN">📋 Load PGN</button>
     <button id="btnOtb" class="btnrole" title="Play moves right on the board (hot-seat, both sides)">♟️ Play OTB</button>
+    <button id="btnFlags" class="btnrole" title="Add flag emoji to characters, squares, and analysis arrows">🏳️ Flags</button>
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
   <div class="links">
@@ -175,6 +187,15 @@
       <button id="exWorld">🌍 World (.json)</button>
     </div>
     <div class="loadhint"><b>🌍 World</b> bakes the heightmap, water bodies, per-piece roles/teams and full replay into one JSON — the bridge to Minecraft / Roblox / a Worms-style game. &nbsp; <b>Suno</b> doesn't read MIDI — upload the <b>.wav</b>, or paste the <b>.txt</b> into Suno's Style/Lyrics. For richer orchestral audio: <code>flatpak run org.musescore.MuseScore game.mid -o song.mp3</code></div>
+  </div></div>
+
+  <div id="flagPanel"><div class="card2">
+    <div class="loadrow">
+      <label>Flag <select id="flagPick" aria-label="Flag emoji"></select></label>
+      <label>Place on <select id="flagTarget"><option value="character">character</option><option value="square">square</option><option value="arrow">analysis arrow</option></select></label>
+      <button id="flagClear" type="button">Clear all flags</button>
+    </div>
+    <div class="flaghelp" id="flagHelp">Choose a flag, then click a character. Click it again with the same flag to remove it. Flags are decorative analysis labels, not claims about nationality.</div>
   </div></div>
 
   <div class="app">
@@ -889,6 +910,21 @@ function buildFrames(mv){
 }
 /* ===================== over-the-board play (perft-validated legal move generation) ===================== */
 let otbOn=false, otbSel=null, otbTargets=[], otbPending=null, branched=false;
+/* ===================== flag annotations =====================
+   Flags are user-authored visual labels only. They never infer nationality or behavior. */
+const FLAG_CODES=("AC AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XK YE YT ZA ZM ZW").split(" ");
+const SPECIAL_FLAGS=["🏳️","🏴","🏁","🚩","🏳️‍🌈","🏳️‍⚧️","🏴‍☠️","🇺🇳","🇪🇺"];
+const codeFlag=c=>String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0)));
+const emptyFlags=()=>({pieces:{},squares:{},arrows:[]});
+let flagsOn=false,flagArrowFrom=null;
+let flagMarks=(()=>{try{const v=JSON.parse(localStorage.getItem("maestro.flags.v1")||"null");return v&&v.pieces&&v.squares&&Array.isArray(v.arrows)?v:emptyFlags();}catch(_){return emptyFlags();}})();
+function saveFlags(){try{localStorage.setItem("maestro.flags.v1",JSON.stringify(flagMarks));}catch(_){}}
+function chosenFlag(){return document.getElementById("flagPick").value||"🏳️";}
+function flagHelp(){const h=document.getElementById("flagHelp"),t=document.getElementById("flagTarget").value;
+  if(t==="arrow"&&flagArrowFrom){h.innerHTML=`<span class="pending">Arrow starts at ${flagArrowFrom}.</span> Click its destination square.`;return;}
+  h.textContent=t==="character"?"Choose a flag, then click a character. Click it again with the same flag to remove it. Flags are decorative analysis labels, not claims about nationality.":t==="square"?"Choose a flag, then click any square. Click it again with the same flag to remove it.":"Choose a flag, then click the arrow's starting square and destination square. Repeat the same arrow and flag to remove it.";}
+function toggleMark(map,key,flag){if(map[key]===flag)delete map[key];else map[key]=flag;saveFlags();render();}
+function squareCenter(sq,flip){const f=fi(sq),r=ri(sq),col=flip?7-f:f,row=flip?r-1:8-r;return{x:(col+.5)*12.5,y:(row+.5)*12.5};}
 const _opp=c=>c==="w"?"b":"w";
 function castleRight(st,side){const c=side[0],ks=side[1]==="K";const kh=(c==="w"?"e1":"e8"),rh=ks?(c==="w"?"h1":"h8"):(c==="w"?"a1":"a8");
   return st.placement[kh]===c+"Ke"&&st.placement[rh]===c+"R"+(ks?"h":"a");}
@@ -995,6 +1031,7 @@ function render(){
     files.forEach((f, colIdx)=>{
       const sq=sqOf(f,r), light=((f+r)%2===0);
       const d=document.createElement("div"); d.className="sq "+(light?"l":"d"); d.dataset.sq=sq;
+      if(flagsOn&&flagArrowFrom===sq)d.classList.add("flagpick");
       if(otbOn){ if(sq===otbSel) d.classList.add("otbsel"); else if(otbTargets.includes(sq)) d.classList.add(fr.placement[sq]?"otbcap":"otbdot"); }
       if(note && (note.from===sq||note.to===sq)) d.classList.add("hl");
       if(sq===checkSq) d.classList.add("chk");
@@ -1009,6 +1046,7 @@ function render(){
       const id=fr.placement[sq];
       if(id){
         d.appendChild(makePiece(id,fr));
+        if(flagMarks.pieces[id]){const fb=document.createElement("span");fb.className="flagbadge";fb.textContent=flagMarks.pieces[id];fb.setAttribute("aria-label","character flag "+flagMarks.pieces[id]);d.appendChild(fb);}
         if(roleMap && roleMap[id]){ const rr=roleMap[id];
           d.style.boxShadow="inset 0 0 0 3px "+ROLE_COLOR[rr.role];
           if(rr.role==="noise") d.classList.add("noise");
@@ -1016,9 +1054,18 @@ function render(){
           b.style.background=ROLE_COLOR[rr.role]; b.textContent=ROLE_TAG[rr.role]; d.appendChild(b);
         }
       }
+      if(flagMarks.squares[sq]){const fb=document.createElement("span");fb.className="flagbadge sqflag";fb.textContent=flagMarks.squares[sq];fb.setAttribute("aria-label",sq+" flag "+flagMarks.squares[sq]);d.appendChild(fb);}
       boardEl.appendChild(d);
     });
   });
+  if(flagMarks.arrows.length){
+    const ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");svg.classList.add("flag-arrows");svg.setAttribute("viewBox","0 0 100 100");svg.setAttribute("aria-label","flag analysis arrows");
+    const defs=document.createElementNS(ns,"defs"),marker=document.createElementNS(ns,"marker");marker.id="flagArrowHead";marker.setAttribute("viewBox","0 0 10 10");marker.setAttribute("refX","8");marker.setAttribute("refY","5");marker.setAttribute("markerWidth","4");marker.setAttribute("markerHeight","4");marker.setAttribute("orient","auto-start-reverse");
+    const path=document.createElementNS(ns,"path");path.setAttribute("d","M 0 0 L 10 5 L 0 10 z");path.setAttribute("fill","#17233c");marker.appendChild(path);defs.appendChild(marker);svg.appendChild(defs);
+    flagMarks.arrows.forEach(a=>{const p1=squareCenter(a.from,flip),p2=squareCenter(a.to,flip),line=document.createElementNS(ns,"line");line.classList.add("flag-arrow-line");line.setAttribute("x1",p1.x);line.setAttribute("y1",p1.y);line.setAttribute("x2",p2.x);line.setAttribute("y2",p2.y);line.setAttribute("marker-end","url(#flagArrowHead)");svg.appendChild(line);
+      const tx=document.createElementNS(ns,"text");tx.classList.add("flag-arrow-label");tx.setAttribute("x",(p1.x+p2.x)/2);tx.setAttribute("y",(p1.y+p2.y)/2);tx.textContent=a.flag;svg.appendChild(tx);});
+    boardEl.appendChild(svg);
+  }
   // player bars (top = opponent, bottom = you/hero)
   const heroIsWhite = hero==="w";
   const youName = heroIsWhite?game.white:game.black, oppName = heroIsWhite?game.black:game.white;
@@ -1084,6 +1131,9 @@ fillSelect(document.getElementById("selGame"),GAMES,g=>g.label,gameKey);
 fillSelect(document.getElementById("selPieceW"),SETS,p=>p.label,pieceW);
 fillSelect(document.getElementById("selPieceB"),SETS,p=>p.label,pieceB);
 fillSelect(document.getElementById("selTheme"),THEMES,t=>t,themeKey);
+const flagPick=document.getElementById("flagPick");
+SPECIAL_FLAGS.forEach((flag,i)=>{const o=document.createElement("option");o.value=flag;o.textContent=flag+" · "+["white","black","checkered","red","rainbow","transgender","pirate","United Nations","European Union"][i];flagPick.appendChild(o);});
+FLAG_CODES.forEach(code=>{const o=document.createElement("option"),flag=codeFlag(code);o.value=flag;o.textContent=flag+" · "+code;flagPick.appendChild(o);});
 document.getElementById("selGame").onchange=e=>{stop();load(e.target.value);};
 document.getElementById("selPieceW").onchange=e=>{pieceW=e.target.value;render();};
 document.getElementById("selPieceB").onchange=e=>{pieceB=e.target.value;render();};
@@ -1100,6 +1150,17 @@ document.getElementById("btnLoad").onclick=function(){const p=document.getElemen
 document.getElementById("pgnCancel").onclick=()=>{document.getElementById("loadPanel").style.display="none";document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnLoad").onclick=()=>{stop();loadCustom(document.getElementById("pgnText").value,document.getElementById("pgnSide").value);document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById("pgnText").value=r.result;};r.readAsText(f);};
+document.getElementById("btnFlags").onclick=function(){flagsOn=!flagsOn;this.classList.toggle("on",flagsOn);document.getElementById("flagPanel").style.display=flagsOn?"block":"none";flagArrowFrom=null;flagHelp();render();};
+document.getElementById("flagTarget").onchange=()=>{flagArrowFrom=null;flagHelp();render();};
+document.getElementById("flagClear").onclick=()=>{if(!Object.keys(flagMarks.pieces).length&&!Object.keys(flagMarks.squares).length&&!flagMarks.arrows.length)return;if(confirm("Clear every character, square, and arrow flag?")){flagMarks=emptyFlags();flagArrowFrom=null;saveFlags();flagHelp();render();}};
+boardEl.addEventListener("click",e=>{if(!flagsOn)return;const sd=e.target.closest(".sq");if(!sd)return;e.stopImmediatePropagation();const sq=sd.dataset.sq,fr=frames[cur],flag=chosenFlag(),target=document.getElementById("flagTarget").value;
+  if(target==="character"){const id=fr.placement[sq];if(id)toggleMark(flagMarks.pieces,id,flag);return;}
+  if(target==="square"){toggleMark(flagMarks.squares,sq,flag);return;}
+  if(!flagArrowFrom){flagArrowFrom=sq;flagHelp();render();return;}
+  if(flagArrowFrom===sq){flagArrowFrom=null;flagHelp();render();return;}
+  const i=flagMarks.arrows.findIndex(a=>a.from===flagArrowFrom&&a.to===sq&&a.flag===flag);
+  if(i>=0)flagMarks.arrows.splice(i,1);else flagMarks.arrows.push({from:flagArrowFrom,to:sq,flag});
+  flagArrowFrom=null;saveFlags();flagHelp();render();});
 // over-the-board play: click a piece then a highlighted square
 boardEl.addEventListener("click",e=>{ if(!otbOn)return; const sd=e.target.closest(".sq"); if(!sd)return; const sq=sd.dataset.sq;
   const st=otbState(), id=st.placement[sq];

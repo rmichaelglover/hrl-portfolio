@@ -15,6 +15,10 @@ the **Misfit Squad** 👸🤴🦏):
 - **🎹 Chess Maestro** ([`maestro.html`](maestro.html)) — a self-contained PWA: emoji board,
   character narration, terrain & role overlays, and **music generated from the
   moves** (key + meter inferred from the game).
+- **🏳️ Flag annotations** — choose any country/territory or special flag emoji,
+  then attach it to a persistent character identity, a board square, or a
+  directed analysis arrow. Annotations stay in local browser storage and are
+  decorative labels, not inferred nationalities.
 - **⌨️ Vim Chess** (`chess_emoji.vim`) — the same study, native in a Vim buffer.
 
 ### [▶️ **Play Chess Maestro now →**](maestro.html)
