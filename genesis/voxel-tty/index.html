@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>In the Beginning, in a Terminal — an ASCII voxel engine · Project Genesis</title>
-<meta name="description" content="The same seven days, rendered by a hand-written ASCII/Unicode voxel engine straight into a terminal: a rotating 3-D diorama with a quaternion camera that slerps between the days. Rotation & interpolation math inspired by David Harrison (mr-mocap), Metro Atlanta. By Manny Glover.">
+<title>Elbie's Genesis World — an ASCII voxel engine</title>
+<meta name="description" content="The seven days of Genesis meet Elbie's living Gooblets and Zappies in a hand-written ASCII voxel engine with a quaternion camera and generative garden music. By Manny Glover.">
 <style>
   :root{
     --bg:#0a0c0b;            /* page frame — deep phosphor black */
@@ -118,6 +118,7 @@
   .key.go{color:#10160f;background:var(--amber);border-color:var(--amber-dim);}
   .key:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
   .key[disabled]{opacity:.4;cursor:not-allowed;filter:none;}
+  .key.music[aria-pressed="true"]{color:#07130d;background:#9be6b8;border-color:#4f9d70;}
 
   .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
   .day{position:relative;font-family:var(--mono);cursor:pointer;background:var(--frame);border:1px solid var(--edge);
@@ -138,9 +139,9 @@
 <div class="page">
   <header class="mast">
     <div class="lhs">
-      <div class="kicker">Genesis <span style="color:var(--amber)">·</span> seven days</div>
-      <h1>voxel <span class="sep">//</span> ascii engine</h1>
-      <div class="byline">a 3d renderer that rasterizes into a text terminal — no gpu, no images, just characters. quaternion camera glides between the days.</div>
+      <div class="kicker">Genesis <span style="color:var(--amber)">·</span> Elbie's living world</div>
+      <h1>voxel <span class="sep">//</span> creation ecology</h1>
+      <div class="byline">seven days become a living text world — Gooblets graze, Zappies roam, and a garden hymn follows creation.</div>
     </div>
     <button class="tbtn" id="theme" type="button">◐ theme</button>
   </header>
@@ -148,7 +149,7 @@
   <section class="term" aria-label="terminal">
     <div class="titlebar">
       <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="path">~/genesis <b>$</b> ./create --days 7 --render ascii-voxel</span>
+      <span class="path">~/elbie <b>$</b> ./create --days 7 --life gooblets,zappies --music gentle</span>
       <span class="spacer"></span>
       <span class="meta" id="fps">— fps</span>
     </div>
@@ -176,6 +177,7 @@
         <button class="key" id="prev" type="button">◀ prev</button>
         <button class="key" id="next" type="button">next ▶</button>
         <button class="key go wide" id="play" type="button">▶ let there be…</button>
+        <button class="key music wide" id="music" type="button" aria-pressed="false">♫ awaken garden hymn</button>
         <button class="key wide" id="reset" type="button">↺ return to void</button>
       </div>
       <div>
@@ -186,7 +188,7 @@
   </section>
 
   <footer>
-    text · <b>king james version, genesis 1–2</b> &nbsp;·&nbsp; engine · <b>hand-written ascii voxel rasterizer</b> &nbsp;·&nbsp; zero dependencies, static-host ready<br>
+    world · <b>genesis creation × elbie's gooblets &amp; zappies</b> &nbsp;·&nbsp; engine · <b>hand-written ascii voxel rasterizer</b> &nbsp;·&nbsp; music starts only by invitation<br>
     quaternion camera &amp; slerp day-transitions inspired by <b><a href="https://github.com/mr-mocap" target="_blank" rel="noopener">MathLib &amp; the dual-quaternion interpolator</a></b> of <b>MrMocap — David Harrison, Metro Atlanta, Georgia</b>
   </footer>
 </div>
@@ -213,6 +215,7 @@
   mat("sheep",[238,231,216]); mat("sheepH",[60,58,52]); mat("cow",[106,82,54]);
   mat("cowW",[239,233,223]); mat("playerT",[31,176,168]); mat("playerH",[202,160,109]);
   mat("gold",[245,197,66]); mat("star",[220,232,245]); mat("void",[40,58,66]);
+  mat("flower",[255,110,199]); mat("gooblet",[238,59,47]); mat("zappy",[59,108,255]);
   const MATS = Object.values(MAT).sort((a,b)=>a.id-b.id);
 
   const LEVELS=6;
@@ -262,6 +265,11 @@
     [[0,0,0],[1,0,0],[-1,0,0],[0,0,1],[0,0,-1],[0,1,0]].forEach(([dx,dy,dz])=>
       terrain.push({x:x+dx,y:lt+dy,z:z+dz,m:MAT.leaf.id,day:3,solid:true}));
   });
+  // Elbie's flowers join the seed-bearing earth (day3)
+  [[-4,0],[-2,2],[0,-2],[2,3],[4,0],[1,1]].forEach(([x,z],i)=>{
+    if(isLand(x,z)) props.push({x,y:H(x,z)+1,z,m:MAT.flower.id,day:3,
+      anim:t=>[0,Math.sin(t*1.1+i)*0.08,0]});
+  });
 
   // props (no occupancy culling)
   // first light (day1) — a lone glowstone, retired when the sun rises (day4)
@@ -277,6 +285,9 @@
   // fish (day5)
   [[-3,3],[3,3],[-4,-2],[4,2]].forEach(([x,z],i)=>
     props.push({x,y:0,z,m:MAT.salmon.id,day:5,anim:t=>[Math.sin(t*0.7+i)*1.1,0.35,Math.cos(t*0.5+i)*0.6]}));
+  // Gooblets begin in the water, then explore the created shore
+  [[-2,4],[2,-4],[4,3]].forEach(([x,z],i)=>
+    props.push({x,y:0.5,z,m:MAT.gooblet.id,day:5,anim:t=>[Math.sin(t*.55+i)*1.5,Math.sin(t*2+i)*.12,Math.cos(t*.45+i)*1.1]}));
   // birds (day5)
   [[-2,-2],[1,-3],[3,1]].forEach(([x,z],i)=>
     props.push({x,y:6,z,m:MAT.bird.id,day:5,anim:t=>[Math.sin(t*0.6+i*2)*1.6,Math.sin(t*1.5+i)*0.3,Math.cos(t*0.6+i*2)*1.0]}));
@@ -288,6 +299,9 @@
   (()=>{ let x=0,z=0; const b=isLand(x,z)?H(x,z):3;
     props.push({x,y:b+1,z,m:MAT.playerT.id,day:6,anim:t=>[0,Math.sin(t*1.2)*0.06,0]});
     props.push({x,y:b+2,z,m:MAT.playerH.id,day:6,anim:t=>[0,Math.sin(t*1.2)*0.06,0]}); })();
+  // Zappies are curious blue caretakers, orbiting rather than catching
+  [[-3,-2],[3,1]].forEach(([x,z],i)=>props.push({x,y:Math.max(1,H(x,z)+1),z,m:MAT.zappy.id,day:6,
+    anim:t=>[Math.sin(t*.42+i*Math.PI)*1.2,Math.sin(t*1.3+i)*.18,Math.cos(t*.42+i*Math.PI)*1.2]}));
 
   const ALL = terrain.concat(props);
   // reveal ordering per day group (bottom-up, outward)
@@ -526,16 +540,16 @@
      sw:"#3f74dd",log:[["#d2d8e0","raised  firmament"],["#3f74dd","gathered  the waters"],["#d2d8e0","spawned  clouds × 5"]]},
     {tag:"DAY 3/7",name:"land & seed",ref:"GENESIS 1:9–12",
      verse:"Let the dry land appear… And the earth brought forth grass, and the herb yielding seed, and the tree yielding fruit.",
-     sw:"#7fb238",log:[["#7fb238","raised  grass × many"],["#8b5a2b","stacked  dirt · stone"],["#4e7a2a","planted  oak × 5"]]},
+     sw:"#7fb238",log:[["#7fb238","raised  grass × many"],["#8b5a2b","stacked  dirt · stone"],["#4e7a2a","planted  oak × 5"],["#ff6ec7","Elbie planted flowers × 6"]]},
     {tag:"DAY 4/7",name:"sun, moon & stars",ref:"GENESIS 1:16",
      verse:"And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.",
      sw:"#ffe08a",log:[["#ffe08a","set  sun  (rule day)"],["#dbe2ee","set  moon  (rule night)"],["#dce8f5","scattered  stars × ∞"]]},
     {tag:"DAY 5/7",name:"fish & fowl",ref:"GENESIS 1:20–21",
      verse:"Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth.",
-     sw:"#e08a3c",log:[["#e08a3c","spawned  salmon × 4"],["#6fe0a0","spawned  parrot × 3"],["#3f74dd","filled  the seas"]]},
+     sw:"#e08a3c",log:[["#e08a3c","spawned  salmon × 4"],["#ee3b2f","awakened  Gooblets × 3"],["#6fe0a0","spawned  parrot × 3"],["#3f74dd","filled  the seas"]]},
     {tag:"DAY 6/7",name:"beasts & humankind",ref:"GENESIS 1:24–27",
      verse:"Let the earth bring forth the living creature after his kind… So God created man in his own image.",
-     sw:"#1fb0a8",log:[["#eee7d8","spawned  sheep"],["#6a5236","spawned  cow"],["#1fb0a8","spawned  player  // imago dei"]]},
+     sw:"#1fb0a8",log:[["#eee7d8","spawned  sheep"],["#6a5236","spawned  cow"],["#3b6cff","invited  Zappies × 2 // gentle mode"],["#1fb0a8","spawned  player  // imago dei"]]},
     {tag:"DAY 7/7",name:"rest",ref:"GENESIS 2:2–3",
      verse:"And on the seventh day God ended his work; and he rested… And God blessed the seventh day, and sanctified it.",
      sw:"#f5c542",log:[["#f5c542","gamerule doDaylightCycle false"],["#9c7e26","blessed  the seventh day"],["#d7ffe8","he rested."]]},
@@ -589,6 +603,26 @@
   document.getElementById("next").addEventListener("click",()=>{ stopPlay(); goDay(curDay+1); });
   document.getElementById("prev").addEventListener("click",()=>{ stopPlay(); goDay(curDay-1); });
   document.getElementById("reset").addEventListener("click",()=>{ stopPlay(); goDay(0); });
+
+  // opt-in generative garden hymn: one consonant four-note cell per day
+  let audio=null, hymnTimer=0, hymnOn=false, hymnStep=0;
+  const musicBtn=document.getElementById("music"), dayRoots=[48,48,50,53,55,57,52,48];
+  function gardenTone(midi,when,dur=.9,gain=.045){
+    const o=audio.createOscillator(), g=audio.createGain(); o.type="sine";
+    o.frequency.value=440*2**((midi-69)/12); g.gain.setValueAtTime(.0001,when);
+    g.gain.linearRampToValueAtTime(gain,when+.06); g.gain.exponentialRampToValueAtTime(.0001,when+dur);
+    o.connect(g).connect(audio.destination); o.start(when); o.stop(when+dur+.05);
+  }
+  function hymnTick(){ if(!hymnOn)return; const root=dayRoots[curDay], cell=[0,4,7,9,7,4];
+    gardenTone(root+12+cell[hymnStep%cell.length],audio.currentTime+.02);
+    if(hymnStep%3===0) gardenTone(root,audio.currentTime+.02,1.7,.025);
+    hymnStep++; hymnTimer=setTimeout(hymnTick,620);
+  }
+  musicBtn.addEventListener("click",async()=>{ hymnOn=!hymnOn; musicBtn.setAttribute("aria-pressed",String(hymnOn));
+    musicBtn.textContent=hymnOn?"■ quiet the garden":"♫ awaken garden hymn";
+    if(hymnOn){ audio ||= new AudioContext(); await audio.resume(); hymnTick(); }
+    else clearTimeout(hymnTimer);
+  });
 
   let playing=false, playTimer=0; const playBtn=document.getElementById("play");
   function stopPlay(){ playing=false; clearTimeout(playTimer); playBtn.textContent="▶ let there be…"; }
