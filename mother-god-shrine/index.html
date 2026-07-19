@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mother God Shrine — Beauty, Wonder &amp; Curiosity</title>
+<meta name="description" content="A contemplative, PG-13 gallery of symbolic beauty, wonder, curiosity, and the sacred feminine.">
+<style>
+  :root{--night:#100b18;--wine:#461d3c;--rose:#f1a8bd;--gold:#f1cc82;--paper:#fff7ed;--muted:#cbbdca}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 50% -10%,#6e294e 0,var(--wine) 25%,var(--night) 68%);color:var(--paper);font:16px/1.65 Georgia,serif;min-height:100vh}
+  .wrap{max-width:920px;margin:auto;padding:48px 18px 80px;text-align:center}
+  .halo{width:90px;height:90px;margin:0 auto 22px;border:2px solid var(--gold);border-radius:50%;box-shadow:0 0 35px #f1cc8280,inset 0 0 22px #f1cc8240;display:grid;place-items:center;font-size:42px}
+  h1{font-size:clamp(39px,8vw,78px);line-height:.98;margin:0;color:var(--rose);font-weight:500;text-shadow:0 3px 22px #000}
+  .kicker{font:12px/1.4 system-ui;text-transform:uppercase;letter-spacing:.28em;color:var(--gold);margin:18px 0}
+  .lead{max-width:660px;margin:0 auto 30px;color:var(--muted);font-size:18px}
+  .gate,.gallery{max-width:620px;margin:25px auto;background:#160f20dd;border:1px solid #f1cc8244;border-radius:22px;padding:28px;box-shadow:0 18px 60px #0008}
+  .gate h2,.gallery h2{font-weight:500;color:var(--gold);margin-top:0}
+  .gate p{color:var(--muted)}
+  button{border:1px solid var(--gold);border-radius:99px;background:linear-gradient(135deg,#8b395c,#54244d);color:#fff7ed;padding:13px 24px;font:700 15px system-ui;cursor:pointer}
+  button:hover{filter:brightness(1.14)}
+  .gallery{display:none}.gallery.open{display:block}
+  .frame{position:relative;width:100%;max-width:500px;min-height:533px;margin:auto;background:#0d0912;border-radius:12px;overflow:hidden}
+  iframe{display:block;width:100%;height:533px;border:0}
+  .caption{font-style:italic;color:var(--muted);margin:20px auto 4px}
+  .fine{font:12px/1.5 system-ui;color:#a99cab;max-width:620px;margin:22px auto}
+  a{color:var(--rose)}
+  noscript a{display:inline-block;margin-top:10px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="halo" aria-hidden="true">🌹</div>
+  <p class="kicker">A contemplative PG-13 gallery</p>
+  <h1>Mother God Shrine</h1>
+  <p class="lead">A symbolic chamber for beauty, wonder, curiosity, and reverence for the sacred feminine—held as art, metaphor, and invitation to contemplation.</p>
+
+  <section class="gate" id="gate" aria-labelledby="gate-title">
+    <h2 id="gate-title">Before entering</h2>
+    <p>This gallery is intended for visitors 13 and older. It may contain mature artistic themes but no explicit material. Entering also loads an embedded Facebook post, which allows Facebook to receive technical information about your visit.</p>
+    <button id="enter" type="button">I am 13+ · Enter and load the gallery</button>
+  </section>
+
+  <section class="gallery" id="gallery" aria-live="polite">
+    <h2>Icon of wonder</h2>
+    <div class="frame" id="frame"><p>Preparing the gallery…</p></div>
+    <p class="caption">Look gently. Remain curious. Let beauty point beyond itself.</p>
+  </section>
+
+  <p class="fine">“Mother God” is presented here as the artist’s spiritual and symbolic language. The gallery does not claim that any depicted person endorses this interpretation. Facebook content remains governed by its original publisher and platform.</p>
+  <p><a href="../mother-god-bomb/">Visit the Mother God essay</a> · <a href="../">Return to the portfolio</a></p>
+  <noscript><p>JavaScript is required for the privacy gate. You may instead <a href="https://www.facebook.com/photo/?fbid=122101595397396698&amp;set=a.122101596057396698" rel="noopener noreferrer">open the original post on Facebook</a>.</p></noscript>
+</main>
+<script>
+  const enter=document.getElementById('enter'), gate=document.getElementById('gate'), gallery=document.getElementById('gallery');
+  enter.addEventListener('click',()=>{
+    const iframe=document.createElement('iframe');
+    iframe.title='Facebook post presented in the Mother God Shrine gallery';
+    iframe.src='https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto%2F%3Ffbid%3D122101595397396698%26set%3Da.122101596057396698&show_text=true&width=500';
+    iframe.width='500'; iframe.height='533'; iframe.scrolling='no'; iframe.allowFullscreen=true;
+    iframe.allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+    document.getElementById('frame').replaceChildren(iframe);
+    gate.hidden=true; gallery.classList.add('open'); gallery.querySelector('h2').focus?.();
+  });
+</script>
+</body>
+</html>
