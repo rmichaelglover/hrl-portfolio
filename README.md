@@ -15,9 +15,17 @@ The same engine, with only the compatibility kernel and prior changed:
 | **Strategy** | chess pieces | tactical roles | roles that co-occur in a real plan |
 | **Model consensus** | observations / regimes | candidate theories | theories that agree in this regime |
 
-This repository is a working, tested core plus a runnable demo. It's the spine
-of a larger portfolio applying relaxation labeling to **markerless motion
-capture** and to a **syncretistic, weighted consensus of physical models**.
+This repository is the publication and exhibition layer: runnable demos,
+essays, visualizations, and selected research code applying relaxation labeling
+to **markerless motion capture** and to a **syncretistic, weighted consensus of
+physical models**. The reusable Python core lives separately in
+[`relaxation-labeling-python`](https://github.com/rmichaelglover/relaxation-labeling-python);
+the canonical Chess Maestro application lives in
+[`whimsy-chess`](https://github.com/rmichaelglover/whimsy-chess).
+
+Physics-consensus pieces here are labeled demonstrations and toy models. The
+underlying conjectures, assumptions, and falsification work belong in the
+separate `physics-speculations` research notebook.
 
 The general information-processing architecture is called
 **[Simplicial Relax](SIMPLICIAL_RELAX.md)**: sparse pairwise and higher-order
