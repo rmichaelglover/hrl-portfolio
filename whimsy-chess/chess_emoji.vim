@@ -7,7 +7,7 @@
 " starting square) the whole game -- so Castle Andora stays Castle Andora even
 " after it roams the board.
 "
-"   :ChessEmoji [queendab|kadas|roundup|carr|schroflag|crab|goldsmith|fathersday|houdini|daisies|deadmove2|crawlnamed|scandi]   open a game
+"   :ChessEmoji [queendab|kadas|roundup|carr|schroflag|crab|goldsmith|fathersday|houdini|daisies|deadmove2|crawlnamed|scandi|stalemategambit]   open a game
 "   In the board:  l / <Right> / <Space> = next   h / <Left> = prev
 "                  < = start    > = end    q = quit
 "
@@ -474,7 +474,7 @@ command! -bar ChessPrev call s:step(-1)
 
 function! s:selftest() abort
   let out = []
-  for [name, wp, wsuf, wmover] in [['queendab',63,'#','wQd'],['kadas',33,'#','wQd'],['roundup',45,'#','wQd'],['carr',44,'#','bRh'],['schroflag',58,'','bQd'],['horsey',42,'','bQd'],['crabblack',52,'#','bRa'],['crab',87,'#','wNb'],['goldsmith',80,'#','bBc'],['fathersday',60,'#','bNb'],['houdini',39,'#','wQd'],['daisies',135,'','wKe'],['deadmove2',40,'#','bQd'],['crawlnamed',39,'#','wQd'],['scandi',69,'#','wPb']]
+  for [name, wp, wsuf, wmover] in [['queendab',63,'#','wQd'],['kadas',33,'#','wQd'],['roundup',45,'#','wQd'],['carr',44,'#','bRh'],['schroflag',58,'','bQd'],['horsey',42,'','bQd'],['crabblack',52,'#','bRa'],['crab',87,'#','wNb'],['goldsmith',80,'#','bBc'],['fathersday',60,'#','bNb'],['houdini',39,'#','wQd'],['daisies',135,'','wKe'],['deadmove2',40,'#','bQd'],['crawlnamed',39,'#','wQd'],['scandi',69,'#','wPb'],['stalemategambit',108,'','bPe']]
     let s:hero = get(g:chess_emoji_games[name], 'hero', 'b')
     let fr = s:build_frames(g:chess_emoji_games[name].moves)
     let plies = len(fr) - 1
@@ -706,4 +706,27 @@ let g:chess_emoji_games['scandi'] = {
 \   '60':'30.Kd2?? -- ONE more gift. Kxd4 and it is level again.',
 \   '61':'30...f5?? -- and we push a pawn instead. That was the last one.',
 \   '69':'35.Qb4# -- checkmate, by a pawn that walked the whole b-file while we were busy. // Twice up a piece with a plan, / twice we gave back what we won, / for the clock sat unspent / while the winning went / to whoever blundered last. Son. 💀',
+\ }}
+
+" The Stalemate Gambit.  Down twelve pawns of material and saved by the
+" opponent's own greed on the very last move.
+let g:chess_emoji_games['stalemategambit'] = {
+\ 'white':'mannyfresher (940)', 'black':'WhatIsUpDogg (1059)', 'hero':'w',
+\ 'opening':'Tennison Gambit -- the STALEMATE GAMBIT', 'result':'Draw by stalemate. 1/2-1/2',
+\ 'moves':'Nf3 d5 e4 dxe4 Ne5 Qd5 Bb5+ Qxb5 Qg4 f6 Kd1 Bxg4+ f3 Qxe5 fxg4 e3 Re1 Qf4 Rxe3 Qxh2 d4 Qxg2 c4 Qxg4+ Kc2 Qxd4 b4 Qxe3 Bxe3 b6 Nc3 h5 Rd1 h4 Nd5 Kf7 Nxc7 h3 Nxa8 h2 Nc7 h1=Q Rxh1 Rxh1 c5 g5 a3 g4 Kc3 g3 Kc4 g2 Kb5 g1=Q Bxg1 Rxg1 a4 f5 a5 f4 Nd5 f3 Ne3 f2 c6 f1=Q+ Nxf1 Rxf1 axb6 Nxc6 b7 Nb8 Ka5 e5 b5 e4 b6 e3 bxa7 Ra1+ Kb6 Rxa7 Kxa7 e2 Kxb8 e1=Q Ka7 Qa1+ Kb6 Qb1+ Kc7 Qc1+ Kb8 Qb1 Ka7 Bh6 Ka8 Bf4 Ka7 Ne7 Ka6 Bb8 Ka5 Nd5 Ka6 Nc3 Ka5 Qxb7',
+\ 'special':{
+\   '4':'2.e4 -- the Tennison Gambit. Offer the pawn, get the game. King Ethelheim 🦁 has never met a gambit he did not like.',
+\   '8':'4.Bb5+?? -- Popette Christiana 🛕 checks from a square nobody is guarding, and Queen Daria 👸 simply takes her. Down a bishop on move four.',
+\   '10':'5.Qg4? -- and Queen Dilorias 🐲 joins her. Minus seven and a half. The book closed the book.',
+\   '11':'5...f6?? -- WAIT. Look at c8. 6.Qxc8 is MATE IN ONE. Down a bishop, down seven pawns of evaluation, and there is a mate on the board.',
+\   '12':'6.Kd1?? -- we did not see it. 🫠 The single most expensive missed move in the collection. Nine seconds on the clock and we moved the king instead.',
+\   '28':'and now the bill. Qxe5, Qxh2, Qxg2, Qxg4+, Qxd4, Qxe3 -- Queen Daria 👸 eats SIX times in nine moves and nothing can be done about any of it.',
+\   '42':'21...h1=Q -- the first new queen. There will be three more. Meanwhile King Ethelheim 🦁 says nothing and pushes a queenside pawn.',
+\   '54':'27...g1=Q -- the second. Still pushing. c5, a3, a4, a5 -- the Woodland pawns walk on like nobody told them the score.',
+\   '66':'33...f1=Q+ -- the third. Minus nine. And the white king starts WALKING: c2, c3, c4, b5, a5. Not running away. Going somewhere.',
+\   '72':'36.b7? -- mate in sixteen for Black now. Sixteen. The engine has stopped counting pawns and started counting the funeral.',
+\   '86':'43...e1=Q -- FOURTH queen. Black has a queen, a bishop, a knight and a rook. We have a king and one pawn on b7. One pawn. Remember the pawn.',
+\   '95':'and here comes the check parade -- Qa1+, Qb1+, Qc1+ -- chasing King Ethelheim 🦁 around the corner of the board he has quietly backed into.',
+\   '107':'54.Ka5 -- the king stands on a5. Every square around him is covered. He has exactly one thing left in the whole world that can legally move: the pawn on b7. 👀',
+\   '108':'54...Qxb7?? -- SHE TAKES THE PAWN. Qb5# was mate. Instead Queen Daria 👸 reaches out and removes the last White unit that could legally move -- and King Ethelheim 🦁 is not in check, and has no move. // STALEMATE. Draw. // A king with nothing at all, / no army, no pawn and no wall, / stood still in the blue / while the queen ate the crew -- / and greed is the shortest way to fall. 🤝⚖️',
 \ }}

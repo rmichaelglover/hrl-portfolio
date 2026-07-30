@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Whimsy Chess — a chess study board that lives in Vim</title>
-<meta name="description" content="Whimsy Chess: a Vim-native emoji chess study board with fifteen narrated games, plus Chess Maestro — the same engine in the browser, scoring each game as music and growing terrain from the relaxation-labeling influence field. By Manny Glover.">
+<meta name="description" content="Whimsy Chess: a Vim-native emoji chess study board with sixteen narrated games, plus Chess Maestro — the same engine in the browser, scoring each game as music and growing terrain from the relaxation-labeling influence field. By Manny Glover.">
 <style>
   :root{
     --void:#05070c; --panel:#0a0f16; --edge:#16202c; --edge-2:#233444;
@@ -79,7 +79,7 @@
 
 <div class="eyebrow">Whimsy Chess</div>
 <h1>A chess study board that lives in <span class="p">Vim</span>.</h1>
-<p class="lede measure">Fifteen real games, each one narrated move by move by a cast of characters
+<p class="lede measure">Sixteen real games, each one narrated move by move by a cast of characters
 who follow their pieces by <em>identity</em> — so the fox that started on a2 is still the fox
 forty moves later, wherever it ended up. Step through with <kbd>l</kbd> and <kbd>h</kbd>. No
 plugin manager, no dependencies, no leaving the terminal.</p>
@@ -94,7 +94,7 @@ vim -c <span class="s">'source chess_emoji.vim'</span> -c <span class="s">'Chess
 <span class="c"># or use the launcher</span>
 ./chess-emoji queendab
 
-<span class="c"># prove all fifteen games still parse</span>
+<span class="c"># prove all sixteen games still parse</span>
 vim -u NONE -N -es -c <span class="s">'source chess_emoji.vim'</span> \
     -c <span class="s">'for l in g:ChessEmojiSelfTest() | echo l | endfor'</span> -c <span class="s">'qa!'</span></pre>
 </div>
@@ -113,7 +113,7 @@ board locks its grid with <code>setcellwidths()</code> and draws with no cell se
 terminal with an emoji-capable monospace font renders it square. Press <kbd>t</kbd> for plain
 figurines if the full emoji board is too loud to read.</p>
 
-<h2>The fifteen games</h2>
+<h2>The sixteen games</h2>
 <div class="scroll"><table>
 <thead><tr><th>key</th><th>game</th><th>you</th><th>result</th><th>ends</th></tr></thead>
 <tbody>
@@ -131,6 +131,7 @@ figurines if the full emoji board is too loud to read.</p>
 <tr><td class="k">horsey</td><td>Horsey Surprise <span class="sub">— White resigns</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Qxf4</td></tr>
 <tr><td class="k">schroflag</td><td>Schrödinger's Flag <span class="sub">— 1…h5</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Qxg1</td></tr>
 <tr><td class="k">scandi</td><td>The One That Got Away <span class="sub">— up a piece twice, lost</span></td><td class="r">Black</td><td class="r loss">1–0</td><td class="r">Qb4#</td></tr>
+<tr><td class="k">stalemategambit</td><td>The Stalemate Gambit <span class="sub">— down twelve pawns, saved on the last move</span></td><td class="r">White</td><td class="r draw">½–½</td><td class="r">stalemate</td></tr>
 <tr><td class="k">daisies</td><td>We're No Daisies <span class="sub">— 135 plies, mates missed by both sides</span></td><td class="r">Black</td><td class="r draw">½–½</td><td class="r">stalemate</td></tr>
 </tbody></table></div>
 
