@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro // CYBERPUNK 2045 — ATL edition · Project Genesis</title>
+<meta name="description" content="Chess Maestro in neon: a real 10-minute game rendered as a 3-D voxel grid-city, every piece an ATL Underground netrunner or a Gridlock Authority agent, narrated in green-rain cyberpunk. Step through move by move. By Manny Glover.">
+<style>
+  :root{
+    --void:#04060a; --panel:#080d14; --edge:#123; --edge-2:#1c3a4a;
+    --grn:#39ff8b; --cyn:#22e0ff; --mag:#ff3ac8; --amb:#ffcc4d; --dim:#4d6a78; --fg:#bfe9f5;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--void);color:var(--fg);font-family:var(--mono);}
+  .page{max-width:1180px;margin:0 auto;padding:clamp(14px,3vw,30px) clamp(12px,3vw,22px);
+    display:flex;flex-direction:column;gap:14px;align-items:center;}
+
+  /* ---- masthead with rain ---- */
+  .mast{width:100%;position:relative;border:1px solid var(--edge);background:#020407;overflow:hidden;
+    padding:clamp(16px,3vw,26px) clamp(14px,3vw,22px);}
+  #rain{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none;}
+  .mast>.z{position:relative;z-index:1;}
+  .kicker{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--grn);
+    text-shadow:0 0 8px rgba(57,255,139,.55);}
+  h1{margin:.22em 0 .12em;font-size:clamp(21px,4.4vw,36px);font-weight:700;letter-spacing:.04em;color:#eafff4;
+    text-shadow:0 0 12px rgba(57,255,139,.45),0 0 34px rgba(34,224,255,.25);}
+  h1 .s{color:var(--mag);text-shadow:0 0 12px rgba(255,58,200,.6);}
+  h1 .y{color:var(--cyn);}
+  .byline{font-size:12px;line-height:1.7;color:var(--dim);max-width:74ch;}
+
+  .nav{width:100%;display:flex;flex-wrap:wrap;gap:6px 8px;font-size:11px;letter-spacing:.1em;}
+  .nav a{color:var(--dim);text-decoration:none;border:1px solid var(--edge);padding:6px 11px;
+    transition:color .12s,border-color .12s,box-shadow .12s;}
+  .nav a:hover,.nav a:focus-visible{color:var(--grn);border-color:var(--grn);box-shadow:0 0 12px rgba(57,255,139,.2);}
+
+  /* ---- terminal ---- */
+  .term{width:100%;border:1px solid var(--edge-2);background:var(--panel);
+    box-shadow:0 0 40px rgba(34,224,255,.07) inset;}
+  .bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--edge);
+    font-size:11px;color:var(--dim);letter-spacing:.06em;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .dot.r{background:#ff4d6d;box-shadow:0 0 8px #ff4d6d;} .dot.y{background:var(--amb);box-shadow:0 0 8px var(--amb);}
+  .dot.g{background:var(--grn);box-shadow:0 0 8px var(--grn);}
+  #wrap{position:relative;overflow:hidden;cursor:grab;touch-action:none;}
+  #wrap.grab{cursor:grabbing;}
+  #wrap::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.22) 2px 4px);}
+  pre#screen{margin:0;line-height:1;font-family:var(--mono);white-space:pre;letter-spacing:0;}
+  .status{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px 12px;
+    border-top:1px solid var(--edge);font-size:11.5px;letter-spacing:.05em;color:var(--dim);}
+  .status b{color:var(--grn);} .status .nm{color:var(--cyn);} .push{flex:1;}
+
+  /* ---- narration ---- */
+  .narr{width:100%;border:1px solid var(--edge-2);border-left:3px solid var(--grn);background:#050a10;
+    padding:15px 18px;font-size:14px;line-height:1.72;color:#d6f7ea;min-height:5.6em;
+    text-shadow:0 0 14px rgba(57,255,139,.16);}
+  .narr .who{color:var(--cyn);font-weight:700;}
+  .narr .foe{color:var(--mag);font-weight:700;}
+  .narr .sys{color:var(--grn);letter-spacing:.12em;text-transform:uppercase;font-size:11.5px;}
+  .narr .hit{color:var(--amb);font-weight:700;}
+
+  /* ---- controls ---- */
+  .ctl{width:100%;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .key{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    background:transparent;color:var(--dim);border:1px solid var(--edge-2);padding:9px 13px;cursor:pointer;
+    transition:color .12s,border-color .12s,box-shadow .12s;}
+  .key:hover{color:var(--grn);border-color:var(--grn);box-shadow:0 0 14px rgba(57,255,139,.22);}
+  .key.go{color:var(--grn);border-color:var(--grn);}
+  input[type=range]{flex:1;min-width:150px;accent-color:#39ff8b;}
+  .foot{width:100%;font-size:11px;line-height:1.9;color:var(--dim);border-top:1px solid var(--edge);padding-top:12px;}
+  .foot b{color:var(--cyn);} .foot a{color:var(--grn);text-decoration:none;} .foot a:hover{text-decoration:underline;}
+  .roster{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px;}
+  .side{border:1px solid var(--edge);padding:12px 14px;background:#050a10;font-size:11.5px;line-height:1.95;}
+  .side h4{margin:0 0 7px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+  .side.w h4{color:var(--cyn);} .side.b h4{color:var(--mag);}
+  .side span{color:var(--dim);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="mast">
+    <canvas id="rain" aria-hidden="true"></canvas>
+    <div class="z">
+      <div class="kicker">Whimsy-Chess · cyberpunk 2045 · atl edition</div>
+      <h1>maestro <span class="s">//</span> <span class="y">THE GRID</span> HAS YOU</h1>
+      <div class="byline">a real 10-minute game — mannyfresher vs AndresValencia1305, lichess, 2026.07.30 — rendered
+      as a 3-D voxel grid-city and narrated in green rain. every piece is a runner or an agent, tracked from its
+      home node. held squares rise as neon towers; contested squares flood with the rain itself.</div>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="where you are">
+    <a href="../../">↖ portfolio</a>
+    <a href="../">Project Genesis</a>
+    <a href="./">♜ Maestro — the voxel board</a>
+    <a href="emoji.html">🎭 the Woodland cast</a>
+    <a href="../../whimsy-chess/maestro.html">♫ scored as music</a>
+  </nav>
+
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span>~/maestro $ ./jack-in --game kadas-2045 --crew atl-underground --vs gridlock-authority</span></div>
+    <div id="wrap"><pre id="screen" aria-hidden="true"></pre></div>
+    <div class="status"><b id="stPly">PLY 0</b><span>›&nbsp;<span class="nm" id="stMove">cold boot</span></span>
+      <span class="push"></span><span>drag rotate · ← → step · space autoplay</span></div>
+  </div>
+
+  <div class="narr" id="narr">Jacking in…</div>
+
+  <div class="ctl">
+    <button class="key" id="prev" type="button">◀ prev</button>
+    <button class="key" id="next" type="button">next ▶</button>
+    <button class="key go" id="play" type="button">▶ run</button>
+    <input type="range" id="range" min="0" max="94" value="0" step="1">
+    <button class="key" id="reset" type="button">↺ reboot</button>
+  </div>
+
+  <div class="roster">
+    <div class="side w"><h4>◈ ATL Underground — White</h4>
+      🕶️ The Operator <span>(K)</span> · 👾 QUEEN.EXE <span>(Q)</span> · 🏙️ Westside Stack &amp; 🏢 Bank of the Void <span>(R)</span><br>
+      🛰️ Sister Uplink &amp; 📡 Deacon Downlink <span>(B)</span> · 🏍️ Boulevard Ghost &amp; 🛵 Peachtree Courier <span>(N)</span><br>
+      <span>daemons:</span> 🛹 Ponce · 🎧 Bankhead · 🚋 MARTA-9 · 🍑 Peachtree · 🔌 Edgewood · 🌊 Chattahoochee · 🎛️ Krog · 🔥 <b>HOTLANTA.h</b>
+    </div>
+    <div class="side b"><h4>◈ Gridlock Authority — Black</h4>
+      🎩 The Architect <span>(K)</span> · 🕷️ Queen Latency <span>(Q)</span> · 🏭 Node Foundry &amp; 🗼 Tower Stone Mountain <span>(R)</span><br>
+      🧿 The Watcher &amp; 💠 Prism <span>(B)</span> · 🤖 Unit Buford &amp; 🛸 Drone Perimeter <span>(N)</span><br>
+      <span>agents:</span> 🕴️ Ashford · 🦾 Bolt · 🧑‍💻 Cypher · ⚙️ Delta · 📟 Echo · 🔒 Fulton · 🛡️ Grady · 🚦 Hartsfield
+    </div>
+  </div>
+
+  <div class="foot">
+    every runner tracked from home node · influence read by <b>relaxation labeling</b> — cyan towers are Underground-held,
+    magenta are Authority-held, green flood is contested rain<br>
+    <b>per-voxel-RGB ascii rasterizer + core.js</b> · quaternion camera after <b>MrMocap — David Harrison</b> ·
+    original narration, no film dialogue quoted · built by <b>Manny Glover</b> · <a href="../../">← portfolio</a>
+  </div>
+</div>
+
+<script src="core.js"></script>
+<script>
+(() => {
+  "use strict";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ================= digital rain (masthead) ================= */
+  (function digitalRain(){
+    const cv=document.getElementById("rain"); if(!cv) return;
+    const g=cv.getContext("2d"); const GLYPH="01ATLアイウエオカキクケコサシスセソナニヌネノ".split("");
+    let cols=0, drops=[], W=0, H=0;
+    function size(){ const r=cv.parentElement.getBoundingClientRect();
+      W=cv.width=Math.max(1,r.width|0); H=cv.height=Math.max(1,r.height|0);
+      // Seed each column somewhere already on-screen so the rain is falling the
+      // instant the page paints, rather than dripping in over the first few seconds.
+      cols=Math.ceil(W/12); drops=new Array(cols).fill(0).map(()=>Math.random()*(H/14+8)); }
+    function frame(){
+      g.fillStyle="rgba(2,4,7,0.10)"; g.fillRect(0,0,W,H);
+      g.font="12px monospace";
+      for(let i=0;i<cols;i++){
+        const ch=GLYPH[(Math.random()*GLYPH.length)|0], y=drops[i]*14;
+        g.fillStyle = Math.random()<0.06 ? "rgba(210,255,235,0.95)" : "rgba(57,255,139,0.5)";
+        g.fillText(ch, i*12, y);
+        if(y>H && Math.random()>0.975) drops[i]=0; else drops[i]+=0.5;
+      }
+      raf=requestAnimationFrame(frame);
+    }
+    let raf=0;
+    size(); new ResizeObserver(size).observe(cv.parentElement);
+    // Reduced motion: paint one still frame of rain and stop — no perpetual repaint.
+    if(reduce){ for(let k=0;k<70;k++) frame0(); cancelAnimationFrame(raf); }
+    else frame();
+    function frame0(){ g.font="12px monospace";
+      for(let i=0;i<cols;i++){ if(Math.random()<0.5) continue;
+        g.fillStyle="rgba(57,255,139,0.32)";
+        g.fillText(GLYPH[(Math.random()*GLYPH.length)|0], i*12, Math.random()*H); } }
+  })();
+
+  /* ================= ascii voxel renderer ================= */
+  const COLS=330, ROWS=150, CELLS=COLS*ROWS;
+  const chBuf=new Int16Array(CELLS), colBuf=new Int32Array(CELLS), zBuf=new Float32Array(CELLS);
+  const RAMP=["·","░","▒","▓","█"];
+  const screen=document.getElementById("screen"), wrap=document.getElementById("wrap");
+
+  const SCx=27, SCy=15, CXs=COLS/2, CYs=ROWS*0.56;
+  let yaw=0.18, pitch=0.52, dragging=false;
+  const qaxis=(a,r)=>{const h=r/2,s=Math.sin(h);return[Math.cos(h),a[0]*s,a[1]*s,a[2]*s];};
+  const qmul=(a,b)=>[a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],
+    a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]];
+  const qrot=(q,v)=>{const w=q[0],x=q[1],y=q[2],z=q[3];
+    const tx=2*(y*v[2]-z*v[1]),ty=2*(z*v[0]-x*v[2]),tz=2*(x*v[1]-y*v[0]);
+    return[v[0]+w*tx+(y*tz-z*ty),v[1]+w*ty+(z*tx-x*tz),v[2]+w*tz+(x*ty-y*tx)];};
+  const cam=()=>qmul(qaxis([1,0,0],pitch),qaxis([0,1,0],yaw));
+  const L=(()=>{const v=[-0.35,0.72,0.6],m=Math.hypot(...v);return[v[0]/m,v[1]/m,v[2]/m];})();
+
+  /* ================= the cast — CYBERPUNK 2045, ATL ================= */
+  const CREW={
+    Ra:["🏙️","Westside Stack"], Nb:["🏍️","Boulevard Ghost"], Bc:["🛰️","Sister Uplink"],
+    Qd:["👾","QUEEN.EXE"], Ke:["🕶️","The Operator"], Bf:["📡","Deacon Downlink"],
+    Ng:["🛵","Peachtree Courier"], Rh:["🏢","Bank of the Void"],
+    Pa:["🛹","Ponce"], Pb:["🎧","Bankhead"], Pc:["🚋","MARTA-9"], Pd:["🍑","Peachtree"],
+    Pe:["🔌","Edgewood"], Pf:["🌊","Chattahoochee"], Pg:["🎛️","Krog"], Ph:["🔥","HOTLANTA.h"]
+  };
+  const AUTH={
+    Ra:["🏭","Node Foundry"], Nb:["🤖","Unit Buford"], Bc:["🧿","The Watcher"],
+    Qd:["🕷️","Queen Latency"], Ke:["🎩","The Architect"], Bf:["💠","Prism"],
+    Ng:["🛸","Drone Perimeter"], Rh:["🗼","Tower Stone Mountain"],
+    Pa:["🕴️","Agent Ashford"], Pb:["🦾","Agent Bolt"], Pc:["🧑‍💻","Agent Cypher"], Pd:["⚙️","Agent Delta"],
+    Pe:["📟","Agent Echo"], Pf:["🔒","Agent Fulton"], Pg:["🛡️","Agent Grady"], Ph:["🚦","Agent Hartsfield"]
+  };
+  const FALL={k:"🔺",q:"🔷",r:"🟩",b:"🔶",n:"🟪",p:"⬜"};
+  const BACK={0:"Ra",1:"Nb",2:"Bc",3:"Qd",4:"Ke",5:"Bf",6:"Ng",7:"Rh"};
+  const homeId=(f,r)=> (r===1||r===6) ? "P"+"abcdefgh"[f] : ((r===0||r===7) ? BACK[f] : null);
+  const castOf=(color,id)=> (color==="w"?CREW:AUTH)[id]||null;
+
+  /* ================= emoji rasteriser (cached) ================= */
+  const N=18, RC={};
+  function rasterize(ch){ if(RC[ch]) return RC[ch];
+    const cv=document.createElement("canvas"); cv.width=cv.height=N;
+    const g=cv.getContext("2d",{willReadFrequently:true});
+    g.clearRect(0,0,N,N); g.textAlign="center"; g.textBaseline="middle";
+    g.font=(N-3)+'px "Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif';
+    g.fillText(ch,N/2,N/2+1);
+    const d=g.getImageData(0,0,N,N).data, vox=[];
+    for(let py=0;py<N;py++)for(let px=0;px<N;px++){const i=(py*N+px)*4; if(d[i+3]>70) vox.push([px,py,d[i],d[i+1],d[i+2]]);}
+    return RC[ch]=vox;
+  }
+
+  /* ================= the game ================= */
+  const PGN="1. h4 e5 2. h5 Bc5 3. h6 Nxh6 4. d4 exd4 5. Bxh6 gxh6 6. Rxh6 d6 7. f4 d5 8. e3 Qe7 9. g4 d3 10. g5 Bd4 11. Qh5 Bxb2 12. Rxh7 Bxa1 13. Bxd3 Qf8 14. Bg6 fxg6 15. Qxg6+ Kd8 16. Rf7 Rg8 17. Rxf8+ Rxf8 18. Qf6+ Bxf6 19. gxf6 Rxf6 20. Nc3 Rc6 21. Nge2 Bg4 22. Kd2 Nd7 23. Nxd5 Bxe2 24. Kxe2 Rh6 25. c4 c6 26. Nc3 Rc8 27. Kd3 Nc5+ 28. Kd4 b6 29. Ne4 Rc7 30. Nxc5 bxc5+ 31. Kxc5 Re7 32. Kd4 Rhe6 33. f5 Rxe3 34. f6 R7e6 35. a4 Rf3 36. a5 Rfxf6 37. c5 Rf4+ 38. Kc3 Rfe4 39. Kd3 R6e5 40. Kd2 Rxc5 41. Kd3 Rce5 42. a6 Ra4 43. Kc2 Rxa6 44. Kb1 Rc5 45. Kb2 Rb6+ 46. Ka3 Rcb5 47. Ka4 Ra6#";
+  const positions=(window.Maestro&&window.Maestro.applyPGN)?window.Maestro.applyPGN(PGN):[];
+  const LAST=Math.max(0,positions.length-1);
+  const idPlies=[], movers=[];
+  (function trackIds(){ let prev=null;
+    for(let k=0;k<positions.length;k++){ const cur=new Map();
+      for(const pc of positions[k].roles) cur.set(pc.file+","+pc.rank,{type:pc.type,color:pc.color,role:pc.role,file:pc.file,rank:pc.rank});
+      let moverId=null,moverTo=null,moverCap=null;
+      if(k===0){ for(const [sq,v] of cur){ const [f,r]=sq.split(",").map(Number); v.id=homeId(f,r)||("X"+sq); } }
+      else{ const vac=[],arr=[];
+        for(const sq of prev.keys()){ if(!cur.has(sq)) vac.push(sq); }
+        for(const [sq,v] of cur){ const pv=prev.get(sq); if(pv&&pv.type===v.type&&pv.color===v.color){ v.id=pv.id; } else arr.push(sq); }
+        for(const to of arr){ const v=cur.get(to); let from=null;
+          for(const f of vac){ const pf=prev.get(f); if(pf&&pf.color===v.color&&pf.type===v.type){from=f;break;} }
+          if(from===null) for(const f of vac){ const pf=prev.get(f); if(pf&&pf.color===v.color){from=f;break;} }
+          const capPrev=prev.get(to);
+          if(from!==null){ v.id=prev.get(from).id; vac.splice(vac.indexOf(from),1); moverId=v.id; moverTo=to;
+            if(capPrev&&capPrev.color!==v.color) moverCap={id:capPrev.id,color:capPrev.color}; }
+          else if(!v.id) v.id="X"+to;
+        }
+      }
+      idPlies.push(cur); movers.push({id:moverId,to:moverTo,cap:moverCap}); prev=cur;
+    }
+  })();
+
+  /* ================= scene ================= */
+  const SP=0.062, HALF=0.033;
+  let scene=[];
+  // Neon grid-city: Underground-held squares glow cyan, Authority-held magenta,
+  // contested squares flood with the rain itself (green).
+  function tileRGB(c,f,r){ let base;
+    if(c.water) base=[24,196,120];
+    else if(c.terrain==="white") base=[26,150,190];
+    else if(c.terrain==="black") base=[150,34,120];
+    else base=[30,44,58];
+    const k=(f+r)%2?1.30:0.72;
+    return [Math.min(255,base[0]*k)|0,Math.min(255,base[1]*k)|0,Math.min(255,base[2]*k)|0]; }
+  function standee(cx,cz,y0,model){ for(const p of model){ const lx=(p[0]-(N-1)/2)*SP, ly=(N-1-p[1])*SP;
+    scene.push({x:cx+lx,y:y0+ly,z:cz,hx:HALF,hy:HALF,hz:HALF,r:p[2],g:p[3],b:p[4]});
+    scene.push({x:cx+lx,y:y0+ly,z:cz+SP,hx:HALF,hy:HALF,hz:HALF,r:p[2],g:p[3],b:p[4]}); } }
+  function rebuildScene(ply){ scene=[]; const P=positions[ply];
+    for(let idx=0;idx<64;idx++){ const c=P.influence[idx], f=idx&7, r=idx>>3, rgb=tileRGB(c,f,r);
+      scene.push({x:f-3.5,y:0,z:r-3.5,hx:0.5,hy:0.09,hz:0.5,r:rgb[0],g:rgb[1],b:rgb[2]}); }
+    for(const [sq,v] of idPlies[ply]){ const cast=castOf(v.color,v.id);
+      const ch=cast?cast[0]:(FALL[v.type]||"⬜"); standee(v.file-3.5, v.rank-3.5, 0.16, rasterize(ch)); }
+  }
+
+  /* ================= render ================= */
+  const FACES=[[1,0,0,0,1,0,0,0,1],[-1,0,0,0,1,0,0,0,1],[0,1,0,1,0,0,0,0,1],[0,-1,0,1,0,0,0,0,1],[0,0,1,1,0,0,0,1,0],[0,0,-1,1,0,0,0,1,0]];
+  const rampOf=b=>b<0.2?0:b<0.42?1:b<0.62?2:b<0.8?3:4;
+  const AX=v=>v[0]?0:(v[1]?1:2);
+  const FI=FACES.map(f=>({n:[f[0],f[1],f[2]],u:[f[3],f[4],f[5]],vv:[f[6],f[7],f[8]],na:AX([f[0],f[1],f[2]]),ua:AX([f[3],f[4],f[5]]),va:AX([f[6],f[7],f[8]])}));
+  function render(){ chBuf.fill(-1); zBuf.fill(-1e9); const q=cam();
+    const F=FI.map(f=>{ const rn=qrot(q,f.n); const dot=rn[0]*L[0]+rn[1]*L[1]+rn[2]*L[2], br=0.45+0.55*Math.max(0,dot);
+      return {vis:rn[2]>0.001,rc:rampOf(br),br,rn,ru:qrot(q,f.u),rv:qrot(q,f.vv),na:f.na,ua:f.ua,va:f.va}; });
+    for(const vx of scene){ const cr=qrot(q,[vx.x,vx.y,vx.z]), h=[vx.hx,vx.hy,vx.hz];
+      for(let fi=0;fi<6;fi++){ const f=F[fi]; if(!f.vis) continue;
+        const hn=h[f.na], eu=h[f.ua], ev=h[f.va];
+        const bx=cr[0]+f.rn[0]*hn, by=cr[1]+f.rn[1]*hn;
+        const packed=(((vx.r*f.br)|0)<<16)|(((vx.g*f.br)|0)<<8)|((vx.b*f.br)|0);
+        const su=Math.max(2,Math.min(46,(eu*SCx*2.2)|0)), sv=Math.max(2,Math.min(46,(ev*SCx*2.2)|0));
+        for(let i=0;i<su;i++){ const a=(-1+2*(i+0.5)/su)*eu, ux=bx+a*f.ru[0],uy=by+a*f.ru[1];
+          for(let j=0;j<sv;j++){ const b2=(-1+2*(j+0.5)/sv)*ev, px=ux+b2*f.rv[0],py=uy+b2*f.rv[1],pz=cr[2]+f.rn[2]*hn+a*f.ru[2]+b2*f.rv[2];
+            const col=(CXs+px*SCx)|0,row=(CYs-py*SCy)|0; if(col<0||col>=COLS||row<0||row>=ROWS) continue;
+            const id=row*COLS+col; if(pz>zBuf[id]){ zBuf[id]=pz; chBuf[id]=f.rc; colBuf[id]=packed; } } } } }
+    let out=""; for(let r=0;r<ROWS;r++){ let line="",run="",cur=-2;
+      for(let c=0;c<COLS;c++){ const i=r*COLS+c,ch=chBuf[i];
+        if(ch===-1){ if(cur!==-1){ if(run){line+=sp(cur,run);run="";} cur=-1;} run+=" "; }
+        else{ const k=colBuf[i]; if(k!==cur){ if(run){line+=sp(cur,run);run="";} cur=k;} run+=RAMP[ch]; } }
+      if(run) line+=sp(cur,run); out+=line+"\n"; }
+    screen.innerHTML=out;
+  }
+  function sp(k,txt){ return k===-1?txt:`<span style="color:rgb(${(k>>16)&255},${(k>>8)&255},${k&255})">${txt}</span>`; }
+
+  /* ================= narration ================= */
+  const stPly=document.getElementById("stPly"),stMove=document.getElementById("stMove"),range=document.getElementById("range");
+  range.max=String(LAST);
+  const narrEl=document.getElementById("narr");
+  const sqName=(f,r)=>"abcdefgh"[f]+(r+1);
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const VERB={q:["executes on","forks to","floods"],r:["rams","hard-routes to","drives"],
+    b:["ghosts to","slips the firewall to","phases into"],n:["jumps the gap to","hops subnet to","bounces to"],
+    k:["walks to","steps the alley to","edges toward"],p:["pushes to","creeps up to","advances on"]};
+  const pick=(a,s)=>a[((s%a.length)+a.length)%a.length];
+  const W=t=>`<span class="who">${esc(t)}</span>`, B=t=>`<span class="foe">${esc(t)}</span>`;
+  const SYS=t=>`<span class="sys">${esc(t)}</span>`, HIT=t=>`<span class="hit">${esc(t)}</span>`;
+
+  // Scripted story beats — the moments that carry the film.
+  const BEATS={
+    0:  `${SYS("// cold boot")}<br>Wake up, Operator. The Grid has you. Eight daemons, eight agents, sixty-four nodes of downtown ATL — and one rook pawn who has already decided how this ends. ${W("Follow HOTLANTA.h 🔥")}.`,
+    1:  `${W("🔥 HOTLANTA.h")} takes the red pill and steps to <b>h4</b>. Nobody sent backup. Nobody was asked.`,
+    5:  `${W("🔥 HOTLANTA.h")} punches to <b>h6</b> — three nodes deep, no cover, no exit. ${SYS("warning: unsupported process")}`,
+    6:  `${B("🤖 Unit Buford")} deletes it. ${HIT("HOTLANTA.h is gone.")} It burned a hole in the firewall on the way down, and the whole Underground is about to pour through it.`,
+    9:  `${W("🛰️ Sister Uplink")} walks straight into the hole. ${HIT("There is no bishop.")}`,
+    11: `${W("🏢 Bank of the Void")} rides the breach to <b>h6</b>. A tower, out of the stack, on move six. ${SYS("this is either genius or a glitch")}`,
+    21: `${W("👾 QUEEN.EXE")} comes online at <b>h5</b>. Everything the Underground owns is now pointed at one corner of the map.`,
+    22: `Meanwhile — three blocks west, quiet as a dropped packet — ${B("🧿 The Watcher")} eats <b>b2</b>. Nobody looks.`,
+    24: `${B("🧿 The Watcher")} takes ${W("🏙️ Westside Stack")} in the corner. ${HIT("An entire tower, gone, while the crew was doing kung fu on the rooftop.")}`,
+    27: `${W("📡 Deacon Downlink")} throws himself onto <b>g6</b>. ${SYS("// dodge this")} Third sacrifice in nine plies. The Underground is no longer asking whether it works.`,
+    35: `${W("👾 QUEEN.EXE")} offers herself on <b>f6</b>. ${HIT("The last one.")} Bishop, tower, queen — fed into the machine one after another, and the machine did not change expression.`,
+    38: `${SYS("// the smoke clears")} The attack is over. It took everything with it. What's left of the Underground is a king, some daemons, and two runners who never got the call.`,
+    39: `${W("🏍️ Boulevard Ghost")} finally jacks in — <b>move 20</b>. ${HIT("Twenty.")} The cavalry arrives to an empty street.`,
+    43: `${W("🕶️ The Operator")} steps out of the safehouse on move 22 and walks into the open Grid. Not for the endgame. Because there is nobody left to stand behind.`,
+    61: `${W("🕶️ The Operator")} takes on <b>c5</b> — a king, eating pawns, alone in the middle of downtown. ${SYS("there is no cavalry")}`,
+    86: `${HIT("Zero. Nothing. No queen, no towers, no runners, no daemons.")} ${W("🕶️ The Operator")} is a bare king in an empty subway station — and there are always two of them, and they never get tired.`,
+    93: `${B("Agents on the stairwell.")} b5 and the a-file. The ladder is assembled. ${SYS("// system failure")}`,
+    94: `${B("🏭 Node Foundry")} slides to <b>a6</b>. ${HIT("CHECKMATE.")} Rank by rank, the way it was always going to end. ${SYS("connection terminated")} <br>♟ 0-1 · the Grid endures · ${W("but HOTLANTA.h 🔥 got three squares nobody gave it")}`
+  };
+
+  function narrate(p){
+    if(BEATS[p]) return BEATS[p];
+    const P=positions[p], m=movers[p], color=p%2?"w":"b", hero=color==="w";
+    const c=m&&m.id?castOf(color,m.id):null;
+    const nm=c?c[0]+" "+c[1]:"An unnamed process", who=hero?W(nm):B(nm);
+    const to=m&&m.to?sqName(...m.to.split(",").map(Number)):"?";
+    const mv=m&&m.to?idPlies[p].get(m.to):null, type=mv?mv.type:"p";
+    const verb=pick(VERB[type]||VERB.p,p);
+    if(P.san.endsWith("#")) return `${who} ${verb} <b>${to}</b> — ${HIT("CHECKMATE.")} ${SYS("connection terminated")}`;
+    if(m&&m.cap){ const cc=castOf(m.cap.color,m.cap.id);
+      const vn=cc?cc[0]+" "+cc[1]:"a process", victim=hero?B(vn):W(vn);
+      const chk=P.san.endsWith("+")?` ${SYS("+ check")}`:"";
+      return `${who} ${verb} <b>${to}</b> and deletes ${victim}.${chk} ${hero?"Material is for accountants.":"The Authority collects."}`; }
+    if(P.san.endsWith("+")) return `${who} ${verb} <b>${to}</b> — ${SYS("check")} The net tightens around ${hero?B("🎩 The Architect"):W("🕶️ The Operator")}.`;
+    return `${who} ${verb} <b>${to}</b>.`;
+  }
+
+  /* ================= UI ================= */
+  let ply=0;
+  function panel(){ const P=positions[ply]; stPly.textContent="PLY "+ply+"/"+LAST;
+    stMove.textContent = ply===0 ? "cold boot" : (Math.ceil(ply/2)+(ply%2?". ":"… ")+P.san);
+    narrEl.innerHTML = narrate(ply); range.value=String(ply); }
+  function setPly(n){ ply=Math.max(0,Math.min(LAST,n)); rebuildScene(ply); panel(); render(); }
+  document.getElementById("next").onclick=()=>{stop();setPly(ply+1);};
+  document.getElementById("prev").onclick=()=>{stop();setPly(ply-1);};
+  document.getElementById("reset").onclick=()=>{stop();setPly(0);};
+  range.oninput=e=>{stop();setPly(+e.target.value);};
+  let playing=false,pt=0; const pb=document.getElementById("play");
+  function stop(){ playing=false; clearTimeout(pt); pb.textContent="▶ run"; }
+  pb.onclick=()=>{ if(playing){stop();return;} playing=true; pb.textContent="⏸ halt"; if(ply>=LAST)setPly(0);
+    const step=()=>{ if(!playing)return; if(ply>=LAST){stop();return;} setPly(ply+1); pt=setTimeout(step,1400); };
+    pt=setTimeout(step,500); };
+  addEventListener("keydown",e=>{ if(e.key==="ArrowRight"){e.preventDefault();stop();setPly(ply+1);}
+    else if(e.key==="ArrowLeft"){e.preventDefault();stop();setPly(ply-1);}
+    else if(e.key===" "){e.preventDefault();pb.click();} });
+  wrap.addEventListener("pointerdown",e=>{dragging=true;wrap.classList.add("grab");wrap._x=e.clientX;wrap._y=e.clientY;wrap.setPointerCapture(e.pointerId);});
+  wrap.addEventListener("pointermove",e=>{ if(!dragging)return; yaw+=(e.clientX-wrap._x)*0.008;
+    pitch=Math.max(0.05,Math.min(1.2,pitch-(e.clientY-wrap._y)*0.006)); wrap._x=e.clientX;wrap._y=e.clientY; render(); });
+  const end=()=>{dragging=false;wrap.classList.remove("grab");};
+  wrap.addEventListener("pointerup",end); wrap.addEventListener("pointercancel",end);
+  function fit(){ const w=wrap.clientWidth||1100; screen.style.fontSize=Math.max(3,Math.min(7,Math.floor(w/(COLS*0.6))))+"px"; }
+  new ResizeObserver(fit).observe(wrap); addEventListener("resize",fit);
+
+  fit();
+  if(!positions.length){ screen.textContent="\n  core.js failed to load — the Grid is dark.\n"; }
+  else { const qp=+((new URLSearchParams(location.search)).get("ply")); setPly(Number.isFinite(qp)?qp:0); }
+})();
+</script>
+</body></html>
