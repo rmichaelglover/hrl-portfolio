@@ -130,7 +130,7 @@
         <button class="key" id="prev" type="button">◀ prev</button>
         <button class="key" id="next" type="button">next ▶</button>
         <button class="key go wide" id="play" type="button">▶ play the game</button>
-        <button class="key music wide" id="music" type="button" aria-pressed="false">♫ score the moves</button>
+        <button class="key music wide" id="music" type="button" aria-pressed="false">♫ hear the world</button>
         <button class="key wide" id="reset" type="button">↺ back to move 1</button>
       </div>
       <div class="scrub">
@@ -147,6 +147,7 @@
 </div>
 
 <script src="core.js"></script>
+<script src="worldscore.js"></script>
 <script>
 (() => {
   "use strict";
@@ -300,19 +301,21 @@
     else if(e.key==="ArrowLeft"){e.preventDefault();stopPlay();setPly(ply-1);}
     else if(e.key===" "){e.preventDefault();playBtn.click();} });
 
-  /* ===== music: score each position from its roles ===== */
-  let audio=null,audioOn=false; const musicBtn=document.getElementById("music");
-  function tone(midi,when,dur,gain){ const o=audio.createOscillator(),g=audio.createGain(); o.type="sine";
-    o.frequency.value=440*2**((midi-69)/12); g.gain.setValueAtTime(.0001,when);
-    g.gain.linearRampToValueAtTime(gain,when+.05); g.gain.exponentialRampToValueAtTime(.0001,when+dur);
-    o.connect(g).connect(audio.destination); o.start(when); o.stop(when+dur+.05); }
-  function scorePly(P){ if(!audio)return; const t=audio.currentTime+.02;
-    const atk=P.roles.filter(r=>r.role==="attacker").length;
-    const root=45+(P.ply%12); tone(root,t,1.4,.03); tone(root+12+[0,4,7,9,7,4][P.ply%6],t,0.9,.035);
-    if(atk) tone(root+12+7+atk,t+.08,0.7,.03); }
+  /* ===== music: the world, sung (worldscore.js) =====
+     Not the moves — the terrain. Water size picks the pad register, held elevation
+     picks the melody, coherence opens the filter, material picks the third. */
+  let audio=null,audioOn=false,score=null; const musicBtn=document.getElementById("music");
+  let lastCount=null;
+  function scorePly(P){
+    if(!audio||!score) return;
+    const n=P.roles.length, cap=(lastCount!==null && n<lastCount); lastCount=n;
+    score.frame(P, window.Maestro, {at:audio.currentTime+0.02, dur:1.7, capture:cap});
+  }
   musicBtn.addEventListener("click",async()=>{ audioOn=!audioOn; musicBtn.setAttribute("aria-pressed",String(audioOn));
-    musicBtn.textContent=audioOn?"■ silence the score":"♫ score the moves";
-    if(audioOn){ audio ||= new AudioContext(); await audio.resume(); scorePly(positions[ply]); } });
+    musicBtn.textContent=audioOn?"■ silence the world":"♫ hear the world";
+    if(audioOn){ audio ||= new (window.AudioContext||window.webkitAudioContext)();
+      await audio.resume(); score ||= new WorldScore(audio,{root:50}); lastCount=null; scorePly(positions[ply]); }
+    else if(score){ score.stop(); } });
 
   /* ===== drag / theme / fit ===== */
   const wrap=document.getElementById("screenWrap"); let px=0,py=0;

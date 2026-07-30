@@ -113,6 +113,7 @@
     <button class="key" id="next" type="button">next ▶</button>
     <button class="key go" id="play" type="button">▶ run</button>
     <input type="range" id="range" min="0" max="94" value="0" step="1">
+    <button class="key" id="music" type="button" aria-pressed="false">♫ hear the world</button>
     <button class="key" id="reset" type="button">↺ reboot</button>
   </div>
 
@@ -138,6 +139,7 @@
 </div>
 
 <script src="core.js"></script>
+<script src="worldscore.js"></script>
 <script>
 (() => {
   "use strict";
@@ -357,7 +359,18 @@
   function panel(){ const P=positions[ply]; stPly.textContent="PLY "+ply+"/"+LAST;
     stMove.textContent = ply===0 ? "cold boot" : (Math.ceil(ply/2)+(ply%2?". ":"… ")+P.san);
     narrEl.innerHTML = narrate(ply); range.value=String(ply); }
-  function setPly(n){ ply=Math.max(0,Math.min(LAST,n)); rebuildScene(ply); panel(); render(); }
+  const HERO_ROOT=45, HERO="w";
+  let audio=null,audioOn=false,score=null,lastCount=null;
+  function sing(P){ if(!audio||!score||!P) return;
+    const n=P.roles.length, cap=(lastCount!==null&&n<lastCount); lastCount=n;
+    score.frame(P, window.Maestro, {at:audio.currentTime+0.02, dur:1.7, capture:cap}); }
+  (function(){ const b=document.getElementById("music"); if(!b) return;
+    b.addEventListener("click", async()=>{ audioOn=!audioOn; b.setAttribute("aria-pressed",String(audioOn));
+      b.textContent = audioOn ? "■ silence" : "♫ hear the world";
+      if(audioOn){ audio ||= new (window.AudioContext||window.webkitAudioContext)(); await audio.resume();
+        score ||= new WorldScore(audio,{root:HERO_ROOT,hero:HERO}); lastCount=null; sing(positions[ply]); }
+      else if(score) score.stop(); }); })();
+  function setPly(n){ ply=Math.max(0,Math.min(LAST,n)); rebuildScene(ply); panel(); render(); if(audioOn) sing(positions[ply]); }
   document.getElementById("next").onclick=()=>{stop();setPly(ply+1);};
   document.getElementById("prev").onclick=()=>{stop();setPly(ply-1);};
   document.getElementById("reset").onclick=()=>{stop();setPly(0);};
