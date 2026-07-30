@@ -7,7 +7,7 @@
 " starting square) the whole game -- so Castle Andora stays Castle Andora even
 " after it roams the board.
 "
-"   :ChessEmoji [queendab|kadas|roundup|carr|schroflag|crab|goldsmith|fathersday|houdini|daisies]   open a game
+"   :ChessEmoji [queendab|kadas|roundup|carr|schroflag|crab|goldsmith|fathersday|houdini|daisies|deadmove2|crawlnamed|scandi]   open a game
 "   In the board:  l / <Right> / <Space> = next   h / <Left> = prev
 "                  < = start    > = end    q = quit
 "
@@ -474,7 +474,7 @@ command! -bar ChessPrev call s:step(-1)
 
 function! s:selftest() abort
   let out = []
-  for [name, wp, wsuf, wmover] in [['queendab',63,'#','wQd'],['kadas',33,'#','wQd'],['roundup',45,'#','wQd'],['carr',44,'#','bRh'],['schroflag',58,'','bQd'],['horsey',42,'','bQd'],['crabblack',52,'#','bRa'],['crab',87,'#','wNb'],['goldsmith',80,'#','bBc'],['fathersday',60,'#','bNb'],['houdini',39,'#','wQd'],['daisies',135,'','wKe']]
+  for [name, wp, wsuf, wmover] in [['queendab',63,'#','wQd'],['kadas',33,'#','wQd'],['roundup',45,'#','wQd'],['carr',44,'#','bRh'],['schroflag',58,'','bQd'],['horsey',42,'','bQd'],['crabblack',52,'#','bRa'],['crab',87,'#','wNb'],['goldsmith',80,'#','bBc'],['fathersday',60,'#','bNb'],['houdini',39,'#','wQd'],['daisies',135,'','wKe'],['deadmove2',40,'#','bQd'],['crawlnamed',39,'#','wQd'],['scandi',69,'#','wPb']]
     let s:hero = get(g:chess_emoji_games[name], 'hero', 'b')
     let fr = s:build_frames(g:chess_emoji_games[name].moves)
     let plies = len(fr) - 1
@@ -657,4 +657,53 @@ let g:chess_emoji_games['daisies'] = {
 \   '60':'30...Nh2+?? -- and the reckonin'' slips through our fingers. 30...Nf5+ was mate in two, sittin'' there pretty as a daisy in a gun barrel, and we checked sideways instead and let the man breathe. Doc coughs into his handkerchief and says not one word.',
 \   '117':'59.a8=Q -- well now. While our horses pranced and fumbled their mates, one lonesome white pawn walked the whole length of Tombstone and strolled back a queen. The board turns clean over. Manny -- a piece up since the first act -- is suddenly the one starin'' down the barrel. My hypocrisy, it seems, knows no bounds.',
 \   '135':'68.Ka6 -- stalemate. After 135 moves of missed mates on BOTH sides, forced wins tossed away like losing cards, the white king backs himself into a corner and Black hasn''t a legal move left. A draw nobody earned and nobody deserved. “You''re no daisy. You''re no daisy at all.” Neither of us was -- not today. 🤠🃏 ½',
+\ }}
+
+" Mated on move 2, and won anyway.  The Carr Defense, played by a man who does
+" not read the memo.
+let g:chess_emoji_games['deadmove2'] = {
+\ 'white':'dannnnnnnny (806)', 'black':'mannyfresher (814)', 'hero':'b',
+\ 'opening':'The Carr Defense -- dead on move 2', 'result':'Black wins! 0-1',
+\ 'moves':'e4 h6 d4 f6 Nf3 d6 Nc3 b6 Bc4 a5 Bf4 g5 Be3 e5 dxe5 fxe5 O-O g4 Nh4 Qxh4 Nd5 Kd8 g3 Qh3 Qe2 h5 Rad1 h4 Bg5+ Be7 Bxe7+ Nxe7 Nxe7 Kxe7 f3 hxg3 hxg3 gxf3 Qf2 Qh1#',
+\ 'special':{
+\   '4':'2...f6?? -- and it is already over. 3.Qh5+ g6 4.Qxg6# is mate in two, sitting right there on move TWO. Ella Elouise 🦉 has opened the front door, unlocked the back door, and gone to bed. The book would resign. We are not the book.',
+\   '5':'3.Nf3?? -- the Misfits look straight at the mate and develop a knight instead. 🎁 Reprieve. Nobody gets a second life on move three. We just did.',
+\   '20':'10.Nh4?? -- the Misfit horse steps onto a square Queen Dilorias 🐲 can see, and she has been waiting nine moves for exactly one mistake.',
+\   '21':'10...Qxh4! -- and she takes it. Out she comes, no escort, no apologies.',
+\   '35':'18.f3?? -- the wall cracks. Georgiana Gina 🦎 and Harriet Hissindorf 🦔 are already leaning on it.',
+\   '39':'19...gxf3 -- the h-file and the first rank are both open now, and there is nothing standing between Queen Dilorias 🐲 and the corner.',
+\   '40':'20...Qh1# -- CHECKMATE on h1. Her Majesty mates on the square the enemy rook was BORN on, and abandoned six moves ago. // There once was a man left for dead / with a mate in two over his head / but the Misfits looked past it, / their tower unmasted -- / and h1 is where he was fed. 🏆',
+\ }}
+
+" The Creepy Crawly, christened.  Lichess itself named this formation.
+let g:chess_emoji_games['crawlnamed'] = {
+\ 'white':'mannyfresher (825)', 'black':'Lerouxdu74 (747)', 'hero':'w',
+\ 'opening':'Creepy Crawly Formation: Classical Defense', 'result':'White wins! 1-0',
+\ 'moves':'h3 d5 a3 e5 c3 Nc6 e3 Nf6 g4 Ne4 b4 Nxb4 axb4 Qh4 Rh2 Bxg4 hxg4 Qxh2 Qa4+ c6 Bb5 a6 Bxc6+ bxc6 Qxc6+ Kd8 Qxd5+ Kc8 Qxa8+ Kc7 Qxe4 Qxg1+ Ke2 Qxc1 b5 axb5 Ra7+ Kb8 Qa8#',
+\ 'special':{
+\   '7':'1.h3 2.a3 3.c3 4.e3 -- the CREEPY CRAWLY, and Lichess itself put the name on the board this time. Four pawns, four single steps, all on the third rank. Nothing developed, nothing weakened, nothing announced. The critters are low in the grass. 🦗',
+\   '9':'5.g4! -- NOW. Crawl first, pounce second -- that is the whole secret, and the games where we lunge on move five are the games we lose.',
+\   '12':'6...Nxb4?? -- Bruno the Rhino 🦏 charges a pawn and finds Alexander Aaronson 🦊 waiting behind it.',
+\   '16':'8...Bxg4?? 9.hxg4 Qxh2 -- Queen Daria 👸 grabs Castle Hessenbach 🧱 in the corner. A whole tower. Take it, Your Majesty. We were not using it.',
+\   '19':'10.Qa4+ -- and here she comes. Queen Dilorias 🐲 leaves home on move ten and does not return.',
+\   '25':'13.Qxc6+ -- pawn. 14.Qxd5+ -- pawn. 15.Qxa8+ -- ROOK. 16.Qxe4 -- knight. Her Majesty is eating the Misfit Squad one piece per move and nobody has laid a finger on her.',
+\   '39':'20.Qa8# -- CHECKMATE on a8, the corner she robbed five moves ago. // The critters crept low in the weeds, / four pawns and no glorious deeds, / then the dragon 🐲 broke cover / and ate every lover -- / a crawl is a gallop that reads. 🏆',
+\ }}
+
+" Up a piece twice, against a 914, and lost.  The cautionary one.
+let g:chess_emoji_games['scandi'] = {
+\ 'white':'mr_guda (914)', 'black':'mannyfresher (805)', 'hero':'b',
+\ 'opening':'Scandinavian -- the one that got away', 'result':'White wins. 1-0',
+\ 'moves':'e4 d5 Qh5 e6 Nf3 g6 Qh3 Nc6 Bd3 Bd7 Nc3 a6 Ng5 Qxg5 Qf3 Nd4 Qg3 Nxc2+ Bxc2 Qxg3 hxg3 Bd6 exd5 Nf6 d4 O-O Bxg6 hxg6 Ne2 Bb5 Nf4 Bxf4 Bxf4 Rae8 Bh6 Ng4 Bxf8 Kxf8 Rh8+ Ke7 Rc1 exd5 Rxe8+ Bxe8 Rxc7+ Kf6 Rxb7 Bb5 f3 Ne3 f4 Ba4 Ra7 Bd1 Rxa6+ Kf5 b4 Ke4 Kd2 f5 b5 Kxd4 b6 Bc2 b7 Be4 b8=Q Nxg2 Qb4#',
+\ 'special':{
+\   '3':'2.Qh5?? -- the Misfit queen sprints out on move two like she has somewhere to be. She does not. This is losing already.',
+\   '13':'7.Ng5?? -- Ganesh the Elephant 🐘 walks onto a square with nothing behind it.',
+\   '14':'7...Qxg5! -- and Queen Dilorias 🐲 collects it. A WHOLE PIECE up, against a man rated a hundred points north of us. 🎉',
+\   '18':'9...Nxc2+?? -- and we hand most of it straight back for a pawn. The piece was the point. The pawn was never the point.',
+\   '28':'14.Bxg6?? -- and they give it AGAIN. Up a piece, second time, clean position, 8 minutes on the clock.',
+\   '38':'19...Kxf8?? -- and there it goes, second time. exd5+ was the move and we had five and a half minutes to find it. We used eight seconds.',
+\   '54':'27...Bd1?? -- Popette Christiana 🛕 wanders to a square with no future and the Misfit rook eats the queenside.',
+\   '60':'30.Kd2?? -- ONE more gift. Kxd4 and it is level again.',
+\   '61':'30...f5?? -- and we push a pawn instead. That was the last one.',
+\   '69':'35.Qb4# -- checkmate, by a pawn that walked the whole b-file while we were busy. // Twice up a piece with a plan, / twice we gave back what we won, / for the clock sat unspent / while the winning went / to whoever blundered last. Son. 💀',
 \ }}
