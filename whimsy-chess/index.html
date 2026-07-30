@@ -1,25 +1,193 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chess Maestro — relaxation-labeling chess, scored as music</title>
-<meta name="description" content="Chess Maestro — relaxation-labeling chess, scored as music. By Manny Glover.">
-<link rel="canonical" href="maestro.html">
-<meta http-equiv="refresh" content="0; url=maestro.html">
+<title>Whimsy Chess — a chess study board that lives in Vim</title>
+<meta name="description" content="Whimsy Chess: a Vim-native emoji chess study board with fifteen narrated games, plus Chess Maestro — the same engine in the browser, scoring each game as music and growing terrain from the relaxation-labeling influence field. By Manny Glover.">
 <style>
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#04050b;color:#e8f0ff;
-       font:15px/1.55 ui-sans-serif,system-ui,sans-serif;text-align:center;padding:24px}
-  h1{font:700 clamp(21px,3.6vw,34px)/1.12 ui-serif,Georgia,serif;margin:0 0 .4em}
-  p{color:#93a0c0;margin:0 0 1.4em}
-  a{color:#37e6ff;text-decoration:none;font:12px ui-monospace,monospace;letter-spacing:.14em;
-    text-transform:uppercase;border:1px solid #1a2340;border-radius:999px;padding:9px 16px}
-  a:hover{border-color:#37e6ff}
+  :root{
+    --void:#05070c; --panel:#0a0f16; --edge:#16202c; --edge-2:#233444;
+    --grn:#7ee787; --cyn:#56d4dd; --amb:#e3b341; --mag:#d2a8ff; --dim:#7d8ea0; --fg:#c9d6e2;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--void);color:var(--fg);font-family:var(--sans);line-height:1.65;}
+  .page{max-width:1080px;margin:0 auto;padding:clamp(18px,4vw,44px) clamp(14px,4vw,26px);}
+  a{color:var(--cyn);text-decoration:none;border-bottom:1px solid rgba(86,212,221,.32);}
+  a:hover{border-bottom-color:var(--cyn);}
+  code,kbd{font-family:var(--mono);font-size:.92em;}
+  kbd{background:var(--panel);border:1px solid var(--edge-2);border-bottom-width:2px;
+    border-radius:4px;padding:1px 6px;color:var(--amb);}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--grn);}
+  h1{margin:.2em 0 .18em;font-size:clamp(28px,5.6vw,50px);line-height:1.05;font-weight:700;color:#eef5fb;letter-spacing:-.01em;}
+  h1 .p{color:var(--grn);}
+  h2{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+    display:flex;align-items:center;gap:12px;margin:44px 0 16px;font-weight:500;}
+  h2::after{content:"";height:1px;flex:1;background:var(--edge);}
+  h3{margin:0 0 .25em;font-size:17px;color:#e6eef6;}
+  p{margin:0 0 1em;} .measure{max-width:70ch;}
+  .lede{font-size:clamp(16px,2.2vw,20px);line-height:1.55;color:#dbe6f0;}
+  .sub{color:var(--dim);}
+
+  nav.top{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:26px;font-size:11px;letter-spacing:.1em;font-family:var(--mono);}
+  nav.top a{color:var(--dim);border:1px solid var(--edge);padding:6px 11px;transition:.12s;}
+  nav.top a:hover{color:var(--grn);border-color:var(--grn);}
+
+  .term{border:1px solid var(--edge-2);background:var(--panel);margin:22px 0;overflow:hidden;}
+  .bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--edge);
+    font-family:var(--mono);font-size:11px;color:var(--dim);}
+  .dot{width:9px;height:9px;border-radius:50%;}
+  .dot.r{background:#ff6b6b}.dot.y{background:var(--amb)}.dot.g{background:var(--grn)}
+  pre{margin:0;padding:15px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--fg);}
+  pre .c{color:var(--dim);} pre .s{color:var(--amb);}
+
+  figure{margin:0;border:1px solid var(--edge-2);background:var(--panel);}
+  figure img{display:block;width:100%;height:auto;}
+  figcaption{padding:10px 14px;font-size:12.5px;color:var(--dim);border-top:1px solid var(--edge);font-family:var(--mono);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+  .card{border:1px solid var(--edge);background:var(--panel);padding:15px 16px;}
+  .card p{margin:0;font-size:14px;color:var(--dim);line-height:1.55;}
+  .card h3 a{border-bottom:0;}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mag);display:block;margin-bottom:6px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--edge);vertical-align:top;}
+  th{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:500;}
+  td.k{font-family:var(--mono);color:var(--amb);white-space:nowrap;}
+  td.r{font-family:var(--mono);color:var(--dim);white-space:nowrap;}
+  .win{color:var(--grn);} .loss{color:#ff8a8a;} .draw{color:var(--mag);}
+  .scroll{overflow-x:auto;}
+
+  .keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px 20px;font-size:14px;}
+  .keys div{padding:5px 0;border-bottom:1px solid var(--edge);}
+  footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--dim);line-height:1.9;}
+  footer b{color:var(--cyn);}
 </style>
 </head>
-<body>
-  <main>
-    <h1>Chess Maestro</h1>
-    <p>Relaxation-labeling chess, scored as music.</p>
-    <a href="maestro.html">Enter →</a>
-    <script>location.replace("maestro.html");</script>
-  </main>
-</body></html>
+<body><div class="page">
+
+<nav class="top">
+  <a href="../">↖ portfolio</a>
+  <a href="../genesis/">Project Genesis</a>
+  <a href="maestro.html">♫ Chess Maestro</a>
+  <a href="../genesis/maestro/">♜ Maestro in 3-D</a>
+  <a href="../genesis/maestro/cyber.html">🕶️ Cyberpunk 2045</a>
+</nav>
+
+<div class="eyebrow">Whimsy Chess</div>
+<h1>A chess study board that lives in <span class="p">Vim</span>.</h1>
+<p class="lede measure">Fifteen real games, each one narrated move by move by a cast of characters
+who follow their pieces by <em>identity</em> — so the fox that started on a2 is still the fox
+forty moves later, wherever it ended up. Step through with <kbd>l</kbd> and <kbd>h</kbd>. No
+plugin manager, no dependencies, no leaving the terminal.</p>
+
+<h2>Run it</h2>
+<div class="term">
+  <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span>~/whimsy-chess $</span></div>
+<pre><span class="c"># one line, no install</span>
+vim -c <span class="s">'source chess_emoji.vim'</span> -c <span class="s">'ChessEmoji crawlnamed'</span>
+
+<span class="c"># or use the launcher</span>
+./chess-emoji queendab
+
+<span class="c"># prove all fifteen games still parse</span>
+vim -u NONE -N -es -c <span class="s">'source chess_emoji.vim'</span> \
+    -c <span class="s">'for l in g:ChessEmojiSelfTest() | echo l | endfor'</span> -c <span class="s">'qa!'</span></pre>
+</div>
+
+<div class="keys">
+  <div><kbd>l</kbd> <kbd>→</kbd> <kbd>space</kbd> <span class="sub">next move</span></div>
+  <div><kbd>h</kbd> <kbd>←</kbd> <span class="sub">previous move</span></div>
+  <div><kbd>&lt;</kbd> <span class="sub">jump to start</span></div>
+  <div><kbd>&gt;</kbd> <span class="sub">jump to the end</span></div>
+  <div><kbd>t</kbd> <span class="sub">emoji ⇄ classic figurines</span></div>
+  <div><kbd>q</kbd> <span class="sub">quit</span></div>
+</div>
+
+<p class="measure sub" style="margin-top:16px;font-size:14px;">Emoji width varies by terminal, so the
+board locks its grid with <code>setcellwidths()</code> and draws with no cell separators. Any modern
+terminal with an emoji-capable monospace font renders it square. Press <kbd>t</kbd> for plain
+figurines if the full emoji board is too loud to read.</p>
+
+<h2>The fifteen games</h2>
+<div class="scroll"><table>
+<thead><tr><th>key</th><th>game</th><th>you</th><th>result</th><th>ends</th></tr></thead>
+<tbody>
+<tr><td class="k">queendab</td><td>The Queen Dab <span class="sub">— vs +482 Elo</span></td><td class="r">White</td><td class="r win">1–0</td><td class="r">Qxb7#</td></tr>
+<tr><td class="k">kadas</td><td>Kádas Stampede <span class="sub">— 1.h4, queen out on move 6</span></td><td class="r">White</td><td class="r win">1–0</td><td class="r">Qg7#</td></tr>
+<tr><td class="k">roundup</td><td>The Kádas Roundup</td><td class="r">White</td><td class="r win">1–0</td><td class="r">Qxe7#</td></tr>
+<tr><td class="k">houdini</td><td>The Kádas Houdini</td><td class="r">White</td><td class="r win">1–0</td><td class="r">Qxg7#</td></tr>
+<tr><td class="k">crawlnamed</td><td>The Creepy Crawly, Named <span class="sub">— Lichess christened the formation</span></td><td class="r">White</td><td class="r win">1–0</td><td class="r">Qa8#</td></tr>
+<tr><td class="k">crab</td><td>The Crab <span class="sub">— both rook pawns as claws</span></td><td class="r">White</td><td class="r win">1–0</td><td class="r">Nh6#</td></tr>
+<tr><td class="k">deadmove2</td><td>Dead on Move 2 <span class="sub">— mated-in-2 on move two, won on move twenty</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Qh1#</td></tr>
+<tr><td class="k">carr</td><td>The Carr Crash <span class="sub">— 1…h6</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Rxh2#</td></tr>
+<tr><td class="k">crabblack</td><td>The Crab, as Black</td><td class="r">Black</td><td class="r win">0–1</td><td class="r">R6d2#</td></tr>
+<tr><td class="k">goldsmith</td><td>Goldsmith Defense</td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Bf3#</td></tr>
+<tr><td class="k">fathersday</td><td>Father's Day Surprise</td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Nf3#</td></tr>
+<tr><td class="k">horsey</td><td>Horsey Surprise <span class="sub">— White resigns</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Qxf4</td></tr>
+<tr><td class="k">schroflag</td><td>Schrödinger's Flag <span class="sub">— 1…h5</span></td><td class="r">Black</td><td class="r win">0–1</td><td class="r">Qxg1</td></tr>
+<tr><td class="k">scandi</td><td>The One That Got Away <span class="sub">— up a piece twice, lost</span></td><td class="r">Black</td><td class="r loss">1–0</td><td class="r">Qb4#</td></tr>
+<tr><td class="k">daisies</td><td>We're No Daisies <span class="sub">— 135 plies, mates missed by both sides</span></td><td class="r">Black</td><td class="r draw">½–½</td><td class="r">stalemate</td></tr>
+</tbody></table></div>
+
+<p class="measure sub" style="font-size:14px;">Adding a game is one object: white, black, hero colour,
+opening, result, movetext, and a <code>special</code> map of ply&nbsp;→&nbsp;narration for the
+turning points. Register it in the self-test loop and it is checked forever after — ply count,
+final move, and which piece delivered it.</p>
+
+<h2>The same engine, in the browser</h2>
+<figure>
+  <img src="media/maestro_kadas.gif" alt="Chess Maestro replaying the Kádas game: the board renders as terrain, with water pooling on contested squares." loading="lazy">
+  <figcaption>Chess Maestro replaying the Kádas Stampede — terrain grown from the influence field.</figcaption>
+</figure>
+
+<div class="grid" style="margin-top:14px;">
+  <div class="card"><span class="tag">flagship</span><h3><a href="maestro.html">♫ Chess Maestro</a></h3>
+    <p>Roles, terrain, and music. The time signature is <em>inferred from the moves</em> — a quiet
+    maneuvering game breathes in 3/4, a tactical scramble lurches into 7/8. Exports MIDI, WAV, and a
+    world file. Installs to a phone home screen.</p></div>
+  <div class="card"><span class="tag">3-d voxels</span><h3><a href="../genesis/maestro/">♜ Maestro in 3-D</a></h3>
+    <p>The board as a voxel landscape — held squares rise as elevation, the contested seam floods
+    pond→ocean by area. Minecraft and Roblox exporters from one <code>core.js</code>.</p></div>
+  <div class="card"><span class="tag">the cast</span><h3><a href="../genesis/maestro/emoji.html">🎭 Woodland vs Misfit</a></h3>
+    <p>Every piece rebuilt as a voxel standee from its real emoji glyph, tracked from its home
+    square, with cast-voiced narration.</p></div>
+  <div class="card"><span class="tag">neon</span><h3><a href="../genesis/maestro/cyber.html">🕶️ Cyberpunk 2045, ATL</a></h3>
+    <p>The grid has you. ATL Underground against the Gridlock Authority, narrated in falling green
+    code, cyan towers against magenta.</p></div>
+  <div class="card"><span class="tag">one export, two worlds</span><h3><a href="worldkit.js">🧱 WorldKit</a></h3>
+    <p>A <code>chess-world</code> v1 export becomes a Minecraft datapack and a Roblox builder. Zero
+    dependencies — including its own store-only zip writer. Runs in the browser and in Node.</p></div>
+  <div class="card"><span class="tag">the engine</span><h3><a href="../hrl-lab/">✦ The HRL Lab</a></h3>
+    <p>What is actually doing the labeling: relaxation labeling, sparse factors, arbitrary
+    constraint order, a noise label for pieces doing nothing.</p></div>
+</div>
+
+<h2>Why any of this</h2>
+<p class="measure">Every piece on the board is an <em>object</em>; every tactical job — attacker,
+defender, controller, outpost, runner, tactic — is a <em>label</em>. Nothing is classified alone:
+the labels settle by mutual consistency, the way <a href="../hrl-lab/">relaxation labeling</a>
+settles anything. Pieces that end up doing nothing get the <b>noise label</b>, and that turns out
+to be the most honest thing the board can tell you about your position.</p>
+<p class="measure">Once every piece has a role, the rest follows. Roles become colours. The
+influence field becomes terrain — water pools where control is contested. Coherence becomes
+harmony. And the narration knows who did what, because it has been tracking them by identity the
+whole time.</p>
+<p class="measure sub">House voice, since it comes up: creativity and daring over memorizing the
+engine's preferred move. The games in here are rated-club chess with all the blunders left in —
+including a mate missed by both sides for seventy moves, and one game where the author was
+theoretically dead on move two and won anyway.</p>
+
+<footer>
+  <b>Whimsy Chess</b> — by <b>Manny Glover</b>. Zero dependencies, no build step; every page here is
+  a single self-contained file.<br>
+  Quaternion camera after <b>MrMocap — David Harrison</b>. Code AGPL-3.0 with a commercial option;
+  creative assets CC BY-SA 4.0.<br>
+  <a href="../">← back to the portfolio</a>
+</footer>
+
+</div></body></html>
