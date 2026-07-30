@@ -185,8 +185,11 @@
       <button id="exWav">🔊 Audio .wav — upload to Suno</button>
       <button id="exSuno">📝 Suno prompt (.txt)</button>
       <button id="exWorld">🌍 World (.json)</button>
+      <button id="exMine">⛏️ Minecraft datapack (.zip)</button>
+      <button id="exRblx">🎮 Roblox builder (.lua)</button>
     </div>
-    <div class="loadhint"><b>🌍 World</b> bakes the heightmap, water bodies, per-piece roles/teams and full replay into one JSON — the bridge to Minecraft / Roblox / a Worms-style game. &nbsp; <b>Suno</b> doesn't read MIDI — upload the <b>.wav</b>, or paste the <b>.txt</b> into Suno's Style/Lyrics. For richer orchestral audio: <code>flatpak run org.musescore.MuseScore game.mid -o song.mp3</code></div>
+    <div class="loadhint"><b>⛏️ Minecraft</b> — a real Java datapack: drop the <b>.zip</b> straight into <code>saves/&lt;world&gt;/datapacks/</code>, then <code>/reload</code> and <code>/function maestro:build</code>. The board becomes terrain (elevation = control, water = the contested seam), every piece a role-coloured totem with a nameplate, and <b>every ply is its own function</b> so you can step the whole game inside the world. <code>/function maestro:help</code> lists the rest. &nbsp; <b>🎮 Roblox</b> — paste the <b>.lua</b> into Studio's Command Bar on a Baseplate. Both build the position you're looking at now; everything is anchored and nothing hostile is ever spawned. &nbsp; <b>🌍 World</b> is the shared spec both exporters read.</div>
+    <div class="loadhint"><b>Suno</b> doesn't read MIDI — upload the <b>.wav</b>, or paste the <b>.txt</b> into Suno's Style/Lyrics. For richer orchestral audio: <code>flatpak run org.musescore.MuseScore game.mid -o song.mp3</code></div>
   </div></div>
 
   <div id="flagPanel"><div class="card2">
@@ -220,6 +223,12 @@
     </div>
   </div>
 
+<!-- WorldKit: turns this page's chess-world export into a Minecraft datapack / Roblox build -->
+<script src="worldkit.js"></script>
+<!-- The preloaded game library, generated from Lichess by tools/build_games_library.py.
+     Kept in its own file so this page stays readable; absent is fine (the twelve
+     hand-picked games below stand alone). -->
+<script src="games-library.js"></script>
 <script>
 /* ===================== GAMES ===================== */
 const GAMES = {
@@ -248,6 +257,17 @@ const GAMES = {
   daisies:{ label:"We're No Daisies (Goldsmith)", white:"lastonefastone (1104)", black:"pappymagee (981)", hero:"b", result:"½–½", tc:"600+0",
     pgn:"e4 {[%clk 0:10:00]} h5 {[%clk 0:10:00]} Nf3 {[%clk 0:09:56]} h4 {[%clk 0:09:57]} g3 {[%clk 0:09:47]} hxg3 {[%clk 0:09:53]} fxg3 {[%clk 0:09:46]} e5 {[%clk 0:09:46]} Nxe5 {[%clk 0:09:42]} d6 {[%clk 0:09:37]} Nc4 {[%clk 0:09:13]} Qg5 {[%clk 0:09:20]} d3 {[%clk 0:09:07]} Bg4 {[%clk 0:09:13]} Be2 {[%clk 0:08:52]} Bxe2 {[%clk 0:09:03]} Kxe2 {[%clk 0:08:28]} Qh5+ {[%clk 0:08:46]} Ke1 {[%clk 0:08:16]} Qxd1+ {[%clk 0:08:29]} Kxd1 {[%clk 0:08:14]} c6 {[%clk 0:08:17]} e5 {[%clk 0:08:05]} d5 {[%clk 0:08:14]} Nd6+ {[%clk 0:08:01]} Bxd6 {[%clk 0:08:11]} exd6 {[%clk 0:08:00]} Kd7 {[%clk 0:08:07]} Bf4 {[%clk 0:07:57]} f6 {[%clk 0:08:01]} c4 {[%clk 0:07:55]} g5 {[%clk 0:07:58]} c5 {[%clk 0:07:38]} gxf4 {[%clk 0:07:54]} gxf4 {[%clk 0:07:37]} Na6 {[%clk 0:07:50]} b4 {[%clk 0:07:33]} Nxb4 {[%clk 0:07:47]} Nc3 {[%clk 0:07:29]} Nxd3 {[%clk 0:07:40]} Rb1 {[%clk 0:07:19]} Nf2+ {[%clk 0:07:37]} Ke2 {[%clk 0:07:16]} Nxh1 {[%clk 0:07:26]} Rxb7+ {[%clk 0:07:14]} Ke6 {[%clk 0:07:20]} d7 {[%clk 0:07:09]} Rxh2+ {[%clk 0:07:16]} Kd3 {[%clk 0:07:05]} Nf2+ {[%clk 0:07:06]} Ke3 {[%clk 0:07:01]} Ng4+ {[%clk 0:06:58]} Kf3 {[%clk 0:06:56]} N8h6 {[%clk 0:06:53]} Kg3 {[%clk 0:06:53]} Rg8 {[%clk 0:06:45]} Kf3 {[%clk 0:06:34]} Rf2+ {[%clk 0:06:33]} Kg3 {[%clk 0:06:26]} Nh2+ {[%clk 0:06:17]} Kxf2 {[%clk 0:06:24]} N6g4+ {[%clk 0:06:12]} Ke2 {[%clk 0:06:16]} d4 {[%clk 0:06:00]} Ne4 {[%clk 0:06:08]} Kd5 {[%clk 0:05:56]} Nd6 {[%clk 0:06:04]} Ne3 {[%clk 0:05:44]} Kd3 {[%clk 0:05:57]} Nhf1 {[%clk 0:05:35]} Nf7 {[%clk 0:05:53]} Kxc5 {[%clk 0:05:19]} d8=Q {[%clk 0:05:48]} Rxd8 {[%clk 0:05:16]} Nxd8 {[%clk 0:05:48]} a5 {[%clk 0:05:10]} Ne6+ {[%clk 0:05:46]} Kd5 {[%clk 0:05:05]} Nxd4 {[%clk 0:05:38]} c5 {[%clk 0:04:58]} Rb5 {[%clk 0:05:16]} a4 {[%clk 0:04:45]} Nc2 {[%clk 0:05:09]} Nc4 {[%clk 0:04:06]} Kc3 {[%clk 0:04:42]} f5 {[%clk 0:03:24]} Rb1 {[%clk 0:04:10]} Ng3 {[%clk 0:03:18]} Rd1+ {[%clk 0:04:01]} Kc6 {[%clk 0:02:48]} Kxc4 {[%clk 0:04:00]} Ne4 {[%clk 0:02:41]} Rd5 {[%clk 0:03:35]} Nd6+ {[%clk 0:02:28]} Rxd6+ {[%clk 0:03:23]} Kxd6 {[%clk 0:02:24]} Ne3 {[%clk 0:03:20]} Ke6 {[%clk 0:02:14]} Kxc5 {[%clk 0:03:16]} a3 {[%clk 0:02:12]} Kb5 {[%clk 0:03:14]} Kf6 {[%clk 0:02:08]} Kb4 {[%clk 0:03:10]} Ke6 {[%clk 0:02:07]} Kxa3 {[%clk 0:03:08]} Kf6 {[%clk 0:02:06]} Kb4 {[%clk 0:03:06]} Ke6 {[%clk 0:02:05]} a4 {[%clk 0:03:06]} Kf6 {[%clk 0:02:03]} a5 {[%clk 0:03:05]} Ke6 {[%clk 0:02:02]} a6 {[%clk 0:03:04]} Kf6 {[%clk 0:02:01]} a7 {[%clk 0:03:02]} Ke6 {[%clk 0:02:00]} a8=Q {[%clk 0:03:01]} Kf6 {[%clk 0:01:59]} Qa5 {[%clk 0:02:57]} Ke6 {[%clk 0:01:58]} Qxf5+ {[%clk 0:02:56]} Kd6 {[%clk 0:01:57]} Kc4 {[%clk 0:02:52]} Kc6 {[%clk 0:01:55]} Qd5+ {[%clk 0:02:51]} Kb6 {[%clk 0:01:54]} Qc5+ {[%clk 0:02:48]} Kb7 {[%clk 0:01:48]} Kb5 {[%clk 0:02:45]} Kb8 {[%clk 0:01:44]} Qc6 {[%clk 0:02:43]} Ka7 {[%clk 0:01:43]} Qb6+ {[%clk 0:02:40]} Ka8 {[%clk 0:01:40]} Ka6 {[%clk 0:02:38]}" },
 };
+
+/* The twelve above are hand-picked and stay first in the menu. games-library.js
+   (generated from Lichess by tools/build_games_library.py) is merged in behind
+   them, grouped by opening family. A missing library file is not an error. */
+for(const k in GAMES) if(!GAMES[k].group) GAMES[k].group="★ Hand-picked";
+if(window.GAMES_LIBRARY){
+  let added=0;
+  for(const k in window.GAMES_LIBRARY) if(!(k in GAMES)){ GAMES[k]=window.GAMES_LIBRARY[k]; added++; }
+  console.info("Chess Maestro: %d games in the library (%d hand-picked + %d from Lichess)",
+    Object.keys(GAMES).length, Object.keys(GAMES).length-added, added);
+}
 
 /* ===================== cast (hero-relative) ===================== */
 const WOOD = {Ra:["🏰","Castle Andora"],Nb:["🦄","Sir Banyan Blithers"],Bc:["🛕","Popette Christiana Carolina"],
@@ -1127,7 +1147,29 @@ document.addEventListener("keydown",e=>{
 
 /* ===================== selectors ===================== */
 function fillSelect(el,obj,getLabel,sel){for(const k in obj){const o=document.createElement("option");o.value=k;o.textContent=getLabel(obj[k]);if(k===sel)o.selected=true;el.appendChild(o);}}
-fillSelect(document.getElementById("selGame"),GAMES,g=>g.label,gameKey);
+/* The game menu is grouped by opening family — with a library of a hundred-plus
+   games a flat list is unusable. Hand-picked sits at the top, then the biggest
+   families first, so the h-file systems he actually plays lead. */
+function fillGameSelect(el,obj,sel){
+  const groups={};
+  for(const k in obj){ const g=obj[k].group||"Other"; (groups[g]||(groups[g]=[])).push(k); }
+  const names=Object.keys(groups).sort((a,b)=>{
+    const pa=a.charAt(0)==="★"?0:1, pb=b.charAt(0)==="★"?0:1;
+    return pa-pb || groups[b].length-groups[a].length || a.localeCompare(b);
+  });
+  for(const g of names){
+    const og=document.createElement("optgroup");
+    og.label=g+"  ("+groups[g].length+")";
+    for(const k of groups[g]){
+      const o=document.createElement("option");
+      o.value=k; o.textContent=obj[k].label;
+      if(k===sel) o.selected=true;
+      og.appendChild(o);
+    }
+    el.appendChild(og);
+  }
+}
+fillGameSelect(document.getElementById("selGame"),GAMES,gameKey);
 fillSelect(document.getElementById("selPieceW"),SETS,p=>p.label,pieceW);
 fillSelect(document.getElementById("selPieceB"),SETS,p=>p.label,pieceB);
 fillSelect(document.getElementById("selTheme"),THEMES,t=>t,themeKey);
@@ -1182,6 +1224,31 @@ document.getElementById("exSuno").onclick=()=>download(fname()+".suno.txt",new B
 document.getElementById("exWorld").onclick=()=>download(fname()+".world.json",new Blob([JSON.stringify(buildWorld())],{type:"application/json"}));
 document.getElementById("exWav").onclick=async function(){const b=this,t=b.textContent;b.textContent="rendering…";b.disabled=true;
   try{await exportWav();}catch(e){alert("WAV render failed: "+e.message);}finally{b.textContent=t;b.disabled=false;}};
+
+/* ---- playable worlds: the same chess-world export, built for Minecraft & Roblox ---- */
+/* Both build the position currently on the board (cur); the Minecraft pack also ships
+   one function per ply, so the whole game is steppable from inside the world. */
+function worldOpts(){ return {ply:cur}; }
+function buildFor(btn, work){
+  if(!window.WorldKit){ alert("worldkit.js didn't load, so the Minecraft/Roblox exporters are unavailable.\n\nIt sits next to this page — serve the folder over http:// rather than opening the file directly."); return; }
+  const label=btn.textContent;
+  btn.textContent="building…"; btn.disabled=true;
+  // let the button repaint before the (synchronous) build blocks the thread
+  setTimeout(()=>{
+    try{ work(); }
+    catch(e){ alert("Export failed: "+e.message); }
+    finally{ btn.textContent=label; btn.disabled=false; }
+  },0);
+}
+document.getElementById("exMine").onclick=function(){ const b=this; buildFor(b,()=>{
+  const w=buildWorld(), o=worldOpts(), out=WorldKit.toMinecraftZip(w,o);
+  download(WorldKit.stem(w,o)+".datapack.zip", new Blob([out.bytes],{type:"application/zip"}));
+});};
+document.getElementById("exRblx").onclick=function(){ const b=this; buildFor(b,()=>{
+  const w=buildWorld(), o=worldOpts(), out=WorldKit.toRoblox(w,o);
+  download(WorldKit.stem(w,o)+".roblox.lua", new Blob([out.lua],{type:"text/plain"}));
+});};
+if(!window.WorldKit){ ["exMine","exRblx"].forEach(id=>{const b=document.getElementById(id); b.disabled=true; b.title="worldkit.js not loaded"; }); }
 
 load("queendab");
 
