@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michael "Manny" Glover — Computer Vision Scientist · selected technical work</title>
+<meta name="description" content="Selected technical work by Michael 'Manny' Glover, computer vision scientist: automated train-brake inspection from wayside imagery, sub-millimeter CT registration, real-time optical tracking, and the hierarchical relaxation-labeling engine — each demonstration self-contained and runnable in the browser.">
+<meta name="robots" content="index,follow">
+<style>
+  :root{
+    --paper:#eef1e6; --card:#f7f8f1; --ink:#20261b; --muted:#586150; --line:#d5dbc7;
+    --green:#2f6b3d; --green-deep:#1f4a2a; --leaf:#5f923f; --acorn:#a9631a; --bark:#4a3a28;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --paper:#11150e; --card:#181e13; --ink:#e9ecdd; --muted:#95a086; --line:#2a331f;
+      --green:#77b46f; --green-deep:#5a9a54; --leaf:#8fc86a; --acorn:#e0a24a; --bark:#c9b590; color-scheme:dark; }
+  }
+  :root[data-theme="light"]{ --paper:#eef1e6;--card:#f7f8f1;--ink:#20261b;--muted:#586150;--line:#d5dbc7;--green:#2f6b3d;--green-deep:#1f4a2a;--leaf:#5f923f;--acorn:#a9631a;--bark:#4a3a28;color-scheme:light;}
+  :root[data-theme="dark"]{ --paper:#11150e;--card:#181e13;--ink:#e9ecdd;--muted:#95a086;--line:#2a331f;--green:#77b46f;--green-deep:#5a9a54;--leaf:#8fc86a;--acorn:#e0a24a;--bark:#c9b590;color-scheme:dark;}
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .doc{background:
+      radial-gradient(120% 60% at 100% -10%, color-mix(in srgb, var(--green) 12%, transparent), transparent 60%),
+      var(--paper);
+    color:var(--ink);font-family:var(--sans);line-height:1.62;
+    padding:clamp(20px,5vw,64px) clamp(18px,5vw,40px);min-height:100vh;}
+  .wrap{max-width:960px;margin:0 auto;}
+  .measure{max-width:68ch;}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,6.4vw,58px);line-height:1.03;margin:.24em 0 .18em;letter-spacing:-.01em;text-wrap:balance;}
+  h1 .q{color:var(--green);font-style:italic;}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,3.2vw,28px);margin:0 0 .3em;letter-spacing:-.01em;text-wrap:balance;}
+  h3{font-family:var(--serif);font-weight:600;font-size:18px;margin:0 0 .2em;}
+  p{margin:0 0 1em;}
+  a{color:var(--green);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--green) 35%,transparent);}
+  a:hover,a:focus-visible{border-bottom-color:var(--green);}
+  .lede{font-family:var(--serif);font-size:clamp(17px,2.3vw,22px);line-height:1.5;}
+  .sub{color:var(--muted);}
+  strong{font-weight:600;}
+
+  header.mast{border-bottom:2px solid var(--line);padding-bottom:26px;margin-bottom:8px;}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+  .addr{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.01em;line-height:1.7;text-align:right;}
+  .addr a{border-bottom:0;color:var(--muted);}
+  .addr a:hover{color:var(--green);}
+  .theme{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
+    color:var(--muted);border:1px solid var(--line);padding:7px 11px;cursor:pointer;margin-top:8px;}
+  .theme:hover{color:var(--ink);border-color:var(--green);}
+
+  section{margin:44px 0;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .kicker::after{content:"";height:1px;flex:1;background:var(--line);}
+
+  /* the three-minute path */
+  .path{display:grid;gap:0;border-top:1px solid var(--line);}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start;}
+  .num{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--green);padding-top:5px;}
+  .step p{margin:.3em 0 0;font-size:15px;color:var(--muted);}
+
+  /* card grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:14px;}
+  .c{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;display:flex;flex-direction:column;gap:7px;}
+  .c h3{margin:0;}
+  .c h3 a{border-bottom:0;}
+  .c p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55;}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--acorn);}
+
+  /* the feature block */
+  .feature{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);
+    padding:clamp(20px,3.4vw,30px);}
+  .feature h2{margin-bottom:.35em;}
+  .feature .flow{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.01em;
+    line-height:2.1;margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;}
+  .feature .flow b{color:var(--green);font-weight:600;}
+
+  dl.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:0;}
+  dl.facts div{border-top:2px solid var(--line);padding-top:10px;}
+  dl.facts dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  dl.facts dd{margin:4px 0 0;font-family:var(--serif);font-size:clamp(22px,3vw,30px);line-height:1.1;color:var(--green);}
+  dl.facts dd span{display:block;font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.45;margin-top:5px;}
+
+  footer{border-top:2px solid var(--line);margin-top:52px;padding-top:20px;
+    font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  @media (max-width:620px){ .addr{text-align:left;} }
+</style>
+</head>
+<body>
+<div class="doc"><div class="wrap">
+
+<header class="mast">
+  <div class="topbar">
+    <div>
+      <div class="eyebrow">Selected technical work</div>
+      <h1>Michael <span class="q">“Manny”</span> Glover</h1>
+      <div class="sub" style="font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;">
+        Computer Vision Scientist · Real-time perception, automated inspection &amp; defect detection
+      </div>
+    </div>
+    <div class="addr">
+      Marietta, Georgia<br>
+      770-421-8658<br>
+      <a href="mailto:michaelmannyglover@gmail.com">michaelmannyglover@gmail.com</a><br>
+      <a href="https://linkedin.com/in/mannyglover">linkedin.com/in/mannyglover</a>
+      <br><button class="theme" id="theme" type="button">◐ theme</button>
+    </div>
+  </div>
+</header>
+
+<section class="measure" style="margin-top:26px;">
+  <p class="lede">Sixteen years of computer vision in domains where being wrong is expensive:
+  railcar brake inspection, image-guided surgery, weld-defect detection, and real-time optical
+  tracking for military training.</p>
+  <p>Every demonstration linked below is <strong>self-contained and runnable in the browser</strong> —
+  no build step, no dependencies, no server. Most run on real published data, and several publish
+  their own null results. My specialty is <strong>identification by constraints</strong>
+  (relaxation labeling, after Rosenfeld, Hummel and Zucker): classifying objects by requiring the
+  whole assignment to be mutually consistent, rather than by training volume. It is
+  label-efficient, explainable, and built for the case where the interesting class is rare.</p>
+</section>
+
+<section>
+  <div class="kicker">If you have three minutes</div>
+  <div class="path">
+    <div class="step">
+      <div class="num">01</div>
+      <div>
+        <h3><a href="../beena/">Train-brake inspection from wayside imagery</a></h3>
+        <p>The applied case, and the one closest to industrial inspection: identify brake
+        components on a passing railcar from two grayscale bogie cameras, and flag what is
+        missing.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <div>
+        <h3><a href="../frustrated/">Chirality — where the 2-simplex sees what pairs cannot</a></h3>
+        <p>The provable result: an order-3 compatibility factor resolves molecular handedness on
+        231 of 231 cases, where pairwise-only constraints provably cannot.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <div>
+        <h3><a href="../hrl-lab/">The HRL Lab — the engine, live</a></h3>
+        <p>The general engine in your browser: sparse factors, arbitrary constraint order,
+        respected priors, a noise label, and few-shot labeling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The applied case — automated inspection</div>
+  <div class="feature">
+    <h2>Train-brake identification, Beena Vision Systems (2014)</h2>
+    <p class="measure">Wayside machine vision for railcar safety inspection. Two grayscale images
+    of a bogie corner — top- and bottom-mounted cameras — are stitched into a single view and
+    reduced to line segments. Rather than classify each segment on its own appearance, the engine
+    assigns every segment to a brake-component label by requiring the <em>whole</em> assignment to
+    be geometrically consistent: perpendicular distances, slopes and intercepts, and ρ/θ
+    relationships that must hold if the assembly is intact. Segments that fit nothing are absorbed
+    by a <strong>noise label</strong>. The output is an inspection verdict, including flags such as
+    <em>“Top Brakepad NOT Visible.”</em></p>
+    <p class="flow">
+      two cameras &nbsp;→&nbsp; <b>stitch</b> &nbsp;→&nbsp; <b>line segments</b> &nbsp;→&nbsp;
+      <b>relaxation labeling</b> <span class="sub">(geometry as compatibility, + noise label)</span>
+      &nbsp;→&nbsp; <b>safety flag</b>
+    </p>
+    <p style="margin-top:16px;"><a href="../beena/">Open the Beena demonstration →</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Production record</div>
+  <dl class="facts">
+    <div><dt>CT registration</dt><dd>~0.5 mm<span>Fiducial bead detection and rigid-body transform into CT coordinates for image-guided cryoablation — C++, DCMTK, OpenCV, Eigen.</span></dd></div>
+    <div><dt>Optical tracking</dt><dd>50% → 98%<span>First-frame marker identification accuracy at Motion Reality, removing the manual setup step from every capture.</span></dd></div>
+    <div><dt>Real-time budget</dt><dd>60 Hz<span>Full-squadron multi-person optical motion capture for tactical VR training; sub-100 ms C++ bidding integration at Cardlytics.</span></dd></div>
+    <div><dt>Higher-order labeling</dt><dd>231 / 231<span>R/S molecular chirality resolved by an order-3 simplicial factor where pairwise compatibility cannot.</span></dd></div>
+  </dl>
+</section>
+
+<section>
+  <div class="kicker">The engine, and what it does on real data</div>
+  <div class="grid">
+    <div class="c"><span class="tag">real sensor data</span>
+      <h3><a href="../body-pos/">HRL on Real Data</a></h3>
+      <p>Body-position labeling from wearable accelerometer signals — the engine on noisy,
+      real-world time series.</p></div>
+    <div class="c"><span class="tag">real survey data</span>
+      <h3><a href="../genesis/sdss/">The Real Cosmic Web</a></h3>
+      <p>SDSS galaxy positions relaxation-labeled into filament, wall, and void structure.</p></div>
+    <div class="c"><span class="tag">real rotation curves</span>
+      <h3><a href="../genesis/sparc/">The Fingerprint of Dark Matter</a></h3>
+      <p>Published SPARC galaxy rotation curves, labeled by consistency rather than fitted
+      per-galaxy.</p></div>
+    <div class="c"><span class="tag">real connectome</span>
+      <h3><a href="../genesis/brain/">A Nervous System, Relaxing</a></h3>
+      <p>The <em>C. elegans</em> connectome — every neuron labeled by its neighbors' labels.</p></div>
+    <div class="c"><span class="tag">higher order</span>
+      <h3><a href="../simplicial-3d/">The Body in 3-D</a></h3>
+      <p>Higher-order relaxation on a simplicial complex — constraints over triples, not just
+      pairs.</p></div>
+    <div class="c"><span class="tag">null result</span>
+      <h3><a href="../genesis/clog/">Does the Threshold Emerge?</a></h3>
+      <p>A negative result, published as one. The predicted threshold does not emerge; here is the
+      evidence.</p></div>
+    <div class="c"><span class="tag">text parsing</span>
+      <h3><a href="../bible-hrl/">Relaxation Labeling Reads a Corpus</a></h3>
+      <p>Constraint-based contradiction detection across a large text corpus — and a frank account
+      of its blind spots.</p></div>
+    <div class="c"><span class="tag">interactive</span>
+      <h3><a href="../play/">Beat the Engine</a></h3>
+      <p>Play against it: a fewest-seeds labeling puzzle and spot-the-enantiomer.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Applied systems &amp; product thinking</div>
+  <div class="grid">
+    <div class="c"><span class="tag">search-free engine</span>
+      <h3><a href="../chess-logic/">Chess Logic</a></h3>
+      <p>A chess engine that reasons by relaxation labeling instead of tree search.</p></div>
+    <div class="c"><span class="tag">decision under time</span>
+      <h3><a href="../chess-premove/">Chess Premove</a></h3>
+      <p>Entropy-gated premove selection — when is a decision safe to commit early?</p></div>
+    <div class="c"><span class="tag">biometrics</span>
+      <h3><a href="../chess-biometric/">Chess Biometric</a></h3>
+      <p>Play-style as a second authentication factor, with a fingerprint-shaped glyph.</p></div>
+    <div class="c"><span class="tag">3-d visualization</span>
+      <h3><a href="../genesis/maestro/">Chess Maestro, in 3-D</a></h3>
+      <p>The labeling output rendered as terrain — held squares as elevation, contested seams as
+      water.</p></div>
+    <div class="c"><span class="tag">product directions</span>
+      <h3><a href="../biz-viz/">One Engine, Seven Businesses</a></h3>
+      <p>Seven interactive concept demonstrations: where constraint-based labeling earns its
+      keep commercially.</p></div>
+    <div class="c"><span class="tag">timeline</span>
+      <h3><a href="../chronology/">Career &amp; Contribution Timeline</a></h3>
+      <p>One algorithm across sixteen years — Motion Reality, Cardlytics, Beena, MiRus, Focused
+      Cryo, Huxley.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div>By Manny Glover · M.S. &amp; B.S. Economics, Georgia Institute of Technology</div>
+  <div><a href="mailto:michaelmannyglover@gmail.com">michaelmannyglover@gmail.com</a></div>
+</footer>
+
+</div></div>
+<script>
+(function(){
+  var b=document.getElementById("theme"), r=document.documentElement;
+  function cur(){ return r.getAttribute("data-theme") ||
+    (window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"); }
+  b.addEventListener("click",function(){ r.setAttribute("data-theme", cur()==="dark"?"light":"dark"); });
+})();
+</script>
+</body></html>
