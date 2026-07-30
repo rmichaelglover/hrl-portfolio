@@ -127,6 +127,7 @@ Maestro.applySAN = function (board, color, san) {
   const disamb = rest.slice(0, -2);
 
   let from = null;
+  let epCapture = null; // en passant: the taken pawn is not on the destination square
 
   if (type === 'p') {
     const dir = color === 'w' ? 1 : -1;
@@ -135,6 +136,12 @@ Maestro.applySAN = function (board, color, san) {
       // capture: source file from disambiguation
       const sf = disamb.charCodeAt(0) - 97;
       from = [sf, dest[1] - dir];
+      // A pawn capture onto an empty square can only be en passant; the victim
+      // sits alongside the mover, one rank back from the destination.
+      const victim = nb[dest[1] - dir] && nb[dest[1] - dir][dest[0]];
+      if (!nb[dest[1]][dest[0]] && victim && Maestro.colorOf(victim) !== color && victim.toLowerCase() === 'p') {
+        epCapture = [dest[0], dest[1] - dir];
+      }
     } else {
       const f = dest[0];
       const one = dest[1] - dir;
@@ -181,6 +188,7 @@ Maestro.applySAN = function (board, color, san) {
   const moving = nb[from[1]][from[0]];
   nb[dest[1]][dest[0]] = promo ? (color === 'w' ? promo : promo.toLowerCase()) : moving;
   nb[from[1]][from[0]] = null;
+  if (epCapture) nb[epCapture[1]][epCapture[0]] = null;
   return nb;
 };
 
@@ -295,6 +303,172 @@ Maestro.applyPGN = function (movesString) {
     color = color === 'w' ? 'b' : 'w';
   }
   return positions;
+};
+
+// ---- chess-world v1 --------------------------------------------------------
+// The interchange format WorldKit consumes (whimsy-chess/worldkit.js), so a game
+// stepped here can be built into Minecraft and Roblox by the same code path that
+// serves maestro.html. Terrain semantics match maestro.html's: positive height is
+// land elevation, negative is water depth, and the contested seam is sized by the
+// area of its connected component — a lone square is a pond, a sprawl is an ocean.
+
+Maestro.NAMES = { p: 'Pawn', n: 'Knight', b: 'Bishop', r: 'Rook', q: 'Queen', k: 'King' };
+
+// Size each contested region pond→ocean, the way maestro.html does.
+Maestro.waterBodies = function (influence) {
+  const wet = [];
+  for (let i = 0; i < 64; i++) wet.push(!!influence[i].water);
+  const comp = new Array(64).fill(-1);
+  const kinds = new Array(64).fill('');
+  let id = 0;
+  for (let start = 0; start < 64; start++) {
+    if (!wet[start] || comp[start] >= 0) continue;
+    const stack = [start], cells = [];
+    comp[start] = id;
+    while (stack.length) {
+      const at = stack.pop();
+      cells.push(at);
+      const f = at & 7, r = at >> 3;
+      for (let df = -1; df <= 1; df++) for (let dr = -1; dr <= 1; dr++) {
+        if (!df && !dr) continue;
+        const nf = f + df, nr = r + dr;
+        if (nf < 0 || nf > 7 || nr < 0 || nr > 7) continue;
+        const ni = nr * 8 + nf;
+        if (wet[ni] && comp[ni] < 0) { comp[ni] = id; stack.push(ni); }
+      }
+    }
+    const fs = cells.map(c => c & 7), rs = cells.map(c => c >> 3);
+    const w = Math.max.apply(null, fs) - Math.min.apply(null, fs) + 1;
+    const h = Math.max.apply(null, rs) - Math.min.apply(null, rs) + 1;
+    const n = cells.length;
+    const thin = Math.min(w, h) === 1 || n <= Math.max(w, h) + 1;
+    let kind;
+    if (n <= 1) kind = 'pond';
+    else if (n <= 2) kind = 'creek';
+    else if (thin && Math.max(w, h) >= 3) kind = 'river';
+    else if (n <= 5) kind = 'lake';
+    else if (n <= 12) kind = 'sea';
+    else kind = 'ocean';
+    for (let i = 0; i < cells.length; i++) kinds[cells[i]] = kind;
+    id++;
+  }
+  return kinds;
+};
+
+const WATER_DEPTH = { pond: 1, creek: 1, river: 1, lake: 2, sea: 3, ocean: 4 };
+
+// A stable piece id per starting square, so a piece keeps its identity across plies.
+Maestro.identify = function (positions) {
+  const ids = {}; // "file,rank" -> id, tracked forward through each move
+  const start = positions[0];
+  const seen = {};
+  for (const p of start.pieces) {
+    const n = (seen[p.color + p.type] = (seen[p.color + p.type] || 0) + 1);
+    ids[p.file + ',' + p.rank] = p.color + p.type + n;
+  }
+  const perPly = [Object.assign({}, ids)];
+  let live = Object.assign({}, ids);
+  for (let i = 1; i < positions.length; i++) {
+    const prev = positions[i - 1], cur = positions[i];
+    const was = {}, now = {};
+    for (const p of prev.pieces) was[p.file + ',' + p.rank] = p;
+    for (const p of cur.pieces) now[p.file + ',' + p.rank] = p;
+    const vacated = [], filled = [];
+    for (const k in was) if (!now[k] || now[k].color !== was[k].color || now[k].type !== was[k].type) vacated.push(k);
+    for (const k in now) if (!was[k] || was[k].color !== now[k].color || was[k].type !== now[k].type) filled.push(k);
+    const next = {};
+    for (const k in live) if (now[k] && vacated.indexOf(k) < 0) next[k] = live[k];
+    // Move each id from the square it left to the square its own colour arrived on.
+    for (const to of filled) {
+      const arriving = now[to];
+      let bestFrom = null;
+      for (const from of vacated) {
+        const left = was[from];
+        if (!left || left.color !== arriving.color) continue;
+        if (!live[from] || next[from]) continue;
+        // prefer same type (promotion changes type, so fall back to any same-colour mover)
+        if (left.type === arriving.type) { bestFrom = from; break; }
+        if (!bestFrom) bestFrom = from;
+      }
+      next[to] = bestFrom && live[bestFrom] ? live[bestFrom] : arriving.color + arriving.type + 'x';
+    }
+    live = next;
+    perPly.push(Object.assign({}, live));
+  }
+  return perPly;
+};
+
+/**
+ * Emit a chess-world v1 document for a whole game.
+ * @param {Array} positions  output of Maestro.applyPGN
+ * @param {Object} meta      {label, white, black, result, hero}
+ */
+Maestro.toWorld = function (positions, meta) {
+  meta = meta || {};
+  const hero = meta.hero || 'w';
+  const idsPerPly = Maestro.identify(positions);
+
+  const pieces = [];
+  const declared = {};
+  for (let i = 0; i < positions.length; i++) {
+    const ids = idsPerPly[i];
+    for (const p of positions[i].pieces) {
+      const id = ids[p.file + ',' + p.rank];
+      if (!id || declared[id]) continue;
+      declared[id] = true;
+      pieces.push({
+        id: id, color: p.color, team: p.color === hero ? 'woodland' : 'misfit',
+        type: p.type, startSquare: Maestro.FILES[p.file] + (p.rank + 1),
+        name: Maestro.NAMES[p.type] || p.type, emoji: ''
+      });
+    }
+  }
+
+  const frames = positions.map(function (P, i) {
+    const kinds = Maestro.waterBodies(P.influence);
+    const height = [], water = [];
+    for (let r = 0; r < 8; r++) {
+      const hr = [], wr = [];
+      for (let f = 0; f < 8; f++) {
+        const idx = r * 8 + f, c = P.influence[idx], kind = kinds[idx];
+        if (kind) { hr.push(-(WATER_DEPTH[kind] || 1)); wr.push(kind); }
+        else { hr.push(Math.max(1, Math.min(8, Math.abs(c.net) || 1))); wr.push(''); }
+      }
+      height.push(hr); water.push(wr);
+    }
+
+    const ids = idsPerPly[i];
+    const placement = {}, roles = {};
+    for (const r of P.roles) {
+      const id = ids[r.file + ',' + r.rank];
+      if (!id) continue;
+      placement[Maestro.FILES[r.file] + (r.rank + 1)] = id;
+      roles[id] = { role: r.role, strength: 1 };
+    }
+
+    return {
+      ply: i, move: i === 0 ? null : { san: P.san, from: null, to: null, moverId: null },
+      placement: placement, roles: roles, height: height, water: water,
+      beat: i, onset: i, coherence: 1, advantage: 0
+    };
+  });
+
+  return {
+    format: 'chess-world', version: 1,
+    meta: {
+      label: meta.label || 'Chess Maestro', white: meta.white || 'White',
+      black: meta.black || 'Black', result: meta.result || '*', hero: hero,
+      plies: positions.length - 1, generator: 'Maestro core.js'
+    },
+    files: 'abcdefgh',
+    note: 'height[rankIndex 0..7][fileIndex 0..7]; rankIndex0=rank1, fileIndex0=file a. height<0 = water depth, >0 = land elevation. placement maps square -> piece id; pieces[] gives identity/team.',
+    legend: {
+      roles: ['attacker', 'defender', 'controller', 'outpost', 'runner', 'tactic', 'noise'],
+      water: ['pond', 'creek', 'river', 'lake', 'sea', 'ocean'],
+      elevation: ['grass', 'meadow', 'tan', 'hills', 'brown', 'rock', 'alpine', 'snow']
+    },
+    pieces: pieces, frames: frames
+  };
 };
 
 // ---- Universal export ------------------------------------------------------
