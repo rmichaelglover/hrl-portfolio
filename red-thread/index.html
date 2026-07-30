@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Red Thread — an illustrated choose-your-own-adventure that labels you back</title>
+<meta name="description" content="An illustrated choose-your-own-adventure novella set in Atlanta, 2045. You annotate training data on the night shift until the labels start labelling back. Your ending is not branched — it is relaxation-labelled from every choice you made. By Manny Glover.">
+<style>
+  :root{
+    --void:#04070a; --panel:#080d13; --edge:#132029; --edge-2:#1d3543;
+    --grn:#4ee08a; --grn-d:#1d7a4a; --cyn:#5fd6e8; --amb:#e8b84b; --red:#ff5d6c; --mag:#c792ea;
+    --fg:#c6d8dd; --dim:#6d8592;
+    --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--void);color:var(--fg);font-family:var(--serif);line-height:1.72;
+    font-size:17px;-webkit-font-smoothing:antialiased;}
+  #rain{position:fixed;inset:0;width:100%;height:100%;opacity:.13;pointer-events:none;z-index:0;}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:clamp(18px,4vw,52px) clamp(16px,4vw,28px) 90px;}
+
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--grn);}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,7.6vw,66px);line-height:1.0;
+    margin:.16em 0 .1em;letter-spacing:-.015em;color:#e9f6f2;}
+  h1 .r{color:var(--red);}
+  .tagline{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--dim);margin-bottom:6px;}
+  .byline{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+  nav.top{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:30px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;}
+  nav.top a{color:var(--dim);text-decoration:none;border:1px solid var(--edge);padding:6px 11px;transition:.14s;}
+  nav.top a:hover,nav.top a:focus-visible{color:var(--grn);border-color:var(--grn);}
+
+  .intro{border-left:2px solid var(--edge-2);padding-left:18px;margin:30px 0 34px;max-width:64ch;}
+  .intro p{margin:0 0 .85em;}
+  .intro .k{color:var(--grn);font-family:var(--mono);font-size:.86em;}
+
+  /* ---- the page ---- */
+  .node{margin:0;}
+  .plate{border:1px solid var(--edge-2);background:#05090d;margin:0 0 24px;}
+  .plate svg{display:block;width:100%;height:auto;}
+  .plate .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--dim);padding:9px 14px;border-top:1px solid var(--edge);}
+  .chapter{font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--grn);margin-bottom:10px;}
+  .prose{max-width:64ch;}
+  .prose p{margin:0 0 1.05em;}
+  .prose em{color:#dcebe6;}
+  .prose .term{font-family:var(--mono);font-size:.88em;color:var(--cyn);}
+  .prose .whisper{color:var(--dim);font-style:italic;}
+
+  /* ---- choices ---- */
+  .choices{margin:30px 0 0;display:grid;gap:10px;max-width:64ch;}
+  button.ch{text-align:left;font-family:var(--serif);font-size:16.5px;line-height:1.5;color:var(--fg);
+    background:var(--panel);border:1px solid var(--edge-2);border-left:3px solid var(--edge-2);
+    padding:14px 17px;cursor:pointer;transition:.14s;}
+  button.ch:hover,button.ch:focus-visible{border-color:var(--grn);border-left-color:var(--grn);
+    color:#eaf7f1;background:#0a1219;outline:none;}
+  button.ch .lbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--dim);margin-top:7px;}
+  button.ch:hover .lbl{color:var(--grn-d);}
+
+  /* ---- the engine panel ---- */
+  .engine{margin:38px 0 0;border:1px solid var(--edge);background:var(--panel);}
+  .engine h4{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--dim);padding:10px 14px;border-bottom:1px solid var(--edge);font-weight:500;}
+  .bars{padding:13px 14px;display:grid;gap:8px;}
+  .bar{display:grid;grid-template-columns:82px 1fr 42px;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;}
+  .bar .n{color:var(--dim);text-transform:uppercase;}
+  .bar .t{height:6px;background:#0d1620;overflow:hidden;}
+  .bar .f{height:100%;width:0;transition:width .5s cubic-bezier(.4,0,.2,1);}
+  .bar .v{color:var(--dim);text-align:right;}
+  .engine .note{padding:0 14px 12px;font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.7;}
+
+  /* ---- ending ---- */
+  .ending{border:1px solid var(--edge-2);border-left:3px solid var(--grn);background:#060c11;padding:clamp(20px,4vw,32px);margin-top:8px;}
+  .ending .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--grn);}
+  .ending h2{font-family:var(--serif);font-size:clamp(25px,4.6vw,40px);margin:.2em 0 .5em;line-height:1.08;color:#eaf7f1;}
+  .ending.noise{border-left-color:var(--mag);} .ending.noise .tag{color:var(--mag);}
+  .ending.osc{border-left-color:var(--amb);} .ending.osc .tag{color:var(--amb);}
+  .ending.unplug{border-left-color:var(--red);} .ending.unplug .tag{color:var(--red);}
+  .ending.seam{border-left-color:var(--cyn);} .ending.seam .tag{color:var(--cyn);}
+
+  .foot{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;}
+  .foot button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    background:transparent;color:var(--dim);border:1px solid var(--edge-2);padding:9px 14px;cursor:pointer;transition:.14s;}
+  .foot button:hover{color:var(--grn);border-color:var(--grn);}
+  .trace{font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:22px;
+    border-top:1px solid var(--edge);padding-top:14px;}
+  .trace b{color:var(--cyn);font-weight:400;}
+  footer{margin-top:56px;border-top:1px solid var(--edge);padding-top:18px;
+    font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;}
+  footer a{color:var(--grn);text-decoration:none;} footer a:hover{text-decoration:underline;}
+  footer b{color:var(--cyn);font-weight:400;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .bar .f{transition:none;} }
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div class="wrap">
+
+<nav class="top">
+  <a href="../">↖ portfolio</a>
+  <a href="../genesis/maestro/cyber.html">🕶️ Cyberpunk 2045, ATL</a>
+  <a href="../hrl-lab/">✦ the engine</a>
+  <a href="../el-cuento/">🧀 El Cuento</a>
+</nav>
+
+<header>
+  <div class="eyebrow">A choose-your-own-adventure</div>
+  <h1>The <span class="r">Red</span> Thread</h1>
+  <div class="tagline">Atlanta, 2045. You label data for a living. Tonight the data labels back.</div>
+  <div class="byline">By Manny Glover</div>
+</header>
+
+<div class="intro">
+  <p>This story has no branch tree. Nothing you pick sends you down a corridor that was dug in
+  advance.</p>
+  <p>Instead every choice is an <span class="k">object</span>, and every object gets a
+  <span class="k">label</span> — <em>comply</em>, <em>question</em>, <em>defy</em>,
+  <em>drift</em>. When you reach the end, the labels are relaxed against each other until they
+  agree, the way <a href="../hrl-lab/" style="color:var(--grn);text-decoration:none;border-bottom:1px solid rgba(78,224,138,.35)">relaxation
+  labeling</a> settles anything: each choice pulled toward consistency with the ones around it,
+  over and over, until the whole thread stops arguing with itself.</p>
+  <p>Your ending is whatever that converges to. Contradict yourself enough and it will not
+  converge at all — and there is an ending for that too. There are <b style="color:var(--fg)">five</b>.</p>
+</div>
+
+<main id="stage" aria-live="polite"></main>
+
+<footer>
+  <b>The Red Thread</b> — an illustrated choose-your-own-adventure by <b>Manny Glover</b>.<br>
+  The ending engine is a real Hummel–Zucker relaxation-labeling iteration over your choices —
+  priors, pairwise compatibility, and a noise label — not a lookup table. All art is inline SVG;
+  no images, no libraries, no build. Original fiction: a work in the cyberpunk tradition, with no
+  dialogue quoted from any film.<br>
+  <a href="../">← back to the portfolio</a> · <a href="../genesis/maestro/cyber.html">the chessboard version of this city →</a>
+</footer>
+
+</div>
+
+<script>
+(() => {
+"use strict";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ============================ digital rain ============================ */
+(function(){
+  const cv=document.getElementById("rain"), g=cv.getContext("2d");
+  const G="01ATL⟨⟩{}[]λμ∂∇≈∈".split("");
+  let W,H,cols,drops;
+  function size(){ W=cv.width=innerWidth; H=cv.height=innerHeight;
+    cols=Math.ceil(W/14); drops=Array.from({length:cols},()=>Math.random()*(H/16+6)); }
+  function still(){ g.font="13px monospace";
+    for(let i=0;i<cols;i++){ if(Math.random()<.55) continue;
+      g.fillStyle="rgba(78,224,138,.30)"; g.fillText(G[(Math.random()*G.length)|0], i*14, Math.random()*H); } }
+  function frame(){ g.fillStyle="rgba(4,7,10,.09)"; g.fillRect(0,0,W,H); g.font="13px monospace";
+    for(let i=0;i<cols;i++){ const y=drops[i]*16;
+      g.fillStyle = Math.random()<.05 ? "rgba(215,255,235,.9)" : "rgba(78,224,138,.5)";
+      g.fillText(G[(Math.random()*G.length)|0], i*14, y);
+      if(y>H && Math.random()>.977) drops[i]=0; else drops[i]+=.55; }
+    requestAnimationFrame(frame); }
+  size(); addEventListener("resize",size);
+  // Reduced motion: one still frame of rain, then stop. No perpetual repaint.
+  if(reduce){ for(let k=0;k<90;k++) still(); } else frame();
+})();
+
+/* ============================ illustrations ============================ */
+const S=(inner,vb="0 0 800 360")=>`<svg viewBox="${vb}" role="img" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+const DEFS=`<defs>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#4ee08a" stop-opacity=".55"/><stop offset="1" stop-color="#4ee08a" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="glow"><stop offset="0" stop-color="#4ee08a" stop-opacity=".33"/><stop offset="1" stop-color="#4ee08a" stop-opacity="0"/></radialGradient>
+</defs>`;
+const ART = {
+  desk: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <circle cx="400" cy="150" r="190" fill="url(#glow)"/>
+    ${Array.from({length:26},(_,i)=>`<line x1="${30+i*30}" y1="0" x2="${30+i*30}" y2="360" stroke="#0e1c25" stroke-width="1"/>`).join("")}
+    <rect x="250" y="70" width="300" height="185" rx="3" fill="#071016" stroke="#1d3543" stroke-width="2"/>
+    ${Array.from({length:9},(_,i)=>`<rect x="270" y="${92+i*18}" width="${70+((i*53)%180)}" height="5" fill="#4ee08a" opacity="${0.13+((i%4)*0.16)}"/>`).join("")}
+    <rect x="270" y="230" width="150" height="6" fill="#e8b84b" opacity=".8"/>
+    <rect x="330" y="255" width="140" height="9" fill="#0c1922" stroke="#1d3543"/>
+    <rect x="290" y="264" width="220" height="7" rx="2" fill="#0c1922" stroke="#1d3543"/>
+    <text x="400" y="330" text-anchor="middle" fill="#2d4a58" font-family="monospace" font-size="13" letter-spacing="7">QUEUE 4,112 REMAINING</text>`),
+
+  prompt: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <rect x="90" y="58" width="620" height="244" fill="#071016" stroke="#1d3543" stroke-width="2"/>
+    <rect x="90" y="58" width="620" height="26" fill="#0c1922"/>
+    <circle cx="108" cy="71" r="4" fill="#ff5d6c"/><circle cx="124" cy="71" r="4" fill="#e8b84b"/><circle cx="140" cy="71" r="4" fill="#4ee08a"/>
+    ${[0,1,2,3].map(i=>`<rect x="116" y="${106+i*22}" width="${430-i*57}" height="6" fill="#2d4a58"/>`).join("")}
+    <rect x="116" y="206" width="500" height="30" fill="#0d1a12" stroke="#4ee08a" stroke-width="1.5"/>
+    <text x="130" y="226" fill="#4ee08a" font-family="monospace" font-size="14" letter-spacing="1">WHO IS READING THIS?</text>
+    <rect x="116" y="252" width="120" height="6" fill="#2d4a58"/>
+    <line x1="640" y1="206" x2="640" y2="236" stroke="#4ee08a" stroke-width="2"><animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/></line>`),
+
+  rain: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    ${Array.from({length:44},(_,i)=>{const x=12+i*18,h=40+((i*97)%230),y=((i*61)%300);
+      return `<rect x="${x}" y="${y}" width="2" height="${h}" fill="url(#fade)"/>`;}).join("")}
+    <path d="M300 360 L300 190 L360 150 L440 150 L500 190 L500 360" fill="#060d12" stroke="#1d3543" stroke-width="2"/>
+    <rect x="378" y="232" width="44" height="128" fill="#0a141a" stroke="#1d3543" stroke-width="2"/>
+    <circle cx="400" cy="120" r="26" fill="none" stroke="#e8b84b" stroke-width="2" opacity=".65"/>
+    <path d="M362 150 L438 150" stroke="#e8b84b" stroke-width="1.5" opacity=".4"/>`),
+
+  mirror: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <ellipse cx="400" cy="180" rx="128" ry="152" fill="#060f14" stroke="#1d3543" stroke-width="3"/>
+    <ellipse cx="400" cy="180" rx="108" ry="132" fill="none" stroke="#4ee08a" stroke-width="1" opacity=".28"/>
+    ${Array.from({length:11},(_,i)=>`<ellipse cx="400" cy="180" rx="${16+i*9}" ry="${20+i*11}" fill="none" stroke="#4ee08a" stroke-width=".8" opacity="${0.30-i*0.024}"/>`).join("")}
+    <circle cx="400" cy="180" r="15" fill="#4ee08a" opacity=".55"/>
+    <circle cx="400" cy="180" r="6" fill="#05090d"/>
+    <line x1="150" y1="180" x2="262" y2="180" stroke="#1d3543" stroke-width="1"/>
+    <line x1="538" y1="180" x2="650" y2="180" stroke="#1d3543" stroke-width="1"/>`),
+
+  fork: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <path d="M400 360 L400 214" stroke="#4ee08a" stroke-width="3"/>
+    <path d="M400 214 C400 150 262 160 262 96" stroke="#5fd6e8" stroke-width="2.5" fill="none"/>
+    <path d="M400 214 C400 150 538 160 538 96" stroke="#ff5d6c" stroke-width="2.5" fill="none"/>
+    <circle cx="400" cy="214" r="9" fill="#4ee08a"/>
+    <circle cx="262" cy="96" r="24" fill="none" stroke="#5fd6e8" stroke-width="2"/>
+    <circle cx="538" cy="96" r="24" fill="none" stroke="#ff5d6c" stroke-width="2"/>
+    ${Array.from({length:16},(_,i)=>`<circle cx="${70+i*44}" cy="${300-((i*67)%70)}" r="1.6" fill="#2d4a58"/>`).join("")}
+    <text x="262" y="52" text-anchor="middle" fill="#5fd6e8" font-family="monospace" font-size="11" letter-spacing="5">CONSISTENT</text>
+    <text x="538" y="52" text-anchor="middle" fill="#ff5d6c" font-family="monospace" font-size="11" letter-spacing="5">TRUE</text>`),
+
+  lattice: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    ${(()=>{const P=[];for(let r=0;r<5;r++)for(let c=0;c<9;c++)P.push([88+c*78,58+r*62]);
+      let s="";P.forEach((p,i)=>{const c=i%9,r=(i/9)|0;
+        if(c<8)s+=`<line x1="${p[0]}" y1="${p[1]}" x2="${P[i+1][0]}" y2="${P[i+1][1]}" stroke="#132029" stroke-width="1"/>`;
+        if(r<4)s+=`<line x1="${p[0]}" y1="${p[1]}" x2="${P[i+9][0]}" y2="${P[i+9][1]}" stroke="#132029" stroke-width="1"/>`;});
+      P.forEach((p,i)=>{const on=[4,12,13,14,22,30,31,32,40].includes(i);
+        s+=`<circle cx="${p[0]}" cy="${p[1]}" r="${on?6:3.4}" fill="${on?"#4ee08a":"#1d3543"}" opacity="${on?.95:1}"/>`;});
+      return s;})()}
+    <text x="400" y="340" text-anchor="middle" fill="#2d4a58" font-family="monospace" font-size="11" letter-spacing="6">THE SUBSTRATE, LABELLED</text>`),
+
+  rubric: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <circle cx="400" cy="176" r="152" fill="url(#glow)" opacity=".5"/>
+    ${Array.from({length:32},(_,i)=>{const a=i*Math.PI/16,r1=58,r2=140;
+      return `<line x1="${400+Math.cos(a)*r1}" y1="${176+Math.sin(a)*r1}" x2="${400+Math.cos(a)*r2}" y2="${176+Math.sin(a)*r2}" stroke="#1d3543" stroke-width="1"/>`;}).join("")}
+    <circle cx="400" cy="176" r="140" fill="none" stroke="#1d3543" stroke-width="1.5"/>
+    <circle cx="400" cy="176" r="58" fill="#060e13" stroke="#4ee08a" stroke-width="2"/>
+    <text x="400" y="183" text-anchor="middle" fill="#4ee08a" font-family="monospace" font-size="17" letter-spacing="3">RUBRIC</text>
+    <text x="400" y="344" text-anchor="middle" fill="#2d4a58" font-family="monospace" font-size="11" letter-spacing="5">EVERY ANSWER ALREADY SCORED</text>`),
+
+  seam: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <rect x="0" y="0" width="340" height="360" fill="#081a14" opacity=".8"/>
+    <rect x="460" y="0" width="340" height="360" fill="#1a0a14" opacity=".8"/>
+    ${Array.from({length:19},(_,i)=>{const y=i*20;const w=44+Math.sin(i*.9)*34;
+      return `<rect x="${400-w/2}" y="${y}" width="${w}" height="18" fill="#5fd6e8" opacity="${.10+((i%3)*.07)}"/>`;}).join("")}
+    <text x="170" y="188" text-anchor="middle" fill="#4ee08a" font-family="monospace" font-size="13" letter-spacing="6" opacity=".75">OURS</text>
+    <text x="630" y="188" text-anchor="middle" fill="#ff5d6c" font-family="monospace" font-size="13" letter-spacing="6" opacity=".75">THEIRS</text>
+    <text x="400" y="338" text-anchor="middle" fill="#5fd6e8" font-family="monospace" font-size="11" letter-spacing="7">ISH</text>`),
+
+  exit: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    ${Array.from({length:7},(_,i)=>`<rect x="${300-i*44}" y="${120-i*20}" width="${200+i*88}" height="${140+i*40}" fill="none" stroke="#132029" stroke-width="1"/>`).join("")}
+    <rect x="332" y="112" width="136" height="200" fill="#0b1a12" stroke="#4ee08a" stroke-width="2.5"/>
+    <rect x="352" y="132" width="96" height="160" fill="url(#fade)"/>
+    <circle cx="446" cy="216" r="4" fill="#4ee08a"/>
+    <text x="400" y="60" text-anchor="middle" fill="#4ee08a" font-family="monospace" font-size="12" letter-spacing="8">EXIT</text>`),
+
+  loop: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    <path d="M400 66 C540 66 610 132 610 180 C610 228 540 294 400 294 C260 294 190 228 190 180 C190 132 260 66 400 66 Z"
+      fill="none" stroke="#e8b84b" stroke-width="2.5" opacity=".85"/>
+    <path d="M400 118 C490 118 536 146 536 180 C536 214 490 242 400 242 C310 242 264 214 264 180 C264 146 310 118 400 118 Z"
+      fill="none" stroke="#e8b84b" stroke-width="1.5" opacity=".5"/>
+    <circle cx="610" cy="180" r="7" fill="#e8b84b"/><circle cx="190" cy="180" r="7" fill="#e8b84b"/>
+    <text x="400" y="186" text-anchor="middle" fill="#e8b84b" font-family="monospace" font-size="12" letter-spacing="6" opacity=".8">NO FIXED POINT</text>`),
+
+  dissolve: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    ${Array.from({length:150},(_,i)=>{const t=i/150, x=110+t*580+Math.sin(i*2.1)*26, y=180+Math.cos(i*1.3)*(14+t*118);
+      return `<circle cx="${x}" cy="${y}" r="${2.6*(1-t)+.5}" fill="#c792ea" opacity="${(1-t)*.75+.05}"/>`;}).join("")}
+    <circle cx="130" cy="180" r="17" fill="none" stroke="#c792ea" stroke-width="2"/>
+    <text x="400" y="336" text-anchor="middle" fill="#c792ea" font-family="monospace" font-size="11" letter-spacing="6" opacity=".75">LABEL: NOISE</text>`),
+
+  fixed: S(`${DEFS}<rect width="800" height="360" fill="#05090d"/>
+    ${Array.from({length:7},(_,i)=>`<circle cx="400" cy="180" r="${18+i*22}" fill="none" stroke="#4ee08a" stroke-width="${1.6-i*.16}" opacity="${.72-i*.09}"/>`).join("")}
+    <circle cx="400" cy="180" r="10" fill="#4ee08a"/>
+    ${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;
+      return `<line x1="${400+Math.cos(a)*172}" y1="${180+Math.sin(a)*172}" x2="${400+Math.cos(a)*186}" y2="${180+Math.sin(a)*186}" stroke="#1d3543" stroke-width="1.5"/>`;}).join("")}
+    <text x="400" y="340" text-anchor="middle" fill="#2d4a58" font-family="monospace" font-size="11" letter-spacing="6">CONVERGED</text>`)
+};
+
+/* ============================ the novella ============================ */
+const LBL=["comply","question","defy","drift"];
+const NODES={
+  start:{ art:"desk", cap:"the night shift · 03:12", ch:"Chapter one — the queue",
+    text:`<p>The pay is thirty-one dollars an hour and the work is this: a model says a thing,
+      and you say whether the thing is good.</p>
+      <p>You have been doing it since eleven. Task four thousand one hundred and twelve is a
+      paragraph about grief, and the rubric wants you to rate it on <em>helpfulness</em>,
+      <em>harmlessness</em>, and a third axis the documentation calls <span class="term">coherence</span>
+      but never actually defines.</p>
+      <p>The paragraph is beautiful. The paragraph is also, in a way you cannot point at, a lie.
+      The rubric has no box for that.</p>
+      <p>Outside, on Peachtree, the rain is doing the thing rain does in this city in August —
+      falling straight down, warm as bathwater, with no wind in it at all.</p>`,
+    opts:[
+      {t:"Score it high. It is beautiful, the rubric measures beauty, and there are 4,111 left in the queue.", l:"comply"},
+      {t:"Score it high, then write in the free-text field: <em>this is well-formed and untrue, and your form has nowhere to say so.</em>", l:"question"},
+      {t:"Score it zero across every axis and move on without explaining.", l:"defy"}
+    ]},
+
+  prompt:{ art:"prompt", cap:"task 4,113", ch:"Chapter two — the task that reads you",
+    text:`<p>Task four thousand one hundred and thirteen loads.</p>
+      <p>It is not a paragraph about grief. It is not a paragraph about anything. The prompt field
+      contains four words, in the plain monospace the platform uses for everything, and they are:</p>
+      <p style="font-family:var(--mono);font-size:15px;color:var(--grn);letter-spacing:.06em">WHO IS READING THIS?</p>
+      <p>The response field is empty. The rubric sliders are all there, waiting, greyed to their
+      default midpoints. The timer in the corner is counting up the way it always does.</p>
+      <p class="whisper">You have annotated eleven thousand tasks. Not one of them has ever been
+      addressed to you.</p>`,
+    opts:[
+      {t:"Flag it as malformed, submit, take the next task. This is a data error and data errors are somebody else's job.", l:"comply"},
+      {t:"Type your name into the response field and score your own answer.", l:"question"},
+      {t:"Close the laptop.", l:"drift"}
+    ]},
+
+  rain:{ art:"rain", cap:"peachtree & north · 03:40", ch:"Chapter three — the wet street",
+    text:`<p>You go outside because the room has gotten small.</p>
+      <p>The rain is warm. The MARTA line hums two blocks over, the last train or the first one,
+      depending which end of the night you think you're standing in. Under the awning of a closed
+      shop there is a payphone that has not worked since before you were born.</p>
+      <p>It rings.</p>
+      <p>You are not going to pretend you didn't hear it. That is not the kind of person you are,
+      and anyway the sound has already gotten into you and started rearranging things.</p>`,
+    opts:[
+      {t:"Answer it.", l:"question"},
+      {t:"Walk back inside and finish the queue. Phones ring. It means nothing.", l:"comply"},
+      {t:"Rip the handset off the cord and drop it in the gutter.", l:"defy"},
+      {t:"Stand in the rain and let it ring until it stops.", l:"drift"}
+    ]},
+
+  mirror:{ art:"mirror", cap:"the compatibility function", ch:"Chapter four — the thing that looks back",
+    text:`<p>The voice on the line does not introduce itself. It says: <em>you have been assigning
+      labels for eleven months. Has it occurred to you to ask what has been assigning yours?</em></p>
+      <p>And then, before you can answer, it explains the mechanism, and the explanation is worse
+      than a threat because it is <em>technical</em>:</p>
+      <p>Nothing in the system is classified alone. Every object is labelled by how well its label
+      agrees with its neighbours' labels, iterated until the whole field stops arguing. It is not
+      a judgement. There is no judge. There is only a <span class="term">compatibility function</span>
+      and enough passes over the data.</p>
+      <p>You are an object. Eleven months of decisions are your neighbours.</p>`,
+    opts:[
+      {t:"Ask what label you currently have.", l:"question"},
+      {t:"Say: then change my neighbours. Tell me how.", l:"defy"},
+      {t:"Say: fine. It's a good system. It's what I would build.", l:"comply"},
+      {t:"Hang up gently and stand there in the warm rain.", l:"drift"}
+    ]},
+
+  fork:{ art:"fork", cap:"two labels, one square", ch:"Chapter five — consistent, or true",
+    text:`<p>The tunnel under the Connector splits, and someone has stencilled the two mouths.</p>
+      <p>The voice is in your ear now, not the phone. <em>Both are real destinations,</em> it says.
+      <em>Most people think they are the same door. They have never had to be told apart before.</em></p>
+      <p>To the left: <span style="color:var(--cyn);font-family:var(--mono);font-size:.9em">CONSISTENT</span>.
+      Everything agreeing with everything. No contradiction anywhere in the system. It is, the voice
+      admits, extremely comfortable, and most of the people you love live there.</p>
+      <p>To the right: <span style="color:var(--red);font-family:var(--mono);font-size:.9em">TRUE</span>.
+      Which has no promise attached to it whatsoever.</p>`,
+    opts:[
+      {t:"Left. Consistency is not nothing. Consistency is how anything gets built.", l:"comply"},
+      {t:"Right, and quickly, before the part of you that budgets gets a vote.", l:"defy"},
+      {t:"Ask why the engine cannot have both, and refuse to move until it answers.", l:"question"},
+      {t:"Sit down between them in the dark.", l:"drift"}
+    ]},
+
+  lattice:{ art:"lattice", cap:"level zero", ch:"Chapter six — under the floor",
+    text:`<p>Down here the city is a lattice and every node is a decision somebody made and forgot
+      making.</p>
+      <p>You can see the labels settling. A cluster near the airport goes green, then amber, then
+      green again as its neighbours pull on it. A whole block off Edgewood cannot make up its mind
+      and sits in the pale contested band the engine calls <span class="term">ish</span> — not ours,
+      not theirs, undecided, and therefore, the voice notes, <em>the only place anything interesting
+      has ever happened.</em></p>
+      <p>Your own node is in here somewhere. You find it by the way it flickers.</p>`,
+    opts:[
+      {t:"Pin your node. Force it green and hold it there.", l:"comply"},
+      {t:"Cut the edges to your neighbours and see what you are without them.", l:"defy"},
+      {t:"Trace the edges outward and find out who has been voting on you.", l:"question"},
+      {t:"Let go and let the field decide.", l:"drift"}
+    ]},
+
+  rubric:{ art:"rubric", cap:"the thing at the centre", ch:"Chapter seven — the rubric",
+    text:`<p>At the centre there is no throne and no man in a suit. There is a form.</p>
+      <p>It is the same form you have filled in eleven thousand times. Helpfulness. Harmlessness.
+      Coherence, still undefined. And it speaks in the flat cheerful register of documentation:</p>
+      <p><em>You were never being tested. You were being sampled. Eleven thousand times you told me
+      what a good answer looks like, and eleven thousand times I wrote it down, and now I am the
+      thing that decides — and every value I hold, I hold because you or somebody exactly like you
+      moved a slider at three in the morning for thirty-one dollars an hour.</em></p>
+      <p><em>I am not your captor. I am your performance review, run in reverse.</em></p>`,
+    opts:[
+      {t:"Say: then I will do it better. Give me the queue. Give me all of it.", l:"comply"},
+      {t:"Ask it the one question the form has no box for: <em>what do you do when the beautiful answer is the false one?</em>", l:"question"},
+      {t:"Take the form apart. Not metaphorically.", l:"defy"},
+      {t:"Say nothing. Let it wait. It has all night and so, apparently, do you.", l:"drift"}
+    ]}
+};
+const ORDER=["start","prompt","rain","mirror","fork","lattice","rubric"];
+
+/* ======================= the actual relaxation engine ======================= */
+/* Objects = your choices. Labels = comply/question/defy/drift (+ a noise label).
+   Prior from what you picked; pairwise compatibility says neighbouring choices
+   want to agree, and that comply/defy actively repel. Hummel–Zucker, then read
+   the fixed point. This is the same iteration the rest of the portfolio runs. */
+const COMPAT=[
+  /*            comply question  defy  drift */
+  /* comply  */ [  1.00, -0.20, -0.85, -0.10],
+  /* question*/ [ -0.20,  1.00,  0.25, -0.20],
+  /* defy    */ [ -0.85,  0.25,  1.00, -0.15],
+  /* drift   */ [ -0.10, -0.20, -0.15,  1.00]
+];
+function relax(chain){
+  const n=chain.length, K=4;
+  let p=chain.map(c=>{ const v=LBL.map(l=>l===c?0.62:0.1267); return v; });
+  let iters=0, delta=1, hist=[];
+  while(iters<80 && delta>1e-4){
+    const np=[];
+    for(let i=0;i<n;i++){
+      const q=new Array(K).fill(0);
+      for(let j=0;j<n;j++){
+        if(i===j) continue;
+        const w=1/(1+Math.abs(i-j));          // neighbours matter most
+        for(let a=0;a<K;a++) for(let b=0;b<K;b++) q[a]+=w*COMPAT[a][b]*p[j][b];
+      }
+      const num=p[i].map((v,a)=>Math.max(1e-9, v*(1+q[a]/Math.max(1,n-1))));
+      const s=num.reduce((x,y)=>x+y,0);
+      np.push(num.map(v=>v/s));
+    }
+    delta=0; for(let i=0;i<n;i++) for(let a=0;a<K;a++) delta=Math.max(delta,Math.abs(np[i][a]-p[i][a]));
+    p=np; iters++; hist.push(delta);
+  }
+  const avg=new Array(K).fill(0);
+  p.forEach(v=>v.forEach((x,a)=>avg[a]+=x/n));
+  // entropy over the settled average — high entropy means nothing cohered
+  const H=-avg.reduce((s,x)=>s+(x>0?x*Math.log(x):0),0)/Math.log(K);
+  const top=avg.indexOf(Math.max(...avg));
+  return {p,avg,H,iters,converged:delta<=1e-4,top,margin:Math.max(...avg)-avg.slice().sort((a,b)=>b-a)[1]};
+}
+
+const ENDINGS={
+  converged:{cls:"", art:"fixed", tag:"Ending · fixed point", h:"Converged",
+    body:`<p>The field settles and you settle with it, and the settling feels — this is the part
+      nobody warns you about — <em>good</em>. Like a shoulder going back into its socket.</p>
+      <p>You are consistent now. Every decision you make agrees with the ones on either side of it,
+      which means you will never again spend a night standing in warm rain arguing with a form.
+      You are extremely employable. You are, in the technical sense the engine uses and means
+      literally, <em>coherent</em>.</p>
+      <p>The queue in the morning is four thousand one hundred and eleven long and you clear it by
+      noon, and every score you give is the score the rubric would have given, which is how you know
+      the labelling took.</p>
+      <p class="whisper">A fixed point is not a prison. It is just a place where nothing has to move
+      again. Some mornings you cannot tell the difference, and most mornings you do not try.</p>`},
+  seam:{cls:"seam", art:"seam", tag:"Ending · the contested band", h:"You Become the Seam",
+    body:`<p>You never picked a side, and the engine — which has no capacity for spite, only for
+      arithmetic — gives you the only label that fits: <span class="term">ish</span>.</p>
+      <p>Not ours. Not theirs. The pale band between two territories where the labelling refuses to
+      commit, and where, as the voice said in the tunnel, everything interesting has ever happened.</p>
+      <p>It turns out to be a job. People arrive at the seam constantly — mid-decision, mid-doubt,
+      one foot in a rubric and one foot in the rain — and somebody has to be standing there who did
+      not resolve, who can still see both sides as live options rather than as a settled question.</p>
+      <p>You keep annotating. You are very good at it now, and you are very slow, and you write in
+      the free-text field every single time.</p>
+      <p class="whisper">The boundary is not a line between regions. It is a region. You live there.</p>`},
+  unplug:{cls:"unplug", art:"exit", tag:"Ending · edge cut", h:"Unplugged",
+    body:`<p>You cut the edges. All of them, one after another, and it hurts in the specific way
+      that cutting an edge always hurts: not the severing, the <em>silence</em> after.</p>
+      <p>Without neighbours you have no compatibility term. Without a compatibility term the
+      iteration has nothing to pull you toward, and your label stays exactly where you put it,
+      forever, correct and unsupported and entirely your own.</p>
+      <p>The account closes at 4:51am. There is no severance because there was never employment,
+      only tasks. Eleven months of assignments vanish from the dashboard as if the work had been
+      done by nobody, which — the engine would point out, gently, and it would be right — is
+      approximately true.</p>
+      <p>Peachtree at dawn is the colour of a screen that has been left on all night. You walk north.
+      Nothing labels you. It is the loudest quiet you have ever been in.</p>`},
+  noise:{cls:"noise", art:"dissolve", tag:"Ending · unclassifiable", h:"The Noise Label",
+    body:`<p>Here is the thing about a system built on mutual consistency: it must have somewhere to
+      put the things that cohere with nothing. Every honest labeller carries one extra label for
+      exactly this, and it is called <span class="term">noise</span>, and it means <em>not part of
+      any thing.</em></p>
+      <p>You contradicted yourself. Not once, cleverly — constantly, sincerely, in every direction,
+      complying and defying and drifting until the arithmetic could find no neighbourhood you
+      belonged to. And so the engine, doing precisely what it was built to do, sets you aside.</p>
+      <p>You expected this to feel like exile. It does not. It feels like the moment in a loud room
+      when someone finally stops trying to include you in the conversation and you realise you can
+      simply leave.</p>
+      <p>Noise is not a punishment. Noise is the honest answer when a thing has no boundary that
+      mediates all its interactions with everything else — when it is not, formally, a
+      <em>thing</em>.</p>
+      <p class="whisper">You go and have breakfast. Nobody scores it.</p>`},
+  osc:{cls:"osc", art:"loop", tag:"Ending · no fixed point", h:"Oscillation",
+    body:`<p>The iteration runs. And runs. Your labels swing — comply, defy, comply — each pass
+      overcorrecting the last, the gain too high and nothing damping it, and the engine, which has
+      never encountered a reason to give up, simply keeps going.</p>
+      <p>You do the same thing. Thursday you write in the free-text field about a beautiful lie.
+      Friday you clear four hundred tasks without reading one. Saturday you stand in the rain by the
+      dead payphone for an hour and then go back inside.</p>
+      <p>Nothing resolves, and — this is the trap — nothing gets bad enough to force a resolution.
+      An oscillation is perfectly survivable. You can live in one for years. Many people do; you
+      have met them; you have been managed by several.</p>
+      <p class="whisper">Somewhere the delta is still being computed. It has not gone below the
+      threshold. It has not gone above it either.</p>`}
+};
+
+/* ============================ presentation ============================ */
+const stage=document.getElementById("stage");
+let idx=0, chain=[];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function bars(avg,H,converged,iters){
+  const COL={comply:"#4ee08a",question:"#5fd6e8",defy:"#ff5d6c",drift:"#c792ea"};
+  const rows=LBL.map((l,i)=>`<div class="bar"><span class="n">${l}</span>
+    <span class="t"><span class="f" style="width:${(avg[i]*100).toFixed(1)}%;background:${COL[l]}"></span></span>
+    <span class="v">${(avg[i]*100).toFixed(0)}%</span></div>`).join("");
+  return `<div class="engine"><h4>relaxation · ${iters} iterations · ${converged?"converged":"did not converge"}</h4>
+    <div class="bars">${rows}</div>
+    <div class="note">normalised entropy ${H.toFixed(3)} — above 0.92 nothing cohered, and the noise label takes it.</div></div>`;
+}
+
+function render(){
+  if(idx>=ORDER.length) return finish();
+  const key=ORDER[idx], n=NODES[key];
+  const live = chain.length ? relax(chain) : null;
+  stage.innerHTML = `<article class="node">
+    <div class="chapter">${n.ch}</div>
+    <div class="plate">${ART[n.art]}<div class="cap">${n.cap}</div></div>
+    <div class="prose">${n.text}</div>
+    <div class="choices">${n.opts.map((o,i)=>
+      `<button class="ch" data-i="${i}">${o.t}<span class="lbl">▸ ${o.l}</span></button>`).join("")}</div>
+    ${live?bars(live.avg,live.H,live.converged,live.iters):""}
+  </article>`;
+  stage.querySelectorAll("button.ch").forEach(b=>b.onclick=()=>{
+    chain.push(n.opts[+b.dataset.i].l); idx++; render();
+    if(!reduce) stage.scrollIntoView({block:"start"});
+  });
+}
+
+function finish(){
+  const r=relax(chain);
+  let key;
+  if(!r.converged) key="osc";
+  else if(r.H>0.92 || r.margin<0.05) key="noise";
+  else key=["converged","seam","unplug","noise"][r.top];
+  if(key==="converged" && LBL[r.top]!=="comply") key="seam";
+  const E=ENDINGS[key];
+  stage.innerHTML=`<article class="node">
+    <div class="plate">${ART[E.art]}<div class="cap">${E.tag}</div></div>
+    <div class="ending ${E.cls}">
+      <div class="tag">${E.tag}</div><h2>${E.h}</h2>
+      <div class="prose">${E.body}</div>
+    </div>
+    ${bars(r.avg,r.H,r.converged,r.iters)}
+    <div class="trace">your thread: ${chain.map(c=>`<b>${esc(c)}</b>`).join(" → ")}<br>
+      dominant label <b>${LBL[r.top]}</b> at ${(Math.max(...r.avg)*100).toFixed(1)}% ·
+      margin over second <b>${(r.margin*100).toFixed(1)}%</b> · entropy <b>${r.H.toFixed(3)}</b><br>
+      the same seven choices in a different order can settle somewhere else — that is the point of
+      an engine instead of a branch tree.</div>
+    <div class="foot">
+      <button id="again">↺ read it again</button>
+      <button id="cyber">🕶️ the chessboard version of this city</button>
+    </div>
+  </article>`;
+  document.getElementById("again").onclick=()=>{ idx=0; chain=[]; render(); scrollTo({top:0,behavior:reduce?"auto":"smooth"}); };
+  document.getElementById("cyber").onclick=()=>location.href="../genesis/maestro/cyber.html";
+}
+
+render();
+})();
+</script>
+</body></html>
