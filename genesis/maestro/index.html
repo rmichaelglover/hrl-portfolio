@@ -22,6 +22,10 @@
   h1{margin:0;font-size:clamp(19px,3vw,28px);letter-spacing:.02em;color:var(--bright);font-weight:600;}
   h1 .sep{color:var(--amber);}
   .byline{font-size:11px;letter-spacing:.14em;color:var(--dim);}
+  .nav{width:100%;max-width:1180px;display:flex;flex-wrap:wrap;gap:6px 8px;font-size:11px;letter-spacing:.1em;}
+  .nav a{color:var(--dim);text-decoration:none;border:1px solid var(--edge);padding:6px 11px;transition:color .12s,border-color .12s;}
+  .nav a:hover,.nav a:focus-visible{color:var(--bright);border-color:var(--edge-2);}
+  .nav .sib{color:var(--fg);border-color:var(--edge-2);}
   .tbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
     color:var(--dim);border:1px solid var(--edge);padding:8px 12px;cursor:pointer;}
   .tbtn:hover{color:var(--fg);border-color:var(--edge-2);}
@@ -78,6 +82,13 @@
     </div>
     <button class="tbtn" id="theme" type="button">◐ theme</button>
   </header>
+
+  <nav class="nav" aria-label="where you are">
+    <a href="../../">↖ portfolio</a>
+    <a href="../">Project Genesis</a>
+    <a class="sib" href="emoji.html">🎭 the same game, as an emoji cast</a>
+    <a class="sib" href="../../whimsy-chess/maestro.html">♫ Chess Maestro — scored as music</a>
+  </nav>
 
   <section class="term" aria-label="terminal">
     <div class="titlebar">
@@ -246,7 +257,7 @@
   /* ===== loop ===== */
   let lastF=0,fpsT=0,fpsN=0; const fpsEl=document.getElementById("fps");
   function frame(now){
-    if(now-lastF>=(reduce?1000:33)){ const dt=(now-lastF)||16; render(computeCamera(dt));
+    if(now-lastF>=33){ const dt=(now-lastF)||16; render(computeCamera(dt));
       fpsN++; if(now-fpsT>500){ fpsEl.textContent=Math.round(fpsN*1000/(now-fpsT))+" fps"; fpsN=0; fpsT=now; } lastF=now; }
     requestAnimationFrame(frame);
   }
@@ -316,7 +327,10 @@
 
   /* ===== boot ===== */
   if(!positions.length){ screen.textContent="\n  core.js failed to load — no positions.\n"; }
-  else { fit(); const qp=+((new URLSearchParams(location.search)).get("ply")); setPly(Number.isFinite(qp)?qp:0); requestAnimationFrame(frame); }
+  else { fit(); const qp=+((new URLSearchParams(location.search)).get("ply")); setPly(Number.isFinite(qp)?qp:0);
+    // Reduced motion: setPly() already drew the frame, and the camera never drifts —
+    // so don't spin up a render loop that would repaint an identical image forever.
+    if(reduce) fpsEl.textContent="static"; else requestAnimationFrame(frame); }
 })();
 </script>
 </body></html>
