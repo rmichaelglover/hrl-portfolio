@@ -1,0 +1,25 @@
+[Event "rated rapid tournament https://lichess.org/tournament/vBgYRWJ0"]
+[Site "https://lichess.org/UttLxPKo"]
+[Date "2026.08.03"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "Chungkheu"]
+[Result "0-1"]
+[WhiteElo "828"]
+[BlackElo "1173"]
+[TimeControl "600+0"]
+[Termination "Normal"]
+[GameId "UttLxPKo"]
+[Variant "From Position"]
+[StudyName "Newish Openings (to mannyfresher)"]
+[ChapterName "mannyfresher (828) - Chungkheu (1173)"]
+[ChapterURL "https://lichess.org/study/uVVhKeOe/Qk2WGgSk"]
+[FEN "rnbqkbnr/ppp2ppp/8/3pp3/4PP2/8/PPPP2PP/RNBQKBNR w KQkq - 0 1"]
+[SetUp "1"]
+
+1. fxe5 Nc6 2. exd5 Qxd5 3. e6 Qxe6+ 4. Be2 Qd5 5. Na3 Qxg2
+6. Nc4 Qxh1 7. d3 Qxg1+ 8. Bf1 Bb4+ 9. c3 Ba5 10. b4 Bb6
+11. Qe2+ Nge7 12. a4 Bh3 13. a5 O-O 14. Qh5 Qxf1+ 15. Kd2 Qf4+
+16. Kc2 Qf2+ 17. Bd2 Bf5 18. Ne5 Nxb4+ 19. cxb4 g6 20. Qxg6+
+fxg6 21. Nxg6 Bxg6 22. Rh1 Be3 23. h4 Qxd2+ 24. Kb3 Qxd3+
+25. Ka4 b5+ 26. axb6 axb6# 0-1

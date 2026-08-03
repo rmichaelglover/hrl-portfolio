@@ -86,6 +86,8 @@ finds the meaningful structures inside that flow.
 | `lichess.html` | Earlier clean web viewer (roles + music), preserved. |
 | `index.html`, `v2.html`, `v3.html` | Early whimsical/bio viewers (the lineage). |
 | `vim/` | **A Vim-native emoji chess study tool** (`chess_emoji.vim`) — 25 narrated games, stepped with `h`/`l`/arrows, board drawn in emoji, plus a self-test. |
+| `CAST-POLICY.md` | The tested default: Manny as Woodland, opponents as classical; Pappymagee's result-sensitive retirement edition. |
+| `ROADMAP-LICHESS-AND-NLP-GRRLE.md` | Official-Lichess licensing/architecture milestones, followed by generic-stream NLP-GRRLE research. |
 | `worldkit.js` | One `chess-world` v1 export → **Minecraft datapack + Roblox builder**. Zero dependencies, including its own store-only zip writer. Runs in the browser *and* in Node. |
 | `roblox/` | Roblox Studio scripts that read the exported World JSON into a 3D world. |
 | `test/` | `bash test/run.sh` — 21 assertions over WorldKit's terrain, roles, and both exporters. |

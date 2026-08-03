@@ -13,6 +13,19 @@
     chk("White begins slightly higher", w.frames[0].hydro.earth[0][3]>w.frames[0].hydro.earth[7][3]);
     chk("water changes gradually", w.frames.slice(1).some((f,i)=>f.hydro.water.some((row,r)=>row.some((v,c)=>v!==w.frames[i].hydro.water[r][c]))));
     chk("WorldKit loaded", !!window.WorldKit);
+    chk("default Manny side is Woodland", pieceW==="woodland" && pieceB==="classic", pieceW+" / "+pieceB);
+    chk("Manny as Black defaults Woodland vs classical", (applyDefaultPieceSets({hero:"b",white:"Opponent",black:"mannyfresher",result:"0–1"}),pieceW==="classic"&&pieceB==="woodland"));
+    chk("Pappymagee win defaults Woodland", userPieceSet({hero:"w",white:"pappymagee",black:"Opponent",result:"1–0"})==="woodland");
+    chk("Pappymagee loss defaults classical", userPieceSet({hero:"w",white:"pappymagee",black:"Opponent",result:"0–1"})==="classic");
+    chk("Pappymagee draw defaults Woodland", userPieceSet({hero:"b",white:"Opponent",black:"pappymagee",result:"½–½"})==="woodland");
+    applyDefaultPieceSets(game);
+
+    const savedKey=gameKey,savedGame=game,savedMoves=moves,savedFrames=frames;
+    load("reversedrat");
+    chk("new From Position game replays completely", frames.length===53, frames.length+" frames");
+    chk("new game starts from supplied center", frames[0].placement.e4==="wPe"&&frames[0].placement.f4==="wPf"&&frames[0].placement.d5==="bPd"&&frames[0].placement.e5==="bPe");
+    chk("new game ends in recorded mate position", moves[51].suffix==="#"&&frames[52].placement.b6==="bPa");
+    gameKey=savedKey;game=savedGame;moves=savedMoves;frames=savedFrames;applyDefaultPieceSets(game);
 
     R.meta = w.meta;
     R.plies = w.frames.length-1;

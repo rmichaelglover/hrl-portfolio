@@ -288,6 +288,9 @@ const GAMES = {
     pgn:"h3 d5 a3 e5 e3 Bd6 d3 Be6 Nc3 Nc6 Nf3 Nf6 d4 exd4 exd4 O-O Bg5 Be7 Qd2 h6 h4 hxg5 hxg5 Ng4 g6 fxg6 Be2 Qd6 O-O-O Nge5 Nxe5 Nxe5 dxe5 Qxe5 g3 Rxf2 Rdg1 Rxe2 Nxe2 Bc5 Qh6 Qxe2 Qh8+ Kf7 Qxa8 Be3+ Kb1 Bxg1 Rh8 Qe1+ Ka2 d4+ b3 Bd5 Qf8+ Ke6 Qe8+ Kf5 Rf8+ Bf7 Qxe1 Kf6 Qf1+ Ke7 Qxf7+ Kd6 Rd8+ Kc5 Qe7+ Kb5 Qxc7 Ka6 Rb8 d3 Qxb7+ Ka5 Qb5#" },
   kadascakes:{ label:"Kádas Opening — Kádas Kakes", white:"mannyfresher (810)", black:"pedrohlorena (773)", hero:"w", result:"1–0",
     pgn:"h4 e5 h5 Bc5 h6 gxh6 d4 exd4 Bxh6 Nxh6 Rxh6 Bb4+ c3 Ba5 b4 Qg5 Re6+ dxe6 Qxd4 Bb6 Qe4 e5 Na3 f5 Qxe5+ Be6 Qxh8+ Kd7 Rd1+ Kc6 b5+ Kc5 Qd4#" },
+  reversedrat:{ label:"The Reversed-Rat River Run — Casual Underdog Journey", white:"mannyfresher (828)", black:"Chungkheu (1173)", hero:"w", result:"0–1", tc:"600+0", turn:"w",
+    setup:{a1:"wRa",b1:"wNb",c1:"wBc",d1:"wQd",e1:"wKe",f1:"wBf",g1:"wNg",h1:"wRh",a2:"wPa",b2:"wPb",c2:"wPc",d2:"wPd",e4:"wPe",f4:"wPf",g2:"wPg",h2:"wPh",a8:"bRa",b8:"bNb",c8:"bBc",d8:"bQd",e8:"bKe",f8:"bBf",g8:"bNg",h8:"bRh",a7:"bPa",b7:"bPb",c7:"bPc",d5:"bPd",e5:"bPe",f7:"bPf",g7:"bPg",h7:"bPh"},
+    pgn:"fxe5 Nc6 exd5 Qxd5 e6 Qxe6+ Be2 Qd5 Na3 Qxg2 Nc4 Qxh1 d3 Qxg1+ Bf1 Bb4+ c3 Ba5 b4 Bb6 Qe2+ Nge7 a4 Bh3 a5 O-O Qh5 Qxf1+ Kd2 Qf4+ Kc2 Qf2+ Bd2 Bf5 Ne5 Nxb4+ cxb4 g6 Qxg6+ fxg6 Nxg6 Bxg6 Rh1 Be3 h4 Qxd2+ Kb3 Qxd3+ Ka4 b5+ axb6 axb6#" },
 };
 
 /* The hand-picked games above stay first in the menu. games-library.js
@@ -517,6 +520,7 @@ const pick=(a,s)=>a[((s%a.length)+a.length)%a.length];
 function nm(id,hero){const c=charOf(id,hero);return c[1]+" "+c[0];}
 // authored per-game narration (mirrors the Vim version's `special` dicts; ply -> prose)
 const NARR = {
+  "reversedrat":{"0":"🌊 THE REVERSED-RAT RIVER RUN. This rated 10+0 tournament chapter starts from a supplied position. Manny is the 828 underdog against Chungkheu at 1173. That can feel lighter, not heavier: play honestly and let curiosity carry the backpack.","5":"3.e6. The Underdog Corollary says low expectations can release imagination, but cannot repeal checks, captures, and threats. Black's queen takes with check.","10":"5...Qxg2. The classical queen enters the pantry. The h1 rook and g1 knight are now concrete targets, even in a lighthearted game.","14":"7...Qxg1+. The visiting queen has collected both corner treasures and gives check. Manny keeps the score honest and starts building practical obstacles.","21":"11.Qe2+. Queen Dilorias answers with a check. The position is materially harsh but emotionally easygoing—the distinction behind the Suspiciously Undecidable Sports Theorem.","39":"20.Qxg6+. Manny offers the queen for a checking moment. After 20...fxg6, the material cannot support the dream, but the experiment remains instructive.","50":"25...b5+. One final forcing current drives the king toward the b-file. Where can the king legally breathe after the check?","52":"26...axb6# — checkmate. Chungkheu wins. This was light casual fun, a clean rated loss, and a counterexample to the idea that enjoyment requires favorable odds. 🌊🌲♟️🤝"},
   "crab":{"0":"🦀 THE CRAB AS WHITE. Harriet Hissindorf and Alexander Aaronson extend the two rim-pawn claws. The shape is playful; the test is serious: can White finish development before the wide pawns become targets?","5":"3.a4. Both claws are visible now—h5 on one shore, a4 on the other. Space at the rim can cramp an opponent, but it does not replace control of the center.","25":"13.Rxh3. Castle Hessenbach recaptures on h3 and White emerges from the opening skirmish with active pieces. The Crab has survived its strange walk; now ordinary calculation takes command.","37":"19.Ra5. Castle Andora rises behind the advanced a-pawn. This is when a flank pawn earns its keep: not because it looked unusual on move three, but because it opened a useful road for a rook.","49":"25.Rxh5. Queens disappear and the rook reaches h5. The position is no longer an opening joke; it is a technical race between White's attack and Black's dangerous b-pawn.","74":"37...b1=Q. Black's runner crowns first. A promotion is powerful, not final: White's king keeps walking into the checks while the knight and rook assemble their own net.","83":"42.Ng5! The knight blocks the rook's checking lane and prepares the last coordination. When the opponent has a queen, every quiet interposition deserves a second look.","87":"44.Nh6# — CHECKMATE. The Crab closes both claws around the king. The moral is not that edge pawns are secretly best; it is that an eccentric beginning still demands patient development, king safety, and a finish. 🦀🏆"},
   "goldsmith":{"0":"🏮 GOLDSMITH DEFENSE. Manny answers 1.e4 with 1...h5: a lantern hung at the edge of the board. The move concedes the center, so Black must earn the experiment with alert tactics and ordinary development.","4":"2...h4. Harriet advances twice while White develops a bishop. A repeated pawn move spends time; the compensation must be concrete, not merely colorful.","10":"5...Qxe5+. Queen Dilorias takes the central pawn with check. White's early queen sortie has become Black's tempo, and the strange opening begins to justify itself tactically.","20":"10...Nxa1. Sir Banyan reaches the corner and captures a rook. Winning material is only the first half of the assignment—the knight still needs a route home.","30":"15...Bxh1. Pope Francisco takes the other rook. The back rank has been harvested, yet White's advanced queenside pawns will soon demand attention.","48":"24...Rh1+. Castle Hessenbach turns the h-pawn's old trail into a checking lane. That is the Goldsmith's best argument: an opening pawn move matters later only if the pieces can use what it changed.","68":"34...Rxa6. Castle Andora finally stops the a-pawn caravan and swings the balance firmly toward Black. Wide ambition meets patient cleanup.","80":"40...Bf3# — CHECKMATE. The bishop seals the dark squares while rook and king hold the exits. Moral: novelty may light the first lantern, but coordination carries it home. 🏮🏆"},
   "deadmove2":{"0":"⚰️ DEAD ON MOVE 2. After 1.e4 h6 2.d4, Manny plays 2...f6—an opening move that weakens the king and deserves the title's warning. But a poor move is a position to solve, not a prophecy.","4":"2...f6?! Frank Fassenbecher steps in front of his own king. The useful habit is immediate: name the weakened diagonals, notice the missing development, and find a safer follow-up.","12":"6...g5. Black has built a precarious pawn wall while White's pieces point toward it. Creativity without a king-safety check can become a trap built around oneself.","20":"10...Qxh4. Queen Dilorias catches the knight on h4. White's tactical oversight gives Black time to recover from the opening, proving that advantages do not play their own moves.","29":"15.Bg5+. White opens the king hunt, but Black meets the check with development. Checks are forcing; they are not automatically winning.","36":"18...hxg3. Harriet reaches g3 and tears open the shelter around White's king. The same wing pawns that looked vulnerable now create the decisive files and diagonals.","40":"20...Qh1# — CHECKMATE. Queen Dilorias enters through the corner. Moral: Black was not literally dead on move two, and White was never entitled to the win—evaluate the current board, not the opening's reputation. ⚰️🌱🏆"},
@@ -1063,9 +1067,16 @@ let gameKey="queendab", pieceW="woodland", pieceB="classic", themeKey="brown";
 // The house setup follows Mannyfresher rather than a fixed board color.
 // Loading a chapter restores this default; the White/Black menus can still
 // override either side afterward for a themed performance.
-function applyHousePieceSetup(hero){
-  pieceW=hero==="w"?"woodland":"classic";
-  pieceB=hero==="b"?"woodland":"classic";
+function userPieceSet(spec){
+  const heroName=(spec.hero==="w"?spec.white:spec.black||"").toLowerCase();
+  const pappy=heroName.includes("pappymagee");
+  const heroWon=(spec.hero==="w"&&spec.result==="1–0")||(spec.hero==="b"&&spec.result==="0–1");
+  return pappy&&!heroWon&&spec.result!=="½–½"?"classic":"woodland";
+}
+function applyDefaultPieceSets(spec){
+  const userSet=userPieceSet(spec),hero=spec.hero;
+  pieceW=hero==="w"?userSet:"classic";
+  pieceB=hero==="b"?userSet:"classic";
   const whiteSelect=document.getElementById("selPieceW");
   const blackSelect=document.getElementById("selPieceB");
   if(whiteSelect)whiteSelect.value=pieceW;
@@ -1156,7 +1167,7 @@ function showPromo(from,to){otbPending={from,to};document.getElementById("promoP
 function load(key){
   if(typeof stop==="function") stop();                                   // never leave autoplay running across a load
   _hydroKey=null;_hydroFrames=null;
-  gameKey=key; game=GAMES[key]; applyHousePieceSetup(game.hero); keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
+  gameKey=key; game=GAMES[key]; applyDefaultPieceSets(game); keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
   frames=buildFrames(mv,game); moves=mv.slice(0,frames.length-1);
   g_increment=parseIncrement(game.tc); _rhythm=null; _rhythmKey=null;     // rebuild rhythm for the new game
   branched=false; otbSel=null; otbTargets=[];                            // fresh game: clear OTB selection + branch flag

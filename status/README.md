@@ -20,12 +20,19 @@ What works now:
 - installable/offline PWA behavior and a Pythonista wrapper;
 - a Vim-native emoji study tool with the same 25-game teaching shelf;
 - linear tween, classroom, and advanced novella paths;
-- an optional ten-door Master Board adventure, beginning with CoachZ Crossing;
+- an optional Master Board adventure with CoachZ Crossing and the Reversed-Rat
+  River Run beyond its original ten doors;
 - an expanding source-game archive, including annotated study PGNs.
 
-The current browser and export harness passes 26 checks. CoachZ Crossing is a
+The current browser and export harness passes 34 checks. CoachZ Crossing is a
 separate archive/adventure addition; it does not silently change the main linear
 novella's 25-game structure.
+
+The newest optional journey is Manny–Chungkheu (`UttLxPKo`), a supplied-position
+rapid tournament loss ending `26...axb6#`. It is archived, replayable, branchable,
+and narrated without entering the linear twenty-five-game canon. Default rendering
+now follows player identity: mannyfresher is Woodland; opponents are classical;
+pappymagee is Woodland for wins and draws, classical for losses.
 
 ## Current project frontier
 
