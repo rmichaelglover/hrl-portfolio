@@ -67,6 +67,15 @@ game Black had the repeated defensive pattern `...Qxa6` before White's two queen
 the final mating net. The loss is valuable because the same avoidable idea appears at
 multiple trainable checkpoints.
 
+The second-newest chapter, mannyfresher–chejov0353 (`8FILwQjX`), is also newer than
+CoachZ Crossing. Its brief lesson is to avoid `5.Nxe4?? dxe4` and save the knight with
+`5.Nh3`; the full glance is preserved in `games/README.md`.
+
+Tonight also recorded—not started—the speculative `hydro-computing/` concept: a
+sensor-rich, water/air/light thermal habitat with homeostatic, sauna, AC, and igloo
+modes; classical silicon by default; optional photonic analysis; HRL supervision; and
+an explicit second-law and safety contract.
+
 ## Preview
 
 A future learner pauses at a study position. One arrow shows the study author's

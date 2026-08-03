@@ -95,6 +95,7 @@ finds the meaningful structures inside that flow.
 | `novella/` | Linear tween, classroom, and advanced editions plus the optional ten-door Master Board adventure. |
 | `status/` | Wide project status, current frontier, near-term polish, and preview. |
 | `engine-coach/` | Future dual-overlay coach for played, study, and engine moves across exact wins and losses. |
+| `hydro-computing/` | Speculative water/air/light computing habitat with thermodynamic and safety boundaries. |
 | `experiments/` | Rough side sketches (some AI-assisted). |
 | `*.md` | Design notes: musical mapping, the boundaries/Markov-blanket musing, PWA install. |
 
