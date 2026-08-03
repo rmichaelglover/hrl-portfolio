@@ -51,6 +51,8 @@ full gallery (prettiest graphics first). Highlights:
   and a [self-relaxing organism](https://rmichaelglover.github.io/hrl-portfolio/genesis/critter/).
 - **[Chess Maestro](https://rmichaelglover.github.io/hrl-portfolio/whimsy-chess/maestro.html)** — the
   interactive, narrated chess studio (PWA). Paste or upload PGNs in the Load panel.
+- **[Data Worlds](https://rmichaelglover.github.io/hrl-portfolio/data-worlds/)** — a public launchpad
+  for the repository's voxel/3-D, colorful 2-D, TUI/ASCII, and real-data browser interfaces.
 - **[Gospel-HRL](https://rmichaelglover.github.io/hrl-portfolio/bible-hrl/)**,
   **[Morphogenesis](https://rmichaelglover.github.io/hrl-portfolio/morphogenesis-grow/)**, and
   **[real-data body-position](https://rmichaelglover.github.io/hrl-portfolio/body-pos/)** — and more on the site.
