@@ -76,6 +76,11 @@ sensor-rich, water/air/light thermal habitat with homeostatic, sauna, AC, and ig
 modes; classical silicon by default; optional photonic analysis; HRL supervision; and
 an explicit second-law and safety contract.
 
+The opening audit now covers 59 unique study games. Its narrative result is the separate
+companion **Woodland Chronicles: Attack of the Narnian Clones**: five smaller personal
+opening realms, four bridge openings already represented in the studies, and eight
+famous standard reference doors clearly labeled where no exact model chapter exists yet.
+
 ## Preview
 
 A future learner pauses at a study position. One arrow shows the study author's
