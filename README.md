@@ -91,6 +91,8 @@ finds the meaningful structures inside that flow.
 | `test/` | `bash test/run.sh` — 21 assertions over WorldKit's terrain, roles, and both exporters. |
 | `tools/` | `build_games_library.py` — assemble the embedded games library. |
 | `media/` | Showcase stills and an animated replay of the Kádas game. |
+| `games/` | Source-game archive, including the latest annotated CoachZ Crossing PGN. |
+| `novella/` | Linear tween, classroom, and advanced editions plus the optional ten-door Master Board adventure. |
 | `experiments/` | Rough side sketches (some AI-assisted). |
 | `*.md` | Design notes: musical mapping, the boundaries/Markov-blanket musing, PWA install. |
 

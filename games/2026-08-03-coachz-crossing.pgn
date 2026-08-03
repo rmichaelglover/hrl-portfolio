@@ -1,0 +1,53 @@
+[Event "rated rapid tournament https://lichess.org/tournament/RgNbF67b"]
+[Site "https://lichess.org/X1kMqfab"]
+[Date "2026.08.03"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "CoachZ"]
+[Result "0-1"]
+[WhiteElo "833"]
+[BlackElo "1627"]
+[TimeControl "600+0"]
+[Termination "Time forfeit"]
+[GameId "X1kMqfab"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Clemenz Opening"]
+[StudyName "Creepy Crawly Formation"]
+[ChapterName "mannyfresher (833) - CoachZ (1627)"]
+[ChapterURL "https://lichess.org/study/WZgtVfpr/vDSqo9ly"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. h3 { [%eval -0.03] [%clk 0:10:00] } 1... e5 { [%eval -0.11] [%clk 0:10:00] }
+2. g3 { [%eval -0.54] [%clk 0:10:00] } 2... d5 { [%eval -0.58] [%clk 0:09:57] }
+3. f3?! { [%eval -1.32] } { Inaccuracy. e3 was best. } { [%clk 0:10:00] }
+3... Bc5 { [%eval -1.55] [%clk 0:09:49] }
+4. e3 { [%eval -1.49] [%clk 0:10:00] } 4... Be6?! { [%eval -0.77] } { Inaccuracy. Nc6 was best. } { [%clk 0:09:44] }
+5. d3?! { [%eval -1.89] } { Inaccuracy. d4 was best. } { [%clk 0:10:00] }
+5... Nc6 { [%eval -1.75] [%clk 0:09:42] }
+6. c3 { [%eval -1.89] [%clk 0:10:00] } 6... Qe7 { [%eval -1.47] [%clk 0:09:32] }
+7. b3 { [%eval -2.07] [%clk 0:10:00] } 7... O-O-O { [%eval -1.96] [%clk 0:09:24] }
+8. a3 { [%eval -2.59] [%clk 0:10:00] } 8... e4 { [%eval -2.41] [%clk 0:09:21] }
+9. Be2?! { [%eval -3.42] } { Inaccuracy. d4 was best. } { [%clk 0:09:58] }
+9... exf3?! { [%eval -2.62] } { Inaccuracy. exd3 was best. } { [%clk 0:09:18] }
+10. Bxf3 { [%eval -2.8] [%clk 0:09:56] } 10... Nf6 { [%eval -2.65] [%clk 0:09:15] }
+11. Bd2?! { [%eval -3.77] } { Inaccuracy. Ne2 was best. } { [%clk 0:09:54] }
+11... Ne5 { [%eval -3.48] [%clk 0:09:11] }
+12. c4? { [%eval -5.74] } { Mistake. d4 was best. } { [%clk 0:09:52] }
+12... Nxf3+?! { [%eval -4.35] } { Inaccuracy. Nxd3+ was best. } { [%clk 0:09:09] }
+13. Qxf3 { [%eval -5.06] [%clk 0:09:45] } 13... dxc4 { [%eval -4.87] [%clk 0:09:08] }
+14. Nc3?! { [%eval -6.36] } { Inaccuracy. dxc4 was best. } { [%clk 0:09:42] }
+14... Rxd3 { [%eval -6.44] [%clk 0:09:03] }
+15. Nge2 { [%eval -6.21] [%clk 0:09:38] } 15... cxb3 { [%eval -6.26] [%clk 0:08:59] }
+16. Nd4 { [%eval -8.3] [%clk 0:09:33] } 16... b2 { [%eval -7.81] [%clk 0:08:49] }
+17. Rb1 { [%eval -7.58] [%clk 0:09:27] } 17... Bxa3 { [%eval -5.82] [%clk 0:08:44] }
+18. Ncb5 { [%eval -6.1] [%clk 0:09:23] } 18... Ba2?? { [%eval -2.51] } { Blunder. Qc5 was best. } { [%clk 0:08:13] }
+19. O-O?? { [%eval -5.64] } { Blunder. Qf5+ was best. } { [%clk 0:09:16] }
+19... Bxb1 { [%eval -5.36] [%clk 0:08:11] }
+20. Rxb1 { [%eval -6.17] [%clk 0:09:14] } 20... Rxd2 { [%eval -5.29] [%clk 0:08:10] }
+21. Nc6?! { [%eval -9.05] } { Inaccuracy. Nxa7+ was best. } { [%clk 0:09:10] }
+21... bxc6 { [%eval -5.06] [%clk 0:08:00] }
+22. Qxc6?? { [%eval #-9] } { Checkmate is now unavoidable. Nxa7+ was best. } { [%clk 0:09:07] }
+22... Qxe3+ { [%eval #-8] [%clk 0:07:59] }
+23. Kh1 { [%eval #-8] [%clk 0:08:57] } 23... Nd5 { [%eval #-8] } { 0-1 White left the game. } { [%clk 0:07:30] }
+0-1
