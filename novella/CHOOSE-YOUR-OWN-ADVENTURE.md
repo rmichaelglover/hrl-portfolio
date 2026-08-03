@@ -35,7 +35,7 @@ better-person points. After each game, return to the Master Board and choose aga
 7. **Jerry Ball** — Brasswing Field; black-and-yellow banners frame a lesson in winning and losing kindly.
 8. **Creepy Harriet** — Rootglass Forest; a familiar pawn gesture meets a classical structure.
 9. **The Crawling Crown** — Crownroot Keep; a quiet shell becomes an attack only when the position permits it.
-10. **CoachZ Crossing** — Longbridge Realm; the newest archive game asks when patient building must yield to urgency.
+10. **CoachZ Crossing** — Longbridge Realm; an archive game asks when patient building must yield to urgency.
 
 These are the first ten narrated doors, not a limit. Later archive games may gain a
 door when they offer a distinct decision rather than a renamed copy of an old path.
