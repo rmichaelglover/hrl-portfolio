@@ -134,6 +134,13 @@
   .flag-arrow-line{stroke:#17233c;stroke-width:1.35;stroke-linecap:round;opacity:.78;filter:drop-shadow(0 0 .5px #fff)}
   .flag-arrow-label{font-size:4.8px;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#fff;stroke-width:.7px;stroke-linejoin:round}
   .sq.flagpick{box-shadow:inset 0 0 0 4px #f3b51b !important}
+  /* Game-menu result colors, always from Mannyfresher's recorded perspective. */
+  #selGame.game-black-win, #selGame option.game-black-win{background:#080b08;color:#66e36f}
+  #selGame.game-black-loss, #selGame option.game-black-loss{background:#080808;color:#ff6268}
+  #selGame.game-white-win, #selGame option.game-white-win{background:#fff;color:#218838}
+  #selGame.game-white-loss, #selGame option.game-white-loss{background:#c72f3b;color:#fff}
+  #selGame.game-draw, #selGame option.game-draw{background:#fff;color:#222}
+  #selGame.game-neutral, #selGame option.game-neutral{background:var(--panel);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -1153,7 +1160,7 @@ function load(key){
   frames=buildFrames(mv,game); moves=mv.slice(0,frames.length-1);
   g_increment=parseIncrement(game.tc); _rhythm=null; _rhythmKey=null;     // rebuild rhythm for the new game
   branched=false; otbSel=null; otbTargets=[];                            // fresh game: clear OTB selection + branch flag
-  cur=0; document.getElementById("moves").dataset.built=""; render();
+  cur=0; document.getElementById("moves").dataset.built=""; setGameMenuScheme(game); render();
 }
 function loadCustom(text, side){
   const h=parseHeaders(text), mv=parseMoves(text);
@@ -1296,6 +1303,22 @@ document.addEventListener("keydown",e=>{
 
 /* ===================== selectors ===================== */
 function fillSelect(el,obj,getLabel,sel){for(const k in obj){const o=document.createElement("option");o.value=k;o.textContent=getLabel(obj[k]);if(k===sel)o.selected=true;el.appendChild(o);}}
+const GAME_MENU_CLASSES=["game-black-win","game-black-loss","game-white-win","game-white-loss","game-draw","game-neutral"];
+function gameMenuClass(spec){
+  const result=String(spec&&spec.result||"").replace(/\s/g,"");
+  if(/½|1\/2|draw/i.test(result))return "game-draw";
+  const won=spec&&((spec.hero==="w"&&/^1[-–—]0$/.test(result))||(spec.hero==="b"&&/^0[-–—]1$/.test(result)));
+  const lost=spec&&((spec.hero==="w"&&/^0[-–—]1$/.test(result))||(spec.hero==="b"&&/^1[-–—]0$/.test(result)));
+  if(won)return spec.hero==="b"?"game-black-win":"game-white-win";
+  if(lost)return spec.hero==="b"?"game-black-loss":"game-white-loss";
+  return "game-neutral";
+}
+function setGameMenuScheme(spec){
+  const el=document.getElementById("selGame"), cls=gameMenuClass(spec);
+  if(!el)return;
+  el.classList.remove(...GAME_MENU_CLASSES);el.classList.add(cls);
+  el.title={"game-black-win":"Mannyfresher victory as Black","game-black-loss":"Mannyfresher loss as Black","game-white-win":"Mannyfresher victory as White","game-white-loss":"Mannyfresher loss as White","game-draw":"Draw or stalemate","game-neutral":"Result not classified"}[cls];
+}
 /* The game menu is grouped by opening family — with a library of a hundred-plus
    games a flat list is unusable. Hand-picked sits at the top, then the biggest
    families first, so the h-file systems he actually plays lead. */
@@ -1312,11 +1335,14 @@ function fillGameSelect(el,obj,sel){
     for(const k of groups[g]){
       const o=document.createElement("option");
       o.value=k; o.textContent=obj[k].label;
+      o.className=gameMenuClass(obj[k]);
+      o.dataset.resultScheme=o.className.replace("game-","");
       if(k===sel) o.selected=true;
       og.appendChild(o);
     }
     el.appendChild(og);
   }
+  setGameMenuScheme(obj[sel]);
 }
 fillGameSelect(document.getElementById("selGame"),GAMES,gameKey);
 fillSelect(document.getElementById("selPieceW"),SETS,p=>p.label,pieceW);
