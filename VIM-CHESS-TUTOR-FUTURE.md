@@ -32,3 +32,12 @@ uncertainty and ask for clarification.
 Licensing goal: FOSS—**free and open-source software**. Educational datasets
 need their own compatible licenses and provenance; “free of charge” alone does
 not make a dataset open source.
+
+## Keyboard musicianship branch
+
+Record a second, optional tutor that grows beyond Vim and beyond ordinary typing.
+The home row becomes both an editor posture and a musical rest position; motions teach
+intervals, rhythm, chord function, voice leading, and fingering without making either
+Vim or a physical instrument mandatory. Lessons should support standard keyboards,
+Vim notation, MIDI-capable devices, accessible one-hand mappings, and silent visual
+practice. This is a future design note, not an active implementation task.

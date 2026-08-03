@@ -122,6 +122,23 @@ Choose a chapter:
 Change one footstep: leave the king home, develop a knight, and castle normally. Compare
 how many moves and defensive obligations the conventional route saves.
 
+## 5A. Grob and Borg Mirror-Gates — `1.g4` and `1...g5`
+
+The **Grob** sends White's g-pawn forward before development; the **Borg**—“Grob” seen
+in the looking-glass—answers from Black's side with an early `...g5`. Both gain wing
+space and may open surprising rook or bishop routes, but both loosen the king and spend
+time away from the center. They enter the companion as opening families awaiting exact,
+non-overlapping archive games; no result is invented for them.
+
+At the Bongcloud bonfire, Georgiana Gina speaks with magnetic, theatrical warmth of
+Gaia or Mother God as one possible mystical image for the life shared by every creature.
+Ella immediately opens the circle wider: another reader may hear nature, conscience,
+community, the Holy Spirit, many gods, no god, or simply poetic silence. The story
+requires kindness and wonder, not agreement about metaphysics.
+
+Change one footstep: compare `g4` or `...g5` with `Nf3`, `Nc3`, `...Nf6`, or `...d5`.
+Ask whether the wing pawn created a concrete threat worth the weakened diagonals.
+
 # Book II — Bridge Realms Already in the Studies
 
 These openings connect the personal experiments to wider opening practice.
