@@ -350,9 +350,11 @@
     if(m&&m.cap){ const cc=castOf(m.cap.color,m.cap.id);
       const vn=cc?cc[0]+" "+cc[1]:"a process", victim=hero?B(vn):W(vn);
       const chk=P.san.endsWith("+")?` ${SYS("+ check")}`:"";
-      return `${who} ${verb} <b>${to}</b> and deletes ${victim}.${chk} ${hero?"Material is for accountants.":"The Authority collects."}`; }
+      const breath=!chk&&p%9===0?` ${SYS("// topology changed")} The capture clears a route as well as a process. Watch the empty node: the next packet may value it more than the material just removed.`:"";
+      return `${who} ${verb} <b>${to}</b> and deletes ${victim}.${chk} ${hero?"Material is for accountants.":"The Authority collects."}${breath}`; }
     if(P.san.endsWith("+")) return `${who} ${verb} <b>${to}</b> — ${SYS("check")} The net tightens around ${hero?B("🎩 The Architect"):W("🕶️ The Operator")}.`;
-    return `${who} ${verb} <b>${to}</b>.`;
+    const breath=p%11===0?` ${SYS("// field update")} No alarm sounds, but every influence tower recalculates around that node. The move may explain itself only when the next reply exposes the route it prepared.`:p%8===0?` Quiet traffic still changes the Grid. One node settles; three neighboring possibilities wake up.`:"";
+    return `${who} ${verb} <b>${to}</b>.${breath}`;
   }
 
   /* ================= UI ================= */

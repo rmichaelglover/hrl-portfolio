@@ -184,9 +184,11 @@
     const mv=m&&m.to?idPlies[p].get(m.to):null, type=mv?mv.type:"p", verb=pick(VERB[type]||VERB.p,p), hero=color==="w";
     if(P.san.endsWith("#")) return `${who} ${verb} onto ${to} — CHECKMATE. ${hero?"King me. ♛ King Edmund 🤴 is roped in the corner, the prairie run out.":"King Ethelheim 🦁 falls; the Misfits steal the day."}`;
     if(m&&m.cap){ const cc=castOf(m.cap.color,m.cap.id), victim=cc?cc[0]+" "+cc[1]:"a piece", chk=P.san.endsWith("+")?", WITH CHECK":"";
-      return `${who} ${verb} in and takes ${victim} on ${to}${chk}. ${hero?"Material is for accountants — the charge only goes forward.":"The Misfits bite back."}`; }
+      const breath=!chk&&p%9===0?" The captured square falls silent, but the lane behind it opens. For one beat, the whole cast turns toward that new doorway.":"";
+      return `${who} ${verb} in and takes ${victim} on ${to}${chk}. ${hero?"Material is for accountants — the charge only goes forward.":"The Misfits bite back."}${breath}`; }
     if(P.san.endsWith("+")) return `${who} ${verb} to ${to} — check! The net draws tight around ${hero?"King Edmund 🤴.":"King Ethelheim 🦁."}`;
-    return `${who} ${verb} to ${to}.`;
+    const breath=p%11===0?" It looks like a small entrance, yet every nearby character must reconsider a route. The meaning of the move may arrive one reply later.":p%8===0?" No fanfare—just a quiet square changing the shape of the scene.":"";
+    return `${who} ${verb} to ${to}.${breath}`;
   }
   function panel(){ const P=positions[ply]; stPly.textContent="PLY "+ply+"/"+LAST;
     stMove.textContent = ply===0 ? "start position" : (Math.ceil(ply/2)+(ply%2?". ":"… ")+P.san);
