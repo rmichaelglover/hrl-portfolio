@@ -86,3 +86,31 @@ individual lives.
 The final image is quiet: after huge changes driven by tiny creeks, an older player
 recognizes the first small choice that began the journey, forgives what can be forgiven,
 repairs what can be repaired, and makes one careful move for whoever comes next.
+
+## Vocational and fork-building track
+
+The teenage edition may include practical, age-appropriate instructions for creating a
+commercial or nonprofit-capable fork as a future vocational project. Each exercise must
+identify separately:
+
+- the software license and source-notice obligations;
+- licenses for writing, artwork, music, fonts, datasets, and model outputs;
+- trademarks, character rights, publicity/likeness rights, and endorsement language;
+- contributor agreements and attribution records;
+- privacy, accessibility, child-safety, and data-retention duties;
+- the distinction between nonprofit status, open-source licensing, and permission to
+  earn revenue—three related but non-interchangeable questions.
+
+Learners can practice choosing a project name, retaining license files, recording asset
+provenance, publishing source, writing a plain-language privacy statement, estimating
+hosting costs, and selecting an honest revenue or donation model. Exercises must not
+promise that a license alone settles every jurisdiction's employment, tax, fundraising,
+consumer-protection, or intellectual-property law; professional review remains a gate
+for a real launch.
+
+The adult edition may take the same path further into cooperative and conventional
+business structures, nonprofit governance, paid maintainership, grants, sponsorships,
+procurement, contracts, insurance, moderation, security response, succession planning,
+and sustainable shutdown or transfer. Its recurring question is not merely “Can this
+fork make money?” but “Who carries its risks, who shares its benefits, and who can still
+maintain it ten years later?”
