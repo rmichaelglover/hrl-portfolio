@@ -6,8 +6,10 @@ them but must not silently alter them.
 
 ## Archive status
 
-- `2026-08-03-checkers-study.pgn` is the newest study archive. Its latest chapter is
-  a6699–mannyfresher, Lichess game `Iti1c13V`.
+- `2026-08-03-ninja-ultrabullet.pgn` is the newest unique-game archive: mannyfresher–
+  Androsov_andrey, Lichess `VeWkDqu1`, won on time in a `15+0` arena.
+- `2026-08-03-checkers-study.pgn` is the newest full-study archive before that game.
+  Its latest chapter is a6699–mannyfresher, Lichess `Iti1c13V`.
 - `2026-08-03-coachz-crossing.pgn` preserves the earlier CoachZ game used by the
   optional Master Board adventure.
 - `creepy-harriet-study.pgn` is the broader annotated source used to build the current
@@ -16,6 +18,25 @@ them but must not silently alter them.
 
 Duplicate full studies and chapter exports must be collapsed by Lichess game ID and
 normalized moves before future catalogue expansion.
+
+## VeWkDqu1 — the one-second king walk
+
+The new chapter appears in six public studies, but it is one game and therefore has one
+canonical archive file here. White began with fifteen seconds; Black's first recorded
+clock is eight seconds, consistent with an arena berserk, though the PGN does not carry
+an explicit berserk tag. The result was `1-0` by time, not checkmate.
+
+White used a Mieses/Creepy-Crawly shell, then walked the king through `e2`, `f3`, `g4`,
+back through `f3`, `e2`, `e1`, and `d1`, and onward to `d2`, `c3`, and `c4`. The walk
+captured Black's bishop on g4 but surrendered normal king safety and development. Black
+won White's queen with `14...Qxd1+` and gathered more material, yet the clock fell to
+zero after `18...Nd4`; White still had one second after `19.Kc4`.
+
+The rigorous lesson is format-specific: the clock decided the recorded game, while the
+position itself should not be presented as a model of sound classical king play. In
+ultrabullet, legal continuity, forced replies, and clock pressure can outweigh an
+ordinary material narrative. “Won the game” and “had the preferable position” are
+different claims, and this PGN proves only the former.
 
 ## a6699–mannyfresher — rigorous examination
 

@@ -1,0 +1,22 @@
+[Event "rated ultraBullet tournament https://lichess.org/tournament/xQaEeuvB"]
+[Site "https://lichess.org/VeWkDqu1"]
+[Date "2026.08.03"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "Androsov_andrey"]
+[Result "1-0"]
+[WhiteElo "1094"]
+[BlackElo "1234"]
+[TimeControl "15+0"]
+[Termination "Time forfeit"]
+[GameId "VeWkDqu1"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Mieses Opening"]
+[StudyName "Creepy Crawly Formation"]
+[ChapterName "mannyfresher (1094) - Androsov_andrey (1234)"]
+[ChapterURL "https://lichess.org/study/WZgtVfpr/K2u6vD8w"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. d3 { [%clk 0:00:15] } 1... e6 { [%clk 0:00:08] } 2. e3 { [%clk 0:00:15] } 2... d6 { [%clk 0:00:07] } 3. g3 { [%clk 0:00:14] } 3... Be7 { [%clk 0:00:07] } 4. b3 { [%clk 0:00:13] } 4... Bd7 { [%clk 0:00:07] } 5. a4 { [%clk 0:00:12] } 5... Nf6 { [%clk 0:00:06] } 6. h4 { [%clk 0:00:11] } 6... O-O { [%clk 0:00:06] } 7. Ke2 { [%clk 0:00:10] } 7... h6 { [%clk 0:00:06] } 8. Kf3 { [%clk 0:00:09] } 8... Nh5 { [%clk 0:00:05] } 9. g4 { [%clk 0:00:09] } 9... e5 { [%clk 0:00:05] } 10. gxh5 { [%clk 0:00:07] } 10... Bg4+ { [%clk 0:00:04] } 11. Kxg4 { [%clk 0:00:06] } 11... Qc8+ { [%clk 0:00:04] } 12. Kf3 { [%clk 0:00:05] } 12... Bxh4 { [%clk 0:00:03] } 13. Ke2 { [%clk 0:00:05] } 13... Qg4+ { [%clk 0:00:02] } 14. Ke1 { [%clk 0:00:05] } 14... Qxd1+ { [%clk 0:00:02] } 15. Kxd1 { [%clk 0:00:03] } 15... Bxf2 { [%clk 0:00:01] } 16. Be2 { [%clk 0:00:02] } 16... Bxg1 { [%clk 0:00:01] } 17. Kd2 { [%clk 0:00:01] } 17... Nc6 { [%clk 0:00:00] } 18. Kc3 { [%clk 0:00:01] } 18... Nd4 { [%clk 0:00:00] } 19. Kc4 { 1-0 White wins on time. } { [%clk 0:00:01] } 1-0
+
