@@ -538,6 +538,13 @@ function narrate(i){
   if(note.promo) s+=" Promoted to a queen! 👑";
   if(mv.suffix==="#") s+=" Checkmate! 🏆";
   else if(mv.suffix==="+") s+=" Check!";
+  // Most plies should remain quick calls. At deterministic breathing points, let
+  // the fallback voice open into a compact paragraph; authored beats above remain
+  // the model and the hard upper range for narration length.
+  else if(note.castle && i%2===0) s+=" The king reaches shelter, but the rook also enters the story. Re-read the center now: castling changes two pieces, not one.";
+  else if(note.captured && i%9===0) s+=" The material count changes immediately; the open line left behind may matter just as much. Before moving on, notice both the prize and the newly emptied square.";
+  else if(!note.captured && i%11===0) s+=" A quiet move still relabels the whole board around its destination. Pause for one breath and ask which defender, route, or future pawn break just became more believable.";
+  else if(!note.captured && i%8===0) s+=" No trumpet sounds, yet the position has changed. Small moves often become legible only after the next reply reveals what they prepared.";
   return s;
 }
 function tagOf(i){const mv=moves[i-1],note=frames[i].note;
