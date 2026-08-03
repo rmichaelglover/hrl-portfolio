@@ -137,3 +137,25 @@ practice patterns.”
 Manny recorded the loss exactly. No secret victory, no rewritten trail—just a marvelous
 game in which the best future move became easier to see because the same chance knocked
 three times.
+
+## Second-newest glance — mannyfresher–chejov0353
+
+The second-newest unique chapter is Lichess `8FILwQjX`, also played August 3, 2026:
+mannyfresher (833)–chejov0353 (1824), `0-1` by `43...Rh3#`. It is newer than CoachZ
+Crossing and appears immediately before the a6699 chapter in the newest Checkers study.
+
+Its first decisive checkpoint is `5.Nxe4??`. Black's d5-pawn answers `5...dxe4`, so
+after `6.dxe4` White has exchanged a knight for a pawn. The study recommends `5.Nh3`,
+simply saving the attacked knight. `8.Bxh6?! Rxh6` then gives up the remaining bishop
+on that wing and makes the material deficit much harder to repair.
+
+Black converted with active knights and rook checks. A quicker finish existed at
+`27...Ncd4 28.Bf1 Nc6#`; the played `27...Rh8?!` missed it without surrendering the
+large advantage. The eventual rook mate on h3 demonstrates patient conversion after
+a missed shortcut.
+
+Woodland version: a knight reached for a berry on e4 without noticing the d5 branch
+bending above it. The branch swept the knight from the trail. Much later Black missed
+the shortest path to the cabin, took the longer moonlit route, and arrived safely with
+`...Rh3#`. Ella's bedtime note was peaceful: count every defender before gathering a
+berry, and when one route disappears, calmly look for the next sound road.
