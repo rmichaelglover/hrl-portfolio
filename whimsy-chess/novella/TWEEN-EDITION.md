@@ -114,4 +114,4 @@ even the board game called Life. Figuratively speaking and literally speaking:
 
 Readers who deliberately select **Choose Your Own Adventure** mode may continue on
 the separate Master Board route. Its optional chapters are not part of this linear
-edition, and the newest archive game appears only there.
+edition, and the CoachZ Crossing branch appears only there.
