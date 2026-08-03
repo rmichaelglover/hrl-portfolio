@@ -6,6 +6,10 @@ them but must not silently alter them.
 
 ## Archive status
 
+- `2026-08-03-newish-openings-study.pgn` is the newest downloaded full-study archive.
+  Its sole addition over the preceding export is Manny–Chungkheu, `UttLxPKo`.
+- `2026-08-03-reversed-rat-river-run.pgn` preserves that supplied-position chapter
+  for direct replay and modification.
 - `2026-08-03-ninja-ultrabullet.pgn` is the newest unique-game archive: mannyfresher–
   Androsov_andrey, Lichess `VeWkDqu1`, won on time in a `15+0` arena.
 - `2026-08-03-checkers-study.pgn` is the newest full-study archive before that game.
@@ -18,6 +22,19 @@ them but must not silently alter them.
 
 Duplicate full studies and chapter exports must be collapsed by Lichess game ID and
 normalized moves before future catalogue expansion.
+
+## UttLxPKo — the Reversed-Rat River Run
+
+Manny (828), White, faced Chungkheu (1173) in a light, casual, rated `600+0`
+tournament game from a supplied FEN and lost by `26...axb6#`. Black's queen entered
+on g2, collected the h1 rook and g1 knight, and kept checking the displaced king.
+White's `20.Qxg6+` sacrificed the queen for a brief forcing moment; Black simplified
+and used `...b5+` to open the final mating file.
+
+The rating gap sometimes reduced the underdog's felt pressure and made experimentation
+easier. That emotional freedom did not change the board: loose pieces, forcing moves,
+and king safety remained concrete. The archive preserves both truths—fun without a
+secret victory, and instruction without turning a loss into a verdict on a person.
 
 ## VeWkDqu1 — the one-second king walk
 

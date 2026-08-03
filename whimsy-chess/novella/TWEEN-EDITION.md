@@ -120,4 +120,8 @@ to the optional Master Board, while this story's work was complete.
 
 Readers who deliberately select **Choose Your Own Adventure** mode may continue on
 the separate Master Board route. Its optional chapters are not part of this linear
-edition, and the CoachZ Crossing branch appears only there.
+edition. CoachZ Crossing, the One-Second Castle, and the Reversed-Rat River Run appear
+only there. The last offers a gentle counterexample to “it is always nice to win”:
+winning is usually nice, but an underdog may feel less pressure when a loss would not
+be surprising. Ella's **Suspiciously Undecidable Sports Theorem** says expectations
+may lighten the backpack, although they never move a piece or answer a check.

@@ -1,7 +1,7 @@
 /* Chess Maestro — offline service worker.
    maestro.html is fully self-contained (no external assets), so caching it + the
    icons/manifest makes the installed PWA work with no network at all. */
-const CACHE = "chess-maestro-v4";
+const CACHE = "chess-maestro-v5";
 const ASSETS = [
   "maestro.html",
   "worldkit.js",

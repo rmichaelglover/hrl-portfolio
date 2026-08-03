@@ -26,7 +26,7 @@ If a move fits two trails, the traveler chooses. If it fits none, Ella calls it 
 **Wander** and sends the party through the nearest unvisited realm. No trail awards
 better-person points. After each game, return to the Master Board and choose again.
 
-### Eleven doors on the Master Board
+### Twelve doors on the Master Board
 
 1. **The Kádas Cascade** — Raven Cliff Falls; daring pawns climb beside white water.
 2. **The Queen Dab** — Mirror Meadow; a queen's flourish must still respect every attacked square.
@@ -40,6 +40,8 @@ better-person points. After each game, return to the Master Board and choose aga
 10. **CoachZ Crossing** — Longbridge Realm; an archive game asks when patient building must yield to urgency.
 11. **The One-Second Castle** — Ninja Moon Arena; Ian Focuscastle and the Misfits race
     a wandering king against the last grain of the clock.
+12. **The Reversed-Rat River Run** — Underdog Ford; a casual rated loss asks whether
+    difficult odds can make experimentation feel lighter.
 
 These are the first ten narrated doors, not a limit. Later archive games may gain a
 door when they offer a distinct decision rather than a renamed copy of an old path.
@@ -107,6 +109,33 @@ The Misfits wrote both truths on the castle door: White won the recorded ultrabu
 game, and the wandering-king plan is not offered as classical opening advice. Ian kept
 the final second in a glass lantern, thanked Androsov_andrey for the race, and led the
 crew quietly home.
+
+### Optional Chapter — The Reversed-Rat River Run
+
+Manny arrived at Underdog Ford carrying 828 rating stones. Chungkheu waited across
+the water with 1173. Instead of feeling crushed by the difference, Manny felt some
+pressure float away. Winning would be lovely; when victory already looked unlikely,
+there was less temptation to protect an imaginary perfect outcome.
+
+This was a supplied-position game. White's e- and f-pawns and Black's d- and e-pawns
+already occupied the center. `1.fxe5 Nc6 2.exd5 Qxd5 3.e6` opened the river gates;
+Black's queen captured with check, entered through g2, and soon took the rook on h1
+and knight on g1.
+
+Ella named the mood the **Suspiciously Undecidable Sports Theorem**: a contest remains
+undecided until play decides it, yet expectations can change how heavy decisions feel.
+Its **Underdog Corollary** says expected difficulty may free experimentation. It grants
+emotional room, not tactical immunity. A loose rook remains loose.
+
+Choose after `7...Qxg1+`: **Shelter** by counting checks, **Cross** by developing with
+tempo, or **Climb** with a fully calculated countercheck. The recorded route eventually
+tried `20.Qxg6+`; the queen sacrifice bought a checking moment, not lasting
+compensation. Black drove the king through d2, c2, b3, and a4, then finished
+`25...b5+ 26.axb6 axb6#`.
+
+Chungkheu won. Manny still left smiling. Lower pressure can encourage play, while
+checks, captures, threats, development, and king safety remain the riverbanks that
+keep imagination useful.
 
 ---
 
