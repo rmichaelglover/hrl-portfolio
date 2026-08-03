@@ -24,7 +24,7 @@ If a move fits two trails, the traveler chooses. If it fits none, Ella calls it 
 **Wander** and sends the party through the nearest unvisited realm. No trail awards
 better-person points. After each game, return to the Master Board and choose again.
 
-### Ten doors on the Master Board
+### Eleven doors on the Master Board
 
 1. **The Kádas Cascade** — Raven Cliff Falls; daring pawns climb beside white water.
 2. **The Queen Dab** — Mirror Meadow; a queen's flourish must still respect every attacked square.
@@ -36,6 +36,8 @@ better-person points. After each game, return to the Master Board and choose aga
 8. **Creepy Harriet** — Rootglass Forest; a familiar pawn gesture meets a classical structure.
 9. **The Crawling Crown** — Crownroot Keep; a quiet shell becomes an attack only when the position permits it.
 10. **CoachZ Crossing** — Longbridge Realm; an archive game asks when patient building must yield to urgency.
+11. **The One-Second Castle** — Ninja Moon Arena; Ian Focuscastle and the Misfits race
+    a wandering king against the last grain of the clock.
 
 These are the first ten narrated doors, not a limit. Later archive games may gain a
 door when they offer a distinct decision rather than a renamed copy of an old path.
@@ -77,3 +79,29 @@ and inspect checks, captures, and threats on the board.
 The party archived the map, thanked the opponent through good sportsmanship, and
 returned to the Master Board. A loss was weather. The discovered crossing was theirs
 to keep.
+
+### Optional Chapter — Ian Focuscastle and the One-Second Castle
+
+This chapter exists only on the optional Master Board. Ian Focuscastle and the Misfits
+entered Ninja Moon Arena with fifteen seconds for an entire game. Their opponent's first
+recorded clock showed eight. Nobody had time to build a handsome fortress, so Ian made
+the king into the fortress and carried it with him.
+
+The king crossed `e2–f3–g4`, captured a bishop, retreated by `f3–e2–e1–d1`, and then
+marched `d2–c3–c4`. Meanwhile Black checked, captured White's queen, and collected
+material—but every answer spent another grain of moonlight. After `18...Nd4`, Black's
+clock showed zero. White played `19.Kc4` with one second remaining and won on time.
+
+Choose the story's lens:
+
+- **Climb:** celebrate the legal king capture `11.Kxg4`; then name the checks that made
+  the king retrace its path.
+- **Cross:** follow the recorded clock after every move and find where speed, not
+  material, became the decisive resource.
+- **Shelter:** pause before `7.Ke2` and invent a safer developing move for an untimed
+  version of the same position.
+
+The Misfits wrote both truths on the castle door: White won the recorded ultrabullet
+game, and the wandering-king plan is not offered as classical opening advice. Ian kept
+the final second in a glass lantern, thanked Androsov_andrey for the race, and led the
+crew quietly home.
