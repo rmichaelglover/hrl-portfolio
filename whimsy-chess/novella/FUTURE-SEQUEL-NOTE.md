@@ -114,3 +114,24 @@ procurement, contracts, insurance, moderation, security response, succession pla
 and sustainable shutdown or transfer. Its recurring question is not merely “Can this
 fork make money?” but “Who carries its risks, who shares its benefits, and who can still
 maintain it ten years later?”
+
+## Adult SupraHydra satire — reserved route
+
+A later TV-MA/R-rated volume may revisit Brickwater Island after the PG **Brick Baal**
+and PG-13 **LEGO Antichrist** routes. Its antagonist adopts the deliberately absurd
+title **Great and Beneficent Global King and Emperor Donald J. Trump, King of Kings,
+Lord of Lords**. This is a fictional satirical role, not a factual description,
+religious judgment, endorsement, or prediction about the real Donald Trump.
+
+The adult route should become more institutionally serious, not more graphically
+violent: regulatory capture, personality cults, falsified telemetry, privatized water,
+AI-generated consent, and a command system that hides dependencies behind one ruler's
+dashboard. Jimmy and Sammy may reappear only in an age-appropriate frame; adult danger
+and moral responsibility remain with adult characters. Any LEGO, Batman, or Spider-Man
+references require either a narrow parody/fan-work treatment with conspicuous
+non-affiliation or replacement by original brick heroes before commercial publication.
+
+The five fictional 2045 stewards defeat the throne by opening its ledgers, isolating
+unsafe controls, restoring local vetoes, and declining to create a rival emperor. The
+point is SupraHydra's central distinction: interdependence can coordinate many powers;
+it must not disguise the concentration of power in one supposedly beneficent head.

@@ -5,6 +5,8 @@ One game archive, several reading paths:
 - `TWEEN-EDITION.md` — the complete PG story, built around the 25-game Maestro shelf.
 - `CHOOSE-YOUR-OWN-ADVENTURE.md` — an optional, move-routed Master Board with eleven
   doors; CoachZ Crossing and Ian Focuscastle's One-Second Castle remain branch-only.
+  It also contains a clearly labeled Atlanta 2045 SupraHydra annex with PG and PG-13
+  fan-satire routes; the adult concept remains a separate future-edition note.
 - `WOODLAND-CHRONICLES-ATTACK-OF-THE-NARNIAN-CLONES.md` — a separate companion manual
   with five smaller personal-opening realms, four study-backed bridges, and eight
   standard opening reference doors.

@@ -112,6 +112,12 @@ even the board game called Life. Figuratively speaking and literally speaking:
 
 **THE END.**
 
+Far beyond the ending, a 2045 lantern briefly reflected in Lake Michael. Five future
+stewards were learning that a watershed, a city, and a chess position could each be
+understood only through relationships. They called their interdependent civic vision
+**SupraHydra**. Ella closed that door gently: its full science-fiction routes belonged
+to the optional Master Board, while this story's work was complete.
+
 Readers who deliberately select **Choose Your Own Adventure** mode may continue on
 the separate Master Board route. Its optional chapters are not part of this linear
 edition, and the CoachZ Crossing branch appears only there.

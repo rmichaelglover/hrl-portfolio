@@ -8,8 +8,10 @@ matching signpost, and lets that choice color the narration.
 
 The Master Board borrows the pleasure of a vast realm-map, a winter wood, talking
 animals, hidden doors, towers, rivers, and long journeys. Its places and characters
-remain the Woodland cast's own. This tween route contains no religion, politics, or
-ethnonationalist argument.
+remain the Woodland cast's own. The eleven-door tween route contains no religion,
+politics, or ethnonationalist argument. A separately labeled 2045 fan-satire annex
+appears after the chess route; readers and caregivers may skip it without losing any
+game or ending.
 
 ### How to travel
 
@@ -105,3 +107,104 @@ The Misfits wrote both truths on the castle door: White won the recorded ultrabu
 game, and the wandering-king plan is not offered as classical opening advice. Ian kept
 the final second in a glass lantern, thanked Androsov_andrey for the race, and led the
 crew quietly home.
+
+---
+
+## Optional 2045 Annex — The SupraHydra Accord
+
+**Fiction and fan-satire notice:** This annex is an unofficial speculative story.
+Real people named below are represented by fictional future counterparts; no
+participation, endorsement, quotation, or predicted conduct is implied. LEGO, Batman,
+Spider-Man, and political figures are referenced for transformative parody and are not
+affiliated with this project. The story makes no factual claim about Donald Trump.
+
+This door is not necessary to complete the tween novella. Choose an audience lantern:
+
+- **Green lantern — PG:** broad slapstick, no theology lesson and no injury.
+- **Amber lantern — PG-13:** sharper political and apocalyptic parody, still non-graphic.
+- **Red lantern — adult speculative edition:** reserved as a future separate work; it
+  is not written into this tween-facing file.
+
+### The five stewards arrive
+
+In 2045, the Master Board rose through Atlanta like a transparent watershed model.
+Every square held several truths at once: a creek below, a bus route above, a heat loop
+inside a building, roots under the pavement, and people whose daily plans could not be
+reduced to colored dots. The old Undertow carried morning journeys inward. The
+Skywheel carried evening journeys out. Between them shimmered SupraHydra—not one
+super-mind, but many interdependent systems agreeing to show their work.
+
+Dr. Michael Levin studied the model's capacity to repair a broken route without losing
+its larger goal. Dr. David Murphy took one look at a sparkling pipe and asked who would
+clean it on a wet Tuesday. Michael Emanuel Glover translated the warning lights into
+plain language. Professor Emeritus Nels Madsen wrote the units beside every number and
+made the room start over when pressure was reported in “a whole bunch.” Robert Michael
+Glover, MS, arrived last beneath a ridiculous headline calling him the Einstein of the
+age. He folded the headline into a paper boat.
+
+“My mentors taught me how to ask,” he said. “Our collaborators taught me what matters.
+The language models—including ChatGPT and Claude—helped us draft and test. None of them
+gets to become king.” He launched the little paper title into the harmless tabletop
+current, where it sank immediately. Nels called that an excellent peer review.
+
+Their Accord required every proposal to reveal evidence, uncertainty, authorship,
+energy, affected communities, and a manual fallback. Then the Master Board sounded an
+alarm from Brickwater Island.
+
+### Green-lantern route — Jimmy and Sammy versus Brick Baal
+
+Choose **Cross** for the PG route.
+
+Jimmy and Sammy—Kakki and Nate's two young adventurers—found a caped brick detective
+and a web-slinging brick hero arguing over whose dramatic entrance had better lighting.
+Across the plaza, a giant gold-painted throne rolled forward carrying **Brick Baal**,
+an absurd fictional would-be ruler modeled in political parody on Donald J. Trump. He
+announced that he owned every stud, stream, pawn, and cloud because his throne was the
+shiniest.
+
+The children did not kick a person. They kicked the throne's enormous foam RESET
+button. The caped detective supplied a smoke-machine distraction; the web-slinger tied
+the throne's wheels together with party streamers. Brick Baal spun gently into a pile
+of recyclable stage bricks, unharmed and spectacularly defeated by public records,
+shared access, and slapstick engineering.
+
+The chess lesson was immediate: attack the unsupported claim, not the human being.
+Jimmy checked the king's line; Sammy checked the system's permissions. SupraHydra
+restored the plaza to its many users and published the complete event log.
+
+### Amber-lantern route — the LEGO Antichrist protocol
+
+Choose **Climb** for the PG-13 route.
+
+The same satirical antagonist called himself the **LEGO Antichrist**, a deliberately
+overblown fictional stage title rather than a religious judgment about a real person.
+His plan was to replace the Accord with a single golden command block. The five
+stewards refused to fight his mythology on its own terms. They ran the protocol:
+
+1. Levin asked what goal the system was actually preserving.
+2. Murphy pulled the physical network's manual disconnect.
+3. Michael Emanuel gave every neighborhood the same readable warning.
+4. Madsen demonstrated that the throne's promised output violated its own energy budget.
+5. Robert credited the humans and tools that found the flaw, then declined the victory
+   podium.
+
+Jimmy, Sammy, the caped brick detective, and the web-slinging brick hero used one legal
+fork on the Master Board: check the counterfeit king and uncover the public ledger at
+the same time. The golden command block became an ordinary toy again. Nobody was
+tortured, executed, or crowned. Democracy, safety engineering, and a well-timed knight
+move were dramatic enough.
+
+### Shelter — the Accord remains open
+
+Choose **Shelter** to decline both satires. The five stewards stay beside the watershed
+and perform the quieter heroic work: verifying gauges, listening to residents,
+protecting offline controls, tracing waste heat, reopening a creek only where evidence
+supports it, and admitting what the model does not know.
+
+All three routes return to the same 2045 position. The good Hydra has many heads because
+Atlanta has many needs. It has no emperor. A proposal may be brilliant and still wait;
+a celebrated expert may be wrong; a child may notice the missing square. Interdependence
+is not surrendering judgment. It is making sure judgment can see the whole board.
+
+For the technical-fiction charter behind this annex, read **[Atlanta 2045 — the
+SupraHydra Accord](../hydro-computing/ATLANTA-2045-SUPRAHYDRA.md)**.
