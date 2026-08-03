@@ -8,6 +8,9 @@ One game archive, several reading paths:
 - `WOODLAND-CHRONICLES-ATTACK-OF-THE-NARNIAN-CLONES.md` — a separate companion manual
   with five smaller personal-opening realms, four study-backed bridges, and eight
   standard opening reference doors.
+- `THE-LANTERN-ARCHIVE.md` — a full second companion novella built from twenty-five
+  unique games: ten previously missed Chess.com imports and fifteen later study games,
+  with no repeated game identity or overlap with the existing explicit game-ID list.
 - `CLASSROOM-EDITION.md` — the same journey arranged as five teachable meetings.
 - `ADVANCED-EDITION.md` — calculation prompts for ambitious readers.
 - `APPENDIX-BALANCE-PUZZLE.md` — a quotation hunt about accuracy and balance.
