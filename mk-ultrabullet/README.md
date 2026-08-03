@@ -4,6 +4,12 @@
 ultrafast chess into gentle, resolving music. It does not model personalities,
 rank players, or reproduce games. Player identifiers are discarded.
 
+The browser app also accepts pasted or uploaded raw PGN, annotated PGN,
+multi-game files, Lichess Study exports, and individual Study chapters. It
+follows each chapter's main line while tolerating headers, comments, NAGs,
+nested variations, results, and Lichess clock annotations. Multiple games or
+chapters appear in a selector. Parsing and music generation stay in the browser.
+
 Lichess monthly database exports are published under CC0. Download a monthly
 standard-rated PGN archive from <https://database.lichess.org/>, then extract a
 small anonymous feature file:

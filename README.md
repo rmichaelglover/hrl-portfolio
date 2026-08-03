@@ -23,6 +23,10 @@ physical models**. The reusable Python core lives separately in
 the canonical Chess Maestro application lives in
 [`whimsy-chess`](https://github.com/rmichaelglover/whimsy-chess).
 
+Public Pages content follows the tween-facing PG policy in
+[`CONTENT-RATING.md`](CONTENT-RATING.md). Earlier material outside that standard
+remains available through Git history rather than the live experience.
+
 Physics-consensus pieces here are labeled demonstrations and toy models. The
 underlying conjectures, assumptions, and falsification work belong in the
 separate `physics-speculations` research notebook.

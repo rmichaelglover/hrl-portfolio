@@ -1,147 +1,115 @@
-# ♟️ Whimsy-Chess — relaxation labeling, played for fun
+# ♟️ Whimsy Chess
 
-> *"Daring & creativity over the engine's book."*
+**Chess as an exchange of nutrients in an ecological dome — scored as music, narrated as a story, and analyzed with hierarchical relaxation labeling.**
 
-The creative, applied face of this portfolio. The **same hierarchical
-relaxation-labeling engine** that tracks motion-capture markers and grades
-physics claims also: segments a chessboard into **terrain**, labels pieces by
-**tactical role**, and — in the [chess-maxims demo](../examples/chess_maxims_demo.py)
-— grades the book's rules of thumb against real games. Here it's wrapped in a
-narrated, musical, emoji study app.
+Watch a chess game come alive: each piece is a character with a name, the board grows
+rivers and mountains from the flow of the battle, the relaxation-labeling engine reads
+each piece's *role* in the position, and the whole game is turned into music whose
+**time signature is inferred from the moves themselves** — a quiet maneuvering game
+breathes in 3/4, a wild tactical scramble lurches into 7/8.
 
-Two surfaces, one cast of characters (the **Woodland Agents** 🦊🐲🦁 — you — vs.
-the **Misfit Squad** 👸🤴🦏):
+It runs entirely in your browser from a single self-contained HTML file. No build, no
+server, no dependencies. It also installs to an iPad/iPhone home screen as an app.
 
-- **🎹 Chess Maestro** ([`maestro.html`](maestro.html)) — a self-contained PWA: emoji board,
-  character narration, terrain & role overlays, and **music generated from the
-  moves** (key + meter inferred from the game).
-- **🏳️ Flag annotations** — choose any country/territory or special flag emoji,
-  then attach it to a persistent character identity, a board square, or a
-  directed analysis arrow. Annotations stay in local browser storage and are
-  decorative labels, not inferred nationalities.
-- **⌨️ Vim Chess** (`chess_emoji.vim`) — the same study, native in a Vim buffer.
+This repository is the canonical development home for Chess Maestro and its
+supporting tools. The live, curated copy is published through
+[`hrl-portfolio`](https://github.com/rmichaelglover/hrl-portfolio); reusable
+Python algorithm work belongs in
+[`relaxation-labeling-python`](https://github.com/rmichaelglover/relaxation-labeling-python).
 
-### [▶️ **Play Chess Maestro now →**](maestro.html)
-
-Runs straight in the browser — no install needed. On phone or desktop, use your
-browser's **"Install" / "Add to Home Screen"** to keep it as an offline app: it's
-a full PWA (manifest + service worker), so it plays with no network at all.
+> 🎥 Demos & tutorials: **[youtube.com/@mannyglover](https://www.youtube.com/@mannyglover)**
 
 ---
 
-## 🎬 A game playing out — the Kádas Stampede
+## Try it
 
-![Kádas Stampede playing in Chess Maestro](media/maestro_kadas.gif)
+**[Open the published Chess Maestro](https://rmichaelglover.github.io/hrl-portfolio/whimsy-chess/maestro.html)**
+or open **`maestro.html`** locally in any modern browser. That exact
+`whimsy-chess/maestro.html` path is the flagship; similarly named pages under
+`lichess-emulator/` and `genesis/maestro/` are separate experiments.
 
----
+- Pick a game, press **▶** to play it back *in rhythm*, or step with the arrow keys.
+- **🧠 Roles** — tint each piece by the role the relaxation-labeling engine assigns it
+  (attacker, defender, controller, outpost, runner, tactic, or idle "noise").
+- **🏞️ Terrain** — a topographic influence field: water pools in the contested squares,
+  land rises by elevation. Built with a trinary relaxation labeling over the 64 squares.
+- **🔊 Music** — orchestrated Web Audio playback. **🥁 Click** adds a metronome so you can
+  hear the inferred meter.
+- **⬇ Export** — MIDI, WAV (upload to Suno), a Suno text prompt, or a **🌍 World JSON** that
+  the included Roblox script reads to build an evolving 3D world of the game.
 
-## 🏆 Checkmate, narrated — the Queen Dab
-
-Emoji armies, a hero-aware story voice, and the meta strip showing the musical
-**key & meter inferred from the game** (`key F# · ♩=120 3/4`):
-
-![Queen Dab mate](media/01_queendab_mate.png)
-
-> *"Queen Dilorias 🐲 DABS on b7! Checkmate. An 1104 just dabbed on a 1586 —
-> daring beat the database."*
-
----
-
-## 🏞️ The board as a world — terrain overlay
-
-This is **relaxation labeling you can see**: the engine segments the 64 squares
-into white / contested / black territories, then renders the result as
-topography — **water on the contested seam, land rising by elevation**. The same
-heightmap exports to a 3-D Roblox world.
-
-![Terrain overlay](media/02_terrain.png)
-
-## 🧠 Pieces by role — the HRL role-labeler
-
-Each piece tinted by its relaxed role — attacker, defender, controller, outpost,
-runner, or idle "noise":
-
-![Roles overlay](media/03_roles.png)
-
-## 🦊 Choose your cast — Woodland vs. Misfit
-
-![Woodland vs Misfit](media/05_woodland_cast.png)
-
-## 🤠 "We're No Daisies" — a Doc Holliday stalemate
-
-135 moves, both sides missing forced mates, a draw nobody earned — narrated in
-the voice of *Tombstone*'s Doc Holliday:
-
-![Daisies stalemate](media/04_daisies_stalemate.png)
-
-> *"You're no daisy. You're no daisy at all." Neither of us was — not today.*
+### Install it as an app (iPad / iPhone)
+See `PWA-INSTALL.md`. Short version: host the folder over HTTPS, open `maestro.html` in
+Safari, and *Share ▸ Add to Home Screen*. It runs fullscreen and offline.
 
 ---
 
-## ⌨️ Vim Chess — the same study, in your editor
+## The idea: hierarchical relaxation labeling
 
-The board renders right in a Vim buffer (emoji or classic figurines, toggle with
-`t`; step with `l`/`→`):
+Relaxation labeling (Hummel & Zucker, 1983) is an identify-by-constraints algorithm: you
+have objects, a set of labels for them, and a measure of how *compatible* any two label
+assignments are for any two objects. It iterates everything toward a globally consistent
+labeling. This project applies it, hierarchically, in three places:
 
-```
-  🌲  mannyfresher (1108)  --  Woodland Agents (you)
-      CTKCRONOS (1207)     --  Misfit Squad
-      Kádas Stampede  (1.h4)   ·   White wins! 1-0
+- **Roles** — pieces are objects, roles are labels; compatibility comes from how pieces
+  support and threaten each other, so coherent plans emerge as label coalitions.
+- **Terrain** — squares are objects labeled white / contested / black; a contested seam
+  emerges, then becomes water, with land elevation rising away from it.
+- **Rhythm** — each move becomes a note; its think-time (or move salience) labels its
+  duration, and the game's accent pattern selects the **time signature**.
 
- 8 🏯🦏🔮👸🤴💎🐘🗼
- 7 🤠🥳🧔🔺📢💃🏁🏨
- 6 ⬛⬜⬛⬜⬛⬜⬛⬜
- 5 ⬜⬛⬜⬛⬜⬛⬜⬛
- 4 ⬛⬜⬛⬜⬛⬜⬛⬜
- 3 ⬜⬛⬜⬛⬜⬛⬜⬛
- 2 🦊🦡🦝🦌🦉🐸🦎🦔
- 1 🏰🦄🛕🐲🦁🧙🐎🧱
-   a b c d e f g h
-
-  Start position   (0 / 33)
-  l/→ next   h/← prev   < start   > end   t style   q quit
-```
-
-Step to the end and Queen Dilorias 🐲 stampedes onto g7 for mate:
-
-```
- 8 🏯🦏⬛⬜⬛🗼🤴⬜          8 ♜ ♞ · · · ♜ ♚ ·
- 7 ⬜🥳⬜⬛⬜💃🐲🏨          7 · ♟ · · · ♟ ♕ ♟
- 6 ⬛⬜🧔🔺⬛⬜🏁⬜          6 · · ♟ ♟ · · ♟ ·
- 5 🤠⬛⬜⬛⬜⬛⬜🐎          5 ♟ · · · · · · ♘
- 4 🦊⬜⬛🦉📢⬜⬛🦔   ⇄      4 ♙ · · ♙ ♟ · · ♙
- 3 ⬜🦡⬜⬛⬜⬛🦎🔮          3 · ♙ · · · · ♙ ♝
- 2 🏰⬜🦝🦌⬛🐸⬛⬜          2 ♖ · ♙ ♙ · ♙ · ·
- 1 ⬜🦄🛕⬛🦁🧙⬜👸          1 · ♘ ♗ · ♔ ♗ · ♛
-   a b c d e f g h            a b c d e f g h
-   emoji cast                 classic figurines  (press t)
-```
-
-> *"Qg7# — Queen Dilorias 🐲 STAMPEDES onto g7. Checkmate. One queen, end to
-> end, never once retreating."*
+The thread tying it together: *boundaries, things, and exchange.* A chess game is a little
+ecology — material is eaten, traded, regrown — and relaxation labeling is how the system
+finds the meaningful structures inside that flow.
 
 ---
 
-## 🗂️ Annotated games
+## What's in here
 
-Full board-by-board walkthroughs with the Woodland cast, every critter tracked
-by identity from its home square:
-
-- [**The Kádas Roundup vs. Tschucksl**](games/2026-06-30-kadas-tschucksl.md) — 1.h4, and 🦊 Alexander the fox eats a queen while 🦉 Ella Elouise marches a pawn into a crown. **1–0.**
-
----
-
-## ▶️ Run it
-
-| Surface | How |
+| Path | What it is |
 |---|---|
-| 🎹 Maestro | [**open `maestro.html`**](maestro.html) in any browser (fully self-contained); or **Install** it as an offline PWA |
-| ⌨️ Vim | `vim -c 'source chess_emoji.vim' -c 'ChessEmoji kadas'` — step with `l`/`h` |
+| `maestro.html` | **The flagship.** Board + roles + terrain + music/rhythm + exports + PWA. |
+| `pythonista/` | Pythonista host for running Maestro offline on iPhone/iPad with native PGN import. |
+| `lichess.html` | Earlier clean web viewer (roles + music), preserved. |
+| `index.html`, `v2.html`, `v3.html` | Early whimsical/bio viewers (the lineage). |
+| `vim/` | **A Vim-native emoji chess study tool** (`chess_emoji.vim`) — 25 narrated games, stepped with `h`/`l`/arrows, board drawn in emoji, plus a self-test. |
+| `worldkit.js` | One `chess-world` v1 export → **Minecraft datapack + Roblox builder**. Zero dependencies, including its own store-only zip writer. Runs in the browser *and* in Node. |
+| `roblox/` | Roblox Studio scripts that read the exported World JSON into a 3D world. |
+| `test/` | `bash test/run.sh` — 21 assertions over WorldKit's terrain, roles, and both exporters. |
+| `tools/` | `build_games_library.py` — assemble the embedded games library. |
+| `media/` | Showcase stills and an animated replay of the Kádas game. |
+| `experiments/` | Rough side sketches (some AI-assisted). |
+| `*.md` | Design notes: musical mapping, the boundaries/Markov-blanket musing, PWA install. |
 
-🔊 **Audio:** in Maestro, press **🔊 Music**, or **⬇ Export → WAV / MIDI / Suno
-prompt** — the key and meter are inferred from the moves. (Generated live in the
-browser, so it isn't captured in these stills.)
+### The Vim study tool
 
-*The Maestro PWA here is fully installable (manifest + service worker bundled). The
-Roblox port and the broader engine live in the author's private working repo; this
-is the polished, playable showcase.*
+```bash
+vim -c 'source vim/chess_emoji.vim' -c 'ChessEmoji queendab'
+```
+
+`l` / `→` step forward, `h` / `←` back, `<` `>` jump, `t` toggles emoji vs. classic
+figurines, `q` quits. Twenty-five games ship with it — `queendab`, `kadas`, `roundup`, `carr`,
+`schroflag`, `horsey`, `crabblack`, `crab`, `goldsmith`, `fathersday`, `houdini`, `daisies`, `deadmove2`, `crawlnamed`, `scandi`, `stalemategambit`
+— plus `ninjastalemate`, `jerryball`, `jerryballas`, `creepyharriet`, `bongcloudpilgrim`,
+`bongcloudgeneral`, `creepycrown`, `kadascakes`, and `ravencliff`, each with
+hand-written narration at its turning points. Verify them all with:
+
+```bash
+vim -u NONE -N -es -c 'source vim/chess_emoji.vim' \
+    -c 'for l in g:ChessEmojiSelfTest() | echo l | endfor' -c 'qa!'
+```
+
+---
+
+## License
+
+- **Code:** [AGPL-3.0](LICENSE) — free to use, study, share, and modify; if you distribute
+  it or run a modified version as a service, share your changes back. A **commercial
+  license** is also available — see [`NOTICE`](NOTICE).
+- **Creative assets** (the character cast, narration, musical & visual designs):
+  [CC BY-SA 4.0](ART-LICENSE.md).
+- Embedded chess games are public game records.
+
+Built by **Manny Glover** (R. Michael Glover). Contributions welcome under a short CLA that
+keeps the dual-license possible. If you teach with this, build on it, or want to collaborate
+— please reach out.
