@@ -102,6 +102,11 @@ Chess Maestro defaults to the Woodland Cast on Mannyfresher's side and black
 or white classical figurines on the opponent's side. The setup follows Manny
 when a chapter or imported PGN places him on Black. The two piece-set menus
 remain available for optional themed casts and visual experiments.
+
+The game menu also carries a result key from Mannyfresher's perspective: green on
+black for a win as Black, red on black for a loss as Black, green on white for a
+win as White, white on red for a loss as White, and a white field for every draw
+or stalemate. Text tooltips preserve the meaning when color is difficult to read.
 | `hydro-computing/` | Speculative water/air/light computing habitat with thermodynamic and safety boundaries. |
 | `experiments/` | Rough side sketches (some AI-assisted). |
 | `*.md` | Design notes: musical mapping, the boundaries/Markov-blanket musing, PWA install. |
