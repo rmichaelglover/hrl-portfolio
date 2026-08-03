@@ -40,6 +40,11 @@ better-person points. After each game, return to the Master Board and choose aga
 These are the first ten narrated doors, not a limit. Later archive games may gain a
 door when they offer a distinct decision rather than a renamed copy of an old path.
 
+For shorter opening-based routes, continue into **Woodland Chronicles: Attack of the
+Narnian Clones**. Its Smaller Realms organize exact wins, losses, and draws by Kádas,
+Creepy Crawly, Goldsmith/Carr, St. George, and Bongcloud families before opening eight
+standard reference doors.
+
 ### Optional Chapter — CoachZ Crossing
 
 The travelers entered Longbridge with a rating mountain rising far above them: 833

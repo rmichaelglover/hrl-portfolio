@@ -92,7 +92,7 @@ finds the meaningful structures inside that flow.
 | `tools/` | `build_games_library.py` — assemble the embedded games library. |
 | `media/` | Showcase stills and an animated replay of the Kádas game. |
 | `games/` | Source-game archive plus rigorous and Woodland reviews of the latest a6699–mannyfresher study chapter. |
-| `novella/` | Linear tween, classroom, and advanced editions plus the optional ten-door Master Board adventure. |
+| `novella/` | Linear tween, classroom, and advanced editions; the Master Board adventure; and the opening-based Narnian Clones companion. |
 | `status/` | Wide project status, current frontier, near-term polish, and preview. |
 | `engine-coach/` | Future dual-overlay coach for played, study, and engine moves across exact wins and losses. |
 | `hydro-computing/` | Speculative water/air/light computing habitat with thermodynamic and safety boundaries. |
