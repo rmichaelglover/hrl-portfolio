@@ -15,6 +15,9 @@ One game archive, several reading paths:
 - `ADVANCED-EDITION.md` — calculation prompts for ambitious readers.
 - `APPENDIX-BALANCE-PUZZLE.md` — a quotation hunt about accuracy and balance.
 - `FUTURE-AUDIENCE-PREVIEW.md` — a separate PG-capped goodbye for readers who someday outgrow the tween shelf. The main novella does not point to it.
+- `FUTURE-SEQUEL-NOTE.md` — a private-to-development future reference for the possible
+  PG-13 *Chess of Teenagers* saga and later life-stage finale, with explicit licensing,
+  audience-separation, synthetic-likeness, and non-endorsement boundaries.
 
 The games themselves remain the authority. Open them in Maestro, move the pieces,
 and disagree politely with the narrator.
