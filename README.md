@@ -55,6 +55,19 @@ labeling. This project applies it, hierarchically, in three places:
   support and threaten each other, so coherent plans emerge as label coalitions.
 - **Terrain** — squares are objects labeled white / contested / black; a contested seam
   emerges, then becomes water, with land elevation rising away from it.
+
+### HydroGRRLE terrain timeline
+
+Every ply begins by recomputing Maestro's HRL coloration. That white/contested/black
+field is the spatial prior for ChessGRRLE, not a decorative after-effect. The initial
+board is nearly flat, with a small White-side height advantage representing the
+first-move evaluation. Each move then raises or lowers its source, destination, and
+nearby squares according to the evaluation change. Continuous water relaxes toward
+the contested prior and flows downhill over several small passes; ice and sky fields
+travel beside it in the World JSON. Correspondence games use a wide ecological
+attention radius, while rapid and ultrabullet games emphasize the immediate tactical
+neighborhood. Legacy integer `height` and `water` grids remain available to existing
+Minecraft and Roblox consumers; the richer values live under each frame's `hydro`.
 - **Rhythm** — each move becomes a note; its think-time (or move salience) labels its
   duration, and the game's accent pattern selects the **time signature**.
 
