@@ -1027,7 +1027,7 @@ function buildWorld(){
   const LANDNAMES=["grass","meadow","tan","hills","brown","rock","alpine","snow"];
   const sp=startPlacement(), pieces=[];
   for(const s in sp){const id=sp[s],c=charOf(id,hero);
-    pieces.push({id,color:id[0],team:id[0]===hero?"woodland":"misfit",type:id[1].toLowerCase(),startSquare:s,name:c[1],emoji:c[0]});}
+    pieces.push({id,color:id[0],team:id[0]===hero?"woodland":"classic",type:id[1].toLowerCase(),startSquare:s,name:c[1],emoji:c[0]});}
   const out=[];
   const hydro=hydroTimeline();
   for(let i=0;i<frames.length;i++){const fr=frames[i],terr=hydro[i].terrain,roles=computeRoles(fr,hero);
@@ -1051,7 +1051,19 @@ function buildWorld(){
 
 /* ===================== state ===================== */
 let game,moves,frames,cur=0,timer=null,playTimers=[];
-let gameKey="queendab", pieceW="royal", pieceB="royal", themeKey="brown";
+let gameKey="queendab", pieceW="woodland", pieceB="classic", themeKey="brown";
+
+// The house setup follows Mannyfresher rather than a fixed board color.
+// Loading a chapter restores this default; the White/Black menus can still
+// override either side afterward for a themed performance.
+function applyHousePieceSetup(hero){
+  pieceW=hero==="w"?"woodland":"classic";
+  pieceB=hero==="b"?"woodland":"classic";
+  const whiteSelect=document.getElementById("selPieceW");
+  const blackSelect=document.getElementById("selPieceB");
+  if(whiteSelect)whiteSelect.value=pieceW;
+  if(blackSelect)blackSelect.value=pieceB;
+}
 
 let lastBad=null;
 function buildFrames(mv,spec=game){
@@ -1137,7 +1149,7 @@ function showPromo(from,to){otbPending={from,to};document.getElementById("promoP
 function load(key){
   if(typeof stop==="function") stop();                                   // never leave autoplay running across a load
   _hydroKey=null;_hydroFrames=null;
-  gameKey=key; game=GAMES[key]; keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
+  gameKey=key; game=GAMES[key]; applyHousePieceSetup(game.hero); keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
   frames=buildFrames(mv,game); moves=mv.slice(0,frames.length-1);
   g_increment=parseIncrement(game.tc); _rhythm=null; _rhythmKey=null;     // rebuild rhythm for the new game
   branched=false; otbSel=null; otbTargets=[];                            // fresh game: clear OTB selection + branch flag
@@ -1165,7 +1177,7 @@ function makePiece(id,fr){
   if(set.kind==="glyph"){ el.className="pc glyph "+color; el.textContent=CLASSIC[t]; el.title=charOf(id,game.hero)[1]; }
   else { // emoji or unique-character cast — drawn on a light/dark disc so the side is always clear
     el.className="pc emoji"; const d=document.createElement("div"); d.className="disc "+color;
-    if(set.kind==="cast"){ const c=(game.heroCast||game.oppCast)?charOf(id,game.hero):set.cast[id.slice(1)]; d.textContent=c[0]; el.title=c[1]; }
+    if(set.kind==="cast"){ const c=set.cast[id.slice(1)]; d.textContent=c[0]; el.title=c[1]; }
     else { d.textContent=set.map[t]; el.title=charOf(id,game.hero)[1]+" — "+TYPEW[t]; }
     el.appendChild(d);
   }

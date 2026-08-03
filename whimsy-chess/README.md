@@ -95,6 +95,13 @@ finds the meaningful structures inside that flow.
 | `novella/` | Linear tween, classroom, and advanced editions; the Master Board adventure; and the opening-based Narnian Clones companion. |
 | `status/` | Wide project status, current frontier, near-term polish, and preview. |
 | `engine-coach/` | Future dual-overlay coach for played, study, and engine moves across exact wins and losses. |
+
+## House chess setup
+
+Chess Maestro defaults to the Woodland Cast on Mannyfresher's side and black
+or white classical figurines on the opponent's side. The setup follows Manny
+when a chapter or imported PGN places him on Black. The two piece-set menus
+remain available for optional themed casts and visual experiments.
 | `hydro-computing/` | Speculative water/air/light computing habitat with thermodynamic and safety boundaries. |
 | `experiments/` | Rough side sketches (some AI-assisted). |
 | `*.md` | Design notes: musical mapping, the boundaries/Markov-blanket musing, PWA install. |
