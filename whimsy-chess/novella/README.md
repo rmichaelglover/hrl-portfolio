@@ -3,6 +3,8 @@
 One game archive, several reading paths:
 
 - `TWEEN-EDITION.md` — the complete PG story, built around the 25-game Maestro shelf.
+- `CHOOSE-YOUR-OWN-ADVENTURE.md` — an optional, move-routed Master Board with ten
+  opening realms and the newest archive game as a branch-only chapter.
 - `CLASSROOM-EDITION.md` — the same journey arranged as five teachable meetings.
 - `ADVANCED-EDITION.md` — calculation prompts for ambitious readers.
 - `APPENDIX-BALANCE-PUZZLE.md` — a quotation hunt about accuracy and balance.
