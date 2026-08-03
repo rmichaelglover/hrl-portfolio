@@ -2,6 +2,10 @@
 
 Status: **speculative future concept; documentation only, not an active build.**
 
+The broader civic-fiction branch is documented in **[Atlanta 2045 — the SupraHydra
+Accord](ATLANTA-2045-SUPRAHYDRA.md)**. There, *supra* emphasizes interdependence
+across systems; it does not mean a larger autonomous super-machine.
+
 ## Peaceful premise
 
 Imagine computation housed inside a visible, gently circulating thermal habitat. Water,
