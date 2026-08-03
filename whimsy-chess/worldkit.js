@@ -96,14 +96,19 @@
     for (let r = 0; r < 8; r++) {
       for (let f = 0; f < 8; f++) {
         const h = fr.height[r][f], wname = (fr.water && fr.water[r][f]) || "";
+        const hydro = fr.hydro || {}, earth = hydro.earth && hydro.earth[r] ? +hydro.earth[r][f] : Math.max(0, h);
+        const waterLevel = hydro.water && hydro.water[r] ? +hydro.water[r][f] : Math.max(0, -h);
+        const ice = hydro.ice && hydro.ice[r] ? +hydro.ice[r][f] : 0;
+        const sky = hydro.sky && hydro.sky[r] ? +hydro.sky[r][f] : 0.5;
         if (h < 0 || wname) {
           const w = waterOf(wname);
           cells.push({ file: f, rank: r, kind: "water", water: wname || "pond",
-                       depth: h < 0 ? -h : w.depth, rgb: w.rgb, mc: "water", floor: w.floor, top: 0 });
+                       depth: h < 0 ? -h : w.depth, earth, waterLevel, ice, sky,
+                       rgb: w.rgb, mc: "water", floor: w.floor, top: 0 });
         } else {
           const e = Math.max(1, h), L = landOf(e);
           cells.push({ file: f, rank: r, kind: "land", elev: e, terrain: L.name,
-                       rgb: L.rgb, mc: L.mc, top: e });
+                       earth, waterLevel, ice, sky, rgb: L.rgb, mc: L.mc, top: e });
         }
       }
     }
@@ -126,7 +131,7 @@
       });
     }
 
-    return { ply, cells, pieces, move: fr.move || null,
+    return { ply, cells, pieces, move: fr.move || null, hydro: fr.hydro || null,
              coherence: fr.coherence, advantage: fr.advantage, beat: fr.beat };
   }
   WorldKit.readFrame = readFrame;
@@ -186,6 +191,7 @@
         const d = Math.max(1, Math.min(4, c.depth));
         say("fill " + xa + " " + (BASE - d - 1) + " " + za + " " + xb + " " + (BASE - d - 1) + " " + zb + " minecraft:" + c.floor);
         say("fill " + xa + " " + (BASE - d) + " " + za + " " + xb + " " + (BASE - 1) + " " + zb + " minecraft:water");
+        if (c.ice > 0.55) say("fill " + xa + " " + BASE + " " + za + " " + xb + " " + BASE + " " + zb + " minecraft:ice");
       }
     }
     say("");
@@ -340,7 +346,8 @@
     // One part per terrain column keeps the object count low enough for Studio.
     const terr = fr.cells.map(c => {
       const h = c.kind === "land" ? c.top : -Math.max(1, Math.min(4, c.depth));
-      return "{" + c.file + "," + c.rank + "," + h + "," + rgb3(c.rgb) + "," + luaStr(c.kind === "land" ? c.terrain : c.water) + "}";
+      return "{" + c.file + "," + c.rank + "," + h + "," + rgb3(c.rgb) + "," + luaStr(c.kind === "land" ? c.terrain : c.water)
+        + "," + (+c.ice || 0).toFixed(3) + "," + (+c.sky || 0.5).toFixed(3) + "}";
     });
 
     const pcs = fr.pieces.map(p => {
@@ -376,6 +383,10 @@ if old then old:Destroy() end
 local root = Instance.new("Model")
 root.Name = NAME
 root.Parent = workspace
+
+local Lighting = game:GetService("Lighting")
+Lighting.ClockTime = ${+(11+((fr.cells.reduce((s,c)=>s+(+c.sky||.5),0)/64)-.5)*6).toFixed(2)}
+Lighting.Brightness = ${+(1.8+(fr.cells.reduce((s,c)=>s+(+c.sky||.5),0)/64)).toFixed(2)}
 
 local function part(cf, size, color, material)
 	local p = Instance.new("Part")
@@ -426,13 +437,13 @@ local function nameplate(adornee, title, subtitle)
 	bot.Parent = bb
 end
 
--- terrain: {file, rank, levels (negative = water depth), colour, name}
+-- terrain: {file, rank, levels, colour, name, ice, sky}
 local TERR = {
 	${terr.join(",\n\t")}
 }
 
 for _, t in ipairs(TERR) do
-	local file, rank, lv, colour, kind = t[1], t[2], t[3], t[4], t[5]
+	local file, rank, lv, colour, kind, ice = t[1], t[2], t[3], t[4], t[5], t[6]
 	local c = centre(file, rank)
 	if lv > 0 then
 		local h = lv * LV
@@ -446,6 +457,11 @@ for _, t in ipairs(TERR) do
 		w.Transparency = 0.45
 		w.CanCollide = false
 		w.Name = string.format("%s_%d%d", kind, file, rank)
+		if ice > 0.55 then
+			local cap = part(CFrame.new(c.X, LV * 0.08, c.Z), Vector3.new(SQ, LV * 0.16, SQ), Color3.fromRGB(205, 235, 245), Enum.Material.Ice)
+			cap.Transparency = 0.18
+			cap.Name = string.format("ice_%d%d", file, rank)
+		end
 	end
 end
 

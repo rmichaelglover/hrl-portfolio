@@ -8,6 +8,10 @@
     chk("has frames", w.frames && w.frames.length>1, (w.frames||[]).length+" frames");
     chk("has pieces", w.pieces && w.pieces.length===32, (w.pieces||[]).length+" pieces");
     chk("height is 8x8", w.frames[0].height.length===8 && w.frames[0].height[0].length===8);
+    chk("HydroGRRLE timeline present", w.frames.every(f=>f.hydro&&f.hydro.prior==="maestro-hrl-coloration"));
+    chk("continuous earth/water are 8x8", w.frames[0].hydro.earth.length===8 && w.frames[0].hydro.water[0].length===8);
+    chk("White begins slightly higher", w.frames[0].hydro.earth[0][3]>w.frames[0].hydro.earth[7][3]);
+    chk("water changes gradually", w.frames.slice(1).some((f,i)=>f.hydro.water.some((row,r)=>row.some((v,c)=>v!==w.frames[i].hydro.water[r][c]))));
     chk("WorldKit loaded", !!window.WorldKit);
 
     R.meta = w.meta;
@@ -15,6 +19,7 @@
 
     // WorldKit accepts it
     const fr = WorldKit.readFrame(w, w.frames.length-1);
+    chk("WorldKit exposes hydro state", !!fr.hydro&&fr.hydro.prior==="maestro-hrl-coloration");
     chk("readFrame gives 64 cells", fr.cells.length===64, fr.cells.length+"");
     chk("readFrame found pieces", fr.pieces.length>0, fr.pieces.length+" on board");
     R.land  = fr.cells.filter(c=>c.kind==="land").length;

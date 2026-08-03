@@ -395,10 +395,11 @@ function parseMoves(t){
   const re=/(\{[^}]*\})|(1-0|0-1|1\/2-1\/2|\*)|([Oo0]-[Oo0](?:-[Oo0])?|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](?:=?[QRBN])?|[a-h]x?[a-h][1-8](?:=?[QRBN])?)([+#]?)/g;
   const out=[];let m;
   while((m=re.exec(s))){
-    if(m[1]){ const c=/%clk\s+([\d:]+)/.exec(m[1]); if(c&&out.length) out[out.length-1].clk=c[1]; continue; } // comment: clk -> previous move
+    if(m[1]){ const c=/%clk\s+([\d:]+)/.exec(m[1]),e=/%eval\s+([^\]\s]+)/.exec(m[1]);
+      if(out.length){if(c)out[out.length-1].clk=c[1];if(e)out[out.length-1].eval=e[1];} continue; } // annotations -> previous move
     if(m[2]) break;                                                     // first game-result token (1-0 etc.) ends the game — ignore any further games pasted
     const san=m[3]; if(!san||/^[0-9.]+$/.test(san))continue;
-    out.push({san:san.replace(/0/g,"O"),suffix:m[4]||"",clk:null});
+    out.push({san:san.replace(/0/g,"O"),suffix:m[4]||"",clk:null,eval:null});
   }
   return out;
 }
@@ -725,7 +726,8 @@ function qcdSquare(chg,ish){
 const WATERCOL={pond:"rgba(122,201,236,.55)",creek:"rgba(96,182,228,.55)",river:"rgba(72,160,220,.57)",lake:"rgba(54,138,204,.6)",sea:"rgba(40,108,176,.63)",ocean:"rgba(24,78,148,.67)"};
 const LANDRAMP=["rgba(126,197,107,.5)","rgba(170,203,93,.5)","rgba(207,197,111,.5)","rgba(193,159,99,.52)","rgba(163,131,87,.54)","rgba(143,127,113,.56)","rgba(172,162,152,.58)","rgba(228,231,235,.64)"];
 const landCol=e=>LANDRAMP[Math.min(Math.max(e-1,0),LANDRAMP.length-1)];
-function computeTerrain(frame){
+function computeTerrain(frame,ply){
+  if(Number.isInteger(ply)){const h=hydroTimeline()[ply];if(h)return h.terrain;}
   const lab=fieldOf(frame), sqs=Object.keys(lab), wset=new Set(sqs.filter(s=>lab[s]==="c"));
   const compId={},comps=[];
   wset.forEach(s=>{if(compId[s]!=null)return;const id=comps.length,st=[s],cells=[];compId[s]=id;
@@ -741,6 +743,56 @@ function computeTerrain(frame){
   sqs.forEach(s=>{ if(lab[s]==="c"){const it=info[compId[s]];color[s]=WATERCOL[it.type];type[s]=it.type;}
     else {color[s]=landCol(elev[s]==null?3:elev[s]);type[s]="land·"+(elev[s]==null?3:elev[s]);} });
   return {color,type,lab};
+}
+
+/* HydroGRRLE: a temporally coherent earth/water/ice/sky system. HRL supplies the
+   target relief; chess evaluation supplies move energy; water then relaxes downhill
+   instead of teleporting between independently generated frames. Values stay
+   deterministic and the legacy integer height/water export remains intact. */
+let _hydroKey=null,_hydroFrames=null;
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function evalPawns(i){
+  const raw=i>0&&moves[i-1]&&moves[i-1].eval;
+  if(raw){if(raw[0]==="#")return (raw[1]==="-"?-1:1)*12;const n=parseFloat(raw);if(Number.isFinite(n))return clamp(n,-12,12);}
+  const fr=frames[i],VAL={p:1,n:3,b:3,r:5,q:9,k:0};let w=0,b=0;
+  for(const s in fr.placement){const id=fr.placement[s],v=VAL[fr.pieces[id].type]||0;id[0]==="w"?w+=v:b+=v;}
+  return clamp((w-b)*.55+(i===0?.18:0),-12,12);
+}
+function focusRadius(){const base=parseInt((game.tc||"").split("+")[0],10);return !base||base>=86400?3:base>=900?2.5:base>=300?1.75:1.15;}
+function waterName(n,connected){if(n<.22)return "";if(n<.55)return connected>2?"creek":"pond";if(n<1.05)return "river";if(n<1.65)return "lake";if(n<2.35)return "sea";return "ocean";}
+function hydroTimeline(){
+  const key=gameKey+"|"+frames.length+"|"+moves.length;if(_hydroKey===key&&_hydroFrames)return _hydroFrames;
+  const sqs=[];for(let r=1;r<=8;r++)for(let f=0;f<8;f++)sqs.push(sqOf(f,r));
+  let earth={},water={};const out=[],radius=focusRadius();
+  for(let i=0;i<frames.length;i++){
+    const fld=chargeOf(frames[i]),ev=evalPawns(i),prevEv=i?evalPawns(i-1):.18;
+    if(i===0)sqs.forEach(s=>{ // almost flat: HRL relief + White's small first-move rise
+      const whiteTilt=(4.5-ri(s))*.025;earth[s]=2+.32*Math.abs(fld.chg[s])-.18*fld.ish[s]-.035*ev*fld.chg[s]+whiteTilt;water[s]=.08+.62*fld.ish[s];});
+    else{
+      const note=frames[i].note,delta=ev-prevEv,mover=note.moverId[0],good=(mover==="w"?1:-1)*delta;
+      sqs.forEach(s=>{const target=2+.85*Math.abs(fld.chg[s])-1.05*fld.ish[s]-.08*ev*fld.chg[s];earth[s]+=.14*(target-earth[s]);});
+      if(note&&note.from&&note.to){
+        const impulse=clamp(.42+Math.abs(delta)*.34+(note.captured?.35:0)+(moves[i-1].suffix? .28:0),.35,2.4),sign=good>=0?1:-1;
+        sqs.forEach(s=>{const d=Math.min(cheb(s,note.from),cheb(s,note.to));if(d>Math.ceil(radius))return;
+          const near=Math.max(note.to===s?1:note.from===s?.72:0,(1-d/(radius+1))*.42);
+          earth[s]+=sign*impulse*near*(s===note.from?-.55:1);});
+      }
+      // rainfall/evaporation moves gradually toward HRL contestation; then water flows downhill.
+      sqs.forEach(s=>{const climate=.05+.9*fld.ish[s]+Math.max(0,1.55-earth[s])*.28;water[s]=Math.max(0,water[s]+.18*(climate-water[s]));});
+      for(let pass=0;pass<3;pass++){const dw={};sqs.forEach(s=>dw[s]=0);sqs.forEach(s=>{
+        if(water[s]<.03)return;let low=s,level=earth[s]+water[s];neighbors8(s).forEach(n=>{const nl=earth[n]+water[n];if(nl<level){level=nl;low=n;}});
+        if(low!==s){const q=Math.min(water[s]*.18,Math.max(0,(earth[s]+water[s]-level)*.12));dw[s]-=q;dw[low]+=q;}});sqs.forEach(s=>water[s]=Math.max(0,water[s]+dw[s]));}
+    }
+    const color={},type={},lab={},height=[],waterGrid=[],earthGrid=[],waterLevel=[],ice=[],sky=[];
+    sqs.forEach(s=>{lab[s]=fld.lab[s];const wn=waterName(water[s],neighbors8(s).filter(n=>water[n]>.22).length);
+      type[s]=wn||"land·"+clamp(Math.round(earth[s]),1,8);color[s]=wn?WATERCOL[wn]:landCol(Math.round(earth[s]));});
+    for(let r=1;r<=8;r++){const hr=[],wr=[],er=[],wl=[],ir=[],sr=[];for(let f=0;f<8;f++){const s=sqOf(f,r),wn=waterName(water[s],neighbors8(s).filter(n=>water[n]>.22).length);
+      hr.push(wn?-clamp(Math.ceil(water[s]),1,4):clamp(Math.round(earth[s]),1,8));wr.push(wn);er.push(+earth[s].toFixed(3));wl.push(+water[s].toFixed(3));
+      ir.push(water[s]>1.25&&earth[s]>3.8?+Math.min(1,(water[s]-1.25)/1.5).toFixed(3):0);sr.push(+clamp(.35+fld.ish[s]*.4+Math.abs(ev)/24,0,1).toFixed(3));}
+      height.push(hr);waterGrid.push(wr);earthGrid.push(er);waterLevel.push(wl);ice.push(ir);sky.push(sr);}
+    out.push({terrain:{color,type,lab},height,water:waterGrid,hydro:{prior:"maestro-hrl-coloration",earth:earthGrid,water:waterLevel,ice,sky,evaluation:+ev.toFixed(3),evaluationDelta:+(ev-prevEv).toFixed(3),focusRadius:radius}});
+  }
+  _hydroKey=key;_hydroFrames=out;return out;
 }
 function isCrossingMove(i){ if(i<1)return false; const note=frames[i]&&frames[i].note; if(!note||!note.from)return false;
   const pf=fieldOf(frames[i-1]), mc=note.moverId[0], opp=mc==="w"?"b":"w", t=pf[note.to]; return t==="c"||t===opp; }
@@ -960,18 +1012,14 @@ function buildWorld(){
   for(const s in sp){const id=sp[s],c=charOf(id,hero);
     pieces.push({id,color:id[0],team:id[0]===hero?"woodland":"misfit",type:id[1].toLowerCase(),startSquare:s,name:c[1],emoji:c[0]});}
   const out=[];
-  for(let i=0;i<frames.length;i++){const fr=frames[i],terr=computeTerrain(fr),roles=computeRoles(fr,hero);
-    const height=[],water=[];
-    for(let r=1;r<=8;r++){const hr=[],wr=[];
-      for(let f=0;f<8;f++){const ty=terr.type[F[f]+r];
-        if(ty.indexOf("land")===0){hr.push(parseInt(ty.split("·")[1])||1);wr.push("");}
-        else{hr.push(DEPTH[ty]||-1);wr.push(ty);}}
-      height.push(hr);water.push(wr);}
+  const hydro=hydroTimeline();
+  for(let i=0;i<frames.length;i++){const fr=frames[i],terr=hydro[i].terrain,roles=computeRoles(fr,hero);
+    const height=hydro[i].height,water=hydro[i].water;
     const rmap={};for(const id in roles.map)rmap[id]={role:roles.map[id].role,strength:+roles.map[id].conf.toFixed(3)};
     const note=fr.note,mv=moves[i-1];
     const move=(i===0||!note||!note.moverId)?null:{san:mv?mv.san+mv.suffix:"",from:note.from,to:note.to,moverId:note.moverId,
       captured:note.captured||null,castle:note.castle||null,promo:note.promo||null,crossing:isCrossingMove(i)};
-    out.push({ply:i,move,placement:Object.assign({},fr.placement),roles:rmap,height,water,
+    out.push({ply:i,move,placement:Object.assign({},fr.placement),roles:rmap,height,water,hydro:hydro[i].hydro,
       beat:(i===0?0:+beatOf(i).toFixed(3)),onset:(i===0?0:+onsetOf(i).toFixed(3)),   // rhythm: replay can be timed to the music
       coherence:+roles.coherence.toFixed(3),advantage:roles.advantage});}
   return {format:"chess-world",version:1,
@@ -979,7 +1027,7 @@ function buildWorld(){
       key:TONIC_NAMES[keyTonic],tempo:MUS_BPM,timeSignature:`${computeRhythm().meter.num}/${computeRhythm().meter.den}`,
       plies:frames.length-1,generator:"Chess Maestro"},
     files:F,
-    note:"height[rankIndex 0..7][fileIndex 0..7]; rankIndex0=rank1, fileIndex0=file a. height<0 = water depth, >0 = land elevation. placement maps square -> piece id; pieces[] gives identity/team/emoji.",
+    note:"HydroGRRLE timeline: legacy integer height/water plus continuous hydro earth, water, ice, sky, evaluation, and focusRadius. Water changes gradually and flows downhill; move source/destination and neighbors receive evaluation-scaled earth impulses.",
     legend:{roles:ROLES, water:["pond","creek","river","lake","sea","ocean"], elevation:LANDNAMES},
     pieces, frames:out};
 }
@@ -1064,13 +1112,14 @@ function makeOtbMove(from,to,promo){
   frames=frames.slice(0,cur+1);moves=moves.slice(0,cur);
   frames.push({placement:{...st.placement},pieces:JSON.parse(JSON.stringify(st.pieces)),note});
   moves.push({san,suffix,clk:null});
-  cur=frames.length-1;_rhythm=null;_rhythmKey=null;branched=true;
+  cur=frames.length-1;_rhythm=null;_rhythmKey=null;_hydroKey=null;_hydroFrames=null;branched=true;
   document.getElementById("moves").dataset.built="";otbSel=null;otbTargets=[];render();
   if(suffix==="#")setTimeout(()=>alert("Checkmate — "+(mColor==="w"?"White":"Black")+" wins! 🏆"),60);
   else if(!hasLegal(st))setTimeout(()=>alert("Stalemate — it's a draw."),60);}
 function showPromo(from,to){otbPending={from,to};document.getElementById("promoPick").classList.add("on");}
 function load(key){
   if(typeof stop==="function") stop();                                   // never leave autoplay running across a load
+  _hydroKey=null;_hydroFrames=null;
   gameKey=key; game=GAMES[key]; keyTonic=tonicFromOpening(game.label||""); const mv=parseMoves(game.pgn);
   frames=buildFrames(mv,game); moves=mv.slice(0,frames.length-1);
   g_increment=parseIncrement(game.tc); _rhythm=null; _rhythmKey=null;     // rebuild rhythm for the new game
@@ -1110,7 +1159,7 @@ function render(){
   const fr=frames[cur], note=fr.note, hero=game.hero, flip=(hero==="b");
   const roleRes = rolesOn ? computeRoles(fr, hero) : null;
   const roleMap = roleRes ? roleRes.map : null;
-  const terr = riverOn ? computeTerrain(fr) : null;
+  const terr = riverOn ? computeTerrain(fr,cur) : null;
   const qcd  = qcdOn ? chargeOf(fr) : null;
   const crossingNow = cur>0 && isCrossingMove(cur);
   let checkSq=null;
