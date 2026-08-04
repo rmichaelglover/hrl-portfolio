@@ -611,4 +611,15 @@ named marker using only the geometry the points share.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+[Marginal Improvement Reciprocity License 1.0](LICENSE) (MIRL-1.0). This is a
+custom source-available license: noncommercial use is welcome; commercial use
+is limited to independent natural-person freelancers, consultants, and
+educators who first make a significant marginal improvement, publish its full
+source under the same license, take compensation only for their own labor,
+not as a return on capital, **and receive prior written approval from the Trust
+of Trusts**. See the [plain-language licensing guide](LICENSING.md).
+The engineers-only, zero-compensation review board is described in the
+[Trust of Trusts stewardship charter](TRUST-OF-TRUSTS.md).
+
+Third-party material retains its own license. Earlier versions released under
+MIT remain under MIT.
