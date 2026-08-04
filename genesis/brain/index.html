@@ -92,4 +92,5 @@ document.getElementById('play').onclick=function(){ if(t>=frames.length-1)t=0; p
 document.getElementById('reset').onclick=()=>{ seed=D.seed.slice(); frames=D.frames; t=0; playing=false; document.getElementById('play').textContent='▶ Stimulate'; };
 document.getElementById('leg').innerHTML=Array.from({length:D.K},(_, i)=>`<span><i class="dot" style="background:${COL[i]}"></i>module ${i+1} · ${D.sizes[i]||0}</span>`).join('');
 loop();
-</script></body></html>
+</script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

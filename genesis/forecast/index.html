@@ -78,4 +78,5 @@ document.getElementById('wleg').innerHTML=D.models.map((m,i)=>`<span><i class="d
    entries.map(([k,v])=>{const win=k==='HRL-ensemble';const col=win?'#ffcf5e':(k==='simple-average'?'#8fb0ff':'#5b6betc'.slice(0,7));
      return `<div class="row ${win?'win':''}"><span class="nm">${k}</span><span class="bar" style="width:${Math.max(4,100*v/worst)}%;background:${win?'#ffcf5e':'#37506e'}"></span><span>${(v/1000).toFixed(1)}k</span></div>`;}).join('');
 })();
-</script></body></html>
+</script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

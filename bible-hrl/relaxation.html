@@ -98,4 +98,5 @@ document.getElementById('play').onclick=function(){ if(t>=T-1){t=0;} playing=!pl
 document.getElementById('replay').onclick=function(){ t=0; playing=true; last=null; document.getElementById('play').textContent='⏸ Pause';};
 document.getElementById('scrub').oninput=function(){ playing=false; document.getElementById('play').textContent='▶ Play'; t=this.value/100*(T-1); render(t);};
 </script>
+<script src="/hrl-portfolio/entry-agreement.js" defer></script>
 </body></html>

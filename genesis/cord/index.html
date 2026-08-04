@@ -94,4 +94,5 @@ document.getElementById('play').onclick=function(){ if(t>=frames.length-1)t=0; p
 document.getElementById('reset').onclick=()=>{ seed=D.seed.slice(); frames=D.frames; t=0; playing=false; document.getElementById('play').textContent='▶ Sense → Reason → Act'; };
 document.getElementById('leg').innerHTML=D.strands.map((s,i)=>`<span><i class="dot" style="background:${COL[i]}"></i>${s} · ${D.counts[s]}</span>`).join('');
 loop();
-</script></body></html>
+</script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

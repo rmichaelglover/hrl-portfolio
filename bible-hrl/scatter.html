@@ -36,4 +36,5 @@ for(let g=0;g<=Math.round(xmax*10);g+=2){const v=g/10;const t=mk('text',{x:X(v),
 const xl=mk('text',{x:(W+L)/2,y:H-8,fill:'#cfc7e6','font-size':12,'text-anchor':'middle'});xl.textContent='TF-IDF similarity →';svg.appendChild(xl);
 PTS.forEach(p=>{const v=p.y; const c=v>=0?`rgba(61,220,151,${0.25+Math.abs(v)*0.6})`:`rgba(255,84,112,${0.25+Math.abs(v)*0.6})`;
   const cir=mk('circle',{cx:X(p.x),cy:Y(v),r:2.6,fill:c}); const tt=mk('title',{}); tt.textContent=`${p.a}  vs  ${p.b}  (${v>=0?'+':''}${v.toFixed(2)})`; cir.appendChild(tt); svg.appendChild(cir);});
-</script></body></html>
+</script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

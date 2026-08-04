@@ -35,3 +35,7 @@ those versions cannot be withdrawn by this change.
 
 The license controls protected portfolio material, not general facts, abstract
 ideas, skills, or expertise outside the legal scope of copyright and patent.
+
+Entry to the published Gaia Worlds is also presented with the versioned
+[Gaia Worlds Entry Terms](TERMS.md). Browser acceptance does not expand the
+scope of copyright or revoke earlier grants.
