@@ -37,6 +37,10 @@ or open **`maestro.html`** locally in any modern browser. That exact
   hear the inferred meter.
 - **⬇ Export** — MIDI, WAV (upload to Suno), a Suno text prompt, or a **🌍 World JSON** that
   the included Roblox script reads to build an evolving 3D world of the game.
+- **🌿 Study branches** — paste or load a multi-game study PGN to see the shared
+  intersection, annotated-evaluation engine evidence, Manny's recorded intuition line,
+  and the leading alternative branches. This is dependency-free and labels study
+  consensus honestly when no engine evaluations are present.
 
 ### Install it as an app (iPad / iPhone)
 See `PWA-INSTALL.md`. Short version: host the folder over HTTPS, open `maestro.html` in

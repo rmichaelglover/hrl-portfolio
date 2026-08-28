@@ -92,8 +92,10 @@
   .sq.noise .pc{opacity:.42;filter:grayscale(.6)}
   .btnrole{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);cursor:pointer}
   .btnrole.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
-  #loadPanel,#exportPanel{max-width:980px;margin:0 auto;padding:4px 16px 0;display:none}
+  #loadPanel,#exportPanel,#studyPanel{max-width:980px;margin:0 auto;padding:4px 16px 0;display:none}
   #loadPanel .card2,#exportPanel .card2{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}
+  #studyPanel .card2{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}
+  .studytable{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}.studytable th,.studytable td{padding:5px 7px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.studytable small{color:var(--mut)}
   #exportPanel code{background:#f0eee9;padding:1px 5px;border-radius:4px;font-size:11px}
   #pgnText{width:100%;height:120px;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:6px;padding:8px;resize:vertical;color:var(--ink)}
   .loadrow{display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap;font-size:13px}
@@ -158,6 +160,7 @@
     <button id="btnQcd" class="btnrole" title="QCD disco overlay: the HRL influence field as a full-spectrum colour-charge map — white-control cool, black-control warm, the contested ish seam (Markov blanket) glows">🪩 QCD</button>
     <button id="btnRage" class="btnrole" title="🃏 Rage Comics: pop a classic rage face on captures, checks and checkmate (off by default)">🃏 Rage</button>
     <button id="btnLoad" class="btnrole" title="Load any annotated PGN">📋 Load PGN</button>
+    <button id="btnStudy" class="btnrole" title="Intersect every game in a study PGN">🌿 Study branches</button>
     <button id="btnOtb" class="btnrole" title="Play moves right on the board (hot-seat, both sides)">♟️ Play OTB</button>
     <button id="btnFlags" class="btnrole" title="Add flag emoji to characters, squares, and analysis arrows">🏳️ Flags</button>
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
@@ -174,6 +177,7 @@
     <button data-p="q">♛ Queen</button><button data-p="r">♜ Rook</button>
     <button data-p="b">♝ Bishop</button><button data-p="n">♞ Knight</button>
   </div></div>
+  <div id="studyPanel"><div id="studyResults"></div></div>
 
   <div id="loadPanel"><div class="card2">
     <textarea id="pgnText" placeholder="Paste an annotated PGN here — headers + moves. Comments, [%eval]/[%clk], NAGs (?! ??), and variations are all handled."></textarea>
@@ -232,6 +236,7 @@
 
 <!-- WorldKit: turns this page's chess-world export into a Minecraft datapack / Roblox build -->
 <script src="worldkit.js"></script>
+<script src="study-branches.js"></script>
 <script>
 /* ===================== GAMES ===================== */
 const GAMES = {
@@ -1375,6 +1380,7 @@ document.getElementById("btnQcd").onclick=function(){qcdOn=!qcdOn;this.classList
 document.getElementById("btnRage").onclick=function(){rageOn=!rageOn;this.classList.toggle("on",rageOn);if(rageOn&&window.RAGE)RAGE.pop("challenge","Rage mode on — reacting to the carnage.");};
 document.getElementById("btnLoad").onclick=function(){const p=document.getElementById("loadPanel");
   p.style.display=(p.style.display==="block")?"none":"block";this.classList.toggle("on",p.style.display==="block");};
+document.getElementById("btnStudy").onclick=function(){const p=document.getElementById("studyPanel");const open=p.style.display==="block";p.style.display=open?"none":"block";this.classList.toggle("on",!open);if(!open){const text=(document.getElementById("pgnText").value||((GAMES._loaded||{}).pgn)||"").trim();StudyBranches.render(text,document.getElementById("studyResults"),32);}};
 document.getElementById("pgnCancel").onclick=()=>{document.getElementById("loadPanel").style.display="none";document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnLoad").onclick=()=>{stop();loadCustom(document.getElementById("pgnText").value,document.getElementById("pgnSide").value);document.getElementById("btnLoad").classList.remove("on");};
 document.getElementById("pgnFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById("pgnText").value=r.result;};r.readAsText(f);};
