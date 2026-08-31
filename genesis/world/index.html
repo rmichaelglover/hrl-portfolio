@@ -1,0 +1,1493 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gooblets &amp; Zappies — a little world that grows itself</title>
+<meta name="description" content="A 2-D artificial-life world that grows and changes on its own: relaxation-labeled biomes (desert, plains, forest, water) where red Gooblets eat pink bushes and drink water while blue Zappies hunt them. Built with Elbie.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#8a97b8;--line:#18213c;
+ --water:#2f8fd0;--desert:#e0a23a;--plain:#57c257;--forest:#2c7a3a;--goob:#ee3b2f;--zap:#3b6cff;--bush:#ff6ec7;--human:#8b1a1a;--settle:#8a5c30;--lev:#1e46a0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#0e1226,var(--bg));color:var(--ink);
+ font:15px/1.55 ui-sans-serif,system-ui;text-align:center}
+.wrap{max-width:820px;margin:0 auto;padding:26px 16px 70px}
+h1{font:700 clamp(22px,4vw,36px)/1.1 ui-serif,Georgia,serif;margin:0 0 4px}
+.sub{color:#8fd0ff;letter-spacing:2px;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+.sub b{color:#ffd27f}
+.lede{color:var(--dim);max-width:720px;margin:0 auto 14px;font-size:14px}.lede b{color:var(--ink)}
+#c{width:100%;max-width:630px;aspect-ratio:1;background:#02030a;border:1px solid var(--line);border-radius:14px;
+ image-rendering:pixelated;cursor:crosshair;touch-action:none;display:block;margin:0 auto}
+.tools{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:12px auto 6px;max-width:640px}
+.tools button{background:#0c1226;color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:7px 12px;
+ font:13px ui-monospace,monospace;cursor:pointer;transition:background .14s,color .14s,border-color .14s}
+.tools button.on{background:#12203a;color:#fff;border-color:#2f5aa0}
+.tools button:hover:not(.on){color:var(--ink)}
+.tools .sep{width:1px;background:var(--line);margin:2px 4px}
+.speedrow{display:flex;align-items:center;justify-content:center;gap:9px;margin:4px auto 2px;font:13px ui-monospace,monospace;color:var(--dim)}
+.speedrow input[type=range]{width:190px;accent-color:#8fd0ff}
+.speedrow b{color:#8fd0ff;min-width:34px;display:inline-block;text-align:left}
+.counts{font:13px ui-monospace,monospace;color:var(--dim);margin:8px auto 2px}
+.counts b{font-size:15px} .cg{color:var(--goob)} .cz{color:var(--zap)} .cb{color:var(--bush)} .ch{color:#cf5b54} .cs{color:#c9925a} .cl{color:#5a86e6} .cspec{color:#c9bff0} .cfire{color:#ff8a3e} .ctreas{color:#ffd76a} .cang{color:#fff2b0} .cfolk{color:#2fd0b8} .csn{color:#d9b483} .cclaw{color:#c9203a} .ctree{color:#6fae55} .cwell{color:#7dff9e} .cgk{color:#ffd23a}
+#graph{width:100%;max-width:630px;height:64px;display:block;margin:6px auto 0;background:#070c18;border:1px solid var(--line);border-radius:8px}
+.glegend{display:flex;flex-wrap:wrap;gap:5px 6px;justify-content:center;margin:7px auto 0;max-width:648px}
+.glegend button{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 8px;
+ font:11px ui-monospace,monospace;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:opacity .14s,border-color .14s}
+.glegend button.off{opacity:.32}
+.glegend button:hover{border-color:#2f5aa0}
+.gsw{width:15px;height:3px;border-radius:2px;display:inline-block}
+.book{display:none;position:fixed;inset:0;background:rgba(4,6,14,.82);z-index:50;align-items:center;justify-content:center}
+.book.open{display:flex}
+.bookinner{background:#0c1226;border:1px solid #2f5aa0;border-radius:14px;padding:16px 18px;width:min(92vw,560px);box-shadow:0 12px 48px rgba(0,0,0,.6)}
+.bookhead{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--ink);margin-bottom:12px}
+.bookhead b{color:#ffd27f}
+.bdim{color:var(--dim);font-size:13px;font-weight:normal}
+.bookhead #bookx{margin-left:auto;background:#0c1226;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px}
+.bookgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:230px}
+.bcard{background:#070c18;border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center;transition:border-color .14s}
+.bcard.seen{border-color:#2f5aa0}
+.bemoji{font-size:34px;line-height:1.1}
+.bcard.locked .bemoji{filter:grayscale(1) brightness(.6)}
+.bname{margin-top:7px;font:12px ui-monospace,monospace;color:var(--ink)}
+.bcard.locked .bname{color:var(--dim)}
+.brealm{font:10px ui-monospace,monospace;color:var(--dim);margin-top:2px}
+.booknav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
+.booknav button{background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:6px 14px;cursor:pointer;font:13px ui-monospace,monospace}
+.booknav button:disabled{opacity:.35;cursor:default}
+.bhint{margin-top:12px;text-align:center;font-size:11.5px;color:var(--dim)}.bhint b{color:#ffd27f}
+.bcard{position:relative}
+.bcard.sparkle{border-color:#ffd23a;animation:bsparkle 1.1s ease-in-out infinite}
+@keyframes bsparkle{0%,100%{box-shadow:0 0 3px #ffd23a}50%{box-shadow:0 0 15px #ffe23a}}
+.bnew{position:absolute;top:5px;right:6px;font:9px ui-monospace,monospace;color:#221800;background:#ffd23a;border-radius:6px;padding:1px 5px;font-weight:bold}
+#bookbtn.ping{position:relative}
+#bookbtn.ping::after{content:'✨';position:absolute;top:-7px;right:-6px;font-size:13px;animation:bsparkle 1.1s ease-in-out infinite}
+#badgebtn{border-color:#ffd23a;color:#ffe07a;animation:bsparkle 1.4s ease-in-out infinite}
+#monarchbtn{border-color:#ffd23a;color:#ffe07a}
+.mrow{display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.memoji{font-size:26px;width:34px;text-align:center;flex:none;filter:grayscale(1) brightness(.65)}
+.mrow.has .memoji{filter:none}
+.mname{flex:1;text-align:left;font:13px ui-monospace,monospace;color:var(--ink)}
+.mrealm{color:var(--dim);font-size:11px}
+.mwho{font:13px ui-monospace,monospace;color:#ffd27f;text-align:right;min-width:118px}
+.mrow:not(.has) .mwho{color:var(--dim)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:12px auto 0;max-width:660px;
+ font:12px ui-monospace,monospace;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(255,255,255,.15)}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.note{color:var(--dim);font-size:12.5px;max-width:760px;margin:16px auto 0;text-align:left;
+ background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.note b{color:#8fd0ff} .note i{color:#ffd27f}
+a{color:#8fd0ff;text-decoration:none}
+</style></head><body><div class="wrap">
+<h1>Gooblets &amp; Zappies</h1>
+<div class="sub">a little world that grows itself · <b>built with Elbie</b></div>
+<p class="lede">A tiny 2-D world that <b>grows and changes on its own</b>. The land labels itself into
+ <b>biomes</b> — desert, plains, forest, water — that drift and shift. The dumb little
+ <b style="color:var(--goob)">Gooblets</b> munch the <b style="color:var(--bush)">pink bushes</b> and run to the water to
+ <b>drink</b>… until the <b style="color:var(--zap)">Zappies</b> hunt them down. The
+ <b style="color:#cf5b54">Humans</b> chop wood to build <b style="color:#c9925a">brown settlements</b> they can hide in. And deep in the
+ water lurk the <b style="color:#5a86e6">Leviathans</b>, who lunge at anyone drinking at the shore. Watch it all
+ rise and fall forever. <b>Click the world</b> to play god.</p>
+
+<canvas id="c" width="630" height="630"></canvas>
+
+<div class="tools" id="tools">
+  <button data-tool="goob" class="on">🔴 Drop Gooblets</button>
+  <button data-tool="zap">🔵 Drop Zappies</button>
+  <button data-tool="human">🟥 Drop Humans</button>
+  <button data-tool="lev">🐋 Drop Leviathans</button>
+  <button data-tool="bush">🌸 Plant Bushes</button>
+  <button data-tool="angel">👼 Drop Angels</button>
+  <button data-tool="wooly">🐑 Drop Woolies</button>
+  <button data-tool="dragon">🐉 Drop Dragonlings</button>
+  <button data-tool="golddragon">🟡 Gold Dragon</button>
+  <button data-tool="sniffer">🐭 Sniffers</button>
+  <button data-tool="claw">🐾 Claws</button>
+  <button data-tool="treeman">🌳 Treemen</button>
+  <span class="sep"></span>
+  <button data-tool="rain">🌧️ Rain</button>
+  <button data-tool="drought">☀️ Drought</button>
+  <span class="sep"></span>
+  <button id="pause">⏸ Pause</button>
+  <button id="reset">↺ New world</button>
+  <span class="sep"></span>
+  <button id="viewbtn">🕳️ Go Underground</button>
+  <button id="bookbtn">📖 Bestiary</button>
+  <button id="badgebtn" style="display:none">🏆 Badge</button>
+  <button id="plantbtn">🌿 Plantiary</button>
+  <button id="plantbadgebtn" style="display:none">🏆 Badge</button>
+  <button id="monarchbtn">👑 Monarchs</button>
+</div>
+<div class="book" id="book"><div class="bookinner">
+  <div class="bookhead"><b>📖 Bestiary</b> <span id="bookprog" class="bdim"></span> <button id="bookx">✕</button></div>
+  <div class="bookgrid" id="bookgrid"></div>
+  <div class="booknav"><button id="bookprev">◀ Prev</button> <span id="bookpage" class="bdim">Page 1</span> <button id="booknext">Next ▶</button></div>
+  <div class="bhint">Creatures you haven't seen on screen yet stay <b>❓ ???</b> — go find them to fill your book!</div>
+</div></div>
+<div class="book" id="badge"><div class="bookinner" style="text-align:center;max-width:420px">
+  <div style="font-size:76px;line-height:1.1;filter:drop-shadow(0 0 14px #ffd23a)">🏆</div>
+  <div style="font-size:20px;color:#ffd27f;font-weight:bold;margin-top:6px">Bestiary Complete!</div>
+  <div id="badgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every creature in the whole world. A true naturalist of Elbie's realm! 🎉</div>
+  <button id="badgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
+</div></div>
+<div class="book" id="plant"><div class="bookinner">
+  <div class="bookhead"><b>🌿 Plantiary</b> <span id="plantprog" class="bdim"></span> <button id="plantx">✕</button></div>
+  <div class="bookgrid" id="plantgrid"></div>
+  <div class="booknav"><button id="plantprev">◀ Prev</button> <span id="plantpage" class="bdim">Page 1</span> <button id="plantnext">Next ▶</button></div>
+  <div class="bhint">Plants you haven't seen on screen yet stay <b>❓ ???</b> — grow the world to fill it!</div>
+</div></div>
+<div class="book" id="plantbadge"><div class="bookinner" style="text-align:center;max-width:420px">
+  <div style="font-size:76px;line-height:1.1;filter:drop-shadow(0 0 14px #6fd06a)">🏆</div>
+  <div style="font-size:20px;color:#bfe89a;font-weight:bold;margin-top:6px">Plantiary Complete!</div>
+  <div id="plantbadgemsg" style="color:var(--ink);font-size:14px;margin-top:8px">You discovered every plant in the whole world! 🎉</div>
+  <button id="plantbadgex" style="margin-top:16px;background:#12203a;color:#fff;border:1px solid #2f5aa0;border-radius:8px;padding:7px 18px;cursor:pointer;font:13px ui-monospace,monospace">Close</button>
+</div></div>
+<div class="book" id="monarch"><div class="bookinner">
+  <div class="bookhead"><b>👑 The Five Monarchs</b> <button id="monarchx">✕</button></div>
+  <div id="monarchgrid"></div>
+  <div class="bhint">Who wears each crown <b>right now</b> — it says <b>— none —</b> when a throne sits empty. Watch it change as the world turns!</div>
+</div></div>
+<div class="speedrow">🐢 <input id="speed" type="range" min="0.25" max="6" step="0.25" value="1"> ⚡ speed <b id="speedval">1×</b></div>
+<div class="counts"><span class="cg">🔴 Gooblets <b id="ng">0</b></span> &nbsp;·&nbsp; <span class="cz">🔵 Zappies <b id="nz">0</b></span> &nbsp;·&nbsp; <span class="ch">🟥 Humans <b id="nh">0</b></span> &nbsp;·&nbsp; <span class="cl">🐋 Leviathans <b id="nl">0</b></span> &nbsp;·&nbsp; <span class="cfolk">🌊 Folk <b id="nfolk">0</b></span> &nbsp;·&nbsp; <span class="cspec">👻 Specters <b id="nspec">0</b></span> &nbsp;·&nbsp; <span class="cfire">🔥 Fire <b id="nfire">0</b></span> &nbsp;·&nbsp; <span class="cs">🏠 Settlements <b id="ns">0</b></span> &nbsp;·&nbsp; <span class="ctreas">💎 Treasury <b id="ntreas">0</b></span> &nbsp;·&nbsp; <span class="cb">🌸 Bushes <b id="nb">0</b></span> &nbsp;·&nbsp; <span class="cang">👼 Angels <b id="nang">0</b></span> &nbsp;·&nbsp; <span style="color:#f2f0e6">🐑 Woolies <b id="nwool">0</b></span> &nbsp;·&nbsp; <span style="color:#4fc06a">🐉 Dragonlings <b id="ndl">0</b></span> &nbsp;·&nbsp; <span class="csn">🐭 Sniffers <b id="nsn">0</b></span> &nbsp;·&nbsp; <span class="cclaw">🐾 Claws <b id="nclaw">0</b></span> &nbsp;·&nbsp; <span class="ctree">🌳 Treemen <b id="ntree">0</b></span> &nbsp;·&nbsp; <span class="cwell">🌲 Forest <b id="nwell">100%</b></span> &nbsp;·&nbsp; <span class="cgk">👑 Grove King <b id="ngk">— none —</b></span> &nbsp;·&nbsp; <span style="color:#b39ddb">🕯️ Fallen <b id="ndeath">0</b></span> &nbsp;·&nbsp; <span style="color:#8fd0ff">💙🐉 Dragons Lost <b id="ndragdeath">0</b></span> &nbsp;·&nbsp; <span id="clock" style="color:var(--dim)">day <b>0</b></span></div>
+<canvas id="graph" width="630" height="64"></canvas>
+<div class="glegend" id="glegend"></div>
+
+<div class="legend">
+  <span><i class="sw" style="background:var(--water)"></i>water</span>
+  <span><i class="sw" style="background:var(--desert)"></i>desert</span>
+  <span><i class="sw" style="background:var(--plain)"></i>plains</span>
+  <span><i class="sw" style="background:var(--forest)"></i>forest</span>
+  <span><i class="sw" style="background:var(--settle)"></i>settlement</span>
+  <span><i class="sw" style="background:#96969c"></i>stone wall</span>
+  <span><i class="dot" style="background:var(--bush)"></i>pink bush (food)</span>
+  <span><i class="dot" style="background:var(--goob)"></i>Gooblet</span>
+  <span><i class="dot" style="background:var(--zap)"></i>Zappy (hunter)</span>
+  <span><i class="dot" style="background:var(--human)"></i>Human (builder)</span>
+  <span><i class="dot" style="background:var(--lev)"></i>Leviathan (ocean)</span>
+  <span><i class="dot" style="background:#9a3ad0"></i>purple pear</span>
+  <span><i class="dot" style="background:#d9b483"></i>Sniffer (grove)</span>
+  <span><i class="dot" style="background:#3a2a44"></i>Claw (wild)</span>
+  <span><i class="dot" style="background:#6fae55"></i>Treeman</span>
+  <span><i class="dot" style="background:#1d5a2a"></i>🌲 Nature Giant</span>
+</div>
+
+<div class="note">
+<b>What's happening.</b> The <b>land labels itself by relaxation</b> — the same engine as the rest of Project Genesis. Every
+patch has four labels (water · desert · plains · forest) and each step it relaxes toward <i>agreement</i> with its neighbours,
+guided by a slowly drifting <b>moisture</b> map, so biomes form regions and then creep and change. <b style="color:var(--bush)">Pink
+bushes</b> sprout on the plains and forest and slowly ripen back after they're eaten.
+<br><br>
+<b>The two species.</b> <b style="color:var(--goob)">Gooblets</b> are dumb herbivores with two needs: they wander to the
+<b style="color:var(--bush)">pink bushes</b> to <b>eat</b>, and run to the water's edge to <b>drink</b>. Eat <b>5 bushes</b> (with a
+drink in you) and a Gooblet makes a baby — but go too long without food <i>or</i> water and it drops.
+<b style="color:var(--zap)">Zappies</b> are hunters — they chase the nearest Gooblet and zap it (though a Gooblet often slips
+away, especially by darting to the water), and after zapping <b>5 Gooblets</b> a Zappy makes a baby of its own.
+Too many Zappies and the Gooblets crash; then the Zappies starve and crash too, and the Gooblets bounce back — a
+<b>boom-and-bust</b> that never quite ends (a few new critters wander in from off-screen so the world never fully dies). A fun toy
+<i>ecosystem</i>, not real biology. And the world keeps a quiet tally of <b>all</b> its dead: for every <b>5000 creatures</b> that
+fall, a <b style="color:#8f6ab0">🥀 Flower of Lament</b> blooms on the very spot where the last of them died — a little monument to
+the fallen.
+<br><br>
+<b>The Humans.</b> <b style="color:#cf5b54">Humans</b> (dark red) also eat the pink bushes, but they gather <b>wood</b> from the
+forest and spend it to build <b style="color:#c9925a">brown settlement blocks</b>. A Human standing on a settlement is <b>safe from
+the Zappies</b> (who hunt Humans too), and <b>no other creature can walk onto settlement tiles</b>. There can only be about
+<b>two settlement blocks per Human</b> — if there are ever too many (because Humans died off), the extra ones <b>collapse</b> back
+into plain land.
+<br><br>
+<b>The Leviathans.</b> <b style="color:#5a86e6">Leviathans</b> (dark blue) live in the ocean and never leave it. When a creature comes
+to <b>drink at the shore</b>, a nearby Leviathan swims over and <b>eats it</b> — <i>unless</i> it's a <b style="color:#cf5b54">Human</b>,
+who instead <b>fishes the Leviathan</b> and eats it (a big meal that fills both its hunger and its baby-meter!). A Leviathan makes a
+baby after eating <b>15 creatures</b>. And they're territorial: whenever there are <b>more than two</b>, one hunts down another for a
+<b>duel</b> — a 50/50 fight, and the loser is gone. So Leviathans stay rare, and <b>can even go extinct</b> (drop more with the 🐋 tool).
+<br><br>
+<b>The underground.</b> Scattered dark <b>holes</b> drop any creature that steps on one into the <b>caves</b> below — hit
+<b>🕳️ Go Underground</b> to watch. Down there are three biomes: <b>mining grounds</b> (grey), where Humans dig new tunnels;
+<b>lava lands</b> (purple-brown) with one big pool of <b style="color:#e87016">lava</b> that kills anything that touches it; and the
+<b>underlake</b> (brown) with water and glowing <b style="color:#b6ff78">glowfruit</b> to eat. You can't cross the <b>black walls</b>.
+Lurking in the tunnels are the <b style="color:#c9bff0">Specters</b> — pale cave predators that hunt whatever fell in and <i>never
+breed</i>, so as they die off the caves grow quiet. And every <b>500 days</b> a <b>giant black creature</b> rises from the lava pool
+for a few seconds — any Gooblet or Zappy caught at the pool is turned into a <b style="color:#ff8a3e">fire minion</b> that walks on
+lava unharmed, hunts the fallen, and (like the Specters) never breeds. While you're underground, the drop tools place creatures
+<b>down in the caves</b> — feed them to the dark, or grow a colony in the glowfruit lake.
+<br><br>
+<b>The Fire Vessel — a hero's quest.</b> But a <b>Human</b> caught in the Giant's reach doesn't burn — he's <b>possessed</b> and
+becomes a <b style="color:#ff4a10">🔥 Fire Vessel</b> who climbs to the <b>surface</b> and <b>terrorizes</b> the land, slaying
+Gooblets and Zappies. To end him, <b>7 Humans</b> must team up beside him — a <b>50/50</b> duel. If they lose, all seven fall and he
+rages on; if they <b>win</b>, one hero is handed a <b style="color:#ffdd55">🗡️ Fire Sword</b> and dons <b style="color:#ff9a2e">orange
+robes</b>. That swordsman then marches <b>back down to the lava pit</b> — <b>burning through</b> any settlement or wall in his path —
+walks the fire unharmed, and <b>destroys the Fire King</b>
+himself — rising as the <b style="color:#ff2030">👑 Red King</b>. Humans flock to him, don <b style="color:#c23030">red robes</b>,
+and raise his settlements. (Slay the Fire King and the Giant <b>never rises again</b>.)
+<br><br>
+<b>The Humans get rich.</b> As Humans mine, they collect <b>stone</b> and sometimes strike <b>valuables</b>. They carry it all up
+top: the stone becomes grey <b>stone walls</b> that keep the Zappies out, and the valuables go into the <b>💎 treasury</b>. Once the
+treasury is full enough, a Human <b>buys a boat</b> and sails out onto the water to <b>fish</b> — where, if it's lucky, it might even
+hook a Leviathan.
+<br><br>
+<b>The Sky Realm.</b> Use the view button to rise to the <b>☁️ Sky Realm</b> — a scatter of <b>floating islands</b> in the open sky
+(drop creatures &amp; 👼 angels up here). The <b>angels</b> trade <b>1 💎 treasure for food</b>, so a starving creature can run to one
+and eat. On the <b>dark-red island</b> lives a <b style="color:#4fc06a">green dragon</b>: gather <b>10 Humans</b> on its island and
+they'll do battle — a <b>50/50</b> fight. Win and the Humans take a <b>👑 crown</b> — one becomes <b>King</b>, and the others rally to
+<b>protect</b> him. Lose, and that whole group is gone. The islands are joined by <b>bridges</b> so creatures can cross between them.
+And back on the surface there's a <b style="color:#b060e0">purple portal square</b>: have your Humans carry <b>3 treasures</b> to it and
+it turns <b style="color:#ffe23a">yellow</b> — then any creature that steps on it is whisked <b>up to the Sky Realm</b> (and can step on
+the glowing sky portal to come back down). Some islands are darker <b>forest islands</b> where fluffy <b>🐑 Woolies</b> graze on
+<b style="color:#e83a3a">red fruit</b>, while <b style="color:#4fc06a">🐉 Dragonlings</b> — tiny dragons — fly across the whole sky
+hunting them (drop your own with the 🐑 and 🐉 tools). A Dragonling that catches a Wooly carries it home to the <b>Dragon King</b>
+to hatch a new Dragonling — and if the Dragon King is ever slain, a Dragonling rises to take the throne. Scattered rarely across the
+islands are <b style="color:#c94a4a">🐲🌱 Dragonsnaps</b> — snapping plants the Dragonlings munch. But if a <b>Wooly</b> eats one
+first, it evolves into a horned <b style="color:#c9a06a">🐏 Fierce Woolie</b> that no longer flees — it <b>fends off</b> any
+Dragonling that dares attack it. A Fierce Woolie also paws up a <b style="color:#7d5836">🟫 dirt mound</b>, and a gentle
+<b style="color:#5aa76a">🌸🐉 Flower Dragon</b> drifts over to sow it with little white <b>💮 Sylvies</b>. Drop a
+<b style="color:#e0b020">🟡 Gold Dragon</b> and it will ignore everything else to hunt down the <b>Green Dragon</b> and duel it to
+the death — a <b>50/50</b> clash of titans. The Gold Dragon has its own <b style="color:#d0b840">golden island</b> where a
+<b style="color:#ffe07a">🥚 golden egg</b> rests: every <b>5000 days</b> it hatches a fresh Gold Dragon and a new egg is laid, so the
+gold line never dies out. And a darker legend haunts the heavens: once <b>500 dragons</b> have died across all the ages, the sky
+<b>tears open</b> and a baby-blue <b style="color:#7fbfff">💙🐉 Soul Dragon</b> glides out — sorrowful and alone — to <b>hunt down
+the Dragonlings</b>, raising its own lonely <b style="color:#8f5ad0">purple island</b> in the void.
+<br><br>
+<b>Long live the King.</b> A crowned <b style="color:#ffd23a">King</b> (he turns yellow) mostly wants one thing: to get <b>home to
+the surface</b>. Once down, his people build him a <b>4×4 hollow keep</b> with a <b>wheat farm</b> around it, and <b>3 blue-robed
+servants</b> shuttle wheat from the farm to feed him while he rules from inside his walls. Sometimes the keep is ringed by a
+<b style="color:#3fa0e0">💧 water moat</b> that keeps the Zappies out (his own people can still cross it), and sometimes it's just
+open ground — it varies each time.
+<br><br>
+<b>The Grove — an alternate dimension.</b> Cycle the view button once more to slip into the <b style="color:#3fd06a">🌲 Grove</b>, an
+<b>overgrown</b> world of three biomes: the lush <b style="color:#3fd06a">pear-tree grove</b> where <b style="color:#9a3ad0">purple
+pears</b> pop up and little tan <b>🐭 Sniffers</b> forage; the dark <b>🌿 Wild</b>, where bristly <b style="color:#c9203a">🐾
+Claws</b> devour any Sniffer — or <i>any</i> creature — that gets <b>lost</b> in there; and open <b>clearings</b>, where brown
+settlements pop up and gentle <b style="color:#6fae55">🌳 Treemen</b> live. The Treemen need nothing but the <b>🌲 wellness of the
+forest</b> — but drop <b>outside creatures</b> into the Grove and they trample and eat their way through it, and the wellness falls.
+Let it sink too low and the settlements <b>collapse</b>; keep it high and new ones <b>bloom</b>. In the Grove you can also
+drop its <b>own</b> creatures — 🐭 Sniffers, 🐾 Claws and 🌳 Treemen — with their tools.
+<br><br>
+<b>Nature Gooblets &amp; flora.</b> Drop a 🔴 Gooblet in the Grove and if it survives <b>50 days</b> it turns into a
+<b style="color:#4fae4a">🌱 Nature Gooblet</b> — a peaceful green one wearing a flower, that Claws no longer touch. As it roams it
+plants <b style="color:#e8395a">🌺 red vine-flowers</b> across the pear grove and <b style="color:#7a6a2a">🌿 bramble</b> across the
+wild. Where a vine and a bramble <b>meet at the border</b>, they merge into a <b style="color:#e24a7e">🌹 rose bush</b>.
+<br><br>
+<b>The Grove King &amp; the portal.</b> Every <b>2000 days</b> the Treemen <b>elect a King</b> (he wears a 👑), and his mood works a
+<b>portal</b> that links the Grove to the surface — you'll see its square on <b>both</b> maps. A <b style="color:#7fe0a0">🛡️ Safe
+King</b> <b>seals</b> the portal (it shows a grey ✗). An <b style="color:#e8564e">⚔️ Aggressive King</b> throws it open and musters the
+<b style="color:#c9203a">🐾 Claws</b> — they stream through onto the <b>surface</b> and hunt Gooblets, Zappies and Humans. A
+<b style="color:#7fe0a0">🤝 Helpful King</b> opens it the friendly way: <b>Humans</b> who stand on the surface portal cross over to
+<b>live with the Treemen</b>, who build <b>wooden pens</b> and <b>feed</b> every creature in the Grove (no wellness lost while he reigns).
+<br><br>
+<b>The five Monarchs.</b> This world answers to five great <b>Monarchs</b>: the <b style="color:#2fd0b8">🌊 Sea Monarch</b> — a sea
+dragon whose <b>folk</b> raid Gooblets at the shore (the folk must dodge the Leviathans, who leave the Sea Monarch alone — but every
+<b>1000 days</b> one Leviathan <b>challenges</b> the Sea Dragon for the throne in a 50/50 duel to the death; if the Leviathan wins it
+becomes the new Sea King, a <b>different colour</b>, and grows to full size over 500 days); the
+<b style="color:#4fc06a">🐉 Dragon Monarch</b> of the sky islands; the <b style="color:#ffd23a">👑 Human Monarch</b>, the crowned
+King; the <b style="color:#ff8a3e">🔥 Fire Monarch</b>, the Giant of the lava pool; and the <b style="color:#3fd06a">🌲 Nature
+Monarch</b> — a great <b>Giant</b> in the Grove's central clearing whose size and glow rise and fall with the forest's wellness, and
+who <b>expels</b> any stranger that strays too near its clearing.
+<br><br>
+<b>Play god.</b> Pick a tool and click the map: drop 🔴 Gooblets, 🔵 Zappies, 🟥 Humans or 🐋 Leviathans (in water), 🌸 plant
+Bushes, or change the weather — 🌧️ Rain grows forest, ☀️ Drought spreads desert.
+<br><br>
+<b>The Bestiary.</b> Open the <b>📖 Bestiary</b> to page through a book of every creature in the world. Any creature you haven't
+<b>seen on your own screen yet</b> stays a mystery — a <b>❓ ???</b> — until you find it (or make it appear), so explore every realm
+and trigger every monarch to fill all the pages. Each brand-new find <b style="color:#ffd23a">✨ sparkles</b> in the book, and once
+you've discovered <b>all</b> of them you earn a <b>🏆 badge</b> you can open to celebrate. There's a matching
+<b>🌿 Plantiary</b> too — a second book for all the world's <b>plants</b> (pears, bushes, fruit, glowfruit, vine-flowers, bramble and
+roses), with its own sparkles and completion badge.
+</div>
+<p style="margin-top:14px"><a href="../critter/">← The Critter</a> · <a href="../">Living Simulators (Genesis hub)</a> · <a href="../../">the full portfolio</a></p>
+</div>
+<script>
+const GW=90, GH=90, N=GW*GH, WATER=0,DESERT=1,PLAIN=2,FOREST=3;
+const cv=document.getElementById('c'), ctx=cv.getContext('2d');
+const SC=cv.width/GW;
+const off=document.createElement('canvas'); off.width=GW; off.height=GH;
+const octx=off.getContext('2d'); const img=octx.createImageData(GW,GH);
+ctx.imageSmoothingEnabled=false;
+const idx=(x,y)=>y*GW+x, rnd=()=>Math.random(), clamp01=v=>v<0?0:v>1?1:v;
+const BCOL=[[47,143,208],[224,162,58],[87,194,87],[44,122,58]];  // water, desert, plain, forest
+
+// ---------- terrain: relaxation-labeled biomes over a drifting moisture prior ----------
+function coarse(scale){ const cw=Math.ceil(GW/scale)+2, ch=Math.ceil(GH/scale)+2, g=new Float32Array(cw*ch);
+  for(let i=0;i<g.length;i++) g[i]=rnd(); return {g,cw,ch,scale}; }
+function sample(c,x,y){ const fx=x/c.scale, fy=y/c.scale, x0=fx|0,y0=fy|0, tx=fx-x0,ty=fy-y0;
+  const a=c.g[y0*c.cw+x0],b=c.g[y0*c.cw+x0+1],d=c.g[(y0+1)*c.cw+x0],e=c.g[(y0+1)*c.cw+x0+1];
+  return (a+(b-a)*tx)+((d+(e-d)*tx)-(a+(b-a)*tx))*ty; }
+let elevC, moistC;
+const elev=new Float32Array(N), moist=new Float32Array(N), biome=new Uint8Array(N);
+let bStr=new Float32Array(N*4), bTmp=new Float32Array(N*4);
+function computeElev(){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++) elev[idx(x,y)]=sample(elevC,x,y); }
+function computeMoist(){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++) moist[idx(x,y)]=sample(moistC,x,y); }
+function priorAt(i,out){ const e=elev[i], m=moist[i], land=clamp01((e-0.34)*6);
+  out[0]=(1-land)+0.02; out[1]=land*clamp01((0.40-m)*3)+0.02;
+  out[2]=land*clamp01(1-Math.abs(m-0.5)*3)+0.05; out[3]=land*clamp01((m-0.62)*3)+0.02;
+  const s=out[0]+out[1]+out[2]+out[3]; out[0]/=s;out[1]/=s;out[2]/=s;out[3]/=s; }
+function argmaxBiomes(){ for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<4;l++){ const v=bStr[i*4+l]; if(v>m){m=v;mi=l;} } biome[i]=mi; } }
+function initBiomes(){ const pr=[0,0,0,0]; for(let i=0;i<N;i++){ priorAt(i,pr); for(let l=0;l<4;l++) bStr[i*4+l]=pr[l]; } argmaxBiomes(); }
+function relaxBiomes(){ const pr=[0,0,0,0];
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); priorAt(i,pr);
+    const sup=[0,0,0,0]; let cnt=0; const add=j=>{sup[0]+=bStr[j];sup[1]+=bStr[j+1];sup[2]+=bStr[j+2];sup[3]+=bStr[j+3];cnt++;};
+    if(x>0)add(idx(x-1,y)*4); if(x<GW-1)add(idx(x+1,y)*4); if(y>0)add(idx(x,y-1)*4); if(y<GH-1)add(idx(x,y+1)*4);
+    const inv=cnt?1/cnt:0; let z=0;
+    for(let l=0;l<4;l++){ const v=Math.sqrt(pr[l])*(0.22+sup[l]*inv); bTmp[i*4+l]=v; z+=v; }
+    for(let l=0;l<4;l++) bTmp[i*4+l]/=z;
+  }
+  const t=bStr; bStr=bTmp; bTmp=t; argmaxBiomes();
+}
+function driftMoist(k){ for(let i=0;i<moistC.g.length;i++) moistC.g[i]=clamp01(moistC.g[i]+(rnd()-0.5)*k); computeMoist(); }
+
+// ---------- water-distance field (for thirsty gooblets to find water) ----------
+const wdist=new Int16Array(N);
+function computeWDist(){ const Q=[]; for(let i=0;i<N;i++){ if(biome[i]===WATER){wdist[i]=0;Q.push(i);} else wdist[i]=9999; }
+  let h=0; while(h<Q.length){ const i=Q[h++]; const x=i%GW,y=(i/GW)|0, d=wdist[i]; if(d>=28)continue;
+    const push=(nx,ny)=>{ if(nx<0||ny<0||nx>=GW||ny>=GH)return; const j=idx(nx,ny); if(wdist[j]>d+1){wdist[j]=d+1;Q.push(j);} };
+    push(x-1,y);push(x+1,y);push(x,y-1);push(x,y+1); } }
+const wdAt=(x,y)=>wdist[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
+function waterDir(x,y){ let bd=wdAt(x,y),bx=0,by=0;
+  for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){ const w=wdAt(x+dx,y+dy); if(w<bd){bd=w;bx=dx;by=dy;} }
+  const l=Math.hypot(bx,by)||1; return [bx/l,by/l]; }
+
+const inWater=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))]===WATER;
+const biomeAt=(x,y)=>biome[idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)))];
+
+// ---------- settlements (brown, human-built) + forest/settlement distance fields ----------
+const settle=new Uint8Array(N), swall=new Uint8Array(N), moat=new Uint8Array(N); let settleList=[], sdirty=true, treasury=0, swallCount=0;
+const cidx=(x,y)=>idx(Math.max(0,Math.min(GW-1,x|0)),Math.max(0,Math.min(GH-1,y|0)));
+const isSettle=(x,y)=>settle[cidx(x,y)]===1;
+const fdist=new Int16Array(N), sdist=new Int16Array(N);
+function bfsFrom(src,out,maxd){ const Q=[]; for(let i=0;i<N;i++){ if(src(i)){out[i]=0;Q.push(i);} else out[i]=9999; }
+  let h=0; while(h<Q.length){ const i=Q[h++]; const x=i%GW,y=(i/GW)|0,d=out[i]; if(d>=maxd)continue;
+    const p=(nx,ny)=>{ if(nx<0||ny<0||nx>=GW||ny>=GH)return; const j=idx(nx,ny); if(out[j]>d+1){out[j]=d+1;Q.push(j);} };
+    p(x-1,y);p(x+1,y);p(x,y-1);p(x,y+1); } }
+const computeFDist=()=>bfsFrom(i=>biome[i]===FOREST,fdist,24);
+const computeSDist=()=>bfsFrom(i=>settle[i]===1,sdist,24);
+const fdAt=(x,y)=>fdist[cidx(x,y)], sdAt=(x,y)=>sdist[cidx(x,y)];
+function gradDir(x,y,field){ let bd=field(x,y),bx=0,by=0; for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){ const w=field(x+dx,y+dy); if(w<bd){bd=w;bx=dx;by=dy;} } const l=Math.hypot(bx,by)||1; return [bx/l,by/l]; }
+
+// ---------- pink bushes (gooblet food) ----------
+const P={ gMeta:0.008,gThirst:0.0045,gHunger:1.5,gDrink:0.40,gRepro:2.4,gReproP:0.06,gMaxAge:1100,gStartE:1.2,gStartW:1.0,gSpeed:1.0,gEatGain:2.6,gFlee:5,
+  zPrey:0.80,zMeta:0.028,zRepro:3.0,zReproP:0.05,zMaxAge:900,zStart:1.2,zSpeed:1.05,zVision:5,zEat:1.1,zEatP:0.20,
+  gCap:900,zCap:150, NB:420, bushRegrow:0.011,
+  hMeta:0.006,hHunger:1.4,hEatGain:2.4,hMaxAge:1500,hStartE:1.4,hSpeed:0.95,hFlee:7,hWoodRate:0.06,hBuild:1.0,hReproAte:6,hCap:70,hThirst:0.0035,hDrink:0.40,hFishGain:2.2,
+  levVision:8,levSpeed:0.95,levEat:1.8,levMeta:0.003,levStartE:3.0,levPrey:1.0,levReproAte:15,levMaxAge:4000,levCap:14 };
+let bushes=[];
+let blueFlora=[];                                                                 // 🪻 blue flowers a Nature Gooblet carries up through the Helpful portal (never more than 3 on the surface)
+const goodBushCell=(x,y)=>{ const b=biomeAt(x,y); return (b===PLAIN||b===FOREST) && !isSettle(x,y) && !swall[cidx(x,y)] && !moat[cidx(x,y)]; };
+const goodBlueCell=(x,y)=>{ const i=cidx(x,y); return biome[i]!==WATER && !settle[i] && !swall[i] && !moat[i]; };
+let laments=[], deaths=0, dragonDeaths=0;                                         // 🥀 the Flower of Lament + a running tally of every creature (and every dragon) that has died
+function died(x,y){ if(++deaths % 5000 === 0) placeLament(x,y); }                 // count a death; every 5000th blooms a Flower of Lament where it fell
+function placeLament(x,y){ if(goodBlueCell(x,y)){ laments.push({x,y,born:day}); return; } // the grief surfaces on the nearest solid ground
+  for(let r=1;r<=8;r++)for(let t=0;t<12;t++){ const a=rnd()*6.283, nx=x+Math.cos(a)*r, ny=y+Math.sin(a)*r; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&goodBlueCell(nx,ny)){ laments.push({x:nx,y:ny,born:day}); return; } } }
+const dieAll=(set,list)=>{ if(set.size) set.forEach(i=>died(list[i].x,list[i].y)); }; // record a whole batch of removed creatures (indices into list)
+function placeBush(){ for(let t=0;t<40;t++){ const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)) return {x,y,food:0.3+rnd()*0.7}; } return null; }
+function initBushes(){ bushes=[]; while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
+function stepBushes(){ for(const b of bushes){ b.food=Math.min(1,b.food+P.bushRegrow); if(!goodBushCell(b.x,b.y)){ const nb=placeBush(); if(nb){b.x=nb.x;b.y=nb.y;b.food=nb.food;} } }
+  while(bushes.length<P.NB){ const b=placeBush(); if(b)bushes.push(b); else break; } }
+
+// ---------- creatures ----------
+let goob=[], zap=[], human=[];
+function spawnGoob(x,y,E,W){ if(goob.length<P.gCap) goob.push({x,y,E,W:W==null?P.gStartW:W,age:0,ate:0}); }
+function spawnZap(x,y,E){ if(zap.length<P.zCap) zap.push({x,y,E,age:0,ate:0}); }
+function spawnHuman(x,y,E){ if(human.length<P.hCap) human.push({x,y,E,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false}); }
+let lev=[], folk=[], seaMonarch=null, lastSeaChallenge=0;
+function spawnLev(x,y,E){ if(lev.length<P.levCap) lev.push({x,y,E,age:0,ate:0}); }
+function clampMove(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||isSettle(nx,ny)||swall[cidx(nx,ny)]||moat[cidx(nx,ny)]) return; c.x=nx;c.y=ny; } // gooblets/zappies: water + settlements + stone walls + the King's moat block (Humans can still cross their own moat)
+function clampMoveH(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||inWater(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }              // humans on foot: water + their own walls block
+function clampMoveBoat(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||isSettle(nx,ny)||swall[cidx(nx,ny)]) return; c.x=nx;c.y=ny; }        // a boat may go on water
+function clampMoveW(c,nx,ny){ if(nx<0||nx>=GW||ny<0||ny>=GH||!inWater(nx,ny)) return; c.x=nx;c.y=ny; }             // leviathans: water only
+function placeLevWater(nx,ny){ for(let t=0;t<30;t++){ const x=(nx==null?rnd()*GW:nx+(rnd()-0.5)*8), y=(ny==null?rnd()*GH:ny+(rnd()-0.5)*8); if(x>=0&&x<GW&&y>=0&&y<GH&&inWater(x,y)) return {x,y}; }
+  for(let t=0;t<300;t++){ const x=rnd()*GW,y=rnd()*GH; if(inWater(x,y)) return {x,y}; } return null; }
+function buildHash(list,cell,surfaceOnly){ const h=new Map(); for(let i=0;i<list.length;i++){ const c=list[i]; if(surfaceOnly&&c.d&&c.d!=='up')continue; const k=(c.x/cell|0)+','+(c.y/cell|0); (h.get(k)||h.set(k,[]).get(k)).push(i);} return h; }
+function nearestIdx(x,y,list,h,cell){ let bd=1e9,bi=-1; const cx=x/cell|0,cy=y/cell|0;
+  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=h.get((cx+a)+','+(cy+b)); if(!arr)continue;
+    for(const i of arr){ const c=list[i]; const d=(c.x-x)**2+(c.y-y)**2; if(d<bd){bd=d;bi=i;} } } return [bi,bd]; }
+function stepGoob(){ const next=[]; const zh=buildHash(zap,P.gFlee,true), bh=buildHash(bushes,6);
+  for(const g of goob){ if(g.d && g.d!=='up'){ next.push(g); continue; }
+    if(g.nature){ natureGoobSurfaceStep(g); next.push(g); continue; }                     // a Nature Gooblet that crossed up: peaceful, plants blue flowers
+    g.age++; g.W-=P.gThirst; g.E-=P.gMeta;
+    const [zi,zd]=nearestIdx(g.x,g.y,zap,zh,P.gFlee);
+    let dx=0,dy=0, moved=false;
+    if(zi>=0 && zd<(P.gFlee*0.7)**2){ const z=zap[zi]; const l=Math.hypot(g.x-z.x,g.y-z.y)||1; dx=(g.x-z.x)/l; dy=(g.y-z.y)/l; moved=true; }      // flee
+    else if(g.W<P.gDrink){ const d=waterDir(g.x,g.y); dx=d[0];dy=d[1]; moved=true; }                                                             // thirsty
+    else if(g.E<P.gHunger){ const [bi,bd]=nearestIdx(g.x,g.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-g.x,b.y-g.y)||1; dx=(b.x-g.x)/l; dy=(b.y-g.y)/l; moved=true; } } // hungry
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    clampMove(g,g.x+dx*P.gSpeed,g.y+dy*P.gSpeed);
+    { if(g.fallCd>0) g.fallCd--; else { let fell=false; for(const h of holes){ if((g.x-h.sx)**2+(g.y-h.sy)**2<1.2){ g.d='under'; g.x=h.ux; g.y=h.uy; g.uAge=0; fell=true; break; } } if(fell){ next.push(g); continue; } } } // fell down a hole
+    if(!(g.fallCd>0) && portalCharge>=3 && portalSX>=0 && (g.x-portalSX)**2+(g.y-portalSY)**2<1.6){ g.d='sky'; g.x=portalUX; g.y=portalUY; g.fallCd=40; next.push(g); continue; } // through the portal to the sky
+    if(wdAt(g.x,g.y)<=1) g.W=Math.min(1,g.W+0.5);                                    // drink at water's edge
+    const [bi2,bd2]=nearestIdx(g.x,g.y,bushes,bh,6);
+    if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ g.E+=b.food*P.gEatGain; b.food=0; g.ate++; } } // eat a whole ripe bush
+    if(g.E<=0||g.W<=0||g.age>P.gMaxAge){ died(g.x,g.y); continue; }
+    if(g.ate>=5 && g.W>0.35){ g.ate=0; g.E*=0.7; spawnGoob(g.x+(rnd()-0.5),g.y+(rnd()-0.5),P.gStartE,g.W*0.8); } // 5 bushes -> a baby
+    next.push(g);
+  } goob=next;
+}
+function stepZap(){ const next=[]; const gh=buildHash(goob,P.zVision,true), hh=buildHash(human,P.zVision,true); const eatG=new Set(), eatH=new Set();
+  for(const z of zap){ if(z.d && z.d!=='up'){ next.push(z); continue; } z.age++; let tx=null,ty=null,bd=P.zVision*P.zVision, kind=null, ki=-1; const cx=z.x/P.zVision|0,cy=z.y/P.zVision|0;
+    const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
+      for(const i of arr){ if(isH){ if(eatH.has(i)||isSettle(list[i].x,list[i].y)||list[i].king||list[i].servant)continue; } else { if(eatG.has(i)||list[i].nature)continue; } const c=list[i]; const d=(c.x-z.x)**2+(c.y-z.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } }; // the King & his servants are protected — and peaceful Nature Gooblets are left be
+    scan(gh,goob,false); scan(hh,human,true);
+    let dx,dy; if(tx!==null){ const d=Math.hypot(tx-z.x,ty-z.y)||1; dx=(tx-z.x)/d*P.zSpeed; dy=(ty-z.y)/d*P.zSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.zSpeed; dy=Math.sin(a)*P.zSpeed; }
+    clampMove(z,z.x+dx,z.y+dy);
+    { if(z.fallCd>0) z.fallCd--; else { let fell=false; for(const h of holes){ if((z.x-h.sx)**2+(z.y-h.sy)**2<1.2){ z.d='under'; z.x=h.ux; z.y=h.uy; z.uAge=0; fell=true; break; } } if(fell){ next.push(z); continue; } } } // fell down a hole
+    if(!(z.fallCd>0) && portalCharge>=3 && portalSX>=0 && (z.x-portalSX)**2+(z.y-portalSY)**2<1.6){ z.d='sky'; z.x=portalUX; z.y=portalUY; z.fallCd=40; next.push(z); continue; } // through the portal to the sky
+    if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-z.x)**2+(prey.y-z.y)**2<P.zEat*P.zEat && !(kind==='h'&&isSettle(prey.x,prey.y)) && rnd()<P.zEatP){ if(kind==='h')eatH.add(ki); else eatG.add(ki); z.E+=P.zPrey; z.ate++; } }
+    z.E-=P.zMeta; if(z.E<=0||z.age>P.zMaxAge){ died(z.x,z.y); continue; }
+    if(z.ate>=5){ z.ate=0; z.E*=0.7; spawnZap(z.x+(rnd()-0.5),z.y+(rnd()-0.5),P.zStart); } // 5 prey (gooblet or human) -> a baby
+    next.push(z);
+  } zap=next; dieAll(eatG,goob); dieAll(eatH,human); if(eatG.size) goob=goob.filter((_,i)=>!eatG.has(i)); if(eatH.size) human=human.filter((_,i)=>!eatH.has(i));
+}
+function collapseSettlements(){ const max=human.length*2; while(settleList.length>max){ const i=settleList.shift(); settle[i]=0; sdirty=true; } } // max = humans x2, excess collapses
+function stepHuman(){ const next=[]; const zh=buildHash(zap,P.hFlee,true), bh=buildHash(bushes,6); const max=human.length*2;
+  const slain=new Set(), vEatG=new Set(), vEatZ=new Set();                             // vessel-fight casualties & the vessel's prey
+  for(const m of human){ if(m.d && m.d!=='up'){ next.push(m); continue; } m.age++; m.E-=P.hMeta; m.W-=P.hThirst;
+    if(m.vessel){                                                                     // FIRE VESSEL — a possessed human terrorizing the surface
+      const near=[]; for(let j=0;j<human.length;j++){ const h=human[j]; if(h!==m && !h.vessel && (!h.d||h.d==='up') && (h.x-m.x)**2+(h.y-m.y)**2<64) near.push(j); }
+      if(near.length>=7){                                                             // 7 humans team up -> a 50/50 duel
+        if(rnd()<0.5){ human[near[0]].fireSword=true; continue; }                     // humans win: the champion takes the Fire Sword; the vessel is slain
+        else { near.slice(0,7).forEach(j=>slain.add(human[j])); next.push(m); continue; } // vessel wins: those 7 fall, it rages on
+      }
+      let tx=null,ty=null,bd=1e9,tk=null,ti=-1;                                        // else terrorize: hunt & kill the nearest Gooblet/Zappy
+      goob.forEach((g,j)=>{ if((!g.d||g.d==='up')&&!vEatG.has(j)){ const d=(g.x-m.x)**2+(g.y-m.y)**2; if(d<bd){bd=d;tx=g.x;ty=g.y;tk='g';ti=j;} } });
+      zap.forEach((z,j)=>{ if((!z.d||z.d==='up')&&!vEatZ.has(j)){ const d=(z.x-m.x)**2+(z.y-m.y)**2; if(d<bd){bd=d;tx=z.x;ty=z.y;tk='z';ti=j;} } });
+      let dx,dy; if(tx!==null){ const l=Math.hypot(tx-m.x,ty-m.y)||1; dx=(tx-m.x)/l; dy=(ty-m.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+      clampMoveH(m,m.x+dx*P.hSpeed*1.15,m.y+dy*P.hSpeed*1.15);
+      if(tx!==null && bd<2.4){ if(tk==='g')vEatG.add(ti); else vEatZ.add(ti); }
+      m.E=Math.max(m.E,1); next.push(m); continue;                                     // the fire sustains it
+    }
+    if(m.fireSword && !m.redKing){                                                     // FIRE SWORDSMAN — rush to a hole and descend to the lava pit
+      let bh0=null,bd0=1e9; for(const h of holes){ const dd=(m.x-h.sx)**2+(m.y-h.sy)**2; if(dd<bd0){bd0=dd;bh0=h;} }
+      if(bh0){ const l=Math.hypot(bh0.sx-m.x,bh0.sy-m.y)||1, dx=(bh0.sx-m.x)/l, dy=(bh0.sy-m.y)/l;   // the Fire Sword burns through settlements & stone walls — only water stops him
+        const nx=m.x+dx*P.hSpeed, ny=m.y+dy*P.hSpeed;
+        if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!inWater(nx,ny)){ m.x=nx; m.y=ny; }
+        else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283, mx=m.x+Math.cos(a)*P.hSpeed, my=m.y+Math.sin(a)*P.hSpeed; if(mx>=0&&mx<GW&&my>=0&&my<GH&&!inWater(mx,my)){ m.x=mx; m.y=my; break; } } } } // wiggle round water
+      if(m.fallCd>0)m.fallCd--; else for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.4){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; break; } }
+      m.E=Math.max(m.E,0.5); m.W=Math.max(m.W,0.5); next.push(m); continue;
+    }
+    if(m.redKing){                                                                     // RED KING — roams his land; nearby humans join him in red robes
+      const a=rnd()*6.283; clampMoveH(m,m.x+Math.cos(a)*0.3,m.y+Math.sin(a)*0.3);
+      human.forEach(h=>{ if(h!==m && !h.redKing && !h.vessel && !h.fireSword && (!h.d||h.d==='up') && (h.x-m.x)**2+(h.y-m.y)**2<120 && rnd()<0.03) h.redFolk=true; });
+      m.E=Math.max(m.E,0.6); m.W=Math.max(m.W,0.6); next.push(m); continue;
+    }
+    if(m.king){                                                                       // the King: build his keep, then stay home; servants feed him
+      if(!castleBuilt){ buildKingCastle(m); castleBuilt=true; }
+      if(kingHome){ const l=Math.hypot(kingHome.x-m.x,kingHome.y-m.y); if(l>0.6) clampMoveH(m,m.x+(kingHome.x-m.x)/l*0.5,m.y+(kingHome.y-m.y)/l*0.5); }
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);
+      if(m.E<0.4) m.E=0.4; if(m.W<0.4) m.W=0.4;                                        // the King endures (servants keep him fed)
+      next.push(m); continue;
+    }
+    if(m.servant){                                                                    // servants fetch wheat and carry it to the King
+      const kg=human.find(h=>h.king);
+      if(!kg){ m.servant=false; next.push(m); continue; }
+      let dx=0,dy=0;
+      if(!m.carrying){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,7); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; } }
+      else { const l=Math.hypot(kg.x-m.x,kg.y-m.y)||1; dx=(kg.x-m.x)/l; dy=(kg.y-m.y)/l; }
+      clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+      if(!m.carrying){ const [b2,d2]=nearestIdx(m.x,m.y,bushes,bh,7); if(b2>=0&&d2<1.6){ const b=bushes[b2]; if(b.food>0.3){ b.food=0; m.carrying=true; m.E=Math.min(4,m.E+0.6); } } }
+      else if((kg.x-m.x)**2+(kg.y-m.y)**2<2.4){ kg.E=Math.min(4,kg.E+2); m.carrying=false; }
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);
+      if(m.E<0.4) m.E=0.4; if(m.W<0.4) m.W=0.4;
+      next.push(m); continue;
+    }
+    if(groveKingType==='helpful' && gPortalSX>=0){ if(!m.grovebound && rnd()<0.003) m.grovebound=true; } else m.grovebound=false; // a Helpful Grove King draws some Humans to go live there
+    if(m.grovebound && gPortalSX>=0){ const l=Math.hypot(gPortalSX-m.x,gPortalSY-m.y)||1; clampMoveH(m,m.x+(gPortalSX-m.x)/l*P.hSpeed,m.y+(gPortalSY-m.y)/l*P.hSpeed);
+      if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5); if(m.E<0.35) m.E=0.35; if(m.W<0.35) m.W=0.35; next.push(m); continue; } // (stepGrove crosses them at the portal)
+    const onS=isSettle(m.x,m.y);
+    const [zi,zd]=nearestIdx(m.x,m.y,zap,zh,P.hFlee);
+    let dx=0,dy=0,moved=false;
+    if(!onS && zi>=0 && zd<(P.hFlee*0.8)**2){                                        // danger: run to nearest settlement, else flee
+      if(sdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,sdAt); dx=d[0];dy=d[1]; }
+      else { const z=zap[zi]; const l=Math.hypot(m.x-z.x,m.y-z.y)||1; dx=(m.x-z.x)/l; dy=(m.y-z.y)/l; } moved=true;
+    } else if(m.W<P.hDrink){ const d=waterDir(m.x,m.y); dx=d[0];dy=d[1]; moved=true; }        // thirsty -> the shore (where leviathans lurk!)
+    else if(m.boat){ const d=waterDir(m.x,m.y); dx=d[0];dy=d[1]; moved=true; }                // a boat sails out to fish
+    else if(m.E<P.hHunger){ const [bi]=nearestIdx(m.x,m.y,bushes,bh,6); if(bi>=0){ const b=bushes[bi]; const l=Math.hypot(b.x-m.x,b.y-m.y)||1; dx=(b.x-m.x)/l; dy=(b.y-m.y)/l; moved=true; } } // hungry -> bush
+    else if(m.wood<P.hBuild){ if(fdAt(m.x,m.y)<900){ const d=gradDir(m.x,m.y,fdAt); dx=d[0];dy=d[1]; moved=true; } }              // need wood -> forest
+    else if(m.redFolk){ const rk=human.find(h=>h.redKing); if(rk){ const l=Math.hypot(rk.x-m.x,rk.y-m.y)||1; if(l>4){ dx=(rk.x-m.x)/l; dy=(rk.y-m.y)/l; moved=true; } } } // red folk gather to the Red King's settlement
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    if(m.boat) clampMoveBoat(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed); else clampMoveH(m,m.x+dx*P.hSpeed,m.y+dy*P.hSpeed);
+    { if(m.fallCd>0) m.fallCd--; else { let fell=false; for(const h of holes){ if((m.x-h.sx)**2+(m.y-h.sy)**2<1.2){ m.d='under'; m.x=h.ux; m.y=h.uy; m.uAge=0; fell=true; break; } } if(fell){ next.push(m); continue; } } } // fell down a hole
+    if(!(m.fallCd>0) && portalCharge>=3 && portalSX>=0 && (m.x-portalSX)**2+(m.y-portalSY)**2<1.6){ m.d='sky'; m.x=portalUX; m.y=portalUY; m.fallCd=40; next.push(m); continue; } // through the portal to the sky
+    if(wdAt(m.x,m.y)<=1) m.W=Math.min(1,m.W+0.5);                                       // drink at the shore
+    if(biomeAt(m.x,m.y)===FOREST || fdAt(m.x,m.y)<=1) m.wood+=P.hWoodRate;             // chop wood at the forest
+    const [bi2,bd2]=nearestIdx(m.x,m.y,bushes,bh,6);
+    if(bi2>=0 && bd2<1.6){ const b=bushes[bi2]; if(b.food>0.20){ m.E+=b.food*P.hEatGain; b.food=0; m.ate++; } } // eat a bush
+    if(m.wood>=P.hBuild && settleList.length<max){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && settle[ci]===0){ settle[ci]=1; settleList.push(ci); m.wood-=P.hBuild; sdirty=true; } } // build a settlement
+    if(m.loot){ treasury+=m.loot; m.loot=0; }                                          // bank the valuables in the treasury
+    if(m.stone>0 && !m.boat && rnd()<0.25 && swallCount<300){ const ci=cidx(m.x,m.y); if(biome[ci]!==WATER && !settle[ci] && !swall[ci]){ swall[ci]=1; swallCount++; m.stone--; } } // lay a stone wall for safety
+    if(!m.boat && treasury>=5 && rnd()<0.03){ treasury-=5; m.boat=true; }               // buy a boat with treasury
+    if(m.boat && inWater(m.x,m.y)){ m.E=Math.min(4,m.E+0.05); if(rnd()<0.02) treasury++; } // out fishing
+    if(portalSX>=0 && portalCharge<3 && treasury>0 && (m.x-portalSX)**2+(m.y-portalSY)**2<2.5){ treasury--; portalCharge++; } // bring treasure to charge the sky portal
+    if(m.E<=0||m.W<=0||m.age>P.hMaxAge){ died(m.x,m.y); continue; }
+    if(m.ate>=P.hReproAte){ m.ate=0; m.E*=0.7; spawnHuman(m.x+(rnd()-0.5),m.y+(rnd()-0.5),P.hStartE); } // 6 bushes -> a baby
+    next.push(m);
+  }
+  slain.forEach(m=>died(m.x,m.y)); dieAll(vEatG,goob); dieAll(vEatZ,zap);
+  human = slain.size ? next.filter(m=>!slain.has(m)) : next;                            // the vessel-fight fallen
+  if(vEatG.size) goob=goob.filter((_,i)=>!vEatG.has(i));                                // the vessel's prey
+  if(vEatZ.size) zap=zap.filter((_,i)=>!vEatZ.has(i));
+}
+function stepLev(){ if(!lev.length) return;
+  const gh=buildHash(goob,P.levVision,true), hh=buildHash(human,P.levVision,true); const eatenG=new Set(), deadLev=new Set();
+  for(let li=0; li<lev.length; li++){ const l=lev[li]; l.age++; l.E-=P.levMeta;
+    let bd=P.levVision*P.levVision, tx=null,ty=null, kind=null, ki=-1; const cx=l.x/P.levVision|0,cy=l.y/P.levVision|0;
+    const scan=(hash,list,isH)=>{ for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=hash.get((cx+a)+','+(cy+b)); if(!arr)continue;
+      for(const i of arr){ if(!isH&&eatenG.has(i))continue; const c=list[i]; if(wdAt(c.x,c.y)>1.6)continue; const d=(c.x-l.x)**2+(c.y-l.y)**2; if(d<bd){bd=d;tx=c.x;ty=c.y;kind=isH?'h':'g';ki=i;} } } };
+    scan(gh,goob,false); scan(hh,human,true);                                          // hunt creatures at the shore
+    let dx,dy; if(tx!==null){ const d=Math.hypot(tx-l.x,ty-l.y)||1; dx=(tx-l.x)/d*P.levSpeed; dy=(ty-l.y)/d*P.levSpeed; } else { const a=rnd()*6.283; dx=Math.cos(a)*P.levSpeed; dy=Math.sin(a)*P.levSpeed; }
+    clampMoveW(l,l.x+dx,l.y+dy);
+    if(ki>=0){ const prey=kind==='h'?human[ki]:goob[ki]; if((prey.x-l.x)**2+(prey.y-l.y)**2<P.levEat*P.levEat){
+      if(kind==='g'){ eatenG.add(ki); l.E+=P.levPrey; l.ate++; }                       // eats a gooblet
+      else { prey.E+=P.hFishGain; prey.ate++; deadLev.add(li); }                       // a Human FISHES the leviathan (fills hunger + reproduction)
+    } }
+    if(l.E<=0||l.age>P.levMaxAge){ deadLev.add(li); continue; }
+    if(l.ate>=P.levReproAte){ l.ate=0; const w=placeLevWater(l.x,l.y); if(w) spawnLev(w.x,w.y,P.levStartE); } // 15 creatures -> a baby
+  }
+  dieAll(deadLev,lev); dieAll(eatenG,goob);
+  lev=lev.filter((_,i)=>!deadLev.has(i)); if(eatenG.size) goob=goob.filter((_,i)=>!eatenG.has(i));
+  if(lev.length>2){ const i=rnd()*lev.length|0; let j=rnd()*lev.length|0; if(j===i)j=(j+1)%lev.length; const k=rnd()<0.5?i:j; died(lev[k].x,lev[k].y); lev.splice(k,1); } // >2 -> a 50/50 duel, loser dies
+}
+function stepSea(){                                                                    // the Sea Monarch (a sea dragon) + its folk
+  if(day-lastSeaChallenge>=1000 && seaMonarch && seaMonarch.alive && lev.length>0){    // every 1000 days a Leviathan challenges for the throne of Sea King
+    lastSeaChallenge=day; const ci=(rnd()*lev.length)|0;
+    if(rnd()<0.5){ died(lev[ci].x,lev[ci].y); lev.splice(ci,1); }                        // the Sea King defends -> challenger dies
+    else { const l=lev[ci]; seaMonarch={x:l.x,y:l.y,alive:true,fromLev:true,bornDay:day}; lev.splice(ci,1); } // the Leviathan wins -> new Sea King (small, grows up over 500 days)
+  }
+  if(seaMonarch && seaMonarch.alive){
+    const a=rnd()*6.283, nx=seaMonarch.x+Math.cos(a)*0.9, ny=seaMonarch.y+Math.sin(a)*0.9; if(inWater(nx,ny)){ seaMonarch.x=nx; seaMonarch.y=ny; }
+    if(folk.length<26 && rnd()<0.05){ const w=placeLevWater(seaMonarch.x,seaMonarch.y); if(w) folk.push({x:w.x,y:w.y,E:1.6,age:0}); } // the monarch summons its folk
+  }
+  if(!folk.length) return;
+  const gh=buildHash(goob,8,true), levH=buildHash(lev,8); const eatenG=new Set(), deadF=new Set();
+  folk.forEach((f,fi)=>{ f.age++; f.E-=0.004;
+    let dx,dy, moved=false, ti=-1,tx=null,ty=null;
+    const [li,ld]=nearestIdx(f.x,f.y,lev,levH,8);
+    if(li>=0 && ld<49){ const l=lev[li]; const ll=Math.hypot(f.x-l.x,f.y-l.y)||1; dx=(f.x-l.x)/ll; dy=(f.y-l.y)/ll; moved=true; } // watch out for Leviathans!
+    if(!moved){ let bd=64; const cx=f.x/8|0,cy=f.y/8|0; for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const arr=gh.get((cx+a)+','+(cy+b)); if(!arr)continue; for(const gi of arr){ if(eatenG.has(gi))continue; const g=goob[gi]; if(wdAt(g.x,g.y)>1.7)continue; const d=(g.x-f.x)**2+(g.y-f.y)**2; if(d<bd){bd=d;tx=g.x;ty=g.y;ti=gi;} } }
+      if(tx!==null){ const d=Math.hypot(tx-f.x,ty-f.y)||1; dx=(tx-f.x)/d; dy=(ty-f.y)/d; moved=true; } } // hunt a Gooblet at the shore
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=f.x+dx*0.95, ny=f.y+dy*0.95; if(inWater(nx,ny)){ f.x=nx; f.y=ny; }
+    if(ti>=0){ const g=goob[ti]; if((g.x-f.x)**2+(g.y-f.y)**2<1.7 && rnd()<0.3){ eatenG.add(ti); f.E+=0.9; } }
+    if(li>=0 && (lev[li].x-f.x)**2+(lev[li].y-f.y)**2<2.2){ deadF.add(fi); }             // a Leviathan caught it
+    if(f.E<=0||f.age>3500) deadF.add(fi);
+  });
+  dieAll(eatenG,goob); dieAll(deadF,folk);
+  if(eatenG.size) goob=goob.filter((_,i)=>!eatenG.has(i));
+  if(deadF.size) folk=folk.filter((_,i)=>!deadF.has(i));
+}
+function stepUnder(){                                                                  // the underground: fallen creatures + Specters
+  const glowH=buildHash(glow,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set(), deadS=new Set();
+  const moveCreature=(c,species)=>{ c.uAge=(c.uAge||0)+1;
+    let dx,dy;
+    if(c.fireSword && !c.redKing && poolX>=0){ const l=Math.hypot(poolX+0.5-c.x,poolY+0.5-c.y)||1; dx=(poolX+0.5-c.x)/l; dy=(poolY+0.5-c.y)/l; } // the Fire Swordsman marches to the lava pit
+    else if(c.uAge>90){ let bh=null,bd=1e9; for(const h of holes){ const dd=(c.x-h.ux)**2+(c.y-h.uy)**2; if(dd<bd){bd=dd;bh=h;} } if(bh){ const l=Math.hypot(bh.ux-c.x,bh.uy-c.y)||1; dx=(bh.ux-c.x)/l; dy=(bh.uy-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // time to climb out
+    else { const [gi]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi>=0){ const g=glow[gi]; const l=Math.hypot(g.x-c.x,g.y-c.y)||1; dx=(g.x-c.x)/l; dy=(g.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } }
+    if(species==='human' && uZoneAt(c.x,c.y)===MINING && rnd()<0.14){ const dirs=[[1,0],[-1,0],[0,1],[0,-1]], dd=dirs[(rnd()*4)|0], nx=(c.x+dd[0])|0, ny=(c.y+dd[1])|0, j=cidx(nx,ny); if(uwall[j] && nx>0&&nx<GW-1&&ny>0&&ny<GH-1){ uwall[j]=0; c.stone=(c.stone||0)+1; if(rnd()<0.08) c.loot=(c.loot||0)+1; } } // mine: dig a tunnel, gain stone (+ rare valuables)
+    const nx=c.x+dx*0.9, ny=c.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ c.x=nx; c.y=ny; }
+    else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283, mx=c.x+Math.cos(a)*0.9, my=c.y+Math.sin(a)*0.9; if(mx>=0&&mx<GW&&my>=0&&my<GH&&!uWall(mx,my)){ c.x=mx; c.y=my; break; } } } // don't get stuck on walls
+    if(c.fireSword && !c.redKing && poolX>=0 && (c.x-(poolX+0.5))**2+(c.y-(poolY+0.5))**2<9){ fireKingDead=true; giantActive=false; fire=[]; c.fireSword=false; c.redKing=true; c.uAge=95; } // reach the pit -> DESTROY the Fire King, become the Red King, climb out
+    if(ulava[cidx(c.x,c.y)] && !c.fireSword && !c.redKing) return true;                 // walked into lava -> dies (but the fire-blessed are immune)
+    const [gi2,gd2]=nearestIdx(c.x,c.y,glow,glowH,6); if(gi2>=0 && gd2<1.6){ const g=glow[gi2]; if(g.food>0.2){ if(c.E!=null)c.E=Math.min(4,c.E+g.food*1.5); if(c.ate!=null)c.ate++; g.food=0; } } // eat glowfruit
+    if(uwater[cidx(c.x,c.y)] && c.W!=null) c.W=1;
+    if(c.uAge>80){ for(const h of holes){ if((c.x-h.ux)**2+(c.y-h.uy)**2<2.2){ c.d='up'; c.x=h.sx; c.y=h.sy; c.uAge=0; c.fallCd=40; break; } } } // climb back to the surface (with a cooldown so it doesn't fall right back)
+    return false;
+  };
+  goob.forEach((g,i)=>{ if(g.d==='under' && moveCreature(g,'goob')) deadG.add(i); });
+  zap.forEach((z,i)=>{ if(z.d==='under' && moveCreature(z,'zap')) deadZ.add(i); });
+  human.forEach((m,i)=>{ if(m.d==='under' && moveCreature(m,'human')) deadH.add(i); });
+  const prey=[];                                                                        // Specters/fire hunt fallen gooblets & zappies (Humans are too strong for them)
+  goob.forEach((g,i)=>{ if(g.d==='under'&&!deadG.has(i)) prey.push({a:'g',i,x:g.x,y:g.y}); });
+  zap.forEach((z,i)=>{ if(z.d==='under'&&!deadZ.has(i)) prey.push({a:'z',i,x:z.x,y:z.y}); });
+  const preyH=buildHash(prey,8);
+  spec.forEach((s,si)=>{ s.age++;
+    const [pi]=nearestIdx(s.x,s.y,prey,preyH,8);
+    let dx,dy; if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-s.x,p.y-s.y)||1; dx=(p.x-s.x)/l; dy=(p.y-s.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=s.x+dx, ny=s.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ s.x=nx; s.y=ny; }
+    if(ulava[cidx(s.x,s.y)]){ deadS.add(si); return; }
+    if(pi>=0){ const p=prey[pi]; if((p.x-s.x)**2+(p.y-s.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } } // caught it
+    if(s.age>6000) deadS.add(si);                                                       // Specters age out and never reproduce
+  });
+  // THE GIANT (Fire Monarch) — surfaces from the lava pool every 500 days; Gooblets/Zappies become fire minions, but a HUMAN becomes a Fire Vessel
+  if(!fireKingDead && day-lastGiant>=500 && !giantActive){ lastGiant=day; giantActive=true; giantTimer=160; }
+  if(giantActive){ if(--giantTimer<=0) giantActive=false;
+    const px=poolX+0.5, py=poolY+0.5, R2=121;
+    goob.forEach((c,i)=>{ if(c.d==='under'&&!deadG.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadG.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+    human.forEach((c,i)=>{ if(c.d==='under'&&!deadH.has(i)&&!c.vessel&&!c.redKing&&(c.x-px)**2+(c.y-py)**2<R2){ c.vessel=true; c.uAge=95; } }); // POSSESSED -> a Fire Vessel (but never the Red King — he's immune to fire & lava)
+    zap.forEach((c,i)=>{ if(c.d==='under'&&!deadZ.has(i)&&(c.x-px)**2+(c.y-py)**2<R2){ deadZ.add(i); fire.push({x:c.x,y:c.y,age:0}); } });
+  }
+  // FIRE MINIONS — hunt the fallen, walk on lava unharmed, never reproduce
+  const deadF=new Set();
+  fire.forEach((f,fi)=>{ f.age++;
+    const [pi]=nearestIdx(f.x,f.y,prey,preyH,8);
+    let dx,dy; if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-f.x,p.y-f.y)||1; dx=(p.x-f.x)/l; dy=(p.y-f.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=f.x+dx*1.05, ny=f.y+dy*1.05; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!uWall(nx,ny)){ f.x=nx; f.y=ny; }
+    if(pi>=0){ const p=prey[pi]; if((p.x-f.x)**2+(p.y-f.y)**2<1.7){ if(p.a==='g')deadG.add(p.i); else if(p.a==='h')deadH.add(p.i); else deadZ.add(p.i); } }
+    if(f.age>4500) deadF.add(fi);
+  });
+  for(const g of glow) g.food=Math.min(1,g.food+0.006);
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human); dieAll(deadS,spec); dieAll(deadF,fire);
+  if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
+  if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
+  if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
+  if(deadS.size) spec=spec.filter((_,i)=>!deadS.has(i));
+  if(deadF.size) fire=fire.filter((_,i)=>!deadF.has(i));
+}
+function stepSky(){
+  if(day-lastDragonCheck>=1000){ lastDragonCheck=day; if((!dragon||!dragon.alive) && dragonling.length>0){ const d0=dragonling[0]; dragon={x:d0.x,y:d0.y,alive:true}; dragonling.splice(0,1); } } // no Dragon King -> a dragonling rises to the throne
+  if(dragon && dragon.alive && dragonIsleX>=0){ const dd=(dragon.x-dragonIsleX)**2+(dragon.y-dragonIsleY)**2; // the Dragon King flies home to the red island (a risen dragonling walks back from wherever it rose)
+    if(dd>4){ const l=Math.hypot(dragonIsleX-dragon.x,dragonIsleY-dragon.y)||1; dragon.x+=(dragonIsleX-dragon.x)/l*0.6; dragon.y+=(dragonIsleY-dragon.y)/l*0.6; } }
+  if(dragon && dragon.alive){                                                           // 10 humans on the dragon island -> a 50/50 battle
+    const near=[]; human.forEach((m,i)=>{ if(m.d==='sky' && (m.x-dragon.x)**2+(m.y-dragon.y)**2<120) near.push(i); });
+    if(near.length>=10){ if(rnd()<0.5){ dragon.alive=false; dragonDeaths++; if(!human.some(h=>h.king)){ human[near[0]].king=true; kingExists=true; for(let sv=1;sv<=3&&sv<near.length;sv++) human[near[sv]].servant=true; } } // humans win -> crown a King + 3 servants (never more than one King)
+      else { const dead=new Set(near.slice(0,10)); dead.forEach(i=>died(human[i].x,human[i].y)); human=human.filter((_,i)=>!dead.has(i)); } }                          // dragon wins -> that group dies
+  }
+  const angelH=buildHash(angels,8); const deadG=new Set(),deadZ=new Set(),deadH=new Set();
+  let king=kingExists?human.find(m=>m.king && m.d==='sky'):null;
+  const move=(c,species,i,dead)=>{
+    if(c.E!=null) c.E-=0.003;
+    let dx,dy,moved=false;
+    if((c.king||c.servant) && portalUX>=0){ const l=Math.hypot(portalUX-c.x,portalUY-c.y)||1; dx=(portalUX-c.x)/l; dy=(portalUY-c.y)/l; moved=true; } // the King's court wants to get home to the surface
+    else if(species==='human' && !c.king && king && rnd()<0.5){ const l=Math.hypot(king.x-c.x,king.y-c.y)||1; dx=(king.x-c.x)/l; dy=(king.y-c.y)/l; moved=true; } // humans protect the King
+    else if(c.E!=null && c.E<1.3){ const [ai]=nearestIdx(c.x,c.y,angels,angelH,8); if(ai>=0){ const a=angels[ai]; const l=Math.hypot(a.x-c.x,a.y-c.y)||1; dx=(a.x-c.x)/l; dy=(a.y-c.y)/l; moved=true; } } // hungry -> an angel
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=c.x+dx*0.85, ny=c.y+dy*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&skyLand(nx,ny)){ c.x=nx; c.y=ny; }
+    else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283,mx=c.x+Math.cos(a)*0.85,my=c.y+Math.sin(a)*0.85; if(mx>=0&&mx<GW&&my>=0&&my<GH&&skyLand(mx,my)){ c.x=mx; c.y=my; break; } } } // stay on the islands
+    const [ai2,ad2]=nearestIdx(c.x,c.y,angels,angelH,8); if(ai2>=0 && ad2<2.4 && treasury>0 && c.E!=null && c.E<2.5){ treasury--; c.E=Math.min(4,c.E+2); } // trade 1 treasure for food
+    if(c.fallCd>0) c.fallCd--; else if(portalUX>=0 && (c.x-portalUX)**2+(c.y-portalUY)**2<1.6){ c.d='up'; c.x=portalSX; c.y=portalSY; c.fallCd=40; return; } // step on the sky portal -> back to the surface (after a cooldown so arrivals don't bounce)
+    if(c.E!=null && c.E<=0) dead.add(i);
+  };
+  goob.forEach((g,i)=>{ if(g.d==='sky') move(g,'goob',i,deadG); });
+  zap.forEach((z,i)=>{ if(z.d==='sky') move(z,'zap',i,deadZ); });
+  human.forEach((m,i)=>{ if(m.d==='sky') move(m,'human',i,deadH); });
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human);
+  if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
+  if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
+  if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
+  for(const rf of redfruit) rf.food=Math.min(1,rf.food+0.005);
+  const rfH=buildHash(redfruit,6), dlH=buildHash(dragonling,7), snapH=buildHash(dsnap,7); const deadW=new Set(), eatenSnap=new Set();
+  wooly.forEach((w,wi)=>{ w.age++; w.E-=0.004;
+    let dx,dy,moved=false;
+    const [di,dd]=nearestIdx(w.x,w.y,dragonling,dlH,7);
+    if(di>=0&&dd<30 && !w.fierce){ const dg=dragonling[di]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; moved=true; } // a normal wooly flees dragonlings (a Fierce one stands its ground)
+    if(!moved && !w.fierce){ const [si]=nearestIdx(w.x,w.y,dsnap,snapH,7); if(si>=0 && !eatenSnap.has(si)){ const s=dsnap[si]; const l=Math.hypot(s.x-w.x,s.y-w.y)||1; dx=(s.x-w.x)/l; dy=(s.y-w.y)/l; moved=true; } } // seek a rare Dragonsnap to evolve
+    if(!moved && w.E<1.6){ const [ri]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri>=0){ const rf=redfruit[ri]; const l=Math.hypot(rf.x-w.x,rf.y-w.y)||1; dx=(rf.x-w.x)/l; dy=(rf.y-w.y)/l; moved=true; } } // seek red fruit
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const spd=w.fierce?0.95:0.8; const nx=w.x+dx*spd, ny=w.y+dy*spd; if(skyLand(nx,ny)){ w.x=nx; w.y=ny; } else { for(let t=0;t<4;t++){ const a=rnd()*6.283,mx=w.x+Math.cos(a)*spd,my=w.y+Math.sin(a)*spd; if(skyLand(mx,my)){w.x=mx;w.y=my;break;} } }
+    const [si2,sd2]=nearestIdx(w.x,w.y,dsnap,snapH,6); if(si2>=0&&sd2<1.7 && !eatenSnap.has(si2) && !w.fierce){ eatenSnap.add(si2); w.fierce=true; w.E=Math.min(4,w.E+1.5); } // ate a Dragonsnap -> FIERCE WOOLIE
+    const [ri2,rd2]=nearestIdx(w.x,w.y,redfruit,rfH,6); if(ri2>=0&&rd2<1.6){ const rf=redfruit[ri2]; if(rf.food>0.3){ rf.food=0; w.E=Math.min(4,w.E+1.4); w.ate=(w.ate||0)+1; } }
+    if(w.ate>=5 && wooly.length<200){ w.ate=0; w.E*=0.7; wooly.push({x:w.x,y:w.y,E:1.2,age:0,ate:0}); }
+    if(w.fierce && mounds.length<8 && rnd()<0.003 && skyLand(w.x,w.y) && !mounds.some(md=>(md.x-w.x)**2+(md.y-w.y)**2<25)){ mounds.push({x:w.x,y:w.y,sylvies:0}); } // a Fierce Woolie paws up a dirt mound
+    if(w.E<=0||w.age>3000) deadW.add(wi);
+  });
+  dieAll(deadW,wooly);
+  if(deadW.size) wooly=wooly.filter((_,i)=>!deadW.has(i));
+  const wH=buildHash(wooly,8); const eatenW=new Set(), deadDL=new Set();
+  dragonling.forEach((dg,di)=>{ dg.age++; let dx,dy;
+    if(!dg.grown && dg.age>2500) dg.grown=true;                                           // a Dragonling grows up
+    if(dg.grown){                                                                         // grown Dragonlings fly home to the Dragon Island and roam there in peace (no more hunting)
+      const tx=dragon?dragon.x:dg.x, ty=dragon?dragon.y:dg.y;
+      if((dg.x-tx)**2+(dg.y-ty)**2>20){ const l=Math.hypot(tx-dg.x,ty-dg.y)||1; dx=(tx-dg.x)/l; dy=(ty-dg.y)/l; } // wing back toward the island
+      else { const a=rnd()*6.283; dx=Math.cos(a)*0.5; dy=Math.sin(a)*0.5; }               // home at last — potter about the Dragon King
+      const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }
+      if(dg.age>4500) deadDL.add(di);
+      return;
+    }
+    if(dg.carry && dragon && dragon.alive){ const l=Math.hypot(dragon.x-dg.x,dragon.y-dg.y)||1; dx=(dragon.x-dg.x)/l; dy=(dragon.y-dg.y)/l; } // carry the wooly to the Dragon King
+    else if(dg.carry){ dg.carry=false; const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                     // no Dragon King -> eat it, no baby
+    else { const [wi]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi>=0){ const w=wooly[wi]; const l=Math.hypot(w.x-dg.x,w.y-dg.y)||1; dx=(w.x-dg.x)/l; dy=(w.y-dg.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); } } // hunt a wooly
+    const nx=dg.x+dx*1.1, ny=dg.y+dy*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ dg.x=nx; dg.y=ny; }                    // dragonlings FLY anywhere
+    const [dsi,dsd]=nearestIdx(dg.x,dg.y,dsnap,snapH,7); if(dsi>=0&&dsd<1.7 && !eatenSnap.has(dsi)) eatenSnap.add(dsi); // dragonlings munch Dragonsnaps too (racing the woolies for them)
+    if(dg.carry){ if(dragon && dragon.alive && (dragon.x-dg.x)**2+(dragon.y-dg.y)**2<9){ dg.carry=false; if(dragonling.length<120) dragonling.push({x:dragon.x+(rnd()-0.5)*3,y:dragon.y+(rnd()-0.5)*3,age:0}); } } // delivered -> a new dragonling
+    else { const [wi2]=nearestIdx(dg.x,dg.y,wooly,wH,8); if(wi2>=0 && !eatenW.has(wi2)){ const w=wooly[wi2]; if((w.x-dg.x)**2+(w.y-dg.y)**2<1.7){ if(w.fierce){ deadDL.add(di); } else { eatenW.add(wi2); dg.carry=true; } } } } // caught a wooly -> carry home; but a FIERCE Woolie fends it off (the dragonling dies)
+    if(dg.age>4500) deadDL.add(di);
+  });
+  dieAll(eatenW,wooly); dieAll(deadDL,dragonling); dragonDeaths+=deadDL.size;             // fallen Dragonlings count toward the Soul Dragon's awakening
+  if(eatenW.size) wooly=wooly.filter((_,i)=>!eatenW.has(i));
+  if(deadDL.size) dragonling=dragonling.filter((_,i)=>!deadDL.has(i));
+  if(eatenSnap.size) dsnap=dsnap.filter((_,i)=>!eatenSnap.has(i));                        // eaten Dragonsnaps
+  if(dsnap.length<5 && rnd()<0.006){ for(let t=0;t<400;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ dsnap.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); break; } } } // they regrow, but only rarely
+  // THE GOLDEN EGG — every 5000 days it hatches a new Gold Dragon, and a fresh egg is laid on the island
+  if(goldEgg && goldEggX>=0 && day-lastGoldHatch>=5000){ lastGoldHatch=day; goldDrag.push({x:goldEggX,y:goldEggY,age:0}); }
+  // GOLD DRAGONS — they hunt ONLY the Green Dragon and duel it to the death (50/50); nothing else concerns them
+  if(goldDrag.length){ const deadGD=new Set();
+    goldDrag.forEach((gd,gi)=>{ gd.age=(gd.age||0)+1;
+      if(dragon && dragon.alive){ const l=Math.hypot(dragon.x-gd.x,dragon.y-gd.y)||1; const nx=gd.x+(dragon.x-gd.x)/l*1.1, ny=gd.y+(dragon.y-gd.y)/l*1.1; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } // fly straight at the Green Dragon
+        if((dragon.x-gd.x)**2+(dragon.y-gd.y)**2<16){ if(rnd()<0.5){ dragon.alive=false; dragonDeaths++; } else deadGD.add(gi); } } // clash: the loser dies
+      else { const a=rnd()*6.283, nx=gd.x+Math.cos(a)*0.85, ny=gd.y+Math.sin(a)*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ gd.x=nx; gd.y=ny; } } // no Green Dragon -> roam the sky
+      if(gd.age>9000) deadGD.add(gi);
+    });
+    dieAll(deadGD,goldDrag); dragonDeaths+=deadGD.size;                                    // fallen Gold Dragons count too
+    if(deadGD.size) goldDrag=goldDrag.filter((_,i)=>!deadGD.has(i));
+  }
+}
+function stepPurple(){                                                                     // 🟣🐉 Purple Dragons — born in the sky, they ride the portal down to visit the blue flowers
+  if(purpleDrag.length<6 && rnd()<0.012){ for(let t=0;t<200;t++){ const i=(rnd()*N)|0; if(sky[i]){ purpleDrag.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,d:'sky',age:0}); break; } } } // born on a sky island
+  if(!purpleDrag.length) return;
+  const dead=new Set();
+  purpleDrag.forEach((p,pi)=>{ p.age++; let dx,dy;
+    if(p.d==='sky'){
+      if(blueFlora.length>0 && portalUX>=0){ const l=Math.hypot(portalUX-p.x,portalUY-p.y)||1; dx=(portalUX-p.x)/l; dy=(portalUY-p.y)/l; } // blue flowers below -> head for the sky portal
+      else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                        // none yet -> roam the sky
+      const nx=p.x+dx*0.9, ny=p.y+dy*0.9; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&skyLand(nx,ny)){ p.x=nx; p.y=ny; }
+      else { for(let tr=0;tr<4;tr++){ const a=rnd()*6.283,mx=p.x+Math.cos(a)*0.9,my=p.y+Math.sin(a)*0.9; if(mx>=0&&mx<GW&&my>=0&&my<GH&&skyLand(mx,my)){p.x=mx;p.y=my;break;} } }
+      if(p.fallCd>0)p.fallCd--; else if(portalUX>=0 && blueFlora.length>0 && portalSX>=0 && (p.x-portalUX)**2+(p.y-portalUY)**2<1.8){ p.d='up'; p.x=portalSX; p.y=portalSY; p.fallCd=40; } // ride the portal down to the surface
+    } else {                                                                               // on the surface: fly to the nearest blue flower and hover
+      if(p.fallCd>0)p.fallCd--;
+      let tx=null,ty=null,bd=1e9; for(const f of blueFlora){ const dd=(f.x-p.x)**2+(f.y-p.y)**2; if(dd<bd){bd=dd;tx=f.x;ty=f.y;} }
+      if(tx!==null){ if(bd>1.3){ const l=Math.hypot(tx-p.x,ty-p.y)||1; dx=(tx-p.x)/l; dy=(ty-p.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.3; dy=Math.sin(a)*0.3; } } // hover at the flower
+      else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                        // flowers gone -> wander
+      const nx=p.x+dx, ny=p.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ p.x=nx; p.y=ny; }         // purple dragons FLY anywhere on the surface
+    }
+    if(p.age>4000) dead.add(pi);
+  });
+  dieAll(dead,purpleDrag); dragonDeaths+=dead.size;                                         // Purple Dragons are dragons too
+  if(dead.size) purpleDrag=purpleDrag.filter((_,i)=>!dead.has(i));
+}
+function stepSoul(){                                                                        // 💙🐉 THE SOUL DRAGON — after 500 dragons have died, the sky tears open
+  if(!soulDone && dragonDeaths>=500){ soulDone=true; summonSoulDragon(); }
+  if(!soulDragon || !soulDragon.alive) return;
+  let bd=1e9, ti=-1; for(let i=0;i<dragonling.length;i++){ const dg=dragonling[i]; const d=(dg.x-soulDragon.x)**2+(dg.y-soulDragon.y)**2; if(d<bd){bd=d;ti=i;} } // stalk the nearest Dragonling
+  let dx,dy;
+  if(ti>=0){ const t=dragonling[ti]; const l=Math.hypot(t.x-soulDragon.x,t.y-soulDragon.y)||1; dx=(t.x-soulDragon.x)/l; dy=(t.y-soulDragon.y)/l; }
+  else if(soulHomeX>=0){ const dd=(soulDragon.x-soulHomeX)**2+(soulDragon.y-soulHomeY)**2; // none left -> brood over the purple island
+    if(dd>16){ const l=Math.hypot(soulHomeX-soulDragon.x,soulHomeY-soulDragon.y)||1; dx=(soulHomeX-soulDragon.x)/l; dy=(soulHomeY-soulDragon.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.5; dy=Math.sin(a)*0.5; } }
+  else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+  const nx=soulDragon.x+dx*1.15, ny=soulDragon.y+dy*1.15; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ soulDragon.x=nx; soulDragon.y=ny; } // it flies anywhere in the sky
+  if(ti>=0 && bd<9){ const t=dragonling[ti]; died(t.x,t.y); dragonDeaths++; dragonling.splice(ti,1); } // devours a Dragonling
+}
+function summonSoulDragon(){                                                                // tear a sky portal open + carve the Soul Dragon's purple island around it
+  let cx=-1,cy=-1;
+  for(let t=0;t<3000;t++){ const x=8+((rnd()*(GW-16))|0), y=8+((rnd()*(GH-16))|0); if(!sky[idx(x,y)]){ cx=x; cy=y; break; } } // prefer open void so a NEW island rises
+  if(cx<0)for(let t=0;t<3000;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ cx=i%GW; cy=(i/GW)|0; break; } }
+  if(cx<0){ cx=GW>>1; cy=GH>>1; }
+  const R=5; for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyPurple[i]=1; skyRed[i]=0; skyGold[i]=0; skyForest[i]=0; } }
+  soulHomeX=cx+0.5; soulHomeY=cy+0.5; soulDragon={x:soulHomeX,y:soulHomeY,alive:true};
+}
+function stepFlower(){                                                                      // 🌸🐉 Flower Dragons — they drift to the Fierce Woolies' dirt mounds and sow white Sylvies
+  if(flowerDrag.length<3 && mounds.length>0 && rnd()<0.02){ for(let t=0;t<200;t++){ const i=(rnd()*N)|0; if(sky[i]){ flowerDrag.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0}); break; } } } // one drifts in when there's a mound to tend
+  if(!flowerDrag.length) return;
+  const dead=new Set();
+  flowerDrag.forEach((fd,fi)=>{ fd.age++;
+    let bd=1e9,tm=null; for(const md of mounds){ if(md.sylvies>=6)continue; const d=(md.x-fd.x)**2+(md.y-fd.y)**2; if(d<bd){bd=d;tm=md;} } // the nearest mound still wanting flowers
+    let dx,dy;
+    if(tm){ if(bd>1.6){ const l=Math.hypot(tm.x-fd.x,tm.y-fd.y)||1; dx=(tm.x-fd.x)/l; dy=(tm.y-fd.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a)*0.3; dy=Math.sin(a)*0.3; if(rnd()<0.08) tm.sylvies++; } } // hover over the mound & sow a Sylvie
+    else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }                            // no mounds -> roam the sky
+    const nx=fd.x+dx, ny=fd.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ fd.x=nx; fd.y=ny; }         // Flower Dragons fly anywhere
+    if(fd.age>5000) dead.add(fi);
+  });
+  if(dead.size){ dead.forEach(i=>died(flowerDrag[i].x,flowerDrag[i].y)); flowerDrag=flowerDrag.filter((_,i)=>!dead.has(i)); }
+}
+function buildKingCastle(m){                                                             // a 4x4 hollow keep (settlement walls) + a wheat farm around it
+  const cx=Math.round(m.x), cy=Math.round(m.y); kingHome={x:cx-0.5,y:cy-0.5};
+  for(let dy=-2;dy<=1;dy++)for(let dx=-2;dx<=1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]===WATER)continue;
+    if(dx===-2||dx===1||dy===-2||dy===1){ if(!settle[i]){ settle[i]=1; settleList.push(i); } } } // walls = the outer ring, hollow inside
+  sdirty=true;
+  if(rnd()<0.5){ for(let dy=-3;dy<=2;dy++)for(let dx=-3;dx<=2;dx++){ if(dx===-3||dx===2||dy===-3||dy===2){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; const i=idx(x,y); if(biome[i]!==WATER && !settle[i] && !swall[i]) moat[i]=1; } } } // ...sometimes ringed by a water moat, sometimes plain ground
+  for(let k=0;k<28;k++){ const a=k/28*6.283, rr=3.9+rnd()*1.6, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr; if(x>1&&x<GW-1&&y>1&&y<GH-1 && goodBushCell(x,y)) bushes.push({x,y,food:0.9}); } // wheat (beyond the moat)
+  m.x=kingHome.x; m.y=kingHome.y;
+}
+const upCount=a=>{ let c=0; for(const o of a) if(!o.d||o.d==='up') c++; return c; };
+function immigrate(){
+  if(upCount(goob)<45 && rnd()<0.6){ let n=0,t=0; while(n<3&&t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(goodBushCell(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);n++;}} }
+  if(upCount(zap)<8 && rnd()<0.3){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)){spawnZap(x,y,P.zStart);break;}} }
+  if(upCount(human)<5 && rnd()<0.25){ let t=0; while(t<80){t++; const x=rnd()*GW,y=rnd()*GH; if(!inWater(x,y)&&!isSettle(x,y)){spawnHuman(x,y,P.hStartE);break;}} }
+}
+
+// ---------- THE UNDERGROUND (a second world reached through holes) ----------
+const MINING=0, LAVA=1, LAKE=2;
+const uwall=new Uint8Array(N), uzone=new Uint8Array(N), ulava=new Uint8Array(N), uwater=new Uint8Array(N);
+let glow=[], holes=[], spec=[], fire=[], view='surface', poolX=-1, poolY=-1, giantActive=false, giantTimer=0, lastGiant=0, fireKingDead=false;
+const uWall=(x,y)=>uwall[cidx(x,y)]===1;
+const uZoneAt=(x,y)=>uzone[cidx(x,y)];
+function genUnderground(){
+  const nA=coarse(18), nB=coarse(26); let zS=new Float32Array(N*3), zT=new Float32Array(N*3);   // 3 zones by relaxation
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y), a=sample(nA,x,y), b=sample(nB,x,y);
+    let p0=clamp01(1-Math.abs(a-0.30)*2.4)+0.05, p1=clamp01((a-0.62)*3)+0.05, p2=clamp01((b-0.55)*3)+0.05;
+    const s=p0+p1+p2; zS[i*3]=p0/s; zS[i*3+1]=p1/s; zS[i*3+2]=p2/s; }
+  for(let k=0;k<6;k++){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); const sup=[0,0,0]; let cnt=0;
+    const add=j=>{sup[0]+=zS[j];sup[1]+=zS[j+1];sup[2]+=zS[j+2];cnt++;};
+    if(x>0)add(idx(x-1,y)*3); if(x<GW-1)add(idx(x+1,y)*3); if(y>0)add(idx(x,y-1)*3); if(y<GH-1)add(idx(x,y+1)*3);
+    const inv=cnt?1/cnt:0; let z=0; for(let l=0;l<3;l++){ const v=Math.sqrt(zS[i*3+l])*(0.3+sup[l]*inv); zT[i*3+l]=v; z+=v; } for(let l=0;l<3;l++) zT[i*3+l]/=z; }
+    const t=zS; zS=zT; zT=t; }
+  for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<3;l++){ if(zS[i*3+l]>m){m=zS[i*3+l];mi=l;} } uzone[i]=mi; }
+  uwall.fill(1);                                                                                 // carve tunnels (drunkard walks), rest is wall
+  for(let w=0;w<16;w++){ let x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); const len=200+((rnd()*240)|0);
+    for(let s=0;s<len;s++){ uwall[idx(x,y)]=0; if(rnd()<0.45 && x<GW-1) uwall[idx(x+1,y)]=0;
+      const dr=(rnd()*4)|0; x+= dr===0?1:dr===1?-1:0; y+= dr===2?1:dr===3?-1:0; x=Math.max(1,Math.min(GW-2,x)); y=Math.max(1,Math.min(GH-2,y)); } }
+  ulava.fill(0); uwater.fill(0); fire=[]; giantActive=false; giantTimer=0; lastGiant=0; fireKingDead=false;
+  for(let i=0;i<N;i++){ if(!uwall[i] && uzone[i]===LAKE && rnd()<0.14) uwater[i]=1; }                // scattered water in the underlake
+  poolX=-1; poolY=-1;                                                                                // ONE big lava pool in the lava lands
+  for(let t=0;t<500;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(uzone[idx(x,y)]===LAVA){ poolX=x; poolY=y; break; } }
+  if(poolX<0) for(let i=0;i<N;i++){ if(uzone[i]===LAVA){ poolX=i%GW; poolY=(i/GW)|0; break; } }
+  if(poolX<0){ poolX=GW>>1; poolY=GH>>1; }
+  { const R=6; for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=poolX+dx,y=poolY+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); uwall[i]=0; ulava[i]=1; } } }
+  glow=[]; let gt=0; while(glow.length<75 && gt<5000){ gt++; const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0), i=idx(x,y); if(!uwall[i] && uzone[i]===LAKE && !uwater[i] && !ulava[i]) glow.push({x:x+0.5,y:y+0.5,food:0.3+rnd()*0.7}); }
+  holes=[]; const nH=2+((rnd()*2)|0); let ht=0;                                                   // 2-3 holes: surface pos <-> a tunnel cell below
+  while(holes.length<nH && ht<5000){ ht++; const sx=1+((rnd()*(GW-2))|0), sy=1+((rnd()*(GH-2))|0); if(inWater(sx,sy)||isSettle(sx,sy))continue;
+    let ux=-1,uy=-1; for(let t=0;t<300;t++){ const x=Math.max(1,Math.min(GW-2,(sx+(rnd()-0.5)*24)|0)), y=Math.max(1,Math.min(GH-2,(sy+(rnd()-0.5)*24)|0)); if(!uwall[idx(x,y)]){ux=x;uy=y;break;} }
+    if(ux<0)for(let i=0;i<N;i++){ if(!uwall[i]){ux=i%GW;uy=(i/GW)|0;break;} }
+    if(ux>=0){ uwall[idx(ux,uy)]=0; holes.push({sx:sx+0.5,sy:sy+0.5,ux:ux+0.5,uy:uy+0.5}); } }
+  spec=[]; let st=0; while(spec.length<6 && st<3000){ st++; const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0), i=idx(x,y); if(!uwall[i]&&!ulava[i]) spec.push({x:x+0.5,y:y+0.5,age:0}); } // Specters — cave predators, never reproduce
+}
+function drawUnder(){ const d=img.data;
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(uwall[i]){ d[o]=6;d[o+1]=6;d[o+2]=11; }                                                    // black wall
+    else if(ulava[i]){ d[o]=232;d[o+1]=112;d[o+2]=22; }                                           // orange lava
+    else if(uwater[i]){ d[o]=38;d[o+1]=92;d[o+2]=150; }                                           // underground water
+    else { const z=uzone[i]; if(z===MINING){d[o]=124;d[o+1]=124;d[o+2]=132;} else if(z===LAVA){d[o]=92;d[o+1]=62;d[o+2]=70;} else {d[o]=106;d[o+1]=78;d[o+2]=50;} } // grey / purple-brown / brown
+    d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+  for(const g of glow){ if(g.food<0.15)continue; const x=g.x*SC,y=g.y*SC,r=SC*(0.25+0.32*g.food); ctx.shadowColor='#c6ff7a'; ctx.shadowBlur=7; ctx.fillStyle=`rgba(190,255,130,${0.55+0.4*g.food})`; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } ctx.shadowBlur=0;
+  for(const h of holes){ const x=h.ux*SC,y=h.uy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.1,0,7);ctx.fill(); ctx.strokeStyle='#7fe0c0'; ctx.lineWidth=2; ctx.stroke(); }
+  for(const s of spec){ const x=s.x*SC,y=s.y*SC,r=SC*0.75;                                        // Specters — ghostly cave predators
+    ctx.shadowColor='#d9ccff'; ctx.shadowBlur=9; ctx.fillStyle='rgba(212,200,242,0.82)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.36, ey=y-r*0.04, er=r*0.24; ctx.fillStyle='#150a2e'; twoDots(x-ex,x+ex,ey,er); }
+  for(const f of fire){ const x=f.x*SC,y=f.y*SC,r=SC*0.7;                                          // Fire minions — born of the Giant
+    ctx.shadowColor='#ff7a1e'; ctx.shadowBlur=10; ctx.fillStyle='rgba(255,120,30,0.92)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34, ey=y-r*0.05, er=r*0.2; ctx.fillStyle='#2a0a00'; twoDots(x-ex,x+ex,ey,er); }
+  if(giantActive && poolX>=0){ const x=(poolX+0.5)*SC,y=(poolY+0.5)*SC,r=SC*4.4;                   // THE GIANT rising from the pool
+    ctx.shadowColor='#ff5a1e'; ctx.shadowBlur=22; ctx.fillStyle='#0a0608'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34, ey=y-r*0.12, er=r*0.13; ctx.shadowColor='#ffb020'; ctx.shadowBlur=14; ctx.fillStyle='#ff5a1e'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+}
+function drawHolesSurface(){ for(const h of holes){ const x=h.sx*SC,y=h.sy*SC; ctx.fillStyle='#04070f'; ctx.beginPath();ctx.arc(x,y,SC*1.05,0,7);ctx.fill(); ctx.strokeStyle='#c9925a'; ctx.lineWidth=2; ctx.stroke(); }
+  if(portalSX>=0){ const x=portalSX*SC,y=portalSY*SC,ss=SC*1.7; ctx.fillStyle=portalCharge>=3?'#ffe23a':'#9b30d0'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // purple until charged, then yellow -> to the sky
+  drawGrovePortal(gPortalSX,gPortalSY);                                                  // the surface end of the Grove portal
+}
+
+// ---------- THE SKY REALM (floating islands — drop creatures & angels up here) ----------
+const sky=new Uint8Array(N), skyRed=new Uint8Array(N), skyForest=new Uint8Array(N), skyGold=new Uint8Array(N), skyPurple=new Uint8Array(N);
+let soulDragon=null, soulDone=false, soulHomeX=-1, soulHomeY=-1;   // 💙🐉 the Soul Dragon + its purple island (born once 500 dragons have died)
+let flowerDrag=[], mounds=[];   // 🌸🐉 Flower Dragons + the dirt mounds Fierce Woolies raise, which they sow with white Sylvies
+let angels=[], dragon=null, goldDrag=[], kingExists=false, portalCharge=0, portalSX=-1, portalSY=-1, portalUX=-1, portalUY=-1;
+let goldEggX=-1, goldEggY=-1, goldEgg=false, lastGoldHatch=0;   // the Gold Dragon's island egg (hatches every 5000 days)
+let kingHome=null, castleBuilt=false, redfruit=[], wooly=[], dragonling=[], lastDragonCheck=0, dsnap=[];  // dsnap = rare Dragonsnap plants
+let purpleDrag=[], dragonIsleX=-1, dragonIsleY=-1;   // 🟣🐉 Purple Dragons (born in the sky, visit the blue flowers) + the Dragon King's home red island
+const skyLand=(x,y)=>sky[cidx(x,y)]===1;
+function genSky(){
+  sky.fill(0); skyRed.fill(0); skyForest.fill(0); skyGold.fill(0); skyPurple.fill(0); angels=[]; dragon=null; goldDrag=[]; kingExists=false; redfruit=[]; wooly=[]; dragonling=[]; lastDragonCheck=0; dsnap=[]; purpleDrag=[];
+  soulDragon=null; soulDone=false; soulHomeX=-1; soulHomeY=-1; flowerDrag=[]; mounds=[];
+  goldEggX=-1; goldEggY=-1; goldEgg=false; lastGoldHatch=0;
+  const centers=[], nIsles=7+((rnd()*4)|0);
+  for(let k=0;k<nIsles;k++){ const cx=6+((rnd()*(GW-12))|0), cy=6+((rnd()*(GH-12))|0), R=4+((rnd()*5)|0); centers.push({cx,cy,R});
+    for(let dy=-R-1;dy<=R+1;dy++)for(let dx=-R-1;dx<=R+1;dx++){ const x=cx+dx,y=cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R+(rnd()*7-3)) sky[idx(x,y)]=1; } }
+  const dc=centers[(rnd()*centers.length)|0], R=dc.R+1;                                  // one island is the dragon's — dark red
+  for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=dc.cx+dx,y=dc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); sky[i]=1; skyRed[i]=1; } }
+  dragon={x:dc.cx+0.5,y:dc.cy+0.5,alive:true}; dragonIsleX=dc.cx+0.5; dragonIsleY=dc.cy+0.5;   // remember the red island so the Dragon King can always fly home
+  let gc=null; for(let k=0;k<centers.length;k++){ if(centers[k]!==dc){ gc=centers[k]; break; } } // a SECOND special island — the Gold Dragon's (yellow), with a golden egg
+  if(gc){ const gR=gc.R+1; for(let dy=-gR;dy<=gR;dy++)for(let dx=-gR;dx<=gR;dx++){ const x=gc.cx+dx,y=gc.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=gR*gR){ const i=idx(x,y); sky[i]=1; skyGold[i]=1; } }
+    goldEggX=gc.cx+0.5; goldEggY=gc.cy+0.5; goldEgg=true; }
+  for(let a=0;a<centers.length;a++){ let bn=-1,bd=1e9; for(let b=0;b<centers.length;b++){ if(a===b)continue; const dd=(centers[a].cx-centers[b].cx)**2+(centers[a].cy-centers[b].cy)**2; if(dd<bd){bd=dd;bn=b;} } // bridge each island to its nearest neighbour
+    if(bn>=0){ const x=centers[a].cx,y=centers[a].cy,tx=centers[bn].cx,ty=centers[bn].cy,st=Math.max(1,Math.max(Math.abs(tx-x),Math.abs(ty-y)));
+      for(let s=0;s<=st;s++){ const px=Math.round(x+(tx-x)*s/st), py=Math.round(y+(ty-y)*s/st); if(px>0&&px<GW-1&&py>0&&py<GH-1){ sky[idx(px,py)]=1; if(py+1<GH-1) sky[idx(px,py+1)]=1; } } } }
+  let at=0; while(angels.length<5 && at<4000){ at++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]) angels.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); }
+  portalCharge=0; portalUX=-1; portalSX=-1;                                              // the two ends of the sky portal
+  for(let t=0;t<4000;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]){ portalUX=(i%GW)+0.5; portalUY=((i/GW)|0)+0.5; break; } }
+  for(let t=0;t<4000;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0); if(!inWater(x,y)&&!isSettle(x,y)&&!holes.some(h=>Math.abs(h.sx-x)<3&&Math.abs(h.sy-y)<3)){ portalSX=x+0.5; portalSY=y+0.5; break; } }
+  let fc=0; for(let k=0;k<centers.length && fc<3;k++){ if(centers[k]===dc||centers[k]===gc)continue; const c=centers[k], R=c.R;   // some islands are FOREST islands (woolies' home)
+    for(let dy=-R;dy<=R;dy++)for(let dx=-R;dx<=R;dx++){ const x=c.cx+dx,y=c.cy+dy; if(x<1||y<1||x>=GW-1||y>=GH-1)continue; if(dx*dx+dy*dy<=R*R){ const i=idx(x,y); if(sky[i]&&!skyRed[i]&&!skyGold[i]) skyForest[i]=1; } } fc++; }
+  let rt=0; while(redfruit.length<64 && rt<6000){ rt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i] && (skyForest[i]||rnd()<0.25)) redfruit.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4+rnd()*0.6}); } // red fruit
+  let dt=0; while(dsnap.length<5 && dt<6000){ dt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]) dsnap.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5}); } // rare Dragonsnap plants
+  let wt=0; while(wooly.length<12 && wt<5000){ wt++; const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i] && (skyForest[i]||rnd()<0.3)) wooly.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,E:2,age:0,ate:0}); } // a starting flock of Woolies
+  for(let k=0;k<6;k++)for(let t=0;t<300;t++){ const i=(rnd()*N)|0; if(sky[i]&&!skyRed[i]&&!skyGold[i]){ dragonling.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0}); break; } } // ...and a few Dragonlings to hunt them
+}
+function drawSky(){ const d=img.data;
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(skyRed[i]){ d[o]=120;d[o+1]=28;d[o+2]=30; }                                       // dark-red dragon island
+    else if(skyPurple[i]){ d[o]=96;d[o+1]=40;d[o+2]=140; }                                // the Soul Dragon's purple island
+    else if(skyGold[i]){ d[o]=150;d[o+1]=132;d[o+2]=58; }                                 // golden dragon island
+    else if(skyForest[i]){ d[o]=48;d[o+1]=118;d[o+2]=62; }                               // darker-green forest island
+    else if(sky[i]){ d[o]=96;d[o+1]=176;d[o+2]=104; }                                    // green floating island
+    else { d[o]=18;d[o+1]=26;d[o+2]=56; }                                                // open sky / void
+    d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+  for(const a of angels){ const x=a.x*SC,y=a.y*SC,r=SC*0.8;                              // Angels — trade 1 treasure for food
+    ctx.shadowColor='#fff2b0'; ctx.shadowBlur=10; ctx.fillStyle='rgba(255,248,214,0.96)'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34,ey=y-r*0.05,er=r*0.2; ctx.fillStyle='#3a3020'; twoDots(x-ex,x+ex,ey,er); }
+  if(dragon && dragon.alive){ const x=dragon.x*SC,y=dragon.y*SC,r=SC*3.6;                // the GREEN DRAGON
+    ctx.shadowColor='#5fe08a'; ctx.shadowBlur=20; ctx.fillStyle='#1f7a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#eaff6a'; ctx.shadowBlur=12; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  for(const gd of goldDrag){ const x=gd.x*SC,y=gd.y*SC,r=SC*3.4;                          // the GOLD DRAGON — foe of the Green Dragon
+    ctx.shadowColor='#ffe23a'; ctx.shadowBlur=20; ctx.fillStyle='#caa018'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#fff2a0'; ctx.shadowBlur=12; ctx.fillStyle='#fff6d0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  if(goldEgg && goldEggX>=0){ const x=goldEggX*SC,y=goldEggY*SC;                           // the GOLDEN EGG on the gold island
+    ctx.shadowColor='#ffe23a'; ctx.shadowBlur=11; ctx.fillStyle='#ffe488'; ctx.beginPath(); ctx.ellipse(x,y,SC*0.85,SC*1.15,0,0,7); ctx.fill(); ctx.shadowBlur=0;
+    ctx.strokeStyle='#b8901c'; ctx.lineWidth=1.5; ctx.stroke(); ctx.fillStyle='#c99a1c'; ctx.beginPath(); ctx.arc(x-SC*0.25,y-SC*0.2,SC*0.16,0,7); ctx.arc(x+SC*0.28,y+SC*0.25,SC*0.13,0,7); ctx.fill(); } // speckled shell
+  if(portalUX>=0){ const x=portalUX*SC,y=portalUY*SC,ss=SC*1.7; ctx.shadowColor='#ffe23a'; ctx.shadowBlur=13; ctx.fillStyle='#ffe23a'; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0; ctx.strokeStyle='#fff8c8'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss); } // the connected sky portal
+  for(const rf of redfruit){ if(rf.food<0.15)continue; const x=rf.x*SC,y=rf.y*SC,r=SC*0.3; ctx.fillStyle='#e83a3a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // red fruit
+  for(const s of dsnap){ const x=s.x*SC,y=s.y*SC,r=SC*0.55;                                // DRAGONSNAP — a rare snapping plant
+    ctx.strokeStyle='#2e7d32'; ctx.lineWidth=Math.max(1.5,r*0.3); ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(x,y+r*0.9); ctx.lineTo(x,y-r*0.1); ctx.stroke(); // green stem
+    ctx.fillStyle='#b0202c'; ctx.beginPath(); ctx.arc(x,y-r*0.35,r*0.55,0.15,3.0); ctx.fill(); ctx.beginPath(); ctx.arc(x,y-r*0.35,r*0.55,3.28,6.13); ctx.fill(); // red snapping jaws
+    ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x-r*0.16,y-r*0.5,r*0.09,0,7); ctx.arc(x+r*0.16,y-r*0.5,r*0.09,0,7); ctx.fill(); } // fangs
+  for(const w of wooly){ const x=w.x*SC,y=w.y*SC,r=SC*(w.fierce?0.62:0.55);                 // WOOLIES (fierce ones are bigger, horned, angry)
+    ctx.fillStyle=w.fierce?'#d6c8ad':'#f2f0e6'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();
+    const ex=r*0.34,ey=y-r*0.05,er=r*0.16; ctx.fillStyle='#2a2a2a'; twoDots(x-ex,x+ex,ey,er);
+    if(w.fierce){ ctx.strokeStyle='#6a5636'; ctx.lineWidth=Math.max(1.5,r*0.2); ctx.lineCap='round';
+      ctx.beginPath(); ctx.moveTo(x-r*0.5,y-r*0.55); ctx.lineTo(x-r*0.85,y-r*1.05); ctx.moveTo(x+r*0.5,y-r*0.55); ctx.lineTo(x+r*0.85,y-r*1.05); ctx.stroke(); // horns
+      ctx.strokeStyle='#2a2a2a'; ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er*1.3); ctx.lineTo(x-ex+er*0.6,ey-er*0.2); ctx.moveTo(x+ex+er,ey-er*1.3); ctx.lineTo(x+ex-er*0.6,ey-er*0.2); ctx.stroke(); } } // angry brows
+  for(const d of dragonling){ const gr=d.grown; const x=d.x*SC,y=d.y*SC,r=SC*(gr?0.9:0.6); ctx.shadowColor='#5fe08a'; ctx.shadowBlur=gr?10:6; ctx.fillStyle=gr?'#1c8a3c':'#2a9c4a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    if(gr){ ctx.fillStyle='#1c8a3c'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.5,y-r*0.75); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.5,y-r*0.75); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); } // grown-up wings
+    const ex=r*0.32,ey=y-r*0.06,er=r*0.15; ctx.fillStyle='#d4ff3a'; twoDots(x-ex,x+ex,ey,er); if(d.carry){ ctx.fillStyle='#f2f0e6'; ctx.beginPath();ctx.arc(x,y+r*0.85,r*0.42,0,7);ctx.fill(); } } // dragonlings grow up bigger, with wings, and fly home to the Dragon Island
+  for(const p of purpleDrag){ if(p.d==='sky') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); }     // 🟣🐉 Purple Dragons up in the sky
+  for(const md of mounds){ const x=md.x*SC,y=md.y*SC,r=SC*0.85;                              // dirt mounds raised by the Fierce Woolies
+    ctx.fillStyle='#6b4a2a'; ctx.beginPath(); ctx.ellipse(x,y+r*0.35,r,r*0.62,0,Math.PI,2*Math.PI); ctx.fill();
+    ctx.fillStyle='#7d5836'; ctx.beginPath(); ctx.ellipse(x,y+r*0.35,r*0.66,r*0.4,0,Math.PI,2*Math.PI); ctx.fill();
+    for(let k=0;k<md.sylvies;k++){ const sx=x+(k-(md.sylvies-1)/2)*r*0.44, sy=y-r*0.12, sr=SC*0.2;  // 💮 white Sylvies on the mound
+      ctx.fillStyle='#ffffff'; for(let p=0;p<5;p++){ const pa=p/5*6.283-1.57; ctx.beginPath(); ctx.arc(sx+Math.cos(pa)*sr*0.5,sy+Math.sin(pa)*sr*0.5,sr*0.42,0,7); ctx.fill(); }
+      ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(sx,sy,sr*0.34,0,7); ctx.fill(); } }
+  for(const fd of flowerDrag){ const x=fd.x*SC,y=fd.y*SC,r=SC*0.72;                           // 🌸🐉 the Flower Dragon — mossy green, wearing a white bloom
+    ctx.fillStyle='#3f7a4a'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.1); ctx.lineTo(x-r*1.3,y-r*0.6); ctx.lineTo(x-r*0.7,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.1); ctx.lineTo(x+r*1.3,y-r*0.6); ctx.lineTo(x+r*0.7,y+r*0.35); ctx.closePath(); ctx.fill(); // leafy wings
+    ctx.shadowColor='#9fe0a0'; ctx.shadowBlur=7; ctx.fillStyle='#5aa76a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.32,ey=y-r*0.05,er=r*0.15; ctx.fillStyle='#241810'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle='#ffffff'; for(let p=0;p<5;p++){ const pa=p/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(pa)*r*0.32,y-r*0.92+Math.sin(pa)*r*0.32,r*0.24,0,7); ctx.fill(); } ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y-r*0.92,r*0.17,0,7); ctx.fill(); } // white flower crown
+  if(soulHomeX>=0){ const x=soulHomeX*SC,y=soulHomeY*SC,r=SC*1.5; ctx.strokeStyle='#bfe4ff'; ctx.shadowColor='#8fd0ff'; ctx.shadowBlur=16; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.shadowBlur=0; } // the soul portal, torn open over the purple island
+  if(soulDragon && soulDragon.alive){ const x=soulDragon.x*SC,y=soulDragon.y*SC,r=SC*3.4;   // 💙🐉 THE SOUL DRAGON — baby blue
+    ctx.fillStyle='#a9d6ff'; ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.2); ctx.lineTo(x-r*1.6,y-r*0.8); ctx.lineTo(x-r*0.8,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.2); ctx.lineTo(x+r*1.6,y-r*0.8); ctx.lineTo(x+r*0.8,y+r*0.35); ctx.closePath(); ctx.fill(); // broad wings
+    ctx.shadowColor='#aee0ff'; ctx.shadowBlur=22; ctx.fillStyle='#7fbfff'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; // baby-blue body + glow
+    const ex=r*0.34,ey=y-r*0.12,er=r*0.14; ctx.shadowColor='#ffffff'; ctx.shadowBlur=12; ctx.fillStyle='#ffffff'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; } // pale mournful eyes
+}
+
+// ---------- THE GROVE REALM (an overgrown alternate dimension) ----------
+// three biomes by relaxation: the pear-tree GROVE, the WILD, and CLEARINGs where Treemen settle.
+const GROVE=0, WILD=1, CLEARING=2;
+const gzone=new Uint8Array(N), gsettle=new Uint8Array(N), pen=new Uint8Array(N);
+const vine=new Uint8Array(N), bramble=new Uint8Array(N), rose=new Uint8Array(N);  // Nature-Gooblet flora: red vine-flowers (grove), bramble (wild), rose bush (where they meet)
+let vineN=0, brambleN=0; const FLORACAP=130;                                      // cached counts (cap the flora so it stays small, restricted patches)
+let pears=[], sniffer=[], claw=[], treeman=[], gsettleList=[], natureGiant=null, groveWellness=1, giantClear={x:-1,y:-1};
+// the Treemen elect a King every 2000 days; the king's mood works the Grove↔surface portal
+let groveKingType='none', lastGroveElection=0, lastClawRaid=0;   // 'safe' seals it · 'aggressive' sends Claws out · 'helpful' lets Humans in
+let gPortalSX=-1,gPortalSY=-1,gPortalGX=-1,gPortalGY=-1, gPortalOpen=false;
+const KINGLABEL={none:'— none —',safe:'🛡️ Safe',aggressive:'⚔️ Aggressive',helpful:'🤝 Helpful'};
+const inGroveWild=(x,y)=>gzone[cidx(x,y)]===WILD;
+function dirToZone(x,y,zone){ let best=null,bd=1e9;                                    // step toward the nearest cell of a target zone
+  for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1],[2,0],[-2,0],[0,2],[0,-2]]){ const nx=x+dx,ny=y+dy; if(nx<0||ny<0||nx>=GW||ny>=GH)continue;
+    if(gzone[cidx(nx,ny)]===zone){ const dd=dx*dx+dy*dy; if(dd<bd){bd=dd;best=[dx,dy];} } }
+  if(!best) return [0,0]; const l=Math.hypot(best[0],best[1])||1; return [best[0]/l,best[1]/l]; }
+function genGrove(){
+  const nA=coarse(20), nB=coarse(28); let zS=new Float32Array(N*3), zT=new Float32Array(N*3);  // 3 overgrown zones by relaxation
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y), a=sample(nA,x,y), b=sample(nB,x,y);
+    let p0=clamp01((a-0.42)*3)+0.06, p1=clamp01((0.40-a)*3)+0.05, p2=clamp01(1-Math.abs(b-0.5)*3.2)+0.05;   // grove where damp, wild where dry, clearings on the ridges
+    const s=p0+p1+p2; zS[i*3]=p0/s; zS[i*3+1]=p1/s; zS[i*3+2]=p2/s; }
+  for(let k=0;k<6;k++){ for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); const sup=[0,0,0]; let cnt=0;
+    const add=j=>{sup[0]+=zS[j];sup[1]+=zS[j+1];sup[2]+=zS[j+2];cnt++;};
+    if(x>0)add(idx(x-1,y)*3); if(x<GW-1)add(idx(x+1,y)*3); if(y>0)add(idx(x,y-1)*3); if(y<GH-1)add(idx(x,y+1)*3);
+    const inv=cnt?1/cnt:0; let z=0; for(let l=0;l<3;l++){ const v=Math.sqrt(zS[i*3+l])*(0.3+sup[l]*inv); zT[i*3+l]=v; z+=v; } for(let l=0;l<3;l++) zT[i*3+l]/=z; }
+    const t=zS; zS=zT; zT=t; }
+  for(let i=0;i<N;i++){ let m=-1,mi=0; for(let l=0;l<3;l++){ if(zS[i*3+l]>m){m=zS[i*3+l];mi=l;} } gzone[i]=mi; }
+  vine.fill(0); bramble.fill(0); rose.fill(0); vineN=0; brambleN=0;
+  gsettle.fill(0); gsettleList=[]; giantClear={x:GW>>1,y:GH>>1}; let bd=1e9;                     // the Giant's clearing: the CLEARING cell nearest the centre
+  for(let i=0;i<N;i++){ if(gzone[i]===CLEARING){ const x=i%GW,y=(i/GW)|0, dd=(x-GW/2)**2+(y-GH/2)**2; if(dd<bd){bd=dd;giantClear={x,y};} } }
+  natureGiant={x:giantClear.x+0.5,y:giantClear.y+0.5,alive:true}; groveWellness=1;
+  pears=[]; let pt=0; while(pears.length<90 && pt<7000){ pt++; const i=(rnd()*N)|0; if(gzone[i]===GROVE) pears.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4+rnd()*0.6}); } // purple pears
+  sniffer=[]; let st=0; while(sniffer.length<40 && st<6000){ st++; const i=(rnd()*N)|0; if(gzone[i]===GROVE) sniffer.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,E:2,age:0,ate:0}); } // Sniffers in the grove
+  claw=[]; let ct=0; while(claw.length<14 && ct<6000){ ct++; const i=(rnd()*N)|0; if(gzone[i]===WILD) claw.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0,ate:0}); } // Claws in the wild
+  treeman=[]; let ht=0; while(gsettleList.length<5 && ht<6000){ ht++; const i=(rnd()*N)|0; const x=i%GW,y=(i/GW)|0;
+    if(gzone[i]===CLEARING && !gsettle[i] && (x-giantClear.x)**2+(y-giantClear.y)**2>36){ gsettle[i]=1; gsettleList.push(i); treeman.push({x:x+0.5,y:y+0.5,home:i,age:0}); } } // Treemen settlements
+  // the Grove↔surface portal: a grove end + a surface end (starts sealed, until the first election)
+  pen.fill(0); groveKingType='none'; lastGroveElection=0; lastClawRaid=0; gPortalOpen=false;
+  gPortalGX=-1; gPortalGY=-1; for(let t=0;t<5000;t++){ const i=(rnd()*N)|0; if(gzone[i]!==WILD && !gsettle[i]){ gPortalGX=(i%GW)+0.5; gPortalGY=((i/GW)|0)+0.5; break; } }
+  gPortalSX=-1; gPortalSY=-1; for(let t=0;t<5000;t++){ const x=1+((rnd()*(GW-2))|0), y=1+((rnd()*(GH-2))|0);
+    if(!inWater(x,y)&&!isSettle(x,y)&&!(portalSX>=0&&Math.abs(portalSX-x)<3&&Math.abs(portalSY-y)<3)&&!holes.some(h=>Math.abs(h.sx-x)<3&&Math.abs(h.sy-y)<3)){ gPortalSX=x+0.5; gPortalSY=y+0.5; break; } }
+}
+function electGroveKing(){                                                              // every 2000 days the Treemen crown a new King
+  for(const t of treeman) t.king=false;
+  groveKingType = treeman.length ? ['safe','aggressive','helpful'][(rnd()*3)|0] : 'none';
+  gPortalOpen = (groveKingType==='aggressive' || groveKingType==='helpful');
+  if(groveKingType!=='helpful') pen.fill(0);                                            // pens only stand under a Helpful King
+  if(treeman.length) treeman[(rnd()*treeman.length)|0].king=true;                       // crown one Treeman
+}
+function natureGoobStep(g){                                                               // a Nature Gooblet: peaceful, plants flora as it roams
+  if(g.fallCd>0) g.fallCd--;
+  let dx,dy;
+  if(groveKingType==='helpful' && gPortalGX>=0 && !(g.fallCd>0)){ const l=Math.hypot(gPortalGX-g.x,gPortalGY-g.y)||1; dx=(gPortalGX-g.x)/l; dy=(gPortalGY-g.y)/l; } // a Helpful King calls it toward the portal home
+  else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+  const nx=g.x+dx*0.7, ny=g.y+dy*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ g.x=nx; g.y=ny; }
+  g.E=Math.min(4,(g.E||2)+0.006);                                                        // the grove sustains it
+  const i=cidx(g.x,g.y);
+  if(gzone[i]===GROVE && !vine[i] && !rose[i] && vineN<FLORACAP && rnd()<0.10){ vine[i]=1; vineN++; }        // red vine-flower in the pear grove
+  else if(gzone[i]===WILD && !bramble[i] && !rose[i] && brambleN<FLORACAP && rnd()<0.10){ bramble[i]=1; brambleN++; } // bramble in the wild
+}
+function natureGoobSurfaceStep(g){                                                        // a Nature Gooblet up on the surface: wanders in peace and plants blue flowers
+  if(g.fallCd>0) g.fallCd--;
+  const a=rnd()*6.283; clampMove(g,g.x+Math.cos(a)*0.6,g.y+Math.sin(a)*0.6);              // peaceful wander (water & walls block)
+  g.E=Math.min(4,(g.E||2)+0.004); if(g.W!=null) g.W=Math.min(1,g.W+0.004);                 // the flower keeps it fed & watered
+  const farFromPortal = gPortalSX<0 || (g.x-gPortalSX)**2+(g.y-gPortalSY)**2>36;            // plant the flowers AWAY from the portal (Elbie), once it has wandered off
+  if(blueFlora.length<3 && farFromPortal && rnd()<0.03 && goodBlueCell(g.x,g.y)) blueFlora.push({x:g.x,y:g.y}); // plant a 🪻 blue flower — never more than 3 on the surface
+}
+function growFlora(){ let vc=0,bc=0; for(let i=0;i<N;i++){ if(vine[i])vc++; else if(bramble[i])bc++; } // recount for caps (keep them as patches, not a takeover)
+  const v0=vine.slice(), b0=bramble.slice();
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y);
+    if(v0[i] && vc<FLORACAP && rnd()<0.03){ const d=[[1,0],[-1,0],[0,1],[0,-1]][(rnd()*4)|0], nx=x+d[0],ny=y+d[1]; if(nx>=0&&ny>=0&&nx<GW&&ny<GH){ const j=idx(nx,ny); if(!vine[j]&&!bramble[j]&&!rose[j]&&gzone[j]!==WILD){ vine[j]=1; vc++; } } } // vines creep through the grove and out into the clearings (border)
+    if(b0[i] && bc<FLORACAP && rnd()<0.03){ const d=[[1,0],[-1,0],[0,1],[0,-1]][(rnd()*4)|0], nx=x+d[0],ny=y+d[1]; if(nx>=0&&ny>=0&&nx<GW&&ny<GH){ const j=idx(nx,ny); if(!vine[j]&&!bramble[j]&&!rose[j]&&gzone[j]!==GROVE){ bramble[j]=1; bc++; } } } // bramble creeps through the wild and out into the clearings
+  }
+  vineN=vc; brambleN=bc;
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){ const i=idx(x,y); if(!vine[i])continue;     // vine meets bramble at the border -> a ROSE BUSH
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){ const nx=x+dx,ny=y+dy; if(nx<0||ny<0||nx>=GW||ny>=GH)continue; const j=idx(nx,ny); if(bramble[j]){ vine[i]=0; bramble[j]=0; rose[i]=1; rose[j]=1; break; } }
+  }
+}
+function stepGrove(){
+  if(day-lastGroveElection>=2000){ lastGroveElection=day; electGroveKing(); }            // the Treemen crown a King every 2000 days
+  if(frame%6===0) growFlora();
+  for(const p of pears) p.food=Math.min(1, p.food+0.006);                               // pears regrow
+  const pearH=buildHash(pears,6); const deadG=new Set(), deadZ=new Set(), deadH=new Set();
+  const helpful = groveKingType==='helpful';
+  // ---- HELPFUL KING: Humans at the surface portal come to live with the Treemen ----
+  if(helpful && gPortalSX>=0){ human.forEach(m=>{ if((!m.d||m.d==='up') && !(m.fallCd>0) && (m.x-gPortalSX)**2+(m.y-gPortalSY)**2<3){ m.d='grove'; m.x=gPortalGX; m.y=gPortalGY; m.fallCd=40; } }); }
+  // ---- OUTSIDERS: creatures lost in the grove — normally despoil it & starve; under a Helpful King they're fed & safe ----
+  let outsiders=0;
+  const wander=(c,i,dead)=>{ outsiders++;
+    const a=rnd()*6.283; const nx=c.x+Math.cos(a)*0.85, ny=c.y+Math.sin(a)*0.85; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ c.x=nx; c.y=ny; }
+    if(helpful){ if(c.E!=null) c.E=Math.min(4, c.E + (pen[cidx(c.x,c.y)]?0.03:0.008)); return; } // Treemen feed them (extra at a pen)
+    if(c.E!=null) c.E-=0.004;
+    const [pi,pd]=nearestIdx(c.x,c.y,pears,pearH,6); if(pi>=0 && pd<1.6 && pears[pi].food>0.3){ pears[pi].food=0; groveWellness-=0.004; } // taking too much hurts the forest most
+    else groveWellness-=0.0002;
+    if(natureGiant && (c.x-natureGiant.x)**2+(c.y-natureGiant.y)**2<20){ dead.add(i); return; } // the Giant expels intruders from its clearing
+    if(c.E!=null && c.E<=0) dead.add(i);
+  };
+  goob.forEach((g,i)=>{ if(g.d!=='grove') return;
+    if(g.nature){                                                                        // a Nature Gooblet
+      if(helpful && gPortalGX>=0 && gPortalSX>=0 && !(g.fallCd>0) && (g.x-gPortalGX)**2+(g.y-gPortalGY)**2<3){ // a Helpful King lets it carry a blue flower back up to the surface
+        g.d='up'; g.x=gPortalSX; g.y=gPortalSY; g.fallCd=40;                                // it plants its blue flowers later, once it has wandered away from the portal
+        return;
+      }
+      natureGoobStep(g); return;
+    }
+    g.groveDays=(g.groveDays||0)+1;
+    if(g.groveDays>=50){ g.nature=true; g.E=Math.max(g.E||0,2.5); return; }               // 50 days in the Grove -> becomes a Nature Gooblet
+    wander(g,i,deadG);
+  });
+  zap.forEach((z,i)=>{ if(z.d==='grove') wander(z,i,deadZ); });
+  human.forEach((m,i)=>{ if(m.d==='grove') wander(m,i,deadH); });
+  // ---- SNIFFERS: forage pears in the grove, hurry out of the wild ----
+  const snH=buildHash(sniffer,7); const deadSn=new Set();
+  sniffer.forEach((s,si)=>{ s.age++; s.E-=0.004; let dx,dy,moved=false;
+    if(inGroveWild(s.x,s.y)){ const g=dirToZone(s.x,s.y,GROVE); if(g[0]||g[1]){ dx=g[0]; dy=g[1]; moved=true; } } // lost in the wild -> flee back
+    if(!moved && s.E<1.9){ const [pi]=nearestIdx(s.x,s.y,pears,pearH,7); if(pi>=0){ const p=pears[pi]; const l=Math.hypot(p.x-s.x,p.y-s.y)||1; dx=(p.x-s.x)/l; dy=(p.y-s.y)/l; moved=true; } }
+    if(!moved){ const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=s.x+dx*0.7, ny=s.y+dy*0.7; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ s.x=nx; s.y=ny; }
+    const [pi2,pd2]=nearestIdx(s.x,s.y,pears,pearH,6); if(pi2>=0&&pd2<1.5&&pears[pi2].food>0.3){ pears[pi2].food=0; s.E=Math.min(4,s.E+1.3); s.ate++; }
+    if(s.ate>=5 && sniffer.length<160){ s.ate=0; s.E*=0.7; sniffer.push({x:s.x,y:s.y,E:1.2,age:0,ate:0}); }
+    if(s.E<=0||s.age>2600) deadSn.add(si);
+  });
+  // ---- CLAWS: wild predators; eat Sniffers AND any outsider that gets lost in the wild ----
+  const prey=[];
+  sniffer.forEach((s,i)=>{ if(!deadSn.has(i)&&inGroveWild(s.x,s.y)) prey.push({a:'sn',i,x:s.x,y:s.y}); });
+  goob.forEach((g,i)=>{ if(g.d==='grove'&&!g.nature&&!deadG.has(i)&&inGroveWild(g.x,g.y)) prey.push({a:'g',i,x:g.x,y:g.y}); }); // Nature Gooblets are one with the grove — Claws leave them be
+  zap.forEach((z,i)=>{ if(z.d==='grove'&&!deadZ.has(i)&&inGroveWild(z.x,z.y)) prey.push({a:'z',i,x:z.x,y:z.y}); });
+  human.forEach((m,i)=>{ if(m.d==='grove'&&!deadH.has(i)&&inGroveWild(m.x,m.y)) prey.push({a:'h',i,x:m.x,y:m.y}); });
+  const preyH=buildHash(prey,8); const deadC=new Set();
+  claw.forEach((c,ci)=>{ if(c.d==='up') return;                                          // surface claws are handled below
+    c.age++; const [pi]=nearestIdx(c.x,c.y,prey,preyH,8); let dx,dy;
+    if(pi>=0){ const p=prey[pi]; const l=Math.hypot(p.x-c.x,p.y-c.y)||1; dx=(p.x-c.x)/l; dy=(p.y-c.y)/l; }
+    else if(groveKingType==='aggressive' && gPortalGX>=0){ const l=Math.hypot(gPortalGX-c.x,gPortalGY-c.y)||1; dx=(gPortalGX-c.x)/l; dy=(gPortalGY-c.y)/l; } // an Aggressive King musters the Claws at the portal
+    else if(!inGroveWild(c.x,c.y)){ const g=dirToZone(c.x,c.y,WILD); if(g[0]||g[1]){dx=g[0];dy=g[1];} else {const a=rnd()*6.283;dx=Math.cos(a);dy=Math.sin(a);} } // drift back to the wild
+    else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=c.x+dx, ny=c.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ c.x=nx; c.y=ny; }
+    if(pi>=0){ const p=prey[pi]; if((p.x-c.x)**2+(p.y-c.y)**2<1.8){
+      if(p.a==='sn')deadSn.add(p.i); else if(p.a==='g')deadG.add(p.i); else if(p.a==='z')deadZ.add(p.i); else deadH.add(p.i);
+      c.ate=(c.ate||0)+1; if(c.ate>=4 && claw.length<40){ c.ate=0; claw.push({x:c.x,y:c.y,age:0,ate:0}); } } }
+    if(c.age>5000) deadC.add(ci);
+  });
+  // ---- AGGRESSIVE KING: Claws that reach the grove portal pour out onto the surface ----
+  if(groveKingType==='aggressive' && gPortalGX>=0 && gPortalSX>=0 && day-lastClawRaid>=6){
+    for(const c of claw){ if(c.d) continue; if((c.x-gPortalGX)**2+(c.y-gPortalGY)**2<4){ c.d='up'; c.x=gPortalSX+(rnd()-0.5); c.y=gPortalSY+(rnd()-0.5); c.age=0; lastClawRaid=day; break; } }
+  }
+  // ---- SURFACE CLAWS: the invasion — they hunt Gooblets, Zappies & Humans on the surface ----
+  if(claw.some(c=>c.d==='up')){
+    const sprey=[];
+    goob.forEach((g,i)=>{ if((!g.d||g.d==='up')&&!deadG.has(i)) sprey.push({a:'g',i,x:g.x,y:g.y}); });
+    zap.forEach((z,i)=>{ if((!z.d||z.d==='up')&&!deadZ.has(i)) sprey.push({a:'z',i,x:z.x,y:z.y}); });
+    human.forEach((m,i)=>{ if((!m.d||m.d==='up')&&!deadH.has(i)) sprey.push({a:'h',i,x:m.x,y:m.y}); });
+    const spreyH=buildHash(sprey,8);
+    claw.forEach((c,ci)=>{ if(c.d!=='up') return; c.age++;
+      const [pi]=nearestIdx(c.x,c.y,sprey,spreyH,8); let dx,dy;
+      if(pi>=0){ const p=sprey[pi]; const l=Math.hypot(p.x-c.x,p.y-c.y)||1; dx=(p.x-c.x)/l; dy=(p.y-c.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+      const nx=c.x+dx, ny=c.y+dy; if(nx>=0&&nx<GW&&ny>=0&&ny<GH&&!inWater(nx,ny)){ c.x=nx; c.y=ny; }
+      if(pi>=0){ const p=sprey[pi]; if((p.x-c.x)**2+(p.y-c.y)**2<1.8){ if(p.a==='g')deadG.add(p.i); else if(p.a==='z')deadZ.add(p.i); else deadH.add(p.i); } }
+      if(c.age>3000) deadC.add(ci);
+    });
+  }
+  // ---- TREEMEN: need nothing but the forest's wellness ----
+  const deadT=new Set();
+  treeman.forEach((t,ti)=>{ t.age++; const hx=(t.home%GW)+0.5, hy=((t.home/GW)|0)+0.5; let dx,dy;
+    if((t.x-hx)**2+(t.y-hy)**2>9){ const l=Math.hypot(hx-t.x,hy-t.y)||1; dx=(hx-t.x)/l; dy=(hy-t.y)/l; } else { const a=rnd()*6.283; dx=Math.cos(a); dy=Math.sin(a); }
+    const nx=t.x+dx*0.45, ny=t.y+dy*0.45; if(nx>=0&&nx<GW&&ny>=0&&ny<GH){ t.x=nx; t.y=ny; }
+    if(groveWellness<0.28 && rnd()<0.02) deadT.add(ti); }); // a sickened forest can't sustain them
+  if(groveWellness<0.25 && gsettleList.length && rnd()<0.04){ const k=(rnd()*gsettleList.length)|0; gsettle[gsettleList[k]]=0; gsettleList.splice(k,1); } // settlements collapse
+  if(groveWellness>0.66 && gsettleList.length<9 && rnd()<0.03){ for(let tr=0;tr<40;tr++){ const i=(rnd()*N)|0; const x=i%GW,y=(i/GW)|0;
+    if(gzone[i]===CLEARING && !gsettle[i] && (x-giantClear.x)**2+(y-giantClear.y)**2>36){ gsettle[i]=1; gsettleList.push(i); treeman.push({x:x+0.5,y:y+0.5,home:i,age:0}); break; } } } // ... and pop up when it flourishes
+  // ---- HELPFUL KING: Treemen build pens near home to shelter & feed the other creatures ----
+  if(helpful && treeman.length && rnd()<0.06){ const t=treeman[(rnd()*treeman.length)|0]; const px=Math.round(t.x+(rnd()-0.5)*4), py=Math.round(t.y+(rnd()-0.5)*4);
+    if(px>0&&px<GW&&py>0&&py<GH){ const i=cidx(px,py); if(gzone[i]!==WILD && !gsettle[i]) pen[i]=1; } }
+  // ---- THE NATURE GIANT (5th monarch): the heart of the forest heals it; strangers wear it down (but not under a caring King) ----
+  groveWellness = clamp01(groveWellness + 0.0009 - (helpful?0:outsiders*0.00012));
+  dieAll(deadG,goob); dieAll(deadZ,zap); dieAll(deadH,human); dieAll(deadSn,sniffer); dieAll(deadC,claw); dieAll(deadT,treeman);
+  if(deadG.size) goob=goob.filter((_,i)=>!deadG.has(i));
+  if(deadZ.size) zap=zap.filter((_,i)=>!deadZ.has(i));
+  if(deadH.size) human=human.filter((_,i)=>!deadH.has(i));
+  if(deadSn.size) sniffer=sniffer.filter((_,i)=>!deadSn.has(i));
+  if(deadC.size) claw=claw.filter((_,i)=>!deadC.has(i));
+  if(deadT.size) treeman=treeman.filter((_,i)=>!deadT.has(i));
+  if(sniffer.length<12 && rnd()<0.4){ let t=0; while(t<200){t++;const i=(rnd()*N)|0; if(gzone[i]===GROVE){sniffer.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,E:2,age:0,ate:0});break;}} } // floors so the grove never dies out
+  if(claw.length<4 && rnd()<0.25){ let t=0; while(t<200){t++;const i=(rnd()*N)|0; if(gzone[i]===WILD){claw.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,age:0,ate:0});break;}} }
+  if(pears.length<50){ let t=0; while(pears.length<90&&t<400){t++;const i=(rnd()*N)|0; if(gzone[i]===GROVE)pears.push({x:(i%GW)+0.5,y:((i/GW)|0)+0.5,food:0.4});} }
+}
+function drawClawSprite(x,y,r){ ctx.fillStyle='#3a2a44'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); // Claws: bristly predators, red claw-marks + yellow eyes
+  const ex=r*0.4,ey=y-r*0.02,er=r*0.24; ctx.strokeStyle='#c9203a'; ctx.lineWidth=Math.max(1,r*0.16); ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(x-ex-er,ey-er); ctx.lineTo(x-ex+er*0.5,ey+er*0.2); ctx.moveTo(x+ex+er,ey-er); ctx.lineTo(x+ex-er*0.5,ey+er*0.2); ctx.stroke();
+  ctx.fillStyle='#ffd23a'; twoDots(x-ex,x+ex,ey,er*0.5); }
+function drawGrovePortal(px,py){ if(px<0)return; const x=px*SC,y=py*SC,ss=SC*1.7;
+  const col = gPortalOpen ? (groveKingType==='aggressive'?'#c9203a':'#2fd06a') : '#43503f';   // red=aggressive · green=helpful · grey=sealed
+  if(gPortalOpen){ ctx.shadowColor=col; ctx.shadowBlur=13; } ctx.fillStyle=col; ctx.fillRect(x-ss/2,y-ss/2,ss,ss); ctx.shadowBlur=0;
+  ctx.strokeStyle='#eafff0'; ctx.lineWidth=1.5; ctx.strokeRect(x-ss/2,y-ss/2,ss,ss);
+  if(!gPortalOpen){ ctx.strokeStyle='#20281e'; ctx.beginPath(); ctx.moveTo(x-ss/2,y-ss/2);ctx.lineTo(x+ss/2,y+ss/2); ctx.moveTo(x+ss/2,y-ss/2);ctx.lineTo(x-ss/2,y+ss/2); ctx.stroke(); } } // sealed = an X
+function drawGrove(){ const d=img.data;
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(gsettle[i]){ d[o]=120;d[o+1]=78;d[o+2]=44; }                                     // brown Treeman hut
+    else if(pen[i]){ d[o]=170;d[o+1]=140;d[o+2]=90; }                                   // wooden pen (Helpful King)
+    else if(rose[i]){ d[o]=226;d[o+1]=74;d[o+2]=126; }                                  // 🌹 rose bush (vine + bramble merged)
+    else if(vine[i]){ d[o]=178;d[o+1]=44;d[o+2]=62; }                                   // red vine-flowers
+    else if(bramble[i]){ d[o]=58;d[o+1]=48;d[o+2]=26; }                                 // dark thorny bramble
+    else { const z=gzone[i];
+      if(z===GROVE){ d[o]=32;d[o+1]=112;d[o+2]=48; }                                    // lush pear-grove green
+      else if(z===WILD){ d[o]=44;d[o+1]=66;d[o+2]=26; }                                 // dark overgrown wild
+      else { d[o]=150;d[o+1]=170;d[o+2]=92; } }                                         // open clearing (meadow)
+    d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+  drawGrovePortal(gPortalGX,gPortalGY);
+  for(const p of pears){ if(p.food<0.15)continue; const x=p.x*SC,y=p.y*SC,r=SC*(0.22+0.24*p.food); ctx.fillStyle='#9a3ad0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); } // purple pears
+  for(const s of sniffer){ const x=s.x*SC,y=s.y*SC,r=SC*0.5; ctx.fillStyle='#d9b483'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); // Sniffers: tan foragers with a sniffing nose
+    const ex=r*0.36,ey=y-r*0.12,er=r*0.2; ctx.fillStyle='#241810'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle='#a86b4a'; ctx.beginPath();ctx.arc(x,y+r*0.4,r*0.26,0,7);ctx.fill(); }
+  for(const c of claw){ if(c.d==='up')continue; drawClawSprite(c.x*SC,c.y*SC,SC*0.72); }  // (surface claws draw on the surface view)
+  for(const t of treeman){ const x=t.x*SC,y=t.y*SC,r=SC*0.6; ctx.fillStyle=t.king?'#8fe06a':'#4a7a3a'; ctx.fillRect(x-r*0.5,y-r*1.0,r,r*2.0); // Treemen: tall folk of the clearings (King = brighter)
+    ctx.fillStyle='#6fae55'; ctx.beginPath();ctx.arc(x,y-r*0.95,r*0.7,0,7);ctx.fill();
+    const ex=r*0.24,ey=y-r*1.0,er=r*0.12; ctx.fillStyle='#14200e'; twoDots(x-ex,x+ex,ey,er);
+    if(t.king){ ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.moveTo(x-r*0.55,y-r*1.5); ctx.lineTo(x-r*0.28,y-r*1.9); ctx.lineTo(x,y-r*1.55); ctx.lineTo(x+r*0.28,y-r*1.9); ctx.lineTo(x+r*0.55,y-r*1.5); ctx.closePath(); ctx.fill(); } } // 👑 the Grove King
+  if(natureGiant && natureGiant.alive){ const x=natureGiant.x*SC,y=natureGiant.y*SC, r=SC*(3.0+2.4*groveWellness); // THE NATURE GIANT — size & glow track wellness
+    ctx.shadowColor='#7dff9e'; ctx.shadowBlur=10+22*groveWellness; ctx.fillStyle='#1d5a2a'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0;
+    ctx.fillStyle='#2f7a3e'; ctx.beginPath();ctx.arc(x,y-r*0.2,r*0.7,0,7);ctx.fill();
+    const ex=r*0.3,ey=y-r*0.12,er=r*0.13; ctx.shadowColor='#eaffb0'; ctx.shadowBlur=12; ctx.fillStyle='#d9ff7a'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+}
+
+// ---------- world setup ----------
+let day=0;
+function newWorld(){ elevC=coarse(16); moistC=coarse(20); computeElev(); computeMoist(); initBiomes();
+  for(let k=0;k<10;k++) relaxBiomes(); computeWDist(); computeFDist(); computeSDist(); initBushes();
+  settle.fill(0); settleList=[]; sdirty=true; swall.fill(0); moat.fill(0); treasury=0; swallCount=0; view='surface';
+  genUnderground(); genSky(); genGrove();
+  goob=[]; zap=[]; human=[]; lev=[]; blueFlora=[]; laments=[]; deaths=0; dragonDeaths=0; day=0; hist.length=0; castleBuilt=false; kingHome=null;
+  let p=0,tr=0; while(p<250&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnGoob(x,y,P.gStartE,P.gStartW);p++;}}
+  p=0;tr=0; while(p<20&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnZap(x,y,P.zStart);p++;}}
+  p=0;tr=0; while(p<14&&tr<8000){tr++;const x=rnd()*GW,y=rnd()*GH;if(!inWater(x,y)){spawnHuman(x,y,P.hStartE);p++;}}
+  p=0;tr=0; while(p<3&&tr<8000){tr++;const w=placeLevWater(null,null);if(w){spawnLev(w.x,w.y,P.levStartE);p++;}else break;}
+  folk=[]; lastSeaChallenge=0; { const w=placeLevWater(null,null); seaMonarch=w?{x:w.x,y:w.y,alive:true,fromLev:false,bornDay:-9999}:null; } // the Sea Monarch rises from the sea (full-grown sea dragon)
+}
+
+// ---------- rendering ----------
+function drawTerrain(){ const d=img.data;
+  for(let i=0;i<N;i++){ const o=i*4;
+    if(settle[i]){ d[o]=138; d[o+1]=92; d[o+2]=48; }                                  // brown settlement block
+    else if(moat[i]){ d[o]=40; d[o+1]=120; d[o+2]=190; }                              // the King's water moat
+    else if(swall[i]){ d[o]=150; d[o+1]=150; d[o+2]=156; }                            // grey stone wall
+    else { const b=biome[i]; d[o]=BCOL[b][0]; d[o+1]=BCOL[b][1]; d[o+2]=BCOL[b][2]; }
+    d[o+3]=255; }
+  octx.putImageData(img,0,0); ctx.drawImage(off,0,0,cv.width,cv.height);
+}
+function drawBushes(){ for(const b of bushes){ if(b.food<0.10)continue; const x=b.x*SC,y=b.y*SC, r=SC*(0.28+0.32*b.food);
+  ctx.fillStyle=`rgba(255,110,199,${0.55+0.4*b.food})`; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); } }
+function drawBlueFlora(){ for(const f of blueFlora){ const x=f.x*SC,y=f.y*SC,r=SC*0.44;    // 🪻 blue flower: five petals + a golden heart
+  ctx.shadowColor='#8fb8ff'; ctx.shadowBlur=6; ctx.fillStyle='#3b7cff';
+  for(let k=0;k<5;k++){ const a=k/5*6.283-1.57; ctx.beginPath(); ctx.arc(x+Math.cos(a)*r*0.6,y+Math.sin(a)*r*0.6,r*0.46,0,7); ctx.fill(); }
+  ctx.shadowBlur=0; ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y,r*0.36,0,7); ctx.fill(); } }
+function drawLaments(){ for(const f of laments){ const x=f.x*SC,y=f.y*SC,r=SC*0.5;         // 🥀 Flower of Lament — a drooping, mournful bloom for the fallen
+  ctx.strokeStyle='#3a5a4a'; ctx.lineWidth=Math.max(1.5,r*0.26); ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(x,y+r*1.1); ctx.quadraticCurveTo(x+r*0.55,y+r*0.15,x+r*0.15,y-r*0.35); ctx.stroke(); // bowed stem
+  ctx.shadowColor='#9a6ab0'; ctx.shadowBlur=7; ctx.fillStyle='#6a4a86';                    // drooping violet-grey petals
+  for(let k=0;k<5;k++){ const a=k/5*6.283+1.2; ctx.beginPath(); ctx.ellipse(x+r*0.15+Math.cos(a)*r*0.4, y-r*0.35+Math.sin(a)*r*0.5, r*0.26, r*0.4, a, 0, 7); ctx.fill(); }
+  ctx.shadowBlur=0; ctx.fillStyle='#c9b3d9'; ctx.beginPath(); ctx.arc(x+r*0.15,y-r*0.35,r*0.16,0,7); ctx.fill(); } }
+function twoDots(x1,x2,y,r){ ctx.beginPath(); ctx.arc(x1,y,r,0,7); ctx.moveTo(x2+r,y); ctx.arc(x2,y,r,0,7); ctx.fill(); }
+function drawPurpleSprite(x,y,r){ ctx.fillStyle='#7a1fb0'; // little purple wings behind
+  ctx.beginPath(); ctx.moveTo(x-r*0.7,y-r*0.1); ctx.lineTo(x-r*1.35,y-r*0.6); ctx.lineTo(x-r*0.7,y+r*0.35); ctx.closePath(); ctx.moveTo(x+r*0.7,y-r*0.1); ctx.lineTo(x+r*1.35,y-r*0.6); ctx.lineTo(x+r*0.7,y+r*0.35); ctx.closePath(); ctx.fill();
+  ctx.shadowColor='#c77aff'; ctx.shadowBlur=7; ctx.fillStyle='#9a3ad0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; // purple body + glow
+  const ex=r*0.34,ey=y-r*0.06,er=r*0.17; ctx.fillStyle='#ffe23a'; twoDots(x-ex,x+ex,ey,er); } // gold eyes
+function drawCreatures(){
+  const lyr=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
+  // GOOBLETS — red, with big dumb googly eyes (they fade when starving/thirsty)
+  for(const g of goob){ if(lyr(g)!==view) continue; const x=g.x*SC,y=g.y*SC, r=SC*0.6;
+    const cond=Math.min(1,Math.min(g.E/1.6,g.W/0.5));
+    ctx.globalAlpha=g.nature?1:0.5+0.5*cond;
+    ctx.fillStyle=g.nature?'#4fae4a':'#ee3b2f'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();  // Nature Gooblets are green
+    const ex=r*0.42, ey=y-r*0.12, er=r*0.38, pr=er*0.5;
+    ctx.fillStyle='#fff'; twoDots(x-ex,x+ex,ey,er);                 // wide white eyes
+    ctx.fillStyle='#241018'; twoDots(x-ex,x+ex,ey,pr);              // pupils
+    if(g.nature){ ctx.fillStyle='#e83a5a'; ctx.beginPath(); ctx.arc(x,y-r*0.95,r*0.32,0,7); ctx.fill(); ctx.fillStyle='#ffd23a'; ctx.beginPath(); ctx.arc(x,y-r*0.95,r*0.12,0,7); ctx.fill(); } // a little red flower crown
+  }
+  ctx.globalAlpha=1;
+  // ZAPPIES — electric blue, mean little eyes + angry brows
+  for(const z of zap){ if(lyr(z)!==view) continue; const x=z.x*SC,y=z.y*SC, r=SC*0.62;
+    ctx.shadowColor='#6f9bff'; ctx.shadowBlur=5;
+    ctx.fillStyle='rgba(59,108,255,0.95)'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    ctx.shadowBlur=0;
+    const ex=r*0.4, ey=y+r*0.02, er=r*0.26, pr=er*0.6;
+    ctx.fillStyle='#eaf2ff'; twoDots(x-ex,x+ex,ey,er);             // small eyes
+    ctx.fillStyle='#0b0b16'; twoDots(x-ex,x+ex,ey,pr);            // pupils
+    ctx.strokeStyle='#0b0b16'; ctx.lineWidth=Math.max(1,r*0.16); ctx.lineCap='round'; ctx.beginPath(); // angry \\ / brows
+    ctx.moveTo(x-ex-er*0.9,ey-er*1.15); ctx.lineTo(x-ex+er*0.7,ey-er*0.35);
+    ctx.moveTo(x+ex+er*0.9,ey-er*1.15); ctx.lineTo(x+ex-er*0.7,ey-er*0.35); ctx.stroke();
+  }
+  // HUMANS — dark red, calm faces; build brown settlements and hide on them
+  for(const m of human){ if(lyr(m)!==view) continue; const x=m.x*SC,y=m.y*SC, r=SC*0.62;
+    if(m.boat){ ctx.fillStyle='#6b4420'; ctx.beginPath(); ctx.moveTo(x-r*1.15,y+r*0.15); ctx.lineTo(x+r*1.15,y+r*0.15); ctx.lineTo(x+r*0.7,y+r*0.95); ctx.lineTo(x-r*0.7,y+r*0.95); ctx.closePath(); ctx.fill(); } // fishing boat
+    if(m.vessel){ ctx.shadowColor='#ff5a1e'; ctx.shadowBlur=12; }                       // the Fire Vessel burns
+    ctx.fillStyle = m.vessel?'#ff4a10' : m.fireSword?'#ff9a2e' : m.redKing?'#d01020' : m.redFolk?'#c23030' : m.king?'#ffd23a':(m.servant?'#2e4a9e':'#8b1a1a'); // vessel/sword=orange · red king/folk=red · King yellow · servants blue
+    ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); ctx.shadowBlur=0;
+    const ex=r*0.4, ey=y-r*0.08, er=r*0.3, pr=er*0.55;
+    ctx.fillStyle=(m.vessel||m.fireSword)?'#ffe6b0':'#fff'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle=m.vessel?'#4a0a00':'#160a0a'; twoDots(x-ex,x+ex,ey,pr);
+    if(m.fireSword){ ctx.strokeStyle='#ffdd55'; ctx.lineWidth=Math.max(1.5,r*0.22); ctx.lineCap='round'; ctx.shadowColor='#ff8a1e'; ctx.shadowBlur=8; ctx.beginPath(); ctx.moveTo(x+r*0.7,y+r*0.7); ctx.lineTo(x+r*1.5,y-r*1.1); ctx.stroke(); ctx.shadowBlur=0; } // 🗡️ the Fire Sword
+    if(m.king){ ctx.fillStyle='#ffb000'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.15); ctx.lineTo(x,y-r*0.78); ctx.lineTo(x+r*0.3,y-r*1.15); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the King
+    if(m.redKing){ ctx.fillStyle='#ff2030'; ctx.beginPath(); ctx.moveTo(x-r*0.6,y-r*0.72); ctx.lineTo(x-r*0.3,y-r*1.2); ctx.lineTo(x,y-r*0.8); ctx.lineTo(x+r*0.3,y-r*1.2); ctx.lineTo(x+r*0.6,y-r*0.72); ctx.closePath(); ctx.fill(); } // 👑 the Red King
+  }
+  // LEVIATHANS — big dark-blue ocean monsters (surface only)
+  for(const l of lev){ if(view!=='surface') break; const x=l.x*SC,y=l.y*SC, r=SC*1.05;
+    ctx.fillStyle='#0b2a63'; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+    const ex=r*0.34, ey=y-r*0.1, er=r*0.19, pr=er*0.6;
+    ctx.fillStyle='#eaf2ff'; twoDots(x-ex,x+ex,ey,er);
+    ctx.fillStyle='#03102b'; twoDots(x-ex,x+ex,ey,pr);
+  }
+  if(view==='surface'){                                                                // FOLK + the SEA MONARCH (sea dragon) + invading grove CLAWS
+    for(const p of purpleDrag){ if(p.d==='up') drawPurpleSprite(p.x*SC,p.y*SC,SC*0.5); } // 🟣🐉 Purple Dragons visiting the blue flowers
+    for(const c of claw){ if(c.d==='up') drawClawSprite(c.x*SC,c.y*SC,SC*0.72); }       // Claws sent up by an Aggressive Grove King
+    for(const f of folk){ const x=f.x*SC,y=f.y*SC,r=SC*0.55; ctx.fillStyle='#1fb0a0'; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); const ex=r*0.36,ey=y-r*0.05,er=r*0.22; ctx.fillStyle='#06201c'; twoDots(x-ex,x+ex,ey,er); }
+    if(seaMonarch && seaMonarch.alive){ const grown=seaMonarch.fromLev?Math.min(1,(day-seaMonarch.bornDay)/500):1; const r=SC*(seaMonarch.fromLev?1.05+0.9*grown:1.95); const x=seaMonarch.x*SC,y=seaMonarch.y*SC; const col=seaMonarch.fromLev?'#6a3ab0':'#118f7a', glow=seaMonarch.fromLev?'#b78aff':'#4fe0c0'; ctx.shadowColor=glow; ctx.shadowBlur=18; ctx.fillStyle=col; ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill(); ctx.shadowBlur=0; const ex=r*0.34,ey=y-r*0.1,er=r*0.15; ctx.shadowColor='#fff'; ctx.shadowBlur=10; ctx.fillStyle='#d4fff0'; twoDots(x-ex,x+ex,ey,er); ctx.shadowBlur=0; }
+  }
+}
+const gcv=document.getElementById('graph'), ggx=gcv.getContext('2d'); const hist=[];
+// every factor Elbie can watch on the graph; click a chip to show/hide its line
+const FACTORS=[
+  {key:'g',   emoji:'🔴',label:'Gooblets',   col:'#ee3b2f', on:true},
+  {key:'z',   emoji:'🔵',label:'Zappies',    col:'#3b6cff', on:true},
+  {key:'h',   emoji:'🟥',label:'Humans',     col:'#cf5b54', on:true},
+  {key:'l',   emoji:'🐋',label:'Leviathans', col:'#5a86e6', on:true},
+  {key:'wool',emoji:'🐑',label:'Woolies',    col:'#f2f0e6', on:true},
+  {key:'dl',  emoji:'🐉',label:'Dragonlings',col:'#4fc06a', on:true},
+  {key:'folk',emoji:'🌊',label:'Folk',       col:'#2fd0b8', on:false},
+  {key:'b',   emoji:'🌸',label:'Bushes',     col:'#e86ab0', on:false},
+  {key:'ang', emoji:'👼',label:'Angels',     col:'#ffe07a', on:false},
+  {key:'spec',emoji:'👻',label:'Specters',   col:'#c9bff0', on:false},
+  {key:'fire',emoji:'🔥',label:'Fire',       col:'#ff8a3e', on:false},
+  {key:'sn',  emoji:'🐭',label:'Sniffers',   col:'#d9b483', on:false},
+  {key:'claw',emoji:'🐾',label:'Claws',      col:'#c9203a', on:false},
+  {key:'tree',emoji:'🌳',label:'Treemen',    col:'#6fae55', on:false},
+];
+function drawGraph(){ const W=gcv.width,H=gcv.height; ggx.clearRect(0,0,W,H); if(hist.length<2)return;
+  for(const f of FACTORS){ if(!f.on) continue;
+    let mxv=1; for(const h of hist){ const v=h[f.key]||0; if(v>mxv) mxv=v; }  // each line auto-scaled to its own peak
+    ggx.strokeStyle=f.col; ggx.lineWidth=1.5; ggx.globalAlpha=.9; ggx.beginPath();
+    for(let i=0;i<hist.length;i++){ const x=i/(hist.length-1)*W, y=H-4-((hist[i][f.key]||0)/mxv)*(H-8); i?ggx.lineTo(x,y):ggx.moveTo(x,y); }
+    ggx.stroke();
+  }
+  ggx.globalAlpha=1;
+}
+
+// ---------- the Bestiary: a book of every creature; unseen ones stay ??? ----------
+const layerOf=c=>c.d==='under'?'under':c.d==='sky'?'sky':c.d==='grove'?'grove':'surface';
+const BPER=6;
+const anyIn=arr=>arr.some(c=>layerOf(c)===view);
+const BESTIARY=[
+  {key:'goob',   name:'Gooblet',        emoji:'🔴', realm:'anywhere',    on:()=>goob.some(g=>!g.nature&&layerOf(g)===view)},
+  {key:'ngoob',  name:'Nature Gooblet', emoji:'🌱', realm:'the Grove',   on:()=>goob.some(g=>g.nature&&layerOf(g)===view)},
+  {key:'zap',    name:'Zappy',          emoji:'🔵', realm:'anywhere',    on:()=>anyIn(zap)},
+  {key:'human',  name:'Human',          emoji:'🟥', realm:'anywhere',    on:()=>human.some(h=>layerOf(h)===view&&!h.vessel&&!h.fireSword&&!h.redKing&&!h.king)},
+  {key:'bush',   name:'Pink Bush',      emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
+  {key:'lev',    name:'Leviathan',      emoji:'🐋', realm:'ocean',       on:()=>view==='surface'&&lev.length>0},
+  {key:'folk',   name:'Sea Folk',       emoji:'🌊', realm:'ocean',       on:()=>view==='surface'&&folk.length>0},
+  {key:'sea',    name:'Sea Monarch',    emoji:'🐉', realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive&&!seaMonarch.fromLev},
+  {key:'levking',name:'Leviathan King', emoji:'🐋👑',realm:'ocean',       on:()=>view==='surface'&&seaMonarch&&seaMonarch.alive&&seaMonarch.fromLev},
+  {key:'spec',   name:'Specter',        emoji:'👻', realm:'underground', on:()=>view==='under'&&spec.length>0},
+  {key:'firem',  name:'Fire Minion',    emoji:'🔥', realm:'underground', on:()=>view==='under'&&fire.length>0},
+  {key:'giant',  name:'The Fire Giant', emoji:'👹', realm:'underground', on:()=>view==='under'&&giantActive},
+  {key:'wooly',  name:'Wooly',          emoji:'🐑', realm:'sky',         on:()=>view==='sky'&&wooly.some(w=>!w.fierce)},
+  {key:'fwool',  name:'Fierce Woolie',  emoji:'🐏', realm:'sky',         on:()=>view==='sky'&&wooly.some(w=>w.fierce)},
+  {key:'angel',  name:'Angel',          emoji:'👼', realm:'sky',         on:()=>view==='sky'&&angels.length>0},
+  {key:'dling',  name:'Dragonling',     emoji:'🐲', realm:'sky',         on:()=>view==='sky'&&dragonling.length>0},
+  {key:'dragon', name:'Green Dragon',   emoji:'🐉', realm:'sky',         on:()=>view==='sky'&&dragon&&dragon.alive},
+  {key:'gold',   name:'Gold Dragon',    emoji:'🟡🐉',realm:'sky',         on:()=>view==='sky'&&goldDrag.length>0},
+  {key:'egg',    name:'Dragon Egg',     emoji:'🥚', realm:'sky',         on:()=>view==='sky'&&goldEgg},
+  {key:'sniffer',name:'Sniffer',        emoji:'🐭', realm:'the Grove',   on:()=>view==='grove'&&sniffer.length>0},
+  {key:'claw',   name:'Claw',           emoji:'🐾', realm:'the Grove',   on:()=>claw.some(c=>c.d==='up'?view==='surface':view==='grove')},
+  {key:'treeman',name:'Treeman',        emoji:'🌳', realm:'the Grove',   on:()=>view==='grove'&&treeman.length>0},
+  {key:'nature', name:'Nature Giant',   emoji:'🌲', realm:'the Grove',   on:()=>view==='grove'&&natureGiant&&natureGiant.alive},
+  {key:'king',   name:'The King',       emoji:'👑', realm:'sky/surface', on:()=>human.some(h=>h.king&&layerOf(h)===view)},
+  {key:'vessel', name:'Fire Vessel',    emoji:'🔥', realm:'surface',     on:()=>human.some(h=>h.vessel&&layerOf(h)===view)},
+  {key:'sword',  name:'Fire Swordsman', emoji:'⚔️', realm:'surface',     on:()=>human.some(h=>h.fireSword&&layerOf(h)===view)},
+  {key:'redking',name:'The Red King',   emoji:'🔴👑',realm:'surface',    on:()=>human.some(h=>h.redKing&&layerOf(h)===view)},
+  {key:'pdrag',  name:'Purple Dragon',  emoji:'🟣🐉',realm:'sky/surface', on:()=>purpleDrag.some(p=> p.d==='sky'?view==='sky':view==='surface')},
+  {key:'soul',   name:'Soul Dragon',    emoji:'💙🐉',realm:'sky',         on:()=>view==='sky'&&soulDragon&&soulDragon.alive},
+  {key:'fdrag',  name:'Flower Dragon',  emoji:'🌸🐉',realm:'sky',         on:()=>view==='sky'&&flowerDrag.length>0},
+];
+// ---------- the Plantiary: the same idea, for the world's plants ----------
+const PLANTIARY=[
+  {key:'pbush', name:'Pink Bush',       emoji:'🌸', realm:'surface',     on:()=>view==='surface'&&bushes.some(b=>b.food>0.1)},
+  {key:'pear',  name:'Purple Pear',     emoji:'🍐', realm:'the Grove',   on:()=>view==='grove'&&pears.some(p=>p.food>0.1)},
+  {key:'redfr', name:'Red Fruit',       emoji:'🍎', realm:'sky',         on:()=>view==='sky'&&redfruit.some(r=>r.food>0.1)},
+  {key:'glow',  name:'Glowfruit',       emoji:'🟢', realm:'underground', on:()=>view==='under'&&glow.some(g=>g.food>0.1)},
+  {key:'vine',  name:'Red Vine-Flower', emoji:'🌺', realm:'the Grove',   on:()=>view==='grove'&&vine.some(v=>v===1)},
+  {key:'bram',  name:'Bramble',         emoji:'🌿', realm:'the Grove',   on:()=>view==='grove'&&bramble.some(v=>v===1)},
+  {key:'rose',  name:'Rose Bush',       emoji:'🌹', realm:'the Grove',   on:()=>view==='grove'&&rose.some(v=>v===1)},
+  {key:'dsnap', name:'Dragonsnap',      emoji:'🐲🌱',realm:'sky (rare)',  on:()=>view==='sky'&&dsnap.length>0},
+  {key:'blue',  name:'Blue Flower',     emoji:'🪻', realm:'surface',     on:()=>view==='surface'&&blueFlora.length>0},
+  {key:'lament',name:'Flower of Lament',emoji:'🥀', realm:'surface',     on:()=>view==='surface'&&laments.length>0},
+  {key:'sylvie',name:'Sylvie',          emoji:'💮', realm:'sky',         on:()=>view==='sky'&&mounds.some(md=>md.sylvies>0)},
+];
+// ---------- the Monarch Tracker: who wears each of the five crowns right now ----------
+const MONARCHS=[
+  {emoji:'🌊', name:'Sea Monarch',    realm:'the ocean',      who:()=> (seaMonarch&&seaMonarch.alive) ? (seaMonarch.fromLev?'a risen Leviathan King':'the Sea Dragon') : null },
+  {emoji:'🐉', name:'Dragon Monarch', realm:'the sky islands', who:()=> (dragon&&dragon.alive) ? 'the Green Dragon' : (goldDrag.length?'a Gold Dragon':null) },
+  {emoji:'👑', name:'Human Monarch',  realm:'the surface',     who:()=> human.some(h=>h.king) ? 'the crowned King' : null },
+  {emoji:'🔥', name:'Fire Monarch',   realm:'the lava pool',   who:()=> human.some(h=>h.redKing) ? 'the Red King' : (!fireKingDead ? 'the Fire Giant' : null) },
+  {emoji:'🌲', name:'Nature Monarch', realm:'the Grove',       who:()=> (natureGiant&&natureGiant.alive) ? 'the Nature Giant' : null },
+];
+let monarchOpen=false;
+function renderMonarchs(){ monarchGrid.innerHTML = MONARCHS.map(m=>{ const who=m.who(), has=!!who;
+  return '<div class="mrow'+(has?' has':'')+'"><span class="memoji">'+m.emoji+'</span>'
+    +'<span class="mname">'+m.name+'<br><span class="mrealm">'+m.realm+'</span></span>'
+    +'<span class="mwho">'+(has?'🏆 '+who:'— none —')+'</span></div>'; }).join(''); }
+// ---------- generic codex (drives both the Bestiary and the Plantiary) ----------
+const E=id=>document.getElementById(id);
+function makeCodex(arr, noun, els){ return {arr, noun, seen:new Set(), newly:new Set(), page:0, done:false, open:false, els}; }
+function markCodex(cx){ for(const b of cx.arr) if(b.on() && !cx.seen.has(b.key)){ cx.seen.add(b.key); cx.newly.add(b.key); }
+  cx.els.btn.classList.toggle('ping', cx.newly.size>0);
+  if(!cx.done && cx.seen.size>=cx.arr.length){ cx.done=true; cx.els.badgeBtn.style.display=''; }
+}
+function renderCodex(cx){ const pages=Math.ceil(cx.arr.length/BPER); cx.page=Math.max(0,Math.min(cx.page,pages-1));
+  const slice=cx.arr.slice(cx.page*BPER, cx.page*BPER+BPER);
+  cx.els.grid.innerHTML=slice.map(b=>{ const s=cx.seen.has(b.key), fresh=cx.newly.has(b.key);
+    return '<div class="bcard '+(s?'seen':'locked')+(fresh?' sparkle':'')+'">'+(fresh?'<span class="bnew">✨ NEW</span>':'')+'<div class="bemoji">'+(s?b.emoji:'❓')+'</div><div class="bname">'+(s?b.name:'???')+'</div><div class="brealm">'+(s?b.realm:'&nbsp;')+'</div></div>'; }).join('');
+  cx.els.pageLbl.textContent='Page '+(cx.page+1)+' / '+pages;
+  cx.els.prog.textContent='('+cx.seen.size+' / '+cx.arr.length+' discovered)';
+  cx.els.prev.disabled=cx.page<=0; cx.els.next.disabled=cx.page>=pages-1;
+}
+function openCodex(cx){ cx.open=true; renderCodex(cx); cx.els.overlay.classList.add('open'); }
+function closeCodex(cx){ cx.open=false; cx.els.overlay.classList.remove('open'); cx.newly.clear(); cx.els.btn.classList.remove('ping'); }
+function wireCodex(cx){ cx.els.btn.onclick=()=>openCodex(cx); cx.els.close.onclick=()=>closeCodex(cx);
+  cx.els.overlay.onclick=e=>{ if(e.target===cx.els.overlay) closeCodex(cx); };
+  cx.els.prev.onclick=()=>{ cx.page--; renderCodex(cx); }; cx.els.next.onclick=()=>{ cx.page++; renderCodex(cx); };
+  cx.els.badgeBtn.onclick=()=>{ cx.els.badgeMsg.innerHTML='You discovered all <b>'+cx.arr.length+'</b> '+cx.noun+' in the whole world! 🎉'; cx.els.badgeOverlay.classList.add('open'); };
+  cx.els.badgeClose.onclick=()=>cx.els.badgeOverlay.classList.remove('open');
+  cx.els.badgeOverlay.onclick=e=>{ if(e.target===cx.els.badgeOverlay) cx.els.badgeOverlay.classList.remove('open'); };
+}
+
+// ---------- loop + interaction ----------
+let playing=true, frame=0, tool='goob', simSpeed=1, acc=0;
+function simStep(){ frame++; day++;
+  stepBushes(); stepGoob(); stepZap(); stepHuman(); stepLev(); stepSea(); stepUnder(); stepSky(); stepPurple(); stepSoul(); stepFlower(); stepGrove(); collapseSettlements(); immigrate();
+  if(blueFlora.length && frame%20===0) blueFlora=blueFlora.filter(f=>goodBlueCell(f.x,f.y)); // a blue flower left underwater or under a wall wilts away
+  if(laments.length && frame%20===0) laments=laments.filter(f=>goodBlueCell(f.x,f.y));      // a Flower of Lament lost to flood or wall fades too
+  if(frame%4===0){ relaxBiomes(); computeWDist(); computeFDist(); }
+  if(sdirty){ computeSDist(); sdirty=false; }
+  if(frame%60===0) driftMoist(0.04);
+  if(frame%6===0){ hist.push({g:goob.length,z:zap.length,h:human.length,l:lev.length,wool:wooly.length,dl:dragonling.length,
+    folk:folk.length,b:bushes.filter(x=>x.food>0.35).length,ang:angels.length,spec:spec.length,fire:fire.length,
+    sn:sniffer.length,claw:claw.length,tree:treeman.length});
+    if(hist.length>210) hist.shift(); }
+}
+function loop(){
+  if(playing){ acc+=simSpeed; let steps=Math.floor(acc); acc-=steps; if(steps>8)steps=8; for(let s=0;s<steps;s++) simStep(); }
+  if(view==='under') drawUnder(); else if(view==='sky') drawSky(); else if(view==='grove') drawGrove(); else { drawTerrain(); drawBushes(); drawBlueFlora(); drawLaments(); drawHolesSurface(); }
+  drawCreatures();
+  document.getElementById('ng').textContent=upCount(goob);
+  document.getElementById('nz').textContent=upCount(zap);
+  document.getElementById('nh').textContent=upCount(human);
+  document.getElementById('nl').textContent=lev.length;
+  document.getElementById('nfolk').textContent=folk.length;
+  document.getElementById('ns').textContent=settleList.length;
+  document.getElementById('nspec').textContent=spec.length;
+  document.getElementById('nfire').textContent=fire.length;
+  document.getElementById('ntreas').textContent=treasury;
+  document.getElementById('nang').textContent=angels.length;
+  document.getElementById('nwool').textContent=wooly.length;
+  document.getElementById('ndl').textContent=dragonling.length;
+  document.getElementById('nb').textContent=bushes.filter(b=>b.food>0.35).length;
+  document.getElementById('nsn').textContent=sniffer.length;
+  document.getElementById('nclaw').textContent=claw.length;
+  document.getElementById('ntree').textContent=treeman.length;
+  document.getElementById('nwell').textContent=Math.round(groveWellness*100)+'%';
+  document.getElementById('ngk').textContent=KINGLABEL[groveKingType];
+  document.getElementById('ndeath').textContent=deaths;
+  document.getElementById('ndragdeath').textContent=dragonDeaths;
+  document.getElementById('clock').innerHTML='day <b>'+day+'</b>';
+  drawGraph();
+  markCodex(bestiary); if(bestiary.open) renderCodex(bestiary);                           // discover creatures & plants as they appear on screen
+  markCodex(plantiary); if(plantiary.open) renderCodex(plantiary);
+  if(monarchOpen) renderMonarchs();                                                        // the Monarch Tracker updates live while it's open
+  requestAnimationFrame(loop);
+}
+function bumpMoist(gxc,gyc,amt){ const cx=Math.round(gxc/moistC.scale), cy=Math.round(gyc/moistC.scale);
+  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){ const x=cx+a,y=cy+b; if(x<0||y<0||x>=moistC.cw||y>=moistC.ch)continue;
+    const w=(a||b)?0.5:1; moistC.g[y*moistC.cw+x]=clamp01(moistC.g[y*moistC.cw+x]+amt*w); }
+  computeMoist(); for(let k=0;k<3;k++) relaxBiomes(); computeWDist(); }
+function applyTool(gxc,gyc){
+  if(view==='sky'){                                                                   // drop creatures / angels onto the islands
+    if(tool==='angel'){ if(skyLand(gxc,gyc)) angels.push({x:gxc,y:gyc}); return; }
+    if(tool==='wooly'){ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(skyLand(x,y)&&wooly.length<200) wooly.push({x,y,E:2,age:0,ate:0}); } return; }
+    if(tool==='dragon'){ for(let k=0;k<2;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH) dragonling.push({x,y,age:0}); } return; }
+    if(tool==='golddragon'){ if(gxc>0&&gxc<GW&&gyc>0&&gyc<GH) goldDrag.push({x:gxc,y:gyc,age:0}); return; } // a Gold Dragon: hunts only the Green Dragon
+    const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&skyLand(x,y)&&arr.length<cap) arr.push(mk(x,y)); } };
+    if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'sky'}), P.gCap, goob);
+    else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'sky'}), P.zCap, zap);
+    else if(tool==='human') drop((x,y)=>({x,y,E:P.hStartE,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false,d:'sky'}), P.hCap, human);
+    return;
+  }
+  if(view==='under'){                                                                 // drop creatures into the caves
+    const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&!uWall(x,y)&&!ulava[cidx(x,y)]&&arr.length<cap) arr.push(mk(x,y)); } };
+    if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'under',uAge:0}), P.gCap, goob);
+    else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'under',uAge:0}), P.zCap, zap);
+    else if(tool==='human') drop((x,y)=>({x,y,E:P.hStartE,W:1,wood:0,age:0,ate:0,d:'under',uAge:0}), P.hCap, human);
+    return;
+  }
+  if(view==='grove'){                                                                 // in the grove you can seed its OWN creatures, or drop outsiders that "get lost"
+    if(tool==='sniffer'){ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&sniffer.length<160) sniffer.push({x,y,E:2,age:0,ate:0}); } return; }
+    if(tool==='claw'){ for(let k=0;k<2;k++){ const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&claw.length<40) claw.push({x,y,age:0,ate:0}); } return; }
+    if(tool==='treeman'){ const i=cidx(gxc,gyc); if(gzone[i]!==WILD){ if(!gsettle[i]){ gsettle[i]=1; gsettleList.push(i); } treeman.push({x:gxc,y:gyc,home:i,age:0}); } return; }
+    const drop=(mk,cap,arr)=>{ for(let k=0;k<4;k++){ const x=gxc+(rnd()-0.5)*3, y=gyc+(rnd()-0.5)*3; if(x>0&&x<GW&&y>0&&y<GH&&arr.length<cap) arr.push(mk(x,y)); } };
+    if(tool==='goob') drop((x,y)=>({x,y,E:P.gStartE,W:1,age:0,ate:0,d:'grove'}), P.gCap, goob);
+    else if(tool==='zap') drop((x,y)=>({x,y,E:P.zStart,age:0,ate:0,d:'grove'}), P.zCap, zap);
+    else if(tool==='human') drop((x,y)=>({x,y,E:P.hStartE,W:1,wood:0,age:0,ate:0,stone:0,loot:0,boat:false,d:'grove'}), P.hCap, human);
+    return;
+  }
+  if(tool==='goob'){ for(let k=0;k<8;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnGoob(x,y,P.gStartE+0.4,1.0);} }
+  else if(tool==='zap'){ for(let k=0;k<4;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnZap(x,y,P.zStart+0.4);} }
+  else if(tool==='human'){ for(let k=0;k<3;k++){const x=gxc+(rnd()-0.5)*4,y=gyc+(rnd()-0.5)*4; if(!inWater(x,y)) spawnHuman(x,y,P.hStartE+0.3);} }
+  else if(tool==='lev'){ for(let k=0;k<2;k++){const x=gxc+(rnd()-0.5)*3,y=gyc+(rnd()-0.5)*3; if(inWater(x,y)) spawnLev(x,y,P.levStartE);} }
+  else if(tool==='bush'){ for(let k=0;k<6;k++){const x=gxc+(rnd()-0.5)*5,y=gyc+(rnd()-0.5)*5; if(goodBushCell(x,y)) bushes.push({x,y,food:0.8});} }
+  else if(tool==='rain'){ bumpMoist(gxc,gyc,+0.28); }
+  else if(tool==='drought'){ bumpMoist(gxc,gyc,-0.28); }
+}
+let dragging=false;
+function evToGrid(e){ const r=cv.getBoundingClientRect(); const cxp=(e.touches?e.touches[0].clientX:e.clientX)-r.left, cyp=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return [cxp/r.width*GW, cyp/r.height*GH]; }
+cv.addEventListener('pointerdown',e=>{ dragging=true; const [x,y]=evToGrid(e); applyTool(x,y); });
+cv.addEventListener('pointermove',e=>{ if(!dragging)return; const [x,y]=evToGrid(e); applyTool(x,y); });
+addEventListener('pointerup',()=>dragging=false);
+document.querySelectorAll('.tools [data-tool]').forEach(b=>b.onclick=()=>{ tool=b.dataset.tool;
+  document.querySelectorAll('.tools [data-tool]').forEach(o=>o.classList.toggle('on',o===b)); });
+document.getElementById('pause').onclick=function(){ playing=!playing; this.textContent=playing?'⏸ Pause':'▶ Play'; };
+document.getElementById('reset').onclick=newWorld;
+document.getElementById('speed').oninput=function(){ simSpeed=+this.value; document.getElementById('speedval').textContent=simSpeed+'×'; };
+const VIEWS=['surface','under','sky','grove'], VLABEL={surface:'☀️ Surface',under:'🕳️ Underground',sky:'☁️ Sky Realm',grove:'🌲 The Grove'};
+document.getElementById('viewbtn').onclick=function(){ view=VIEWS[(VIEWS.indexOf(view)+1)%VIEWS.length]; const nx=VIEWS[(VIEWS.indexOf(view)+1)%VIEWS.length]; this.textContent='Go to '+VLABEL[nx]; };
+document.getElementById('viewbtn').textContent='Go to '+VLABEL['under'];
+// build the clickable graph legend — one chip per factor, click to show/hide its line
+const gleg=document.getElementById('glegend');
+FACTORS.forEach(f=>{ const b=document.createElement('button'); b.className=f.on?'':'off';
+  b.innerHTML='<i class="gsw" style="background:'+f.col+'"></i>'+f.emoji+' '+f.label;
+  b.title='Click to show or hide '+f.label+' on the graph';
+  b.onclick=()=>{ f.on=!f.on; b.classList.toggle('off',!f.on); drawGraph(); };
+  gleg.appendChild(b); });
+// the two codices — Bestiary (creatures) and Plantiary (plants)
+const bestiary=makeCodex(BESTIARY,'creatures',{overlay:E('book'),grid:E('bookgrid'),pageLbl:E('bookpage'),prog:E('bookprog'),prev:E('bookprev'),next:E('booknext'),btn:E('bookbtn'),close:E('bookx'),badgeBtn:E('badgebtn'),badgeOverlay:E('badge'),badgeClose:E('badgex'),badgeMsg:E('badgemsg')});
+const plantiary=makeCodex(PLANTIARY,'plants',{overlay:E('plant'),grid:E('plantgrid'),pageLbl:E('plantpage'),prog:E('plantprog'),prev:E('plantprev'),next:E('plantnext'),btn:E('plantbtn'),close:E('plantx'),badgeBtn:E('plantbadgebtn'),badgeOverlay:E('plantbadge'),badgeClose:E('plantbadgex'),badgeMsg:E('plantbadgemsg')});
+wireCodex(bestiary); wireCodex(plantiary);
+// the Monarch Tracker overlay
+const monarchOverlay=E('monarch'), monarchGrid=E('monarchgrid');
+E('monarchbtn').onclick=()=>{ monarchOpen=true; renderMonarchs(); monarchOverlay.classList.add('open'); };
+E('monarchx').onclick=()=>{ monarchOpen=false; monarchOverlay.classList.remove('open'); };
+monarchOverlay.onclick=e=>{ if(e.target===monarchOverlay){ monarchOpen=false; monarchOverlay.classList.remove('open'); } };
+newWorld(); loop();
+</script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

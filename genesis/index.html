@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Genesis — Living Simulators (artificial life from one rule)</title>
+<meta name="description" content="Project Genesis: a gallery of artificial-life simulators built on one rule — relaxation labeling. Organisms that build themselves, minds that decide (chess and otherwise), and cosmic structure — all running in your browser.">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0;
+ --org:#5fe3a0;--nrv:#37e6ff;--chs:#c060ff;--cos:#e8c170;--mth:#9fb0d8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#04050b;color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system}
+canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:relative;overflow:hidden;text-align:center;padding:70px 20px 34px;
+ background:radial-gradient(900px 520px at 50% -10%,#14224a,transparent)}
+h1{font:700 clamp(30px,7vw,60px)/1.03 ui-serif,Georgia,serif;margin:0;letter-spacing:-1px;
+ background:linear-gradient(120deg,#fff,#9fe6c0 45%,#c9a0ff);-webkit-background-clip:text;background-clip:text;color:transparent;
+ text-shadow:0 0 60px rgba(120,220,180,.16)}
+.eyebrow{color:var(--gr);letter-spacing:4px;text-transform:uppercase;font-size:12px;margin-bottom:14px}
+.tag{color:var(--dim);font-size:clamp(15px,2.4vw,19px);max-width:700px;margin:16px auto 0}
+.tag b{color:var(--ink)}
+nav{display:flex;gap:8px 16px;justify-content:center;flex-wrap:wrap;margin-top:24px;font:13px ui-monospace,monospace}
+nav a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:6px 14px}
+nav a:hover{color:#fff;border-color:var(--gr);background:#0c1630}
+nav a.home{color:var(--cy);border-color:#20406a}
+section{padding:40px 0 4px}
+h2{font:600 23px ui-serif,Georgia,serif;margin:0 0 4px;color:#fff}
+h2 .k{font:12px ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px}
+.lead{color:var(--dim);max-width:740px;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
+.card{display:block;text-decoration:none;color:inherit;background:#0a1020;border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.glyph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:44px;line-height:1;
+ filter:drop-shadow(0 5px 12px rgba(0,0,0,.55));background:#060a16}
+.card .body{padding:12px 15px 15px}
+.card h3{margin:0 0 4px;font:600 15.5px ui-serif,Georgia,serif;color:#fff}
+.card p{margin:0;color:var(--dim);font-size:12.5px;line-height:1.5}
+.chip{display:inline-block;margin-top:9px;font:10px ui-monospace,monospace;letter-spacing:1px;text-transform:uppercase;
+ padding:2px 8px;border-radius:12px;border:1px solid}
+.chip.real{color:var(--gr);border-color:#1e5e3e;background:#0a1a14}
+.chip.sim{color:var(--gd);border-color:#5e4a1e;background:#1a1406}
+.chip.idea{color:var(--pu);border-color:#3a1e5e;background:#140a24}
+/* per-group glyph tint + heading accent + hover border */
+.g-org h2{color:#c8f6df} .g-org .glyph{background:radial-gradient(150px 92px at 50% 42%,rgba(95,227,160,.17),#060a16)} .g-org .card:hover{border-color:#2b6e4e}
+.g-nrv h2{color:#bfeeff} .g-nrv .glyph{background:radial-gradient(150px 92px at 50% 42%,rgba(55,230,255,.16),#060a16)} .g-nrv .card:hover{border-color:#1f5570}
+.g-chs h2{color:#e6c8ff} .g-chs .glyph{background:radial-gradient(150px 92px at 50% 42%,rgba(192,96,255,.17),#060a16)} .g-chs .card:hover{border-color:#5a2f7e}
+.g-cos h2{color:#f2dca6} .g-cos .glyph{background:radial-gradient(150px 92px at 50% 42%,rgba(232,193,112,.16),#060a16)} .g-cos .card:hover{border-color:#6e5a2f}
+.g-mth h2{color:#cdd8ee} .g-mth .glyph{background:radial-gradient(150px 92px at 50% 42%,rgba(159,176,216,.14),#060a16)} .g-mth .card:hover{border-color:#3a4665}
+footer{text-align:center;color:var(--dim);font-size:13px;padding:48px 20px 60px;margin-top:26px;border-top:1px solid var(--line)}
+footer a{color:var(--gr);text-decoration:none}
+</style></head><body>
+<canvas id="stars"></canvas>
+<header>
+<div class="wrap">
+  <div class="eyebrow">Project Genesis · artificial life from one rule</div>
+  <h1>Living Simulators</h1>
+  <p class="tag">One local rule — <b>constraints relaxing into agreement</b> — is enough to grow <b>organisms</b> that build
+   themselves, <b>minds</b> that decide (chess and otherwise), and the <b>cosmic structure</b> they’re made of. Every tile below
+   is a simulator that runs in your browser. Same engine, different bodies.</p>
+  <nav>
+    <a class="home" href="../">← Portfolio</a>
+    <a href="#organisms">Organisms</a>
+    <a href="#minds">Nervous systems</a>
+    <a href="#chess">Chess minds</a>
+    <a href="#cosmos">Emergence &amp; cosmos</a>
+    <a href="#method">Method &amp; world</a>
+  </nav>
+</div>
+</header>
+
+<div class="wrap">
+
+<section id="organisms" class="g-org">
+<h2><span class="k">Artificial life · autopoiesis</span>Organisms that build themselves</h2>
+<p class="lead">Systems that assemble and maintain their own bodies. Here the labeling rule <i>is</i> the metabolism — a form that
+ grows, grooms, repairs and reproduces itself, with no controller outside the tissue.</p>
+<div class="grid">
+  <a class="card" href="world/"><div class="glyph">🌍</div><div class="body"><h3>Gooblets &amp; Zappies</h3><p>A little 2-D world that grows itself — grazers, hunters &amp; relaxation-labeled biomes. Built with Elbie.</p><span class="chip sim">ecosystem</span></div></a>
+  <a class="card" href="critter/"><div class="glyph">🦠</div><div class="body"><h3>The Critter</h3><p>A self-relaxing organism that grows, grooms &amp; reproduces <i>itself</i> — as a simplicial mesh <b>and</b> a 2-D grid.</p><span class="chip idea">autopoiesis</span></div></a>
+  <a class="card" href="games/"><div class="glyph">🎮</div><div class="body"><h3>The Critter, in Worlds You Can Play</h3><p>The autopoiesis organism, ported to Roblox &amp; Minecraft (plus a Python mockup).</p><span class="chip sim">playable</span></div></a>
+  <a class="card" href="../morphogenesis-grow/"><div class="glyph">🌱</div><div class="body"><h3>A Body Grows Itself</h3><p>Growing-graph morphogenesis — one cell relaxes into a whole patterned body.</p><span class="chip sim">morphogenesis</span></div></a>
+  <a class="card" href="../morphogenesis-remodel/"><div class="glyph">🔧</div><div class="body"><h3>Remodelling Without Injury</h3><p>Decision-driven form repair — the body re-patterns itself, no scalpel.</p><span class="chip sim">morphogenesis</span></div></a>
+  <a class="card" href="../morphogenesis/"><div class="glyph">🗺️</div><div class="body"><h3>Editable Anatomical Memory</h3><p>Bioelectric pattern formation as constraint relaxation — HRL × Levin.</p><span class="chip idea">bioelectric</span></div></a>
+  <a class="card" href="../simplicial-3d/"><div class="glyph">🔺</div><div class="body"><h3>The Body in 3D</h3><p>Higher-order relaxation on a growing 3-D simplicial complex.</p><span class="chip idea">topology</span></div></a>
+  <a class="card" href="../simplicial/"><div class="glyph">🔻</div><div class="body"><h3>The Body as a Simplicial Complex</h3><p>Higher-order networks in 2-D — where triangles see what pairs cannot.</p><span class="chip idea">topology</span></div></a>
+</div>
+</section>
+
+<section id="minds" class="g-nrv">
+<h2><span class="k">Living wiring · function from structure</span>Nervous systems, relaxing</h2>
+<p class="lead">Real and toy wiring diagrams relaxed into function. Feed in a stimulus and watch structure alone decide where the
+ activity flows — a nervous system as a field settling into agreement.</p>
+<div class="grid">
+  <a class="card" href="brain/"><div class="glyph">🪱</div><div class="body"><h3>A Nervous System, Relaxing</h3><p>The real <i>C. elegans</i> connectome, labeled into functional communities.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="cord/"><div class="glyph">🧵</div><div class="body"><h3>The Cord of Three Strands</h3><p>Trinary relaxation: sensory → interneuron → motor on the real wiring.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="monad/"><div class="glyph">🪟</div><div class="body"><h3>The Windowed Monad</h3><p>A self relating itself to itself — the smallest possible mind.</p><span class="chip idea">concept</span></div></a>
+  <a class="card" href="regard/"><div class="glyph">👁️</div><div class="body"><h3>The Two Directions</h3><p>Axioms of Regard — a conservation law for looking, on a live, relaxing network of quantum reference frames.</p><span class="chip idea">concept</span></div></a>
+  <a class="card" href="waterize/"><div class="glyph">🌊</div><div class="body"><h3>Waterize the World</h3><p>Endless tiny creeks braid into a soft, breathing cell membrane around a warm divine core — the membrane, not the wall.</p><span class="chip idea">meditation</span></div></a>
+</div>
+</section>
+
+<section id="chess" class="g-chs">
+<h2><span class="k">Artificial cognition · strategy</span>Minds at play — chess</h2>
+<p class="lead">Strategy as artificial life of the mind: engines that <b>reason by relaxation instead of search</b>, learn a player’s
+ move-logic from their games, and spend a clock the way a living thing spends energy.</p>
+<div class="grid">
+  <a class="card" href="../chess-brain/"><div class="glyph">🧬</div><div class="body"><h3>Chess Brain</h3><p>A mind grown one dimension at a time from a single style seed.</p><span class="chip idea">cognition</span></div></a>
+  <a class="card" href="../chess-logic/"><div class="glyph">🧠</div><div class="body"><h3>Chess Logic</h3><p>A move engine that reasons by relaxation, not search — and explains its plan.</p><span class="chip idea">engine</span></div></a>
+  <a class="card" href="../chess-premove/"><div class="glyph">⏱️</div><div class="body"><h3>Chess Premove</h3><p>The human edge in 15-second chess: entropy-gated premoves that beat the clock.</p><span class="chip real">real games</span></div></a>
+  <a class="card" href="../chess-mind/"><div class="glyph">🫆</div><div class="body"><h3>Cognitive Fingerprints</h3><p>Learn a player’s move-logic from their games — the mind inside the moves.</p><span class="chip real">real games</span></div></a>
+  <a class="card" href="../chess-biometric/"><div class="glyph">🔐</div><div class="body"><h3>Chess Biometric</h3><p>Play-style as a second authentication factor — you are how you play.</p><span class="chip idea">concept</span></div></a>
+  <a class="card" href="../whimsy-chess/maestro.html"><div class="glyph">♟️</div><div class="body"><h3>Chess Maestro</h3><p>Tactical role labeling, live — a game scored as music.</p><span class="chip sim">live</span></div></a>
+</div>
+</section>
+
+<section id="cosmos" class="g-cos">
+<h2><span class="k">Emergence · structure from one rule</span>Before life, structure</h2>
+<p class="lead">Life needs a universe to happen in. The same rule condenses matter into webs, halos and thresholds — the pre-biotic
+ genesis, mostly on <b>real astronomical data</b>, honestly framed.</p>
+<div class="grid">
+  <a class="card" href="light/"><div class="glyph">✨</div><div class="body"><h3>Self-Gravitating Light</h3><p>Cosmic structure condenses from a single rule — the origin of Project Genesis.</p><span class="chip sim">simulation</span></div></a>
+  <a class="card" href="voxel/"><div class="glyph">🟩</div><div class="body"><h3>In the Beginning</h3><p>The seven days of Genesis, built block by block — an isometric voxel diorama with a hotbar of days. The coloring-book version.</p><span class="chip sim">voxel</span></div></a>
+  <a class="card" href="voxel-tty/"><div class="glyph">🖥️</div><div class="body"><h3>Genesis, in a Terminal</h3><p>The same seven days rendered by a hand-written ASCII voxel engine — a rotating 3-D diorama, quaternion camera slerping between the days. After David Harrison.</p><span class="chip idea">ascii engine</span></div></a>
+  <a class="card" href="worlds/"><div class="glyph">🗺️</div><div class="body"><h3>Living Worlds</h3><p>Three fantastical biomes on the same ASCII voxel engine — Terraformer, Floating Isles &amp; the Deep Reef. One universe, three doors; Gooblets graze, Zappies orbit.</p><span class="chip idea">worlds hub</span></div></a>
+  <a class="card" href="terraform/"><div class="glyph">🌱</div><div class="body"><h3>Terraformer</h3><p>A cold drifting stone hatches into a living world across seven epochs — core, sky, seas, twin suns, bloom, swarm, hum.</p><span class="chip idea">ascii engine</span></div></a>
+  <a class="card" href="isles/"><div class="glyph">🏝️</div><div class="body"><h3>Floating Isles</h3><p>A levitating sky-archipelago that builds itself — anchor stone, rising isles, skyfalls, mushroom groves, crystal spires &amp; a lantern festival.</p><span class="chip idea">ascii engine</span></div></a>
+  <a class="card" href="reef/"><div class="glyph">🌊</div><div class="body"><h3>The Deep Reef</h3><p>A bioluminescent deep grown tide by tide — trench, thermal vents, coral, kelp towers, anglerlights, jellyfolk &amp; the glow tide.</p><span class="chip idea">ascii engine</span></div></a>
+  <a class="card" href="maestro/"><div class="glyph">🎼</div><div class="body"><h3>Chess Maestro, in 3-D</h3><p>A chess game as a living voxel terrain — the HRL influence field becomes elevation (water on the contested seam), each piece tinted by its relaxed tactical role. Step move by move; the same <b>core.js</b> exports to Minecraft &amp; Roblox.</p><span class="chip real">hrl · voxel</span></div></a>
+  <a class="card" href="maestro/emoji.html"><div class="glyph">🎭</div><div class="body"><h3>Maestro — the Cast, in Voxels</h3><p>Your game played by its narration characters — each piece the real emoji glyph rebuilt as a 3-D voxel standee (🦁🐲🏰🤴👸🦏), tracked from its home square, with cast-voiced narration. Steps move by move on a solid isometric board.</p><span class="chip real">emoji voxels</span></div></a>
+  <a class="card" href="maestro/cyber.html"><div class="glyph">🕶️</div><div class="body"><h3>Maestro — Cyberpunk 2045, ATL</h3><p>The grid has you. A real 10-minute game rendered as a neon voxel city — cyan towers are Underground-held, magenta is Authority-held, and the contested seam floods green. Every piece is a netrunner (🔥 HOTLANTA.h, 👾 QUEEN.EXE) or an agent (🎩 The Architect), narrated move by move in falling code.</p><span class="chip real">neon voxels</span></div></a>
+  <a class="card" href="sdss/"><div class="glyph">🌌</div><div class="body"><h3>The Real Cosmic Web</h3><p>25,000 SDSS galaxies, relaxation-labeled into void, filament &amp; cluster.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="planck/"><div class="glyph">💥</div><div class="body"><h3>Seeded by the Big Bang</h3><p>A cosmic web grown from the real ΛCDM matter power spectrum.</p><span class="chip sim">simulation</span></div></a>
+  <a class="card" href="sparc/"><div class="glyph">🌗</div><div class="body"><h3>The Fingerprint of Dark Matter</h3><p>165 real galaxy rotation curves — the gap with no light behind it.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="rar/"><div class="glyph">🚰</div><div class="body"><h3>The Clog Threshold</h3><p>The Radial Acceleration Relation, from 3,343 real measurements.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="clog/"><div class="glyph">🧪</div><div class="body"><h3>Does the Threshold Emerge?</h3><p>The clog, tested dynamically — and an honest null result.</p><span class="chip idea">null result</span></div></a>
+  <a class="card" href="ontology/"><div class="glyph">🔷</div><div class="body"><h3>The Four Poles</h3><p>A tetrahedral ontology — a conjecture: dark matter as the noise.</p><span class="chip idea">conjecture</span></div></a>
+  <a class="card" href="ladder/"><div class="glyph">🪜</div><div class="body"><h3>The Simplex Ladder</h3><p>1·2·3·4 — Troolean relaxation climbing one dimension at a time.</p><span class="chip idea">concept</span></div></a>
+</div>
+</section>
+
+<section id="method" class="g-mth">
+<h2><span class="k">The engine &amp; its uses</span>Method &amp; world</h2>
+<p class="lead">The engine itself, and where it touches the world — forecasts that beat every single model, humanitarian mapping,
+ the maths underneath, and a wearable on real data.</p>
+<div class="grid">
+  <a class="card" href="forecast/"><div class="glyph">📈</div><div class="body"><h3>Forecasting by Relaxation</h3><p>An adaptive econometric ensemble that beats every single model.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="malaria/"><div class="glyph">🌍</div><div class="body"><h3>Opening the Escape Valves</h3><p>Malaria &amp; waterborne-disease mitigation — labeling a watershed.</p><span class="chip idea">public health</span></div></a>
+  <a class="card" href="energy/"><div class="glyph">📐</div><div class="body"><h3>Energy = Diversity × Unity</h3><p>A rigorous, honestly-bounded essay on the engine’s ethos.</p><span class="chip idea">essay</span></div></a>
+  <a class="card" href="../frustrated/"><div class="glyph">🧲</div><div class="body"><h3>Chirality</h3><p>Frustrated constraints — where the 2-simplex sees what pairs cannot.</p><span class="chip idea">concept</span></div></a>
+  <a class="card" href="../body-pos/"><div class="glyph">🏃</div><div class="body"><h3>HRL on Real Data</h3><p>Wearable accelerometer → body-position labeling, on measured motion.</p><span class="chip real">real data</span></div></a>
+  <a class="card" href="voxel-world/"><div class="glyph">🧱</div><div class="body"><h3>VoxelData</h3><p>Walk any dataset as a Minecraft-like world — a zero-dependency WebGL voxel engine. Fly through the real body-position cloud, misclassifications flagged, over a live bandoneón tango.</p><span class="chip sim">voxel engine</span></div></a>
+  <a class="card" href="scrabble/"><div class="glyph">🔤</div><div class="body"><h3>Scrabble</h3><p>A dataset you can <i>read</i> — a rotating ASCII voxel board where every tile's letter is its category. The body-position cloud, its three classes tiling as E·A·T.</p><span class="chip idea">typographic viz</span></div></a>
+  <a class="card" href="scrabble-4d/"><div class="glyph">🌀</div><div class="body"><h3>4-D Scrabble</h3><p>The board gains a fourth dimension: the letter is the <i>predicted</i> class, the 4th axis is the <i>truth</i>. Rotating through 4-D, misfiled tiles drift into the wrong layer, glowing red.</p><span class="chip idea">4-D viz</span></div></a>
+</div>
+</section>
+
+</div>
+<footer>
+<div style="max-width:640px;margin:0 auto 16px;color:#aab6d6;font:italic 15px/1.6 ui-serif,Georgia,serif">
+“Artificial life is just <b style="color:#fff;font-style:normal">order that keeps itself</b> — a field of parts, each welcome at
+the table, relaxing into an agreement none of them could reach alone.”</div>
+One rule, every body on this page. Part of the <a href="../">hierarchical relaxation labeling portfolio</a> by
+<b style="color:var(--ink)">Manny Glover</b>.<br>
+<a href="https://github.com/rmichaelglover/hrl-portfolio">github.com/rmichaelglover/hrl-portfolio</a> ·
+<a href="../licensing/"><b style="color:var(--gr)">MIRL-1.0 source-available</b></a> · noncommercial sharing welcome · dark theme, real data, honestly framed.
+</footer>
+<script>
+// subtle drifting starfield (shared with the portfolio home)
+const cv=document.getElementById('stars'),x=cv.getContext('2d');let W,H,st=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;st=[];const n=Math.min(150,innerWidth/9|0);
+ for(let i=0;i<n;i++)st.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*0.18+0.02});}
+addEventListener('resize',rs);rs();
+(function loop(){x.clearRect(0,0,W,H);for(const p of st){p.y+=p.s*(0.4+p.z);if(p.y>H)p.y=0;
+ const a=0.25+p.z*0.5;x.fillStyle=`rgba(${150+70*p.z|0},${200+40*p.z|0},${200+50*p.z|0},${a})`;
+ x.fillRect(p.x,p.y,p.z*1.7+0.4,p.z*1.7+0.4);}requestAnimationFrame(loop);})();
+</script>
+<script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

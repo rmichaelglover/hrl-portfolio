@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Living Worlds — three biomes, one ASCII voxel engine · Project Genesis</title>
+<meta name="description" content="Three fantastical worlds on one hand-written ASCII voxel engine — Terraformer, Floating Isles and the Deep Reef. One universe, three doors. Gooblets graze, Zappies orbit. By Manny Glover.">
+<style>
+  :root{
+    --bg:#0a0c0b; --frame:#0e1210; --panel:#0c100e; --edge:#1c2621; --edge-2:#2a3a32;
+    --dim:#4f6b5c; --fg:#9be6b8; --bright:#d7ffe8; --amber:#f5c542; --amber-dim:#9c7e26;
+    --mono:"SFMono-Regular","SF Mono","JetBrains Mono","Cascadia Mono",Consolas,"Liberation Mono",ui-monospace,monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);
+    background-image:radial-gradient(120% 90% at 50% -20%, rgba(155,230,184,.06), transparent 55%);}
+  .page{min-height:100vh;max-width:1180px;margin:0 auto;padding:clamp(16px,3vw,34px);display:flex;flex-direction:column;gap:clamp(16px,2.4vw,26px);}
+  a{color:var(--fg);text-decoration:none;}
+
+  .mast{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+  .kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);}
+  h1{margin:6px 0 0;font-size:clamp(21px,3.4vw,32px);letter-spacing:.02em;color:var(--bright);font-weight:600;}
+  h1 .sep{color:var(--amber);}
+  .byline{font-size:12px;letter-spacing:.12em;color:var(--dim);margin-top:8px;max-width:60ch;line-height:1.7;}
+  .back{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--edge);padding:8px 12px;}
+  .back:hover{color:var(--fg);border-color:var(--edge-2);}
+
+  .term{border:1px solid var(--edge-2);background:#05060500;}
+  .termbar{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--frame);border-bottom:1px solid var(--edge);}
+  .dot{width:11px;height:11px;border-radius:50%;} .r{background:#e0705a;} .y{background:#e0b34a;} .g{background:#5ac07a;}
+  .termbody{padding:12px 14px;font-size:13px;color:var(--dim);}
+  .termbody b{color:var(--fg);} .cur{display:inline-block;width:.55ch;height:1.05em;background:var(--fg);vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:820px){ .grid{grid-template-columns:1fr;} }
+  .card{border:1px solid var(--edge);background:var(--panel);display:flex;flex-direction:column;transition:border-color .12s,transform .06s;}
+  .card:hover{border-color:var(--amber);transform:translateY(-2px);}
+  .card .art{white-space:pre;font-size:12px;line-height:1.15;padding:16px 16px 6px;color:var(--dim);}
+  .card h3{margin:6px 16px 2px;font-size:17px;color:var(--bright);letter-spacing:.02em;}
+  .card .stages{margin:0 16px;font-size:11px;letter-spacing:.06em;color:var(--dim);line-height:1.8;}
+  .card .go{margin:12px 16px 16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);}
+  .card.t .art{color:#9be6b8;} .card.i .art{color:#78b4f0;} .card.d .art{color:#60e0e0;}
+
+  .creed{border-left:2px solid var(--amber-dim);padding:6px 0 6px 18px;color:var(--bright);}
+  .creed .ch{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);}
+  .creed p{margin:8px 0 0;line-height:1.7;font-size:15px;max-width:64ch;}
+  .creed .sub{color:var(--dim);font-style:italic;}
+
+  footer{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;line-height:2;border-top:1px solid var(--edge);padding-top:16px;}
+  footer b{color:var(--fg);font-weight:500;} footer a{color:var(--fg);}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <div>
+      <div class="kicker">Genesis <span style="color:var(--amber)">·</span> Elbie's living worlds</div>
+      <h1>living worlds <span class="sep">//</span> three doors, one engine</h1>
+      <div class="byline">Three fantastical biomes rendered by the same hand-written ASCII voxel engine — a rotating diorama with a quaternion camera and an opt-in generative hum. One universe: Gooblets graze, Zappies orbit, and each world builds itself stage by stage.</div>
+    </div>
+    <a class="back" href="../">◀ Project Genesis</a>
+  </header>
+
+  <section class="term">
+    <div class="termbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="termbody">~/elbie <b>$</b> <span id="cmd"></span><span class="cur"></span></div>
+  </section>
+
+  <section class="grid">
+    <a class="card t" href="../terraform/">
+      <div class="art">  · ✷ ·
+ ▒▓█▓▒
+▓███████▓
+ ▓█████▓</div>
+      <h3>🌱 Terraformer</h3>
+      <div class="stages">stone · core · sky · seas ·<br>twin suns · bloom · swarm · hum</div>
+      <div class="go">enter the cold rock →</div>
+    </a>
+    <a class="card i" href="../isles/">
+      <div class="art"> ▓██▓   ░▒░
+  ▓█▓   ▒█▒
+   |     |
+   ░     ░</div>
+      <h3>🏝️ Floating Isles</h3>
+      <div class="stages">anchor · rise · skyfalls · groves ·<br>spires · lanterns · swarm · festival</div>
+      <div class="go">enter the sky →</div>
+    </a>
+    <a class="card d" href="../reef/">
+      <div class="art">~ ~ ~ ~ ~ ~
+ ♦  ▓  ♦
+▒█▒ ▓█▓ ▒█▒
+▓▓▓▓▓▓▓▓▓</div>
+      <h3>🌊 The Deep Reef</h3>
+      <div class="stages">trench · vents · coral · kelp ·<br>anglerlights · jellyfolk · swarm · glow</div>
+      <div class="go">enter the deep →</div>
+    </a>
+  </section>
+
+  <section class="creed">
+    <div class="ch">Chapter V — “You're No Anny at All”</div>
+    <p>in which the Null Set learns to shoot left-handed.<br>
+    <span class="sub">One engine. Three doors. The world hums to itself, and none of it is quite so religious.</span></p>
+  </section>
+
+  <footer>
+    engine · <b>hand-written ascii voxel rasterizer</b> &nbsp;·&nbsp; quaternion camera &amp; slerp transitions inspired by
+    <b><a href="https://github.com/mr-mocap" target="_blank" rel="noopener">MathLib</a></b> of <b>MrMocap — David Harrison, Metro Atlanta, Georgia</b><br>
+    built by <b>Manny Glover</b> &nbsp;·&nbsp; <a href="../../">← the full portfolio</a>
+  </footer>
+</div>
+<script>
+  (() => {
+    const el = document.getElementById("cmd");
+    const text = "./enter --world [ terraformer | floating-isles | deep-reef ]  --life gooblets,zappies";
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches){ el.textContent = text; return; }
+    let n = 0; (function step(){ el.textContent = text.slice(0, ++n); if (n < text.length) setTimeout(step, 26); })();
+  })();
+</script>
+<script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>WorldScore — offline render assertions</title>
+<!--
+  Renders the score with OfflineAudioContext and measures the result, so the audio
+  can be regression-tested with no speaker and no human ear. Open in a browser, or
+  headless:
+
+    google-chrome --headless --no-sandbox --disable-gpu --virtual-time-budget=25000 \
+      --dump-dom file://$PWD/test_worldscore.html | grep -o '<title>[^<]*'
+
+  By Manny Glover.
+-->
+<style>body{background:#06090d;color:#cfe;font:13px/1.7 ui-monospace,monospace;padding:24px}
+b{color:#7ee787}.f{color:#ff6b6b}.p{color:#7ee787}</style>
+</head><body><pre id="out">rendering…</pre>
+<script src="core.js"></script>
+<script src="worldscore.js"></script>
+<script>
+(async () => {
+  const log=[]; let pass=0, fail=0;
+  const chk=(name,ok,detail)=>{ ok?pass++:fail++;
+    log.push(`  ${ok?"ok  ":"FAIL"} ${name}${detail!==undefined?"  ("+detail+")":""}`); };
+
+  const PGN="1. h4 e5 2. h5 Bc5 3. h6 Nxh6 4. d4 exd4 5. Bxh6 gxh6 6. Rxh6 d6 7. f4 d5 8. e3 Qe7 9. g4 d3 10. g5 Bd4 11. Qh5 Bxb2 12. Rxh7 Bxa1 13. Bxd3 Qf8 14. Bg6 fxg6 15. Qxg6+ Kd8 16. Rf7 Rg8 17. Rxf8+ Rxf8 18. Qf6+ Bxf6 19. gxf6 Rxf6 20. Nc3 Rc6";
+  const P = Maestro.applyPGN(PGN);
+
+  // --- render one frame offline and measure it ---
+  async function render(frame, opts, secs){
+    secs = secs || 2.2;
+    const ctx = new OfflineAudioContext(2, Math.ceil(44100*secs), 44100);
+    const ws = new WorldScore(ctx, opts||{});
+    ws.frame(frame, Maestro, Object.assign({at:0.05, dur:1.6}, opts||{}));
+    const buf = await ctx.startRendering();
+    const L=buf.getChannelData(0), R=buf.getChannelData(1);
+    let sl=0, sr=0, peak=0;
+    for(let i=0;i<L.length;i++){ sl+=L[i]*L[i]; sr+=R[i]*R[i];
+      const a=Math.max(Math.abs(L[i]),Math.abs(R[i])); if(a>peak) peak=a; }
+    const rmsL=Math.sqrt(sl/L.length), rmsR=Math.sqrt(sr/R.length);
+    // crude spectral centroid via zero-crossing rate on the sum
+    let zc=0; let prev=0;
+    for(let i=0;i<L.length;i++){ const v=L[i]+R[i]; if((v>=0)!==(prev>=0)) zc++; prev=v; }
+    return {rms:(rmsL+rmsR)/2, rmsL, rmsR, peak, zcr: zc/(L.length/44100)};
+  }
+
+  const A = await render(P[0]);
+  const mid = await render(P[24]);
+
+  chk("renders audible output",            A.rms > 0.002, "rms "+A.rms.toFixed(4));
+  chk("does not clip",                     A.peak <= 1.0, "peak "+A.peak.toFixed(3));
+  chk("peak is healthy, not a whisper",    A.peak > 0.02 && A.peak < 0.999, "peak "+A.peak.toFixed(3));
+  chk("no NaN in the buffer",              isFinite(A.rms) && isFinite(A.peak));
+
+  // water size must change the voice: a pond and a sea should not sound alike
+  const frames = P.map(f => ({f, w: WorldScore.readWorld(f, Maestro)}));
+  const pond = frames.find(x => x.w.water === "pond");
+  const big  = frames.find(x => x.w.water === "sea" || x.w.water === "ocean" || x.w.water === "lake");
+  chk("corpus contains both a pond and a large body", !!pond && !!big,
+      (pond?pond.w.water:"—")+" / "+(big?big.w.water:"—"));
+  if (pond && big){
+    const rp = await render(pond.f), rb = await render(big.f);
+    chk("bigger water is darker (lower zero-crossing rate)", rb.zcr < rp.zcr,
+        "pond "+rp.zcr.toFixed(0)+" vs "+big.w.water+" "+rb.zcr.toFixed(0));
+    chk("bigger water is louder", rb.rms > rp.rms,
+        rp.rms.toFixed(4)+" → "+rb.rms.toFixed(4));
+  }
+
+  // the stereo field must actually respond to who holds the board
+  const lop = frames.reduce((a,x)=> Math.abs(x.w.balance)>Math.abs(a.w.balance)?x:a, frames[0]);
+  const rl = await render(lop.f);
+  chk("one-sided board is off-centre in stereo", Math.abs(rl.rmsL-rl.rmsR)/Math.max(rl.rmsL,rl.rmsR) > 0.02,
+      "bal "+lop.w.balance.toFixed(2)+" L/R "+rl.rmsL.toFixed(4)+"/"+rl.rmsR.toFixed(4));
+
+  // a capture must add transient energy
+  const noCap = await render(P[12]);
+  const cap   = await render(P[12], {capture:true});
+  chk("a capture adds a transient", cap.peak > noCap.peak,
+      noCap.peak.toFixed(3)+" → "+cap.peak.toFixed(3));
+
+  // hero side flips the field
+  const hw = await render(lop.f, {hero:"w"}), hb = await render(lop.f, {hero:"b"});
+  chk("hero colour mirrors the stereo field",
+      Math.sign(hw.rmsL-hw.rmsR) !== Math.sign(hb.rmsL-hb.rmsR),
+      "w "+(hw.rmsL-hw.rmsR).toFixed(5)+" | b "+(hb.rmsL-hb.rmsR).toFixed(5));
+
+  // every frame in the game must render without throwing
+  let threw=0;
+  for (const f of [P[0],P[8],P[16],P[32],P[40]]){ try{ await render(f,{},0.4); }catch(e){ threw++; } }
+  chk("all sampled frames render clean", threw===0, threw+" threw");
+
+  const head = `WorldScore: ${pass} passing, ${fail} failing`;
+  document.getElementById("out").innerHTML =
+    head+"\n\n"+log.join("\n").replace(/FAIL/g,'<span class="f">FAIL</span>').replace(/ ok  /g,' <span class="p">ok</span>   ');
+  document.title = head + " :: " + log.map(l=>l.trim().split(/\s{2,}/)[0]).join(" | ");
+})();
+</script>
+<script src="/hrl-portfolio/entry-agreement.js" defer></script>
+</body></html>

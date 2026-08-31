@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "provider": "ace-step",
+  "project": "st-james-park",
+  "track_id": "fairest-lord-jesus-garden-theme",
+  "title": "Fairest Lord Jesus",
+  "work_status": "traditional-hymn-new-arrangement",
+  "caption": "Reverent acoustic garden hymn, unaccompanied opening melody, warm strings, fingerpicked acoustic guitar, gentle handbells, soft mixed choir, subtle birds and flowing-water ambience, stately and joyful, intimate natural recording, clear melodic phrasing, restrained dynamics",
+  "structure": [
+    "intro-unaccompanied",
+    "verse-light-accompaniment",
+    "verse-full-ensemble",
+    "instrumental-reflection",
+    "final-verse-simple-voice",
+    "water-and-birds-outro"
+  ],
+  "lyrics": "",
+  "instrumental": false,
+  "duration_seconds": 180,
+  "language": "en",
+  "seed": 510,
+  "rights_notes": [
+    "Use a newly recorded or separately cleared performance.",
+    "Do not imitate a named living performer or a protected recording.",
+    "Review generated audio for melodic or recording similarity before publication.",
+    "Disclose AI assistance when publishing generated material."
+  ]
+}

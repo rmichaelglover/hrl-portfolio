@@ -1,0 +1,195 @@
+Marginal Improvement Reciprocity License, Version 1.0 ("MIRL-1.0")
+
+Copyright (c) 2026 R. Michael Glover
+
+This is a source-available license, not an Open Source Initiative-approved
+open-source license. Its purpose is to permit learning, sharing, and genuine
+improvement while preventing extraction of capital from the Work.
+
+1. Definitions
+
+"Work" means the software, documentation, writing, art, data, and other
+material distributed with this license, except material identified as being
+under another license or owned by someone else.
+
+"Source" means the preferred form for studying and making changes, including
+the scripts, build instructions, and corresponding assets reasonably needed
+to reproduce a distributed or publicly performed version.
+
+"Modification" means any adaptation, derivative work, or other change to the
+Work.
+
+"Significant Marginal Improvement" means a good-faith, non-trivial
+Modification that produces a demonstrable improvement over the version used.
+It must materially improve at least one relevant quality—such as capability,
+correctness, accessibility, safety, privacy, resource efficiency,
+maintainability, documentation, pedagogy, or artistic expression—and must not
+obtain that improvement chiefly by degrading another relevant quality. Merely
+renaming, rebranding, repackaging, changing prices, adding advertising,
+removing attribution, or making cosmetic changes is not sufficient.
+
+"Independent Worker" means one natural person acting as a sole proprietor or
+otherwise selling that person's own labor, without employees, investors,
+shareholders, partners who share profits, or a business entity other than a
+single-member disregarded entity wholly owned and controlled by that person.
+Independent consultants, freelancers, and educators may qualify. A worker
+does not cease to qualify solely because a client reports payments on a U.S.
+Form 1099 or a comparable form.
+
+"Commercial Use" means use primarily intended for commercial advantage or
+monetary compensation, whether direct or indirect.
+
+"Capital Return" means revenue or economic benefit based primarily on
+ownership rather than the natural person's own labor. It includes dividends,
+profit distributions to investors or passive owners, interest derived from
+the Work, royalties for access to the Work or a Modification, equity value or
+fundraising value attributed to them, sale of a business or other capital
+asset whose value materially includes them, and rent-seeking or financialized
+claims against them. Ordinary fees paid directly for an Independent Worker's
+personal consulting, freelance, or educational labor are not Capital Return.
+
+"Trust of Trusts" means the stewardship body originally founded and led by
+R. Michael Glover to oversee commercial uses of the Work. Until a separate
+legal trust or other stewardship entity is publicly designated by R. Michael
+Glover in this repository, "Trust of Trusts" means R. Michael Glover acting as
+the initial steward. A successor has authority under this license only after a
+public, dated designation is added to the repository by the then-authorized
+steward. Its reviewing board is the Board of Trustees of Trustees described in
+the stewardship charter distributed with the Work. Board service is limited to
+engineers who voluntarily accept a written zero-compensation service agreement;
+no person or employer is appointed or bound merely by being named or eligible.
+
+"Stewardship Approval" means specific, prior, express written permission from
+the Trust of Trusts for the particular person, version, improvement, scope,
+clients or audience, compensation model, and time period proposed. Silence,
+source availability, acceptance of a contribution, or approval of a different
+use is not Stewardship Approval.
+
+2. Noncommercial permission
+
+Subject to this license, the Licensor grants everyone a worldwide,
+non-exclusive, royalty-free, non-sublicensable copyright license to use, study,
+copy, modify, publicly perform, publicly display, and distribute the Work and
+Modifications for purposes that are not Commercial Use.
+
+3. Limited commercial permission for independent labor
+
+Commercial Use is permitted only when all of the following are true:
+
+a. The Trust of Trusts has reviewed the proposed use and granted Stewardship
+   Approval before any offer, sale, invoice, paid instruction, paid advice,
+   monetized deployment, or other money-making activity begins;
+b. Every person receiving monetary compensation from the use is an
+   Independent Worker, and the compensation is for that person's own labor;
+c. Before requesting Stewardship Approval and before offering or providing the
+   commercial product or service, that
+   Independent Worker creates a Significant Marginal Improvement;
+d. The complete Source of the Significant Marginal Improvement is made
+   publicly available, without charge, in a durable and readily accessible
+   repository under this same license no later than the first commercial use;
+e. The public Source includes a clear description and reasonable evidence of
+   the claimed improvement, instructions sufficient to reproduce or evaluate
+   it, attribution to this Work, and a copy of this license; and
+f. No person or entity receives, seeks, promises, collateralizes, or
+   accumulates a Capital Return from the Work or any Modification.
+
+The Trust of Trusts may approve or decline a request in its stewardship
+judgment and may condition approval on reporting and verification consistent
+with this license. Creating or publishing an improvement does not create a
+right to earn money. Stewardship Approval is always required and does not
+waive any other condition.
+
+For clarity, a company, partnership, nonprofit organization, government body,
+investment fund, employer, platform acting as principal, or other organization
+may not exercise the commercial permission in this section. It may hire an
+Independent Worker for that worker's personal labor only if the organization
+itself does not copy, deploy, distribute, publicly perform, or otherwise use
+the Work or a Modification for Commercial Use. No artificial division of an
+organization or transaction may be used to evade this section.
+
+4. Sharing and public performance
+
+Any distribution of a Modification, and any public performance of a modified
+version over a computer network, must include or conspicuously link to its
+complete Source and license the Modification as a whole under this same
+license. You must preserve copyright, attribution, license, and third-party
+notices. You must state that you changed the Work and identify the date of the
+change. You may not impose terms or technological measures that restrict a
+recipient's exercise of the permissions this license grants.
+
+Distribution of an unmodified copy is permitted under section 2, but charging
+for the copy or access to it is Commercial Use and requires full compliance
+with section 3, including a separate Significant Marginal Improvement.
+
+5. No trademark or endorsement rights
+
+This license grants no rights in names, trademarks, service marks, or trade
+dress, and does not permit you to imply endorsement by the Licensor.
+
+6. Patents
+
+The Licensor grants you a worldwide, royalty-free, non-exclusive patent
+license under patent claims the Licensor can license that are necessarily
+infringed by your permitted use of the Work. If you or an organization you
+control initiate patent litigation alleging that the Work or a Modification
+infringes a patent, all patent rights granted to you by this section terminate.
+
+7. Compliance and termination
+
+Your rights terminate automatically if you fail to comply. They reinstate
+automatically if you cure the violation within 30 days after first learning
+of it, provided this is your first violation. Otherwise, reinstatement
+requires the Licensor's express written permission. Sections 5, 8, and 9
+survive termination.
+
+8. Disclaimer of warranty
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE WORK IS PROVIDED "AS IS" WITHOUT
+WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF TITLE,
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. YOU
+BEAR ALL RISK ARISING FROM USE OF THE WORK.
+
+9. Limitation of liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE LICENSOR AND CONTRIBUTORS WILL NOT
+BE LIABLE FOR ANY CLAIM OR FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM THE WORK OR THIS LICENSE,
+REGARDLESS OF THE THEORY OF LIABILITY, EVEN IF ADVISED OF THE POSSIBILITY.
+
+10. Scope and prior versions
+
+This license applies only to material for which R. Michael Glover owns the
+copyright and that is distributed in a version carrying this license. It does
+not replace or restrict any separate license governing a third-party work,
+dependency, dataset, recording, quotation, or other incorporated material.
+
+Versions previously distributed under the MIT License remain available under
+the MIT License; this license does not revoke rights already granted for those
+versions. No contributor's material is relicensed unless its copyright owner
+has authorized the change.
+
+11. Additional permission and stewardship decisions
+
+The Licensor may grant additional permission in writing. Only the Trust of
+Trusts may grant Stewardship Approval. Additional permission or Stewardship
+Approval for one person, use, or version does not change this license for
+anyone else. The Trust of Trusts may publish nonbinding procedures and review
+criteria, but may not use them to eliminate the express conditions in section
+3 without issuing a new license version from the copyright owner.
+
+The stewardship charter is explanatory governance unless incorporated into a
+signed legal instrument. If it conflicts with this license, this license
+controls the permissions to use the Work.
+
+12. Interpretation
+
+If a provision is unenforceable, it will be reformed only as much as necessary
+to make it enforceable, and the remainder stays effective. Headings and the
+plain-language summary distributed with the Work are explanatory only; these
+terms control. This license creates conditions on the copyright and patent
+permissions granted here and does not waive limitations or exceptions supplied
+by applicable law.
+
+This license governs use of the protected Work; it does not claim ownership of
+general knowledge, abstract ideas, facts, skills, or expertise that copyright
+and patent law leave free for others to use.
