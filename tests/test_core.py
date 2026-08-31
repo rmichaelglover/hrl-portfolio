@@ -106,6 +106,18 @@ def test_rejects_zero_sum_prior_rows():
         RelaxationLabeler(compat, prior=prior)
 
 
+@pytest.mark.parametrize(
+    ("shape", "message"),
+    [
+        ((0, 1, 0, 1), "at least one object"),
+        ((1, 0, 1, 0), "at least one label"),
+    ],
+)
+def test_rejects_empty_problem_dimensions(shape, message):
+    with pytest.raises(ValueError, match=message):
+        RelaxationLabeler(np.empty(shape))
+
+
 if __name__ == "__main__":
     # Runnable without pytest: python tests/test_core.py
     for name, fn in sorted(globals().items()):

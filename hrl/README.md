@@ -42,6 +42,16 @@ decide how hard constraints should interact with compatibility, noise, and
 contradictory locked labels. Until then, infinity remains a fascinatingly
 fishy edge of the model rather than an implicit input convention.
 
+### Related future direction: generation from the null set
+
+Generative set theory offers a different and legitimate interpretation of
+emptiness: the null set can seed a construction from which progressively richer
+objects are generated. That research direction is compatible with HRL's wider
+interest in emergence, but it is not the same contract as labeling an existing
+finite collection. The current numerical engine therefore requires at least
+one object and one candidate label. A future generative formulation may define
+null-set initialization explicitly; this implementation does not yet do so.
+
 ## Parked prototype idea: Mine for Truth ⛏️
 
 A family-friendly, Minecraft-like world in which players mine not for an

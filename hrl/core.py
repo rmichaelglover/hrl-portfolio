@@ -80,7 +80,8 @@ class RelaxationLabeler:
         ``[n_objects, n_labels, n_objects, n_labels]`` array. ``compatibility
         [i, j, k, l]`` is how much assigning label ``j`` to object ``i`` is
         reinforced by assigning label ``l`` to object ``k`` (typically in
-        ``[0, 1]``, but signed values are allowed — negatives suppress).
+        ``[0, 1]``, but signed values are allowed — negatives suppress). At
+        least one object and one label are required.
     prior:
         ``[n_objects, n_labels]`` non-negative prior strength per object/label.
         Each row must have a positive sum and is re-normalized internally.
@@ -126,6 +127,10 @@ class RelaxationLabeler:
                 "[n_objects, n_labels, n_objects, n_labels]; got "
                 f"{compatibility.shape}"
             )
+        if compatibility.shape[0] == 0:
+            raise ValueError("compatibility must contain at least one object")
+        if compatibility.shape[1] == 0:
+            raise ValueError("compatibility must contain at least one label")
         # For now the numerical engine stays in ordinary finite probability
         # space. Extended-real values (for example, an infinite prior as a
         # hard constraint) need explicit limiting semantics rather than
