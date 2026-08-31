@@ -21,6 +21,7 @@ from .body_pos import (
     classify_session, synthetic_session, canonical_positions,
     affinity_prior, POSITION_NAMES,
 )
+from .meggers import MeggersResult, relax_delimitation, lift_evidence
 
 __all__ = [
     "RelaxationLabeler",
@@ -50,6 +51,9 @@ __all__ = [
     "VFALSE",
     "ISH",
     "VTRUE",
+    "MeggersResult",
+    "relax_delimitation",
+    "lift_evidence",
 ]
 
 __version__ = "0.1.0"

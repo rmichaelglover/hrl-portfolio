@@ -19,6 +19,16 @@ machine labels a different world.
 | `consensus.py` | `relax_truth` — claims → `vtrue`/`ish`/`vfalse` over an agreement web |
 | `nli.py` | `NLIAgreement` — a DeBERTa-v3 NLI model builds the agreement web from text |
 | `llm_judge.py` | `LLMAgreement` + `extract_claims_llm` — Claude backend (opt-in) |
+| `meggers.py` | generic delimiter/delimited relaxation; `ish` marks a fuzzy boundary |
+
+## MEGGERS: generic delimitation
+
+**MEGGERS** — Maximally Elucidative Generic Grabby Engine, Relaxed Somewhat —
+relaxes one distinction: delimiter versus delimited. Delimiter reads as
+`vtrue`, delimited as `vfalse`, and `ish` records a boundary that remains fuzzy.
+The input geometry is deliberately unspecified. Ordinary sets, image regions,
+graphs, and simplicial complexes can all supply relationships or hierarchy
+groups; none is part of MEGGERS' defining contract.
 
 ## What makes the core different 🧠
 
