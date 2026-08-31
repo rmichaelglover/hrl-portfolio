@@ -83,8 +83,9 @@ class RelaxationLabeler:
         ``[0, 1]``, but signed values are allowed — negatives suppress).
     prior:
         ``[n_objects, n_labels]`` non-negative prior strength per object/label.
-        Rows are re-normalized internally. ``None`` (default) uses a uniform
-        prior, in which case the prior has no steering effect.
+        Each row must have a positive sum and is re-normalized internally.
+        ``None`` (default) uses a uniform prior, in which case the prior has no
+        steering effect.
     noise:
         Enable the trailing noise label. Default ``False``.
     noise_gain:
@@ -125,6 +126,12 @@ class RelaxationLabeler:
                 "[n_objects, n_labels, n_objects, n_labels]; got "
                 f"{compatibility.shape}"
             )
+        # For now the numerical engine stays in ordinary finite probability
+        # space. Extended-real values (for example, an infinite prior as a
+        # hard constraint) need explicit limiting semantics rather than
+        # accidental NaN propagation.
+        if not np.all(np.isfinite(compatibility)):
+            raise ValueError("compatibility must contain only finite values")
         self.compatibility = compatibility
         self.n_objects = compatibility.shape[0]
         self.n_labels = compatibility.shape[1]
@@ -158,6 +165,10 @@ class RelaxationLabeler:
                 )
             if np.any(real < 0):
                 raise ValueError("prior must be non-negative")
+            if not np.all(np.isfinite(real)):
+                raise ValueError("prior must contain only finite values")
+            if np.any(real.sum(axis=1) == 0):
+                raise ValueError("each prior row must have a positive sum")
         full = np.zeros((self.n_objects, self.n_total))
         full[:, : self.n_labels] = real
         if self.noise:

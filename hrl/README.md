@@ -28,6 +28,40 @@ machine labels a different world.
 * **Noise label** — a trailing "none of the above" class that absorbs outliers /
   spurious detections and regularizes against over-confident labelings.
 
+## Future exploration: infinite priors ♾️
+
+The core currently rejects non-finite priors. That is the safe numerical
+behavior: ordinary normalization cannot distinguish an intentional hard
+constraint from an accidental infinity, and operations such as ``inf / inf``
+produce ``NaN``.
+
+Still, an “infinite prior” may be a meaningful feature if it is defined
+deliberately—for example, as a locked label or as the finite-limit behavior of
+increasingly strong evidence. Future work can compare those semantics and
+decide how hard constraints should interact with compatibility, noise, and
+contradictory locked labels. Until then, infinity remains a fascinatingly
+fishy edge of the model rather than an implicit input convention.
+
+## Parked prototype idea: Mine for Truth ⛏️
+
+A family-friendly, Minecraft-like world in which players mine not for an
+absolute answer, but for progressively better-supported approximations of
+**Truth**. Capital-T Truth is deliberately non-religious and non-spiritual so
+families of any religious, spiritual, or secular persuasion can play together.
+
+The world yields claims with different evidential roles: truths, lies, facts,
+distortions, clarifications, and newly coined names. Players compare them,
+discover context, revise labels, and learn that stronger evidence can move a
+model closer to Truth without granting perfect possession of it. HRL supplies
+the underlying mechanic: labels relax as neighboring evidence changes.
+
+The intended audience includes children. Topics and generated content must
+therefore remain age-appropriate and noncontroversial: no sexualized material,
+partisan persuasion, religious instruction, or other adult-content escalation.
+The fun should come from exploration, evidence, naming, cooperation, and
+correcting earlier guesses. This idea is recorded for later exploration; it is
+not part of the current implementation roadmap.
+
 Watch it converge — each point's winning-label strength climbing to a stable,
 confident assignment, and the final strength matrix lighting up the correct
 (permuted) marker for every point:

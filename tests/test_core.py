@@ -1,5 +1,6 @@
 """Tests for the relaxation-labeling core: correspondence, noise, priors."""
 import numpy as np
+import pytest
 
 from hrl import RelaxationLabeler, pairwise_distance_compatibility
 
@@ -84,6 +85,25 @@ def test_uniform_prior_is_well_formed():
     assert result.strengths.shape == (4, 4)
     np.testing.assert_allclose(result.strengths.sum(axis=1), 1.0, atol=1e-9)
     assert result.noise_index is None
+
+
+def test_rejects_non_finite_inputs():
+    compat = np.zeros((1, 1, 1, 1))
+    compat[0, 0, 0, 0] = np.nan
+    with pytest.raises(ValueError, match="compatibility must contain only finite values"):
+        RelaxationLabeler(compat)
+
+    compat[0, 0, 0, 0] = 1.0
+    with pytest.raises(ValueError, match="prior must contain only finite values"):
+        RelaxationLabeler(compat, prior=np.array([[np.inf]]))
+
+
+def test_rejects_zero_sum_prior_rows():
+    compat = np.zeros((2, 2, 2, 2))
+    prior = np.array([[0.5, 0.5], [0.0, 0.0]])
+
+    with pytest.raises(ValueError, match="each prior row must have a positive sum"):
+        RelaxationLabeler(compat, prior=prior)
 
 
 if __name__ == "__main__":
