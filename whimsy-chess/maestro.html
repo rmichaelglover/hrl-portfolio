@@ -1444,6 +1444,15 @@ if(!window.WorldKit){ ["exMine","exRblx"].forEach(id=>{const b=document.getEleme
 
 load("queendab");
 
+// A family-facing link can open a fresh, legal hot-seat game immediately.
+// The ordinary Maestro URL keeps its narrated replay default.
+if(new URLSearchParams(location.search).get("play")==="1"){
+  otbOn=true;
+  document.getElementById("btnOtb").classList.add("on");
+  document.getElementById("otbHint").style.display="block";
+  render();
+}
+
 /* PWA offline: register the service worker (only when served over http/https, not file://) */
 if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
   window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
