@@ -32,11 +32,11 @@ Open `http://localhost:8080`.
 
 ## Bible text
 
-The repository currently includes a **small WEB demo dataset** sufficient to exercise the reader. It intentionally does **not** pretend that placeholder/demo text constitutes ten installed translations.
+The repository includes the complete 66-book Protestant canon of the public-domain **World English Bible**: 39 Old Testament books and 27 New Testament books. Deuterocanonical/apocryphal books are intentionally excluded. The source is eBible.org's canon-only `engwebp` VPL distribution; `tools/build_web_bible.py` reproducibly converts that source while enforcing an explicit 66-book allowlist and 1,189-chapter count.
 
 The translation registry is ready for ten English editions. Before a full text is committed, its redistribution status should be verified for the project's distribution jurisdictions. Editions currently listed in the UI but not installed are visibly disabled.
 
-The World English Bible is public domain and is a good default full bundled edition. eBible.org also publishes machine-readable/downloadable formats suitable for a later import step.
+Other translations remain visibly disabled until complete text and redistribution status are verified for the project's distribution jurisdictions.
 
 ## Portfolio placement
 

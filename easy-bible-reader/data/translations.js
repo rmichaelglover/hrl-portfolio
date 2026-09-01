@@ -1,5 +1,5 @@
 window.TRANSLATIONS = [
-  {id:'web',name:'World English Bible',abbr:'WEB',status:'bundled-demo',license:'Public Domain'},
+  {id:'web',name:'World English Bible',abbr:'WEB',status:'complete-canon',license:'Public Domain'},
   {id:'webu',name:'World English Bible Updated',abbr:'WEBU',status:'adapter-ready',license:'Public Domain'},
   {id:'asv',name:'American Standard Version',abbr:'ASV',status:'adapter-ready',license:'Public Domain'},
   {id:'kjv',name:'King James Version',abbr:'KJV',status:'adapter-ready',license:'Public Domain (US)'},
