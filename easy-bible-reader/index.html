@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <title>Easy Bible Reader</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="bar">
+    <button id="menuBtn" aria-label="Open navigation">☰</button>
+    <button id="referenceBtn" class="reference">John 1</button>
+    <select id="translation" aria-label="Translation"></select>
+    <button id="bookmarkBtn" aria-label="Bookmark chapter">☆</button>
+    <button id="settingsBtn" aria-label="Reading settings">Aa</button>
+  </header>
+
+  <main id="reader" tabindex="0" aria-live="polite">
+    <article id="passage"></article>
+  </main>
+
+  <aside id="drawer" class="panel hidden" aria-label="Navigation">
+    <div class="panelHead"><strong>Navigate</strong><button data-close="drawer">×</button></div>
+    <form id="jumpForm"><input id="jump" autocomplete="off" placeholder="John 3:16 or :Psalm 23"><button>Go</button></form>
+    <input id="search" autocomplete="off" placeholder="/ search this translation">
+    <div id="searchResults"></div>
+    <hr>
+    <div class="navgrid"><select id="book"></select><select id="chapter"></select></div>
+    <div class="navbuttons"><button id="prev" type="button">← Previous</button><button id="next" type="button">Next →</button></div>
+    <details><summary>Bookmarks</summary><div id="bookmarks"></div></details>
+    <details><summary>Keyboard</summary><pre>j / k      scroll
+Ctrl-f/b   page
+/          search
+:          jump
+[ / ]      chapter
+gg          top
+G           bottom
+Esc         close panels</pre></details>
+  </aside>
+
+  <aside id="settings" class="panel hidden" aria-label="Reading settings">
+    <div class="panelHead"><strong>Reading</strong><button data-close="settings">×</button></div>
+    <label>Text size <input id="fontSize" type="range" min="17" max="32" value="21"></label>
+    <label>Line width <input id="lineWidth" type="range" min="32" max="85" value="66"></label>
+    <label>Line spacing <input id="lineHeight" type="range" min="14" max="22" value="18"></label>
+    <label><input id="verseNumbers" type="checkbox" checked> Verse numbers</label>
+    <label><input id="serif" type="checkbox" checked> Serif reading font</label>
+    <label><input id="dark" type="checkbox"> Dark mode</label>
+  </aside>
+
+  <script src="data/translations.js"></script>
+  <script src="data/web-demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
