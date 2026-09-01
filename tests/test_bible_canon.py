@@ -50,3 +50,6 @@ def test_read_aloud_controls_and_browser_speech_are_wired():
     assert "speechSynthesis.pause()" in app
     assert "speechSynthesis.resume()" in app
     assert "speechSynthesis.cancel()" in app
+    assert "speech.utterance=new SpeechSynthesisUtterance" in app
+    assert "speech.nextTimer=setTimeout(()=>speakCurrent(token),160)" in app
+    assert "startReading(nearestVerse())" in app

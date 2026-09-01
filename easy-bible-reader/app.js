@@ -1,7 +1,7 @@
 const $=s=>document.querySelector(s), data=window.BIBLE_DATA;
 const OT_BOOKS=39;
 let state=JSON.parse(localStorage.getItem('ebr-state')||'null')||{t:'web',book:'Genesis',chapter:1};
-const speech={supported:'speechSynthesis'in window&&'SpeechSynthesisUtterance'in window,active:false,paused:false,index:0,token:0,voices:[]};
+const speech={supported:'speechSynthesis'in window&&'SpeechSynthesisUtterance'in window,active:false,paused:false,index:0,token:0,voices:[],utterance:null,nextTimer:0};
 const save=()=>localStorage.setItem('ebr-state',JSON.stringify(state));
 const availableBooks=()=>Object.keys(data[state.t]||data.web);
 const chapters=b=>Object.keys((data[state.t]||data.web)[b]||{}).map(Number).sort((a,b)=>a-b);
@@ -45,15 +45,21 @@ function setup(){
 }
 function setupSpeech(){
   if(!speech.supported){$('#readBtn').disabled=true;$('#readBtn').title='Read aloud is unavailable in this browser';return}
-  $('#readBtn').onclick=()=>{if(!speech.active)startReading(0);else toggleSpeech()};
+  $('#readBtn').onclick=()=>{if(!speech.active)startReading(nearestVerse());else toggleSpeech()};
   $('#speechToggle').onclick=toggleSpeech;$('#speechStop').onclick=stopReading;
   const loadVoices=()=>{speech.voices=speechSynthesis.getVoices();const select=$('#speechVoice'),chosen=select.value;select.replaceChildren(new Option('System default',''));speech.voices.forEach((voice,index)=>select.add(new Option(`${voice.name} · ${voice.lang}`,String(index))));select.value=chosen};
   loadVoices();speechSynthesis.addEventListener?.('voiceschanged',loadVoices);
 }
 function chapterVerses(){return (data[state.t]||data.web)[state.book][state.chapter]}
+function nearestVerse(){
+  const verses=[...document.querySelectorAll('.verse')],readingTop=64;
+  if(!verses.length)return 0;
+  const firstVisible=verses.findIndex(verse=>verse.getBoundingClientRect().bottom>readingTop);
+  return firstVisible<0?verses.length-1:firstVisible;
+}
 function startReading(index=0){
   if(!speech.supported)return;
-  speechSynthesis.cancel();speech.token++;speech.active=true;speech.paused=false;speech.index=index;
+  clearTimeout(speech.nextTimer);speechSynthesis.cancel();speech.token++;speech.active=true;speech.paused=false;speech.index=index;speech.utterance=null;
   $('#speechBar').classList.remove('hidden');$('#readBtn').textContent='❚❚ Pause';$('#speechToggle').textContent='Pause';
   setTimeout(()=>speakCurrent(speech.token),20);
 }
@@ -65,24 +71,24 @@ function speakCurrent(token){
   document.querySelectorAll('.verse.speaking').forEach(v=>v.classList.remove('speaking'));
   const element=$('#v'+(speech.index+1));element?.classList.add('speaking');element?.scrollIntoView({block:'center',behavior:'smooth'});
   const prefix=speech.index===0?`${state.book}, chapter ${state.chapter}. `:`Verse ${speech.index+1}. `;
-  const utterance=new SpeechSynthesisUtterance(prefix+verses[speech.index]);
-  utterance.rate=Number($('#speechRate').value);const voiceIndex=$('#speechVoice').value;if(voiceIndex!=='')utterance.voice=speech.voices[Number(voiceIndex)]||null;
-  $('#speechStatus').textContent=`Verse ${speech.index+1} of ${verses.length}`;
-  utterance.onend=()=>{if(speech.active&&token===speech.token){speech.index++;speakCurrent(token)}};
-  utterance.onerror=event=>{if(event.error!=='canceled'&&event.error!=='interrupted'){stopReading();$('#speechStatus').textContent='Speech could not continue'}};
-  speechSynthesis.speak(utterance);
+  speech.utterance=new SpeechSynthesisUtterance(prefix+verses[speech.index]);
+  speech.utterance.rate=Number($('#speechRate').value);const voiceIndex=$('#speechVoice').value;if(voiceIndex!=='')speech.utterance.voice=speech.voices[Number(voiceIndex)]||null;
+  $('#speechStatus').textContent=`Verse ${speech.index+1} of ${verses.length} · continuing`;
+  speech.utterance.onend=()=>{if(speech.active&&token===speech.token){speech.index++;speech.utterance=null;speech.nextTimer=setTimeout(()=>speakCurrent(token),160)}};
+  speech.utterance.onerror=event=>{if(event.error!=='canceled'&&event.error!=='interrupted'){stopReading();$('#speechStatus').textContent='Speech could not continue'}};
+  speechSynthesis.speak(speech.utterance);
 }
 function toggleSpeech(){
-  if(!speech.active){startReading(0);return}
+  if(!speech.active){startReading(nearestVerse());return}
   if(speech.paused){speechSynthesis.resume();speech.paused=false;$('#readBtn').textContent='❚❚ Pause';$('#speechToggle').textContent='Pause'}
   else{speechSynthesis.pause();speech.paused=true;$('#readBtn').textContent='▶ Resume';$('#speechToggle').textContent='Resume'}
 }
 function stopReading(){
-  if(!speech.supported)return;speech.token++;speech.active=false;speech.paused=false;speechSynthesis.cancel();
+  if(!speech.supported)return;speech.token++;speech.active=false;speech.paused=false;clearTimeout(speech.nextTimer);speech.utterance=null;speechSynthesis.cancel();
   document.querySelectorAll('.verse.speaking').forEach(v=>v.classList.remove('speaking'));$('#speechBar').classList.add('hidden');$('#readBtn').textContent='▶ Read';$('#speechStatus').textContent='Ready';
 }
 function finishReading(){
-  speech.active=false;speech.paused=false;document.querySelectorAll('.verse.speaking').forEach(v=>v.classList.remove('speaking'));$('#readBtn').textContent='▶ Read';$('#speechToggle').textContent='Read again';$('#speechStatus').textContent='Chapter complete';
+  speech.active=false;speech.paused=false;speech.utterance=null;document.querySelectorAll('.verse.speaking').forEach(v=>v.classList.remove('speaking'));$('#readBtn').textContent='▶ Read';$('#speechToggle').textContent='Read again';$('#speechStatus').textContent='Chapter complete';
 }
 function bindSetting(id,fn){$('#'+id).oninput=e=>fn(e.target.value);fn($('#'+id).value)}
 function search(q){let out=$('#searchResults');if(q.length<2){out.innerHTML='';return}let res=[];let src=data[state.t]||data.web;for(let [b,chs] of Object.entries(src))for(let [c,vs] of Object.entries(chs))vs.forEach((v,i)=>{if(v.toLowerCase().includes(q.toLowerCase())&&res.length<40)res.push({b,c:+c,v:i+1,text:v})});out.innerHTML=res.map(r=>`<button data-ref="${r.b}|${r.c}|${r.v}"><strong>${r.b} ${r.c}:${r.v}</strong><br>${escapeHtml(r.text)}</button>`).join('');out.querySelectorAll('button').forEach(b=>b.onclick=()=>{let [book,chapter,verse]=b.dataset.ref.split('|');go({book,chapter:+chapter,verse:+verse})})}
