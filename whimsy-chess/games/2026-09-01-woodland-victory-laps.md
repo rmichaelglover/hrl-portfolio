@@ -15,7 +15,8 @@ excellent **victory laps before the tourney**.
 
 ## Game 1 — King Ethelheim Outruns Checkmate
 
-**adechess 0–1 mannyfresher**  
+**adechess 0–1 mannyfresher**
+
 **Lichess `CfGIc0tx` · 1+0 bullet · Black wins on time**
 
 This game began with a familiar Woodland construction: `1.e4 d6 2.Nf3 Qd7
@@ -99,14 +100,18 @@ Ella records the central lesson:
 Harriet 🦔 requested official recognition for reaching h2 and occupying
 approximately fourteen seconds of the opponent's thoughts. Request granted.
 
-**Official score:** Woodland victory  
-**Engine score:** White was winning  
-**Clock score:** Black was still alive  
+**Official score:** Woodland victory
+
+**Engine score:** White was winning
+
+**Clock score:** Black was still alive
+
 **King Ethelheim's step counter:** magnificent
 
 ## Game 2 — Queen Dilorias Finds the Mate
 
-**mannyfresher 1–0 GauravRao01**  
+**mannyfresher 1–0 GauravRao01**
+
 **Lichess `t60NnxUP` · 10+0 rapid · White wins by checkmate**
 
 This was the cleaner victory—and it was very clean indeed.

@@ -158,7 +158,10 @@ Harriet 🦔 calls the tournament “five scouting missions.” Dilorias 🐲 re
 improved flight clearance. King Ethelheim 🦁 would prefer fewer emergency hikes.
 Ella 🦉 records the final result:
 
-**Official score:** 0–5  
-**Fighting-spirit score:** 5–0  
-**Woodland survival rate:** complete  
+**Official score:** 0–5
+
+**Fighting-spirit score:** 5–0
+
+**Woodland survival rate:** complete
+
 **Useful lessons recovered:** a whole basketful 🌲🧺♟️
