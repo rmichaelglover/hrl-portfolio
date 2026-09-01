@@ -12,10 +12,19 @@
   <header id="bar">
     <button id="menuBtn" aria-label="Open navigation">☰</button>
     <button id="referenceBtn" class="reference">John 1</button>
+    <button id="readBtn" aria-label="Read this chapter aloud">▶ Read</button>
     <select id="translation" aria-label="Translation"></select>
     <button id="bookmarkBtn" aria-label="Bookmark chapter">☆</button>
     <button id="settingsBtn" aria-label="Reading settings">Aa</button>
   </header>
+
+  <section id="speechBar" class="speechBar hidden" aria-label="Read-aloud controls">
+    <button id="speechToggle" type="button">Pause</button>
+    <button id="speechStop" type="button">Stop</button>
+    <label>Speed <select id="speechRate" aria-label="Reading speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
+    <label>Voice <select id="speechVoice" aria-label="Reading voice"><option value="">System default</option></select></label>
+    <span id="speechStatus" role="status" aria-live="polite">Ready</span>
+  </section>
 
   <main id="reader" tabindex="0" aria-live="polite">
     <article id="passage"></article>
@@ -53,6 +62,6 @@ Esc         close panels</pre></details>
 
   <script src="data/translations.js"></script>
   <script src="data/web-canon.js?v=1"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

@@ -40,3 +40,13 @@ def test_canon_has_all_source_verse_records_and_boundary_passages():
     assert canon["Genesis"]["1"][0] == "In the beginning, God created the heavens and the earth."
     assert "God so loved the world" in canon["John"]["3"][15]
     assert canon["Revelation"]["22"][-1].startswith("The grace of the Lord Jesus Christ")
+
+
+def test_read_aloud_controls_and_browser_speech_are_wired():
+    page = (ROOT / "easy-bible-reader" / "index.html").read_text(encoding="utf-8")
+    app = (ROOT / "easy-bible-reader" / "app.js").read_text(encoding="utf-8")
+    assert all(control in page for control in ('id="readBtn"', 'id="speechToggle"', 'id="speechStop"', 'id="speechRate"', 'id="speechVoice"'))
+    assert "SpeechSynthesisUtterance" in app
+    assert "speechSynthesis.pause()" in app
+    assert "speechSynthesis.resume()" in app
+    assert "speechSynthesis.cancel()" in app

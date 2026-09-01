@@ -1,6 +1,6 @@
-const CACHE = 'easy-bible-reader-v0.3';
+const CACHE = 'easy-bible-reader-v0.4';
 const FILES = [
-  './', './index.html', './style.css', './app.js',
+  './', './index.html', './style.css', './app.js?v=2',
   './data/translations.js', './data/web-canon.js?v=1'
 ];
 
