@@ -1,3 +1,9 @@
+---
+layout: woodland-novella
+title: The Master Board Adventure
+book: 2
+subtitle: Choose a trail, change one move, and discover how a different decision reshapes the whole woodland board.
+---
 # The Master Board
 ## A Choose Your Own Adventure Mode
 

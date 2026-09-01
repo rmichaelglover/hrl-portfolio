@@ -1,3 +1,9 @@
+---
+layout: woodland-novella
+title: The Woodland Losers
+book: 1
+subtitle: Twenty-five true chess games become one funny, fantastical, sometimes serious journey through courage, calculation, and learning.
+---
 # The Woodland Losers
 ## A Twenty-Five-Game Tween Novella
 
@@ -10,21 +16,140 @@ honest move.”
 
 ### Part I — Color Outside Carefully
 
-Harriet Hissindorf opened with `1.h4` in the **Kádas Cascade**, then survived the
-**Queen Dab**, the **Kádas Stampede**, and the **Kádas Roundup**. The moves looked
-like crayons escaping a coloring book. Yet every flourish still had to answer three
-questions: Is my king safe? What is attacked? What changed?
+Harriet Hissindorf 🦔 opened with `1.h4` in the **Kádas Cascade**, then survived
+the **Queen Dab**, the **Kádas Stampede**, and the **Kádas Roundup**. The moves
+looked like crayons escaping a coloring book. Yet every flourish still had to answer
+three questions:
+
+1. Is my king safe?
+2. What is attacked?
+3. What changed after the last move?
 
 “I like coloring between the lines,” Harriet said, “then adding messy accents around
 the solid figure for a little flair. No diggity, no doubt.”
 
-Ella approved the first sentence and made her calculate the second.
+Ella Elouise 🦉 approved the first sentence and made her calculate the second.
 
-The **Carr Crash**, **Schrödinger’s Flag**, and **Horsey Surprise** taught the same
-lesson from Black’s side. Novelty may confuse an opponent, but confusion is not a
-substitute for development. In **The Crab as Black** and **The Crab as White**, the
-a- and h-pawns scuttled sideways only in the story; on the board they still marched
-straight ahead and captured diagonally. Rules made the joke possible.
+#### Game 1 — The Kádas Cascade: Harriet Finds the Falls 🦔🌊
+
+The trail began with three consecutive hedgehog steps: `1.h4`, `2.h5`, and `3.h6`.
+Harriet reached the sixth rank before most of the royal court had put on its boots.
+The opening was not objectively best. It was, however, unmistakably hers.
+
+On `5.hxg7`, Harriet captured the g7-pawn and rang the little brass bell beside the
+enemy rook. She was caught soon afterward. A child reviewing only material might say,
+“Then Harriet failed.” Ella shook her head. A pawn may disappear and still change the
+position: files open, defenders move, and time is spent. The correct question is not
+whether Harriet survived. It is what her journey purchased.
+
+The game nearly went over the cliff at `9.Nh3??`. Black had a dangerous queen check,
+but chose another road. One missed punishment did not magically make White's move
+sound; it created a new position with a new chance. Queen Dilorias 🐲 recovered the
+trail map with `10.Qxd4!`.
+
+Later Sir Banyan Blithers 🦄 leapt into c7 with check, and Dame Gertrude Goethe 🐎
+followed him onto the same dangerous ledge. The relay mattered more than either
+individual landing. At last Dilorias reached e7 with `25.Qxe7#`.
+
+> **Trail lesson:** A strange opening does not excuse a careless move, and one
+> careless move does not end the game. Recalculate the board that actually exists.
+
+#### Game 2 — The Queen Dab: A Dragon Behind the Pawns 🐲🕺
+
+The Queen Dab began with `d3`, `e4`, `f4`, and `g4`: a diagonal arm of pawns flung
+across the board while Queen Dilorias tucked herself behind it. Manny was rated 1104.
+His opponent was rated 1586. The database disliked the formation; the Woodland cast
+did not ask the database for permission to enjoy Tuesday.
+
+Enjoyment was not proof. At `10.Nd5??`, the position lurched into tactical confusion.
+Both players missed cleaner moves. Dilorias waited on d2 instead of pretending the
+opening shape had already won something. That patience mattered.
+
+When Black played `...d5??`, cracks appeared around the king. Dilorias did not attack
+because she was a dragon in a named opening. She attacked because checks and captures
+had become forcing. After the black king stepped to b8, she landed on b7:
+
+`Qxb7#`.
+
+The clearing erupted. Harriet attempted the actual dance. Her legs were too short,
+so the maneuver resembled a pine cone falling off a picnic table. Nobody corrected
+her because she looked extremely pleased.
+
+> **Dragon lesson:** Ratings describe past results, not legal moves available today.
+> Confidence helps us look for the finish; calculation confirms that it is real.
+
+#### Game 3 — The Kádas Stampede: The Rook Left on the Table 🐎💨
+
+Harriet again began with `1.h4`, but this time Queen Dilorias charged out early with
+`Qh5`, crossed to d5, and returned to g5. Ella called it “one-dragon development,”
+which was not a compliment and was not entirely a complaint.
+
+Black's queen eventually captured Castle Hessenbach 🧱 on h1 **with check**. A rook
+was hanging in the corner, apparently begging to be recovered. Instead, Pope Francisco
+Finochitti 🧙 quietly played `Bf1`, answering the check and keeping the attack alive.
+
+Ignoring material is usually expensive. Here it was a calculated decision: returning
+for the rook would have surrendered the initiative, while Dilorias could continue
+against the king. She captured on h6 and then delivered `Qg7#`.
+
+“Material is for accountants!” cried Dilorias.
+
+“Material is extremely important,” replied Bartholomew Bogerson 🦡, the Woodland
+accountant. “But checkmate closes the ledger immediately.”
+
+> **Stampede lesson:** Do not refuse a rook merely to look daring. Refuse it only when
+> a forcing line buys something greater—in this case, the king itself.
+
+#### Game 4 — The Kádas Roundup: Do Not Chase; Herd 🦄🤠
+
+The Roundup widened the experiment. Harriet rode the h-file while Alexander Aaronson
+🦊 advanced on the a-file. Two rook pawns became outriders, but the center still
+needed pieces, and the king still needed care.
+
+The position's meaning became clear only later. Dame Gertrude captured on a7 with
+check. Dilorias followed with `Qa6+`, and suddenly the open a-file was not decoration;
+it was a chute guiding the enemy king. Sir Banyan jumped to c6 with check, offering
+himself to keep the royal journey moving. Castle Andora 🏰 thundered up the a-file
+with `Ra7+`.
+
+Each check removed choices. The king traveled from b8 toward the center until
+Dilorias closed the gate with `Qxe7#`.
+
+The cast did not win because two edge pawns looked like cowboys. They won because the
+queen, knight, and rook coordinated checks so that every forced reply improved the
+next attack.
+
+> **Roundup lesson:** A king hunt is often geometry, not speed. Control the exits and
+> the king may walk toward the final square by itself.
+
+#### Game 5 — The Creepy Crawly Receives Its Name 🕷️🌲
+
+At last the formation acquired a sign: `h3`, `a3`, `c3`, `e3`, then `g4` and `b4`.
+Tiny feelers surrounded the board. The name helped everyone remember the shape, but
+Ella immediately wrote beneath it:
+
+> A name describes the creature. It does not guarantee the creature is safe.
+
+Black's queen raided h2 and captured Castle Hessenbach. Instead of mourning the rook,
+Dilorias found `Qa4+!`. The check forced the story forward. She later reached a8 and
+captured a rook with check, while the opposing queen raided White's back rank in
+return. Both queens gathered treasure. Only one kept control of the king.
+
+Dilorias returned to a8 with `Qa8#`. The Crawly had begun as a quiet pawn shell and
+ended as a queen-driven mating net.
+
+Harriet painted a wooden sign reading **CREEPY CRAWLY NATIONAL FOREST**. Ella added,
+in smaller letters, **Naming rights do not include engine approval**.
+
+> **Crawly lesson:** Openings organize memory; forcing moves decide tactics. Use the
+> name to recall ideas, then calculate the position in front of you.
+
+Across the next trails—the **Carr Crash**, **Schrödinger's Flag**, **Horsey
+Surprise**, and the two **Crab** games—the same principle would return from Black's
+side. Novelty may confuse an opponent, but confusion is not a substitute for
+development. The a- and h-pawns scuttled sideways only in the story; on the board
+they still marched straight ahead and captured diagonally. Rules made the joke
+possible. 🦀
 
 ### Part II — Results Are Weather
 

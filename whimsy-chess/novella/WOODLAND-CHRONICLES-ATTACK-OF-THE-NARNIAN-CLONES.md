@@ -1,3 +1,9 @@
+---
+layout: woodland-novella
+title: Woodland Chronicles
+book: 3
+subtitle: Experimental openings and classical roads meet in a practical, fantastical guide to building a thoughtful chess repertoire.
+---
 # Woodland Chronicles
 ## Attack of the Narnian Clones
 
