@@ -1,5 +1,6 @@
 const $=s=>document.querySelector(s), data=window.BIBLE_DATA;
-let state=JSON.parse(localStorage.getItem('ebr-state')||'null')||{t:'web',book:'John',chapter:1};
+const OT_BOOKS=39;
+let state=JSON.parse(localStorage.getItem('ebr-state')||'null')||{t:'web',book:'Genesis',chapter:1};
 const save=()=>localStorage.setItem('ebr-state',JSON.stringify(state));
 const availableBooks=()=>Object.keys(data[state.t]||data.web);
 const chapters=b=>Object.keys((data[state.t]||data.web)[b]||{}).map(Number).sort((a,b)=>a-b);
@@ -9,12 +10,14 @@ function render(){
   let cs=chapters(state.book); if(!cs.includes(+state.chapter)) state.chapter=cs[0];
   const vs=source[state.book][state.chapter];
   $('#referenceBtn').textContent=`${state.book} ${state.chapter}`;
-  $('#passage').innerHTML=`<h1>${state.book}</h1><h2>Chapter ${state.chapter}</h2>`+vs.map((v,i)=>`<span class="verse" id="v${i+1}"><span class="vnum">${i+1}</span>${escapeHtml(v)}</span>`).join('');
+  const books=availableBooks(), testament=books.indexOf(state.book)<OT_BOOKS?'Old Testament':'New Testament';
+  $('#passage').innerHTML=`<h1>${state.book}</h1><h2>${testament} · Chapter ${state.chapter} of ${cs.length}</h2>`+vs.map((v,i)=>`<span class="verse" id="v${i+1}"><span class="vnum">${i+1}</span>${escapeHtml(v)}</span>`).join('');
   fillNav(); save(); window.scrollTo({top:0});
 }
 function escapeHtml(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
 function fillNav(){
-  $('#book').innerHTML=availableBooks().map(b=>`<option ${b===state.book?'selected':''}>${b}</option>`).join('');
+  const books=availableBooks(), options=items=>items.map(b=>`<option ${b===state.book?'selected':''}>${b}</option>`).join('');
+  $('#book').innerHTML=`<optgroup label="Old Testament · 39 books">${options(books.slice(0,OT_BOOKS))}</optgroup><optgroup label="New Testament · 27 books">${options(books.slice(OT_BOOKS))}</optgroup>`;
   $('#chapter').innerHTML=chapters(state.book).map(c=>`<option ${c==state.chapter?'selected':''}>${c}</option>`).join('');
 }
 function parseRef(q){q=q.trim().replace(/^:/,'');let m=q.match(/^(.+?)\s+(\d+)(?::(\d+))?$/);if(!m)return null;let book=availableBooks().find(b=>b.toLowerCase()===m[1].toLowerCase())||availableBooks().find(b=>b.toLowerCase().startsWith(m[1].toLowerCase()));return book?{book,chapter:+m[2],verse:+m[3]||null}:null}
