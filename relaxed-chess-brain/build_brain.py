@@ -68,6 +68,7 @@ def motif(move: str) -> str:
 def compile_brain(root: Path, max_contexts: int = 180):
     files = sorted(root.rglob("*.pgn"))
     seen, games, transitions = set(), [], defaultdict(Counter)
+    transition_evidence = defaultdict(list)
     move_counts, motif_counts, opening_counts = Counter(), Counter(), Counter()
     results, plies = Counter(), 0
     for path in files:
@@ -90,6 +91,16 @@ def compile_brain(root: Path, max_contexts: int = 180):
                         context = tuple(moves[max(0, i-width):i])
                         if len(context) == width:
                             transitions[context][move] += 1
+                            key = (context, move)
+                            if len(transition_evidence[key]) < 4:
+                                transition_evidence[key].append({
+                                    "white": headers.get("White", "?"),
+                                    "black": headers.get("Black", "?"),
+                                    "result": headers.get("Result", "*"),
+                                    "site": headers.get("Site", ""),
+                                    "event": headers.get("Event", "Game"),
+                                    "ply": i + 1,
+                                })
         except OSError:
             continue
 
@@ -102,7 +113,8 @@ def compile_brain(root: Path, max_contexts: int = 180):
         counts = transitions[context]
         total = sum(counts.values())
         candidates = [
-            {"move": m, "count": n, "prior": round(n / total, 6), "motif": motif(m)}
+            {"move": m, "count": n, "prior": round(n / total, 6), "motif": motif(m),
+             "evidence": transition_evidence[(context, m)]}
             for m, n in counts.most_common(8)
         ]
         contexts.append({"key": " ".join(context), "count": total, "next": candidates})
