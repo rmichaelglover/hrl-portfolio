@@ -122,6 +122,19 @@ def compile_brain(root: Path, max_contexts: int = 180):
         mid = f"m{i}"; nodes.append({"id": mid, "label": name, "layer": 3, "weight": count})
         links.append({"source": motif_ids[motif(name)], "target": mid, "weight": count})
 
+    # Exact empirical one-ply compatibility.  Entry [i][j] is the observed
+    # conditional frequency P(next move j | move i), with no smoothing,
+    # motif bonus, or relaxation-derived adjustment.
+    auto_names = [name for name, _ in top_moves]
+    auto_matrix = []
+    for source in auto_names:
+        row_counts = transitions.get((source,), Counter())
+        denominator = sum(row_counts.values())
+        auto_matrix.append([
+            round(row_counts[target] / denominator, 8) if denominator else 0.0
+            for target in auto_names
+        ])
+
     return {
         "meta": {"files": len(files), "unique_games": len(games), "plies": plies,
                  "unique_moves": len(move_counts), "results": results,
@@ -129,6 +142,8 @@ def compile_brain(root: Path, max_contexts: int = 180):
                  "noise_label": True, "context_depth": 3},
         "global": [{"move": m, "count": n, "motif": motif(m)} for m, n in move_counts.most_common(60)],
         "contexts": contexts, "nodes": nodes, "links": links,
+        "automata": {"moves": auto_names, "compatibility": auto_matrix,
+                     "definition": "exact empirical P(next | current), unsmoothed"},
     }
 
 
