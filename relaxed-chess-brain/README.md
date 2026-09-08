@@ -2,6 +2,8 @@
 
 A corpus-trained, browser-visible hierarchical relaxation-labeling network.
 
+![Relaxed Chess Brain working demonstration](relaxed-chess-brain-demo.gif)
+
 Build its memory from every PGN beneath the home directory:
 
 ```bash
