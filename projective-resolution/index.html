@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wings Out | Conceptual Resolution</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0b1220;color:#e7eef9}*{box-sizing:border-box}body{margin:0 auto;max-width:1250px;padding:28px}h1{font-size:clamp(28px,5vw,48px);margin:8px 0}p{color:#b5c5db;line-height:1.6}.eyebrow{color:#7de2c5;letter-spacing:.16em;font-size:12px}main{display:grid;grid-template-columns:280px 1fr;gap:24px;margin-top:28px}aside,.panel{background:#121e30;border:1px solid #2a3c55;border-radius:18px;padding:20px}label{display:block;margin:20px 0 8px}input[type=range]{width:100%;accent-color:#7de2c5}button{background:#213953;color:#fff;border:1px solid #476280;border-radius:9px;padding:10px 13px;cursor:pointer;margin:4px 4px 4px 0}button:hover{background:#325373}button:focus-visible,input:focus-visible{outline:3px solid #ffc875}canvas{display:block;width:100%;height:290px;background:#09111d;border-radius:12px}.views{display:grid;gap:20px}.stats{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:12px}.count{color:#7de2c5;font-weight:700}.small{font-size:13px}code{color:#ffc875}h2{font-size:18px;margin:0}.legend{display:flex;gap:15px;font-size:13px;color:#bacbe0;flex-wrap:wrap}footer{margin-top:24px}output{float:right;color:#7de2c5}@media(max-width:760px){main{grid-template-columns:1fr}body{padding:16px}canvas{height:250px}}
+</style>
+<div class="eyebrow">WINGS OUT / A PERSPECTIVE LAB</div>
+<h1>Three features. One observation?</h1>
+<p>Rotate a rod and an equilateral triangle. Move them away. Change the resolution.<br>Watch distinct vertices land in the same observation cell.</p>
+<main>
+<aside>
+<h2>Move the viewpoint</h2>
+<label for="yaw">Yaw <output id="yawValue"></output></label><input id="yaw" type="range" min="-90" max="90" value="0">
+<label for="pitch">Pitch <output id="pitchValue"></output></label><input id="pitch" type="range" min="-80" max="80" value="0">
+<label for="distance">Distance / d <output id="distanceValue"></output></label><input id="distance" type="range" min="2" max="30" step="0.1" value="5">
+<label for="resolution">Cell width <output id="resolutionValue"></output></label><input id="resolution" type="range" min="4" max="100" value="24">
+<label for="phase">Grid offset <output id="phaseValue"></output></label><input id="phase" type="range" min="0" max="99" value="50">
+<p class="small">Offset exposes an important limitation: a cell boundary can separate nearby points. This is an explicit toy observer, not a model of human acuity.</p>
+<button id="spin" aria-pressed="false">Rotate continuously</button><button id="reset">Reset</button>
+<p class="small">Try a distant view with large cells, then rotate. Both objects have edge length d = 1. Counts describe marked endpoints or vertices, not connected objects.</p>
+</aside>
+<section class="views">
+<div class="panel"><div class="stats"><h2>Dyad / rod</h2><span class="count" id="rodCount"></span></div><canvas id="rod" aria-label="Projected rod and its observation cells"></canvas><p class="small" id="rodDetails"></p></div>
+<div class="panel"><div class="stats"><h2>Triad / equilateral triangle</h2><span class="count" id="triangleCount"></span></div><canvas id="triangle" aria-label="Projected triangle and its observation cells"></canvas><p class="small" id="triangleDetails"></p></div>
+<div class="legend"><span>Mint: projected geometry</span><span>Amber: occupied observation cells</span><span>Letters: underlying distinct features</span></div>
+</section>
+</main>
+<footer class="panel">
+<h2>The rule is explicit</h2>
+<p><code>project(X, Y, Z) = (f * X / Z, f * Y / Z)</code><br><code>cell(x, y) = (floor((x - offset) / epsilon), floor((y - offset) / epsilon))</code><br><code>A ~ B exactly when cell(project(A)) = cell(project(B))</code></p>
+<p>The observed count is the number of occupied cells. A triangle can have 3 vertices and 1 observed class. One occupied cell alone does not reveal how many vertices it contains. This uses perspective projection of Euclidean objects; finite resolution supplies the grouping.</p>
+<p class="small">Projection coordinates use a fixed 800 x 290 image plane, f = 600. Display resizing scales the entire plane. Geometry remains visible as a reference overlay even when its observation cells merge. Face-on at equal distance, triangle sides and the broadside rod have equal projected lengths.</p>
+</footer>
+<script>
+'use strict';
+const defaults={yaw:0,pitch:0,distance:5,resolution:24,phase:50};
+const controls=Object.fromEntries(Object.keys(defaults).map(k=>[k,document.getElementById(k)]));
+const shapes={rod:[[-.5,0,0],[.5,0,0]],triangle:[[-.5,-Math.sqrt(3)/6,0],[.5,-Math.sqrt(3)/6,0],[0,Math.sqrt(3)/3,0]]};
+function projectPoint(p,yaw,pitch,distance){
+ const a=yaw*Math.PI/180,b=pitch*Math.PI/180;
+ const x=p[0]*Math.cos(a)+p[2]*Math.sin(a),z=-p[0]*Math.sin(a)+p[2]*Math.cos(a);
+ const y=p[1]*Math.cos(b)-z*Math.sin(b),depth=p[1]*Math.sin(b)+z*Math.cos(b)+distance;
+ return [600*x/depth,-600*y/depth];
+}
+function cellKey(p,epsilon,offset){return [Math.floor((p[0]-offset)/epsilon),Math.floor((p[1]-offset)/epsilon)].join(',');}
+function draw(name,state){
+ const canvas=document.getElementById(name),ratio=window.devicePixelRatio||1;
+ const width=canvas.clientWidth,height=canvas.clientHeight;
+ canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
+ const ctx=canvas.getContext('2d');ctx.setTransform(ratio*width/800,0,0,ratio*height/290,0,0);
+ const epsilon=state.resolution,offset=epsilon*state.phase/100;
+ const points=shapes[name].map(p=>projectPoint(p,state.yaw,state.pitch,state.distance));
+ const groups=new Map();points.forEach((p,i)=>{const k=cellKey(p,epsilon,offset);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(String.fromCharCode(65+i));});
+ ctx.translate(400,145);ctx.strokeStyle='#1c2b40';ctx.lineWidth=.7;
+ for(let x=Math.floor((-400-offset)/epsilon)*epsilon+offset;x<400;x+=epsilon){ctx.beginPath();ctx.moveTo(x,-145);ctx.lineTo(x,145);ctx.stroke();}
+ for(let y=Math.floor((-145-offset)/epsilon)*epsilon+offset;y<145;y+=epsilon){ctx.beginPath();ctx.moveTo(-400,y);ctx.lineTo(400,y);ctx.stroke();}
+ groups.forEach((letters,key)=>{const [x,y]=key.split(',').map(Number);ctx.fillStyle='#ffc87530';ctx.fillRect(x*epsilon+offset,y*epsilon+offset,epsilon,epsilon);ctx.strokeStyle='#ffc875';ctx.lineWidth=1.5;ctx.strokeRect(x*epsilon+offset,y*epsilon+offset,epsilon,epsilon);});
+ ctx.strokeStyle='#7de2c5';ctx.lineWidth=2;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));if(name==='triangle')ctx.closePath();ctx.stroke();
+ points.forEach((p,i)=>{ctx.fillStyle='#7de2c5';ctx.beginPath();ctx.arc(...p,3,0,Math.PI*2);ctx.fill();ctx.font='bold 13px system-ui';ctx.fillStyle='#e7eef9';ctx.fillText(String.fromCharCode(65+i),p[0]+7,p[1]-7-i*3);});
+ document.getElementById(name+'Count').textContent=points.length+' features / '+groups.size+' observed '+(groups.size===1?'class':'classes');
+ document.getElementById(name+'Details').textContent='Cell membership: '+[...groups.values()].map(g=>'{'+g.join(', ')+'}').join('  ')+' | Minimum projected separation: '+Math.min(...points.flatMap((p,i)=>points.slice(i+1).map(q=>Math.hypot(p[0]-q[0],p[1]-q[1])))).toFixed(2)+' image units';
+ return groups.size;
+}
+function render(){const state=Object.fromEntries(Object.entries(controls).map(([k,v])=>[k,Number(v.value)]));for(const [k,v] of Object.entries(state))document.getElementById(k+'Value').textContent=v+(k==='yaw'||k==='pitch'?' deg':k==='phase'?'%':'');draw('rod',state);draw('triangle',state);}
+let spinning=false,last=0;
+const spin=document.getElementById('spin');
+function setSpin(value){spinning=value;spin.setAttribute('aria-pressed',String(value));spin.textContent=value?'Pause rotation':'Rotate continuously';}
+spin.onclick=()=>setSpin(!spinning);
+document.getElementById('reset').onclick=()=>{setSpin(false);for(const [k,v] of Object.entries(defaults))controls[k].value=v;render();};
+Object.values(controls).forEach(c=>c.addEventListener('input',render));
+window.addEventListener('resize',render);
+function tick(time){if(spinning){controls.yaw.value=90*Math.sin(time/3500);if(time-last>30){render();last=time;}}requestAnimationFrame(tick);}
+render();requestAnimationFrame(tick);
+</script>
+</html>
