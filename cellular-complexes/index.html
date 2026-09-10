@@ -5,7 +5,7 @@
 </style></head><body>
 <nav><a href="../">Portfolio</a> / <a href="../relaxed-chess-brain/">Existing CA lab</a> / <a href="../simplicial/">Simplicial relaxation</a></nav>
 <div class="kicker">WINGS OUT / CELLULAR COMPLEXES</div><h1>Same rule. Different neighbors.</h1>
-<p>Compare automata on square, rectangular, triangular, cubic, and tetrahedral cells.<br>Both panels advance together. Geometry supplies the neighbors; a discrete local rule supplies the next state.</p>
+<p>Compare automata on square, rectangular, triangular, cubic, and tetrahedral cells.<br>All five geometries advance together. Switch shapes or presets to compare the same generation; switching pauses playback. Geometry supplies the neighbors; a discrete local rule supplies the next state.</p>
 <div class="controls">
 <label>Comparison preset<select id="preset"><option value="2d">2D: squares / triangles</option><option value="stretch">2D: squares / rectangles</option><option value="3d">3D: cubes / tetrahedra</option><option value="custom" disabled>Custom geometry pair</option></select></label>
 <label>Shared rule<select id="rule"><option value="wave">Excitable wave (3 states)</option><option value="cyclic">Cyclic pursuit (3 states)</option><option value="threshold">Binary threshold</option></select></label>
@@ -20,6 +20,7 @@
 <label>3D layers<select id="layers"><option value="all">All active cells</option><option value="slice">Middle layer (all states)</option></select></label>
 <span id="generation" role="status">Generation 0</span>
 </div>
+<p>Step advances one generation. Shape and preset changes preserve the current generation and history. Reset, rule, threshold, or starting-field changes begin again at generation 0.</p>
 <div class="panels">
 <section class="panel"><div class="heading"><h2>Field A</h2><select id="left" aria-label="Field A geometry"></select></div><canvas id="a" aria-label="Field A cellular automaton"></canvas><div class="stats" id="statsA"></div></section>
 <section class="panel"><div class="heading"><h2>Field B</h2><select id="right" aria-label="Field B geometry"></select></div><canvas id="b" aria-label="Field B cellular automaton"></canvas><div class="stats" id="statsB"></div></section>

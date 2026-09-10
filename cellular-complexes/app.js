@@ -2,12 +2,14 @@
 const $=id=>document.getElementById(id),C=CellComplex;
 const names={square:'Squares',rectangle:'Rectangles',triangle:'Triangles',cube:'Cubes',tetra:'Tetrahedra'};
 for(const id of ['left','right'])for(const [value,text] of Object.entries(names))$(id).add(new Option(text,value));
-let fields=[],generation=0,running=false,history=[],last=0;
+let fields=[],allFields={},generation=0,running=false,history=[],last=0;
 function stop(){running=false;$('run').textContent='Run';$('run').setAttribute('aria-pressed','false');}
-function reset(){stop();generation=0;history=[];const seed=Number($('seed').value);$('seed').value=Number.isFinite(seed)?Math.max(0,Math.min(999999,Math.trunc(seed))):42;
- fields=['left','right'].map(id=>{const kind=$(id).value,m=C.mesh(kind,['cube','tetra'].includes(kind)?5:18);return {m,state:C.initial(m,$('pattern').value,+$('seed').value,$('rule').value),changed:0};});record();render();}
-function record(){history.push(fields.map(f=>f.state.reduce((s,x)=>s+(x===1),0)/f.state.length));if(history.length>200)history.shift();}
-function advance(){for(const f of fields){const result=C.evolve(f.m,f.state,$('rule').value,+$('threshold').value);f.state=result.state;f.changed=result.changed;}generation++;record();render();}
+function selectFields(){fields=['left','right'].map(id=>allFields[$(id).value]);history=fields[0].history.map((v,i)=>[v,fields[1].history[i]]);}
+function changeGeometry(){stop();selectFields();render();}
+function reset(){stop();generation=0;const seed=Number($('seed').value);$('seed').value=Number.isFinite(seed)?Math.max(0,Math.min(999999,Math.trunc(seed))):42;
+ allFields=Object.fromEntries(Object.keys(names).map(kind=>{const m=C.mesh(kind,['cube','tetra'].includes(kind)?5:18);return [kind,{m,state:C.initial(m,$('pattern').value,+$('seed').value,$('rule').value),changed:0,history:[]}];}));record();render();}
+function record(){for(const f of Object.values(allFields)){f.history.push(f.state.reduce((s,x)=>s+(x===1),0)/f.state.length);if(f.history.length>200)f.history.shift();}selectFields();}
+function advance(){for(const f of Object.values(allFields)){const result=C.evolve(f.m,f.state,$('rule').value,+$('threshold').value);f.state=result.state;f.changed=result.changed;}generation++;record();render();}
 function context(id){const canvas=$(id),dpr=window.devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return {ctx,w,h};}
 const palette=['#17283f','#77e4c6','#b695f2'];
 function drawField(f,id,stats){const {ctx,w,h}=context(id),m=f.m,stretch=m.kind==='rectangle'?1.6:1;
@@ -33,9 +35,9 @@ function render(){drawField(fields[0],'a','statsA');drawField(fields[1],'b','sta
  $('comparison').textContent=rectPair?'Square / rectangle invariant: '+(a.state.every((x,i)=>x===b.state[i])?'all corresponding cell states match.':'states differ.'):
  a.m.dim!==b.m.dim?'Cross-dimensional view: the spatial domains and initial fields are not directly matched. Use a comparison preset for matched dimensions.':'Matched parent-block seed; different cell counts and adjacency. A shared fraction threshold does not make the discrete neighborhoods equivalent.';
 }
-$('preset').onchange=()=>{const pair={ '2d':['square','triangle'],stretch:['square','rectangle'],'3d':['cube','tetra']}[$('preset').value];$('left').value=pair[0];$('right').value=pair[1];reset();};
+$('preset').onchange=()=>{const pair={ '2d':['square','triangle'],stretch:['square','rectangle'],'3d':['cube','tetra']}[$('preset').value];$('left').value=pair[0];$('right').value=pair[1];changeGeometry();};
 for(const id of ['rule','pattern','seed'])$(id).onchange=reset;
-for(const id of ['left','right'])$(id).onchange=()=>{$('preset').value='custom';reset();};
+for(const id of ['left','right'])$(id).onchange=()=>{$('preset').value='custom';changeGeometry();};
 $('threshold').oninput=()=>{$('thresholdValue').textContent=(+$('threshold').value).toFixed(2);reset();};
 $('speed').oninput=()=>{$('speedValue').textContent=$('speed').value;};
 $('yaw').oninput=()=>{$('yawValue').textContent=$('yaw').value;render();};$('layers').onchange=render;

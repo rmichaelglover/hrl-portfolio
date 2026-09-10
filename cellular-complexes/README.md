@@ -10,6 +10,7 @@ Run the engine verification with:
 
 ```sh
 node cellular-complexes/engine.test.cjs
+node cellular-complexes/app.test.cjs
 ```
 
 Checks cover cell counts, boundary-facet counts, adjacency symmetry, connectivity,
@@ -18,3 +19,8 @@ square/rectangle evolution invariant, and explicit synchronous-update fixtures.
 
 The page documents open boundaries, rule definitions, geometric construction,
 unequal discretization, and the limitations of the depth-sorted 3D display.
+
+All five geometries evolve in lockstep. Switching displayed geometries pauses
+playback and preserves the generation and per-geometry occupancy histories.
+The app regression test checks shape switching against independently evolved
+states, consecutive steps, history retention, and explicit reset behavior.
