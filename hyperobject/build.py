@@ -46,5 +46,6 @@ obj = {
 }
 (ROOT/'hyperobject.json').write_text(json.dumps(obj, indent=2)+'\n')
 template = (ROOT/'template.html').read_text()
-(ROOT/'index.html').write_text(template.replace('__OBJECT_JSON__', json.dumps(obj)))
-print('Built hyperobject.json and standalone index.html')
+(ROOT/'structure.html').write_text(template.replace('__OBJECT_JSON__', json.dumps(obj)))
+(ROOT/'index.html').write_text((ROOT/'field-template.html').read_text())
+print('Built hyperobject.json, structure.html, and projective index.html')
