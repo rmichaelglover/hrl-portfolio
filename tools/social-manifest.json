@@ -1,0 +1,842 @@
+[
+  {
+    "path": "atlanta/index.html",
+    "title": "Atlanta — the Great Water Cycle",
+    "description": "HRLize Atlanta: the city's transportation & economy modeled as a great water cycle. Two monumental gyres — an outward clockwise Skywheel above the city and an inward...",
+    "key": "atlanta--index",
+    "image": "assets/social/atlanta--index.png",
+    "artwork": null
+  },
+  {
+    "path": "beena/index.html",
+    "title": "Beena Train-Brake Inspection — relaxation labeling (2014, reborn)",
+    "description": "An automatic safety inspection from 2014: detect line segments in a train bogie image and label each as a brake component — by relaxation labeling (\"NewIDByConstraints\"). Here the...",
+    "key": "beena--index",
+    "image": "assets/social/beena--index.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/explorer.html",
+    "title": "Verse Explorer — the algorithm's relationships",
+    "description": "← back to the overview · a chosen verse glows at the centre; its kin orbit by relationship, nearer = stronger.",
+    "key": "bible-hrl--explorer",
+    "image": "assets/social/bible-hrl--explorer.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/index.html",
+    "title": "Relaxation Labeling Reads the Bible — HRL contradiction engine",
+    "description": "The same engine that tracks motion-capture markers and grades physics claims here judges pairs of verses by natural-language inference — agree = P(entail) − P(contradict) — to...",
+    "key": "bible-hrl--index",
+    "image": "assets/social/bible-hrl--index.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/relaxation.html",
+    "title": "Watch Relaxation Labeling Settle — Hath any seen God?",
+    "description": "Ten verses; an NLI web of who-agrees-with-whom. We seed one verse (John 1:18, “no man hath seen God”) and let hrl.consensus relax. Watch belief cascade: allies glide right (agree),...",
+    "key": "bible-hrl--relaxation",
+    "image": "assets/social/bible-hrl--relaxation.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/scatter.html",
+    "title": "The Machine's Signal Space",
+    "description": "Each dot is a verse-pair the engine judged. Horizontal: how lexically similar (TF-IDF). Vertical: the NLI verdict + harmony … − contradiction. The tell-tale cluster sits top-right...",
+    "key": "bible-hrl--scatter",
+    "image": "assets/social/bible-hrl--scatter.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/simplex.html",
+    "title": "Objects Converging to Labels — 2D relaxation",
+    "description": "The same relaxation, drawn in 2D. Four corners are the labels — false, true, ish, noise. Each verse sits at the weighted centroid of its label-strengths and migrates to a corner as...",
+    "key": "bible-hrl--simplex",
+    "image": "assets/social/bible-hrl--simplex.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/tensor.html",
+    "title": "The Compatibility Tensor — relaxation labeling",
+    "description": "For our 10-verse web, the compatibility kernel is [10,3,10,3] — a 30×30 grid of 3×3 blocks. Each block couples two verses across the three truth labels (false · ish · true). Where...",
+    "key": "bible-hrl--tensor",
+    "image": "assets/social/bible-hrl--tensor.png",
+    "artwork": null
+  },
+  {
+    "path": "bible-hrl/trajectories.html",
+    "title": "Convergence Curves",
+    "description": "The animation, drawn analytically. Each line is one verse's expected truth-value across the iterations, from an undecided centre toward its camp: agrees with the seed (+) rises,...",
+    "key": "bible-hrl--trajectories",
+    "image": "assets/social/bible-hrl--trajectories.png",
+    "artwork": null
+  },
+  {
+    "path": "biz-viz/index.html",
+    "title": "HRL Business Visualizer — seven live demos",
+    "description": "Interactive concept demos for products built around hierarchical relaxation labeling: decisions becoming mutually consistent under context.",
+    "key": "biz-viz--index",
+    "image": "assets/social/biz-viz--index.png",
+    "artwork": null
+  },
+  {
+    "path": "body-pos/index.html",
+    "title": "HRL on Real Data — wearable body-position labeling",
+    "description": "Real clinician-labelled accelerometer recordings (the Huxley body-position study). Each second's gravity vector is a reading; the hrl.RelaxationLabeler (affinity prior + temporal...",
+    "key": "body-pos--index",
+    "image": "assets/social/body-pos--index.png",
+    "artwork": null
+  },
+  {
+    "path": "calabi-yau-vane/index.html",
+    "title": "Calabi–Yau Vane — conservation-law instrument",
+    "description": "A hollow-tube, Calabi–Yau-inspired cage floats inside a spherical air bearing, itself enveloped by geomagnetically responsive steel balls. The upper arrow follows wind; the lower...",
+    "key": "calabi-yau-vane--index",
+    "image": "assets/social/calabi-yau-vane--index.png",
+    "artwork": null
+  },
+  {
+    "path": "catfish-lane/index.html",
+    "title": "Catfish Lane — Tiny Creek Verification Club",
+    "description": "A humorous family-friendly social-media literacy game about catfish, tiny creeks, monadic windows, worms, and kind verification.",
+    "key": "catfish-lane--index",
+    "image": "assets/social/catfish-lane--index.png",
+    "artwork": null
+  },
+  {
+    "path": "cellular-complexes/index.html",
+    "title": "Cellular Complexes",
+    "description": "Same rule, different neighbors: compare automata on squares, rectangles, triangles, cubes, and tetrahedra.",
+    "key": "cellular-complexes",
+    "image": "assets/social/cellular-complexes.png",
+    "artwork": null
+  },
+  {
+    "path": "chess/index.html",
+    "title": "Chess Worlds — Maestro, games, stories and experiments",
+    "description": "A chess-only doorway into Manny Glover's public Maestro games, musical boards, stories, lessons, and open experiments.",
+    "key": "chess--index",
+    "image": "assets/social/chess--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess-biometric/index.html",
+    "title": "Chess Biometric — your play-style as a second factor",
+    "description": "A physical fingerprint is something you are. How you play chess is something you do — a behavioural signature. This binds them: your game database becomes a glyph shaped like a...",
+    "key": "chess-biometric--index",
+    "image": "assets/social/chess-biometric--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess-brain/index.html",
+    "title": "Chess Brain — a mind grown one dimension at a time",
+    "description": "The ground truth (a chess style fingerprint) is seeded at the origin — the 0-D axiom. Each dimension doubles the cells and adds a layer of cognition, coloured by trinary relaxation...",
+    "key": "chess-brain--index",
+    "image": "assets/social/chess-brain--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess-logic/index.html",
+    "title": "Chess Logic — reasoning by relaxation, not search",
+    "description": "No tree, no minimax. Every legal move gets a belief from transparent chess logic, then the beliefs relax against each other — a move gains support when other good moves share its...",
+    "key": "chess-logic--index",
+    "image": "assets/social/chess-logic--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess-mind/index.html",
+    "title": "Cognitive Fingerprints — the intelligence inherent in every chess game",
+    "description": "Every human carries their own internal logic to the board. This engine reads a corpus of games, turns each move into a feature vector (python-chess), and (1) distills each player...",
+    "key": "chess-mind--index",
+    "image": "assets/social/chess-mind--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess-premove/index.html",
+    "title": "Chess Premove — beating the clock with entropy",
+    "description": "You can't out-search the engine. So out-clock it. A premove is a commitment made before the opponent's move resolves — safe when their move is predictable, a gamble when it isn't....",
+    "key": "chess-premove--index",
+    "image": "assets/social/chess-premove--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chronology/index.html",
+    "title": "Career & Contribution Timeline — one algorithm, thirteen years",
+    "description": "A single distinctive method — NewIDByConstraints, i.e. hierarchical relaxation labeling — runs through a 13-year career. Roles that applied it are highlighted gold. Below, the real...",
+    "key": "chronology--index",
+    "image": "assets/social/chronology--index.png",
+    "artwork": null
+  },
+  {
+    "path": "cover-songs/index.html",
+    "title": "Cover Songs Workshop",
+    "description": "Gentle hymns, folk songs, spirituals, and properly licensed tributes—organized for original performances, honest credits, and beautiful new arrangements.",
+    "key": "cover-songs--index",
+    "image": "assets/social/cover-songs--index.png",
+    "artwork": null
+  },
+  {
+    "path": "cv/index.html",
+    "title": "Michael \"Manny\" Glover — Computer Vision Scientist · selected technical work",
+    "description": "Selected technical work by Michael 'Manny' Glover, computer vision scientist: automated train-brake inspection from wayside imagery, sub-millimeter CT registration, real-time...",
+    "key": "cv--index",
+    "image": "assets/social/cv--index.png",
+    "artwork": null
+  },
+  {
+    "path": "data-worlds/index.html",
+    "title": "Data Worlds — voxel, 2-D, TUI and live-data demos",
+    "description": "A launchpad for Manny Glover's dependency-light voxel, 2-D, terminal-style, and real-data browser demonstrations.",
+    "key": "data-worlds--index",
+    "image": "assets/social/data-worlds--index.png",
+    "artwork": null
+  },
+  {
+    "path": "easy-bible-reader/index.html",
+    "title": "Easy Bible Reader",
+    "description": "Complete canonical Bible39 Old Testament · 27 New Testament · 66 books",
+    "key": "easy-bible-reader--index",
+    "image": "assets/social/easy-bible-reader--index.png",
+    "artwork": null
+  },
+  {
+    "path": "education-pathways/index.html",
+    "title": "Education Pathways — Manny Glover",
+    "description": "A research-led plan connecting computer vision and economics to civil engineering, hydrology, infrastructure intelligence, and computational social science.",
+    "key": "education-pathways--index",
+    "image": "assets/social/education-pathways--index.png",
+    "artwork": null
+  },
+  {
+    "path": "el-cuento/index.html",
+    "title": "El Cuento — one night, seven makings, one arc · Manny Glover",
+    "description": "A capstone that tells one evening of making as a single story: seven works — Genesis in voxels, VoxelData, Scrabble, 4-D Scrabble, Fair Oaks, and two songs — arced from darkness on...",
+    "key": "el-cuento--index",
+    "image": "assets/social/el-cuento--index.png",
+    "artwork": null
+  },
+  {
+    "path": "elbies-world/music.html",
+    "title": "Elbie's World — Music Garden",
+    "description": "Gooblets hum, Zappies answer, and the pond supplies a soft bass note. Tap a friend or let the garden sing itself.",
+    "key": "elbies-world--music",
+    "image": "assets/social/elbies-world--music.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/almost.html",
+    "title": "Almost — essays of a post-Christian · Manny Glover",
+    "description": "A small collection of essays on faith, doubt, and the God of Truth — by a post-Christian who still loves Christianity. \"Almost thou persuadest me to be a Christian.\" By Manny Glover.",
+    "key": "essays--almost",
+    "image": "assets/social/essays--almost.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/augustines-folly.html",
+    "title": "Augustine's Folly — Almost · Manny Glover",
+    "description": "A close, funny critique of Augustine's argument for biblical authority: knowledge faces selective pressures that religious ideas don't. Would Augustine, born in the 9th century,...",
+    "key": "essays--augustines-folly",
+    "image": "assets/social/essays--augustines-folly.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/index.html",
+    "title": "Essays — Manny Glover",
+    "description": "The collected essays of Michael Emanuel Glover, in five registers: metaphysical, emotional, personal, theological, and physical. By Manny Glover.",
+    "key": "essays--index",
+    "image": "assets/social/essays--index.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/poor-king-agrippa.html",
+    "title": "Poor King Agrippa — Almost · Manny Glover",
+    "description": "The Christian books he loves, the doctrines he cannot affirm, and Strauss's true myth — the whole post-Christian position in one essay, ending on King Agrippa. By Manny Glover.",
+    "key": "essays--poor-king-agrippa",
+    "image": "assets/social/essays--poor-king-agrippa.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/some-quotes-from-a-book-i-like.html",
+    "title": "Some Quotes from a Book I Like — Almost · Manny Glover",
+    "description": "On David Friedrich Strauss's Life of Jesus (1835), the Reformation as the root of biblical criticism, and the lineage of the post-faith. By Manny Glover.",
+    "key": "essays--some-quotes-from-a-book-i-like",
+    "image": "assets/social/essays--some-quotes-from-a-book-i-like.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/the-parable-of-the-farmer.html",
+    "title": "The Parable of the Farmer — Almost · Manny Glover",
+    "description": "A parable in the King James register: an Evangelical certain of salvation, and a Chinese farmer who reads Micah once and goes and does likewise. By Manny Glover.",
+    "key": "essays--the-parable-of-the-farmer",
+    "image": "assets/social/essays--the-parable-of-the-farmer.png",
+    "artwork": null
+  },
+  {
+    "path": "essays/war-to-end-all-wars.html",
+    "title": "The War to End All Wars — Almost · Manny Glover",
+    "description": "After an argument that hurt friends he loves, a post-Christian asks the honest question: what good is my mission, and what harm? The conscience of the collection. By Manny Glover.",
+    "key": "essays--war-to-end-all-wars",
+    "image": "assets/social/essays--war-to-end-all-wars.png",
+    "artwork": null
+  },
+  {
+    "path": "fair-oaks/index.html",
+    "title": "Fair Oaks — a growth sketch · nonprofit school, Marietta GA",
+    "description": "A growth-plan sketch for Fair Oaks: a nonprofit, accredited learning community rooted at Fair Oaks Park (510 Bellemeade Dr SW, Marietta GA 30008), grown one ring at a time from...",
+    "key": "fair-oaks--index",
+    "image": "assets/social/fair-oaks--index.png",
+    "artwork": null
+  },
+  {
+    "path": "frustrated/index.html",
+    "title": "Chirality — where the 2-simplex sees what pairs cannot",
+    "description": "A field of oriented triangles, three labels. The pairwise rule \"the three cells differ\" is satisfied by a triangle read clockwise or counter-clockwise alike. Handedness is invisible...",
+    "key": "frustrated--index",
+    "image": "assets/social/frustrated--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/brain/index.html",
+    "title": "A Nervous System, Relaxing — the C. elegans connectome",
+    "description": "This is the near-complete wiring of a real animal — the ~300 neurons of C. elegans, their synapses, and the muscles they drive — 399 cells in all, ~300 of them neurons — the only...",
+    "key": "genesis--brain--index",
+    "image": "assets/social/genesis--brain--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/clog/index.html",
+    "title": "Does the Threshold Emerge? — the clog, dynamically",
+    "description": "Manny's picture: a free‑flowing whirlpool that clogs below a critical push — and the real data shows exactly such a threshold, g†. So we ran the honest test: drive particles through...",
+    "key": "genesis--clog--index",
+    "image": "assets/social/genesis--clog--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/cord/index.html",
+    "title": "The Cord of Three Strands — trinary relaxation labeling",
+    "description": "\"A cord of three strands is not quickly broken.\" Every nervous system is that cord: sensory in → interneuron reasoning → motor out. Our engine relaxation-labels the real C. elegans...",
+    "key": "genesis--cord--index",
+    "image": "assets/social/genesis--cord--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/critter/index.html",
+    "title": "The Critter — a self-relaxing organism (simplicial & grid)",
+    "description": "The Critter: a self-relaxing artificial organism that labels, grows, grooms and reproduces itself — shown two ways, as a 3-D-looking simplicial body and as a 2-D grid body. Same...",
+    "key": "genesis--critter--index",
+    "image": "assets/social/genesis--critter--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/energy/index.html",
+    "title": "Energy = Diversity × Unity — a rigorous reading",
+    "description": "The claim, made precise: energy is the pairing of an extensive quantity that counts (Diversity) with an intensive quantity that is shared (Unity).",
+    "key": "genesis--energy--index",
+    "image": "assets/social/genesis--energy--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/forecast/index.html",
+    "title": "Forecasting by Relaxation — an adaptive econometric ensemble",
+    "description": "Real US retail sales (FRED RSXFSN, 1992–2026). Six forecasting models each predict 6 months ahead; none is best everywhere. Relaxation labeling picks the blend — prior = each...",
+    "key": "genesis--forecast--index",
+    "image": "assets/social/genesis--forecast--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/games/index.html",
+    "title": "The Critter, in Worlds You Can Play — Roblox & Minecraft",
+    "description": "The same self‑relaxing simplicial organism from The Critter — it relaxation‑labels itself, grows where coherent, grooms the undecided, buds children, and tunes its own temperature...",
+    "key": "genesis--games--index",
+    "image": "assets/social/genesis--games--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/index.html",
+    "title": "Project Genesis — Living Simulators (artificial life from one rule)",
+    "description": "Project Genesis: a gallery of artificial-life simulators built on one rule — relaxation labeling. Organisms that build themselves, minds that decide (chess and otherwise), and...",
+    "key": "genesis--index",
+    "image": "assets/social/genesis--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/isles/index.html",
+    "title": "Floating Isles — a levitating sky-archipelago · Project Genesis",
+    "description": "A lone anchor stone tears itself into a levitating sky-archipelago across seven stages — a hand-written ASCII voxel engine with a quaternion camera and generative music. Gooblets...",
+    "key": "genesis--isles--index",
+    "image": "assets/social/genesis--isles--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/ladder/index.html",
+    "title": "The Simplex Ladder — 1·2·3·4, Troolean relaxation across dimensions",
+    "description": "Oneness · vertices. Twoness — edges. Threeness △ triangles. And fourness ▲ the tetrahedron — four is one plus three, a triangle plus an apex. Every simplex carries a three-valued...",
+    "key": "genesis--ladder--index",
+    "image": "assets/social/genesis--ladder--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/light/index.html",
+    "title": "Project Genesis — Self-Gravitating Light",
+    "description": "A near-uniform gas of light — thousands of photons — under a single rule: energy bends light toward energy (light's own energy gravitates, per E=mc² + general relativity). Watch...",
+    "key": "genesis--light--index",
+    "image": "assets/social/genesis--light--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/maestro/cyber.html",
+    "title": "Maestro // CYBERPUNK 2045 — ATL edition · Project Genesis",
+    "description": "Chess Maestro in neon: a real 10-minute game rendered as a 3-D voxel grid-city, every piece an ATL Underground netrunner or a Gridlock Authority agent, narrated in green-rain...",
+    "key": "genesis--maestro--cyber",
+    "image": "assets/social/genesis--maestro--cyber.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/maestro/emoji.html",
+    "title": "Maestro — your game, played by the cast (voxel emoji) · Project Genesis",
+    "description": "Your chess game rendered in 3-D voxels, every piece its own narration character — the real emoji glyph rasterized into a standee, tracked from its home square. Step through move by...",
+    "key": "genesis--maestro--emoji",
+    "image": "assets/social/genesis--maestro--emoji.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/maestro/index.html",
+    "title": "Chess Maestro — the board as a voxel world · Project Genesis",
+    "description": "A chess game rendered as a living voxel terrain — the HRL influence field becomes elevation (water on the contested seam), every piece tinted by its relaxed tactical role. Step move...",
+    "key": "genesis--maestro--index",
+    "image": "assets/social/genesis--maestro--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/maestro/playworld.html",
+    "title": "Maestro Playworld — Gooblets & Zappies",
+    "description": "A dependency-free colorful chess world rendered in 2D, 2.5D, 3D and Atari-era inspired modes.",
+    "key": "genesis--maestro--playworld",
+    "image": "assets/social/genesis--maestro--playworld.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/malaria/index.html",
+    "title": "Opening the Escape Valves — malaria & water mitigation",
+    "description": "The lethal tango: water and people settle together, and their tension breeds a deadly third — malaria, from mosquitoes nursed in standing water. The relaxation engine first labels...",
+    "key": "genesis--malaria--index",
+    "image": "assets/social/genesis--malaria--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/monad/index.html",
+    "title": "The Windowed Monad — a self relating itself to itself",
+    "description": "Kierkegaard: \"the self is a relation that relates itself to itself.\" Leibniz said monads have no windows — so we give this one a window. Watch a singularity that is alone and cannot...",
+    "key": "genesis--monad--index",
+    "image": "assets/social/genesis--monad--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/ontology/index.html",
+    "title": "The Four Poles — Ontological Assignment Space",
+    "description": "The halos that condensed in Project Genesis become parcels of stuff, each measured for clumping, speed, and geodesic clutter. The relaxation-labeling engine sorts them across the...",
+    "key": "genesis--ontology--index",
+    "image": "assets/social/genesis--ontology--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/planck/index.html",
+    "title": "Seeded by the Big Bang — Planck power spectrum -> cosmic web",
+    "description": "Project Genesis started from white noise. But the real universe didn't — its initial ripples have a specific power spectrum, measured by Planck. Here we seed structure from the true...",
+    "key": "genesis--planck--index",
+    "image": "assets/social/genesis--planck--index.png",
+    "artwork": "genesis/planck/frames/web_3.png"
+  },
+  {
+    "path": "genesis/rar/index.html",
+    "title": "The Clog Threshold — the Radial Acceleration Relation (real data)",
+    "description": "Every dot is one real measurement in one real galaxy: the pull the visible matter can source (horizontal) versus the pull actually measured (vertical). Where the flow is fast they...",
+    "key": "genesis--rar--index",
+    "image": "assets/social/genesis--rar--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/reef/index.html",
+    "title": "The Deep Reef — a bioluminescent underwater world · Project Genesis",
+    "description": "A bare mound of trench rock blooms into a glowing underwater reef across seven tides — a hand-written ASCII voxel engine with a quaternion camera and generative music. Gooblets...",
+    "key": "genesis--reef--index",
+    "image": "assets/social/genesis--reef--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/regard/index.html",
+    "title": "The Two Directions — a conservation law for looking · Project Genesis",
+    "description": "Axioms of Regard: the only two directions are inward and outward. From Breuer's self-measurement limit and an attention budget, a conservation law for looking — the gaze current is...",
+    "key": "genesis--regard--index",
+    "image": "assets/social/genesis--regard--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/scrabble/index.html",
+    "title": "Scrabble — a dataset you can read · Project Genesis",
+    "description": "A rotating isometric ASCII voxel data-viz where every tile is a lettered Scrabble tile and the letter encodes its category. Bundled with a real HRL body-position cloud (600 pts)...",
+    "key": "genesis--scrabble--index",
+    "image": "assets/social/genesis--scrabble--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/scrabble-4d/index.html",
+    "title": "4-D Scrabble — the fourth axis is the truth · Project Genesis",
+    "description": "A four-dimensional ASCII Scrabble board: every tile’s letter is its HRL-predicted class, its position in the 4th dimension is its true class. The board rotates through 4-D so...",
+    "key": "genesis--scrabble-4d--index",
+    "image": "assets/social/genesis--scrabble-4d--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/sdss/index.html",
+    "title": "The Real Cosmic Web — SDSS, relaxation-labeled",
+    "description": "This wedge is real: every point is a galaxy the Sloan survey measured, placed by its redshift. You are looking at the actual Cosmic Web — filaments strung between clusters, draped...",
+    "key": "genesis--sdss--index",
+    "image": "assets/social/genesis--sdss--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/sparc/index.html",
+    "title": "The Fingerprint of Dark Matter — real galaxy rotation curves",
+    "description": "This is real measured data — not a simulation. For each galaxy we plot how fast it actually spins (Vobs, from Doppler shifts) against how fast the visible matter — gas, stars, bulge...",
+    "key": "genesis--sparc--index",
+    "image": "assets/social/genesis--sparc--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/terraform/index.html",
+    "title": "Terraformer — a world from a cold rock · Project Genesis",
+    "description": "A cold drifting stone hatches into a living fantastical world across seven epochs — a hand-written ASCII voxel engine with a quaternion camera and generative music. Gooblets graze,...",
+    "key": "genesis--terraform--index",
+    "image": "assets/social/genesis--terraform--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/voxel/index.html",
+    "title": "In the Beginning — a seven-day voxel telling · Project Genesis",
+    "description": "The seven days of Genesis, built block by block as an isometric voxel diorama you drive with a Minecraft-style hotbar. The coloring-book version — for those who like to color...",
+    "key": "genesis--voxel--index",
+    "image": "assets/social/genesis--voxel--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/voxel-tty/index.html",
+    "title": "Elbie's Genesis World — an ASCII voxel engine",
+    "description": "The seven days of Genesis meet Elbie's living Gooblets and Zappies in a hand-written ASCII voxel engine with a quaternion camera and generative garden music. By Manny Glover.",
+    "key": "genesis--voxel-tty--index",
+    "image": "assets/social/genesis--voxel-tty--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/voxel-world/index.html",
+    "title": "VoxelData — walk any dataset as a Minecraft-like world · Project Genesis",
+    "description": "A zero-dependency WebGL first-person voxel engine that turns any dataset into a walkable Minecraft-like world — chunked greedy-mesh rendering with ambient occlusion and frustum...",
+    "key": "genesis--voxel-world--index",
+    "image": "assets/social/genesis--voxel-world--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/waterize/index.html",
+    "title": "Waterize the World — a soft membrane around Mother God · Project Genesis",
+    "description": "A generative meditation: endless tiny creeks braid into a soft, breathing cell membrane around a warm divine core. The membrane, not the wall — the anti-Panzer boundary,...",
+    "key": "genesis--waterize--index",
+    "image": "assets/social/genesis--waterize--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/world/index.html",
+    "title": "Gooblets & Zappies — a little world that grows itself",
+    "description": "A 2-D artificial-life world that grows and changes on its own: relaxation-labeled biomes (desert, plains, forest, water) where red Gooblets eat pink bushes and drink water while...",
+    "key": "genesis--world--index",
+    "image": "assets/social/genesis--world--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/worlds/index.html",
+    "title": "Living Worlds — three biomes, one ASCII voxel engine · Project Genesis",
+    "description": "Three fantastical worlds on one hand-written ASCII voxel engine — Terraformer, Floating Isles and the Deep Reef. One universe, three doors. Gooblets graze, Zappies orbit. By Manny...",
+    "key": "genesis--worlds--index",
+    "image": "assets/social/genesis--worlds--index.png",
+    "artwork": null
+  },
+  {
+    "path": "hrl-lab/index.html",
+    "title": "The HRL Lab — one engine, live",
+    "description": "Live, in-browser demos of the generic Hierarchical Relaxation Labeling engine: DNA complement by relaxation, order-3 molecular chirality (R/S), and few-shot label propagation. The...",
+    "key": "hrl-lab--index",
+    "image": "assets/social/hrl-lab--index.png",
+    "artwork": null
+  },
+  {
+    "path": "hrlized/index.html",
+    "title": "HRLized — music by relaxation",
+    "description": "HRLized: an HRL-powered music generator. The relaxation-labeling engine composes two voices at once — a melody and a bass — with rhythm, then plays them in your browser. Pitches are...",
+    "key": "hrlized--index",
+    "image": "assets/social/hrlized--index.png",
+    "artwork": null
+  },
+  {
+    "path": "hyperobject/index.html",
+    "title": "Projective Sound Field",
+    "description": "Colored sine waves in first-person perspective. Play a musical octave, explore stereo geometry, and try the null conductor.",
+    "key": "sound-field",
+    "image": "assets/social/sound-field.png",
+    "artwork": null
+  },
+  {
+    "path": "hyperobject/structure.html",
+    "title": "C · Musical Hyperobject",
+    "description": "A point carrying musical state. Choose notes, balance a chord, and listen.",
+    "key": "hyperobject--structure",
+    "image": "assets/social/hyperobject--structure.png",
+    "artwork": null
+  },
+  {
+    "path": "i-am-what-i-am/index.html",
+    "title": "I Am What I Am — the answer song · Manny Glover",
+    "description": "A bright, major-key generative anthem (Web Audio, no files) — the answer to \"Plastic Copy\". The type glitches PANZER → PANXER → PANTER, then plants its feet on I AM WHAT I AM....",
+    "key": "i-am-what-i-am--index",
+    "image": "assets/social/i-am-what-i-am--index.png",
+    "artwork": null
+  },
+  {
+    "path": "index.html",
+    "title": "Wings Out | Interactive Portfolio",
+    "description": "Explore sound, chess, cellular worlds, geometry, and relaxation labeling. Play with the ideas in your browser.",
+    "key": "portfolio",
+    "image": "assets/social/portfolio.png",
+    "artwork": "assets/thumbs/calabi-yau-vane.jpg"
+  },
+  {
+    "path": "king-me-bitch/index.html",
+    "title": "Archived Chess Story — HRL Portfolio",
+    "description": "The original page used language outside the portfolio's current tween-facing PG standard. Its development history remains available in the GitHub repository, but the material is no...",
+    "key": "king-me-bitch--index",
+    "image": "assets/social/king-me-bitch--index.png",
+    "artwork": null
+  },
+  {
+    "path": "licensing/index.html",
+    "title": "Licensing & the Trust of Trusts — HRL Portfolio",
+    "description": "Noncommercial study, use, modification, and sharing are welcome. Third-party works keep their own licenses, and versions already released under MIT remain under MIT.",
+    "key": "licensing--index",
+    "image": "assets/social/licensing--index.png",
+    "artwork": null
+  },
+  {
+    "path": "lichess-emulator/index.html",
+    "title": "Ultrabullet Emulator — local chess clock",
+    "description": "Tap a piece, then a destination. The emulator permits exploratory moves; its purpose is rhythm and clock practice, not rated play.",
+    "key": "lichess-emulator--index",
+    "image": "assets/social/lichess-emulator--index.png",
+    "artwork": null
+  },
+  {
+    "path": "lichess-emulator/maestro.html",
+    "title": "Ultrabullet Maestro",
+    "description": "Fast decisions, translated into gentle resolutions.",
+    "key": "lichess-emulator--maestro",
+    "image": "assets/social/lichess-emulator--maestro.png",
+    "artwork": null
+  },
+  {
+    "path": "mk-ultrabullet/index.html",
+    "title": "Musical Kernel Ultrabullet — PGN to music",
+    "description": "Turn a game, tournament, or Lichess Study into a musical profile. Speed supplies pulse, tactics supply tension, and compatibility guides every anthem gently home.",
+    "key": "mk-ultrabullet--index",
+    "image": "assets/social/mk-ultrabullet--index.png",
+    "artwork": null
+  },
+  {
+    "path": "morphogenesis/index.html",
+    "title": "Editable Anatomical Memory — HRL × Levin",
+    "description": "Both creatures are amputated at the posterior, then regrow by hrl.consensus relaxation — cells (objects) settling onto an anatomical identity (label) via gap-junction coupling (the...",
+    "key": "morphogenesis--index",
+    "image": "assets/social/morphogenesis--index.png",
+    "artwork": null
+  },
+  {
+    "path": "morphogenesis-grow/index.html",
+    "title": "A Body Grows Itself — growing-graph morphogenesis",
+    "description": "From a single seed-cell, the body grows by recruiting neighbours (division); every cell labels itself each step by relaxation over gap-junction coupling and a bioelectric setpoint...",
+    "key": "morphogenesis-grow--index",
+    "image": "assets/social/morphogenesis-grow--index.png",
+    "artwork": null
+  },
+  {
+    "path": "morphogenesis-remodel/index.html",
+    "title": "Remodelling Without Injury — decision-driven morphogenesis",
+    "description": "A one-headed body grows by relaxation, cells committing to an identity and dividing only at the front where the bioelectric setpoint wants tissue. Then — with no amputation — we...",
+    "key": "morphogenesis-remodel--index",
+    "image": "assets/social/morphogenesis-remodel--index.png",
+    "artwork": null
+  },
+  {
+    "path": "mother-god-bomb/index.html",
+    "title": "Project Mother God — the un-bomb whose yield is measured in reunions · Manny Glover",
+    "description": "Satire, in the form of a deadpan military brief: a spec sheet for a device that cannot hurt anyone. The MG-1 'Mother God' detonates into agreement — warhead of noise, creeks, honey...",
+    "key": "mother-god-bomb--index",
+    "image": "assets/social/mother-god-bomb--index.png",
+    "artwork": null
+  },
+  {
+    "path": "mother-god-shrine/index.html",
+    "title": "Mother God Shrine — Beauty, Wonder & Curiosity",
+    "description": "A contemplative, PG-13 gallery of symbolic beauty, wonder, curiosity, and the sacred feminine.",
+    "key": "mother-god-shrine--index",
+    "image": "assets/social/mother-god-shrine--index.png",
+    "artwork": null
+  },
+  {
+    "path": "no-panzer/index.html",
+    "title": "I Am No Panzer — a novella · Manny Glover",
+    "description": "I Am No Panzer — a novella. A misunderstood composer, mislabeled a 'Panzer,' whose dying act of relaxation turns the living noise of the world into a path from a Marietta meadow to...",
+    "key": "no-panzer--index",
+    "image": "assets/social/no-panzer--index.png",
+    "artwork": null
+  },
+  {
+    "path": "penrose/index.html",
+    "title": "Tizzy-Tight Tilings — the abyss & the grace · Manny Glover",
+    "description": "A real aperiodic Penrose P3 tiling (Robinson-triangle subdivision, fat:thin = golden ratio), colored two ways over the same never-repeating field: the abyss (pigment, subtractive,...",
+    "key": "penrose--index",
+    "image": "assets/social/penrose--index.png",
+    "artwork": null
+  },
+  {
+    "path": "perfect-union/index.html",
+    "title": "A More Perfect Union — a novella · Manny Glover",
+    "description": "A More Perfect Union — the sequel to 'I Am No Panzer.' President Miguel Manuel Glover Ia makes the two old parties settle their wars at the chessboard (where perfect play always...",
+    "key": "perfect-union--index",
+    "image": "assets/social/perfect-union--index.png",
+    "artwork": null
+  },
+  {
+    "path": "play/index.html",
+    "title": "Beat the Engine — HRL Challenges",
+    "description": "Play against the Hierarchical Relaxation Labeling engine: reveal as few digit seeds as you can and still label all 40 (fewest-seeds puzzle), and spot the R enantiomer (why chirality...",
+    "key": "play--index",
+    "image": "assets/social/play--index.png",
+    "artwork": null
+  },
+  {
+    "path": "projective-resolution/index.html",
+    "title": "Conceptual Resolution",
+    "description": "Rotate a rod and triangle. Change distance and resolution. See three features become one observed class.",
+    "key": "projective-resolution",
+    "image": "assets/social/projective-resolution.png",
+    "artwork": null
+  },
+  {
+    "path": "promaster-grrle/index.html",
+    "title": "ProMaster GRRLE — part-whole vision field",
+    "description": "An inspectable relaxation-labeling experiment resolving ambiguous parts of a white Ram ProMaster 1500 from geometric relationships.",
+    "key": "promaster-grrle--index",
+    "image": "assets/social/promaster-grrle--index.png",
+    "artwork": "promaster-grrle/assets/promaster-1500-front-left.jpg"
+  },
+  {
+    "path": "red-thread/index.html",
+    "title": "The Red Thread — an illustrated choose-your-own-adventure that labels you back",
+    "description": "An illustrated choose-your-own-adventure novella set in Atlanta, 2045. You annotate training data on the night shift until the labels start labelling back. Your ending is not...",
+    "key": "red-thread--index",
+    "image": "assets/social/red-thread--index.png",
+    "artwork": null
+  },
+  {
+    "path": "relax-relabel/index.html",
+    "title": "Relax, Relabel — a Simpsons teleplay · Manny Glover",
+    "description": "Relax, Relabel — an original Simpsons teleplay. Homer gets glasses, a runaway eyebrow-and-beard makeover, and is instantly re-labeled by a town that only ever read the surface — a...",
+    "key": "relax-relabel--index",
+    "image": "assets/social/relax-relabel--index.png",
+    "artwork": null
+  },
+  {
+    "path": "relaxed-chess-brain/arena.html",
+    "title": "Chess Brain Interpretability Arena",
+    "description": "Every recommendation exposes its observations, prior, pairwise compatibility, iteration-by-iteration strength, uncertainty, and response to intervention.",
+    "key": "relaxed-chess-brain--arena",
+    "image": "assets/social/relaxed-chess-brain--arena.png",
+    "artwork": null
+  },
+  {
+    "path": "relaxed-chess-brain/index.html",
+    "title": "Relaxed Chess Brain — a PGN-grown neural field",
+    "description": "Every unique game on this drive is an observation. Moves become neurons; recurring contexts become assemblies; openings and motifs become higher bodies. Candidate intentions...",
+    "key": "relaxed-chess-brain--index",
+    "image": "assets/social/relaxed-chess-brain--index.png",
+    "artwork": null
+  },
+  {
+    "path": "simplicial/index.html",
+    "title": "The Body as a Simplicial Complex — HRL × topology",
+    "description": "The virtual body, lifted from a graph to a 2-complex: cells are 0-simplices, gap junctions 1-simplices, triangulated tissue patches 2-simplices. Its homology is a signature of...",
+    "key": "simplicial--index",
+    "image": "assets/social/simplicial--index.png",
+    "artwork": null
+  },
+  {
+    "path": "simplicial-3d/index.html",
+    "title": "The Body in 3D — higher-order relaxation on a simplicial complex",
+    "description": "A 3D organism as a simplicial complex — every cell joined to its neighbours (drag to spin 🖐). The engine now runs across dimensions: corrupt the labels with noise, then relax with...",
+    "key": "simplicial-3d--index",
+    "image": "assets/social/simplicial-3d--index.png",
+    "artwork": null
+  },
+  {
+    "path": "st-james/index.html",
+    "title": "St. James Park — a fictional civic garden",
+    "description": "A privacy-safe concept sketch for St. James Park: sacred garden, playful waters, fictional festivals, caring characters, and responsible boundaries.",
+    "key": "st-james--index",
+    "image": "assets/social/st-james--index.png",
+    "artwork": "st-james/assets/rose-of-hawthorne-manger.png"
+  },
+  {
+    "path": "terms/index.html",
+    "title": "Gaia Worlds Entry Terms",
+    "description": "These terms form an agreement between you and R. Michael Glover when you select “I agree — enter Gaia Worlds.” If you do not agree, do not enter or use the site. If you lack legal...",
+    "key": "terms--index",
+    "image": "assets/social/terms--index.png",
+    "artwork": null
+  },
+  {
+    "path": "the-wall/index.html",
+    "title": "Tear Down This Wall — an interlude · Manny Glover",
+    "description": "Tear Down This Wall — an interlude in the Gloverian cycle. The anti-Panzer answer to a famous demand: you do not topple a wall in triumph; you outnumber it with ways — greenways,...",
+    "key": "the-wall--index",
+    "image": "assets/social/the-wall--index.png",
+    "artwork": null
+  },
+  {
+    "path": "ultrabullet-lessons/index.html",
+    "title": "Ultrabullet Lessons — Manny Glover",
+    "description": "Fast-chess lessons from Manny Glover's games: budget the clock, scan forcing moves, respect long diagonals, and confirm the mate.",
+    "key": "ultrabullet-lessons--index",
+    "image": "assets/social/ultrabullet-lessons--index.png",
+    "artwork": null
+  },
+  {
+    "path": "whimsy-chess/index.html",
+    "title": "Whimsy Chess — a chess study board that lives in Vim",
+    "description": "Whimsy Chess: a Vim-native emoji chess study board with sixteen narrated games, plus Chess Maestro — the same engine in the browser, scoring each game as music and growing terrain...",
+    "key": "whimsy-chess--index",
+    "image": "assets/social/whimsy-chess--index.png",
+    "artwork": "whimsy-chess/media/maestro_kadas.gif"
+  },
+  {
+    "path": "whimsy-chess/maestro.html",
+    "title": "Chess Maestro — relaxation-labeling chess, scored as music",
+    "description": "Explore Chess Maestro — relaxation-labeling chess, scored as music in the HRL portfolio.",
+    "key": "whimsy-chess--maestro",
+    "image": "assets/social/whimsy-chess--maestro.png",
+    "artwork": null
+  },
+  {
+    "path": "wikimrgrele/index.html",
+    "title": "WikiMRGRELE — words relaxing into language",
+    "description": "A transparent stochastic NLP experiment: WordNet candidates relax, compete, preserve short spans, and generate inspectable English-like text.",
+    "key": "wikimrgrele--index",
+    "image": "assets/social/wikimrgrele--index.png",
+    "artwork": "wikimrgrele/assets/test-a-strength.png"
+  }
+]

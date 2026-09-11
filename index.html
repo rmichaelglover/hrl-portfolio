@@ -2,7 +2,23 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hierarchical Relaxation Labeling — the portfolio</title>
-<meta name="description" content="One engine that assigns labels under context — relaxation labeling applied from galaxies to genomes to markets. Interactive, dark-themed portfolio.">
+<!-- social-preview:start -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wings Out | HRL Portfolio">
+<meta property="og:title" content="Wings Out | Interactive Portfolio">
+<meta property="og:description" content="Explore sound, chess, cellular worlds, geometry, and relaxation labeling. Play with the ideas in your browser.">
+<meta property="og:url" content="https://rmichaelglover.github.io/hrl-portfolio/">
+<meta property="og:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/portfolio.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wings Out | Interactive Portfolio — visual preview">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wings Out | Interactive Portfolio">
+<meta name="twitter:description" content="Explore sound, chess, cellular worlds, geometry, and relaxation labeling. Play with the ideas in your browser.">
+<meta name="twitter:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/portfolio.png">
+<link rel="canonical" href="https://rmichaelglover.github.io/hrl-portfolio/">
+<!-- social-preview:end -->
+<meta name="description" content="Interactive sound, chess, geometry, cellular automata, and relaxation-labeling exhibits. Explore real datasets and clearly described models.">
 <style>
 :root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0}
 *{box-sizing:border-box}
@@ -56,9 +72,7 @@ footer a{color:var(--cy);text-decoration:none}
 <div class="wrap">
   <div class="eyebrow">Relaxation Labeling · a working engine</div>
   <h1>Labels, Under Context</h1>
-  <p class="tag">One engine assigns meaning by <b>letting constraints relax into agreement</b> — the same core, from
-   <b>galaxies</b> to <b>genomes</b> to <b>markets</b>. Give it objects, labels, and a compatibility, and it settles the whole
-   field into a mutually consistent labeling. Below: interactive, dark, and mostly built on <b>real data</b>.</p>
+  <p class="tag">Explore <b>relaxation labeling, sound, geometry, cellular worlds, and chess</b>. Some exhibits use real datasets; others are interactive models and playful experiments. Each page explains what its model does.</p>
 	  <nav>
 	    <a href="#featured">Featured</a>
 	    <a href="#elbie-latest">New</a>
@@ -67,7 +81,7 @@ footer a{color:var(--cy);text-decoration:none}
 	    <a href="chess/">Chess</a>
 	    <a href="https://github.com/rmichaelglover/hrl-portfolio">GitHub ↗</a>
 	  </nav>
-  <a class="new-launch" href="calabi-yau-vane/">NEW · Open the Calabi–Yau Vane →</a>
+  <a class="new-launch" href="hyperobject/">NEW · Enter the Projective Sound Field →</a>
 </div>
 </header>
 
@@ -75,16 +89,15 @@ footer a{color:var(--cy);text-decoration:none}
 
 <section id="featured">
 <h2><span class="k">Featured — prettiest first</span>Interactive visualizations</h2>
-<p class="lead">Every tile runs in your browser. The bulk are the <a href="genesis/" style="color:var(--cy)">Project Genesis</a>
- series — real cosmology, neuroscience and econometrics through the one engine, honestly framed.</p>
+<p class="lead">Explore the browser-based exhibits below, including the <a href="genesis/" style="color:var(--cy)">Project Genesis</a> series and the newer sound, geometry, and cellular-automaton labs.</p>
 <div class="grid">
   <a class="card" href="hyperobject/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Colored sound waves in stereo perspective"><path d="M0 90 L80 35 L160 90 M0 65 L80 35 L160 65" fill="none" stroke="#314f70"/><path d="M10 70 Q20 30 30 70 T50 60 T70 50 T90 45 T110 40 T150 35" fill="none" stroke="#ff94bf" stroke-width="2"/><path d="M10 80 Q20 40 30 75 T60 55 T90 45 T150 35" fill="none" stroke="#00ff88" stroke-width="2"/><path d="M80 0 V100" stroke="#7896b4"/></svg></div><div class="body"><h3>Projective Sound Field</h3><p>First-person stereo sine waves, a colored octave, live audio, and a null conductor exchanging modeled energy and matter with a reservoir.</p><span class="chip new">interactive · sound + geometry</span></div></a>
   <a class="card" href="cellular-complexes/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Square and triangular cellular neighborhoods"><g fill="#77e4c644" stroke="#77e4c6" stroke-width="2"><rect x="15" y="25" width="45" height="45"/><path d="M95 70 L145 70 L120 25 Z"/></g><path d="M76 35 V65 M69 50 H83" stroke="#ffcd7c" stroke-width="2"/></svg></div><div class="body"><h3>Cellular Complexes</h3><p>Compare synchronized automata on squares, rectangles, triangles, cubes, and tetrahedra. Same local rule; different neighbors.</p><span class="chip new">interactive · 2D + 3D CA lab</span></div></a>
   <a class="card" href="projective-resolution/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Triangle vertices grouped into one observation cell"><rect x="36" y="12" width="88" height="76" rx="6" fill="#ffc87522" stroke="#ffc875"/><path d="M50 72 L110 72 L80 24 Z" fill="none" stroke="#7de2c5" stroke-width="3"/><g fill="#7de2c5"><circle cx="50" cy="72" r="4"/><circle cx="110" cy="72" r="4"/><circle cx="80" cy="24" r="4"/></g></svg></div><div class="body"><h3>Wings Out: Conceptual Resolution</h3><p>Rotate a rod and triangle, adjust distance and observation cells, and explore how three distinct features become one observed class.</p><span class="chip new">interactive · projective geometry</span></div></a>
-  <a class="card" href="calabi-yau-vane/"><img class="thumb" src="assets/thumbs/calabi-yau-vane.jpg" alt="Calabi-Yau-inspired hollow tube vane inside a spherical bearing shell"><div class="body"><h3>Calabi–Yau Vane</h3><p>A weather vane, geomagnetic compass, hollow-tube air bearing, and sphere-of-bearings shell—plus an honest conservation-law ledger.</p><span class="chip new">newest · concept CAD</span></div></a>
+  <a class="card" href="calabi-yau-vane/"><img class="thumb" src="assets/thumbs/calabi-yau-vane.jpg" alt="Calabi-Yau-inspired hollow tube vane inside a spherical bearing shell"><div class="body"><h3>Calabi–Yau Vane</h3><p>A weather vane, geomagnetic compass, hollow-tube air bearing, and sphere-of-bearings shell—plus an honest conservation-law ledger.</p><span class="chip new">concept CAD</span></div></a>
 
   <a class="card" href="promaster-grrle/"><img class="thumb" style="object-position:50% 52%" src="promaster-grrle/assets/promaster-1500-front-left.jpg" alt="white Ram ProMaster 1500 with a part-whole vision field">
-   <div class="body"><h3>ProMaster GRRLE + CRLE-0</h3><p>Watch convolutional edge hypotheses negotiate into a stabilized field, then explore wheels, lights, panels, and doors through part-to-part geometry.</p><span class="chip new">newest · computer vision</span></div></a>
+   <div class="body"><h3>ProMaster GRRLE + CRLE-0</h3><p>Watch convolutional edge hypotheses negotiate into a stabilized field, then explore wheels, lights, panels, and doors through part-to-part geometry.</p><span class="chip new">computer vision</span></div></a>
 
   <a class="card" href="wikimrgrele/"><img class="thumb" style="object-position:50% 50%" src="wikimrgrele/assets/ian-convergence-montage.png" alt="six WikiMRGRELE convergence charts">
    <div class="body"><h3>WikiMRGRELE — language relaxing</h3><p>206,798 WordNet pairs compete across bytes and protected spans; real HELLO and OPPENHEIMER trajectories converge in Ian Gray’s original plots.</p><span class="chip real">real dictionary data</span></div></a>
@@ -98,7 +111,7 @@ footer a{color:var(--cy);text-decoration:none}
        <circle cx="0" cy="0" r="7" fill="#2a3350"/><circle cx="0" cy="-24" r="7" fill="#c0562e"/><circle cx="22" cy="13" r="7" fill="#5fe3a0"/><circle cx="-22" cy="13" r="7" fill="#c060ff"/>
      </g>
    </svg></div>
-   <div class="body"><h3>The HRL Lab — live</h3><p>The generic engine running in your browser: DNA complement by relaxation, order-3 molecular chirality (R/S), and few-shot label propagation.</p><span class="chip new">newest ✦</span></div></a>
+   <div class="body"><h3>The HRL Lab — live</h3><p>The generic engine running in your browser: DNA complement by relaxation, order-3 molecular chirality (R/S), and few-shot label propagation.</p><span class="chip new">interactive lab</span></div></a>
 
   <a class="card" href="hrlized/">
    <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a rising melody of note blocks">
@@ -108,7 +121,7 @@ footer a{color:var(--cy);text-decoration:none}
      <rect x="128" y="70" width="16" height="12" rx="2" fill="#8f5cff"/>
      <path d="M16 76 L36 64 L56 50 L76 36 L96 50 L116 64 L136 76" fill="none" stroke="rgba(200,160,255,.65)" stroke-width="2"/>
    </svg></div>
-   <div class="body"><h3>HRLized — music by relaxation</h3><p>The engine <i>composes</i>: pitches are labels, melodic smoothness &amp; chord tones the constraints. It relaxes a melody and plays it. A tiny answer to Suno.</p><span class="chip new">newest ♪</span></div></a>
+   <div class="body"><h3>HRLized — music by relaxation</h3><p>The engine <i>composes</i>: pitches are labels, melodic smoothness &amp; chord tones the constraints. It relaxes a melody and plays it. A tiny answer to Suno.</p><span class="chip new">generative music</span></div></a>
 
   <a class="card" href="genesis/sdss/"><img class="thumb" src="assets/thumbs/sdss.png" alt="cosmic web">
    <div class="body"><h3>The Real Cosmic Web</h3><p>25,000 SDSS galaxies, relaxation-labeled into void, filament &amp; cluster.</p><span class="chip real">real data</span></div></a>
@@ -141,7 +154,7 @@ footer a{color:var(--cy);text-decoration:none}
    <div class="body"><h3>Seeded by the Big Bang</h3><p>A cosmic web grown from the real ΛCDM matter power spectrum.</p><span class="chip sim">simulation</span></div></a>
 
   <a class="card" href="genesis/forecast/"><img class="thumb" src="assets/thumbs/forecast.png" alt="forecasting ensemble">
-   <div class="body"><h3>Forecasting by Relaxation</h3><p>An adaptive econometric ensemble that beats every single model.</p><span class="chip real">real data</span></div></a>
+   <div class="body"><h3>Forecasting by Relaxation</h3><p>Compare an adaptive econometric ensemble with its component models.</p><span class="chip real">real data</span></div></a>
 
   <a class="card" href="genesis/malaria/"><img class="thumb" src="assets/thumbs/malaria.png" alt="malaria mitigation map">
    <div class="body"><h3>Opening the Escape Valves</h3><p>Malaria &amp; waterborne‑disease mitigation — labeling a watershed, draining the breeding.</p><span class="chip idea">public health</span></div></a>
