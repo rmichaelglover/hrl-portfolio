@@ -22,6 +22,7 @@ class Info(HTMLParser):
   if self.p is not None:self.p.append(s)
 def parse(s):p=Info();p.feed(s);return p
 special={
+ 'wave-worlds/index.html':('Wave Worlds | Air, Water & Music','Three first-person worlds. Hear the same notes travel through air, water, and their boundary, with independent sources and listening controls.','wave-worlds'),
  'index.html':('Wings Out | Interactive Portfolio','Explore sound, chess, cellular worlds, geometry, and relaxation labeling. Play with the ideas in your browser.','portfolio'),
  'hyperobject/index.html':('Projective Sound Field','Colored sine waves in first-person perspective. Play a musical octave, explore stereo geometry, and try the null conductor.','sound-field'),
  'cellular-complexes/index.html':('Cellular Complexes','Same rule, different neighbors: compare automata on squares, rectangles, triangles, cubes, and tetrahedra.','cellular-complexes'),

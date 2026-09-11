@@ -816,6 +816,14 @@
     "artwork": null
   },
   {
+    "path": "wave-worlds/index.html",
+    "title": "Wave Worlds | Air, Water & Music",
+    "description": "Three first-person worlds. Hear the same notes travel through air, water, and their boundary, with independent sources and listening controls.",
+    "key": "wave-worlds",
+    "image": "assets/social/wave-worlds.png",
+    "artwork": null
+  },
+  {
     "path": "whimsy-chess/index.html",
     "title": "Whimsy Chess — a chess study board that lives in Vim",
     "description": "Whimsy Chess: a Vim-native emoji chess study board with sixteen narrated games, plus Chess Maestro — the same engine in the browser, scoring each game as music and growing terrain...",

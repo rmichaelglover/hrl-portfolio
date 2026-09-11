@@ -11,7 +11,7 @@ try:
  for _ in range(100):
   try:pages=json.load(urllib.request.urlopen('http://localhost:9236/json'));break
   except Exception:time.sleep(.1)
- ws=websocket.create_connection(pages[0]['webSocketDebuggerUrl'],origin='http://localhost:9236',timeout=30);seq=0
+ ws=websocket.create_connection(next(page for page in pages if page.get('type')=='page')['webSocketDebuggerUrl'],origin='http://localhost:9236',timeout=30);seq=0
  def call(method,params=None):
   global seq
   seq+=1;ws.send(json.dumps({'id':seq,'method':method,'params':params or {}}))
@@ -45,6 +45,9 @@ try:
  navigate('projective-resolution/index.html')
  rect=js("(()=>{const r=document.querySelector('.views').getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}})()")
  capture(SOURCE/'projective-resolution.png',rect)
+ navigate('wave-worlds/index.html');js("setPaused(true);visualTime=.004;choose([0,2,4,5,7,9,11,12]);render();")
+ rect=js("(()=>{const r=$('worlds').getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}})()")
+ capture(SOURCE/'wave-worlds.png',rect)
  manifest=json.loads((ROOT/'tools/social-manifest.json').read_text())
  call('Emulation.setDeviceMetricsOverride',{'width':1200,'height':630,'deviceScaleFactor':1,'mobile':False})
  rendered=0
@@ -59,6 +62,7 @@ try:
   else:graphic='''<svg viewBox="0 0 600 560"><defs><radialGradient id="g"><stop stop-color="#183d58"/><stop offset="1" stop-color="#071422"/></radialGradient></defs><rect width="600" height="560" fill="url(#g)"/><g fill="none" stroke="#78e4c5" stroke-width="2"><path d="M100 400 L300 70 L510 400 Z M100 400 L300 510 L510 400 M300 70 L300 510 M100 400 L400 230 L300 510 L200 230 L510 400"/><circle cx="300" cy="280" r="180" stroke="#7a8eef"/></g><g fill="#ffcf83"><circle cx="100" cy="400" r="9"/><circle cx="300" cy="70" r="9"/><circle cx="510" cy="400" r="9"/><circle cx="300" cy="510" r="9"/></g></svg>'''
   full=key=='sound-field'
   style='''*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:#08111f;color:#eef5ff;font-family:Arial,sans-serif;overflow:hidden}.frame{position:relative;width:1200px;height:630px;border:2px solid #28465d}.copy{position:absolute;left:55px;top:68px;width:495px;z-index:2}.brand{font-size:17px;letter-spacing:4px;color:#83e7cc}h1{font-size:46px;line-height:1.08;margin:26px 0 20px;max-height:206px;overflow:hidden}p{font-size:22px;line-height:1.4;color:#bfcede}.foot{position:absolute;left:55px;bottom:40px;font-size:17px;color:#8dacbf;z-index:2}.visual{position:absolute;right:25px;top:25px;width:555px;height:550px;overflow:hidden;border-radius:20px}.art{width:100%;height:100%;object-fit:contain}.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%}.mosaic img{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:12px}svg{width:100%;height:100%}'''
+  if key=='wave-worlds':style+=' .copy{top:28px;width:1090px}h1{font-size:46px;margin:14px 0}p{font-size:20px;margin:8px 0}.visual{left:55px;top:220px;width:1090px;height:350px}.foot{bottom:18px}'
   if full:style+='''.visual{inset:0;width:1200px;height:630px;border-radius:0}.art{object-fit:cover}.copy{top:42px;width:1090px}h1{font-size:52px;margin:14px 0}p{font-size:21px;max-width:950px}.foot{left:0;bottom:0;width:1200px;padding:17px 55px;background:#08111fe8}.copy{padding-bottom:18px;background:linear-gradient(#08111fe8,#08111f00)}'''
   markup='<html><head><style>'+style+'</style></head><body><div class="frame"><div class="visual">'+graphic+'</div><div class="copy"><div class="brand">WINGS OUT / HRL PORTFOLIO</div><h1>'+title+'</h1><p>'+desc+'</p></div><div class="foot">rmichaelglover.github.io/hrl-portfolio</div></div></body></html>'
   js('document.open();document.write('+json.dumps(markup)+');document.close();')
