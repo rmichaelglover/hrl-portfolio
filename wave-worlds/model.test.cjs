@@ -15,3 +15,20 @@ assert.equal(W.probeList(['air','water','mixed'],{air:true,water:true}).length,4
 assert.equal(W.sample('mixed',19,440,.003,{air:0,water:0}),0);
 assert(Math.abs(W.sample('mixed',19,440,.003,{air:.6,water:.4})-W.sample('mixed',19,440,.003,{air:.6})-W.sample('mixed',19,440,.003,{water:.4}))<1e-12);
 console.log('Passed: reflection/transmission energy balance, pressure continuity, phase reversal, source availability, propagation delays, probe routing, linear superposition.');
+
+const box={enabled:true,form:'closed',face:'near',x:0,y:-.35,z:10,size:3};
+assert.equal(W.faces(box).length,6);
+assert.equal(W.faces({...box,form:'open'}).length,5);
+assert.equal(W.faces({...box,form:'single'}).length,1);
+assert.equal(W.obstaclePaths('air',19,'air',box).length,0,'closed box shadows downstream');
+const echo=W.obstaclePaths('air',7,'air',box).find(p=>p.kind==='box');
+assert.equal(echo.gain,1);assert(Math.abs(echo.delay-8/343)<1e-12);
+assert.deepEqual(W.obstaclePaths('air',19,'air',{...box,x:5}),W.paths('air',19,'air'));
+assert.deepEqual(W.obstaclePaths('air',19,'air',{...box,y:5}),W.paths('air',19,'air'));
+assert.equal(W.obstaclePaths('air',10,'air',box).length,0,'closed interior has no external input');
+assert(W.obstaclePaths('air',10,'air',{...box,form:'open'}).some(p=>p.kind==='box'),'near opening admits wave to far wall');
+assert.equal(W.obstaclePaths('air',19,'air',{...box,form:'single',face:'top'}).length,1,'parallel face does not intercept');
+for(const world of ['air','water','mixed'])for(const source of ['air','water'])for(const form of ['closed','open','single'])for(const face of ['near','far','top'])for(const bz of [5.1,10,12,15,22.9])for(const z of [2,7,11.9,12.1,19,26]){
+ const ps=W.obstaclePaths(world,z,source,{...box,form,face,z:bz});assert(ps.length<=8);assert(ps.every(p=>p.delay>=0&&p.delay<.2&&Number.isFinite(p.gain)));
+}
+console.log('Passed: rigid face counts, shadowing, reflection delay and sign, XYZ placement, open interior, parallel square, bounded mixed-world paths.');

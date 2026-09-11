@@ -24,5 +24,39 @@ function sample(world,z,frequency,time,sources,boost=1){let value=0;
  return value;
 }
 function probeList(worlds,hear){const out=[];for(const world of worlds){if(world!=='water'&&hear.air)out.push({world,medium:'air',z:7});if(world!=='air'&&hear.water)out.push({world,medium:'water',z:19});}return out;}
-const api={media,start,boundary,end,boundaryCoefficients,mediumAt,paths,sample,probeList};root.WaveWorld=api;if(typeof module!=='undefined')module.exports=api;
+// Finite, axis-aligned rigid faces. Axial rays only; at most four encounters.
+function faces(box){
+ if(!box?.enabled)return [];
+ const h=box.size/2,x=box.x,y=box.y,z=box.z;
+ const all=[
+ {name:'near',axis:2,value:z-h,points:[[x-h,y-h,z-h],[x+h,y-h,z-h],[x+h,y+h,z-h],[x-h,y+h,z-h]]},
+ {name:'far',axis:2,value:z+h,points:[[x-h,y-h,z+h],[x+h,y-h,z+h],[x+h,y+h,z+h],[x-h,y+h,z+h]]},
+ {name:'top',axis:1,points:[[x-h,y+h,z-h],[x+h,y+h,z-h],[x+h,y+h,z+h],[x-h,y+h,z+h]]},
+ {name:'bottom',axis:1,points:[[x-h,y-h,z-h],[x+h,y-h,z-h],[x+h,y-h,z+h],[x-h,y-h,z+h]]},
+ {name:'left',axis:0,points:[[x-h,y-h,z-h],[x-h,y+h,z-h],[x-h,y+h,z+h],[x-h,y-h,z+h]]},
+ {name:'right',axis:0,points:[[x+h,y-h,z-h],[x+h,y+h,z-h],[x+h,y+h,z+h],[x+h,y-h,z+h]]}];
+ return all.filter(f=>box.form==='closed'||(box.form==='open'?f.name!==box.face:f.name===box.face));
+}
+function obstaclePaths(world,z,source,box,x=0,y=-.35){
+ if(!box?.enabled)return paths(world,z,source);
+ if(world!=='mixed'&&world!==source)return [];
+ const walls=Math.abs(x-box.x)<=box.size/2&&Math.abs(y-box.y)<=box.size/2?faces(box).filter(f=>f.axis===2).map(f=>f.value):[];
+ if(!walls.length)return paths(world,z,source);
+ const out=[];
+ function travel(pos,dir,medium,gain,delay,depth,kind){
+  let stop=dir>0?end:start,event='end';
+  for(const w of walls)if((w-pos)*dir>1e-7&&(stop-w)*dir>=0){stop=w;event='wall';}
+  if(world==='mixed'&&(boundary-pos)*dir>1e-7&&(stop-boundary)*dir>1e-7){stop=boundary;event='interface';}
+  if((z-pos)*dir>=-1e-8&&(stop-z)*dir>=0)out.push({kind,source,medium,gain,delay:delay+Math.abs(z-pos)/media[medium].speed});
+  if(event==='end'||depth===4)return;
+  const t=delay+Math.abs(stop-pos)/media[medium].speed;
+  if(event==='wall')travel(stop,-dir,medium,gain,t,depth+1,'box');
+  else {const other=medium==='air'?'water':'air',k=boundaryCoefficients(medium,other);
+   travel(stop,-dir,medium,gain*k.r,t,depth+1,kind==='box'?'box':'reflected');
+   travel(stop,dir,other,gain*k.t,t,depth+1,kind==='box'?'box':'transmitted');}
+ }
+ travel(source==='air'?start:end,source==='air'?1:-1,source,1,0,0,'incident');
+ return out;
+}
+const api={faces,obstaclePaths,media,start,boundary,end,boundaryCoefficients,mediumAt,paths,sample,probeList};root.WaveWorld=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

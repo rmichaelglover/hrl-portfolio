@@ -45,7 +45,7 @@ try:
  navigate('projective-resolution/index.html')
  rect=js("(()=>{const r=document.querySelector('.views').getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}})()")
  capture(SOURCE/'projective-resolution.png',rect)
- navigate('wave-worlds/index.html');js("setPaused(true);visualTime=.004;choose([0,2,4,5,7,9,11,12]);render();")
+ navigate('wave-worlds/index.html');js("setPaused(true);visualTime=.004;choose([0,2,4,5,7,9,11,12]);$('boxEnabled').checked=true;updateBox();render();")
  rect=js("(()=>{const r=$('worlds').getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}})()")
  capture(SOURCE/'wave-worlds.png',rect)
  manifest=json.loads((ROOT/'tools/social-manifest.json').read_text())

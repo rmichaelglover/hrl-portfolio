@@ -6,8 +6,16 @@ function shown(){return Object.keys(worldNames).filter(k=>$('show'+worldNames[k]
 function sources(){return {air:$('sourceAir').checked?+$('levelAir').value:0,water:$('sourceWater').checked?+$('levelWater').value:0};}
 function noteColor(i){return N[i].pitch==='C'&&$('palette').value==='black'?'#050505':N[i].color;}
 function activeProbes(){return W.probeList(shown(),{air:$('hearAir').checked,water:$('hearWater').checked});}
+function boxState(){return {enabled:$('boxEnabled').checked,form:$('boxForm').value,face:$('boxFace').value,x:+$('boxX').value,y:+$('boxY').value,z:+$('boxZ').value,size:+$('boxSize').value};}
+function lane(i){return (i-6)*.35;}
+let pathCache=new Map();
+function fieldPaths(world,z,source,i){const key=[world,z,source,i].join(':');if(!pathCache.has(key))pathCache.set(key,W.obstaclePaths(world,z,source,boxState(),lane(i)));return pathCache.get(key);}
+function updateBox(){pathCache.clear();const b=boxState();$('boxFace').disabled=b.form==='closed';$('faceLabel').textContent=b.form==='single'?'Square face':'Opening';$('boxReadout').textContent=(b.enabled?'Placed':'Off')+' / x '+b.x.toFixed(1)+' / y '+b.y.toFixed(2)+' / z '+b.z.toFixed(1)+' m / size '+b.size.toFixed(1)+' m';refresh();}
+for(const id of ['boxEnabled','boxForm','boxFace'])$(id).onchange=updateBox;
+for(const id of ['boxX','boxY','boxZ','boxSize'])$(id).oninput=updateBox;
+$('boxReset').onclick=()=>{$('boxX').value=0;$('boxY').value=-.35;$('boxZ').value=10;$('boxSize').value=3;updateBox();};
 function syncAudio(){if(!audio)return;const active=new Set(activeProbes().map(p=>p.world+':'+p.medium)),s=sources();
- for(const r of routes){const gain=active.has(r.world+':'+r.medium)&&selected.has(r.note)?s[r.source]*r.pathGain/Math.max(1,selected.size):0;r.gain.gain.setTargetAtTime(gain,audio.currentTime,.02);}
+ for(const r of routes){const p=fieldPaths(r.world,r.z,r.source,r.note)[r.slot];r.pathGain=p?.gain||0;r.delay.delayTime.setTargetAtTime(p?.delay||0,audio.currentTime,.02);const gain=active.has(r.world+':'+r.medium)&&selected.has(r.note)?s[r.source]*r.pathGain/Math.max(1,selected.size):0;r.gain.gain.setTargetAtTime(gain,audio.currentTime,.02);}
  bus.gain.setTargetAtTime(playing?+$('volume').value/8:0,audio.currentTime,.02);
 }
 function refresh(){const visible=shown();$('worlds').style.setProperty('--count',Math.max(1,visible.length));$('empty').hidden=visible.length>0;
@@ -28,8 +36,8 @@ $('play').onclick=async()=>{try{if(!audio){audio=new AudioContext();bus=audio.cr
  const startTime=audio.currentTime+.03;oscillators=N.map(n=>{const o=audio.createOscillator();o.type='sine';o.frequency.value=n.frequency;o.start(startTime);return o;});
  for(const probe of W.probeList(['air','water','mixed'],{air:true,water:true})){
   const pan=audio.createStereoPanner();pan.pan.value=probe.world==='mixed'?(probe.medium==='air'?-.7:.7):probe.world==='air'?-.25:.25;pan.connect(bus);
-  for(const source of ['air','water'])for(const p of W.paths(probe.world,probe.z,source))for(let i=0;i<N.length;i++){
-   const delay=audio.createDelay(.2),gain=audio.createGain();delay.delayTime.value=p.delay;gain.gain.value=0;oscillators[i].connect(delay);delay.connect(gain);gain.connect(pan);routes.push({world:probe.world,medium:probe.medium,source,note:i,pathGain:p.gain,gain,delay});
+  for(const source of ['air','water'])for(let slot=0;slot<8;slot++)for(let i=0;i<N.length;i++){
+   const delay=audio.createDelay(.2),gain=audio.createGain();delay.delayTime.value=0;gain.gain.value=0;oscillators[i].connect(delay);delay.connect(gain);gain.connect(pan);routes.push({world:probe.world,medium:probe.medium,source,note:i,z:probe.z,slot,pathGain:0,gain,delay});
   }
  }
  }await audio.resume();playing=!playing;$('play').textContent=playing?'Mute all sound':'Enable sound';$('play').setAttribute('aria-pressed',String(playing));refresh();}catch(e){$('status').textContent='Audio unavailable: '+e.message;}};
@@ -40,18 +48,20 @@ function drawWorld(world){const {g,w,h}=surface(world),f=w*.5/Math.tan(+$('fov')
  function line(points,col,width=1,dashed=false){g.strokeStyle=col;g.lineWidth=width;g.setLineDash(dashed?[5,4]:[]);g.beginPath();let pen=false;for(const p of points){const q=p&&project(p);if(q){pen?g.lineTo(q.x,q.y):g.moveTo(q.x,q.y);pen=true;}else pen=false;}g.stroke();g.setLineDash([]);}
  if(world==='mixed'){const corners=[[-8,4,12],[8,4,12],[8,-3,12],[-8,-3,12]].map(project);if(corners.every(Boolean)){g.beginPath();corners.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fillStyle='#0b5a7c88';g.fill();g.strokeStyle='#7cdef4';g.stroke();}const q=project([-6,3.5,12]);if(q){g.fillStyle='#a4e8ff';g.font='11px system-ui';g.fillText('WATER BEYOND / INTERFACE 12 m',q.x,q.y-6);}}
  for(let z=2;z<=28;z+=2)line([[-14,-1.5,z],[14,-1.5,z]],'#49769266');for(let x=-14;x<=14;x+=2)line([[x,-1.5,2],[x,-1.5,28]],'#49769266');
- for(const i of selected)for(const source of ['air','water']){if(!s[source])continue;for(const kind of ['incident','transmitted','reflected']){if(kind==='reflected'&&!$('reflected').checked)continue;const points=[];let any=false;
-  for(let k=0;k<=420;k++){const z=2+k*24/420,p=W.paths(world,z,source).find(p=>p.kind===kind);if(!p){points.push(null);continue;}any=true;const q=s[source]*p.gain*Math.sin(2*Math.PI*N[i].frequency*(visualTime-p.delay))*(kind==='transmitted'?boost:1);points.push([(i-6)*.065*(z-1),-.35+q*.48,z]);}
-  if(!any)continue;const col=noteColor(i);g.globalAlpha=kind==='reflected'?.55:1;if(col==='#050505')line(points,'#a9c2d5',4,kind==='reflected');line(points,col,kind==='transmitted'?2.4:1.7,kind==='reflected');g.globalAlpha=1;
+ for(const i of selected)for(const source of ['air','water']){if(!s[source])continue;for(const kind of ['incident','transmitted','reflected','box']){if((kind==='reflected'||kind==='box')&&!$('reflected').checked)continue;const points=[];let any=false;
+  for(let k=0;k<=420;k++){const z=2+k*24/420,paths=fieldPaths(world,z,source,i).filter(p=>p.kind===kind);if(!paths.length){points.push(null);continue;}any=true;const q=paths.reduce((sum,p)=>sum+s[source]*p.gain*Math.sin(2*Math.PI*N[i].frequency*(visualTime-p.delay)),0)*(kind==='transmitted'?boost:1);points.push([lane(i),-.35+q*.48,z]);}
+
+  if(!any)continue;const col=noteColor(i);g.globalAlpha=(kind==='reflected'||kind==='box')?.55:1;if(col==='#050505')line(points,'#a9c2d5',4,(kind==='reflected'||kind==='box'));line(points,col,kind==='transmitted'?2.4:1.7,(kind==='reflected'||kind==='box'));g.globalAlpha=1;
  }
  }
+ for(const face of W.faces(boxState())){const corners=face.points.map(project);if(corners.every(Boolean)){g.beginPath();corners.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fillStyle='#ffc28a12';g.fill();}line([...face.points,face.points[0]],'#ffc28a',2);}
  for(const medium of ['air','water']){if(world!=='mixed'&&world!==medium)continue;const z=medium==='air'?2:26,q=project([0,-.35,z]);if(q){g.fillStyle=s[medium]?'#fff':'#71849a';g.beginPath();g.arc(q.x,q.y,medium==='air'?5:3,0,Math.PI*2);g.fill();g.font='10px system-ui';g.fillText(medium.toUpperCase()+' SOURCE'+(s[medium]?'':' OFF'),q.x+8,q.y+16);}}
  for(const probe of W.probeList([world],{air:true,water:true})){const q=project([0,-.35,probe.z]);if(q){g.strokeStyle=probe.medium==='air'?'#ffd08c':'#78edff';g.strokeRect(q.x-4,q.y-4,8,8);g.fillStyle=g.strokeStyle;g.font='10px system-ui';g.fillText(probe.medium+' probe '+probe.z+' m',q.x+8,q.y-8);}}
  // Mark one forward-moving phase along each enabled source's path.
  const i=[...selected][0];if(i!==undefined)for(const source of ['air','water']){if(!s[source]||(world!=='mixed'&&world!==source))continue;let z;
   if(world!=='mixed'){const distance=(visualTime*W.media[source].speed)%24;z=source==='air'?2+distance:26-distance;}
   else {const first=source==='air'?10:14,second=24-first,c1=W.media[source].speed,c2=W.media[source==='air'?'water':'air'].speed,t=visualTime%(first/c1+second/c2),distance=t<first/c1?t*c1:first+(t-first/c1)*c2;z=source==='air'?2+distance:26-distance;}
-  const q=project([(i-6)*.065*(z-1),-.35,z]);if(q){g.fillStyle=noteColor(i)==='#050505'?'#fff':noteColor(i);g.beginPath();g.arc(q.x,q.y,3,0,Math.PI*2);g.fill();}
+  const q=W.obstaclePaths(world,z,source,boxState(),lane(i)).some(p=>p.kind==='incident'||p.kind==='transmitted')&&project([lane(i),-.35,z]);if(q){g.fillStyle=noteColor(i)==='#050505'?'#fff':noteColor(i);g.beginPath();g.arc(q.x,q.y,3,0,Math.PI*2);g.fill();}
  }
  g.fillStyle='#b9d8e9';g.font='11px ui-monospace';g.fillText('FIRST PERSON / '+(world==='mixed'?'AIR NEAR, WATER FAR':world.toUpperCase()),12,h-17);
  const freq=i===undefined?440:N[i].frequency,note=i===undefined?'A4 reference':N[i].name;
@@ -65,4 +75,4 @@ function drawScope(){const {g,w,h}=surface('scope');g.strokeStyle='#38516b';g.be
 function render(){for(const world of shown())drawWorld(world);$('clock').textContent='Visual time '+(visualTime*1000).toFixed(2)+' ms';drawScope();}
 const coeff=W.boundaryCoefficients('air','water');$('boundaryStats').textContent='Reflected energy: '+(coeff.R*100).toFixed(4)+'%\nTransmitted energy: '+(coeff.T*100).toFixed(4)+'%\nAir -> water pressure reflection: +'+coeff.r.toFixed(5)+'\nWater -> air pressure reflection: '+(-coeff.r).toFixed(5)+' (phase reversal)';
 function frame(t){const dt=last?Math.min(.1,(t-last)/1000):0;last=t;if(!paused)visualTime+=dt*+$('slow').value;render();requestAnimationFrame(frame);}
-window.addEventListener('pagehide',()=>audio?.suspend());refresh();requestAnimationFrame(frame);
+window.addEventListener('pagehide',()=>audio?.suspend());updateBox();requestAnimationFrame(frame);
