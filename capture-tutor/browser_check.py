@@ -16,6 +16,8 @@ try:
   if r.get('exceptionDetails'):raise Exception(r['exceptionDetails'])
   return r['result'].get('value')
  call('Emulation.setDeviceMetricsOverride',{'width':1280,'height':1200,'deviceScaleFactor':1,'mobile':False})
+ call('Network.enable')
+ call('Network.setCacheDisabled',{'cacheDisabled':True})
  call('Page.navigate',{'url':'http://127.0.0.1:8766/capture-tutor/'})
  for _ in range(50):
   if js("document.readyState==='complete' && !!document.querySelector('#board .square')"):break
