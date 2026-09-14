@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Before You Take | A small chess tutor</title>
+<!-- social-preview:start -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wings Out | HRL Portfolio">
+<meta property="og:title" content="Before You Take | A small chess tutor">
+<meta property="og:description" content="Practice three capture habits: check the reply, keep your defenses, and count the exchange. Six guided chess exercises with hints and replay.">
+<meta property="og:url" content="https://rmichaelglover.github.io/hrl-portfolio/capture-tutor/">
+<meta property="og:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/capture-tutor--index.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Before You Take chess tutor with a square chessboard and a capture exercise">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Before You Take | A small chess tutor">
+<meta name="twitter:description" content="Practice three capture habits: check the reply, keep your defenses, and count the exchange. Six guided chess exercises with hints and replay.">
+<meta name="twitter:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/capture-tutor--index.png">
+<link rel="canonical" href="https://rmichaelglover.github.io/hrl-portfolio/capture-tutor/">
+<!-- social-preview:end --><meta name="description" content="Practice three capture habits: check the reply, keep your defenses, and count the exchange. A local, rule-based chess tutor."><link rel="stylesheet" href="style.css"></head><body>
+<header><a href="../chess/">Chess Worlds</a><span class="tag">WORKING PROTOTYPE / 0.1</span><h1>Before you take.</h1><p>A tempting piece. One pause. A better decision.</p><p class="intro">For players around 850–1250 on Lichess. Practice checking replies, keeping defenses, and counting exchanges. Six short exercises; no clock pressure.</p></header>
+<main><div class="layout"><section class="board-panel"><div class="board-heading"><strong id="turn"></strong><button id="flip">Flip board</button></div><div id="board" role="img" aria-label="Chess position"></div><p id="positionLabel"></p><div class="controls"><button id="back" disabled>Previous position</button><button id="forward" disabled>Next position</button></div><p id="line" class="line"></p></section>
+<section class="lesson-panel"><span id="phase" class="tag"></span><h2 id="title"></h2><p id="prompt"></p><div id="answers" class="answers"></div><button id="hint">Give me a nudge</button><p id="hintText" role="status"></p><div id="feedback" tabindex="-1" aria-live="polite"></div><button id="next" hidden>Next exercise</button><p id="recommendation" class="muted"></p></section></div>
+<section class="panel"><h2>Your practice trail</h2><p id="progress"></p><div id="skills" class="skills"></div><p class="muted">These are practice signals, not a rating or proof of mastery. The black-side exercises mirror the white-side ones. Hints count as guided practice.</p><details><summary>Choose an exercise</summary><div id="lessonList" class="lesson-list"></div></details><details><summary>Why this tutor suggests an exercise</summary><p>Explicit rules connect your answers to three skill objects. Iterative relaxation balances “practice,” “steady,” and “unknown” labels. It recommends an unseen exercise with more support for practice or uncertainty. Nothing is trained; strengths are not calibrated probabilities.</p><pre id="trace"></pre></details><button id="reset">Clear saved practice</button><span id="storage" class="muted"></span></section>
+<details class="panel"><summary>What this prototype does</summary><p>Three authored mini-lessons, each in two orientations. Make a capture decision, predict the consequence, then replay a legally verified line. The tutor tests the stated immediate tactic, not every possible continuation or the best move in arbitrary positions. Positions are teaching constructions, not historical games.</p><p>No account, paid service, Stockfish, neural model, or network API is needed. Progress stays in this browser when storage is available. Repeating an exercise does not inflate the recorded first-attempt evidence. Clearing practice removes that record.</p><p><a href="README.md">Source and design notes</a> · <a href="ROADMAP.md">Path to v1.0</a> · <a href="../LICENSE">Repository license (source-available)</a></p></details></main>
+<footer>Respect the possibility of a plan. Check the moves you can see. <strong>Wings out.</strong></footer>
+<script src="relax.js"></script><script src="tutor.js"></script><script src="lessons.js"></script><script src="app.js"></script></body></html>

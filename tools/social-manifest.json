@@ -96,6 +96,14 @@
     "artwork": null
   },
   {
+    "path": "capture-tutor/index.html",
+    "title": "Before You Take | A small chess tutor",
+    "description": "Practice three capture habits: check the reply, keep your defenses, and count the exchange. Six guided chess exercises with hints and replay.",
+    "key": "capture-tutor--index",
+    "image": "assets/social/capture-tutor--index.png",
+    "artwork": null
+  },
+  {
     "path": "catfish-lane/index.html",
     "title": "Catfish Lane — Tiny Creek Verification Club",
     "description": "A humorous family-friendly social-media literacy game about catfish, tiny creeks, monadic windows, worms, and kind verification.",
@@ -109,14 +117,6 @@
     "description": "Same rule, different neighbors: compare automata on squares, rectangles, triangles, cubes, and tetrahedra.",
     "key": "cellular-complexes",
     "image": "assets/social/cellular-complexes.png",
-    "artwork": null
-  },
-  {
-    "path": "chess/index.html",
-    "title": "Chess Worlds — Maestro, games, stories and experiments",
-    "description": "A chess-only doorway into Manny Glover's public Maestro games, musical boards, stories, lessons, and open experiments.",
-    "key": "chess--index",
-    "image": "assets/social/chess--index.png",
     "artwork": null
   },
   {
@@ -157,6 +157,14 @@
     "description": "You can't out-search the engine. So out-clock it. A premove is a commitment made before the opponent's move resolves — safe when their move is predictable, a gamble when it isn't....",
     "key": "chess-premove--index",
     "image": "assets/social/chess-premove--index.png",
+    "artwork": null
+  },
+  {
+    "path": "chess/index.html",
+    "title": "Chess Worlds — Maestro, games, stories and experiments",
+    "description": "A chess-only doorway into Manny Glover's public Maestro games, musical boards, stories, lessons, and open experiments.",
+    "key": "chess--index",
+    "image": "assets/social/chess--index.png",
     "artwork": null
   },
   {
@@ -472,19 +480,19 @@
     "artwork": null
   },
   {
-    "path": "genesis/scrabble/index.html",
-    "title": "Scrabble — a dataset you can read · Project Genesis",
-    "description": "A rotating isometric ASCII voxel data-viz where every tile is a lettered Scrabble tile and the letter encodes its category. Bundled with a real HRL body-position cloud (600 pts)...",
-    "key": "genesis--scrabble--index",
-    "image": "assets/social/genesis--scrabble--index.png",
-    "artwork": null
-  },
-  {
     "path": "genesis/scrabble-4d/index.html",
     "title": "4-D Scrabble — the fourth axis is the truth · Project Genesis",
     "description": "A four-dimensional ASCII Scrabble board: every tile’s letter is its HRL-predicted class, its position in the 4th dimension is its true class. The board rotates through 4-D so...",
     "key": "genesis--scrabble-4d--index",
     "image": "assets/social/genesis--scrabble-4d--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/scrabble/index.html",
+    "title": "Scrabble — a dataset you can read · Project Genesis",
+    "description": "A rotating isometric ASCII voxel data-viz where every tile is a lettered Scrabble tile and the letter encodes its category. Bundled with a real HRL body-position cloud (600 pts)...",
+    "key": "genesis--scrabble--index",
+    "image": "assets/social/genesis--scrabble--index.png",
     "artwork": null
   },
   {
@@ -512,14 +520,6 @@
     "artwork": null
   },
   {
-    "path": "genesis/voxel/index.html",
-    "title": "In the Beginning — a seven-day voxel telling · Project Genesis",
-    "description": "The seven days of Genesis, built block by block as an isometric voxel diorama you drive with a Minecraft-style hotbar. The coloring-book version — for those who like to color...",
-    "key": "genesis--voxel--index",
-    "image": "assets/social/genesis--voxel--index.png",
-    "artwork": null
-  },
-  {
     "path": "genesis/voxel-tty/index.html",
     "title": "Elbie's Genesis World — an ASCII voxel engine",
     "description": "The seven days of Genesis meet Elbie's living Gooblets and Zappies in a hand-written ASCII voxel engine with a quaternion camera and generative garden music. By Manny Glover.",
@@ -533,6 +533,14 @@
     "description": "A zero-dependency WebGL first-person voxel engine that turns any dataset into a walkable Minecraft-like world — chunked greedy-mesh rendering with ambient occlusion and frustum...",
     "key": "genesis--voxel-world--index",
     "image": "assets/social/genesis--voxel-world--index.png",
+    "artwork": null
+  },
+  {
+    "path": "genesis/voxel/index.html",
+    "title": "In the Beginning — a seven-day voxel telling · Project Genesis",
+    "description": "The seven days of Genesis, built block by block as an isometric voxel diorama you drive with a Minecraft-style hotbar. The coloring-book version — for those who like to color...",
+    "key": "genesis--voxel--index",
+    "image": "assets/social/genesis--voxel--index.png",
     "artwork": null
   },
   {
@@ -648,14 +656,6 @@
     "artwork": null
   },
   {
-    "path": "morphogenesis/index.html",
-    "title": "Editable Anatomical Memory — HRL × Levin",
-    "description": "Both creatures are amputated at the posterior, then regrow by hrl.consensus relaxation — cells (objects) settling onto an anatomical identity (label) via gap-junction coupling (the...",
-    "key": "morphogenesis--index",
-    "image": "assets/social/morphogenesis--index.png",
-    "artwork": null
-  },
-  {
     "path": "morphogenesis-grow/index.html",
     "title": "A Body Grows Itself — growing-graph morphogenesis",
     "description": "From a single seed-cell, the body grows by recruiting neighbours (division); every cell labels itself each step by relaxation over gap-junction coupling and a bioelectric setpoint...",
@@ -669,6 +669,14 @@
     "description": "A one-headed body grows by relaxation, cells committing to an identity and dividing only at the front where the bioelectric setpoint wants tissue. Then — with no amputation — we...",
     "key": "morphogenesis-remodel--index",
     "image": "assets/social/morphogenesis-remodel--index.png",
+    "artwork": null
+  },
+  {
+    "path": "morphogenesis/index.html",
+    "title": "Editable Anatomical Memory — HRL × Levin",
+    "description": "Both creatures are amputated at the posterior, then regrow by hrl.consensus relaxation — cells (objects) settling onto an anatomical identity (label) via gap-junction coupling (the...",
+    "key": "morphogenesis--index",
+    "image": "assets/social/morphogenesis--index.png",
     "artwork": null
   },
   {
@@ -768,19 +776,19 @@
     "artwork": null
   },
   {
-    "path": "simplicial/index.html",
-    "title": "The Body as a Simplicial Complex — HRL × topology",
-    "description": "The virtual body, lifted from a graph to a 2-complex: cells are 0-simplices, gap junctions 1-simplices, triangulated tissue patches 2-simplices. Its homology is a signature of...",
-    "key": "simplicial--index",
-    "image": "assets/social/simplicial--index.png",
-    "artwork": null
-  },
-  {
     "path": "simplicial-3d/index.html",
     "title": "The Body in 3D — higher-order relaxation on a simplicial complex",
     "description": "A 3D organism as a simplicial complex — every cell joined to its neighbours (drag to spin 🖐). The engine now runs across dimensions: corrupt the labels with noise, then relax with...",
     "key": "simplicial-3d--index",
     "image": "assets/social/simplicial-3d--index.png",
+    "artwork": null
+  },
+  {
+    "path": "simplicial/index.html",
+    "title": "The Body as a Simplicial Complex — HRL × topology",
+    "description": "The virtual body, lifted from a graph to a 2-complex: cells are 0-simplices, gap junctions 1-simplices, triangulated tissue patches 2-simplices. Its homology is a signature of...",
+    "key": "simplicial--index",
+    "image": "assets/social/simplicial--index.png",
     "artwork": null
   },
   {
