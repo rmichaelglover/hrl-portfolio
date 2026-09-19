@@ -1287,7 +1287,17 @@ function renderMoves(){
         m.textContent=moves[k].san+moves[k].suffix;m.onclick=()=>go(k+1);el.appendChild(m);}else el.appendChild(document.createElement("div"));}}
     el.dataset.built="1"; }
   el.querySelectorAll(".m").forEach(m=>m.classList.toggle("cur",(+m.dataset.k)===cur-1));
-  const c=el.querySelector(".m.cur"); if(c) c.scrollIntoView({block:"nearest"});
+  // Keep the move list in view without scrolling the document.  scrollIntoView()
+  // also scrolls the page when the app is in a short, non-maximized window,
+  // pulling the board out from under the reader while stepping through moves.
+  const c=el.querySelector(".m.cur");
+  const box=el.closest(".movebox");
+  if(c&&box){
+    const top=c.offsetTop, bottom=top+c.offsetHeight;
+    const viewTop=box.scrollTop, viewBottom=viewTop+box.clientHeight;
+    if(top<viewTop) box.scrollTop=top;
+    else if(bottom>viewBottom) box.scrollTop=bottom-box.clientHeight;
+  }
 }
 function go(n){cur=Math.max(0,Math.min(frames.length-1,n));otbSel=null;otbTargets=[];render();if(musicOn)playStep();rageReact();}
 function rageReact(){ if(!rageOn||!window.RAGE||cur<1)return; const mv=moves[cur-1]; if(!mv)return;   // 🃏 opt-in rage overlay
