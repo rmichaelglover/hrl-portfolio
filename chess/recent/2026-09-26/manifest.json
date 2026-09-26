@@ -1,5 +1,26 @@
 [
   {
+    "file": "lichess_study_englund-gambit_by_mannyfresher_2026.09.26.pgn",
+    "title": "Englund Gambit",
+    "games": 1,
+    "sha256": "0a7ba87932b739c66273be4e8c59838b609dad41372efd9b0867793dd79228b8",
+    "source": "lichess_study_englund-gambit_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_study_french-mediterraneans_by_mannyfresher_2026.09.26.pgn",
+    "title": "French Mediterraneans",
+    "games": 1,
+    "sha256": "903a3e6d23ecfec9c23d4f1a6cea69c34adf5db35bfd7900a03b7a7862900e5a",
+    "source": "lichess_study_french-mediterraneans_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_tournament_2026.09.26_CE74c0Y6_hourly-bullet.pgn",
+    "title": "Hourly Bullet \u00b7 September 26",
+    "games": 12,
+    "sha256": "f3f7aeae4e2e68d78cdece7aa3a22bd516581696e63a7834fff223472b4059ce",
+    "source": "lichess_tournament_2026.09.26_CE74c0Y6_hourly-bullet.pgn"
+  },
+  {
     "file": "lichess_study_creepy-crawly-formation_mannyfresher-865-russogal-869_by_mannyfresher_2026.09.26.pgn",
     "title": "Creepy Crawly Formation",
     "games": 1,
