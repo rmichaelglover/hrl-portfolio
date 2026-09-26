@@ -1,0 +1,58 @@
+[
+  {
+    "file": "lichess_study_creepy-crawly-formation_mannyfresher-865-russogal-869_by_mannyfresher_2026.09.26.pgn",
+    "title": "Creepy Crawly Formation",
+    "games": 1,
+    "sha256": "4510291722a2890c83bbac145ec5ad63a59f3ca369e4696c6abe6e652cb92a5d",
+    "source": "lichess_study_creepy-crawly-formation_mannyfresher-865-russogal-869_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_study_king-leonardis_by_mannyfresher_2026.09.26.pgn",
+    "title": "King Leonardis",
+    "games": 1,
+    "sha256": "26674e0c1d00ef418c026f2a4d545e1bc89922b0de4baa94c9611adbb3c676fd",
+    "source": "lichess_study_king-leonardis_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_study_mantis-queen_mannyfresher-1107-duru-isik11-1040_by_mannyfresher_2026.09.26.pgn",
+    "title": "Mantis Queen",
+    "games": 1,
+    "sha256": "a2877151c06f8b2379b7f5f4c15a5018d2bf60615a3a0bdfdfeb13321173b1e4",
+    "source": "lichess_study_mantis-queen_mannyfresher-1107-duru-isik11-1040_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_study_master-splinter-master-shinter_by_mannyfresher_2026.09.09.pgn",
+    "title": "Master Splinter & Master Shinter",
+    "games": 7,
+    "sha256": "7e149b092321952df8aee274aded5104ef7431a70ab3e1c5aa6472e443dc68ce",
+    "source": "lichess_study_master-splinter-master-shinter_by_mannyfresher_2026.09.09 (1).pgn"
+  },
+  {
+    "file": "lichess_study_old-engines-attack_by_mannyfresher_2026.09.11.pgn",
+    "title": "Old Engines Attack",
+    "games": 2,
+    "sha256": "7abec06ad8c9394e54b95ed5bf6cab4d61f60fbc22947422ae062105414927ba",
+    "source": "lichess_study_old-engines-attack_by_mannyfresher_2026.09.11.pgn"
+  },
+  {
+    "file": "lichess_study_the-great-halfsitation_by_mannyfresher_2026.09.26.pgn",
+    "title": "The Great Halfsitation",
+    "games": 1,
+    "sha256": "769d82d3003009298e69327360ad71943aa4dd00b26912fff46f14b429c3115d",
+    "source": "lichess_study_the-great-halfsitation_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_study_vant-kruijsing_abilashnelapati-844-mannyfresher-853_by_mannyfresher_2026.09.26.pgn",
+    "title": "Vant Kruijsing",
+    "games": 1,
+    "sha256": "65c97a768d586e440d8d078b8603b260f65b726e35850611662bc52503aa393e",
+    "source": "lichess_study_vant-kruijsing_abilashnelapati-844-mannyfresher-853_by_mannyfresher_2026.09.26.pgn"
+  },
+  {
+    "file": "lichess_tournament_2026.09.26_sep26wua_titled-arena-warm-up-september-26.pgn",
+    "title": "Titled Arena Warm-up September \u201926",
+    "games": 22,
+    "sha256": "7028b435d3516265dcc8ca14bad1485636ce5967dec2292bf3a546940df60f6f",
+    "source": "lichess_tournament_2026.09.26_sep26wua_titled-arena-warm-up-september-26 (1).pgn"
+  }
+]
