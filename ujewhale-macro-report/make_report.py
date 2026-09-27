@@ -57,7 +57,7 @@ def build_pdf():
     styles.add(ParagraphStyle(name="TitleX", parent=styles["Title"], fontName="Helvetica-Bold", fontSize=27, leading=32, textColor=colors.HexColor("#10384a"), alignment=TA_CENTER, spaceAfter=16))
     styles.add(ParagraphStyle(name="Sub", parent=styles["Normal"], fontSize=13, leading=18, textColor=colors.HexColor("#376577"), alignment=TA_CENTER, spaceAfter=20))
     styles.add(ParagraphStyle(name="H", parent=styles["Heading1"], fontSize=19, leading=23, textColor=colors.HexColor("#0e7182"), spaceAfter=10))
-    styles.add(ParagraphStyle(name="BodyX", parent=styles["BodyText"], fontSize=10.5, leading=15, spaceAfter=8))
+    styles.add(ParagraphStyle(name="BodyX", parent=styles["BodyText"], fontSize=12.2, leading=18, spaceAfter=11))
     styles.add(ParagraphStyle(name="Small", parent=styles["BodyText"], fontSize=8.3, leading=11, textColor=colors.HexColor("#49616a")))
     styles.add(ParagraphStyle(name="CodeX", fontName="Courier", fontSize=7.4, leading=9.2, backColor=colors.HexColor("#eef7f5"), borderPadding=8))
     out = ROOT / "ujewhale_macro_sleep_report.pdf"
@@ -69,9 +69,34 @@ def build_pdf():
         canvas.drawRightString(letter[0]-doc.rightMargin, .27*inch, f"{doc.page}"); canvas.restoreState()
     doc.addPageTemplates([PageTemplate(id="all", frames=frame, onPage=footer)])
     story=[]
+    notes = {
+        "Executive summary":"A good aggregate model explains timing and feedback while refusing to impersonate physiology.",
+        "Research question and fictional setting":"Keep the species fictional; keep the measurement discipline real.",
+        "What is real and what is invented":"Provenance is part of the result, not a footnote added after the chart.",
+        "Data inventory":"Every number carries a source, a definition, and a unit.",
+        "Published sleep anchors":"Observed anchors orient the scale; they do not validate the fictional species.",
+        "Seasonal timing as a driver":"A transparent stylized input is better than an invisible invented dataset.",
+        "Model architecture":"State, input, lag, and shock are separate roles in the equation.",
+        "Toy REM trajectory":"A simulated curve can teach dynamics without claiming to be an observation.",
+        "Identification by constraints":"Constraints make imaginative models inspectable.",
+        "Why macroeconometrics belongs here":"The level of aggregation determines whether the analogy is useful.",
+        "Why macroeconometrics is not enough":"Population averages cannot reveal individual mechanisms.",
+        "Agent-based extension":"Micro rules become macro patterns through aggregation.",
+        "Measurement and survey error":"Different instruments answer different questions.",
+        "Color and visual grammar":"A color key should tell the reader what kind of evidence they are seeing.",
+        "Reproducible code":"If a reader cannot regenerate it, the claim is only half published.",
+        "Data table: calibration extract":"Small, explicit extracts are easier to audit than opaque data dumps.",
+        "Sensitivity experiments":"Scenario variation is not statistical confidence.",
+        "Validation checklist":"A model earns trust by stating the checks it can actually pass.",
+        "Limitations and ethics":"Fiction is safest when its boundary is visible.",
+        "Discussion":"The bridge between disciplines works when each level keeps its own meaning.",
+        "Conclusion":"The next experiment should test disagreement between model layers.",
+    }
     def page(title, body, extras=None):
         story.append(p(title, styles["H"])); story.extend([p(x, styles["BodyX"]) if isinstance(x,str) else x for x in body]);
         if extras: story.extend(extras)
+        callout=Table([[p("WORKING NOTE", styles["Small"]), p(notes.get(title,"Evidence and imagination should remain visibly distinct."), styles["BodyX"])]], colWidths=[1.35*inch,5.35*inch], style=TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.HexColor('#e4f5f0')),('BOX',(0,0),(-1,-1),.8,colors.HexColor('#39aab3')),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),10),('RIGHTPADDING',(0,0),(-1,-1),10),('TOPPADDING',(0,0),(-1,-1),9),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
+        story.append(Spacer(1, .14*inch)); story.append(callout)
         story.append(PageBreak())
     story += [Spacer(1, 1.3*inch), p("Ujewhale Sleep–Wake Cycles", styles["TitleX"]), p("A macroeconometric thought experiment with real calibration anchors, reproducible code, and a fictional marine society", styles["Sub"]), Spacer(1,.3*inch), p("Working paper · 27 September 2026", styles["Sub"]), p("<b>Scope note.</b> Ujewhales are fictional. No claim in this report describes a real animal, population, or medical intervention. Real numbers are used only to make the toy model legible and auditable.", styles["BodyX"]), PageBreak()]
     page("Executive summary", ["This report asks whether an aggregate macroeconometric model can describe fictional Ujewhale REM and wake cycles. The answer is yes as a modeling metaphor: population-level sleep can be represented as a coupled system of social demand, environmental timing, and lagged biological state. The model does not replace physiology.", "The empirical anchors are real: the U.S. Bureau of Labor Statistics reports average sleep of 8.80 hours on weekdays and 9.69 on weekends and holidays in the 2023 American Time Use Survey. CDC publications report the prevalence of healthy and short sleep in national surveys. These measurements are kept in separate units and are never falsely pooled.", "The key result is methodological: a macro model is useful for questions about synchronization, shocks, and aggregate recovery; an agent-based or physiological model is needed for individual REM mechanisms."])
