@@ -1,0 +1,6 @@
+source,measure,value,unit
+BLS ATUS 2023,"sleep, weekday",8.8,hours/day
+BLS ATUS 2023,"sleep, weekend/holiday",9.69,hours/day
+CDC BRFSS 2014,healthy sleep (>=7h),65.2,% adults
+CDC BRFSS 2014,short sleep (<7h),34.8,% adults
+CDC NHIS 2020,adults with sleep difficulty,30.0,% (approx. report table)
