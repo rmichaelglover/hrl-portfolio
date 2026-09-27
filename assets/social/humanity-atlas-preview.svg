@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101a2a"/><stop offset="1" stop-color="#244267"/></linearGradient>
+    <linearGradient id="table" x2="0" y2="1"><stop stop-color="#3b5571"/><stop offset="1" stop-color="#1b2940"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="935" cy="260" r="178" fill="#75dce8" opacity=".12" stroke="#75dce8" stroke-width="3"/>
+  <path d="M795 260c90-140 260-130 315 0-55 130-225 140-315 0Z" fill="none" stroke="#c3b6ff" stroke-width="3" opacity=".65"/>
+  <path d="M935 82v356M760 260h350" stroke="#94e3c0" stroke-width="2" opacity=".45"/>
+  <circle cx="935" cy="260" r="70" fill="#75dce8" opacity=".8"/>
+  <path d="M900 220q35-35 70 0v75q-35 35-70 0Zm-35 20h140M935 185v150" fill="none" stroke="#101a2a" stroke-width="7" opacity=".72"/>
+  <g font-family="Georgia,serif" fill="#f4f5ff"><text x="70" y="104" font-size="23" fill="#94e3c0" letter-spacing="3">FIELD NOTES 01 · SHARED TABLE</text><text x="70" y="220" font-size="88" font-weight="700">A place</text><text x="70" y="310" font-size="88" font-weight="700">at the <tspan fill="#75dce8" font-style="italic">table.</tspan></text></g>
+  <text x="74" y="368" font-family="system-ui,sans-serif" font-size="25" fill="#c0cce0">Food · stories · symbols · human connections</text>
+  <g font-family="system-ui,sans-serif" font-size="52"><text x="700" y="125">🌽</text><text x="1050" y="190">🍞</text><text x="700" y="450">🥬</text><text x="1040" y="430">🐚</text></g>
+  <rect x="60" y="475" width="1080" height="5" rx="3" fill="#75dce8" opacity=".7"/>
+  <g font-family="system-ui,sans-serif" fill="#f4f5ff" font-size="22"><text x="70" y="535">○ Practice</text><text x="275" y="535">△ Story</text><text x="430" y="535">□ Object</text><text x="720" y="535" fill="#c3b6ff">Different stories.</text><text x="720" y="572" fill="#94e3c0">Shared curiosity. 🌍</text></g>
+</svg>

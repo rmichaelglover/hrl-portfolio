@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101a2a"/><stop offset="1" stop-color="#244267"/></linearGradient><linearGradient id="glass"><stop stop-color="#75dce8" stop-opacity=".2"/><stop offset="1" stop-color="#c3b6ff" stop-opacity=".65"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <path d="M790 115A200 200 0 0 1 790 515" fill="none" stroke="#ff6b45" stroke-width="19"/><path d="M810 115A180 180 0 0 1 810 515" fill="none" stroke="#ffd45a" stroke-width="19"/><path d="M830 115A160 160 0 0 1 830 515" fill="none" stroke="#94e3c0" stroke-width="19"/><path d="M850 115A140 140 0 0 1 850 515" fill="none" stroke="#75dce8" stroke-width="19"/><path d="M870 115A120 120 0 0 1 870 515" fill="none" stroke="#c3b6ff" stroke-width="19"/>
+  <rect x="1010" y="135" width="150" height="350" rx="25" fill="url(#glass)" stroke="#f4f5ff" stroke-width="5" opacity=".9" transform="rotate(-7 1085 310)"/><path d="M1045 215l80 160M1125 215L1045 375" stroke="#f4f5ff" stroke-width="4" opacity=".7"/>
+  <g stroke="#75dce8" stroke-width="4" opacity=".55"><path d="M710 315h-90"/><path d="M620 315l-45-120"/><path d="M620 315l-45 120"/></g><circle cx="620" cy="315" r="12" fill="#75dce8"/>
+  <g font-family="Georgia,serif" fill="#f4f5ff"><text x="70" y="105" font-family="system-ui,sans-serif" font-size="25" fill="#94e3c0" letter-spacing="5">MIRROR GARDEN · AN OPEN NOTEBOOK</text><text x="70" y="220" font-size="86" font-weight="700">Let curiosity</text><text x="70" y="315" font-size="86" font-weight="700" fill="#75dce8" font-style="italic">reflect.</text></g>
+  <text x="75" y="385" font-family="system-ui,sans-serif" font-size="25" fill="#c0cce0">Light · evidence · possibility · HyperStar recursion</text>
+  <rect x="70" y="470" width="580" height="5" rx="3" fill="#75dce8" opacity=".7"/><text x="75" y="535" font-family="system-ui,sans-serif" font-size="24" fill="#f4f5ff">🪞 Optics experiments</text><text x="75" y="575" font-family="system-ui,sans-serif" font-size="22" fill="#c3b6ff">🌀 Infinite depth, finite influence</text>
+</svg>
