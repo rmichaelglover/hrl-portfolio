@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict');
+const {cards}=require('./data.js');const {run}=require('./engine.js');
+const a=run(cards),b=run(cards,{triangles:false});
+assert(a.converged);assert(b.converged);
+assert(a.strengths.every(r=>r.every(x=>Number.isFinite(x)&&x>0&&x<1)));
+assert(a.strengths.some((r,i)=>Math.abs(r[1]-b.strengths[i][1])>1e-5),'Triangle must affect welcome channel');
+for(let i=0;i<cards.length;i++)for(const t of [0,2])assert(Math.abs(a.strengths[i][t]-b.strengths[i][t])<1e-8,'Other themes must agree within stopping tolerance');
+for(const f of a.simplices)for(const i of f.nodes)for(const j of f.nodes)if(i!==j)assert(a.edges.some(e=>(e.a===i&&e.b===j)||(e.a===j&&e.b===i)),'Simplex face missing');
+const reversed=run([...cards].reverse());for(let i=0;i<cards.length;i++)for(let t=0;t<3;t++)assert(Math.abs(a.strengths[i][t]-reversed.strengths[cards.length-1-i][t])<1e-12,'Ordering must not affect results');
+assert.equal(new Set(cards.map(c=>c.id)).size,cards.length);
+for(const c of cards)assert(new URL(c.url).protocol==='https:');
+console.log('PASS: bounded convergence, active triangle, channel isolation, face closure, permutation invariance and source integrity.');
