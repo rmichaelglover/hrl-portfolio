@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Van Mieses — a Chess Worlds chapter from Mannyfresher: development as performance art, survival chess, king walks, tactical chaos, and stories." />
+  <title>Van Mieses — Chess Worlds</title>
+  <style>
+    :root {
+      --bg:#0d0c12; --panel:#17141f; --ink:#f4efe7; --muted:#c7bdaf;
+      --gold:#d9b56d; --red:#a94747; --line:#332d3a; --max:920px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at top,#241d2a 0,#0d0c12 46%);color:var(--ink);font:17px/1.68 Georgia,"Times New Roman",serif}
+    a{color:var(--gold)}
+    .hero{max-width:1180px;margin:0 auto;padding:24px 18px 0}
+    .hero img{width:100%;display:block;border:1px solid #4c4055;border-radius:18px;box-shadow:0 22px 65px #0008}
+    main{max-width:var(--max);margin:auto;padding:46px 24px 90px}
+    .eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font:700 12px/1.3 system-ui,sans-serif}
+    h1,h2,h3{line-height:1.12;margin:0 0 .7em}
+    h1{font-size:clamp(2.7rem,8vw,5.5rem);letter-spacing:-.035em}
+    h2{font-size:clamp(1.7rem,4vw,2.45rem);color:#f0d9a8;margin-top:2.1em}
+    h3{font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em;color:#e8c785;margin-top:2.1em}
+    .dek{font-size:1.28rem;color:var(--muted);max-width:760px}
+    .ritual{margin:34px 0;padding:20px 24px;border-left:4px solid var(--gold);background:#15121bcc;font:700 1.25rem/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.05em}
+    .chapter{margin:42px 0 58px;padding-top:10px;border-top:1px solid var(--line)}
+    .meta{color:#a99e91;font:600 13px/1.5 system-ui,sans-serif;margin:-.45em 0 1.4em}
+    .moves{white-space:pre-wrap;background:#121018;border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:#efe2c8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    blockquote{margin:32px 0;padding:4px 0 4px 24px;border-left:3px solid var(--red);font-size:1.35rem;font-style:italic;color:#eadfd3}
+    .faces{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:24px 0}
+    .card{background:linear-gradient(180deg,#1b1722,#121016);border:1px solid var(--line);border-radius:14px;padding:18px}
+    .card strong{color:#f2d79c}
+    .rank{counter-reset:r}
+    .rank p{counter-increment:r;margin:.85em 0}
+    .rank p:before{content:counter(r) ". ";color:var(--gold);font-weight:700}
+    footer{margin-top:62px;padding-top:22px;border-top:1px solid var(--line);color:#9e9487;font:14px/1.6 system-ui,sans-serif}
+    .back{display:inline-block;margin-bottom:28px;text-decoration:none;font:700 14px system-ui,sans-serif}
+    @media (max-width:600px){body{font-size:16px}.hero{padding:10px 10px 0}main{padding:30px 18px 64px}.moves{font-size:.91rem}}
+  </style>
+</head>
+<body>
+  <div class="hero"><img src="assets/van-mieses-hero.png" alt="Van Mieses Chess Worlds fantasy illustration: a ceremonial chess procession becoming a chaotic battle." /></div>
+  <main>
+    <a class="back" href="../../">← Chess Worlds</a>
+    <div class="eyebrow">The Chess Worlds · Chapter</div>
+    <h1>Van Mieses</h1>
+    <p class="dek">Development as performance art. A procession before development. A king that refuses to behave. A queen that wanders. And eventually—if everyone survives long enough—a knife fight.</p>
+
+    <div class="ritual">d3 · Qd2 · Kd1 · Qe1</div>
+
+    <h2>Introduction</h2>
+    <p>Van Mieses begins with a strange little procession. The pieces do not rush outward in textbook fashion. The king steps into view. The queen retreats. Development seems to fold inward before it expands.</p>
+    <p>At its best, Van Mieses feels theatrical: White invites the opponent to overextend, survives the resulting confusion, and then strikes from unexpected geometry.</p>
+    <p>At its worst, the center opens before White is ready and the king becomes the star of somebody else’s mating attack.</p>
+    <p>That tension is the whole study. Van Mieses is not merely an opening here. It is a recurring experiment in whether awkwardness can become creativity before it becomes liability.</p>
+
+    <section class="chapter"><h2>I. The First Procession</h2><div class="meta">mannyfresher 826 — KelsoPresto 766 · Rapid · September 8, 2026 · 1–0</div>
+    <p>This is the foundational Van Mieses game. The ritual appears almost immediately: 1.d3, 2.Qd2, 3.Kd1, 4.Qe1. Then the king keeps traveling: Kc1, Kb1.</p>
+    <p>By move 10 the opening has become objectively dangerous. 10.Bh6?? allows ...Nxf2, and Black’s knight soon raids h1. White is badly worse, roughly in the −8 range. Yet this game establishes one of the most important Van Mieses themes: being strategically lost does not mean being tactically dead.</p>
+    <p>The queen begins circling the kingside. Black loosens the position with 17...b5?? and 18...a6??, and suddenly the game reverses. White even misses multiple forced mates because extra material is too tempting.</p>
+    <div class="moves">22.Qh6+ Qg7
+23.Qxg7#</div>
+    <p>The first Van Mieses lesson is not clean technique. It is resurrection.</p></section>
+
+    <section class="chapter"><h2>II. When the Center Opens</h2><div class="meta">mannyfresher 820 — AndriyMAY 1191 · Rapid tournament · September 9, 2026 · 0–1</div>
+    <p>The same ceremonial structure returns, but this time Black reacts more practically. After 5.e4?? dxe4, the center opens while White’s king remains vulnerable. That is the structural danger of Van Mieses in one sentence.</p>
+    <p>White compensates with queenside adventure, but Black’s pieces are simply more active around the king. At move 16 Black even has mate in one with ...Qb1#, misses it, and Van Mieses is granted one more life.</p>
+    <div class="moves">18.fxe4? Qxd2#</div>
+    <p>This chapter is the warning label: eccentric development needs a center sturdy enough to support it.</p></section>
+
+    <section class="chapter"><h2>III. The Sixty-Second Van Mieses</h2><div class="meta">mannyfresher 1026 — GarrettC4 990 · Bullet · September 10, 2026 · 1–0</div>
+    <p>The ritual survives intact, and then weather begins: f3, g4, h4, h5, Bxh6, g5, h6, f4. The kingside becomes a pawn avalanche and both queens disappear by move 15.</p>
+    <p>The decisive story is clock geometry. White keeps enough complexity on the board that Black must solve problems every move. By move 29 White has 23 seconds; Black has one.</p>
+    <div class="moves">30.Ra1 Na2
+31.Rxa2 1–0 (time)</div>
+    <p>Van Mieses becomes tempo economics: unfamiliarity is a resource.</p></section>
+
+    <section class="chapter"><h2>IV. The King Goes Walkabout</h2><div class="meta">mannyfresher 960 — Abbaof5 1051 · Blitz · September 10, 2026 · 0–1</div>
+    <p>This is one of the study’s most cinematic losses. White’s king travels Kc2, Kb3, Kc3, Kd4, Ke3, Kf3, Kg4, Kg5, Kh6. At some point king safety becomes king tourism.</p>
+    <p>White survives this journey for an astonishingly long time, walking through checks, pawn pushes, queen attacks, and rook pressure. Eventually Black simplifies enough chaos to build a mating net.</p>
+    <div class="moves">38.fxg5 Rh8#</div>
+    <p>Not successful. Unforgettable.</p></section>
+
+    <section class="chapter"><h2>V. The Long Execution</h2><div class="meta">mannyfresher 820 — Hamid_Fathi 745 · Rapid · September 11, 2026 · 0–1</div>
+    <p>This chapter begins more conventionally, then 7.c4?? and 8.e4?? rip the center open. The remarkable feature is how often forced mate appears, disappears, and reappears.</p>
+    <p>Black repeatedly has mating sequences and misses them. White repeatedly receives another chance and misses it. The game becomes a comic-horror rhythm: mate available, mate missed, escape available, escape missed.</p>
+    <div class="moves">27...Be2
+28.g4 Rd5#</div>
+    <p>This is perhaps the purest knife fight in the study.</p></section>
+
+    <section class="chapter"><h2>VI. The Pawn That Became a Queen</h2><div class="meta">mannyfresher 1024 — Farkhadik5 1003 · Blitz · September 19, 2026 · 0–1</div>
+    <p>White loses the queen early with 8.Qxf7+?? and spends the rest of the game trying to manufacture counterplay. The final image, however, is elegant.</p>
+    <p>A black pawn advances through the wreckage, reaches the first rank, becomes a queen, and ends the game at the same instant.</p>
+    <div class="moves">26...exd1=Q#</div>
+    <p>Promotion and mate in one transformation.</p></section>
+
+    <section class="chapter"><h2>VII. The Twelve-Move Collapse</h2><div class="meta">mannyfresher 888 — Ac3to 718 · Rapid · September 27, 2026 · 0–1</div>
+    <p>This is the shortest and harshest technical lesson in the study. White reaches playable territory, then one bad decision allows a knight tactic and the queen disappears.</p>
+    <p>There is no resurrection, no king marathon, no clock swindle. Just punishment.</p>
+    <p>Sometimes the lesson is simple: one bad square can end the whole experiment.</p></section>
+
+    <section class="chapter"><h2>VIII. The Draw That Refused to Die</h2><div class="meta">mannyfresher 904 — LDoume 913 · Rapid · September 27, 2026 · ½–½</div>
+    <p>Black’s queen raids both rooks early. Ordinarily that should begin a technical conversion. Instead the game becomes a long survival march.</p>
+    <p>Queens come off; kings activate; passed pawns appear; rooks and bishops grind for dozens of moves. White is materially mangled and still refuses to disappear.</p>
+    <p>This is one of the study’s rare true endgames, and its central theme is stubborn defensive value: pure Survival Chess.</p></section>
+
+    <section class="chapter"><h2>IX. The Mighty 1567 and the Vanishing Clock</h2><div class="meta">mannyfresher 1105 — Manuelgilr 1567 · Bullet · September 28, 2026 · 1–0</div>
+    <p>This is the strongest-rating scalp in the study and perhaps the purest expression of Van Mieses absurdity. The full ritual returns, followed by further king-and-queen shuffling that becomes almost literal performance art.</p>
+    <p>White’s queen disappears. Black obtains an overwhelming position. By move 30 Black has a forced mate. The engine sees it. The board sees it. Probably every chess god in the multiverse sees it.</p>
+    <p>But there is one remaining participant: the clock.</p>
+    <div class="moves">30...Nf1+
+31.Kg1 1–0 (time)</div>
+    <p>Objectively bad positions can remain alive. In bullet, life itself can become an advantage.</p></section>
+
+    <h2>Epilogue: What Van Mieses Actually Is</h2>
+    <p>Across these nine games, Van Mieses scores three wins, five losses, and one draw. But the record does not describe the real experiment.</p>
+
+    <h3>The Procession</h3><p>The iconic sequence—d3, Qd2, Kd1, Qe1—delays ordinary development and creates unfamiliar geometry. As pure opening theory it is dubious. As identity it is unmistakable.</p>
+    <h3>The King as a Piece</h3><p>Van Mieses treats the king less like fragile cargo and more like an active character. Sometimes this produces resilience. Sometimes spectacular disaster. Often both.</p>
+    <h3>The Queen as Scout</h3><p>The queen frequently moves early and repeatedly. She is not merely developed; she investigates.</p>
+    <h3>The Center Is the Real Judge</h3><p>If Black opens the center before White completes development, the king becomes vulnerable immediately. Van Mieses cannot survive on eccentricity alone.</p>
+    <h3>The System Thrives on Error Density</h3><p>Many wins occur because the position remains unusual enough that both players continue making mistakes. Confusion is not evaluation—but confusion is a resource.</p>
+
+    <h2>The Three Faces of Van Mieses</h2>
+    <div class="faces">
+      <div class="card"><strong>The Artist</strong><br>Slow, ceremonial, queen-and-king choreography, strange piece placement, opening as aesthetic object.</div>
+      <div class="card"><strong>The Survivor</strong><br>Bad position, king under fire, material deficit, still playing, still creating problems.</div>
+      <div class="card"><strong>The Knife Fighter</strong><br>Once tactics begin, classical structure disappears. Checks, sacrifices, king walks, promotions, mating nets.</div>
+    </div>
+
+    <h2>Narrative Ranking</h2>
+    <div class="rank">
+      <p>KelsoPresto — definitive comeback and queen mate.</p>
+      <p>Manuelgilr — the 1567 bullet scalp and ultimate Survival Chess ending.</p>
+      <p>Abbaof5 — the legendary king walk ending in Rh8#.</p>
+      <p>GarrettC4 — Van Mieses as a bullet clock weapon.</p>
+      <p>LDoume — strongest endgame-survival chapter.</p>
+      <p>Hamid_Fathi — the longest tactical horror show.</p>
+      <p>Farkhadik5 — memorable promotion mate.</p>
+      <p>AndriyMAY — clean warning about opening the center.</p>
+      <p>Ac3to — shortest cautionary miniature.</p>
+    </div>
+
+    <blockquote>Some openings develop pieces. Van Mieses develops stories.</blockquote>
+    <footer>Chess Worlds · Mannyfresher · Van Mieses · September 2026<br><a href="../../../">Back to HRL Portfolio</a></footer>
+  </main>
+</body>
+</html>
