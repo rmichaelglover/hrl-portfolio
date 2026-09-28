@@ -6,11 +6,11 @@
 <title>Chess Maestro — relaxation-labeling chess, scored as music</title>
 <!-- PWA: installable to the iPad/iPhone home screen (Share ▸ Add to Home Screen), runs fullscreen & offline -->
 <meta name="theme-color" content="#e8e6e3" />
-<link rel="manifest" href="manifest.webmanifest" />
+<link rel="manifest" href="whimsy-chess/manifest.webmanifest" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Maestro" />
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" href="whimsy-chess/icons/apple-touch-icon.png" />
 <style>
   :root{
     --bg:#e8e6e3; --panel:#ffffff; --ink:#2b2b2b; --mut:#787470; --line:#dcd8d2;
@@ -164,8 +164,8 @@
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
   <div class="links">
-    <a href="../">← portfolio</a> · <a href="../hrl-lab/">The HRL Lab</a> · <a href="../play/">Beat the Engine</a> ·
-    <a href="../hrlized/">🎵 HRLized</a> <span style="color:var(--mut)">— the same engine that scores this game, composing music</span>
+    <a href="./">← portfolio</a> · <a href="hrl-lab/">The HRL Lab</a> · <a href="play/">Beat the Engine</a> ·
+    <a href="hrlized/">🎵 HRLized</a> <span style="color:var(--mut)">— the same engine that scores this game, composing music</span>
   </div>
   <div id="otbHint">♟️ <b>Play OTB</b> is on — click a piece, then a highlighted square, to move (hot-seat: you play both sides).
     Moves <b>continue from the current position</b>, so press ⏮ first to play a fresh game from move 1. Load one of your own
@@ -233,7 +233,7 @@
   </div>
 
 <!-- WorldKit: turns this page's chess-world export into a Minecraft datapack / Roblox build -->
-<script src="worldkit.js"></script>
+<script src="whimsy-chess/worldkit.js"></script>
 <script>
 /* ===================== GAMES ===================== */
 const GAMES = {
