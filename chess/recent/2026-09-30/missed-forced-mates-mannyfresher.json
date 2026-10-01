@@ -1,0 +1,12 @@
+{
+  "generated": "2026-09-30",
+  "scope": "recent standard-chess PGNs",
+  "deduplication": "Lichess Game ID",
+  "verification": "exact legal-defense search; queen-first forcing lines; mate in 1-3",
+  "games": [
+    {"game_id":"2jid8qJX","url":"https://lichess.org/2jid8qJX","opponent":"chrkoll","position":"27.White","mate_in":1,"line":["Qh8#"],"played":"Qh7+"},
+    {"game_id":"rmMa0yGW","url":"https://lichess.org/rmMa0yGW","opponent":"trostyanko-13","position":"24...","mate_in":1,"line":["Qg2#"],"played":"Nf6"},
+    {"game_id":"I0HkZs9T","url":"https://lichess.org/I0HkZs9T","opponent":"KelsoPresto","position":"20.White","mate_in":2,"line":["Qh6+","Qg7","Qxg7#"],"played":"Nxa8"},
+    {"game_id":"Ti5XC3Lp","url":"https://lichess.org/Ti5XC3Lp","opponent":"Jane_jo","position":"23.White","mate_in":2,"line":["Qc7+","Ke8","Qxe7#"],"played":"Qxe7+"}
+  ]
+}
