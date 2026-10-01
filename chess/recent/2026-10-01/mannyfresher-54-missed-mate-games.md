@@ -4,7 +4,7 @@ This catalog contains all **54 unique games** in which Mannyfresher had at least
 
 | # | Game | Date | Position | Verified line | Move actually played | Other candidates |
 |---:|---|---|---:|---|---|---:|
-| 1 | [Chess.com](Chess.com) vs marilu2026 | 2023.10.05 | 41. M1 | `Qh3#` | `Rg2+` | 5 |
+| 1 | Chess.com vs marilu2026 | 2023.10.05 | 41. M1 | `Qh3#` | `Rg2+` | 5 |
 | 2 | [FU2MBKyg](https://lichess.org/FU2MBKyg) vs emrebglr | 2026.06.20 | 31. M1 | `Qa8#` | `Qd7+` | 0 |
 | 3 | [DgSTwQzY](https://lichess.org/DgSTwQzY) vs pmc-1403 | 2026.06.23 | 54. M2 | `Qb7+ Ka5 Ra8#` | `Qc4+` | 3 |
 | 4 | [6QvVCuYW](https://lichess.org/6QvVCuYW) vs lpo1978 | 2026.06.30 | 21... M2 | `Qf4+ Kd3 Nf2#` | `Rae8+` | 1 |
