@@ -1,0 +1,2308 @@
+{
+  "generated": "2026-10-01",
+  "scope": "all Mannyfresher-to-move games found in the full-drive scan",
+  "unique_games": 54,
+  "search": "queen-first checking lines, mate in 1-3; every legal defense searched",
+  "games": [
+    {
+      "game_id": "Chess.com",
+      "url": "Chess.com",
+      "date": "2023.10.05",
+      "white": "mannyglover",
+      "black": "marilu2026",
+      "opponent": "marilu2026",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_reviewing-mannyfreshers-old-games_by_mannyfresher_2026.06.09.pgn",
+      "candidate_count": 6,
+      "candidates": [
+        {
+          "move_number": 41,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qh3#"
+          ],
+          "played": "Rg2+",
+          "fen": "8/8/p7/P5pP/4bNk1/RP6/5R1Q/4K3 w - - 0 41"
+        },
+        {
+          "move_number": 12,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxc7#"
+          ],
+          "played": "Qxa6+",
+          "fen": "2kr1b1r/Q1p1pppp/b4n2/1p6/4PB2/Nn6/P1P3PP/R3KBNR w KQ - 1 12"
+        },
+        {
+          "move_number": 32,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc7+",
+            "Kf6",
+            "e5#"
+          ],
+          "played": "Rd2",
+          "fen": "2b2r2/7p/pQ5n/P3kPpP/N3P1P1/RP3P2/6R1/4K3 w - - 3 32"
+        },
+        {
+          "move_number": 43,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qxg2+",
+            "Ke3",
+            "Qe4#"
+          ],
+          "played": "Rd4",
+          "fen": "8/8/p7/P5pP/R4N2/1P3k2/6bQ/4K3 w - - 2 43"
+        },
+        {
+          "move_number": 40,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc4+",
+            "Kd6",
+            "Qe6#"
+          ],
+          "played": "Qa5",
+          "fen": "8/4R3/1rk5/7r/1Q1P4/8/8/4K3 w - - 1 40"
+        },
+        {
+          "move_number": 44,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg1+",
+            "Kf3",
+            "Qxg2+",
+            "Ke3",
+            "Qe4#"
+          ],
+          "played": "Qg3+",
+          "fen": "8/8/p7/P5pP/3R1N2/1P2k3/6bQ/4K3 w - - 4 44"
+        }
+      ]
+    },
+    {
+      "game_id": "FU2MBKyg",
+      "url": "https://lichess.org/FU2MBKyg",
+      "date": "2026.06.20",
+      "white": "mannyfresher",
+      "black": "emrebglr",
+      "opponent": "emrebglr",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 31,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qa8#"
+          ],
+          "played": "Qd7+",
+          "fen": "2k5/2p1bp1p/2Q5/4p1Bp/4P3/5N1b/5qr1/3R3K w - - 6 31"
+        }
+      ]
+    },
+    {
+      "game_id": "DgSTwQzY",
+      "url": "https://lichess.org/DgSTwQzY",
+      "date": "2026.06.23",
+      "white": "mannyfresher",
+      "black": "pmc-1403",
+      "opponent": "pmc-1403",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "move_number": 54,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qb7+",
+            "Ka5",
+            "Ra8#"
+          ],
+          "played": "Qc4+",
+          "fen": "2R5/8/2Q5/5K2/1k1p4/8/8/8 w - - 1 54"
+        },
+        {
+          "move_number": 52,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qxc6+",
+            "Kd4",
+            "Qc3+",
+            "Ke4",
+            "Re8#"
+          ],
+          "played": "Kf5",
+          "fen": "2R5/8/2b2Q2/2kp2K1/8/8/8/8 w - - 14 52"
+        },
+        {
+          "move_number": 55,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qa6+",
+            "Kb4",
+            "Qb7+",
+            "Ka5",
+            "Ra8#"
+          ],
+          "played": "Qxd4",
+          "fen": "2R5/8/8/5K2/2Qp4/k7/8/8 w - - 3 55"
+        },
+        {
+          "move_number": 57,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qa7+",
+            "Kb3",
+            "Qb7+",
+            "Ka4",
+            "Ra8#"
+          ],
+          "played": "Ra8#",
+          "fen": "2R5/8/1Q6/5K2/8/8/k7/8 w - - 3 57"
+        }
+      ]
+    },
+    {
+      "game_id": "6QvVCuYW",
+      "url": "https://lichess.org/6QvVCuYW",
+      "date": "2026.06.30",
+      "white": "lpo1978",
+      "black": "mannyfresher",
+      "opponent": "lpo1978",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_newish-openings-to-mannyfresher_by_mannyfresher_2026.06.30.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 21,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qf4+",
+            "Kd3",
+            "Nf2#"
+          ],
+          "played": "Rae8+",
+          "fen": "r4rk1/n1p3p1/p6p/1p6/1P5q/P1N1KN1P/2P1B3/R1BQR2n b - - 5 21"
+        },
+        {
+          "move_number": 22,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qf4+",
+            "Kd3",
+            "Nf2#"
+          ],
+          "played": "Rd8+",
+          "fen": "4rrk1/n1p3p1/p6p/1p6/1P5q/P1N2N1P/2PKB3/R1BQR2n b - - 7 22"
+        }
+      ]
+    },
+    {
+      "game_id": "IfA3sPYs",
+      "url": "https://lichess.org/IfA3sPYs",
+      "date": "2026.06.30",
+      "white": "hsynak60",
+      "black": "mannyfresher",
+      "opponent": "hsynak60",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_newish-openings-to-mannyfresher_by_mannyfresher_2026.06.30.pgn",
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "move_number": 70,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Q3g3#"
+          ],
+          "played": "Q3g1+",
+          "fen": "8/2k5/8/8/8/4q3/6K1/4q3 b - - 3 70"
+        },
+        {
+          "move_number": 71,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qgg3#"
+          ],
+          "played": "Qee3#",
+          "fen": "8/2k5/8/8/8/5K2/8/4q1q1 b - - 5 71"
+        },
+        {
+          "move_number": 69,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qh5+",
+            "Kf4",
+            "Qee5#"
+          ],
+          "played": "Qce3+",
+          "fen": "8/2k5/8/2q5/8/5K2/8/4q3 b - - 1 69"
+        }
+      ]
+    },
+    {
+      "game_id": "v0iJvR47",
+      "url": "https://lichess.org/v0iJvR47",
+      "date": "2026.07.01",
+      "white": "Kolezyum_42",
+      "black": "mannyfresher",
+      "opponent": "Kolezyum_42",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_newish-openings-to-mannyfresher_by_mannyfresher_2026.06.30.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 25,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qg4+",
+            "Kf1",
+            "Rh1+",
+            "Ng1",
+            "Qxg1#"
+          ],
+          "played": "Qh1#",
+          "fen": "8/2pk1pp1/r1n5/p7/B2p3r/5N1q/PP1PRP2/R1BQ2K1 b - - 1 25"
+        }
+      ]
+    },
+    {
+      "game_id": "6eyDPN0u",
+      "url": "https://lichess.org/6eyDPN0u",
+      "date": "2026.07.18",
+      "white": "elikinda1",
+      "black": "mannyfresher",
+      "opponent": "elikinda1",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_the-great-hesitation_by_mannyfresher_2026.07.18.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 23,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qc6#"
+          ],
+          "played": "Rd5+",
+          "fen": "1n2k3/4B1p1/p2KQ1Pp/5r2/8/5q2/PPb2P1P/RN6 b - - 2 23"
+        }
+      ]
+    },
+    {
+      "game_id": "QY6OgGt4",
+      "url": "https://lichess.org/QY6OgGt4",
+      "date": "2026.07.28",
+      "white": "mannyfresher",
+      "black": "lekazuz",
+      "opponent": "lekazuz",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_creepy-crawly-formation_by_mannyfresher_2026.07.27.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 35,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qxc7+",
+            "Kb5",
+            "Qxb7+",
+            "Kc5",
+            "Rd5#"
+          ],
+          "played": "Qe7+",
+          "fen": "3R4/ppp2Qp1/6p1/2k5/3p4/PP4P1/K1P5/6b1 w - - 3 35"
+        },
+        {
+          "move_number": 39,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qd5+",
+            "Ka6",
+            "Qb7+",
+            "Ka5",
+            "Qb5#"
+          ],
+          "played": "Qb5#",
+          "fen": "1R6/pQ4p1/6p1/k7/8/PP1p2P1/K1P5/6b1 w - - 1 39"
+        }
+      ]
+    },
+    {
+      "game_id": "ZN8uhX9p",
+      "url": "https://lichess.org/ZN8uhX9p",
+      "date": "2026.07.30",
+      "white": "mannyfresher",
+      "black": "WhatIsUpDogg",
+      "opponent": "WhatIsUpDogg",
+      "source_file": "/home/rmichaelglover/lichess-studies/lichess_tournament_2026.07.30_87MKRumB_hourly-blitz.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 6,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxc8#"
+          ],
+          "played": "Kd1",
+          "fen": "rnb1kbnr/ppp1p1pp/5p2/1q2N3/4p1Q1/8/PPPP1PPP/RNB1K2R w KQkq - 0 6"
+        }
+      ]
+    },
+    {
+      "game_id": "7du2wGox",
+      "url": "https://lichess.org/7du2wGox",
+      "date": "2026.08.01",
+      "white": "mannyfresher",
+      "black": "Salmanbekk",
+      "opponent": "Salmanbekk",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 26,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qb8+",
+            "Kc6",
+            "Qb5#"
+          ],
+          "played": "Nc4+",
+          "fen": "Q7/p1p1qp2/1k1p4/8/8/N1P2P1B/1P2PP2/2n1K3 w - - 7 26"
+        }
+      ]
+    },
+    {
+      "game_id": "NPx1c1qW",
+      "url": "https://lichess.org/NPx1c1qW",
+      "date": "2026.08.01",
+      "white": "Dmitro_055",
+      "black": "mannyfresher",
+      "opponent": "Dmitro_055",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 54,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qa6+",
+            "Kd4",
+            "Qd3#"
+          ],
+          "played": "Qa4#",
+          "fen": "5k2/8/8/2n4r/2K1n3/5p2/8/q7 b - - 5 54"
+        }
+      ]
+    },
+    {
+      "game_id": "a5r0NgNQ",
+      "url": "https://lichess.org/a5r0NgNQ",
+      "date": "2026.08.01",
+      "white": "mannyfresher",
+      "black": "pedrohlorena",
+      "opponent": "pedrohlorena",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 17,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qf8+",
+            "Qe7",
+            "Qxe7#"
+          ],
+          "played": "Qd4#",
+          "fen": "rn5Q/ppp4p/1b2b3/1Pk2pq1/8/N1P5/P3PPP1/3RKBN1 w - - 1 17"
+        },
+        {
+          "move_number": 16,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qe8+",
+            "Nd7",
+            "Qxe6#"
+          ],
+          "played": "b5+",
+          "fen": "rn5Q/ppp4p/1bk1b3/5pq1/1P6/N1P5/P3PPP1/3RKBN1 w - - 3 16"
+        }
+      ]
+    },
+    {
+      "game_id": "z5Qr9Am4",
+      "url": "https://lichess.org/z5Qr9Am4",
+      "date": "2026.08.04",
+      "white": "tayseerson",
+      "black": "mannyfresher",
+      "opponent": "tayseerson",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_stalemate-gambit_by_mannyfresher_2026.07.30 (1).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 14,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qf2#"
+          ],
+          "played": "Qxg1+",
+          "fen": "rn2k2r/1b2n3/8/ppb1p1Pp/3qP2P/1N3P1B/PPP5/R1BQK1NR b KQkq - 4 14"
+        }
+      ]
+    },
+    {
+      "game_id": "i9YsBk4b",
+      "url": "https://lichess.org/i9YsBk4b",
+      "date": "2026.08.05",
+      "white": "mannyfresher",
+      "black": "Alexey7583",
+      "opponent": "Alexey7583",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 23,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qxh6+",
+            "Kg8",
+            "Qg7#"
+          ],
+          "played": "bxc3",
+          "fen": "5k1r/pp3p1p/5P1p/q2p3Q/7P/2rP2P1/PP3P2/K3R3 w - - 0 23"
+        }
+      ]
+    },
+    {
+      "game_id": "q1Use42z",
+      "url": "https://lichess.org/q1Use42z",
+      "date": "2026.08.05",
+      "white": "VaPoRIGUANAS",
+      "black": "mannyfresher",
+      "opponent": "VaPoRIGUANAS",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 24,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qg4#"
+          ],
+          "played": "Nh5#",
+          "fen": "r2qk3/2p1bpp1/2pp1n2/p7/P1P1BK2/1PN1PP1b/1BQR4/5rq1 b q - 1 24"
+        }
+      ]
+    },
+    {
+      "game_id": "zIA4qBEG",
+      "url": "https://lichess.org/zIA4qBEG",
+      "date": "2026.08.11",
+      "white": "thinnesh94",
+      "black": "mannyfresher",
+      "opponent": "thinnesh94",
+      "source_file": "/home/rmichaelglover/Downloads/my public studies 2026-09-03/lichess_study_kadas-opening_by_mannyfresher_2026.06.22.pgn",
+      "candidate_count": 7,
+      "candidates": [
+        {
+          "move_number": 29,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qb6#"
+          ],
+          "played": "Qxb3",
+          "fen": "rn2k1n1/8/3Kp3/3pPpP1/5P2/PB2q2P/1P6/8 b q - 1 29"
+        },
+        {
+          "move_number": 30,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qb6#"
+          ],
+          "played": "Qxb2",
+          "fen": "rn2k1n1/8/3Kp1P1/3pPp2/5P2/Pq5P/1P6/8 b q - 0 30"
+        },
+        {
+          "move_number": 44,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qed8#"
+          ],
+          "played": "Qb7#",
+          "fen": "K3k1n1/2q1q3/8/8/8/8/8/8 b - - 2 44"
+        },
+        {
+          "move_number": 40,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qha6+",
+            "Kxb8",
+            "Qf4#"
+          ],
+          "played": "Qxg7",
+          "fen": "Kn2k1n1/4P1P1/7q/8/8/8/8/5q2 b - - 0 40"
+        },
+        {
+          "move_number": 41,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qa6+",
+            "Kxb8",
+            "Qe5#"
+          ],
+          "played": "Qxe7+",
+          "fen": "1n2k1n1/1K2P1q1/8/8/8/8/8/5q2 b - - 1 41"
+        },
+        {
+          "move_number": 42,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qd8+",
+            "Kb7",
+            "Qa6#"
+          ],
+          "played": "Qc4+",
+          "fen": "1nK1k1n1/4q3/8/8/8/8/8/5q2 b - - 1 42"
+        },
+        {
+          "move_number": 43,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qec7+",
+            "Ka8",
+            "Q4c6#"
+          ],
+          "played": "Qcc7+",
+          "fen": "1K2k1n1/4q3/8/8/2q5/8/8/8 b - - 0 43"
+        }
+      ]
+    },
+    {
+      "game_id": "WOcTBDr2",
+      "url": "https://lichess.org/WOcTBDr2",
+      "date": "2026.08.27",
+      "white": "mannyfresher",
+      "black": "AdhithiSankaran",
+      "opponent": "AdhithiSankaran",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_mantis-queen_by_mannyfresher_2026.07.28 (1).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 41,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qf6+",
+            "Ke8",
+            "Rh8+",
+            "Kd7",
+            "Rd8#"
+          ],
+          "played": "Qh7+",
+          "fen": "8/ppp1k3/7R/5Q2/3r1pK1/1P6/P5P1/8 w - - 10 41"
+        },
+        {
+          "move_number": 42,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg8+",
+            "Ke7",
+            "Qg7+",
+            "Ke8",
+            "Rh8#"
+          ],
+          "played": "Rg6",
+          "fen": "3k4/ppp4Q/7R/8/3r1pK1/1P6/P5P1/8 w - - 12 42"
+        }
+      ]
+    },
+    {
+      "game_id": "RFrhUPXB",
+      "url": "https://lichess.org/RFrhUPXB",
+      "date": "2026.08.31",
+      "white": "mannyfresher",
+      "black": "FiladelfoEspejo",
+      "opponent": "FiladelfoEspejo",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_mantis-queen_by_mannyfresher_2026.07.28 (1).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 33,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg5+",
+            "Kh8",
+            "Qh6+",
+            "Kg8",
+            "Rf8#"
+          ],
+          "played": "Rf7+",
+          "fen": "2b5/1p4k1/4p3/1q1nP2Q/r1pP2B1/P1p5/8/R4RK1 w - - 8 33"
+        }
+      ]
+    },
+    {
+      "game_id": "t60NnxUP",
+      "url": "https://lichess.org/t60NnxUP",
+      "date": "2026.09.01",
+      "white": "mannyfresher",
+      "black": "GauravRao01",
+      "opponent": "GauravRao01",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_mantis-queen_by_mannyfresher_2026.07.28 (1).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 22,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qf8#"
+          ],
+          "played": "Qh7#",
+          "fen": "7k/1pp2Q2/2nprp2/p3pB2/4P2p/P1PP3P/2P3P1/1RB1K3 w - - 0 22"
+        }
+      ]
+    },
+    {
+      "game_id": "CNiQNpoe",
+      "url": "https://lichess.org/CNiQNpoe",
+      "date": "2026.09.06",
+      "white": "GonzRob",
+      "black": "mannyfresher",
+      "opponent": "GonzRob",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_checkers_by_mannyfresher_2026.07.27 (1).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 32,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qb4#"
+          ],
+          "played": "Rd1",
+          "fen": "7Q/1rk5/3pP3/1qp5/8/2KP3P/2P3P1/r7 b - - 0 32"
+        },
+        {
+          "move_number": 34,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qa5+",
+            "Kc4",
+            "Qb4#"
+          ],
+          "played": "Qb4#",
+          "fen": "8/1r2P2Q/2kp4/1qp5/8/2KP3P/2P3P1/3r4 b - - 0 34"
+        }
+      ]
+    },
+    {
+      "game_id": "wrAzP54I",
+      "url": "https://lichess.org/wrAzP54I",
+      "date": "2026.09.06",
+      "white": "mannyfresher",
+      "black": "nyadyam",
+      "opponent": "nyadyam",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_creepy-crawly-formation_mannyfresher-1018-nyadyam-822_by_mannyfresher_2026.09.06.pgn",
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "move_number": 25,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qc3#"
+          ],
+          "played": "Qe7+",
+          "fen": "3r3r/p1Q4p/1p1p1p1b/3Bk3/4Pp2/P7/1P4PP/R3KR2 w Q - 1 25"
+        },
+        {
+          "move_number": 35,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qc4#"
+          ],
+          "played": "Reb1",
+          "fen": "5r2/p1Q4p/1p1p1p1b/1k1B4/4P3/1P3K2/7P/R3R3 w - - 3 35"
+        },
+        {
+          "move_number": 36,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qc4#"
+          ],
+          "played": "Qc6",
+          "fen": "5r2/p1Q4p/1p1p1p1b/3B4/1k2P3/1P3K2/7P/RR6 w - - 5 36"
+        },
+        {
+          "move_number": 33,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc4+",
+            "Ka5",
+            "Ra1#"
+          ],
+          "played": "b3+",
+          "fen": "5r2/p1Q4p/1p1p1p1b/3B4/k3P3/5K2/1P5P/3RR3 w - - 0 33"
+        },
+        {
+          "move_number": 27,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qc7+",
+            "Kb5",
+            "Bc4+",
+            "Ka5",
+            "Qxa7#"
+          ],
+          "played": "Kf2",
+          "fen": "3r3r/p3Q2p/1p1p1p1b/2kB4/4Pp2/P7/1P4PP/3RKR2 w - - 5 27"
+        },
+        {
+          "move_number": 28,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qc7+",
+            "Kb5",
+            "Bc4+",
+            "Ka5",
+            "Qxa7#"
+          ],
+          "played": "Rfe1",
+          "fen": "3r2r1/p3Q2p/1p1p1p1b/2kB4/4Pp2/P7/1P3KPP/3R1R2 w - - 7 28"
+        },
+        {
+          "move_number": 32,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qd7+",
+            "Ka6",
+            "Qa4#"
+          ],
+          "played": "a4+",
+          "fen": "5r2/p1Q4p/1p1p1p1b/1k1B4/4P3/P4K2/1P5P/3RR3 w - - 3 32"
+        },
+        {
+          "move_number": 34,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qc4+",
+            "Ka5",
+            "Qa4#"
+          ],
+          "played": "Ra1",
+          "fen": "5r2/p1Q4p/1p1p1p1b/3B4/1k2P3/1P3K2/7P/3RR3 w - - 1 34"
+        }
+      ]
+    },
+    {
+      "game_id": "ykdZPLl6",
+      "url": "https://lichess.org/ykdZPLl6",
+      "date": "2026.09.06",
+      "white": "mannyfresher",
+      "black": "Vad412",
+      "opponent": "Vad412",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_mantis-queen_by_mannyfresher_2026.07.28 (1).pgn",
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "move_number": 52,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qdc2#"
+          ],
+          "played": "Qdd1#",
+          "fen": "8/8/8/2p5/1p6/p2Q2K1/4Q3/2k5 w - - 3 52"
+        },
+        {
+          "move_number": 51,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qf6+",
+            "Ka2",
+            "Qc2#"
+          ],
+          "played": "Qfe2+",
+          "fen": "8/8/8/2p5/1p6/p2Q1QK1/1k6/8 w - - 1 51"
+        },
+        {
+          "move_number": 49,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qd2+",
+            "Kb3",
+            "Qd1+",
+            "Kc3",
+            "Qf6#"
+          ],
+          "played": "Qf3+",
+          "fen": "8/8/3Q4/2pQ4/1pb5/p1k3K1/8/8 w - - 0 49"
+        }
+      ]
+    },
+    {
+      "game_id": "6LWzlKb7",
+      "url": "https://lichess.org/6LWzlKb7",
+      "date": "2026.09.07",
+      "white": "Christiang11",
+      "black": "mannyfresher",
+      "opponent": "Christiang11",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_carr-crash_christiang11-919-mannyfresher-909_by_mannyfresher_2026.09.07.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 30,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qc2+",
+            "Kf3",
+            "Qf2+",
+            "Ke4",
+            "Qf5#"
+          ],
+          "played": "g2",
+          "fen": "8/pQ4P1/2ppk3/P2n4/3Pq3/2P1n1pP/4K3/R4B1R b - - 0 30"
+        }
+      ]
+    },
+    {
+      "game_id": "YzrieHEX",
+      "url": "https://lichess.org/YzrieHEX",
+      "date": "2026.09.07",
+      "white": "mannyfresher",
+      "black": "jamal-adin",
+      "opponent": "jamal-adin",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_incredible-sulk-mexizuko-dance-edition_mannyfresher-928-jamal-adin-946_by_mannyfresher_2026.09.07.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 22,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qg7#"
+          ],
+          "played": "Qh6#",
+          "fen": "5r1k/ppp5/2n3Q1/2b1p3/6R1/2N5/PPK4P/1R3q2 w - - 1 22"
+        }
+      ]
+    },
+    {
+      "game_id": "s8pas6VU",
+      "url": "https://lichess.org/s8pas6VU",
+      "date": "2026.09.07",
+      "white": "mannyfresher",
+      "black": "IvanIsTheBestKidIn",
+      "opponent": "IvanIsTheBestKidIn",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_the-uje-whale_by_mannyfresher_2026.09.06.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 42,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qb8#"
+          ],
+          "played": "Qd4+",
+          "fen": "3Q4/5ppp/1K6/5bn1/5k2/5P2/6PP/4R3 w - - 4 42"
+        },
+        {
+          "move_number": 43,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qd6+",
+            "Kf5",
+            "g4#"
+          ],
+          "played": "Qxe4+",
+          "fen": "8/5ppp/1K6/6n1/3Qbk2/5P2/6PP/4R3 w - - 6 43"
+        }
+      ]
+    },
+    {
+      "game_id": "I0HkZs9T",
+      "url": "https://lichess.org/I0HkZs9T",
+      "date": "2026.09.08",
+      "white": "mannyfresher",
+      "black": "KelsoPresto",
+      "opponent": "KelsoPresto",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_van-mieses_by_mannyfresher_2026.09.08 (2).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 20,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qh6+",
+            "Qg7",
+            "Qxg7#"
+          ],
+          "played": "Nxa8",
+          "fen": "r4kq1/2Nb1p2/p1n1pBp1/3p4/7Q/3P4/PPP1P1PP/RK3Bbn w - - 1 20"
+        },
+        {
+          "move_number": 21,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qh6+",
+            "Ke8",
+            "Nc7#"
+          ],
+          "played": "Nc7",
+          "fen": "N4kq1/3b1p2/p3pBp1/n2p4/7Q/3P4/PPP1P1PP/RK3Bbn w - - 1 21"
+        }
+      ]
+    },
+    {
+      "game_id": "JXdXDehb",
+      "url": "https://lichess.org/JXdXDehb",
+      "date": "2026.09.08",
+      "white": "Spenniii2308",
+      "black": "mannyfresher",
+      "opponent": "Spenniii2308",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.09.08_rcBY49tu_1300-bullet.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 21,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qxc2#"
+          ],
+          "played": "Rxd4",
+          "fen": "2k5/1pB2p2/p1q4p/3r2p1/1n1P4/1P6/P1R2PPP/2KR4 b - - 2 21"
+        }
+      ]
+    },
+    {
+      "game_id": "VeQUVlV0",
+      "url": "https://lichess.org/VeQUVlV0",
+      "date": "2026.09.08",
+      "white": "Orozkho_BR",
+      "black": "mannyfresher",
+      "opponent": "Orozkho_BR",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_french-normies_by_mannyfresher_2026.09.09.pgn",
+      "candidate_count": 14,
+      "candidates": [
+        {
+          "move_number": 64,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qhf8#"
+          ],
+          "played": "Qde6+",
+          "fen": "2q4q/2P4P/7K/3q4/8/8/4k3/1q6 b - - 3 64"
+        },
+        {
+          "move_number": 67,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Q8g8#"
+          ],
+          "played": "Qhh6#",
+          "fen": "7q/2q4q/4q3/6K1/8/8/4k3/8 b - - 1 67"
+        },
+        {
+          "move_number": 54,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qg8+",
+            "Kh5",
+            "Qgg4#"
+          ],
+          "played": "b4",
+          "fen": "2q5/2P5/6KP/1p1p4/3q4/8/4k3/8 b - - 1 54"
+        },
+        {
+          "move_number": 56,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qg8+",
+            "Kh5",
+            "Qgg4#"
+          ],
+          "played": "b2",
+          "fen": "2q5/2P5/6KP/3p4/3q4/1p6/4k3/8 b - - 1 56"
+        },
+        {
+          "move_number": 57,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qe6+",
+            "Kh5",
+            "Qdg4#"
+          ],
+          "played": "b1=Q+",
+          "fen": "2q5/2P4P/6K1/3p4/3q4/8/1p2k3/8 b - - 0 57"
+        },
+        {
+          "move_number": 58,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qf8+",
+            "Kh5",
+            "Qbf5#"
+          ],
+          "played": "Qdh8",
+          "fen": "2q5/2P4P/7K/3p4/3q4/8/4k3/1q6 b - - 1 58"
+        },
+        {
+          "move_number": 59,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhxh7+",
+            "Kg5",
+            "Qcf5#"
+          ],
+          "played": "d4",
+          "fen": "2q4q/2P4P/8/3p3K/8/8/4k3/1q6 b - - 3 59"
+        },
+        {
+          "move_number": 60,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhxh7+",
+            "Kg5",
+            "Qcf5#"
+          ],
+          "played": "d3",
+          "fen": "2q4q/2P4P/7K/8/3p4/8/4k3/1q6 b - - 1 60"
+        },
+        {
+          "move_number": 61,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qxh7+",
+            "Kg5",
+            "Qcf5#"
+          ],
+          "played": "d2",
+          "fen": "2q4q/2P4P/8/7K/8/3p4/4k3/1q6 b - - 1 61"
+        },
+        {
+          "move_number": 62,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhxh7+",
+            "Kg5",
+            "Qcf5#"
+          ],
+          "played": "d1=Q",
+          "fen": "2q4q/2P4P/7K/8/8/8/3pk3/1q6 b - - 1 62"
+        },
+        {
+          "move_number": 63,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhxh7+",
+            "Kg5",
+            "Qcf5#"
+          ],
+          "played": "Qd5+",
+          "fen": "2q4q/2P4P/8/7K/8/8/4k3/1q1q4 b - - 1 63"
+        },
+        {
+          "move_number": 65,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhxh7+",
+            "Kg5",
+            "Qhh6#"
+          ],
+          "played": "Qxc7",
+          "fen": "2q4q/2P4P/4q3/7K/8/8/4k3/1q6 b - - 5 65"
+        },
+        {
+          "move_number": 66,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qhd8+",
+            "Kh5",
+            "Qcxh7#"
+          ],
+          "played": "Qbxh7+",
+          "fen": "7q/2q4P/4q3/8/7K/8/4k3/1q6 b - - 1 66"
+        },
+        {
+          "move_number": 55,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qch8+",
+            "Kg6",
+            "Qg8+",
+            "Kh5",
+            "Qgg4#"
+          ],
+          "played": "b3",
+          "fen": "2q5/2P4K/7P/3p4/1p1q4/8/4k3/8 b - - 1 55"
+        }
+      ]
+    },
+    {
+      "game_id": "ZJwfZukg",
+      "url": "https://lichess.org/ZJwfZukg",
+      "date": "2026.09.08",
+      "white": "mannyfresher",
+      "black": "emeyce3",
+      "opponent": "emeyce3",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_newish-openings-contd_by_mannyfresher_2026.09.04.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 29,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qg6#"
+          ],
+          "played": "Rh1+",
+          "fen": "r2q4/ppp5/2np3k/8/1P4Q1/P7/2pK4/6R1 w - - 1 29"
+        }
+      ]
+    },
+    {
+      "game_id": "HtIphbBT",
+      "url": "https://lichess.org/HtIphbBT",
+      "date": "2026.09.09",
+      "white": "billye",
+      "black": "mannyfresher",
+      "opponent": "billye",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.09.09_iascGagm_1300-blitz.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 34,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qxh1#"
+          ],
+          "played": "Rg8+",
+          "fen": "7r/2p5/p2p1p2/4pk2/2PP4/P6q/1P3B2/RN4KR b - - 1 34"
+        },
+        {
+          "move_number": 31,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qh5+",
+            "Kxh5",
+            "Rh8#"
+          ],
+          "played": "Rh8+",
+          "fen": "6r1/2p5/p2p1p2/4pk2/2PP3K/P6P/1P2qB2/RN5R b - - 2 31"
+        }
+      ]
+    },
+    {
+      "game_id": "J9qmc10L",
+      "url": "https://lichess.org/J9qmc10L",
+      "date": "2026.09.09",
+      "white": "mannyfresher",
+      "black": "arashRiquelme",
+      "opponent": "arashRiquelme",
+      "source_file": "/home/rmichaelglover/Code/hrl-portfolio/chess/recent/2026-09-26/lichess_study_master-splinter-master-shinter_by_mannyfresher_2026.09.09.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 26,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qf6#"
+          ],
+          "played": "Qd5",
+          "fen": "4rk2/7p/6p1/4Qp2/2BP4/4PP2/1PP4P/3K3R w - - 3 26"
+        },
+        {
+          "move_number": 27,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qf7#"
+          ],
+          "played": "Qxf5+",
+          "fen": "4rk2/7p/8/3Q1pp1/2BP4/4PP2/1PP4P/3K3R w - - 0 27"
+        }
+      ]
+    },
+    {
+      "game_id": "o8Bbs4cF",
+      "url": "https://lichess.org/o8Bbs4cF",
+      "date": "2026.09.09",
+      "white": "mannyfresher",
+      "black": "cattail9506",
+      "opponent": "cattail9506",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_sodium-attack_mannyfresher-803-cattail9506-933_by_mannyfresher_2026.09.09.pgn",
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "move_number": 28,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qe7#"
+          ],
+          "played": "g4",
+          "fen": "8/p1p4Q/8/4kp2/5N2/P3P3/P3P1PP/n2K1B1R w - - 7 28"
+        },
+        {
+          "move_number": 39,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qb8#"
+          ],
+          "played": "Qa6#",
+          "fen": "k2N4/1R6/3Q4/p7/4P3/P1p5/P3P3/n2K1B2 w - - 0 39"
+        },
+        {
+          "move_number": 30,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qe7+",
+            "Kf5",
+            "Bxh3#"
+          ],
+          "played": "Rxh3",
+          "fen": "8/p1p4Q/8/4k3/5N2/P3P2p/P3P3/n2K1B1R w - - 0 30"
+        },
+        {
+          "move_number": 37,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qe7+",
+            "Kb8",
+            "Qb7#"
+          ],
+          "played": "Rh7+",
+          "fen": "3N4/k7/3Q4/p6R/2p1P3/P7/P3P3/n2K1B2 w - - 2 37"
+        },
+        {
+          "move_number": 38,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc6+",
+            "Kb8",
+            "Qb7#"
+          ],
+          "played": "Rb7",
+          "fen": "k2N4/7R/3Q4/p7/2p1P3/P7/P3P3/n2K1B2 w - - 4 38"
+        },
+        {
+          "move_number": 31,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg7+",
+            "Kd6",
+            "Rh6#"
+          ],
+          "played": "Rh5+",
+          "fen": "8/p6Q/8/2p1k3/5N2/P3P2R/P3P3/n2K1B2 w - - 0 31"
+        },
+        {
+          "move_number": 32,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg6+",
+            "Ke7",
+            "Qg7+",
+            "Ke8",
+            "Rh8#"
+          ],
+          "played": "Qd3+",
+          "fen": "8/p6Q/3k4/2p4R/5N2/P3P3/P3P3/n2K1B2 w - - 2 32"
+        },
+        {
+          "move_number": 34,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qd6+",
+            "Kb7",
+            "Nd8+",
+            "Kc8",
+            "Rxc5#"
+          ],
+          "played": "e4",
+          "fen": "8/p7/1k2N3/2p4R/8/P2QP3/P3P3/n2K1B2 w - - 6 34"
+        }
+      ]
+    },
+    {
+      "game_id": "8BKOgzdC",
+      "url": "https://lichess.org/8BKOgzdC",
+      "date": "2026.09.12",
+      "white": "Eminx38",
+      "black": "mannyfresher",
+      "opponent": "Eminx38",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_newish-openings-contd_by_mannyfresher_2026.09.04.pgn",
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "move_number": 16,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qxh2#"
+          ],
+          "played": "a3",
+          "fen": "r3k2r/1ppb1ppp/3bp3/4q3/p1P5/3P4/P2BBPPP/R2Q1RK1 b kq - 1 16"
+        },
+        {
+          "move_number": 17,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qh2#"
+          ],
+          "played": "Ba4",
+          "fen": "r3k2r/1ppb1ppp/3bp3/4q3/2P5/p2P3P/P2BBPP1/R2Q1RK1 b kq - 0 17"
+        },
+        {
+          "move_number": 18,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qh2#"
+          ],
+          "played": "O-O-O",
+          "fen": "r3k2r/1pp2ppp/3bp3/4q3/b1P5/p2P3P/P2BBPP1/R1Q2RK1 b kq - 2 18"
+        },
+        {
+          "move_number": 19,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qh2#"
+          ],
+          "played": "Bc5",
+          "fen": "2kr3r/1pp2ppp/3bp3/4q3/b1P3B1/p2P3P/P2B1PP1/R1Q2RK1 b - - 4 19"
+        }
+      ]
+    },
+    {
+      "game_id": "bFKICDGR",
+      "url": "https://lichess.org/bFKICDGR",
+      "date": "2026.09.13",
+      "white": "mannyfresher",
+      "black": "chess06sisi",
+      "opponent": "chess06sisi",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_vant-kruijsing_by_mannyfresher_2026.09.08 (1).pgn",
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "move_number": 46,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxg8#"
+          ],
+          "played": "Bxg8",
+          "fen": "2Q3qk/7b/2p5/r1P1p2R/1p1pPp2/pB1P1P2/P2K4/8 w - - 3 46"
+        },
+        {
+          "move_number": 48,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qf5#"
+          ],
+          "played": "Qe6+",
+          "fen": "2Q3B1/7R/2p3k1/r1P1p3/1p1pPp2/p2P1P2/P2K4/8 w - - 1 48"
+        },
+        {
+          "move_number": 49,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qh6#"
+          ],
+          "played": "Rg7+",
+          "fen": "6B1/7R/2p1Q3/r1P1p1k1/1p1pPp2/p2P1P2/P2K4/8 w - - 3 49"
+        },
+        {
+          "move_number": 50,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qe7+",
+            "Kh5",
+            "Qg5#"
+          ],
+          "played": "Qh6#",
+          "fen": "6B1/6R1/2p1Q3/r1P1p3/1p1pPp1k/p2P1P2/P2K4/8 w - - 5 50"
+        }
+      ]
+    },
+    {
+      "game_id": "eM779z4U",
+      "url": "https://lichess.org/eM779z4U",
+      "date": "2026.09.13",
+      "white": "cns2018",
+      "black": "mannyfresher",
+      "opponent": "cns2018",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_carr-crash_cns2018-722-mannyfresher-809_by_mannyfresher_2026.09.13.pgn",
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "move_number": 25,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qc4#"
+          ],
+          "played": "Qxf3",
+          "fen": "1k1r3r/p1p2pp1/2q4p/1p2P3/1b6/1K2BBP1/PP5P/R7 b - - 3 25"
+        },
+        {
+          "move_number": 29,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qxd1#"
+          ],
+          "played": "a4#",
+          "fen": "1k1r3r/2p2pp1/7p/pp2P3/1b6/1K4P1/PP1q3P/3R4 b - - 1 29"
+        },
+        {
+          "move_number": 27,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qc5+",
+            "Kb3",
+            "Qc4#"
+          ],
+          "played": "Qd2+",
+          "fen": "1k1r3r/p1p2pp1/7p/1p2P3/1b6/4q1P1/PPK4P/6R1 b - - 1 27"
+        },
+        {
+          "move_number": 28,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qd3+",
+            "Kxb4",
+            "Qc4+",
+            "Ka5",
+            "Qa4#"
+          ],
+          "played": "a5",
+          "fen": "1k1r3r/p1p2pp1/7p/1p2P3/1b6/1K4P1/PP1q3P/6R1 b - - 3 28"
+        }
+      ]
+    },
+    {
+      "game_id": "mMftY1DU",
+      "url": "https://lichess.org/mMftY1DU",
+      "date": "2026.09.13",
+      "white": "Rodolfo-19-02-79",
+      "black": "mannyfresher",
+      "opponent": "Rodolfo-19-02-79",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_horsey-surprise_rodolfo-19-02-79-1318-mannyfresher-1038_by_mannyfresher_2026.09.13.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 24,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qe1#"
+          ],
+          "played": "Rh2+",
+          "fen": "r1b1k2r/pp6/n1p1p1p1/3P1p2/8/3PP1b1/PPQK4/RNB2q2 b q - 1 24"
+        }
+      ]
+    },
+    {
+      "game_id": "tcFBzQWV",
+      "url": "https://lichess.org/tcFBzQWV",
+      "date": "2026.09.13",
+      "white": "mannyfresher",
+      "black": "treyshab2024",
+      "opponent": "treyshab2024",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.09.13_LnM0z0Gz_1700-superblitz.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 17,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxe8#"
+          ],
+          "played": "Ne4",
+          "fen": "rn1kr3/ppp2ppp/8/8/8/b2P2N1/q2BQPPP/2R1R1K1 w - - 4 17"
+        }
+      ]
+    },
+    {
+      "game_id": "9MpeQRir",
+      "url": "https://lichess.org/9MpeQRir",
+      "date": "2026.09.17",
+      "white": "mannyfresher",
+      "black": "tobyaz",
+      "opponent": "tobyaz",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_saragossa-mimosa_by_mannyfresher_2026.09.14 (2).pgn",
+      "candidate_count": 11,
+      "candidates": [
+        {
+          "move_number": 37,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qc6#"
+          ],
+          "played": "Qb7+",
+          "fen": "2R2b1R/3krpp1/8/p7/P3Q3/1P3P2/8/K5N1 w - - 3 37"
+        },
+        {
+          "move_number": 46,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxf7#"
+          ],
+          "played": "b5",
+          "fen": "4RR2/2Q2p2/5k2/p5p1/PP6/5P2/K7/6r1 w - - 0 46"
+        },
+        {
+          "move_number": 47,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxf7#"
+          ],
+          "played": "b6",
+          "fen": "4RR2/2Q2p2/5k2/pP4p1/P7/5P2/K7/3r4 w - - 1 47"
+        },
+        {
+          "move_number": 50,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxf7#"
+          ],
+          "played": "b7",
+          "fen": "4RR2/2Q2p2/1P3k2/p5p1/P7/5P2/2K5/5r2 w - - 5 50"
+        },
+        {
+          "move_number": 34,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qxe4+",
+            "Ne5",
+            "Qxe5#"
+          ],
+          "played": "Bxd7+",
+          "fen": "3rkb1R/3n1pp1/2Q5/p7/P3p1B1/1PR2P2/8/K5N1 w - - 2 34"
+        },
+        {
+          "move_number": 36,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qa8+",
+            "Kd7",
+            "Qc6+",
+            "Kd8",
+            "Qc8#"
+          ],
+          "played": "Rc8+",
+          "fen": "4kb1R/4rpp1/8/p7/P3Q3/1PR2P2/8/K5N1 w - - 1 36"
+        },
+        {
+          "move_number": 42,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qxf7+",
+            "Kd6",
+            "Qc7+",
+            "Kd5",
+            "Qc5#"
+          ],
+          "played": "Qc7+",
+          "fen": "2R2R2/4kpp1/4r3/p7/P4Q2/1P3P2/8/K5N1 w - - 5 42"
+        },
+        {
+          "move_number": 45,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qxf7+",
+            "Kg5",
+            "Qxg7+",
+            "Kh5",
+            "Rh8#"
+          ],
+          "played": "b4",
+          "fen": "4RR2/2Q2pp1/5k2/p7/P7/1P3P2/K7/6r1 w - - 0 45"
+        },
+        {
+          "move_number": 55,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qe5+",
+            "Kh7",
+            "Qh8+",
+            "Kg6",
+            "Rg8#"
+          ],
+          "played": "Qxf4",
+          "fen": "1Q2RR2/5pk1/8/p7/P3Kp2/8/8/8 w - - 1 55"
+        },
+        {
+          "move_number": 56,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qc7+",
+            "Kh6",
+            "Rh8+",
+            "Kg6",
+            "Reg8#"
+          ],
+          "played": "Qxf6+",
+          "fen": "4RR2/6k1/5p2/p7/P3KQ2/8/8/8 w - - 0 56"
+        },
+        {
+          "move_number": 57,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qh8+",
+            "Kg6",
+            "Rg8+",
+            "Kf7",
+            "Qg7#"
+          ],
+          "played": "Rh8#",
+          "fen": "4RR2/7k/5Q2/p7/P3K3/8/8/8 w - - 1 57"
+        }
+      ]
+    },
+    {
+      "game_id": "xQJdJbRq",
+      "url": "https://lichess.org/xQJdJbRq",
+      "date": "2026.09.17",
+      "white": "mannyfresher",
+      "black": "wesleytm",
+      "opponent": "wesleytm",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_saragossa-mimosa_by_mannyfresher_2026.09.14 (2).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 20,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qxg8#"
+          ],
+          "played": "f7+",
+          "fen": "r3k1n1/p1pq2Q1/1p2pPpB/n2p4/P2P4/2P2P2/1P1KP3/RN4N1 w - - 4 20"
+        }
+      ]
+    },
+    {
+      "game_id": "Ti5XC3Lp",
+      "url": "https://lichess.org/Ti5XC3Lp",
+      "date": "2026.09.18",
+      "white": "mannyfresher",
+      "black": "Jane_jo",
+      "opponent": "Jane_jo",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_van-geek_by_mannyfresher_2026.09.10.pgn",
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "move_number": 23,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc7+",
+            "Ke8",
+            "Qxe7#"
+          ],
+          "played": "Qxe7+",
+          "fen": "r6r/p2kb1p1/p4pb1/3NQ1PP/4P3/P2p4/1PP2P2/R1B1K2R w KQ - 0 23"
+        },
+        {
+          "move_number": 24,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qc7+",
+            "Kb5",
+            "Nc3#"
+          ],
+          "played": "Rf1",
+          "fen": "r6r/p3Q1p1/p1k2pb1/3N2PP/4P3/P2p4/1PP2P2/R1B1K2R w KQ - 1 24"
+        },
+        {
+          "move_number": 26,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qd7+",
+            "Kc5",
+            "Be3+",
+            "Kc4",
+            "Qc6#"
+          ],
+          "played": "a4#",
+          "fen": "r6r/p1Q3p1/p4p2/1k1N2Pb/4P3/P2p4/1PP2P2/R1B1KR2 w Q - 2 26"
+        }
+      ]
+    },
+    {
+      "game_id": "ERY6U09K",
+      "url": "https://lichess.org/ERY6U09K",
+      "date": "2026.09.26",
+      "white": "karabulzehra",
+      "black": "mannyfresher",
+      "opponent": "karabulzehra",
+      "source_file": "/home/rmichaelglover/Code/hrl-portfolio/chess/recent/2026-09-26/lichess_study_french-mediterraneans_by_mannyfresher_2026.09.26.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 22,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qe3+",
+            "Kg3",
+            "Ne4+",
+            "Kh4",
+            "Qh6#"
+          ],
+          "played": "Bxh3",
+          "fen": "r1b1k2B/2p4p/p5p1/1p1p4/5K2/P1n2P1Q/P1n1q1PP/2R5 b q - 0 22"
+        }
+      ]
+    },
+    {
+      "game_id": "SYsto3Q6",
+      "url": "https://lichess.org/SYsto3Q6",
+      "date": "2026.09.26",
+      "white": "mannyfresher",
+      "black": "Russogal",
+      "opponent": "Russogal",
+      "source_file": "/home/rmichaelglover/Code/hrl-portfolio/chess/recent/2026-09-26/lichess_study_creepy-crawly-formation_mannyfresher-865-russogal-869_by_mannyfresher_2026.09.26.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 29,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qxe6+",
+            "Kf8",
+            "Rh8#"
+          ],
+          "played": "Qh1",
+          "fen": "3rb1k1/p5p1/2p1pbP1/1p5R/4Q3/P7/1PP5/2K5 w - - 1 29"
+        },
+        {
+          "move_number": 40,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg3+",
+            "Kc4",
+            "Qb3#"
+          ],
+          "played": "Qe1+",
+          "fen": "8/6p1/2p1p3/1p3b2/1P1b3Q/P1k5/2P5/2K5 w - - 9 40"
+        }
+      ]
+    },
+    {
+      "game_id": "yAemWvGL",
+      "url": "https://lichess.org/yAemWvGL",
+      "date": "2026.09.26",
+      "white": "tyok12",
+      "black": "mannyfresher",
+      "opponent": "tyok12",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_garden-spider_by_mannyfresher_2026.09.16.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 33,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qe2#"
+          ],
+          "played": "Qc3+",
+          "fen": "4rrk1/Qpp2pp1/3p4/7p/5P1P/1N3KP1/P1q5/7R b - - 0 33"
+        },
+        {
+          "move_number": 41,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qg2#"
+          ],
+          "played": "Qxh1#",
+          "fen": "8/1pp2ppk/3p4/5NQp/4rP1P/5qPK/P3r3/7R b - - 16 41"
+        }
+      ]
+    },
+    {
+      "game_id": "yHDp9B7U",
+      "url": "https://lichess.org/yHDp9B7U",
+      "date": "2026.09.26",
+      "white": "AbilashNelapati",
+      "black": "mannyfresher",
+      "opponent": "AbilashNelapati",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_vant-kruijsing_by_mannyfresher_2026.09.08 (1).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 28,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qc5#"
+          ],
+          "played": "Qxe2",
+          "fen": "4r3/2p5/2k5/pN6/1nK4P/3r1PP1/PP1BNq2/R6R b - - 0 28"
+        },
+        {
+          "move_number": 29,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qe6#"
+          ],
+          "played": "Qxd2",
+          "fen": "4r3/2p5/2k5/pN6/1nK4P/3r1PP1/PP1Bq3/R1R5 b - - 1 29"
+        }
+      ]
+    },
+    {
+      "game_id": "zFiz2FiO",
+      "url": "https://lichess.org/zFiz2FiO",
+      "date": "2026.09.26",
+      "white": "mannyfresher",
+      "black": "Stickity",
+      "opponent": "Stickity",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_vant-kruijsing_by_mannyfresher_2026.09.08 (1).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 33,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qe8+",
+            "Kh7",
+            "Qg6+",
+            "Kg8",
+            "Rxd8#"
+          ],
+          "played": "Rxd8#",
+          "fen": "3b2kr/2p3p1/6Qp/4p2P/p7/N1P4N/PP3PK1/R2R4 w - - 3 33"
+        }
+      ]
+    },
+    {
+      "game_id": "2jid8qJX",
+      "url": "https://lichess.org/2jid8qJX",
+      "date": "2026.09.27",
+      "white": "mannyfresher",
+      "black": "chrkoll",
+      "opponent": "chrkoll",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_maroczy-allocaine_by_mannyfresher_2026.09.27 (2).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 27,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qh8#"
+          ],
+          "played": "Qh7+",
+          "fen": "r5k1/p4p2/3p1p1Q/8/6b1/8/P1P2K2/q5NR w - - 2 27"
+        }
+      ]
+    },
+    {
+      "game_id": "C2qo5zsO",
+      "url": "https://lichess.org/C2qo5zsO",
+      "date": "2026.09.27",
+      "white": "Edupuicon_utp",
+      "black": "mannyfresher",
+      "opponent": "Edupuicon_utp",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_project-nim_by_mannyfresher_2026.09.27 (2).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 24,
+          "side": "Black",
+          "mate_in": 2,
+          "line": [
+            "Qd3+",
+            "Ke1",
+            "Rb1#"
+          ],
+          "played": "Rb2+",
+          "fen": "4k1nr/p1pp1ppp/4p3/3PP3/7P/1r4P1/3K1P2/1q6 b k - 2 24"
+        },
+        {
+          "move_number": 20,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qa6+",
+            "Kd2",
+            "Qd3+",
+            "Kc1",
+            "Qc2#"
+          ],
+          "played": "Qxb2+",
+          "fen": "4k1nr/p1pp1ppp/4p3/4P3/3P3P/1r4P1/qB2KP2/n3R3 b k - 3 20"
+        }
+      ]
+    },
+    {
+      "game_id": "di9WGHZ9",
+      "url": "https://lichess.org/di9WGHZ9",
+      "date": "2026.09.27",
+      "white": "mannyfresher",
+      "black": "alxwntr",
+      "opponent": "alxwntr",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_saragossa-mimosa_by_mannyfresher_2026.09.14 (2).pgn",
+      "candidate_count": 5,
+      "candidates": [
+        {
+          "move_number": 36,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qe7#"
+          ],
+          "played": "Bf6",
+          "fen": "5k1r/p2Q3P/2pR4/5pB1/8/8/5P1R/2K2b2 w - - 1 36"
+        },
+        {
+          "move_number": 37,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qe7#"
+          ],
+          "played": "Bxh8",
+          "fen": "5k1r/p2Q3P/2pR1B2/8/5p2/8/5P1R/2K2b2 w - - 0 37"
+        },
+        {
+          "move_number": 39,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qe7#"
+          ],
+          "played": "h8=Q#",
+          "fen": "5k2/p2Q3P/2pR1B2/1b6/8/5p2/5P1R/2K5 w - - 2 39"
+        },
+        {
+          "move_number": 34,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qe6+",
+            "Kg7",
+            "Qf6#"
+          ],
+          "played": "Rd6+",
+          "fen": "7r/p2QB2P/2p3k1/5pp1/3R4/8/5P1R/2K2b2 w - - 0 34"
+        },
+        {
+          "move_number": 38,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qd8+",
+            "Kf7",
+            "Rf6#"
+          ],
+          "played": "Bf6",
+          "fen": "5k1B/p2Q3P/2pR4/8/8/5p2/5P1R/2K2b2 w - - 0 38"
+        }
+      ]
+    },
+    {
+      "game_id": "z4znoCcz",
+      "url": "https://lichess.org/z4znoCcz",
+      "date": "2026.09.27",
+      "white": "mannyfresher",
+      "black": "pakdhe",
+      "opponent": "pakdhe",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.09.27_z2Fm30hS_hourly-blitz.pgn",
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "move_number": 48,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qh5+",
+            "Kf6",
+            "Rg6#"
+          ],
+          "played": "Re7+",
+          "fen": "8/7R/p5Q1/1p2k3/6RK/8/8/3r4 w - - 3 48"
+        },
+        {
+          "move_number": 49,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qe6+",
+            "Kc5",
+            "Rc7#"
+          ],
+          "played": "Rg5+",
+          "fen": "8/4R3/p5Q1/1p1k4/6RK/8/8/3r4 w - - 5 49"
+        },
+        {
+          "move_number": 47,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qg7+",
+            "Ke6",
+            "Qg6+",
+            "Ke5",
+            "Rh5#"
+          ],
+          "played": "Qg6+",
+          "fen": "6Q1/7R/p4k2/1p6/6RK/8/8/3r4 w - - 1 47"
+        }
+      ]
+    },
+    {
+      "game_id": "RiO0We4D",
+      "url": "https://lichess.org/RiO0We4D",
+      "date": "2026.09.30",
+      "white": "mannyfresher",
+      "black": "Danila230600",
+      "opponent": "Danila230600",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_van-mieses_by_mannyfresher_2026.09.08 (2).pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 24,
+          "side": "White",
+          "mate_in": 1,
+          "line": [
+            "Qg7#"
+          ],
+          "played": "Nxf5",
+          "fen": "r4k1r/pbQ5/1pn2P1p/2bp1qP1/5B2/3P2N1/PPP5/RN2RK2 w - - 3 24"
+        }
+      ]
+    },
+    {
+      "game_id": "rmMa0yGW",
+      "url": "https://lichess.org/rmMa0yGW",
+      "date": "2026.09.30",
+      "white": "trostyanko-13",
+      "black": "mannyfresher",
+      "opponent": "trostyanko-13",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.09.30_qENwwapJ_eastern-superblitz (1).pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 24,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qg2#"
+          ],
+          "played": "Nf6",
+          "fen": "N5nr/ppQbk3/2n1p3/1B6/3P4/P6p/1PPq3P/4RRK1 b - - 4 24"
+        },
+        {
+          "move_number": 25,
+          "side": "Black",
+          "mate_in": 1,
+          "line": [
+            "Qg2#"
+          ],
+          "played": "Rg8+",
+          "fen": "N6r/pQ1bk3/2n1pn2/1B6/3P4/P6p/1PPq3P/4RRK1 b - - 0 25"
+        }
+      ]
+    },
+    {
+      "game_id": "Cj4hJ7qc",
+      "url": "https://lichess.org/Cj4hJ7qc",
+      "date": "2026.10.01",
+      "white": "mannyfresher",
+      "black": "riggorog",
+      "opponent": "riggorog",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_van-mieses_mannyfresher-898-riggorog-853_by_mannyfresher_2026.10.01.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 60,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qd2+",
+            "Kg1",
+            "Ra1#"
+          ],
+          "played": "Rd3",
+          "fen": "3Q4/8/8/8/2K5/R7/5k2/8 w - - 1 60"
+        },
+        {
+          "move_number": 65,
+          "side": "White",
+          "mate_in": 3,
+          "line": [
+            "Qh8+",
+            "Kg5",
+            "Qg8+",
+            "Kh6",
+            "Rh7#"
+          ],
+          "played": "Rh7#",
+          "fen": "6Q1/5R2/8/8/2K4k/8/8/8 w - - 11 65"
+        }
+      ]
+    },
+    {
+      "game_id": "DHXB0n44",
+      "url": "https://lichess.org/DHXB0n44",
+      "date": "2026.10.01",
+      "white": "mannyfresher",
+      "black": "samurai2113",
+      "opponent": "samurai2113",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_tournament_2026.10.01_39EeRmch_hourly-superblitz.pgn",
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "move_number": 23,
+          "side": "White",
+          "mate_in": 2,
+          "line": [
+            "Qd7+",
+            "Kf8",
+            "Nxg6#"
+          ],
+          "played": "Nxe6",
+          "fen": "1r2k1nr/p1p3Q1/4p1np/4p3/5N2/5PP1/PN5P/2KR3R w k - 0 23"
+        }
+      ]
+    },
+    {
+      "game_id": "biu2zGAr",
+      "url": "https://lichess.org/biu2zGAr",
+      "date": "2026.10.01",
+      "white": "matisanchez76",
+      "black": "mannyfresher",
+      "opponent": "matisanchez76",
+      "source_file": "/home/rmichaelglover/Downloads/lichess_study_newish-openings-contd_matisanchez76-872-mannyfresher-909_by_mannyfresher_2026.10.01.pgn",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "move_number": 25,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qa6+",
+            "Kb2",
+            "Qa3#"
+          ],
+          "played": "a5",
+          "fen": "1r3rk1/p4p1p/5qp1/2pP1b2/1bP5/1N6/K3QPPP/3R1B1R b - - 5 25"
+        },
+        {
+          "move_number": 36,
+          "side": "Black",
+          "mate_in": 3,
+          "line": [
+            "Qf2+",
+            "Kd3",
+            "Bf5#"
+          ],
+          "played": "Bf5+",
+          "fen": "rr4k1/3b1p1p/1q4p1/3P2P1/pbP2P2/8/2K4P/QR3B1R b - - 1 36"
+        }
+      ]
+    }
+  ]
+}
