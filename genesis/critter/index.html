@@ -39,6 +39,7 @@ h1{font:700 clamp(21px,3.6vw,34px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px}
 button.act{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 15px;font:14px ui-serif,Georgia;cursor:pointer}button.act:hover{background:#12203a}
 .stat{font:12px ui-monospace,monospace;color:var(--dim);margin-top:4px}.stat b{color:#7fe0c0}
 .geo{font:12px ui-monospace,monospace;color:var(--dim);max-width:620px;margin:6px auto 0}.geo b{color:#7fe0c0}
+.speed-control{display:inline-flex;align-items:center;gap:7px;font-size:13px}.speed-control select{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:7px;font:13px ui-monospace,monospace}.speed-note{color:var(--dim);font-size:12px;margin:4px auto 10px}
 .state-option{display:inline-flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}.state-option input{accent-color:var(--gr);width:17px;height:17px}.state-legend{max-width:620px;margin:10px auto;color:var(--dim);font-size:13px}.state-legend p{margin:5px 0}.state-legend [role="list"]{display:flex;justify-content:center;gap:8px 16px;flex-wrap:wrap}.state-legend [role="listitem"]{white-space:nowrap}.state-inspect{min-height:2em;font:12px/1.6 ui-monospace,monospace;color:#bff3dd;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:2px solid var(--gr);outline-offset:4px}
 .note{color:var(--dim);font-size:12.5px;max-width:790px;margin:16px auto 0;text-align:left;
  background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
@@ -59,10 +60,23 @@ a{color:#7fe0c0;text-decoration:none}
 <canvas id="c" width="620" height="620" role="img" aria-label="Animated Critter body: colors show three cell types; optional emoji show each cell's confidence."></canvas>
 <div class="panel">
   <button class="act" id="play">⏸ Pause</button>
+  <button class="act" id="step" title="Pause and advance one update">⏭ Step</button>
   <button class="act" id="reset">↺ New seed</button>
+  <label class="speed-control" for="speed">Updates/sec
+    <select id="speed">
+      <option value="1">1 · very slow</option>
+      <option value="2">2 · slow</option>
+      <option value="4" selected>4 · gentle</option>
+      <option value="8">8</option>
+      <option value="15">15</option>
+      <option value="30">30</option>
+      <option value="60">60 · original pace</option>
+    </select>
+  </label>
   <label class="state-option"><input type="checkbox" id="emoji-states" aria-controls="c state-legend"> Emoji node states</label>
   <span class="stat" id="stat"></span>
 </div>
+<p class="speed-note">Start gently at 4 updates/sec. Choose 1 to watch emoji changes, or pause and Step through each update.</p>
 <div class="state-legend" id="state-legend" hidden>
   <div role="list" aria-label="Node confidence legend">
     <span role="listitem">😵‍💫 Undecided: below 45%</span>
@@ -96,6 +110,7 @@ relax," poised at criticality.
 const cv=document.getElementById('c'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
 const K=3, COL=[[95,227,160],[192,96,255],[232,207,112]];   // the three cell types (green · violet · gold)
 let mode='simplicial', playing=true, frame=0;
+let updatesPerSecond=4, lastUpdateTime=performance.now();
 let showEmojiStates=false, hoveredState=null;
 const stateKinds=[{emoji:'😵‍💫',name:'Undecided'},{emoji:'🤔',name:'Leaning'},{emoji:'😌',name:'Settled'}];
 function nodeState(p){ const confidence=Math.max(...p);return {...stateKinds[confidence<0.45?0:confidence<0.70?1:2],confidence}; }
@@ -298,12 +313,19 @@ function gPoke(mx,my){ const CE=G.CELL; const x=Math.round(gCamX+(mx-W/2)/CE), z
   for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){ const k=gk(x+dx,z+dz); if(gCells.has(k)) gCells.set(k,rndp()); } }
 
 /* ===================== SHARED DRIVER ===================== */
-function seedActive(){ hoveredState=null;if(mode==='simplicial') sSeed(); else gSeed(); }
-function loop(){
-  if(playing){ frame++;
-    if(mode==='simplicial'){ sRelax(); sPhysics(); if(frame%8===0) sMorph(); }
-    else { gRelax(); if(frame%3===0) gMorph(); }
-  }
+function seedActive(){ hoveredState=null;frame=0;lastUpdateTime=performance.now();if(mode==='simplicial') sSeed(); else gSeed(); }
+function advanceSimulation(){
+  frame++;
+  if(mode==='simplicial'){ sRelax(); sPhysics(); if(frame%8===0) sMorph(); }
+  else { gRelax(); if(frame%3===0) gMorph(); }
+}
+function setPlaying(value){
+  playing=value;lastUpdateTime=performance.now();document.getElementById('play').textContent=playing?'⏸ Pause':'▶ Play';
+}
+function loop(time=performance.now()){
+  // Keep rendering responsive, but change the simulation only at the chosen pace.
+  // Never replay missed updates in a burst after a background tab resumes.
+  if(playing && time-lastUpdateTime>=1000/updatesPerSecond){advanceSimulation();lastUpdateTime=time;}
   if(mode==='simplicial'){ sDraw();
     document.getElementById('stat').innerHTML=`cells <b>${nodes.size}</b> · T <b>${sT.toFixed(2)}</b> · activity <b>${(sAct*100).toFixed(0)}%</b> · buds <b>${sGen}</b>`;
   } else { gDraw();
@@ -343,7 +365,9 @@ document.getElementById('emoji-states').addEventListener('change',function(){
 });
 document.getElementById('m-simp').onclick=()=>setMode('simplicial');
 document.getElementById('m-grid').onclick=()=>setMode('grid');
-document.getElementById('play').onclick=function(){playing=!playing;this.textContent=playing?'⏸ Pause':'▶ Play';};
+document.getElementById('play').onclick=()=>setPlaying(!playing);
+document.getElementById('step').onclick=()=>{setPlaying(false);advanceSimulation();};
+document.getElementById('speed').addEventListener('change',function(){updatesPerSecond=Number(this.value);lastUpdateTime=performance.now();});
 document.getElementById('reset').onclick=seedActive;
 document.getElementById('geo').innerHTML='continuous mesh · cells are nodes on springs, filled as <b>2-simplices</b> — the body flexes like a 3-D form';
 sSeed(); loop();
