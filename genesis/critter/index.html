@@ -39,6 +39,7 @@ h1{font:700 clamp(21px,3.6vw,34px)/1.12 ui-serif,Georgia,serif;margin:0 0 4px}
 button.act{background:#0c1226;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 15px;font:14px ui-serif,Georgia;cursor:pointer}button.act:hover{background:#12203a}
 .stat{font:12px ui-monospace,monospace;color:var(--dim);margin-top:4px}.stat b{color:#7fe0c0}
 .geo{font:12px ui-monospace,monospace;color:var(--dim);max-width:620px;margin:6px auto 0}.geo b{color:#7fe0c0}
+.state-option{display:inline-flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}.state-option input{accent-color:var(--gr);width:17px;height:17px}.state-legend{max-width:620px;margin:10px auto;color:var(--dim);font-size:13px}.state-legend p{margin:5px 0}.state-legend [role="list"]{display:flex;justify-content:center;gap:8px 16px;flex-wrap:wrap}.state-legend [role="listitem"]{white-space:nowrap}.state-inspect{min-height:2em;font:12px/1.6 ui-monospace,monospace;color:#bff3dd;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:2px solid var(--gr);outline-offset:4px}
 .note{color:var(--dim);font-size:12.5px;max-width:790px;margin:16px auto 0;text-align:left;
  background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .note b{color:#7fe0c0} code{background:#141d3a;padding:1px 6px;border-radius:5px;color:#e8c170;font-size:12px}
@@ -55,11 +56,22 @@ a{color:#7fe0c0;text-decoration:none}
   <button id="m-simp" class="on" aria-selected="true">◆ Simplicial body</button>
   <button id="m-grid" aria-selected="false">▦ Grid body (2-D)</button>
 </div>
-<canvas id="c" width="620" height="620"></canvas>
+<canvas id="c" width="620" height="620" role="img" aria-label="Animated Critter body: colors show three cell types; optional emoji show each cell's confidence."></canvas>
 <div class="panel">
   <button class="act" id="play">⏸ Pause</button>
   <button class="act" id="reset">↺ New seed</button>
+  <label class="state-option"><input type="checkbox" id="emoji-states" aria-controls="c state-legend"> Emoji node states</label>
   <span class="stat" id="stat"></span>
+</div>
+<div class="state-legend" id="state-legend" hidden>
+  <div role="list" aria-label="Node confidence legend">
+    <span role="listitem">😵‍💫 Undecided: below 45%</span>
+    <span role="listitem">🤔 Leaning: 45% to below 70%</span>
+    <span role="listitem">😌 Settled: 70% or more</span>
+  </div>
+  <p>Emoji describe the strongest of a node’s three label weights. Colors show its leading cell type.</p>
+  <p id="state-summary"></p>
+  <p class="state-inspect" id="state-inspect">Hover over a node to inspect its label weights.</p>
 </div>
 <p class="geo" id="geo"></p>
 <div class="note">
@@ -84,6 +96,28 @@ relax," poised at criticality.
 const cv=document.getElementById('c'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
 const K=3, COL=[[95,227,160],[192,96,255],[232,207,112]];   // the three cell types (green · violet · gold)
 let mode='simplicial', playing=true, frame=0;
+let showEmojiStates=false, hoveredState=null;
+const stateKinds=[{emoji:'😵‍💫',name:'Undecided'},{emoji:'🤔',name:'Leaning'},{emoji:'😌',name:'Settled'}];
+function nodeState(p){ const confidence=Math.max(...p);return {...stateKinds[confidence<0.45?0:confidence<0.70?1:2],confidence}; }
+function drawStateEmoji(x,y,p,size){
+  const state=nodeState(p);ctx.save();
+  ctx.fillStyle='rgba(1,2,8,0.78)';ctx.beginPath();ctx.arc(x,y,size*0.52,0,Math.PI*2);ctx.fill();
+  const color=COL[dom(p)];ctx.strokeStyle=`rgb(${color.join(',')})`;ctx.lineWidth=1.3;
+  ctx.beginPath();ctx.arc(x,y,size*0.6,0,Math.PI*2);ctx.stroke();
+  ctx.font=`${size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(state.emoji,x,y+0.5);ctx.restore();
+}
+function updateStateDescription(){
+  if(!showEmojiStates)return;
+  const distributions=mode==='simplicial'?[...nodes.values()].map(n=>n.p):[...gCells.values()];
+  const counts=[0,0,0];for(const p of distributions){const c=Math.max(...p);counts[c<0.45?0:c<0.70?1:2]++;}
+  document.getElementById('state-summary').textContent=stateKinds.map((s,i)=>`${s.emoji} ${s.name}: ${counts[i]}`).join(' · ');
+  const p=hoveredState===null?null:mode==='simplicial'?nodes.get(hoveredState)?.p:gCells.get(hoveredState);
+  const inspect=document.getElementById('state-inspect');
+  if(!p){inspect.textContent='Hover over a node to inspect its label weights.';return;}
+  const state=nodeState(p);
+  inspect.textContent=`${state.emoji} ${state.name} · ${Math.round(state.confidence*100)}% strongest weight · green ${(p[0]*100).toFixed(1)}% · violet ${(p[1]*100).toFixed(1)}% · gold ${(p[2]*100).toFixed(1)}%`;
+}
 
 function rndp(){ const p=[Math.random(),Math.random(),Math.random()]; const s=p[0]+p[1]+p[2]; return [p[0]/s,p[1]/s,p[2]/s]; }
 function dom(p){ let m=0,mi=0; for(let l=0;l<K;l++) if(p[l]>m){m=p[l];mi=l;} return mi; }
@@ -192,7 +226,8 @@ function sDraw(){
     ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); } }
   for(const i of ids){ const n=nodes.get(i); const d=dom(n.p), conf=Math.max(...n.p);
     const c=COL[d]; ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${0.45+0.5*conf})`;
-    ctx.beginPath();ctx.arc(n.x,n.y,conf>0.5?3.2:2.2,0,7);ctx.fill(); }
+    ctx.beginPath();ctx.arc(n.x,n.y,conf>0.5?3.2:2.2,0,7);ctx.fill();
+    if(showEmojiStates)drawStateEmoji(n.x,n.y,n.p,13); }
 }
 function sPoke(mx,my){ for(const [id,n] of nodes){ if((n.x-mx)**2+(n.y-my)**2<1600){ n.p=rndp(); n.vx+=(Math.random()-0.5)*4; n.vy+=(Math.random()-0.5)*4; } } }
 
@@ -256,13 +291,14 @@ function gDraw(){
     const d=dom(p), conf=Math.max(...p), c=COL[d];
     ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${0.30+0.6*conf})`;
     ctx.fillRect(px-s/2,py-s/2,s,s);
+    if(showEmojiStates)drawStateEmoji(px,py,p,11);
   }
 }
 function gPoke(mx,my){ const CE=G.CELL; const x=Math.round(gCamX+(mx-W/2)/CE), z=Math.round(gCamZ+(my-H/2)/CE);
   for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){ const k=gk(x+dx,z+dz); if(gCells.has(k)) gCells.set(k,rndp()); } }
 
 /* ===================== SHARED DRIVER ===================== */
-function seedActive(){ if(mode==='simplicial') sSeed(); else gSeed(); }
+function seedActive(){ hoveredState=null;if(mode==='simplicial') sSeed(); else gSeed(); }
 function loop(){
   if(playing){ frame++;
     if(mode==='simplicial'){ sRelax(); sPhysics(); if(frame%8===0) sMorph(); }
@@ -273,7 +309,7 @@ function loop(){
   } else { gDraw();
     document.getElementById('stat').innerHTML=`cells <b>${gCells.size}</b> · T <b>${gT.toFixed(2)}</b> · activity <b>${(gAct*100).toFixed(0)}%</b> · buds <b>${gGen}</b>`;
   }
-  requestAnimationFrame(loop);
+  updateStateDescription();requestAnimationFrame(loop);
 }
 function setMode(m){ if(m===mode) return; mode=m; frame=0;
   document.getElementById('m-simp').classList.toggle('on',m==='simplicial');
@@ -288,6 +324,22 @@ function setMode(m){ if(m===mode) return; mode=m; frame=0;
 cv.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect();
   const mx=(e.clientX-r.left)*W/r.width, my=(e.clientY-r.top)*H/r.height;
   if(mode==='simplicial') sPoke(mx,my); else gPoke(mx,my);
+});
+cv.addEventListener('pointermove',e=>{
+  if(!showEmojiStates)return;
+  const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*W/r.width,my=(e.clientY-r.top)*H/r.height;
+  hoveredState=null;
+  if(mode==='simplicial'){
+    let nearest=18*W/r.width;
+    for(const [id,n] of nodes){const distance=Math.hypot(n.x-mx,n.y-my);if(distance<nearest){nearest=distance;hoveredState=id;}}
+  }else{
+    const x=Math.round(gCamX+(mx-W/2)/G.CELL),z=Math.round(gCamZ+(my-H/2)/G.CELL),key=gk(x,z);
+    if(gCells.has(key))hoveredState=key;
+  }
+});
+cv.addEventListener('pointerleave',()=>{hoveredState=null;});
+document.getElementById('emoji-states').addEventListener('change',function(){
+  showEmojiStates=this.checked;hoveredState=null;document.getElementById('state-legend').hidden=!showEmojiStates;
 });
 document.getElementById('m-simp').onclick=()=>setMode('simplicial');
 document.getElementById('m-grid').onclick=()=>setMode('grid');
