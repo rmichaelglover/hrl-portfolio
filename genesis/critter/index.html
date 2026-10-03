@@ -325,7 +325,8 @@ function setPlaying(value){
 function loop(time=performance.now()){
   // Keep rendering responsive, but change the simulation only at the chosen pace.
   // Never replay missed updates in a burst after a background tab resumes.
-  if(playing && time-lastUpdateTime>=1000/updatesPerSecond){advanceSimulation();lastUpdateTime=time;}
+  const interval=1000/updatesPerSecond,elapsed=time-lastUpdateTime;
+  if(playing && elapsed>=interval){advanceSimulation();lastUpdateTime=time-(elapsed%interval);}
   if(mode==='simplicial'){ sDraw();
     document.getElementById('stat').innerHTML=`cells <b>${nodes.size}</b> · T <b>${sT.toFixed(2)}</b> · activity <b>${(sAct*100).toFixed(0)}%</b> · buds <b>${sGen}</b>`;
   } else { gDraw();
