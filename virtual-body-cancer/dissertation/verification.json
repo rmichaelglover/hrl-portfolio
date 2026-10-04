@@ -1,0 +1,14 @@
+{
+  "pages": 80,
+  "words": 22280,
+  "distinct_figures": 64,
+  "all_page_headings_checked": true,
+  "all_pages_exceed_180_extracted_words": true,
+  "overfull_boxes": 0,
+  "visual_pages_checked": [
+    1,
+    36,
+    80
+  ],
+  "scope": "document integrity and existing experiment results; not clinical validation"
+}

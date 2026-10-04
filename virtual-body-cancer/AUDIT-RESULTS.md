@@ -72,7 +72,7 @@ A_resistant(C) = diag(resistant_growth - kill_resistant*penetration*C)
                  + migration*L.
 ```
 
-The conversion term gives a lower off-diagonal block but does not change eigenvalues of this block-triangular system. The other state couplings do not feed back into the tumor block to first order at zero tumor population. With the model's positive repair and clearance assumptions, the non-tumor modes are stable. Local asymptotic stability therefore requires the largest eigenvalue of **both clone blocks** to be strictly negative.
+The conversion term gives a lower off-diagonal block but does not change eigenvalues of this block-triangular system. The other state couplings do not feed back into the tumor block to first order at zero tumor population. With the model's positive repair and clearance assumptions, the non-tumor modes are stable. Strictly negative largest eigenvalues of **both clone blocks** certify local exponential stability. Zero eigenvalues are nonhyperbolic and do not alone settle nonlinear stability. In the reserve-permitted interval the resistant block retains a strictly positive eigenvalue, establishing instability.
 
 Here L is symmetric. Raising C subtracts a strictly positive diagonal matrix, so the largest eigenvalue decreases strictly. Each positive-to-negative threshold is unique and calculated by a bracketed root solver. This is an analysis of the implemented equations, not a biological efficacy threshold.
 

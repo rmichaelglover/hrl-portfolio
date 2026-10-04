@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "migration_conserves_each_clone": true,
+    "no_spontaneous_tumor": true,
+    "constant_input_exposure_exact": true,
+    "none_nonnegative": true,
+    "none_step_refinement": true,
+    "continuous_nonnegative": true,
+    "continuous_step_refinement": true,
+    "pulsed_nonnegative": true,
+    "pulsed_step_refinement": true,
+    "feedback_nonnegative": true,
+    "feedback_step_refinement": true,
+    "all_passed": true
+  },
+  "final_state_step_refinement_error": {
+    "none": 1.2864154186331689e-12,
+    "continuous": 8.344969160134497e-11,
+    "pulsed": 1.4045548057950441e-09,
+    "feedback": 0.0002470467055030179
+  },
+  "scope": "numerics only; no cancer biology validation"
+}
