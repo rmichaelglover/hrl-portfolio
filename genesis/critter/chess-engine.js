@@ -8,8 +8,11 @@ DIRS.q=DIRS.b.concat(DIRS.r);
 const KNIGHTS=[[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]];
 const KING=DIRS.q;
 const other=c=>c==='w'?'b':'w';
-const BACK_EMOJI=['🏰','🐴','🧙','👸','👑','🔮','🦄','🗼'];
-const PAWN_EMOJI=['🌱','🌿','🍀','🌾','🍃','🌵','🌴','🌳'];
+const WOODLAND={"Ra": ["🏰", "Castle Andora"], "Nb": ["🦄", "Sir Banyan Blithers"], "Bc": ["🛕", "Popette Christiana Carolina"], "Qd": ["🐲", "Queen Dilorias"], "Ke": ["🦁", "King Ethelheim"], "Bf": ["🧙", "Pope Francisco Finochitti"], "Ng": ["🐎", "Dame Gertrude Goethe"], "Rh": ["🧱", "Castle Hessenbach"], "Pa": ["🦊", "Alexander Aaronson"], "Pb": ["🦡", "Bartholomew Bogerson"], "Pc": ["🦝", "Cais Christianson"], "Pd": ["🦌", "Dorothy Dryers"], "Pe": ["🦉", "Ella Elouise"], "Pf": ["🐸", "Frank Fassenbecher"], "Pg": ["🦎", "Georgiana Gina"], "Ph": ["🦔", "Harriet Hissindorf"]};
+const BACK_KEYS=["Ra","Nb","Bc","Qd","Ke","Bf","Ng","Rh"];
+const PAWN_KEYS=["Pa","Pb","Pc","Pd","Pe","Pf","Pg","Ph"];
+const BACK_EMOJI=BACK_KEYS.map(key=>WOODLAND[key][0]);
+const PAWN_EMOJI=PAWN_KEYS.map(key=>WOODLAND[key][0]);
 function hashSeed(text){let h=2166136261;for(const c of String(text)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 function random(seed){let a=hashSeed(seed);return ()=>{a+=0x6D2B79F5;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
 class Habitat{
@@ -43,9 +46,9 @@ class Habitat{
       const record={id:army,color,pair,homeX:x+4,homeY:row,kingId:null,rooks:[],active:true};
       this.armies.push(record);
       for(let col=0;col<8;col++){
-        const p={id:this.nextId++,type:'rnbqkbnr'[col],birthType:'rnbqkbnr'[col],glyph:color==='w'?BACK_EMOJI[col]:null,color,army,x:x+col,y:row,moved:false};
+        const p={id:this.nextId++,type:'rnbqkbnr'[col],birthType:'rnbqkbnr'[col],glyph:color==='w'?BACK_EMOJI[col]:null,character:color==='w'?WOODLAND[BACK_KEYS[col]][1]:null,color,army,x:x+col,y:row,moved:false};
         this.put(p);if(p.type==='k')record.kingId=p.id;if(p.type==='r')record.rooks.push(p.id);
-        this.put({id:this.nextId++,type:'p',birthType:'p',glyph:color==='w'?PAWN_EMOJI[col]:null,color,army,x:x+col,y:pawnRow,moved:false});
+        this.put({id:this.nextId++,type:'p',birthType:'p',glyph:color==='w'?PAWN_EMOJI[col]:null,character:color==='w'?WOODLAND[PAWN_KEYS[col]][1]:null,color,army,x:x+col,y:pawnRow,moved:false});
       }
     }
   }
@@ -222,6 +225,6 @@ class Habitat{
   step(policy='forage'){const move=this.chooseMove(policy);return move?this.move(move):false;}
   snapshot(){return {format:'chess-critter-v1',seed:this.seed,width:this.width,height:this.height,pairs:this.pairs,turn:this.turn,ply:this.ply,halfmove:this.halfmove,ep:this.ep,armies:this.armies,board:this.board,mated:this.mated,captured:this.captured,retired:this.retired,result:this.result,history:this.history};}
 }
-const api={Habitat,hashSeed,random,VALUES};
+const api={Habitat,hashSeed,random,VALUES,WOODLAND};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ChessCritter=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

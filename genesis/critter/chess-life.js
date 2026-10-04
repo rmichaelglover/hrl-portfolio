@@ -1,13 +1,13 @@
 'use strict';
 const $=id=>document.getElementById(id),canvas=$('board'),ctx=canvas.getContext('2d');
-const HOME={k:'👑',q:'👸',r:'🏰',b:'🧙',n:'🐴',p:'🌱'},AWAY={k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
+const HOME={k:'🦁',q:'🐲',r:'🏰',b:'🧙',n:'🦄',p:'🦊'},AWAY={k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
 const NAME={k:'King',q:'Queen',r:'Rook',b:'Bishop',n:'Knight',p:'Pawn'};
 let world,playing=false,cellSize=36,last=performance.now(),selected=null,hovered=null,legal=[],fit=false;
 const team=c=>c==='w'?'White / home':'Black / away';
 const square=(x,y)=>`${String.fromCharCode(65+x%26)}${x>=26?Math.floor(x/26)+1:''}:${world.height-y}`;
 function pause(){playing=false;$('play').textContent='▶ Observe';last=performance.now();}
 function seedWorld(){
-  pause();const [w,h]=$('size').value.split(',').map(Number);
+  invalidateAnalysis();pause();const [w,h]=$('size').value.split(',').map(Number);
   world=new ChessCritter.Habitat(w,h,$('seed').value||'wings-out',Number($('pairs').value));
   $('pairs').value=String(world.pairs);selected=hovered=null;legal=[];
   setCanvasSize();update();
@@ -70,9 +70,9 @@ function describe(){
   if(!p){$('inspector').textContent=world.result?world.result.reason:'Hover to inspect; while paused, select a moving-team node to show legal destinations.';return;}
   const choices=p.color===world.turn?(selected===p.id?legal:world.legalMoves()).filter(m=>m.id===p.id):[];
   const checked=p.type==='k'&&world.attacked(p.x,p.y,p.color==='w'?'b':'w');
-  $('inspector').textContent=`${p.color==='w'?(p.glyph||HOME[p.type]):AWAY[p.type]} ${team(p.color)} ${NAME[p.type]}${p.birthType==='p'&&p.type!=='p'?' (promoted)':''} · army ${p.army} · ${square(p.x,p.y)}${checked?' · IN CHECK':''} · ${p.color===world.turn?new Set(choices.map(m=>`${m.x},${m.y}`)).size+' legal destinations':'waiting for its team turn'}`;
+  $('inspector').textContent=`${p.color==='w'?(p.glyph||HOME[p.type]):AWAY[p.type]} ${team(p.color)} ${NAME[p.type]}${p.character?' · '+p.character:''}${p.birthType==='p'&&p.type!=='p'?' (promoted)':''} · army ${p.army} · ${square(p.x,p.y)}${checked?' · IN CHECK':''} · ${p.color===world.turn?new Set(choices.map(m=>`${m.x},${m.y}`)).size+' legal destinations':'waiting for its team turn'}`;
 }
-function step(){pause();world.step($('policy').value);selected=null;legal=[];update();}
+function step(){invalidateAnalysis();pause();world.step($('policy').value);selected=null;legal=[];update();}
 function cellAt(event){const r=canvas.getBoundingClientRect();return {x:Math.floor((event.clientX-r.left)/r.width*world.width),y:Math.floor((event.clientY-r.top)/r.height*world.height)};}
 canvas.addEventListener('pointermove',event=>{const {x,y}=cellAt(event);hovered=world.at(x,y)?.id??null;describe();});
 canvas.addEventListener('pointerleave',()=>{hovered=null;describe();});
@@ -81,9 +81,9 @@ canvas.addEventListener('click',event=>{
   const {x,y}=cellAt(event),p=world.at(x,y);
   if(p&&p.color===world.turn){selected=p.id;legal=world.legalMoves();describe();draw();return;}
   const move=legal.find(m=>m.id===selected&&m.x===x&&m.y===y&&(!m.promotion||m.promotion===$('promotion').value));
-  if(move&&world.move(move)){selected=null;legal=[];update();}
+  if(move&&world.move(move)){invalidateAnalysis();selected=null;legal=[];update();}
 });
-$('play').onclick=()=>{if(world.result)return;playing=!playing;last=performance.now();selected=null;legal=[];$('play').textContent=playing?'⏸ Pause':'▶ Observe';update();};
+$('play').onclick=()=>{if(world.result)return;invalidateAnalysis();playing=!playing;last=performance.now();selected=null;legal=[];$('play').textContent=playing?'⏸ Pause':'▶ Observe';update();};
 $('step').onclick=step;$('seed-world').onclick=seedWorld;
 $('new-seed').onclick=()=>{$('seed').value='critter-'+crypto.getRandomValues(new Uint32Array(1))[0].toString(36);seedWorld();};
 $('size').onchange=()=>{
@@ -95,7 +95,7 @@ $('pairs').onchange=seedWorld;
 $('zoom').onchange=()=>{fit=false;setCanvasSize();};$('fit').onclick=()=>{fit=true;setCanvasSize();};
 $('origins').onchange=draw;$('speed').onchange=()=>{last=performance.now();};
 $('export').onclick=()=>{
-  const blob=new Blob([JSON.stringify({...world.snapshot(),policy:$('policy').value},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  const blob=new Blob([JSON.stringify({...ChessSolver.serialize(world),policy:$('policy').value},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
   a.href=url;a.download=`chess-critter-${world.ply}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 addEventListener('resize',()=>{if(fit)setCanvasSize();});
@@ -106,4 +106,37 @@ function loop(time){
 }
 // Disable army counts that do not fit the initial Conway-sized habitat.
 for(const option of $('pairs').options)option.disabled=Number(option.value)>2;
+let solverWorker=null,analysis=null;
+function stopAnalysis(){
+  if(solverWorker){solverWorker.terminate();solverWorker=null;}
+  $('solve').disabled=false;$('solve-stop').disabled=true;
+}
+function invalidateAnalysis(){
+  stopAnalysis();analysis=null;$('solve-save').disabled=true;
+  $('solve-status').textContent='Ready. Search pauses the habitat and runs in the background.';
+}
+function showAnalysis(report){
+  analysis=report;$('solve-save').disabled=false;
+  const label=report.value===1?'White win':report.value===-1?'Black win':'draw';
+  $('solve-status').textContent=`${report.status==='proven'?'PROVEN '+label:'UNRESOLVED'} · White value [${report.lower}, ${report.upper}] · epsilon ${report.epsilon} · ${report.nodes.toLocaleString()} searched nodes · completed depth ${report.completedDepth} · ${(report.elapsedMs/1000).toFixed(1)} seconds`;
+}
+$('solve').onclick=()=>{
+  pause();update();stopAnalysis();analysis=null;$('solve-save').disabled=true;
+  $('solve').disabled=true;$('solve-stop').disabled=false;
+  $('solve-status').textContent='Searching continuations… initial bounds [−1, +1].';
+  solverWorker=new Worker('chess-solver-worker.js');
+  solverWorker.onmessage=event=>{
+    if(event.data.type==='error'){$('solve-status').textContent='Search error: '+event.data.message;stopAnalysis();return;}
+    showAnalysis(event.data.report);
+    if(event.data.type==='done'){stopAnalysis();$('solve-status').textContent+=' · '+event.data.report.stopReason;}
+  };
+  solverWorker.onerror=()=>{$('solve-status').textContent='Search could not start. Serve this page over HTTP to enable background workers.';stopAnalysis();};
+  solverWorker.postMessage({state:ChessSolver.serialize(world),options:{milliseconds:Number($('solve-budget').value),maxNodes:1000000}});
+};
+$('solve-stop').onclick=()=>{stopAnalysis();$('solve-status').textContent+=' · stopped; only completed reports retained';};
+$('solve-save').onclick=()=>{
+  if(!analysis)return;
+  const url=URL.createObjectURL(new Blob([JSON.stringify(analysis,null,2)],{type:'application/json'}));
+  const a=document.createElement('a');a.href=url;a.download=`chess-analysis-${analysis.ply}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
 seedWorld();requestAnimationFrame(loop);

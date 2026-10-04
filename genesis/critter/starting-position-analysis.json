@@ -1,0 +1,760 @@
+{
+  "format": "chess-critter-analysis-v1",
+  "rules": "Chess Critter automatic draws and 1200-ply cap",
+  "perspective": "White",
+  "status": "unresolved",
+  "lower": -1,
+  "upper": 1,
+  "epsilon": 2,
+  "value": null,
+  "turn": "w",
+  "ply": 0,
+  "nodes": 24491,
+  "completedDepth": 3,
+  "attemptedDepth": 4,
+  "elapsedMs": 5000,
+  "stopReason": "budget exhausted",
+  "terminalReason": null,
+  "candidate": {
+    "id": 18,
+    "fromX": 0,
+    "fromY": 6,
+    "x": 0,
+    "y": 5
+  },
+  "moves": [
+    {
+      "move": {
+        "id": 18,
+        "fromX": 0,
+        "fromY": 6,
+        "x": 0,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 18,
+        "fromX": 0,
+        "fromY": 6,
+        "x": 0,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 20,
+        "fromX": 1,
+        "fromY": 6,
+        "x": 1,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 20,
+        "fromX": 1,
+        "fromY": 6,
+        "x": 1,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 22,
+        "fromX": 2,
+        "fromY": 6,
+        "x": 2,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 22,
+        "fromX": 2,
+        "fromY": 6,
+        "x": 2,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 24,
+        "fromX": 3,
+        "fromY": 6,
+        "x": 3,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 24,
+        "fromX": 3,
+        "fromY": 6,
+        "x": 3,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 26,
+        "fromX": 4,
+        "fromY": 6,
+        "x": 4,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 26,
+        "fromX": 4,
+        "fromY": 6,
+        "x": 4,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 28,
+        "fromX": 5,
+        "fromY": 6,
+        "x": 5,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 28,
+        "fromX": 5,
+        "fromY": 6,
+        "x": 5,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 30,
+        "fromX": 6,
+        "fromY": 6,
+        "x": 6,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 30,
+        "fromX": 6,
+        "fromY": 6,
+        "x": 6,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 32,
+        "fromX": 7,
+        "fromY": 6,
+        "x": 7,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 32,
+        "fromX": 7,
+        "fromY": 6,
+        "x": 7,
+        "y": 4,
+        "double": true
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 19,
+        "fromX": 1,
+        "fromY": 7,
+        "x": 2,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 19,
+        "fromX": 1,
+        "fromY": 7,
+        "x": 0,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 29,
+        "fromX": 6,
+        "fromY": 7,
+        "x": 7,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    },
+    {
+      "move": {
+        "id": 29,
+        "fromX": 6,
+        "fromY": 7,
+        "x": 5,
+        "y": 5
+      },
+      "lower": -1,
+      "upper": 1,
+      "proven": false
+    }
+  ],
+  "state": {
+    "format": "chess-critter-v1",
+    "seed": "solver-start",
+    "width": 8,
+    "height": 8,
+    "pairs": 1,
+    "turn": "w",
+    "ply": 0,
+    "halfmove": 0,
+    "ep": null,
+    "armies": [
+      {
+        "id": "0-b",
+        "color": "b",
+        "pair": 0,
+        "homeX": 4,
+        "homeY": 0,
+        "kingId": 9,
+        "rooks": [
+          1,
+          15
+        ],
+        "active": true
+      },
+      {
+        "id": "0-w",
+        "color": "w",
+        "pair": 0,
+        "homeX": 4,
+        "homeY": 7,
+        "kingId": 25,
+        "rooks": [
+          17,
+          31
+        ],
+        "active": true
+      }
+    ],
+    "board": [
+      {
+        "id": 1,
+        "type": "r",
+        "birthType": "r",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 0,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 3,
+        "type": "n",
+        "birthType": "n",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 1,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 5,
+        "type": "b",
+        "birthType": "b",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 2,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 7,
+        "type": "q",
+        "birthType": "q",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 3,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 9,
+        "type": "k",
+        "birthType": "k",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 4,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 11,
+        "type": "b",
+        "birthType": "b",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 5,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 13,
+        "type": "n",
+        "birthType": "n",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 6,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 15,
+        "type": "r",
+        "birthType": "r",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 7,
+        "y": 0,
+        "moved": false
+      },
+      {
+        "id": 2,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 0,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 4,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 1,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 6,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 2,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 8,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 3,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 10,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 4,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 12,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 5,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 14,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 6,
+        "y": 1,
+        "moved": false
+      },
+      {
+        "id": 16,
+        "type": "p",
+        "birthType": "p",
+        "glyph": null,
+        "character": null,
+        "color": "b",
+        "army": "0-b",
+        "x": 7,
+        "y": 1,
+        "moved": false
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "id": 18,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd8a",
+        "character": "Alexander Aaronson",
+        "color": "w",
+        "army": "0-w",
+        "x": 0,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 20,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udda1",
+        "character": "Bartholomew Bogerson",
+        "color": "w",
+        "army": "0-w",
+        "x": 1,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 22,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd9d",
+        "character": "Cais Christianson",
+        "color": "w",
+        "army": "0-w",
+        "x": 2,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 24,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd8c",
+        "character": "Dorothy Dryers",
+        "color": "w",
+        "army": "0-w",
+        "x": 3,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 26,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd89",
+        "character": "Ella Elouise",
+        "color": "w",
+        "army": "0-w",
+        "x": 4,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 28,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83d\udc38",
+        "character": "Frank Fassenbecher",
+        "color": "w",
+        "army": "0-w",
+        "x": 5,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 30,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd8e",
+        "character": "Georgiana Gina",
+        "color": "w",
+        "army": "0-w",
+        "x": 6,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 32,
+        "type": "p",
+        "birthType": "p",
+        "glyph": "\ud83e\udd94",
+        "character": "Harriet Hissindorf",
+        "color": "w",
+        "army": "0-w",
+        "x": 7,
+        "y": 6,
+        "moved": false
+      },
+      {
+        "id": 17,
+        "type": "r",
+        "birthType": "r",
+        "glyph": "\ud83c\udff0",
+        "character": "Castle Andora",
+        "color": "w",
+        "army": "0-w",
+        "x": 0,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 19,
+        "type": "n",
+        "birthType": "n",
+        "glyph": "\ud83e\udd84",
+        "character": "Sir Banyan Blithers",
+        "color": "w",
+        "army": "0-w",
+        "x": 1,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 21,
+        "type": "b",
+        "birthType": "b",
+        "glyph": "\ud83d\uded5",
+        "character": "Popette Christiana Carolina",
+        "color": "w",
+        "army": "0-w",
+        "x": 2,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 23,
+        "type": "q",
+        "birthType": "q",
+        "glyph": "\ud83d\udc32",
+        "character": "Queen Dilorias",
+        "color": "w",
+        "army": "0-w",
+        "x": 3,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 25,
+        "type": "k",
+        "birthType": "k",
+        "glyph": "\ud83e\udd81",
+        "character": "King Ethelheim",
+        "color": "w",
+        "army": "0-w",
+        "x": 4,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 27,
+        "type": "b",
+        "birthType": "b",
+        "glyph": "\ud83e\uddd9",
+        "character": "Pope Francisco Finochitti",
+        "color": "w",
+        "army": "0-w",
+        "x": 5,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 29,
+        "type": "n",
+        "birthType": "n",
+        "glyph": "\ud83d\udc0e",
+        "character": "Dame Gertrude Goethe",
+        "color": "w",
+        "army": "0-w",
+        "x": 6,
+        "y": 7,
+        "moved": false
+      },
+      {
+        "id": 31,
+        "type": "r",
+        "birthType": "r",
+        "glyph": "\ud83e\uddf1",
+        "character": "Castle Hessenbach",
+        "color": "w",
+        "army": "0-w",
+        "x": 7,
+        "y": 7,
+        "moved": false
+      }
+    ],
+    "mated": {
+      "w": 0,
+      "b": 0
+    },
+    "captured": {
+      "w": 0,
+      "b": 0
+    },
+    "retired": {
+      "w": 0,
+      "b": 0
+    },
+    "result": null,
+    "history": [],
+    "origins": [
+      {
+        "x": 0,
+        "y": 0,
+        "pair": 0
+      }
+    ],
+    "nextId": 33,
+    "repetition": [
+      [
+        "8x8|w|br:0-b,bn:0-b,bb:0-b,bq:0-b,bk:0-b,bb:0-b,bn:0-b,br:0-b,bp:0-b,bp:0-b,bp:0-b,bp:0-b,bp:0-b,bp:0-b,bp:0-b,bp:0-b,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,wp:0-w,wp:0-w,wp:0-w,wp:0-w,wp:0-w,wp:0-w,wp:0-w,wp:0-w,wr:0-w,wn:0-w,wb:0-w,wq:0-w,wk:0-w,wb:0-w,wn:0-w,wr:0-w|0-b:1,0-b:15;0-w:17,0-w:31|0,1;0,6;1,1;1,6;2,1;2,6;3,1;3,6;4,1;4,6;5,1;5,6;6,1;6,6;7,1;7,6|-",
+        1
+      ]
+    ]
+  }
+}

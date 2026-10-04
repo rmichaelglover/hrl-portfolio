@@ -9,11 +9,14 @@ sizes support up to six army pairs. Initial formations have two-square gaps
 where multiple formations fit. Those gaps and formation borders never restrict
 movement. Pawns promote at the entire habitat's far edge, not a former region.
 
-White is the home team. Every starting home army has sixteen distinct emoji:
-king 👑; queen 👸; rooks 🏰 and 🗼; bishops 🧙 and 🔮; knights 🐴 and 🦄;
-pawns 🌱 🌿 🍀 🌾 🍃 🌵 🌴 🌳. Promotions retain the plant identity and add a
-role badge. Black uses classical figurines. Army corner marks distinguish
-matching identities in different armies.
+White is the home team, using the definitive Woodland cast from `maestro.html`:
+King Ethelheim 🦁, Queen Dilorias 🐲, Castle Andora 🏰, Castle Hessenbach 🧱,
+Sir Banyan Blithers 🦄, Dame Gertrude Goethe 🐎, Popette Christiana Carolina 🛕,
+and Pope Francisco Finochitti 🧙. Pawns: Alexander Aaronson 🦊, Bartholomew
+Bogerson 🦡, Cais Christianson 🦝, Dorothy Dryers 🦌, Ella Elouise 🦉,
+Frank Fassenbecher 🐸, Georgiana Gina 🦎, Harriet Hissindorf 🦔.
+Promotions retain identity and add a role badge. Black uses classical figurines.
+Army corner marks distinguish matching identities in different armies.
 
 ## Explicit variant rules
 
@@ -56,7 +59,7 @@ Forage is a seeded one-ply heuristic favoring material gains and checks while
 penalizing attacked destination squares. Random chooses among legal moves.
 Neither policy claims strong chess play. Identical seed, habitat, army count,
 policy, and action sequence reproduce the same run. Saved JSON records the
-state and history; the interface does not currently import saved states.
+state, history, and full repetition counts required for exact search; the interface does not currently import saved states.
 
 ## Verification
 
@@ -74,3 +77,35 @@ movement; repetition; quiet-move and bare-king draws; deterministic RNG; and
 population accounting over multi-army play.
 
 Classical reference: [FIDE Laws of Chess](https://handbook.fide.com/chapter/E012023).
+
+## Search toward an exact outcome
+
+Search position pauses play and uses a Web Worker, keeping the interface responsive.
+Choose a 1-, 5-, or 30-second budget; stop at any time or save the latest report.
+Serve the page over HTTP for background workers.
+
+`chess-solver.js` performs iterative deepening with sound integer minimax bounds.
+Unexpanded branches contribute [-1,+1]; terminal positions contribute their exact
+White-perspective outcome. White nodes maximize both endpoints, Black nodes minimize
+them. Capture/promotion ordering affects speed, never certification. A forced win
+can terminate search early; certifying a draw requires excluding winning alternatives
+for both teams. Reports retain monotonic root bounds, per-move bounds, searched node
+count, elapsed time, and completed search depth. Epsilon is upper minus lower.
+
+No heuristic score is substituted for an exact leaf. No transposition cache merges
+positions with different draw histories. Every branch copies army rights, moved flags,
+en passant, quiet counter, ply count, and repetition counts. Saved analyses can be
+rerun; they are search reports, not independently checkable full proof trees.
+Older snapshots lacking repetition counts are rejected for certification.
+
+This solver applies to this variant, including automatic draws and the 1,200-ply
+cap. It does not claim to solve standard chess. Exhaustive finite-horizon coverage
+converges to an exact result in principle; large starting positions can remain
+unresolved at any practical budget. A current-position result does not prove that
+an earlier repetition was forced. There is no HRL evaluator in this proof search yet.
+
+```sh
+node genesis/critter/chess-solver.test.cjs
+node genesis/critter/solve-chess.cjs --ms=5000 --nodes=100000 --depth=1200
+node genesis/critter/solve-chess.cjs saved-state.json --ms=30000
+```

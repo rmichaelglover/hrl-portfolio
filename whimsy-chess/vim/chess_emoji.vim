@@ -1,7 +1,7 @@
 " chess_emoji.vim — Manny's emoji chess study board for Vim (legacy Vimscript, Vim 8+)
 "
 " Woodland Agents = YOU (Manny), whichever color you played that game.
-" Misfit Squad = the opponent.  (Set per game by the 'hero' color.)
+" Classical figurines = the opponent by default.  (Set per game by the 'hero' color.)
 " Empty squares are white/black square emojis; occupied squares show each
 " piece's unique character emoji, which follows the piece by IDENTITY (its
 " starting square) the whole game -- so Castle Andora stays Castle Andora even
@@ -23,7 +23,7 @@ let g:loaded_chess_emoji = 1
 " ============================================================ the cast
 " Two side-relative casts keyed by TYPE+startfile (e.g. 'Ra','Pa').
 " Your side (the 'hero' color) is always the Woodland Agents; the opponent is
-" always the Misfit Squad -- so the woodland creatures are always YOU.
+" classical by default -- so the woodland creatures are always YOU.
 let s:WOOD = {
 \ 'Ra':['🏰','Castle Andora'],       'Nb':['🦄','Sir Banyan Blithers'],
 \ 'Bc':['🛕','Popette Christiana Carolina'], 'Qd':['🐲','Queen Dilorias'],
@@ -68,6 +68,7 @@ let s:DAWGS = {
 let s:hero = 'b'
 let s:hero_cast = s:WOOD
 let s:opp_cast = s:MISFIT
+let s:opp_classic = 1
 function! s:cast(name, fallback) abort
   return a:name ==# 'tech' ? s:TECH : a:name ==# 'dawgs' ? s:DAWGS : a:name ==# 'woodland' ? s:WOOD : a:name ==# 'misfit' ? s:MISFIT : a:fallback
 endfunction
@@ -487,7 +488,7 @@ function! s:render() abort
     for f in files
       let id = get(pos, s:sq(f, r), '')
       if id !=# ''
-        if s:style ==# 'classic'
+        if s:style ==# 'classic' || (s:style ==# 'emoji' && id[0] !=# s:hero && s:opp_classic)
           let type = get(frame.promos, id, tolower(id[1]))
           let row .= (id[0] ==# 'w' ? s:GLYPH_W : s:GLYPH_B)[type] . ' '
         else
@@ -601,6 +602,7 @@ function! s:open(name) abort
   let s:hero = get(game, 'hero', 'b')
   let s:hero_cast = s:cast(get(game, 'hero_cast', ''), s:WOOD)
   let s:opp_cast = s:cast(get(game, 'opp_cast', ''), s:MISFIT)
+  let s:opp_classic = empty(get(game, 'opp_cast', ''))
   let frames = s:build_frames(game)
   if !empty(s:errors)
     echohl ErrorMsg | echo 'Engine errors: ' . join(s:errors, '; ') | echohl NONE
@@ -659,6 +661,7 @@ function! s:selftest() abort
     let s:hero = get(g:chess_emoji_games[name], 'hero', 'b')
     let s:hero_cast = s:cast(get(g:chess_emoji_games[name], 'hero_cast', ''), s:WOOD)
     let s:opp_cast = s:cast(get(g:chess_emoji_games[name], 'opp_cast', ''), s:MISFIT)
+    let s:opp_classic = empty(get(g:chess_emoji_games[name], 'opp_cast', ''))
     let fr = s:build_frames(g:chess_emoji_games[name])
     let plies = len(fr) - 1
     let last = fr[-1]

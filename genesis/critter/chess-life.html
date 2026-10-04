@@ -30,17 +30,22 @@ main,.layout>div,aside{min-width:0}.board-wrap{max-width:100%;min-width:0}@media
 <div class="board-wrap" id="board-wrap" tabindex="0" aria-label="Scrollable chess habitat"><canvas id="board" role="img" aria-label="Shared rectangular chess habitat. White home pieces use emoji; Black away pieces use classical figurines."></canvas></div>
 <p class="status" id="status" aria-live="polite"></p><div class="summary" id="summary"></div>
 <p class="inspector" id="inspector">Select or hover over a node to inspect its chess role, army, and legal destinations.</p>
-<label>Promotion choice <select id="promotion"><option value="q">Queen 👸</option><option value="r">Rook 🏰</option><option value="b">Bishop 🧙</option><option value="n">Knight 🐴</option></select></label>
+<label>Promotion choice <select id="promotion"><option value="q">Queen 🐲</option><option value="r">Rook 🏰</option><option value="b">Bishop 🧙</option><option value="n">Knight 🦄</option></select></label>
 </div><aside><div><h2>Home / away</h2><div class="legend">
-<span><span class="glyph">👑</span> King</span><span><span class="glyph">♚</span> King</span>
-<span><span class="glyph">👸</span> Queen</span><span><span class="glyph">♛</span> Queen</span>
-<span><span class="glyph">🏰 🗼</span> Rooks</span><span><span class="glyph">♜</span> Rook</span>
-<span><span class="glyph">🧙 🔮</span> Bishops</span><span><span class="glyph">♝</span> Bishop</span>
-<span><span class="glyph">🐴 🦄</span> Knights</span><span><span class="glyph">♞</span> Knight</span>
-<span><span class="glyph">🌱 🌿 🍀 🌾 🍃 🌵 🌴 🌳</span> Pawns</span><span><span class="glyph">♟</span> Pawn</span>
-</div><p class="note">Each starting home army has sixteen distinct emoji identities. Fortifications slide straight, magic travels diagonally, horses jump, and plants can grow into promoted roles. A promoted plant keeps its identity and gains a queen, rook, bishop, or knight badge. Army corner colors distinguish matching identities in different armies.</p>
+<span><span class="glyph">🦁</span> King</span><span><span class="glyph">♚</span> King</span>
+<span><span class="glyph">🐲</span> Queen</span><span><span class="glyph">♛</span> Queen</span>
+<span><span class="glyph">🏰 🧱</span> Rooks</span><span><span class="glyph">♜</span> Rook</span>
+<span><span class="glyph">🛕 🧙</span> Bishops</span><span><span class="glyph">♝</span> Bishop</span>
+<span><span class="glyph">🦄 🐎</span> Knights</span><span><span class="glyph">♞</span> Knight</span>
+<span><span class="glyph">🦊 🦡 🦝 🦌 🦉 🐸 🦎 🦔</span> Pawns</span><span><span class="glyph">♟</span> Pawn</span>
+</div><p class="note">Each starting home army has sixteen distinct emoji identities. The cast follows Maestro: King Ethelheim, Queen Dilorias, their court, and eight woodland creatures. A promoted creature keeps its identity and gains a queen, rook, bishop, or knight badge. Army corner colors distinguish matching identities in different armies.</p>
 <p class="note">Red outline: king in check. Cyan dots: legal destinations. A colored corner mark identifies an army. Crossed squares mark recorded checkmates; they do not block movement.</p></div>
 <div><h2>Habitat journal</h2><ol class="events" id="journal" reversed aria-label="Recent moves and checkmates"></ol></div></aside></div></section>
+<section class="panel" aria-label="Exact outcome search"><h2>Investigate perfect play</h2>
+<p>Search this position under the habitat’s rules. White win = +1, draw = 0, Black win = −1. Unresolved branches retain honest bounds; a result is proven when both bounds agree.</p>
+<div class="controls"><label>Search budget <select id="solve-budget"><option value="1000">1 second</option><option value="5000" selected>5 seconds</option><option value="30000">30 seconds</option></select></label><button id="solve">Search position</button><button id="solve-stop" disabled>Stop search</button><button id="solve-save" disabled>Save analysis</button></div>
+<p id="solve-status" class="summary" role="status">Ready. Search pauses the habitat and runs in the background.</p>
+<p class="note">Exact bounds apply to this multi-king variant, including automatic draws and the 1,200-ply cap. A budget-limited search can remain unresolved. This investigates the current position; it does not establish that a previously played repetition was forced.</p></section>
 <section class="panel"><h2>The laws of this habitat</h2><div class="rules">
 <div class="rule"><strong>Freedom of movement</strong><p>Rooks, bishops, and queens travel across the whole board until blocked. Knights jump. Kings step. Pawns keep their team direction, may initially advance two squares, and promote at the far edge of the entire habitat. No wrapping and no Conway births.</p></div>
 <div class="rule"><strong>All friendly kings stay safe</strong><p>Teams alternate globally, White first. A move is legal only if every surviving king of the moving team is safe afterward. Castling uses the king’s original rook and home squares; en passant expires after the opposing team’s next ply. Kings are never captured.</p></div>
@@ -49,4 +54,4 @@ main,.layout>div,aside{min-width:0}.board-wrap{max-width:100%;min-width:0}@media
 </div><p class="note">This is an explicitly defined multi-king chess variant inspired by the cellular garden, not standard tournament chess. The 8 × 8, one-pair setting uses ordinary piece geometry and king safety. The habitat automatically applies threefold/50-move draws rather than requiring a claim. The forage policy is a seeded local heuristic, not a strong chess engine.</p>
 <p><a href="https://handbook.fide.com/chapter/E012023">Classical chess laws</a> · <a href="chess-engine.js">Open engine</a> · <a href="chess-engine.test.cjs">Rule verification</a></p></section>
 <footer>Michael Emanuel Glover · HRL Portfolio · Chess Critter. Use a seed to repeat an experiment. RNG selects army locations and legal move choices; it never permits an illegal move.</footer>
-</main><script src="chess-engine.js"></script><script src="chess-life.js"></script></body></html>
+</main><script src="chess-engine.js"></script><script src="chess-solver.js"></script><script src="chess-life.js"></script></body></html>

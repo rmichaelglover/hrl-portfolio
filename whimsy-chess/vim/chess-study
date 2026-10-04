@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Launch the Vim chess study board.
+#   ./chess-study            # opens the Crab game
+#   ./chess-study goldsmith  # opens the Goldsmith Defense game
+DIR="$(cd "$(dirname "$0")" && pwd)"
+GAME="${1:-crab}"
+exec vim -N -c "source $DIR/chess_emoji.vim" -c "ChessEmoji $GAME"

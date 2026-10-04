@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Launch Manny's emoji chess study board.
+#   ./chess-emoji            # the Queen Dab game (you as Black)
+#   ./chess-emoji crab
+#   ./chess-emoji goldsmith
+DIR="$(cd "$(dirname "$0")" && pwd)"
+GAME="${1:-queendab}"
+exec vim -N -c "source $DIR/chess_emoji.vim" -c "ChessEmoji $GAME"

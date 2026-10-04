@@ -21,9 +21,9 @@ chmod +x chess-study          # first time only
 Or from inside Vim:
 
 ```vim
-:source /full/path/to/chess.vim
-:ChessStudy crab
-:ChessStudy goldsmith
+:source /full/path/to/chess_emoji.vim
+:ChessEmoji crab
+:ChessEmoji goldsmith
 ```
 
 (To always have it available, add the `:source` line to your `~/.vimrc`.)
@@ -57,27 +57,11 @@ milliseconds (the default is 900).
 
 ## How the board is represented
 
-The buffer holds the position as plain **FEN letters**, one per square, separated
-by `|`:
-
-```
- 8 |r|n|b|q|k|b|n|r|
- 7 |p|p|p|p|p|p|p|p|
- ...
- 1 |R|N|B|Q|K|B|N|R|
-    a b c d e f g h
-```
-
-- **UPPERCASE = White**, **lowercase = Black**, space = empty square.
-- Vim's `:conceal` feature *displays* those letters as chess figurines
-  (♔♕♖♗♘♙ / ♚♛♜♝♞♟), white pieces outlined-light and black pieces filled-dark,
-  so the two sides are clearly distinct.
-- The rank your cursor sits on can reveal the raw letters for editing — which is
-  the foundation for the next modes.
-
-Storing letters (not emoji) is deliberate: letters are single-byte, trivial to
-parse, and trivial to edit with `r` — which is what makes the planned **Play** and
-**Puzzle** modes possible.
+The emoji study board tracks each piece by its starting identity, so characters
+keep their names when moving, capturing, and promoting. The default renders the
+hero with the Woodland cast and the opponent with classical figurines. The
+original `chess.vim` engine retains its FEN-letter buffer and conceal rendering
+for the planned editable play mode.
 
 ## What's next (engine is already in place)
 
@@ -101,3 +85,12 @@ vim -es -u NONE -N -c 'source chess.vim' \
 
 Builds both games through the engine and checks ply counts, the mating move, and
 king positions.
+
+## Default cast
+
+The emoji board follows the definitive `maestro.html` Woodland identities on
+Manny's side, whether White or Black; opponents use classical figurines by default.
+Promotions retain Woodland character identity. Press `t` for classical pieces on
+both sides. Explicit themed games retain their selected character casts.
+Use `./chess-emoji` for the emoji study board; `./chess-study` opens this same
+Woodland board with the Crab game by default.
