@@ -69,3 +69,7 @@ Sources were located/checked on 4 October 2026. Source pages inform the research
 ## The next decisive milestone
 
 A versioned, independently held-out perturbation benchmark in one defined cancer context. Demonstrate whether measured spatial and higher-order factors improve response prediction beyond simpler baselines while exposing failures and uncertainty. Only then expand the hierarchy. The goal is a useful, falsifiable model that earns each added level through evidence.
+
+## Expanded audit and executed follow-up
+
+The later whole-accessible-storage inventory located additional material outside the initial targeted paths. See `AUDIT-RESULTS.md` for the measured CRISPR benchmark, repaired nested-cell snapshot and constant-exposure extinction feasibility calculation. These extend the initial deliverable without claiming a cancer cure.

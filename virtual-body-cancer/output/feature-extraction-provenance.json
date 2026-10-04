@@ -1,0 +1,5 @@
+{
+  "original_predict_sha256": "96cdb8d4edcd791f0c2e209ee7c7cd86d47c2414887b20eb036dc81f6185160c",
+  "original_prepare_sha256": "92c63084a14b251bbf57a30bc41d19a779aadee7bc1bf64cf094f58352170b59",
+  "method": "AST-selected source functions preserved verbatim; annotation stubs removed from final feature array; all 25 metadata columns discarded"
+}

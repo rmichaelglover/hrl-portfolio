@@ -1,0 +1,336 @@
+{
+  "status": "new exploratory benchmark of locally cached measured assay ranks",
+  "data_audit": {
+    "rows": 5310,
+    "unique_sequences": 4379,
+    "genes": 17,
+    "historical_test_sequences_also_in_training": 271,
+    "historical_test_sequences": 1034,
+    "removed_metadata_columns": 25,
+    "sequence_only_features": 968,
+    "metadata_independence_check": true,
+    "historical_selection_warning": "results.tsv repeatedly compares the same test metric while selecting models; it is not an untouched final test",
+    "source_file_sha256": "97a4fda9481985d5e4ea6b18bb52e17b1c953913fbb901f56a134ec3c31f2972"
+  },
+  "metrics": [
+    {
+      "protocol": "sequence_disjoint",
+      "model": "onehot_ridge",
+      "pooled_oof_spearman": 0.39531787786443684,
+      "mean_fold_spearman": 0.39527700374004665,
+      "MAE": 0.2210908962246226
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "model": "existing_sequence_features_ridge",
+      "pooled_oof_spearman": 0.4798581311839686,
+      "mean_fold_spearman": 0.4800612840092328,
+      "MAE": 0.20904269728101352
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "model": "hrl_sequence_graph",
+      "pooled_oof_spearman": 0.4805439918011317,
+      "mean_fold_spearman": 0.4805844646487721,
+      "MAE": 0.20769904165083025
+    },
+    {
+      "protocol": "gene_disjoint",
+      "model": "onehot_ridge",
+      "pooled_oof_spearman": 0.3884533612062157,
+      "mean_fold_spearman": 0.3912778962921556,
+      "MAE": 0.221998304850495
+    },
+    {
+      "protocol": "gene_disjoint",
+      "model": "existing_sequence_features_ridge",
+      "pooled_oof_spearman": 0.4003228201645437,
+      "mean_fold_spearman": 0.4095929315139849,
+      "MAE": 0.22146972743095664
+    },
+    {
+      "protocol": "gene_disjoint",
+      "model": "hrl_sequence_graph",
+      "pooled_oof_spearman": 0.4032911679695581,
+      "mean_fold_spearman": 0.4127444928351884,
+      "MAE": 0.21904279556779463
+    }
+  ],
+  "folds": [
+    {
+      "protocol": "sequence_disjoint",
+      "fold": 0,
+      "train_rows": 4248,
+      "test_rows": 1062,
+      "test_genes": [
+        "CCDC101",
+        "CD13",
+        "CD15",
+        "CD28",
+        "CD33",
+        "CD43",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "H2-K",
+        "HPRT1",
+        "MED12",
+        "NF1",
+        "NF2",
+        "TADA1",
+        "TADA2B",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.4495945524696069,
+        "existing_sequence_features_ridge": 0.4946728345278083,
+        "hrl_sequence_graph": 0.49172031947576833
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 13,
+      "seconds": 0.1557697569951415
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "fold": 1,
+      "train_rows": 4248,
+      "test_rows": 1062,
+      "test_genes": [
+        "CCDC101",
+        "CD13",
+        "CD15",
+        "CD28",
+        "CD33",
+        "CD43",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "H2-K",
+        "HPRT1",
+        "MED12",
+        "NF1",
+        "NF2",
+        "TADA1",
+        "TADA2B",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.4347886604934118,
+        "existing_sequence_features_ridge": 0.47700179246087465,
+        "hrl_sequence_graph": 0.4767793798560406
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 16,
+      "seconds": 0.15842648899706546
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "fold": 2,
+      "train_rows": 4248,
+      "test_rows": 1062,
+      "test_genes": [
+        "CCDC101",
+        "CD13",
+        "CD15",
+        "CD28",
+        "CD33",
+        "CD43",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "H2-K",
+        "HPRT1",
+        "MED12",
+        "NF1",
+        "NF2",
+        "TADA1",
+        "TADA2B",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.3614511781653456,
+        "existing_sequence_features_ridge": 0.47431735333718,
+        "hrl_sequence_graph": 0.4736677936863277
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 13,
+      "seconds": 0.14146554699982516
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "fold": 3,
+      "train_rows": 4248,
+      "test_rows": 1062,
+      "test_genes": [
+        "CCDC101",
+        "CD13",
+        "CD15",
+        "CD28",
+        "CD33",
+        "CD43",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "H2-K",
+        "HPRT1",
+        "MED12",
+        "NF1",
+        "NF2",
+        "TADA1",
+        "TADA2B",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.3708333613542035,
+        "existing_sequence_features_ridge": 0.4679449162155213,
+        "hrl_sequence_graph": 0.4708130631757219
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 15,
+      "seconds": 0.14462711400119588
+    },
+    {
+      "protocol": "sequence_disjoint",
+      "fold": 4,
+      "train_rows": 4248,
+      "test_rows": 1062,
+      "test_genes": [
+        "CCDC101",
+        "CD13",
+        "CD15",
+        "CD28",
+        "CD33",
+        "CD43",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "H2-K",
+        "HPRT1",
+        "MED12",
+        "NF1",
+        "NF2",
+        "TADA1",
+        "TADA2B",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.3597172662176656,
+        "existing_sequence_features_ridge": 0.4863695235047797,
+        "hrl_sequence_graph": 0.4899417670500021
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 16,
+      "seconds": 0.15267910399415996
+    },
+    {
+      "protocol": "gene_disjoint",
+      "fold": 0,
+      "train_rows": 3462,
+      "test_rows": 1848,
+      "test_genes": [
+        "MED12"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.37775441916286995,
+        "existing_sequence_features_ridge": 0.36527804133437947,
+        "hrl_sequence_graph": 0.36722421903106245
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 16,
+      "seconds": 0.1395423310023034
+    },
+    {
+      "protocol": "gene_disjoint",
+      "fold": 1,
+      "train_rows": 4465,
+      "test_rows": 845,
+      "test_genes": [
+        "NF1",
+        "TADA1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.240230512067868,
+        "existing_sequence_features_ridge": 0.3726338589217222,
+        "hrl_sequence_graph": 0.378081510352899
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 13,
+      "seconds": 0.15977099399606232
+    },
+    {
+      "protocol": "gene_disjoint",
+      "fold": 2,
+      "train_rows": 4437,
+      "test_rows": 873,
+      "test_genes": [
+        "CD13",
+        "CD28",
+        "CD33",
+        "TADA2B"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.4935259778570806,
+        "existing_sequence_features_ridge": 0.4498733971960759,
+        "hrl_sequence_graph": 0.4553194750995669
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 13,
+      "seconds": 0.16357341200637165
+    },
+    {
+      "protocol": "gene_disjoint",
+      "fold": 3,
+      "train_rows": 4438,
+      "test_rows": 872,
+      "test_genes": [
+        "CD15",
+        "CD43",
+        "H2-K",
+        "NF2",
+        "THY1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.40606374857747535,
+        "existing_sequence_features_ridge": 0.4034869764925243,
+        "hrl_sequence_graph": 0.4053267465426008
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 12,
+      "seconds": 0.16418754500045907
+    },
+    {
+      "protocol": "gene_disjoint",
+      "fold": 4,
+      "train_rows": 4438,
+      "test_rows": 872,
+      "test_genes": [
+        "CCDC101",
+        "CD45",
+        "CD5",
+        "CUL3",
+        "HPRT1"
+      ],
+      "spearman": {
+        "onehot_ridge": 0.43881482379548414,
+        "existing_sequence_features_ridge": 0.4566923836252232,
+        "hrl_sequence_graph": 0.4577705131498128
+      },
+      "hrl_converged": true,
+      "hrl_iterations": 12,
+      "seconds": 0.15768549400672782
+    }
+  ],
+  "design": "fixed 5-fold group splits; no new hyperparameter selection; feature-only transductive graph; train-only feature scaling; no test labels in inference",
+  "provenance": {
+    "paper": "https://doi.org/10.1038/nbt.3437",
+    "dataset_url": "https://raw.githubusercontent.com/MicrosoftResearch/Azimuth/master/azimuth/data/FC_plus_RES_withPredictions.csv",
+    "feature_code": "vendor/crispr_sequence_features.py",
+    "feature_code_sha256": "424449b1a45e7defdd6cc633b39718e7fccd6725151584794f7917e772c68787"
+  },
+  "limitations": [
+    "Assay response rank, not proof of cutting efficiency for every context, tumor eradication, organism safety or a cure.",
+    "No held-out external laboratory or prospective experiment; split choices and dataset were available to prior project development.",
+    "Graph homophily by sequence similarity is an assumption being tested, not established biology.",
+    "Gene-grouped normalized ranks are the supplied dataset target; no drug response or cancer vulnerability is inferred."
+  ]
+}

@@ -1,0 +1,895 @@
+{
+  "original_step": {
+    "passed": false,
+    "error": "AttributeError",
+    "message": "'Membrane' object has no attribute 'ish_step'"
+  },
+  "audited_snapshot_checks_passed": true,
+  "hierarchy_nodes": 7,
+  "levels": 3,
+  "steps": 10,
+  "trace": [
+    {
+      "iteration": 1,
+      "metrics": {
+        "calcification": 0.075489985987324,
+        "softening": 0.5685278221316835,
+        "ish_entropy": 0.9957695188413531
+      },
+      "ish_entropy": 0.824741977716454,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 1,
+          "metrics": {
+            "calcification": 0.08434284149600109,
+            "softening": 0.5426752142061809,
+            "ish_entropy": 0.9996446498555139
+          },
+          "ish_entropy": 0.7626304746617355,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 1,
+              "metrics": {
+                "calcification": 0.057994359268498795,
+                "softening": 0.5967327411672263,
+                "ish_entropy": 0.9721020247841843
+              },
+              "ish_entropy": 0.8374378936308874,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 1,
+              "metrics": {
+                "calcification": 0.06264192011258685,
+                "softening": 0.600329162105433,
+                "ish_entropy": 0.9693551866635881
+              },
+              "ish_entropy": 0.9005545818987293,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 1,
+          "metrics": {
+            "calcification": 0.11254496043336508,
+            "softening": 0.5150172137124672,
+            "ish_entropy": 0.9969939735584156
+          },
+          "ish_entropy": 0.7988485906065236,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 1,
+              "metrics": {
+                "calcification": 0.04481007191392953,
+                "softening": 0.6065874263000869,
+                "ish_entropy": 0.9999272024440264
+              },
+              "ish_entropy": 0.7952063006548956,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 1,
+              "metrics": {
+                "calcification": 0.06833158912907294,
+                "softening": 0.5784717237912019,
+                "ish_entropy": 0.9978070073843724
+              },
+              "ish_entropy": 0.8986129159692395,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "metrics": {
+        "calcification": 0.034559507732764914,
+        "softening": 0.605840490012751,
+        "ish_entropy": 0.9877547134014775
+      },
+      "ish_entropy": 0.850613404714684,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 2,
+          "metrics": {
+            "calcification": 0.04211012787742888,
+            "softening": 0.590007531987365,
+            "ish_entropy": 0.9929867295671956
+          },
+          "ish_entropy": 0.7962921259705175,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 2,
+              "metrics": {
+                "calcification": 0.028571993886440748,
+                "softening": 0.6174620534911711,
+                "ish_entropy": 0.9713287132488034
+              },
+              "ish_entropy": 0.8540481895194509,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 2,
+              "metrics": {
+                "calcification": 0.02679141557127392,
+                "softening": 0.6265160821555812,
+                "ish_entropy": 0.9677420285691413
+              },
+              "ish_entropy": 0.9188093068060509,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "metrics": {
+            "calcification": 0.04652936414659579,
+            "softening": 0.590561558483556,
+            "ish_entropy": 0.987987492683527
+          },
+          "ish_entropy": 0.8401493421935724,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 2,
+              "metrics": {
+                "calcification": 0.023301800689135233,
+                "softening": 0.6243157935496724,
+                "ish_entropy": 0.9973198012291207
+              },
+              "ish_entropy": 0.8106374759826357,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 2,
+              "metrics": {
+                "calcification": 0.028157985220379378,
+                "softening": 0.617418596918384,
+                "ish_entropy": 0.9897655012171235
+              },
+              "ish_entropy": 0.9218563798035627,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "metrics": {
+        "calcification": 0.020478404537189493,
+        "softening": 0.6185324916966142,
+        "ish_entropy": 0.9839875411871214
+      },
+      "ish_entropy": 0.8637192992688177,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 3,
+          "metrics": {
+            "calcification": 0.02640963255940455,
+            "softening": 0.6069668593326432,
+            "ish_entropy": 0.988220804530083
+          },
+          "ish_entropy": 0.8140966043717782,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 3,
+              "metrics": {
+                "calcification": 0.01747434980961479,
+                "softening": 0.6256126308140714,
+                "ish_entropy": 0.9710521117362941
+              },
+              "ish_entropy": 0.862959208502824,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 3,
+              "metrics": {
+                "calcification": 0.014529940238851192,
+                "softening": 0.6352119271444998,
+                "ish_entropy": 0.96717979827552
+              },
+              "ish_entropy": 0.9275441724108294,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "metrics": {
+            "calcification": 0.027002026932784095,
+            "softening": 0.6102158929572402,
+            "ish_entropy": 0.9835027032052769
+          },
+          "ish_entropy": 0.8601846623392687,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 3,
+              "metrics": {
+                "calcification": 0.015020770133517871,
+                "softening": 0.6309937063446062,
+                "ish_entropy": 0.994301409307921
+              },
+              "ish_entropy": 0.8189949465339281,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 3,
+              "metrics": {
+                "calcification": 0.015004626354682464,
+                "softening": 0.6290528200003801,
+                "ish_entropy": 0.9857096529716545
+              },
+              "ish_entropy": 0.9326920680537475,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "metrics": {
+        "calcification": 0.01408145883501389,
+        "softening": 0.6249685267793825,
+        "ish_entropy": 0.9818725902173929
+      },
+      "ish_entropy": 0.8718345886524133,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 4,
+          "metrics": {
+            "calcification": 0.018828338689210657,
+            "softening": 0.6159124721891084,
+            "ish_entropy": 0.9851929525111791
+          },
+          "ish_entropy": 0.8253582849303065,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 4,
+              "metrics": {
+                "calcification": 0.012339390563883425,
+                "softening": 0.6299817545921192,
+                "ish_entropy": 0.9709268790931572
+              },
+              "ish_entropy": 0.868701904185992,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 4,
+              "metrics": {
+                "calcification": 0.009152019109042526,
+                "softening": 0.6393868670460335,
+                "ish_entropy": 0.9669148589239986
+              },
+              "ish_entropy": 0.9326497497202344,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "metrics": {
+            "calcification": 0.01814785934486162,
+            "softening": 0.6197842527700704,
+            "ish_entropy": 0.9809513748532901
+          },
+          "ish_entropy": 0.8722016445733738,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 4,
+              "metrics": {
+                "calcification": 0.011061993970180123,
+                "softening": 0.634625365132234,
+                "ish_entropy": 0.992091703232163
+              },
+              "ish_entropy": 0.8244405872940761,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 4,
+              "metrics": {
+                "calcification": 0.009252874527825186,
+                "softening": 0.6344751809644609,
+                "ish_entropy": 0.9835193334274696
+              },
+              "ish_entropy": 0.938879735749524,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "metrics": {
+        "calcification": 0.010757131863326531,
+        "softening": 0.6289563401114696,
+        "ish_entropy": 0.9804932075322896
+      },
+      "ish_entropy": 0.8775603381772704,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 5,
+          "metrics": {
+            "calcification": 0.01464755580598929,
+            "softening": 0.6215600906238632,
+            "ish_entropy": 0.9831066969644374
+          },
+          "ish_entropy": 0.8333284321988188,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 5,
+              "metrics": {
+                "calcification": 0.009660214008705774,
+                "softening": 0.6327960323109935,
+                "ish_entropy": 0.9708607746092904
+              },
+              "ish_entropy": 0.8728869751979227,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 5,
+              "metrics": {
+                "calcification": 0.006516614514667011,
+                "softening": 0.6418313605610236,
+                "ish_entropy": 0.9667636696935767
+              },
+              "ish_entropy": 0.9361044498280967,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 5,
+          "metrics": {
+            "calcification": 0.013517232949808859,
+            "softening": 0.6255345388546291,
+            "ish_entropy": 0.9793011497307115
+          },
+          "ish_entropy": 0.8804368333030365,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 5,
+              "metrics": {
+                "calcification": 0.008901147349628097,
+                "softening": 0.6369980513370678,
+                "ish_entropy": 0.9903880482666038
+              },
+              "ish_entropy": 0.8284134934517867,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 5,
+              "metrics": {
+                "calcification": 0.00642873172799389,
+                "softening": 0.6375712264026631,
+                "ish_entropy": 0.982178307986304
+              },
+              "ish_entropy": 0.9429655861249623,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 6,
+      "metrics": {
+        "calcification": 0.008842194469691964,
+        "softening": 0.6317711962382386,
+        "ish_entropy": 0.9794879843402889
+      },
+      "ish_entropy": 0.8819673268950523,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 6,
+          "metrics": {
+            "calcification": 0.012093903272966583,
+            "softening": 0.6255514346703359,
+            "ish_entropy": 0.9815559140572393
+          },
+          "ish_entropy": 0.8394002795826067,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 6,
+              "metrics": {
+                "calcification": 0.008112324979678277,
+                "softening": 0.6348462085940922,
+                "ish_entropy": 0.9708226992840644
+              },
+              "ish_entropy": 0.8761937486228307,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 6,
+              "metrics": {
+                "calcification": 0.005121438984385835,
+                "softening": 0.6434871256612743,
+                "ish_entropy": 0.9666637502933391
+              },
+              "ish_entropy": 0.9387162718436964,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 6,
+          "metrics": {
+            "calcification": 0.010841735463969429,
+            "softening": 0.629480140098539,
+            "ish_entropy": 0.9781189801491795
+          },
+          "ish_entropy": 0.8866153519897537,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 6,
+              "metrics": {
+                "calcification": 0.007578784096570114,
+                "softening": 0.6387323063382913,
+                "ish_entropy": 0.9889887227111136
+              },
+              "ish_entropy": 0.8315208872743627,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 6,
+              "metrics": {
+                "calcification": 0.004931802342652831,
+                "softening": 0.6396154682640609,
+                "ish_entropy": 0.9812556386215175
+              },
+              "ish_entropy": 0.9459844090176551,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 7,
+      "metrics": {
+        "calcification": 0.007629621376994737,
+        "softening": 0.6339384611885172,
+        "ish_entropy": 0.9786963440254799
+      },
+      "ish_entropy": 0.885556812285298,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 7,
+          "metrics": {
+            "calcification": 0.010390047801045936,
+            "softening": 0.6285887260092312,
+            "ish_entropy": 0.9803368960923929
+          },
+          "ish_entropy": 0.8442553362791472,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 7,
+              "metrics": {
+                "calcification": 0.007124448156018335,
+                "softening": 0.6364656198468509,
+                "ish_entropy": 0.9708003613372108
+              },
+              "ish_entropy": 0.8789431726140502,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 7,
+              "metrics": {
+                "calcification": 0.0043260157831951015,
+                "softening": 0.6447397719067279,
+                "ish_entropy": 0.9665898704012182
+              },
+              "ish_entropy": 0.9408527257028645,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 7,
+          "metrics": {
+            "calcification": 0.009155829898757547,
+            "softening": 0.6324430026649229,
+            "ish_entropy": 0.9772053721421577
+          },
+          "ish_entropy": 0.8915441478805698,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 7,
+              "metrics": {
+                "calcification": 0.006680548391525387,
+                "softening": 0.6400906974924293,
+                "ish_entropy": 0.9877858974302988
+              },
+              "ish_entropy": 0.8340564498094173,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 7,
+              "metrics": {
+                "calcification": 0.004080602752336241,
+                "softening": 0.6411257808937059,
+                "ish_entropy": 0.9805544979949133
+              },
+              "ish_entropy": 0.9484075793382312,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 8,
+      "metrics": {
+        "calcification": 0.00679108824695111,
+        "softening": 0.6357041810852067,
+        "ish_entropy": 0.9780400745054574
+      },
+      "ish_entropy": 0.8885881122711997,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 8,
+          "metrics": {
+            "calcification": 0.009163761478024389,
+            "softening": 0.6310150534846618,
+            "ish_entropy": 0.9793414304008207
+          },
+          "ish_entropy": 0.8482635663846506,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 8,
+              "metrics": {
+                "calcification": 0.006431409012886202,
+                "softening": 0.6378117136656425,
+                "ish_entropy": 0.9707881983404504
+              },
+              "ish_entropy": 0.881302006961158,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 8,
+              "metrics": {
+                "calcification": 0.0038336367787898517,
+                "softening": 0.6457649475942308,
+                "ish_entropy": 0.966530716701826
+              },
+              "ish_entropy": 0.9426932666324529,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 8,
+          "metrics": {
+            "calcification": 0.008005713586345773,
+            "softening": 0.634808196780532,
+            "ish_entropy": 0.9764606992829747
+          },
+          "ish_entropy": 0.8956407000161715,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 8,
+              "metrics": {
+                "calcification": 0.006013734436928754,
+                "softening": 0.6412004318626064,
+                "ish_entropy": 0.9867218182576029
+              },
+              "ish_entropy": 0.8361796205361919,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 8,
+              "metrics": {
+                "calcification": 0.003558032141258873,
+                "softening": 0.6423380462249907,
+                "ish_entropy": 0.9799795411388219
+              },
+              "ish_entropy": 0.9504659999178008,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 9,
+      "metrics": {
+        "calcification": 0.0061652304174913885,
+        "softening": 0.6371956767287861,
+        "ish_entropy": 0.9774778618262591
+      },
+      "ish_entropy": 0.8912081357523607,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 9,
+          "metrics": {
+            "calcification": 0.008225242251603227,
+            "softening": 0.6330165253036154,
+            "ish_entropy": 0.9785077445119196
+          },
+          "ish_entropy": 0.85164472592542,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 9,
+              "metrics": {
+                "calcification": 0.005904086636247298,
+                "softening": 0.6389662925588401,
+                "ish_entropy": 0.9707833316727787
+              },
+              "ish_entropy": 0.8833653123497321,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 9,
+              "metrics": {
+                "calcification": 0.003500390304237553,
+                "softening": 0.6466484913419696,
+                "ish_entropy": 0.9664808220445051
+              },
+              "ish_entropy": 0.9443309279482061,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 9,
+          "metrics": {
+            "calcification": 0.007164322412137673,
+            "softening": 0.6367751302739034,
+            "ish_entropy": 0.975831468133127
+          },
+          "ish_entropy": 0.8991403776260597,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 9,
+              "metrics": {
+                "calcification": 0.005483734777761145,
+                "softening": 0.6421306395948322,
+                "ish_entropy": 0.9857639791755578
+              },
+              "ish_entropy": 0.8379865417998261,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 9,
+              "metrics": {
+                "calcification": 0.003209152559625594,
+                "softening": 0.6433678043568952,
+                "ish_entropy": 0.9794824950423504
+              },
+              "ish_entropy": 0.9522795506179151,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iteration": 10,
+      "metrics": {
+        "calcification": 0.005669052262543584,
+        "softening": 0.6384850873550842,
+        "ish_entropy": 0.9769860461683609
+      },
+      "ish_entropy": 0.8935076224884071,
+      "is_terminating": false,
+      "num_children": 2,
+      "child_metrics": [
+        {
+          "iteration": 10,
+          "metrics": {
+            "calcification": 0.00747229968521126,
+            "softening": 0.6347036318533273,
+            "ish_entropy": 0.9777977937386113
+          },
+          "ish_entropy": 0.8545400163256777,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 10,
+              "metrics": {
+                "calcification": 0.005477059900015555,
+                "softening": 0.639975990142337,
+                "ish_entropy": 0.9707840575859521
+              },
+              "ish_entropy": 0.8851925086764684,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 10,
+              "metrics": {
+                "calcification": 0.0032544572292447518,
+                "softening": 0.6474349206398591,
+                "ish_entropy": 0.9664373621261331
+              },
+              "ish_entropy": 0.9458170891594041,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        },
+        {
+          "iteration": 10,
+          "metrics": {
+            "calcification": 0.006512425342985482,
+            "softening": 0.6384562926210133,
+            "ish_entropy": 0.9752868400582793
+          },
+          "ish_entropy": 0.9021867659914987,
+          "is_terminating": false,
+          "num_children": 2,
+          "child_metrics": [
+            {
+              "iteration": 10,
+              "metrics": {
+                "calcification": 0.00504168350608048,
+                "softening": 0.642923032272817,
+                "ish_entropy": 0.9848926725295942
+              },
+              "ish_entropy": 0.8395407642714682,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            },
+            {
+              "iteration": 10,
+              "metrics": {
+                "calcification": 0.0029559578542817954,
+                "softening": 0.6442750395575033,
+                "ish_entropy": 0.9790379171707514
+              },
+              "ish_entropy": 0.9539142332867572,
+              "is_terminating": false,
+              "num_children": 0,
+              "child_metrics": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fixes": [
+    "compute missing step entropy from categorical state",
+    "normalize entropy weights",
+    "copy old state before mutation to measure change",
+    "distinct abstention category -2"
+  ],
+  "scope": "categorical nested relaxation diagnostic, not a biological cell model",
+  "original_files_unchanged": true,
+  "source_hashes": {
+    "membrane.py": "1214e24a6a2bc76eb714be2b9227d8fbf8a3119150963527a6231e8234c50496",
+    "virtual_cell.py": "abb379f95ed1bbf109361cadf3b9c22980799d3894cd0435a04ea5474865a4aa"
+  }
+}

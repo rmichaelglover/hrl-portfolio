@@ -1,0 +1,326 @@
+{
+  "scope": "exact linearization of the uncalibrated three-site synthetic model; not a biological cure or a clinical threshold",
+  "reserve_floor": 0.7,
+  "parameters": {
+    "growth": 0.22,
+    "resistant_growth": 0.18,
+    "kill_sensitive": 0.65,
+    "kill_resistant": 0.08,
+    "immune_kill": 0.08,
+    "mutation": 0.002,
+    "migration": 0.015,
+    "clearance": 0.7,
+    "toxicity": 0.11,
+    "repair": 0.035,
+    "oxygen_supply": 0.8,
+    "oxygen_consumption": 0.6,
+    "immune_recruit": 0.07,
+    "immune_decay": 0.1,
+    "immune_toxicity": 0.08,
+    "capacity": 1.0
+  },
+  "nominal": {
+    "exposure_thresholds": {
+      "sensitive": 0.7892342764874044,
+      "resistant": 5.1811951014133015
+    },
+    "maximum_exposure_for_reserve_floor": 0.1363636363636364,
+    "required_exposure_strictly_greater_than": 5.1811951014133015,
+    "minimum_equilibrium_reserve_at_threshold": 0.05785779422539447,
+    "constant_exposure_feasible": false,
+    "resistant_invasion_at_reserve_limit": 0.17285607565598138
+  },
+  "ensemble": [
+    {
+      "replicate": 0,
+      "exposure_thresholds": {
+        "sensitive": 0.7404584029119966,
+        "resistant": 3.211775020588306
+      },
+      "maximum_exposure_for_reserve_floor": 0.21037489975743026,
+      "required_exposure_strictly_greater_than": 3.211775020588306,
+      "minimum_equilibrium_reserve_at_threshold": 0.13257391176053565,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.16095490115177027
+    },
+    {
+      "replicate": 1,
+      "exposure_thresholds": {
+        "sensitive": 1.2689296509931727,
+        "resistant": 5.912861149571428
+      },
+      "maximum_exposure_for_reserve_floor": 0.14354649014065038,
+      "required_exposure_strictly_greater_than": 5.912861149571428,
+      "minimum_equilibrium_reserve_at_threshold": 0.05360953482015155,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.2142419886732977
+    },
+    {
+      "replicate": 2,
+      "exposure_thresholds": {
+        "sensitive": 0.9871172384526222,
+        "resistant": 10.638020958914117
+      },
+      "maximum_exposure_for_reserve_floor": 0.11853006182055151,
+      "required_exposure_strictly_greater_than": 10.638020958914117,
+      "minimum_equilibrium_reserve_at_threshold": 0.025339487447022017,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.22298386526133107
+    },
+    {
+      "replicate": 3,
+      "exposure_thresholds": {
+        "sensitive": 0.8148303748115304,
+        "resistant": 6.365963276193739
+      },
+      "maximum_exposure_for_reserve_floor": 0.08499365466369578,
+      "required_exposure_strictly_greater_than": 6.365963276193739,
+      "minimum_equilibrium_reserve_at_threshold": 0.030211763217654685,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.19812346435960265
+    },
+    {
+      "replicate": 4,
+      "exposure_thresholds": {
+        "sensitive": 0.9826959946256558,
+        "resistant": 12.012458274113982
+      },
+      "maximum_exposure_for_reserve_floor": 0.19104693184816612,
+      "required_exposure_strictly_greater_than": 12.012458274113982,
+      "minimum_equilibrium_reserve_at_threshold": 0.035781649170095256,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.1419366747055763
+    },
+    {
+      "replicate": 5,
+      "exposure_thresholds": {
+        "sensitive": 1.1287072083847596,
+        "resistant": 8.219341003429637
+      },
+      "maximum_exposure_for_reserve_floor": 0.12892501756605068,
+      "required_exposure_strictly_greater_than": 8.219341003429637,
+      "minimum_equilibrium_reserve_at_threshold": 0.035307415303786206,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.23978621905560857
+    },
+    {
+      "replicate": 6,
+      "exposure_thresholds": {
+        "sensitive": 0.7634533339036741,
+        "resistant": 3.483904122763202
+      },
+      "maximum_exposure_for_reserve_floor": 0.13338285659214333,
+      "required_exposure_strictly_greater_than": 3.483904122763202,
+      "minimum_equilibrium_reserve_at_threshold": 0.08200683527267873,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.17182335555383768
+    },
+    {
+      "replicate": 7,
+      "exposure_thresholds": {
+        "sensitive": 0.7704352729822924,
+        "resistant": 2.807519706766493
+      },
+      "maximum_exposure_for_reserve_floor": 0.14084850172530233,
+      "required_exposure_strictly_greater_than": 2.807519706766493,
+      "minimum_equilibrium_reserve_at_threshold": 0.10479243826260372,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.14890800970514514
+    },
+    {
+      "replicate": 8,
+      "exposure_thresholds": {
+        "sensitive": 1.1624172471175007,
+        "resistant": 14.13636823245146
+      },
+      "maximum_exposure_for_reserve_floor": 0.09713080440874029,
+      "required_exposure_strictly_greater_than": 14.13636823245146,
+      "minimum_equilibrium_reserve_at_threshold": 0.01577932442376647,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.13677972303455566
+    },
+    {
+      "replicate": 9,
+      "exposure_thresholds": {
+        "sensitive": 1.0034875454138357,
+        "resistant": 5.365138531626408
+      },
+      "maximum_exposure_for_reserve_floor": 0.1953744709115672,
+      "required_exposure_strictly_greater_than": 5.365138531626408,
+      "minimum_equilibrium_reserve_at_threshold": 0.07831520398753954,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.2098811908618977
+    },
+    {
+      "replicate": 10,
+      "exposure_thresholds": {
+        "sensitive": 0.8728818999701402,
+        "resistant": 3.21969163931247
+      },
+      "maximum_exposure_for_reserve_floor": 0.11015949755701042,
+      "required_exposure_strictly_greater_than": 3.21969163931247,
+      "minimum_equilibrium_reserve_at_threshold": 0.07393119198533889,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.1720820443955529
+    },
+    {
+      "replicate": 11,
+      "exposure_thresholds": {
+        "sensitive": 1.3146651958674498,
+        "resistant": 4.475024205112819
+      },
+      "maximum_exposure_for_reserve_floor": 0.1749267858024282,
+      "required_exposure_strictly_greater_than": 4.475024205112819,
+      "minimum_equilibrium_reserve_at_threshold": 0.08358527429662249,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.15032741549640394
+    },
+    {
+      "replicate": 12,
+      "exposure_thresholds": {
+        "sensitive": 1.4659925522338884,
+        "resistant": 5.513846667598703
+      },
+      "maximum_exposure_for_reserve_floor": 0.1575113195846861,
+      "required_exposure_strictly_greater_than": 5.513846667598703,
+      "minimum_equilibrium_reserve_at_threshold": 0.06248989944480472,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.1441806615466652
+    },
+    {
+      "replicate": 13,
+      "exposure_thresholds": {
+        "sensitive": 0.7976096671060147,
+        "resistant": 6.9238265239257135
+      },
+      "maximum_exposure_for_reserve_floor": 0.09512790018989657,
+      "required_exposure_strictly_greater_than": 6.9238265239257135,
+      "minimum_equilibrium_reserve_at_threshold": 0.031062352796034455,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.21713585283850412
+    },
+    {
+      "replicate": 14,
+      "exposure_thresholds": {
+        "sensitive": 0.5046021456312316,
+        "resistant": 3.4185625710774943
+      },
+      "maximum_exposure_for_reserve_floor": 0.1890296909126804,
+      "required_exposure_strictly_greater_than": 3.4185625710774943,
+      "minimum_equilibrium_reserve_at_threshold": 0.11427755183714784,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.1213369099673151
+    },
+    {
+      "replicate": 15,
+      "exposure_thresholds": {
+        "sensitive": 0.6669979407273963,
+        "resistant": 6.513879607619402
+      },
+      "maximum_exposure_for_reserve_floor": 0.1559552272416666,
+      "required_exposure_strictly_greater_than": 6.513879607619402,
+      "minimum_equilibrium_reserve_at_threshold": 0.052908901924977984,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.20295442762090538
+    },
+    {
+      "replicate": 16,
+      "exposure_thresholds": {
+        "sensitive": 1.024862511897684,
+        "resistant": 1.8046569077637218
+      },
+      "maximum_exposure_for_reserve_floor": 0.08874180998264695,
+      "required_exposure_strictly_greater_than": 1.8046569077637218,
+      "minimum_equilibrium_reserve_at_threshold": 0.10292889014099674,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.12234532787463435
+    },
+    {
+      "replicate": 17,
+      "exposure_thresholds": {
+        "sensitive": 0.6090182082068336,
+        "resistant": 4.871264875045427
+      },
+      "maximum_exposure_for_reserve_floor": 0.13166744145168396,
+      "required_exposure_strictly_greater_than": 4.871264875045427,
+      "minimum_equilibrium_reserve_at_threshold": 0.0593269650054478,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.23596802793646093
+    },
+    {
+      "replicate": 18,
+      "exposure_thresholds": {
+        "sensitive": 0.6369618952997842,
+        "resistant": 11.321807924089004
+      },
+      "maximum_exposure_for_reserve_floor": 0.15509519526777232,
+      "required_exposure_strictly_greater_than": 11.321807924089004,
+      "minimum_equilibrium_reserve_at_threshold": 0.030973825994132113,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.2323308722743627
+    },
+    {
+      "replicate": 19,
+      "exposure_thresholds": {
+        "sensitive": 0.5513337139780061,
+        "resistant": 4.387410085423401
+      },
+      "maximum_exposure_for_reserve_floor": 0.13410678405039927,
+      "required_exposure_strictly_greater_than": 4.387410085423401,
+      "minimum_equilibrium_reserve_at_threshold": 0.066573219627324,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.22079144727388525
+    },
+    {
+      "replicate": 20,
+      "exposure_thresholds": {
+        "sensitive": 1.2495244412698303,
+        "resistant": 6.011539992355541
+      },
+      "maximum_exposure_for_reserve_floor": 0.23079159673519567,
+      "required_exposure_strictly_greater_than": 6.011539992355541,
+      "minimum_equilibrium_reserve_at_threshold": 0.08221516172145985,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.19286832831482212
+    },
+    {
+      "replicate": 21,
+      "exposure_thresholds": {
+        "sensitive": 0.991147861058653,
+        "resistant": 2.8077725358128403
+      },
+      "maximum_exposure_for_reserve_floor": 0.18640219308103945,
+      "required_exposure_strictly_greater_than": 2.8077725358128403,
+      "minimum_equilibrium_reserve_at_threshold": 0.13412803433770365,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.1262685759109229
+    },
+    {
+      "replicate": 22,
+      "exposure_thresholds": {
+        "sensitive": 0.821384939665627,
+        "resistant": 16.081871908226454
+      },
+      "maximum_exposure_for_reserve_floor": 0.0857010115634626,
+      "required_exposure_strictly_greater_than": 16.081871908226454,
+      "minimum_equilibrium_reserve_at_threshold": 0.012281720953863363,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.16374417714576253
+    },
+    {
+      "replicate": 23,
+      "exposure_thresholds": {
+        "sensitive": 0.9807690262948978,
+        "resistant": 3.1972482447374975
+      },
+      "maximum_exposure_for_reserve_floor": 0.08693677847384923,
+      "required_exposure_strictly_greater_than": 3.1972482447374975,
+      "minimum_equilibrium_reserve_at_threshold": 0.0596607275321304,
+      "constant_exposure_feasible": false,
+      "resistant_invasion_at_reserve_limit": 0.12560811416431966
+    }
+  ],
+  "feasible_constant_exposure_cases": 0,
+  "checks": "threshold roots, crossing signs, monotonicity and zero-migration analytic limit passed",
+  "limitations": "local stability only; not global eradication; no conclusion about arbitrary time-varying controls, actual patients or alternative biology"
+}

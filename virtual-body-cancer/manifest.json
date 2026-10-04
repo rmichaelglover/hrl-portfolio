@@ -1,16 +1,32 @@
 {
   "files": [
     {
+      "path": "AUDIT-RESULTS.md",
+      "sha256": "656a30062fe527cd7b6d8e46ea85e64497886ac4a7e8bac0c2162f93026e2fd1"
+    },
+    {
       "path": "README.md",
-      "sha256": "da636c72357a632f73a3e864bd71c5d9c90e65e088708ede017d44d702fc4571"
+      "sha256": "804abd832e184d097610a35248a1a5856e4116763de1318fd126b7349557f4d1"
     },
     {
       "path": "RESEARCH-PLAN.md",
-      "sha256": "9f93b87e6d6168d7d586759d8b709d3a37e7224b6194572b06c21aed8ad55821"
+      "sha256": "ed10a8e9aa6dc04600d3f9c669b70bc8a0d0f8f5c4fed077b44dfe0a3d6c9dee"
+    },
+    {
+      "path": "analyze_extinction.py",
+      "sha256": "4133dfdd9576029034183d9fc85dbc57ee72716f074e9e1d84faa190189147fd"
+    },
+    {
+      "path": "benchmark_existing_crispr.py",
+      "sha256": "8e78e1e84f8e378615fe1cb38eabaddc1cde3f70ae210dd49f3e3b4755a10f4f"
     },
     {
       "path": "build_report.py",
-      "sha256": "4a8d4745e0070c4b6de515fda0bf3ea0b982c246b794aad1b26322cd436f0109"
+      "sha256": "491c94fa3f86f29b0f6c284827060c1d34dfbbc9e3a6b024ab9585f02bc3fa0f"
+    },
+    {
+      "path": "check_nested_cells.py",
+      "sha256": "d263cce99a4eaa9617c65d8a6b96e033d7761488215e501187afa514fe336d88"
     },
     {
       "path": "model.py",
@@ -21,8 +37,40 @@
       "sha256": "fc56bf74af679676c4539a2b947e3f48745644f21fa723c4712f5ee95fe8b908"
     },
     {
+      "path": "output/crispr-benchmark.json",
+      "sha256": "6365f922c67719cb81b92a8926f341c3fc22a920fb8e26e192903b4a3200a4b1"
+    },
+    {
+      "path": "output/crispr-benchmark.png",
+      "sha256": "25f5efeec7a9ce8c301b0e745394494552cdb39107b29b79be54de6ac959fc7f"
+    },
+    {
+      "path": "output/crispr-gene_disjoint-oof.csv",
+      "sha256": "7391cfc3763d96142c58c923482a0acb005842c1bed1483cdda3d757d6c303f5"
+    },
+    {
+      "path": "output/crispr-sequence_disjoint-oof.csv",
+      "sha256": "64470ca8be1823dcbadfd4730e9001c6eb875ec93a0cb21d2367cd40664e4103"
+    },
+    {
+      "path": "output/extinction-feasibility.json",
+      "sha256": "fb40cd31adff5c8fdc107d666c2f531dc92ec36d7034d7f7806818c13fee7adc"
+    },
+    {
+      "path": "output/extinction-feasibility.png",
+      "sha256": "8566913607c1be0f2a35b1f74e83c997861880a04b589114768fa81570c04b10"
+    },
+    {
+      "path": "output/feature-extraction-provenance.json",
+      "sha256": "9771e0a0fa9564c62b67e19435726f9d1ad909da337f58b8d96256f388b622b8"
+    },
+    {
       "path": "output/feedback.csv",
       "sha256": "49a63e0a742125ebdf8b96be9b603226ad7deaf0962e86ee7712977d7ebee5ed"
+    },
+    {
+      "path": "output/nested-cell-checks.json",
+      "sha256": "d398de9d5d94e53828309fd7738673f341593994d60cc7d5c3c9e1d5f3dca90a"
     },
     {
       "path": "output/none.csv",
@@ -54,15 +102,31 @@
     },
     {
       "path": "report.html",
-      "sha256": "7c6c8ec12fe9b73f9778f7f0952541619a34e654ceeaaebce9680c7277047671"
+      "sha256": "be09f82e2e604a90ed0bf4ab2b0f675b65aad3e7687df55118327180cfc1e780"
     },
     {
       "path": "requirements.txt",
-      "sha256": "3b30617936665814e14f54e0de8543e6cb46479b3de3c0b8086164a7d1fab81d"
+      "sha256": "bafb801beaa6efb92723727fe2fc2e3923a8a511ee5329b8dc575148b7fa34fb"
     },
     {
       "path": "run.py",
       "sha256": "ea7462d30ebc14ca7ecfe8f2c87dd7e32c85c0025820160044a028edab7fd6c5"
+    },
+    {
+      "path": "vendor/crispr_sequence_features.py",
+      "sha256": "424449b1a45e7defdd6cc633b39718e7fccd6725151584794f7917e772c68787"
+    },
+    {
+      "path": "vendor/hrl2026_audited/__init__.py",
+      "sha256": "5db966bc6508eedb8e74cae26b9921afeabf1f640238523e72b1ccddcf4bb6a6"
+    },
+    {
+      "path": "vendor/hrl2026_audited/membrane.py",
+      "sha256": "2b7ff0eb67b2ee36a062b723bb1c8b41df3ed475ece51a0e13d42e5db9a82714"
+    },
+    {
+      "path": "vendor/hrl2026_audited/virtual_cell.py",
+      "sha256": "9dfe93d231e64c7e6434381e2e3a0c2a54802f8e75a270b4109bd4be0b0252a9"
     },
     {
       "path": "vendor/hrl_engine.py",
