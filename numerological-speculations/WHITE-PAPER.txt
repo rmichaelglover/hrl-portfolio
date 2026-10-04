@@ -1,0 +1,137 @@
+# Numerological Speculations: A Short Book About Natural Language
+
+Michael Emanuel Glover. Developed in dialogue with Codex. 4 October 2026.
+
+
+## 1. Numerological Speculations
+
+By Michael Emanuel Glover. Developed in dialogue with Codex. Naming, counting, meaning, and the little phrase that carries a large burden: it follows.
+
+The book is about natural language. Let that sentence stand at the entrance. I am interested in the names we give things, the things we make with names, and the surprising distance between saying something and establishing it. Numbers enter because language counts, orders, compares, repeats, and compresses. They do not arrive as a secret alphabet that automatically reveals my destiny.
+
+I have a name; therefore I am. That is our opening sentence. It sounds immediate, almost self-evident. Yet it already contains a premise, a relation, and an interpretation. What does having a name mean? What does being mean? What licenses therefore? A short sentence can carry a whole system inside its pockets.
+
+I want to keep the energy of ordinary speech while making its commitments visible. Sometimes I say amen. Sometimes I say it follows. Those phrases perform different jobs: assent is an act of a speaker, while inference concerns a relationship between claims. A person can assent to an invalid argument, or decline to assent to a valid one. Neither changes the relationship by itself.
+
+This is an inquiry written in my voice, with formal examples developed in dialogue. Its proofs concern declared models. Its reflections concern how people use words. Where I propose a meaning, I will call it a proposal; where a conclusion follows, I will show the premises. Wings out.
+
+
+## 2. 1. The hinge: it follows
+
+It follows is the hinge between what we have said and what we claim we must accept. In conversation the hinge often disappears behind the rhythm. Of course. Obviously. Therefore. Q.E.D. These are powerful little performances. Their force can outrun the argument they announce.
+
+Let P mean I have a name. Let Q mean I exist. Modus ponens has a plain form: if P implies Q, and P holds, then Q holds. The rule is valid in classical propositional logic. Its validity does not supply the conditional premise. We still need to state why naming implies existence, and what existence means here.
+
+Compare a second argument: if it rains, the pavement becomes wet; the pavement is wet; therefore it rained. That conclusion is not licensed by those premises alone. A sprinkler supplies a counterexample. The sentences sound connected because they mention the same event and effect. Their connection does not determine a unique cause.
+
+A useful reading habit is to replace it follows with a longer question: what follows, from which premises, under which meanings? The expansion interrupts the tempo just enough to reveal the missing step. This does not destroy eloquence. It gives eloquence an argument that can carry its weight.
+
+A speaker may be certain without having a valid inference. A valid inference may begin from doubtful premises. A true conclusion may appear at the end of a bad argument. These possibilities are ordinary parts of reasoning, and keeping them separate makes conversation more generous and more exact.
+
+
+\[
+P\to Q,\quad P\quad\vdash\quad Q.
+\]
+
+
+## 3. 2. Names and kinds of existence
+
+Our proposed axiom is simple: everything named exists. To formalize it carefully, choose a domain of candidate subjects. Let Named(x) mean that a speaker has assigned x a name or designation. Let ExistsReal(x) mean that x has a referent in the actual world. The proposed bridge says that the first condition entails the second.
+
+There is an important alternative. ExistsConcept(x) can mean that a representation or concept of x is present in discourse. Under that meaning, naming a fictional dragon readily introduces something we can discuss. It does not establish a living dragon outside the discussion. A difference in predicates can hide behind an unchanged English word.
+
+Classical first-order logic usually requires a constant symbol to denote something in its interpretation. That is a feature of the selected semantics, not a discovery that everything anybody names physically exists. A fictional figure can be represented by an abstract object in a model. Free logics offer other treatments of non-denoting names. Our simplified propositional experiments below do not decide between those approaches.
+
+I can stipulate the stronger bridge as an axiom. Given a named subject, real existence then follows within that stipulated theory. But the bridge carries the substantive commitment. Writing therefore does not independently test it against the world. To investigate the commitment empirically, I would need a definition of naming and a way to evaluate the relevant existence claims.
+
+This is why the apparently tiny sentence I have a name; therefore I am deserves a whole chapter. Its economy is beautiful. Its economy also conceals a choice about ontology. Let us appreciate both facts without making them the same fact.
+
+
+\[
+\forall x\,[\operatorname{Named}(x)\to\operatorname{ExistsReal}(x)].
+\]
+
+
+## 4. 3. Both, and, not: give the sense a name
+
+Both/and is a welcome at the table. It can join commitments, descriptions, perspectives, and experiences. Its logical effect depends on what is being joined. I am ordinary in one respect and unusual in another can be perfectly coherent. I am P and not P in precisely the same respect at the same time is a different construction.
+
+Attach the respect and time explicitly. Ordinary(x, daily habits) and Unusual(x, choice of projects) need not conflict. The predicates describe different properties. The repair is not to declare that contradictions have vanished everywhere; it is to say accurately what the original words were doing.
+
+Religious disagreement has a similarly useful distinction. Tradition A affirms proposition p, and tradition B denies p can both be accurate reports of those traditions. Reporting the disagreement does not entail p and not p. Belief reports have speakers or communities inside their structure. Remove those subjects, and the logical claim changes.
+
+The same care helps us write autobiography. My résumé reports a result is a statement about a source. The result has been independently reproduced is a statement about verification. They can support one another, but they are not interchangeable. A responsible narrative can retain a strong voice and still identify whose observation or recollection supports a sentence.
+
+Natural language is good at accommodating shifting senses. Formalization asks us to notice the shifts when they affect an inference. It need not flatten a poem into a checklist. It does ask an argument to keep track of the meanings on which its conclusion depends.
+
+
+## 5. 4. Counting what the sentence commits us to
+
+Everyone grows sounds warm at supper. Read literally as a universal claim, it ranges over every member of a stated domain and assigns each the relevant kind of growth. What is that domain? What counts as growth? Does the sentence describe a tendency, express a hope, or make an exceptionless claim? The answer changes its commitments.
+
+For a finite domain of three subjects, everyone has property G expands into three claims joined by and. Someone has G expands into three alternatives joined by or. Exactly two have G requires two positive assignments and one negative assignment, in any of three possible arrangements. These are numerical features of meaning, not mystical features of letter shapes.
+
+Negation changes scope. Not everyone has G means at least one lacks G, given ordinary classical quantifier semantics. Nobody has G means every subject lacks it. Confusing them turns a single counterexample into a total absence. A tiny word can dramatically enlarge what a speaker has asserted.
+
+Counting also reveals why unanimous assent is different from proof. A vote counts acts of endorsement. An inference checks whether a conclusion holds in every interpretation satisfying the premises under the specified semantics. People decide which framework to use and whether its assumptions fit their purposes, but a tally of their preferences is not the truth-table operation.
+
+Here the title Numerological Speculations becomes literal in a useful way: I speculate about the numbers already inside language. How many subjects? How many exceptions? How many interpretations remain possible? The arithmetic becomes illuminating when we know what it is counting.
+
+
+| Phrase, three subjects | Satisfying assignments |
+| Everyone has G | 1 of 8 |
+| Someone has G | 7 of 8 |
+| Exactly two have G | 3 of 8 |
+| Not everyone has G | 7 of 8 |
+| Nobody has G | 1 of 8 |
+
+
+## 6. 5. Compute the inference
+
+The accompanying program enumerates all four Boolean assignments for P and Q. Three satisfy P implies Q. Add the premise P, and only one assignment remains: P true and Q true. Add not Q as well, and none remain. These are exhaustively computed results for a finite propositional model.
+
+A separate experiment considers two named subjects, A and B, with existence propositions EA and EB. Without a naming-to-existence bridge, all four assignments of those existence propositions remain available. Add the bridge for both subjects and the premises that both are named, and only the assignment in which both exist remains. The computation confirms what the stipulated bridge demands; it does not discover that either subject exists in the actual world.
+
+The distinction matters even when the intended subjects are deities. The formal system can entail their existence if it includes the requisite premises and bridge. No theological conclusion has been independently established by enumeration. The result is a statement about this specified logical structure.
+
+The program also enumerates the eight assignments of the three growth predicates used in the previous chapter. It checks the displayed counts and writes them to results.json. A calculation lets a reader reproduce the small examples instead of trusting the typography of Q.E.D.
+
+No collection of human speech was statistically sampled for this book. No language model was trained. These are exact finite logical experiments, accompanied by interpretive essays. The modesty of the numerical claim is part of its precision: we can say exactly what was computed, and exactly which additional questions it leaves open.
+
+
+| Premises | Remaining assignments |
+| P implies Q | 3 |
+| P implies Q; P | 1 |
+| P implies Q; P; not Q | 0 |
+| A and B named; no existence bridge | 4 |
+| A and B named; both existence bridges | 1 |
+
+
+## 7. 6. A name is also an act
+
+Words do more than describe. A title invites a reader. A nickname recognizes a friend. Amen expresses assent or closes a prayer. Selah can mark a pause in this author's prose. These uses do not all function as ordinary propositions waiting for a truth value. Their role emerges from an occasion, a speaker, and an audience.
+
+Kierketaard: A Peculiar Kind of Rapper. Kierkegoonce: A Peculiar Kind of Electronic Artist. Johannus Climacus: A Peculiar Kind of Prophet. Kierkeetoven: A Peculiar Kind of Mourner. Kierkemessia: A Particularly Messi Player. These titles came from our conversation. Their names enact a joke and propose an artistic direction. They do not assert that a historical philosopher performed all those roles.
+
+A pun connects sounds while allowing their referents to remain distinct. This is one reason natural language cannot be reduced to a single numerical encoding. An alphabet sum can be well defined and reproducible, yet omit the context that makes the joke intelligible. Calculation answers the question posed by the encoding, not every question posed by the phrase.
+
+Naming may establish a work as an object of conversation before the work is written. The title has existence as a title; the manuscript requires another action. Here is a practical theorem in ordinary language: if I want a book rather than merely its name, I must write pages. The formal appearance of that sentence should not conceal its ordinary, useful demand.
+
+Different names, one person underneath. That is the humanism of the pseudonym series. I can change a costume, an instrument, a register, or a voice without treating another human being as disposable. A lively vocabulary should make more room for attention, not less.
+
+
+## 8. 7. Let it be written; let it be checked
+
+I want language to remain alive. Let it laugh, compress, stumble, argue, sing, and try again. I also want to know when a sentence has given me a conclusion and when it has merely given me momentum. It follows is most useful when I can put my finger on the step.
+
+Our central result is conditional: a named-existence axiom and a naming premise entail an existence conclusion in the selected system. Naming without that bridge does not supply the same entailment. Different meanings of existence create different theories. The conclusion belongs to the premises and their interpretation; it cannot be detached from them by confidence alone.
+
+The finite examples make this visible. Four possible assignments become three, then one, then none as constraints are added. A proposition can be forced by assumptions. An inconsistent collection has no satisfying assignment in this semantics. Neither observation tells us which assumptions best describe reality. That next task requires suitable evidence and a clear account of the intended subject.
+
+There is a hospitable way to disagree about those assumptions. State yours. Ask what the other person means. Look for an example that separates the possibilities. Revise the sentence when its old form hides the distinction. We can value a speaker without accepting every inference the speaker offers.
+
+Numerological Speculations is therefore a short book about the meaningful numbers of speech and the speech surrounding our numbers. Names begin conversations. Definitions sharpen them. Premises constrain them. Proofs carry consequences. Observation asks whether the consequences reach the world.
+
+Relaxing Philosophy: Every Pig Is Right; Some Pigs Are Sacred. Here right can name a right to regard, a place at the table, or a claim to be heard. Sacred can name the special regard of a tradition or a speaker. If right instead means that every assertion is true, the argument changes. The little pig teaches the larger lesson: dignity and correctness are different meanings, and a shared sentence need not erase either.
+
+Amen marks my assent. Selah gives the thought a breath. It follows identifies a task I can show. Wings out.

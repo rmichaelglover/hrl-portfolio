@@ -1,0 +1,36 @@
+{
+  "truth_table": [
+    {
+      "P": false,
+      "Q": false,
+      "implication": true
+    },
+    {
+      "P": false,
+      "Q": true,
+      "implication": true
+    },
+    {
+      "P": true,
+      "Q": false,
+      "implication": false
+    },
+    {
+      "P": true,
+      "Q": true,
+      "implication": true
+    }
+  ],
+  "counts": {
+    "implication": 3,
+    "modus_ponens": 1,
+    "inconsistent": 0,
+    "all_growth": 1,
+    "some_growth": 7,
+    "exactly_two": 3,
+    "not_everyone": 7,
+    "nobody": 1,
+    "named_without_bridge": 4,
+    "named_with_bridge": 1
+  }
+}

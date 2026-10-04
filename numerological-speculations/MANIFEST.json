@@ -1,0 +1,59 @@
+{
+  "title": "Numerological Speculations: A Short Book About Natural Language",
+  "author": "Michael Emanuel Glover",
+  "pages": 8,
+  "words": 2343,
+  "figures": 0,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "fa214cac377535e201fff18d749ff802c6365e1b1e6c6d2e9541bfe0c805902f",
+      "bytes": 14614
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "108ac4ffffd165f5ac40d76b330227fe5a24214ed2ad04bd9f9929f8ec28be4d",
+      "bytes": 123961
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "9cd006164c4659253276075c0d74e9bc327cf6ecafd4c39e22fb739d5a2c0d7f",
+      "bytes": 16185
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "fa214cac377535e201fff18d749ff802c6365e1b1e6c6d2e9541bfe0c805902f",
+      "bytes": 14614
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "8d2acc42add5d77163a1f08a4bf95f96b13377e3064779bee7c6642ba34fa8a4",
+      "bytes": 219
+    },
+    {
+      "path": "index.html",
+      "sha256": "6bce60b24e06a72bd31c1b38f90e86a392cf799317147ebaf54edcba16305b0e",
+      "bytes": 17320
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "29057e5b8593a29c7ec61de17443e518cff5b836f24a42a698a75375d4a0dcc5",
+      "bytes": 15642
+    },
+    {
+      "path": "results.json",
+      "sha256": "a6606e51a903d576b46678f9e8383d527998f880c5bf1c8d4c4e6d8a848478c6",
+      "bytes": 572
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "write.py",
+      "sha256": "9e9f2a22b79e4675cf78d9ebf75476ae42715e52a745aec055004e1412924dbe",
+      "bytes": 18678
+    }
+  ]
+}
