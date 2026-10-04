@@ -1,0 +1,69 @@
+{
+  "title": "Magnum Quantreleviathone",
+  "author": "Michael Emanuel Glover",
+  "pages": 4,
+  "words": 1011,
+  "figures": 1,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "0dc50ad47cd5d176412f86306a9e297276fea7510540925774670cf93079a132",
+      "bytes": 6840
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "5f58adfe5513886a5c7c217780c348739d2b78e886d2cfaa5d54392900848566",
+      "bytes": 207119
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "02a7b3aa1aa32d74cfc819aab8270dd473f8eac7874113200f3097dc424a5a1f",
+      "bytes": 8053
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "0dc50ad47cd5d176412f86306a9e297276fea7510540925774670cf93079a132",
+      "bytes": 6840
+    },
+    {
+      "path": "compute.py",
+      "sha256": "86e4d7309f813c6a94a6c2446d26577de96766ab69ee1f77bddb035cbc812524",
+      "bytes": 1598
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "a1a714b5e6edd949fa7befbf63967d3fd1d938b48cc886ca6addf958cd183a0d",
+      "bytes": 180
+    },
+    {
+      "path": "figures/memory.pdf",
+      "sha256": "8fb1ffc424786e77aea74c4cf936d659e326c5967b0769d6b09ee7afb2d1703f",
+      "bytes": 17199
+    },
+    {
+      "path": "figures/memory.png",
+      "sha256": "00f1b8eb833474aadab1401d60c3219fdd1f090f7684b76693848d8853a11501",
+      "bytes": 65177
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "909804e7236e3db300e254234915a521d0108a6a69a8a66b77aca465c502f27c",
+      "bytes": 7350
+    },
+    {
+      "path": "results.json",
+      "sha256": "8fb07bf139640f0e2235c83186be89b0047147a374d61505e1bd6990a5c69531",
+      "bytes": 2959
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "write.py",
+      "sha256": "b43060ae620dc011376c72353452818f146ac96483db7a1bebb242bc1ef8466c",
+      "bytes": 7119
+    }
+  ]
+}

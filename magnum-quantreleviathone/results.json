@@ -1,0 +1,135 @@
+[
+  {
+    "qubits": 2,
+    "dense_bytes": 64,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 3,
+    "dense_bytes": 128,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 4,
+    "dense_bytes": 256,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 5,
+    "dense_bytes": 512,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 6,
+    "dense_bytes": 1024,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 7,
+    "dense_bytes": 2048,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 8,
+    "dense_bytes": 4096,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 9,
+    "dense_bytes": 8192,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 10,
+    "dense_bytes": 16384,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 11,
+    "dense_bytes": 32768,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 12,
+    "dense_bytes": 65536,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 13,
+    "dense_bytes": 131072,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 14,
+    "dense_bytes": 262144,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 15,
+    "dense_bytes": 524288,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 16,
+    "dense_bytes": 1048576,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 17,
+    "dense_bytes": 2097152,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 18,
+    "dense_bytes": 4194304,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 19,
+    "dense_bytes": 8388608,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  },
+  {
+    "qubits": 20,
+    "dense_bytes": 16777216,
+    "sparse_payload_bytes": 48,
+    "max_amplitude_error": 0.0,
+    "norm_squared": 0.9999999999999998
+  }
+]
