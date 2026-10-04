@@ -1,0 +1,14 @@
+{
+  "discordant_relax_only": 4,
+  "discordant_static_only": 0,
+  "mcnemar_exact_p": 0.125,
+  "paired_mean_gap_improvement_cp": 63.708333333333336,
+  "descriptive_bootstrap_95_mean_cp": [
+    4.165625000000001,
+    151.125
+  ],
+  "improved": 7,
+  "worse": 2,
+  "tied": 15,
+  "timing_ratio_medians": 3.8824833872572246
+}

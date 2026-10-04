@@ -1,0 +1,192 @@
+{
+  "title": "Better Than Stockfish: Relaxfish",
+  "author": "Michael Emanuel Glover",
+  "pages": 27,
+  "manuscript_words": 8927,
+  "figures": 8,
+  "tables": 4,
+  "positions": 24,
+  "diagnostic_matches": 4,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "242fc33e6a73a622d08341c56e005a4702e39ab2faffe28595b4e14d4c36a7eb",
+      "bytes": 2673
+    },
+    {
+      "path": "RELAXFISH.pdf",
+      "sha256": "fba155dcc65b54c9643fd5e74ac863cf19687785d05a86826af112eeb6b83eeb",
+      "bytes": 699394
+    },
+    {
+      "path": "RELAXFISH.tex",
+      "sha256": "4de092b9ffa1015a677c8ed06631de760b5be5e4c3801478b79296c054b576ee",
+      "bytes": 68638
+    },
+    {
+      "path": "RELAXFISH.txt",
+      "sha256": "4ba43f4c5930f5926e7757f765f2dc6fca833bed0101745a7a6efb472bae48b8",
+      "bytes": 65015
+    },
+    {
+      "path": "build.py",
+      "sha256": "2534086003557114e82d28a15f803137997ac9e5449f26a71075da142d8d3f94",
+      "bytes": 5716
+    },
+    {
+      "path": "chess-engine.js",
+      "sha256": "e6389623ede9b4cca13f791a3669681b13620a13292f2733bafc4d6d6e3e58a3",
+      "bytes": 14626
+    },
+    {
+      "path": "chess-engine.test.cjs",
+      "sha256": "b767573779718ef4d9226b15e35e8942613732cf5227b9152296bf6e99eb8a6f",
+      "bytes": 5338
+    },
+    {
+      "path": "chess-solver.js",
+      "sha256": "3ac1f37df12032dbbaafa716c05b3d0237d680ae1d749d66d720cc4aaabbd610",
+      "bytes": 4539
+    },
+    {
+      "path": "chess-solver.test.cjs",
+      "sha256": "29cc95d8c0b8bbec68a9077d63c7b370bfdf0c278c00968855fb210e46ffb22b",
+      "bytes": 3413
+    },
+    {
+      "path": "data/habitat-start-analysis.json",
+      "sha256": "3592852782366c53a55bf959410e67ec0ad55ae31b6eb13f52d8ea77da117f1b",
+      "bytes": 14047
+    },
+    {
+      "path": "data/positions.csv",
+      "sha256": "60bbf72564d92e6a0ef74f4feac40d317a5f47f2d1a3f66d665fc6e85d11d1ab",
+      "bytes": 5598
+    },
+    {
+      "path": "data/results.json",
+      "sha256": "61589091d445218c90c34730080ac461046a2184303890a1fed78dc2793e7480",
+      "bytes": 180523
+    },
+    {
+      "path": "data/statistics.json",
+      "sha256": "e46637a6f1f476ddaed1604ab020164e9e1edfe20a5812f50086716710b84df8",
+      "bytes": 319
+    },
+    {
+      "path": "data/summary.json",
+      "sha256": "deadd202d56088a881fe5f9f7d3022bb6300d6338be06b058036a3039379635b",
+      "bytes": 5031
+    },
+    {
+      "path": "experiment.py",
+      "sha256": "7ee646eb7f62111c3c187f41f8f0fd6875cbb95a6b48f33aab89b2c96a9d7ac2",
+      "bytes": 10612
+    },
+    {
+      "path": "figures/ablation_cost.pdf",
+      "sha256": "e174ba44ce884b1ab672f2cd25cb75d90d66fe49669f6f10f7a5383db056f965",
+      "bytes": 24788
+    },
+    {
+      "path": "figures/ablation_cost.png",
+      "sha256": "6001775c770716057c2c2d47d9478002013aad71568d046ccfe872a82cb70524",
+      "bytes": 248069
+    },
+    {
+      "path": "figures/architecture.pdf",
+      "sha256": "f8d000bf12a50810f383ff7e8b8cc708ccdf6043c8a3fe876b11435335ca0040",
+      "bytes": 13543
+    },
+    {
+      "path": "figures/architecture.png",
+      "sha256": "ee4fae821ea9cc69f1bbe0da2a003295cb8fee62042b6c960ea5b3ca7cc202f0",
+      "bytes": 131419
+    },
+    {
+      "path": "figures/confidence_3d.pdf",
+      "sha256": "bd5a4f32e127c56c52f820ad86e84ce111e9041c5fee10769d2a3c5be4168b57",
+      "bytes": 107183
+    },
+    {
+      "path": "figures/confidence_3d.png",
+      "sha256": "5a65848811a3571a9467ced795b7e389cf7f2ee3ba547ef34d8f60a8b4d2fbc4",
+      "bytes": 605394
+    },
+    {
+      "path": "figures/entropy.pdf",
+      "sha256": "738025a877053029ba9b6812adb03034333c2f0dac52b0e7598a57f4ab685af1",
+      "bytes": 18819
+    },
+    {
+      "path": "figures/entropy.png",
+      "sha256": "5582988b67eeb593fbf774b08b7b430a8afa1f27672e888304105e7b2ab830e8",
+      "bytes": 363123
+    },
+    {
+      "path": "figures/potential_3d.pdf",
+      "sha256": "73da42bde5eda6f9186197198868dd76b06065059071f8b3ae776537ca9b64ba",
+      "bytes": 41902
+    },
+    {
+      "path": "figures/potential_3d.png",
+      "sha256": "08d9bdf96d8da3948815fa566a1bafc39bf351ff8a743a76ab2581bce549aae0",
+      "bytes": 437126
+    },
+    {
+      "path": "figures/reference_comparison.pdf",
+      "sha256": "2e7d61ceb93cc7f1470fefb8cee81e3faf32f4c411d402eac20700820961e47f",
+      "bytes": 26060
+    },
+    {
+      "path": "figures/reference_comparison.png",
+      "sha256": "8b41c291149f3c6bb4a2bdda1cfa77f54482b5107cba872a158ec41954d485f7",
+      "bytes": 259019
+    },
+    {
+      "path": "figures/role_field.pdf",
+      "sha256": "75bf9ecb7d0498e917e1d91b1e6f1f8c6f4cf763e03f70d176e986ae4b406509",
+      "bytes": 40862
+    },
+    {
+      "path": "figures/role_field.png",
+      "sha256": "279841de3b07ccd2d4cc9ca93371fc5de40f7dfcca75d4cbeb32596906e5e57d",
+      "bytes": 388269
+    },
+    {
+      "path": "figures/statistical_design.pdf",
+      "sha256": "15f27324252ead2ecbbd1d44c0136b6210f1211fd027cb154b9692a0b8282c1b",
+      "bytes": 138513
+    },
+    {
+      "path": "figures/statistical_design.png",
+      "sha256": "a00c7e70097e45cc573ad41506150ca7974481bc733254c9cd72f5367880ecf7",
+      "bytes": 244785
+    },
+    {
+      "path": "figures.py",
+      "sha256": "e3aa15d6131e6d18cac171379540fe84fb711c1a3515bd486fd2023c8a378972",
+      "bytes": 7019
+    },
+    {
+      "path": "manuscript.md",
+      "sha256": "0cf4277bf4b2fc835728ed411e0f7080761cfc1ecf2365b8f5990cb065af4e42",
+      "bytes": 64055
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "bab7a0c65cb8512afbbc853a7cf020f9629cf6635351a1160c20204b2ab1023b",
+      "bytes": 67
+    },
+    {
+      "path": "statistics.py",
+      "sha256": "5d923a6ede21b54bb52da7fd4d26397463022050949907c58706289a41f2a952",
+      "bytes": 1266
+    },
+    {
+      "path": "verify.py",
+      "sha256": "38163847930daa85be485dbb60803117fcfbd58fd22458debdb6baab5dda2c05",
+      "bytes": 2021
+    }
+  ]
+}
