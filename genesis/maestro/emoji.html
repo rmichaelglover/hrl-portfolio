@@ -72,7 +72,7 @@
     quaternion camera after <b>MrMocap — David Harrison</b> · built by <b>Manny Glover</b> · <a href="../../">← portfolio</a>
   </div>
 </div>
-<script src="core.js"></script>
+<script src="core.js"></script><script src="../../whimsy-chess/storybook.js"></script>
 <script src="worldscore.js"></script>
 <script>
 (() => {
@@ -208,7 +208,7 @@
   }
   function panel(){ const P=positions[ply]; stPly.textContent="PLY "+ply+"/"+LAST;
     stMove.textContent = ply===0 ? "start position" : (Math.ceil(ply/2)+(ply%2?". ":"… ")+P.san);
-    narrEl.textContent = narrate(ply); range.value=String(ply); }
+    narrEl.textContent = narrate(ply); range.value=String(ply); ChessStorybook.update({ply,san:P.san,final:ply===LAST,result:"1–0"}); }
   const HERO_ROOT=52, HERO="w";
   let audio=null,audioOn=false,score=null,lastCount=null;
   function sing(P){ if(!audio||!score||!P) return;

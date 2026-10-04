@@ -160,7 +160,7 @@
   </div>
 </div>
 
-<script src="core.js"></script>
+<script src="core.js"></script><script src="../../whimsy-chess/storybook.js"></script>
 <script src="worldscore.js"></script>
 <script>
 (() => {
@@ -382,7 +382,7 @@
   let ply=0;
   function panel(){ const P=positions[ply]; stPly.textContent="PLY "+ply+"/"+LAST;
     stMove.textContent = ply===0 ? "cold boot" : (Math.ceil(ply/2)+(ply%2?". ":"… ")+P.san);
-    narrEl.innerHTML = narrate(ply); range.value=String(ply); }
+    narrEl.innerHTML = narrate(ply); range.value=String(ply); ChessStorybook.update({ply,san:P.san,final:ply===LAST,result:"1–0"}); }
   const HERO_ROOT=45, HERO="w";
   let audio=null,audioOn=false,score=null,lastCount=null;
   function sing(P){ if(!audio||!score||!P) return;

@@ -234,9 +234,12 @@
 
 <!-- WorldKit: turns this page's chess-world export into a Minecraft datapack / Roblox build -->
 <script src="whimsy-chess/worldkit.js"></script>
+<script src="whimsy-chess/storybook.js"></script>
 <script>
 /* ===================== GAMES ===================== */
 const GAMES = {
+projectnim20261004:{"label": "Project Nim: The Buffet Was a Trap", "white": "mannyfresher (942)", "black": "DylliQ (950)", "hero": "w", "result": "1–0", "tc": "600+0", "pgn": "1. Nc3 e5 2. d4 d6 3. dxe5 dxe5 4. Bd2 Nc6 5. e3 e4 6. Nge2 Nf6 7. g3 Bf5 8.\nBg2 Bd6 9. Nxe4 Nxe4 10. Bxe4 Bxe4 11. O-O O-O 12. f4 Qf6 13. Nd4 Nxd4 14. Qh5\ng6 15. Qh6 Nxc2 16. Rac1 Qxb2 17. Bc3 Qxc3 18. f5 gxf5 19. g4 fxg4 20. Kf2 Rae8\n21. Rg1 Qd2+ 22. Kf1 Qxc1+ 23. Kf2 Qxe3+ 24. Kf1 Bc5 25. Rxg4+ Kh8 26. Qg7# 1-0"},
+kruijs20261004:{"label": "Van’t Kruijsing: Express Checkout", "white": "mannyfresher (963)", "black": "ximenacaicedoluna (1029)", "hero": "w", "result": "1–0", "tc": "600+0", "pgn": "1. e3 e5 2. Qe2 d5 3. Nf3 Nc6 4. h4 Nf6 5. Ng5 Bc5 6. Qb5 Bf5 7. Qxb7 1-0"},
   ravencliff:{ label:"The Kádas Cascade — Raven Cliff Relay (vs +635 Elo)", white:"mannyfresher (815)", black:"DDL-Chess (1450)", hero:"w", result:"1–0", tc:"600+0",
     pgn:"h4 e5 h5 d5 h6 Nc6 d4 e4 hxg7 Bxg7 f3 Bxd4 fxe4 Nf6 exd5 Ng4 Nh3 Nce5 Qxd4 f6 Nf4 Bf5 Ne6 Qe7 Bh6 Rd8 Bg7 Rg8 Rxh7 Rd6 e4 Bxh7 Bb5+ c6 Bxc6+ bxc6 Nc3 cxd5 Nb5 Rxg7 Nbc7+ Qxc7 Nxc7+ Kd7 Qxa7 Re7 Nxd5+ Ke6 Qxe7#" },
   queendab:{ label:"Queen Dab (vs +482 Elo)", white:"mannyfresher (1104)", black:"Arya864 (1586)", hero:"w", result:"1–0",
@@ -1276,6 +1279,7 @@ function render(){
   else { const [tt,tc]=tagOf(cur); const i=cur-1,num=Math.floor(i/2)+1,dots=(i%2===0)?".":"...";
     nEl.innerHTML=`<span class="tag" style="background:${tc}">${num}${dots} ${moves[i].san}${moves[i].suffix}</span>${narrate(cur)}`; }
   document.getElementById("meta").textContent = `${game.label} · ${game.result} · move ${cur}/${moves.length} · key ${TONIC_NAMES[keyTonic]} · ♩=${MUS_BPM} ${meterLabel()}`;
+  ChessStorybook.update({ply:cur,san:cur?moves[cur-1].san+moves[cur-1].suffix:"",final:cur===moves.length,result:branched?"unfinished variation":game.result});
   renderMoves();
   fillRoles(roleRes);
   renderMaterial();

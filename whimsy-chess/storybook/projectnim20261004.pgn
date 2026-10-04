@@ -1,0 +1,23 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/1i3pw3T2"]
+[Date "2026.10.04"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "DylliQ"]
+[Result "1-0"]
+[WhiteElo "942"]
+[BlackElo "950"]
+[TimeControl "600+0"]
+[Termination "Normal"]
+[GameId "1i3pw3T2"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Van Geet Opening: Reversed Nimzowitsch"]
+[StudyName "Project Nim"]
+[ChapterName "mannyfresher (942) - DylliQ (950)"]
+[ChapterURL "https://lichess.org/study/Bty8CJcj/3JShgRWn"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. Nc3 { [%eval -0.04] [%clk 0:10:00] } 1... e5 { [%eval 0.2] [%clk 0:10:00] } 2. d4 { [%eval 0.04] [%clk 0:09:57] } 2... d6 { [%eval 0.54] [%clk 0:09:55] } 3. dxe5 { [%eval 0.34] [%clk 0:09:55] } 3... dxe5 { [%eval 0.35] [%clk 0:09:54] } 4. Bd2 { [%eval -0.19] [%clk 0:09:52] } 4... Nc6 { [%eval 0.0] [%clk 0:09:51] } 5. e3 { [%eval -0.37] [%clk 0:09:50] } 5... e4?? { [%eval 1.43] } { Blunder. Nf6 was best. } { [%clk 0:09:42] } (5... Nf6 6. Bd3 Qe7 7. e4 Be6 8. Nf3 O-O-O 9. O-O h6 10. Rb1 g5 11. b4) 6. Nge2? { [%eval -0.13] } { Mistake. Nxe4 was best. } { [%clk 0:09:50] } (6. Nxe4 Bd7 7. Bd3 Nf6 8. Nf3 Qe7 9. Nc3 O-O-O 10. h3 g6 11. O-O Bg7) 6... Nf6 { [%eval -0.25] [%clk 0:09:34] } 7. g3?? { [%eval -2.97] } { Blunder. h3 was best. } { [%clk 0:09:50] } (7. h3 h5 8. Nd4 Bd7 9. Qe2 Bd6 10. O-O-O a6 11. f3 Qe7 12. Be1 O-O-O) 7... Bf5?? { [%eval -0.69] } { Blunder. Bg4 was best. } { [%clk 0:09:18] } (7... Bg4 8. Bg2 Ne5 9. Nb5 Nf3+ 10. Bxf3 Bxf3 11. Rg1 c5 12. c4 a6 13. Na3) 8. Bg2 { [%eval -0.72] [%clk 0:09:50] } 8... Bd6 { [%eval -0.29] [%clk 0:09:11] } 9. Nxe4?? { [%eval -6.37] } { Blunder. Nb5 was best. } { [%clk 0:09:50] } (9. Nb5 Be5 10. Nbd4 Nxd4 11. exd4 Bxd4 12. Nxd4 Qxd4 13. Bc3 Qb6 14. Qd4 O-O) 9... Nxe4 { [%eval -6.38] [%clk 0:09:05] } 10. Bxe4 { [%eval -7.3] [%clk 0:09:50] } 10... Bxe4 { [%eval -7.3] [%clk 0:09:04] } 11. O-O { [%eval -7.73] [%clk 0:09:46] } 11... O-O { [%eval -6.73] [%clk 0:09:02] } 12. f4 { [%eval -7.15] [%clk 0:09:43] } 12... Qf6 { [%eval -6.78] [%clk 0:08:56] } 13. Nd4 { [%eval -7.31] [%clk 0:09:43] } 13... Nxd4 { [%eval -7.22] [%clk 0:08:53] } 14. Qh5 { [%eval -9.15] [%clk 0:09:43] } 14... g6 { [%eval -8.56] [%clk 0:08:45] } 15. Qh6 { [%eval -9.27] [%clk 0:09:41] } 15... Nxc2 { [%eval -7.93] [%clk 0:08:43] } 16. Rac1 { [%eval -9.34] [%clk 0:09:28] } 16... Qxb2 { [%eval -9.66] [%clk 0:08:37] } 17. Bc3 { [%eval -23.11] [%clk 0:09:28] } 17... Qxc3 { [%eval -22.72] [%clk 0:08:35] } 18. f5 { [%eval -21.22] [%clk 0:09:22] } 18... gxf5 { [%eval -11.51] [%clk 0:08:27] } 19. g4 { [%eval -14.04] [%clk 0:09:19] } 19... fxg4 { [%eval -11.77] [%clk 0:08:12] } 20. Kf2?! { [%eval #-2] } { Checkmate is now unavoidable. Qg5+ was best. } { [%clk 0:09:12] } (20. Qg5+ Kh8 21. Qf6+ Qxf6 22. Rxf6 Bc5 23. Kf1 Bxe3 24. Rxc2 Bd3+ 25. Kg2 Bxc2) 20... Rae8?! { [%eval -15.38] } { Lost forced checkmate sequence. Qd2+ was best. } { [%clk 0:08:02] } (20... Qd2+ 21. Kg1 Qg2#) 21. Rg1?! { [%eval #-2] } { Checkmate is now unavoidable. Qg5+ was best. } { [%clk 0:09:12] } (21. Qg5+ Bg6 22. Kg1 Rxe3 23. Qxg4 Rfe8 24. Rcd1 Qc5 25. Kh1 Re2 26. Rxd6 Qxd6) 21... Qd2+ { [%eval #-1] [%clk 0:07:59] } 22. Kf1 { [%eval #-1] [%clk 0:09:05] } 22... Qxc1+ { [%eval #-3] [%clk 0:07:57] } 23. Kf2 { [%eval #-2] [%clk 0:09:02] } 23... Qxe3+?! { [%eval -15.39] } { Lost forced checkmate sequence. Qd2+ was best. } { [%clk 0:07:49] } (23... Qd2+ 24. Kf1 Bd3#) 24. Kf1?! { [%eval #-1] } { Checkmate is now unavoidable. Qxe3 was best. } { [%clk 0:09:00] } (24. Qxe3 Nxe3 25. Kxe3 Bc5+ 26. Ke2 Bxg1 27. a3 Bxh2 28. a4 Kg7 29. Ke1 Bg3+) 24... Bc5?! { [%eval -27.36] } { Lost forced checkmate sequence. Qf3# was best. } { [%clk 0:07:44] } (24... Qf3#) 25. Rxg4+?! { [%eval #-8] } { Checkmate is now unavoidable. Qxe3 was best. } { [%clk 0:08:52] } (25. Qxe3 Nxe3+ 26. Ke2 Bg6 27. Kd2 Ng2 28. Kc3 Bxg1 29. h4 gxh3 30. Kb3 Re3+) 25... Kh8?? { [%eval #1] } { Lost forced checkmate sequence. Bg6 was best. } { [%clk 0:07:42] } (25... Bg6 26. Qxe3 Nxe3+ 27. Kf2 Nxg4+ 28. Kg2 Re2+ 29. Kg3 Re3+ 30. Kxg4 f6 31. h3) 26. Qg7# { 1-0 White wins by checkmate. } { [%clk 0:08:51] } 1-0
+
+

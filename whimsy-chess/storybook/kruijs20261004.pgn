@@ -1,0 +1,23 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/Ok27NG4F"]
+[Date "2026.10.04"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "ximenacaicedoluna"]
+[Result "1-0"]
+[WhiteElo "963"]
+[BlackElo "1029"]
+[TimeControl "600+0"]
+[Termination "Normal"]
+[GameId "Ok27NG4F"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Van't Kruijs Opening"]
+[StudyName "Van't Kruijsing"]
+[ChapterName "mannyfresher (963) - ximenacaicedoluna (1029)"]
+[ChapterURL "https://lichess.org/study/7hLlnCHF/6qsVKEfV"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. e3 { [%clk 0:10:00] } 1... e5 { [%clk 0:10:00] } 2. Qe2 { [%clk 0:10:00] } 2... d5 { [%clk 0:09:55] } 3. Nf3 { [%clk 0:10:00] } 3... Nc6 { [%clk 0:09:50] } 4. h4 { [%clk 0:10:00] } 4... Nf6 { [%clk 0:09:48] } 5. Ng5 { [%clk 0:10:00] } 5... Bc5 { [%clk 0:09:35] } 6. Qb5 { [%clk 0:10:00] } 6... Bf5 { [%clk 0:09:25] } 7. Qxb7 { 1-0 Black resigns. } { [%clk 0:09:58] } 1-0
+
+

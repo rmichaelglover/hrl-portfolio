@@ -162,7 +162,7 @@
   </footer>
 </div>
 
-<script src="core.js"></script>
+<script src="core.js"></script><script src="../../whimsy-chess/storybook.js"></script>
 <script src="worldscore.js"></script>
 <script>
 (() => {
@@ -295,6 +295,7 @@
     countsEl.innerHTML = Object.keys(tally).filter(k=>tally[k]).map(k=>`<span>${k}: <b style="color:var(--fg)">${tally[k]}</b></span>`).join("");
     let water=0,wl=0,bl=0; for(const c of P.influence){ if(c.water)water++; else if(c.terrain==="white")wl++; else if(c.terrain==="black")bl++; }
     narrEl.textContent = `terrain — white control ${wl} sq · black control ${bl} sq · contested seam ${water} sq. ${P.ply===LAST?"Checkmate. King me. ♛":""}`;
+    ChessStorybook.update({ply:P.ply,san:P.san,final:P.ply===LAST,result:"1–0"});
     range.value=String(P.ply);
     document.getElementById("prev").disabled=P.ply<=0;
     document.getElementById("next").disabled=P.ply>=LAST;
