@@ -1,0 +1,21 @@
+{
+  "pdf_pages": 25,
+  "distinct_embedded_figures": 9,
+  "overfull_boxes": 0,
+  "minimum_rendered_page_words": 194,
+  "fixture_certificates_replayed": 3,
+  "corrupted_mate_witness_rejected": true,
+  "initial_frontiers_at_depths_0_to_3": [
+    1,
+    20,
+    400,
+    8902
+  ],
+  "initial_root_interval": [
+    -1,
+    1
+  ],
+  "fools_mate_probability": "1/228000",
+  "initial_position_solved": false,
+  "scope": "Software checks and conditional mathematical results; no universal initial-position certificate"
+}

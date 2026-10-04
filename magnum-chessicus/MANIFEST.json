@@ -1,0 +1,194 @@
+{
+  "title": "Magnum Chessicus: From the Stalemate Gambit to Certified Draws",
+  "author": "Michael Emanuel Glover",
+  "pages": 25,
+  "words": 5541,
+  "figures": 9,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "d70c1c0ac1f5a274c41490eedb2cf1694bc922e31255e839110ac9ed9e8c6d1e",
+      "bytes": 36559
+    },
+    {
+      "path": "README.md",
+      "sha256": "1b036376a65d5b603dfa24c7b25a6327183a450f033e725714dc0850d38d5665",
+      "bytes": 941
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "d57a20d35b1acb12e47e429c115bf370437eb93efab6a7deb5cd369b2aab3b86",
+      "bytes": 446000
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "8eb8f60b98c9586c29d5946fec0ff687707ce74ef941ee82016f37a9145b298f",
+      "bytes": 40873
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "d70c1c0ac1f5a274c41490eedb2cf1694bc922e31255e839110ac9ed9e8c6d1e",
+      "bytes": 36559
+    },
+    {
+      "path": "data/certificates.json",
+      "sha256": "6f78bb497f14b14e62d1d3ac775ebbda992d54c926e9dbe140929dc1cd897fc7",
+      "bytes": 572
+    },
+    {
+      "path": "data/relaxfish/positions.csv",
+      "sha256": "60bbf72564d92e6a0ef74f4feac40d317a5f47f2d1a3f66d665fc6e85d11d1ab",
+      "bytes": 5598
+    },
+    {
+      "path": "data/relaxfish/statistics.json",
+      "sha256": "e46637a6f1f476ddaed1604ab020164e9e1edfe20a5812f50086716710b84df8",
+      "bytes": 319
+    },
+    {
+      "path": "data/relaxfish/summary.json",
+      "sha256": "deadd202d56088a881fe5f9f7d3022bb6300d6338be06b058036a3039379635b",
+      "bytes": 5031
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "865bdf2b744f2b2f2590b10efdf8874219504f0939aa4b8b4187b8f3c573cbd8",
+      "bytes": 219
+    },
+    {
+      "path": "experiment.py",
+      "sha256": "59e412b1cd29388f6ba8ede1b94bd8bf5908415acce386acf04907fac08ba0d3",
+      "bytes": 9918
+    },
+    {
+      "path": "figures/coverage-surface.pdf",
+      "sha256": "968bd1efc5afdba319aa8b0560b044a34723c95795d8bd4498c165020feed874",
+      "bytes": 108461
+    },
+    {
+      "path": "figures/coverage-surface.png",
+      "sha256": "9e2fdd8488938ad5780aa589f83bb563c38f64af1f72dab881921671b23ff4fc",
+      "bytes": 263057
+    },
+    {
+      "path": "figures/fools-mate.pdf",
+      "sha256": "52be747b0e38a4a40cf46daa1c0fbe6fbd3b336ddbec692a50921dd14d02d6d2",
+      "bytes": 14033
+    },
+    {
+      "path": "figures/fools-mate.png",
+      "sha256": "2e0ceb6707296fba448433de57c866a33b65786924a7dfd47637c1f47ac1a5b2",
+      "bytes": 59074
+    },
+    {
+      "path": "figures/initial-bounds.pdf",
+      "sha256": "7cbaf0f0c5271f291b99ab54bbf6ce11e703977ac90531c1a8e6c86028810346",
+      "bytes": 15163
+    },
+    {
+      "path": "figures/initial-bounds.png",
+      "sha256": "7b44c600d6af3b91443da4f272d5a89de3c05334abd9239c6609dd68e8dab198",
+      "bytes": 41685
+    },
+    {
+      "path": "figures/mate-bounds.pdf",
+      "sha256": "55d084f2d0f5c07e1614eb16e4954e1b6e5708abebd45395866e6191941709b3",
+      "bytes": 14308
+    },
+    {
+      "path": "figures/mate-bounds.png",
+      "sha256": "3597685751808d235d8a7086fcecba87ca7652e1853398b72808cc390b075263",
+      "bytes": 53716
+    },
+    {
+      "path": "figures/outcome-gap.pdf",
+      "sha256": "a8df726d201fa9ab768a5be7b791e22aa5b9461b5dd21db17b2e1df3478b2a9f",
+      "bytes": 13212
+    },
+    {
+      "path": "figures/outcome-gap.png",
+      "sha256": "72d1852e27eeb6689489a25b7920b4e950c6b2ad6a4e82b226fd2f534f773fd0",
+      "bytes": 32575
+    },
+    {
+      "path": "figures/pilot-agreement.pdf",
+      "sha256": "b4d38555310f5f2ac737a8953dcca5acea7fea19f16812b15ba3b3a882700966",
+      "bytes": 12175
+    },
+    {
+      "path": "figures/pilot-agreement.png",
+      "sha256": "1b3d2800b2a8948a1c0269ece6c257388d9020034805d3897fd281c13445bd1a",
+      "bytes": 40980
+    },
+    {
+      "path": "figures/repetition.pdf",
+      "sha256": "b25b70fb4ace5f8363e515b7566817c4f8a6e6ab3549b0140445b9361019d14b",
+      "bytes": 14606
+    },
+    {
+      "path": "figures/repetition.png",
+      "sha256": "d4e765c69627a8c03433b8c8e671790a1eb1024d4cec44bf5e5be95087486150",
+      "bytes": 48219
+    },
+    {
+      "path": "figures/sampling-bound.pdf",
+      "sha256": "e74c0c6912a8b52b03f8a0768a753da974b39fe7919ed5c4607234643a2555c3",
+      "bytes": 16293
+    },
+    {
+      "path": "figures/sampling-bound.png",
+      "sha256": "8e740fde5cb5c2d577b2004ad09747b4332b0fa866cf7ccb0fd979b650f189dc",
+      "bytes": 79449
+    },
+    {
+      "path": "figures/search-cost.pdf",
+      "sha256": "48b4a253200ae50c9e4ffe333b0b56eb6ceef2b9a5ff64c504bcd8e34705bfb3",
+      "bytes": 13600
+    },
+    {
+      "path": "figures/search-cost.png",
+      "sha256": "2430abefbf57d691908aa0280b319e6f90511e9c08509a5411f8d9025ca92e43",
+      "bytes": 54182
+    },
+    {
+      "path": "index.html",
+      "sha256": "9ab4fc46721016bc15288dcddba7be0bee7447167420fcbcb047addd64efc25c",
+      "bytes": 2199
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "78910c61168e1fc678aaad1f1dcb2ce9e0dd11d84cbf102bc14251e562d4895b",
+      "bytes": 41239
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "b4779f06c20b2057873e56cface48e7447e785ca60640df7741b4c2a13a716b7",
+      "bytes": 67
+    },
+    {
+      "path": "results.json",
+      "sha256": "911a44476b0633a5f7c60bfc1879be6766a05f3c54a5fbc614b758680243885d",
+      "bytes": 7352
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "verification.json",
+      "sha256": "ef4aac01677b799092128e419a829d265ea1ce0b9ddc3906827b53b7e189429c",
+      "bytes": 511
+    },
+    {
+      "path": "verify.py",
+      "sha256": "05f37c78395110c1b74374a12b05e7f467299f33bed367fcb566ea8c1f53efa0",
+      "bytes": 1425
+    },
+    {
+      "path": "write.py",
+      "sha256": "b83d3d3ef77c4ee2e47e558b1e017e11c8905385c682a402b198aa37330662bb",
+      "bytes": 38076
+    }
+  ]
+}

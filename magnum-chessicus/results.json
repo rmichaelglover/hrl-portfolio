@@ -1,0 +1,315 @@
+{
+  "title": "Magnum Chessicus",
+  "chess_package": "1.10.0",
+  "python_chess_distribution": "1.999",
+  "payoff": "White +1, draw 0, Black -1",
+  "rules": "Automatic terminal conditions plus optional correct draw claims as available actions; no clocks, resignations, or agreed draws",
+  "initial_search": [
+    {
+      "depth": 0,
+      "lower": -1,
+      "upper": 1,
+      "nodes": 1,
+      "terminals": 0,
+      "frontiers": 1,
+      "seconds": 0.0002989300119224936
+    },
+    {
+      "depth": 1,
+      "lower": -1,
+      "upper": 1,
+      "nodes": 21,
+      "terminals": 0,
+      "frontiers": 20,
+      "seconds": 0.003783918989938684
+    },
+    {
+      "depth": 2,
+      "lower": -1,
+      "upper": 1,
+      "nodes": 421,
+      "terminals": 0,
+      "frontiers": 400,
+      "seconds": 0.07484463800210506
+    },
+    {
+      "depth": 3,
+      "lower": -1,
+      "upper": 1,
+      "nodes": 9323,
+      "terminals": 0,
+      "frontiers": 8902,
+      "seconds": 1.649898118004785
+    }
+  ],
+  "mate_fixture": {
+    "fen": "7k/8/5KQ1/8/8/8/8/8 w - - 0 1",
+    "search": [
+      {
+        "depth": 0,
+        "lower": -1,
+        "upper": 1,
+        "nodes": 1,
+        "terminals": 0,
+        "frontiers": 1,
+        "seconds": 0.00021681998623535037
+      },
+      {
+        "depth": 1,
+        "lower": 1,
+        "upper": 1,
+        "nodes": 24,
+        "terminals": 8,
+        "frontiers": 15,
+        "seconds": 0.0011247640068177134
+      },
+      {
+        "depth": 2,
+        "lower": 1,
+        "upper": 1,
+        "nodes": 39,
+        "terminals": 10,
+        "frontiers": 13,
+        "seconds": 0.004088931003934704
+      }
+    ],
+    "winning_move": "g6g7"
+  },
+  "stalemate_fixture": {
+    "fen": "7k/5K2/6Q1/8/8/8/8/8 b - - 0 1",
+    "search": {
+      "depth": 0,
+      "lower": 0,
+      "upper": 0,
+      "nodes": 1,
+      "terminals": 1,
+      "frontiers": 0,
+      "seconds": 3.6676006857305765e-05
+    }
+  },
+  "kings_only_fixture": {
+    "fen": "7k/8/5K2/8/8/8/8/8 w - - 0 1",
+    "search": {
+      "depth": 0,
+      "lower": 0,
+      "upper": 0,
+      "nodes": 1,
+      "terminals": 1,
+      "frontiers": 0,
+      "seconds": 2.4402004783041775e-05
+    }
+  },
+  "fools_mate": {
+    "moves": [
+      {
+        "san": "f3",
+        "uci": "f2f3",
+        "legal_choices": 20,
+        "path_probability": "1/20",
+        "fen_before": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      },
+      {
+        "san": "e5",
+        "uci": "e7e5",
+        "legal_choices": 20,
+        "path_probability": "1/400",
+        "fen_before": "rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1"
+      },
+      {
+        "san": "g4",
+        "uci": "g2g4",
+        "legal_choices": 19,
+        "path_probability": "1/7600",
+        "fen_before": "rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2"
+      },
+      {
+        "san": "Qh4#",
+        "uci": "d8h4",
+        "legal_choices": 30,
+        "path_probability": "1/228000",
+        "fen_before": "rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2"
+      }
+    ],
+    "probability_exact": "1/228000",
+    "probability_float": 4.3859649122807014e-06,
+    "search": {
+      "depth": 0,
+      "lower": -1,
+      "upper": -1,
+      "nodes": 1,
+      "terminals": 1,
+      "frontiers": 0,
+      "seconds": 5.679599416907877e-05
+    }
+  },
+  "repetition": [
+    {
+      "ply": 0,
+      "repetition_2": false,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 1,
+      "repetition_2": false,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 2,
+      "repetition_2": false,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 3,
+      "repetition_2": false,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 4,
+      "repetition_2": true,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 5,
+      "repetition_2": true,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 6,
+      "repetition_2": true,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": false,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 7,
+      "repetition_2": true,
+      "repetition_3": false,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 8,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 9,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 10,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 11,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 12,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 13,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 14,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 15,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": false,
+      "claim_threefold": true,
+      "automatic_terminal": null
+    },
+    {
+      "ply": 16,
+      "repetition_2": true,
+      "repetition_3": true,
+      "fivefold": true,
+      "claim_threefold": true,
+      "automatic_terminal": 0
+    }
+  ],
+  "same_fen_different_fivefold_status": true,
+  "certificate_checks": {
+    "accepted": 3,
+    "incorrect_mate_witness_rejected": true
+  },
+  "archived_pilot": {
+    "source": "hrl-portfolio/relaxfish/data; previously executed pilot, not rerun here",
+    "reference_agreement": {
+      "static": 6,
+      "relaxfish": 10,
+      "stockfish_2k": 16
+    },
+    "positions": 24,
+    "diagnostic_match_results": [
+      "0-1",
+      "1-0",
+      "0-1",
+      "1-0"
+    ],
+    "file_hashes": {
+      "data/relaxfish/positions.csv": "60bbf72564d92e6a0ef74f4feac40d317a5f47f2d1a3f66d665fc6e85d11d1ab",
+      "data/relaxfish/statistics.json": "e46637a6f1f476ddaed1604ab020164e9e1edfe20a5812f50086716710b84df8",
+      "data/relaxfish/summary.json": "deadd202d56088a881fe5f9f7d3022bb6300d6338be06b058036a3039379635b"
+    }
+  },
+  "confidence_examples": {
+    "100": 0.029513049607039932,
+    "1000": 0.0029912495450953314,
+    "10000": 0.00029952835977664627
+  },
+  "checks_passed": true,
+  "initial_position_solved": false
+}

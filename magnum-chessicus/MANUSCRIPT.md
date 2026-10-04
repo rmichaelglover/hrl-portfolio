@@ -1,0 +1,407 @@
+# Magnum Chessicus: From the Stalemate Gambit to Certified Draws
+
+Michael Emanuel Glover. Developed in dialogue with Codex. 4 October 2026.
+
+
+## 1. Magnum Chessicus: From the Stalemate Gambit to Certified Draws
+
+I want to know what would settle chess. I want the question made exact enough that a calculation can succeed, fail or remain incomplete without changing its meaning along the way. My working ambition is a draw certificate: a strategy for White that prevents a loss and a strategy for Black that prevents a loss, each valid against every legal opposing continuation.
+
+The strongest mathematical result of this inquiry gives my epsilon idea a precise consequence. Chess has discrete terminal outcomes. If independently sound bounds on its minimax value fit strictly between a loss and a win, the value must be a draw. The required precision is less than one outcome-unit; the difficult part is proving the bounds, not printing more decimal places.
+
+I develop the theorem through a finite, history-aware rules model, pure strategies, interval propagation and small replayable certificates. I also examine almost-sure claims under random play, because probability one is not the same proposition as a perfect-play draw. A verified mating path supplies a decisive counterexample to probability-one drawing under uniform legal moves.
+
+The completed numerical record contains bounded searches, exact path arithmetic, repetition tests, small certificate checks and archived Relaxfish pilot measurements. It does not contain a solved initial position. I keep that status visible so that the work can be used as a route toward a proof rather than mistaken for the proof already obtained. Selah.
+
+
+## 2. Abstract: the exact target and the executed result
+
+I study standard chess as a deterministic, alternating, perfect-information game with White outcome payoff equal to one, zero or minus one. The rules model includes automatic draw conditions and optional correct draw claims, and excludes clocks, resignations and agreed draws. Complete histories are retained where repetition requires them.
+
+The main conditional theorem states that a certified interval contained strictly within minus one and plus one identifies the initial minimax value as zero. A strategy form supplies universal lower and upper guarantees. For pure strategies, guarantees within less than one of zero also imply that their paired play ends in a draw.
+
+The numerical experiment verifies Fool’s Mate and computes its uniform legal-move probability exactly. It executes full-enumeration interval search through three plies from the initial position, solves a legal mate-in-one fixture, recognizes stalemate and kings-only draws, and demonstrates that identical FEN strings can have different repetition status. Small certificates are replayed and an incorrect mate witness is rejected.
+
+Nine color figures distinguish proof structure, measured search behavior, analytic statistical examples and archived engine diagnostics. The research contribution is a mathematical and computational certification framework. Neither a centipawn estimate, a self-play draw streak nor a successful fixture is represented as a universal guarantee from the initial position.
+
+
+## 3. Rules, scope and the meaning of a position
+
+The FIDE Laws supply the rules context [1]. My model keeps legal moves, checkmate, stalemate, automatic draw conditions and a correct draw claim as an available ending action. I omit clock management and consensual endings to isolate the underlying board-game question. These omissions are declared rather than silently folded into engine results.
+
+Threefold repetition and the fifty-move condition concern claimable draws; fivefold repetition and the seventy-five-move condition provide automatic endings. Checkmate on the last move takes precedence over the seventy-five-move automatic draw. The implementation distinguishes automatic outcome detection from an available draw claim.
+
+A state includes placement, side to move, castling rights, relevant en passant information, move-count information and the history needed for repetition. A FEN string alone does not preserve the entire repetition history. Search that discards it must justify why the discarded information cannot affect the result.
+
+The executable fixtures are analyzed from their explicitly supplied states. A claim about the standard initial position uses the standard initial history. These are different roots of analysis, even when the same search routine processes both. A solved fixture is evidence about that fixture and about the implementation, not a solution transferred to the opening position.
+
+[1] FIDE. Laws of Chess, effective 1 January 2023. Articles 5 and 9; accessed 4 October 2026. https://handbook.fide.com/chapter/e012023
+
+
+## 4. Theorem F1: a conservative finite-horizon bound
+
+For standard initial material, every pawn can make at most six moves before promotion or removal. With sixteen pawns, there are at most ninety-six pawn moves. Every capture removes one non-king piece, and promotion replaces a pawn rather than increasing the piece count, so there are at most thirty captures.
+
+A pawn move or capture resets the quiet-move counter. Counting both kinds separately gives at most 126 resetting events, an intentionally loose bound because some moves belong to both categories. Between resets, play must end after at most 150 plies without another reset, unless it has already ended by another rule. Checkmate at that boundary also terminates.
+
+Thus a conservative upper bound is 150 times 127, or 19,050 plies, for the board-play model from standard initial material. This is a proof of finiteness, not a claim that the bound is attainable or sharp. Automatic repetition and other endings can shorten a line. A claim action terminates immediately.
+
+The significance is logical. A finite upper bound and finite branching yield a finite game tree, permitting backward induction. The number of nodes can still be enormous. Finiteness ensures that an exact solution is a well-defined mathematical target; it does not make the computation small or the result already known.
+
+
+\[
+N_{\mathrm{reset}}\leq16\cdot6+30=126,\qquad H\leq150(126+1)=19050.
+\]
+
+
+## 5. Strategies and the order of the quantifiers
+
+A pure strategy chooses a legal action at every decision history belonging to its player. It is a contingent plan, not just the line played in one game. A strategy can prescribe different actions after different opposing moves; the universal guarantee concerns all such legal responses.
+
+To prevent a White loss, the required statement is that there exists one White strategy such that every Black strategy leads to a nonnegative White payoff. It is weaker to say that, for each Black strategy considered separately, some White response can be found. Switching the quantifiers changes the claim.
+
+The analogous Black certificate fixes one Black strategy that keeps White’s payoff nonpositive against every White strategy. Their paired play then satisfies both restrictions. A list of cooperative drawing lines does not establish either certificate because the opponent is not obliged to follow the listed line.
+
+This is the exact point where my earlier self-play intuition needs a stronger object. A drawing line demonstrates compatibility of two choices. A strategy certificate demonstrates resistance to all choices the opponent is allowed to make. The word all is a mathematical requirement, not a rhetorical flourish.
+
+
+\[
+\exists\sigma_W\ \forall\sigma_B:\ u(\sigma_W,\sigma_B)\geq0,
+\]
+
+
+\[
+\exists\sigma_B\ \forall\sigma_W:\ u(\sigma_W,\sigma_B)\leq0.
+\]
+
+
+## 6. Theorem M1: the minimax value is an outcome
+
+Theorem M1. In the finite rules model, every complete history has a minimax value in the set consisting of minus one, zero and plus one. Pure optimal strategies exist. The initial value is therefore a discrete outcome rather than an arbitrary real-valued engine score.
+
+Proof. Assign each terminal history its White payoff. At a White decision history, assign the maximum of the child values. At a Black decision history, assign the minimum. The tree is finite, so this backward induction reaches the root. Every maximum or minimum of a finite nonempty subset of the outcome set remains in that set.
+
+Selecting a maximizing action at every White history and a minimizing action at every Black history constructs pure optimal strategies. Their guarantees follow by induction through the tree. Optional correct draw claims appear as children with payoff zero, preserving the same argument.
+
+The theorem does not identify which of the three values belongs to the standard initial position. It establishes the structure of the answer and the existence of strategies attaining it. That structure makes the certified epsilon theorem possible, while leaving the required initial-position calculation or proof as substantive work.
+
+
+\[
+V(h)=\begin{cases}u(h),&h\text{ terminal},\\\max_a V(ha),&\text{White to move},\\\min_a V(ha),&\text{Black to move}.\end{cases}
+\]
+
+
+## 7. Theorem E1: a certified epsilon interval gives an exact draw
+
+Theorem E1. Suppose sound lower and upper bounds enclose the initial minimax value and both lie strictly between a loss and a win. Then the value is zero. In particular, an enclosure from minus epsilon to plus epsilon proves a draw whenever epsilon is nonnegative and strictly less than one.
+
+Proof. The minimax theorem restricts the value to minus one, zero or plus one. The proposed interval excludes minus one and plus one. Its only possible outcome value is therefore zero. The proof is exact and does not require epsilon to approach floating-point precision.
+
+The word sound carries the essential requirement: the bounds must apply to all legal adversarial continuations under the declared rules. A statistical confidence interval for a draw rate, a centipawn evaluation near zero or a neural uncertainty interval is not automatically such an enclosure.
+
+This is the strongest form of the epsilon idea in the present work. Once valid outcome bounds cross the discrete gap, additional decimals do not strengthen the conclusion that the value is drawn. The challenge has moved from approximate arithmetic to a certificate that the bounds actually contain the true value.
+
+
+\[
+L\leq V\leq U,\quad -1<L\leq U<1\quad\Longrightarrow\quad V=0.
+\]
+
+
+\[
+0\leq\varepsilon<1,\quad |V|\leq\varepsilon\quad\Longrightarrow\quad V=0.
+\]
+
+
+Figure: figures/outcome-gap.pdf
+Analytic illustration of the outcome gap. The interval [-0.75,0.75] is hypothetical, not an obtained bound for the initial position.
+
+
+## 8. Theorem E2: two pure strategy certificates draw their pairing
+
+Suppose a fixed pure White strategy guarantees a payoff of at least minus epsilon against every Black strategy, and a fixed pure Black strategy guarantees at most plus epsilon against every White strategy. Assume epsilon is strictly below one.
+
+For any pure opposing strategy, the resulting payoff is one of the three outcomes. White’s guarantee therefore excludes a Black win, and Black’s guarantee excludes a White win. Pairing the two certified pure strategies leaves only a draw. This is stronger than an expectation statement about a sampled population of games.
+
+An interval certificate can establish the game value even without exporting the complete optimal strategies, if its validity is independently justified. A strategy certificate additionally gives an operational witness for the guarantee. The paper distinguishes these deliverables so that a value claim is not confused with a playable policy.
+
+For randomized policies, expected-payoff guarantees must be stated as expectations. An average payoff near zero does not by itself establish that each sampled game is drawn: wins and losses can cancel. The pure-strategy statement avoids that ambiguity by applying the discrete outcome restriction to every actual strategy pairing.
+
+
+\[
+\forall\tau_B:\ u(\sigma_W,\tau_B)\geq-\varepsilon,\quad\forall\tau_W:\ u(\tau_W,\sigma_B)\leq\varepsilon
+\]
+
+
+\[
+\sigma_W,\sigma_B\text{ pure},\quad\varepsilon<1\quad\Longrightarrow\quad u(\sigma_W,\sigma_B)=0.
+\]
+
+
+## 9. Sound interval propagation: max and min preserve enclosures
+
+Give each unresolved frontier history the interval from minus one to plus one. Give each recognized terminal history its exact singleton outcome. If a draw claim is available, include an exact zero child. These intervals are valid without assuming a heuristic evaluation is correct.
+
+At a White node, take the maximum of the child lower bounds and the maximum of the child upper bounds. At a Black node, take their respective minima. If every child interval contains its true value, the resulting parent interval contains the parent minimax value.
+
+Proof. For every child, its lower bound does not exceed its value and its upper bound does not fall below it. Maximum and minimum are monotone in every argument, so applying the relevant operation preserves both inequalities. Induct through the explored tree to the root.
+
+The implementation enumerates every legal move within its depth budget. It does not replace unresolved positions with a zero score. A missing branch retains uncertainty through its frontier interval. This produces coarse bounds at the initial position, but the coarseness is honest information about what has not been established.
+
+
+\[
+[L,U]_W=[\max_a L_a,\max_a U_a],\qquad[L,U]_B=[\min_a L_a,\min_a U_a].
+\]
+
+
+## 10. Theorem I1: deeper sound search cannot widen the interval
+
+When one unresolved frontier is replaced by sound child enclosures derived from the same rules, its interval can only tighten relative to the universal outcome bounds. More generally, refining child intervals to subsets tightens the parent interval under the max or min propagation rule.
+
+Proof. Tightening a child interval can only increase its lower endpoint and decrease its upper endpoint. The maximum of lower endpoints and the minimum of lower endpoints are both monotone under the increase; the analogous upper endpoints cannot increase under a decrease. Applying this through the ancestors establishes the claim.
+
+The theorem permits a sequence of searches to make progress without requiring every depth increment to improve the root. A root interval can remain unchanged while many interior nodes are resolved. A plateau is not proof of a draw or proof that the algorithm has failed permanently.
+
+For the standard initial position, the executed depths zero through three all retain the interval [-1,+1]. The numerical result does not enter the certified-draw region. Increasing computation would be a new experiment; simply interpreting the plateau as neutral evaluation would replace the certificate semantics with a different claim.
+
+
+Figure: figures/initial-bounds.pdf
+Measured sound outcome enclosures from exhaustive depth-limited search. The unchanged interval leaves all three initial outcomes possible.
+
+
+## 11. Measured search: cost and coverage
+
+The experiment records every visited node, recognized terminal and unresolved frontier, together with elapsed wall time. Search starts from a board carrying the appropriate history, and each move is pushed and popped. A restoration assertion checks that the root state is unchanged after the computation.
+
+The node count measures this implementation’s work, including internal nodes and the root. It is not the same quantity as a leaf-only move-generation count. The implementation does not use transposition reuse or heuristic cutoffs, making the relationship between visited paths and the depth budget straightforward.
+
+Through three plies, the full initial-position enumeration is small enough to reproduce locally. It is still only a tiny prefix of the game tree. Every nonterminal frontier can contain continuations that change the result, so the remaining uncertainty is represented explicitly rather than extrapolated away.
+
+The graph of measured node visits shows growth within the executed range. It does not fit or predict a complete solution time. A systems approach should distinguish an observed cost, an asymptotic argument and an engineering forecast before asking a graph to support all three.
+
+
+| Depth | Nodes | Frontiers | Bounds |
+| 0 | 1 | 1 | [-1, 1]  |
+| 1 | 21 | 20 | [-1, 1]  |
+| 2 | 421 | 400 | [-1, 1]  |
+| 3 | 9323 | 8902 | [-1, 1]  |
+
+
+Figure: figures/search-cost.pdf
+Measured node visits, not a synthetic complexity estimate. Timing and node counts are stored in results.json.
+
+
+## 12. A complete small result: a legal mate-in-one fixture
+
+The first nontrivial solved fixture places White’s king on f6 and queen on g6, with Black’s king on h8 and White to move. The position passes the library’s validity check. Moving the queen to g7 produces checkmate. The witness is replayed from the root FEN rather than accepted because its notation contains a mate symbol.
+
+At depth zero, the nonterminal root has the unresolved interval [-1,+1]. At depth one, a terminal winning child establishes a lower bound of plus one for White. The universal payoff cap gives an upper bound of plus one, so the interval collapses exactly.
+
+This certificate has an existential form: White needs one winning move at that history. A proof that Black can prevent a White win would need to cover every White choice at a White node, or apply a sound general bound covering them. Those obligations have different shapes.
+
+The fixture demonstrates that the code can turn a legal move and a verified terminal condition into an exact local result. It does not demonstrate that the initial game is drawn. Its significance is the reproducible proof pattern and the distinction between a winning witness and a universal defensive guarantee.
+
+
+Figure: figures/mate-bounds.pdf
+Measured interval collapse for the stated legal fixture: Qg7 is replayed and verified as checkmate.
+
+
+## 13. Small draw certificates: stalemate and kings only
+
+A second fixture places Black’s king on h8, White’s king on f7 and queen on g6, with Black to move. Black is not in check and has no legal move. The verifier recognizes stalemate and assigns the exact draw value at depth zero.
+
+A third fixture contains only White’s king on f6 and Black’s king on h8. Neither king can checkmate the other through a legal sequence. The verifier checks validity, that exactly two pieces remain and that both are kings. This supplies another exact local draw certificate.
+
+These roots are terminal draw cases, which makes their certificates short. A nonterminal drawing strategy would require more: choices at the defender’s turns, coverage of adversarial moves and justification of every ending or unexpanded bound. Terminal examples should not be presented as having already solved that broader task.
+
+The exported certificate file records all three small results with their roots and proof descriptions. An incorrect replacement for the mating move is deliberately tested and rejected. The checker is intentionally narrow; it recognizes these proof forms rather than pretending to validate an arbitrary grand certificate.
+
+
+| Fixture | Lower | Upper | Verified basis |
+| Mate in one | 1 | 1 | Legal mating witness |
+| Stalemate | 0 | 0 | No moves, no check |
+| Kings only | 0 | 0 | Two kings, no mate |
+
+
+## 14. Almost surely: probability requires a policy model
+
+The phrase almost surely drawn means that the draw event has probability one under a specified probability measure on complete plays. Standard chess rules do not supply that measure. One must specify move policies, their dependence on history and how draw claims are handled.
+
+For uniform legal-move selection at each nonterminal history, a particular finite legal path has probability equal to the product of the reciprocal legal-choice counts along that path. Every factor is positive. A legal checkmating path therefore has positive probability, disproving a probability-one draw claim for that model.
+
+The same argument applies to any behavioral policy pair that assigns positive conditional probability to every move along such a mating path. The probabilities need not be uniform. A perfect-play policy model can assign zero probability to losing moves, so the counterexample does not disprove a perfect-play draw conjecture.
+
+I keep the two questions separate because each can be mathematically useful. A statistical study can investigate outcomes under selected policies. A minimax proof must address the adversarial value. Neither question becomes the other merely because both discussions use the word draw.
+
+
+\[
+P(D)=1\quad\Longleftrightarrow\quad P(W\cup B)=0,
+\]
+
+
+\[
+P(h_m)=\prod_{t=0}^{m-1}\pi_t(a_t\mid h_t).
+\]
+
+
+## 15. Exact counterexample: Fool’s Mate from the initial position
+
+The executed line is 1.f3 e5 2.g4 Qh4 mate. The move parser verifies each move against the legal move set, and the final board is checked for checkmate. The legal-choice counts before the moves are twenty, twenty, nineteen and thirty.
+
+Under uniform legal moves, the probability of this exact path is one divided by 228,000. This is a lower bound on the total probability of a decisive outcome in that random-play model, since other mating paths may also contribute. It is not an estimate of the complete win or draw distribution.
+
+Because the exact path probability is positive, the draw event cannot have probability one under the uniform policy pair. No Monte Carlo run is needed for this conclusion. Failing to observe the rare path in a sample would not make its exact probability vanish.
+
+The example is also a useful warning about language. Almost always can be an informal statement about frequency; almost surely has a precise probability-one meaning. The present result refutes the latter for the declared model without pretending to measure the former for strong engine play.
+
+
+\[
+P(1.f3\ e5\ 2.g4\ Qh4\#)=\frac1{20\cdot20\cdot19\cdot30}=\frac1{228000}>0.
+\]
+
+
+Figure: figures/fools-mate.pdf
+Exact cumulative probability along a verified legal mating path. This is not a random-game simulation or a minimax calculation.
+
+
+## 16. A repeated board is not a repeated proof state
+
+The repetition experiment plays the knight-return cycle Nf3, Nf6, Ng1, Ng8 four times from the standard initial position. At eight plies, the initial arrangement has occurred three times. At sixteen plies it has occurred five times, and the automatic repetition ending is detected.
+
+The original board at sixteen plies carries the full move stack. Reconstructing a new board from its FEN preserves the displayed placement, side, rights and counters but loses the prior occurrences. The two objects have identical FEN strings and different fivefold-repetition status.
+
+A proof cache keyed only by FEN can therefore merge states whose outcomes or available claims differ. To justify reuse, the cache must include relevant history information or prove that its stored result remains valid independently of the lost history. A fast cache is not sound merely because its keys are concise.
+
+The plotted predicates concern repetitions currently present, separately from claims that may be available through an intended move. This matters near a repetition threshold. The executed test records both current repetition status and claim availability, making their distinction visible.
+
+
+Figure: figures/repetition.pdf
+Verified legal knight-return line. The plotted threefold predicate is current repetition, not the full intended-move claim predicate.
+
+
+## 17. Statistics: a draw streak bounds a distribution, not the game tree
+
+Suppose independent games from a fixed policy and sampling protocol produce zero decisive outcomes. Under a common binomial decisive-event probability, an exact one-sided 95% upper confidence bound is one minus 0.05 raised to the reciprocal sample size.
+
+For one hundred, one thousand and ten thousand such games, the hypothetical bounds are approximately 0.02951, 0.002991 and 0.00029953. No all-draw sample of these sizes was run for this paper. The figure is an analytic illustration of what a specified observation would support.
+
+The bound concerns the sampling distribution. It does not say that a particular unsampled adversarial branch is impossible. If a tournament repeatedly visits a narrow opening family or deterministic self-play follows the same trajectory, the independence and common-distribution assumptions also require examination.
+
+Statistical significance remains valuable for engine comparison and policy behavior. The limitation is one of quantifiers: a frequentist event rate is not a worst-case guarantee against every opponent. I want the study to use each tool for the claim it can actually support, rather than discount statistics or promote it into a different kind of proof.
+
+
+\[
+P(X=0\mid p)=(1-p)^n,\qquad p_U=1-0.05^{1/n}.
+\]
+
+
+Figure: figures/sampling-bound.pdf
+Hypothetical binomial bounds; no draw streak is claimed as observed. The dashed reference is the exact mate-path probability for uniform play.
+
+
+## 18. Coverage: why a million games can miss the important branch
+
+A sampling policy determines which branches receive attention. A branch can be legal and strategically decisive while having very low probability under that policy. Many games drawn from the same distribution can therefore provide little information about a move the distribution nearly excludes.
+
+The three-dimensional surface uses an invented two-stage branching model. Its displayed branch probability is the product of two complement probabilities. The purpose is to show dependence on policy choices, not to represent measured chess outcomes or a fitted engine weakness.
+
+Adversarial search asks a different question: can the opponent deliberately choose the branch that hurts the proposed guarantee? A move that appears rarely under sampling can appear with probability one under a best response if it is legal and advantageous.
+
+A credible research workflow can use sampling to discover candidates and direct resources. Certification then needs exhaustive obligations or sound bounds for the remaining branches. The route from one to the other is a proof procedure, not an automatic conversion obtained by increasing the number of self-play games.
+
+
+\[
+P(\text{toy branch})=(1-p)(1-q).
+\]
+
+
+Figure: figures/coverage-surface.pdf
+Synthetic two-stage coverage illustration. The axes are invented policy parameters and are not measurements of chess players or engines.
+
+
+## 19. Engine scores and certified outcome bounds
+
+An engine evaluation is designed to help choose moves under finite resources. It may be a centipawn score, a mate indication or a transformed outcome estimate. Its units and provenance matter. A score near zero is not automatically a bound containing the exact minimax outcome.
+
+Search software can also report lower or upper bounds relative to a search window. The meaning depends on the search tree, leaf evaluator and pruning rules. A bound sound for a depth-limited heuristic problem need not be a bound on the full terminal-outcome game.
+
+To use an estimate in a proof, one needs an independent guarantee that the true continuation value lies inside the claimed interval. Such a guarantee could come from complete terminal search, a verified tablebase under compatible rules or another proved bound. The certificate must state the bridge rather than borrowing the authority of the engine name.
+
+This framework does not oppose strong engines. It gives their outputs useful roles: ordering moves, finding tactical witnesses, exposing errors and suggesting invariant regions. The eventual checker must accept a result because its obligations are met, even if a weaker proposal system generated it, and reject an unsupported claim even if a very strong engine printed it.
+
+
+## 20. Archived Relaxfish evidence, preserved in its actual direction
+
+The local Relaxfish publication contains a twenty-four-position diagnostic pilot. Its archived summary records reference-move agreements of six for the static model, ten for Relaxfish and sixteen for the low-node Stockfish comparator. The present paper copies those data and records their hashes; it does not rerun the pilot or enlarge its scope.
+
+The four recorded diagnostic match continuations all ended in Relaxfish losses, across its White and Black assignments. The earlier paper explicitly describes the setup as an implementation diagnostic rather than an equal-time strength tournament. These outcomes remain in the evidence ledger.
+
+The plot gives the measured agreement counts with the original denominator. Agreement with a finite-budget reference is not agreement with a proved optimal move. It can be useful for diagnosing changes in a prototype without becoming a proof of superiority or a certificate of the initial value.
+
+I preserve this direction of evidence because a research ambition should be able to survive an unfavorable result without rewriting it. The certified-draw theorem does not depend on claiming that the current Relaxfish prototype is already stronger than every engine. Its future contribution would need to satisfy the theorem’s obligations.
+
+
+Figure: figures/pilot-agreement.pdf
+Archived measured pilot, not a newly executed match or a representative tournament. Reference agreement is a comparator metric, not optimality.
+
+
+## 21. Hierarchical relaxation as a proposer and organizer
+
+My systems idea gives hierarchical relaxation labeling a constructive role: organize position features, identify candidate defensive structures, order moves and distribute attention across interacting constraints. A useful proposer can reduce the work needed to find a certificate without itself being the certificate.
+
+A local compatibility score can encourage a coherent representation while missing an adversarial line that changes the outcome. Convergence of the labeling dynamics proves a property of those dynamics only when its assumptions are met. It does not establish convergence to the chess minimax value.
+
+A stronger architecture would export a candidate strategy graph together with obligations at every retained state. The checker would verify legal actions, opponent coverage, terminal outcomes, history handling and any bounds used for unexpanded continuations. Unsupported obligations would remain explicitly open.
+
+This separates two kinds of progress without diminishing either. The proposer can become faster and more effective at finding useful structure. The checker can become more reliable at recognizing what has actually been proved. Their interface is a concrete artifact: a candidate certificate whose claims can be tested independently.
+
+
+## 22. The stalemate gambit as a defensive certificate problem
+
+I use stalemate gambit as the name of a defensive research idea: seek a strategy that preserves a non-losing outcome even when a position or a heuristic score looks unfavorable. A legal stalemate, a forced repetition or another justified draw can be a successful terminal witness.
+
+The opponent must remain free to choose any legal response. A line ending in repetition proves a drawing possibility; it proves a defensive strategy only if the drawing outcome survives every relevant deviation or those deviations are themselves certified non-losing. The same distinction applies to a discovered stalemate pattern.
+
+A proposed defensive region could be modeled as a set of complete histories. At defender turns, at least one action must stay in the region or reach a certified safe terminal. At opponent turns, every legal action must do so. A rank or other termination argument is additionally required to exclude a merely endless informal loop.
+
+This turns the slogan into a precise game-theoretic objective. The resulting invariant may be local, limited to an endgame family or a particular root. I would report that domain exactly. A local safe region is valuable without being declared a proof that all of standard chess lies inside it.
+
+
+## 23. Certificate obligations: existential edges and universal coverage
+
+For a White lower-bound certificate, a White node can provide one legal child whose lower bound suffices. A Black node must justify the lower bound for every legal child. For a White upper-bound certificate, the obligations reverse: White choices require universal coverage, while Black can provide a sufficient minimizing witness.
+
+Leaves need exact terminal outcomes or separately sound continuation bounds. An unexpanded ordinary position cannot be labeled a draw solely because an engine prefers equality. Draw claims must be valid in the stored history. A duplicated node must retain all information on which its proof depends.
+
+Cycles in a compact graph need special care. A cyclic diagram is not an induction proof just because its labels repeat. One may use a decreasing rank, a valid finite-horizon unrolling or a separately proved draw mechanism. The complete proof must explain why every permitted continuation meets its promised outcome.
+
+The small verifier in this project checks three narrowly defined certificate forms and rejects a corrupted mate witness. It is not yet a general strategy-graph verifier. The chapter supplies a specification for extending it while retaining explicit acceptance rules and a small auditable trusted base.
+
+
+## 24. A route toward the initial-position proof
+
+The next computational goal would be to export separate initial-position lower and upper certificates. Each certificate should carry the rules model, complete-state convention, branch obligations and continuation bounds. A checker should be able to replay its reasoning independently of the move-selection heuristic.
+
+Progress can be reported through the number of discharged obligations, unresolved frontier intervals, verified defensive regions and the current root enclosure. If the enclosure enters the strict outcome gap, the main theorem gives the exact draw conclusion. Until then, the unresolved interval should remain part of the result.
+
+Engine matches remain a parallel experimental track. A strength study needs an explicit opponent version, resource controls, opening protocol, color balancing, sample design and uncertainty analysis. Stockfish’s official testing infrastructure illustrates the separate role of controlled engine evaluation [3]. This paper claims no new superiority experiment.
+
+My target is demanding but clear: move from a candidate idea to a verified artifact whose universal obligations are inspectable. I want to know that the drawing strategy works because an opponent cannot break it, not merely because the opponents I happened to try did not break it. That is the work that would make the theorem a solution. Selah.
+
+
+## 25. References, reproducibility and the completed ledger
+
+Michael Emanuel Glover is the author of this independent research manuscript, developed in dialogue with Codex. The source archive includes the numerical experiment, exported fixture certificates, results JSON, archived pilot data, nine figures, LaTeX and complete plain text. No engine binary or full-game draw certificate is included.
+
+The executed move library is chess 1.10.0, from python-chess distribution 1.999. The script checks position validity, legal moves, automatic outcomes and optional claims. Its exact-arithmetic mating probability and integer interval endpoints do not depend on floating-point evaluation scores.
+
+The completed checks pass for initial-state restoration, fixture outcomes, mate-witness replay, rejection of an incorrect witness, repetition history and archived-data hashes. The initial position remains enclosed by [-1,+1] through the executed three-ply search. The file results.json records initial_position_solved as false.
+
+The main theorem is a completed conditional proof. Its missing premises are concrete certified bounds or strategies for the standard initial root. This distinction allows the research to say exactly what has been achieved while retaining the ambition that motivated it: a chess result that can be checked rather than merely believed.
+
+[1] FIDE. Laws of Chess. Rules and draw conditions. https://handbook.fide.com/chapter/e012023
+
+[2] python-chess. Core documentation. Move legality, outcome and repetition interfaces; installed version recorded separately. https://python-chess.readthedocs.io/en/latest/core.html
+
+[3] Official Stockfish. Fishtest testing framework. https://github.com/official-stockfish/fishtest
+
+[4] Michael Emanuel Glover. Better Than Stockfish: Relaxfish. Archived pilot, 3 October 2026. https://rmichaelglover.github.io/hrl-portfolio/relaxfish/
