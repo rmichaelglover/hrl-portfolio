@@ -1,0 +1,115 @@
+{
+  "title": "The Tree, the Proof, and the Light",
+  "author": "Michael Emanuel Glover",
+  "collaboration": "developed in dialogue with Codex",
+  "pages": 26,
+  "words": 8336,
+  "figures": 6,
+  "files": [
+    {
+      "path": "MAGNUM-OPUS.pdf",
+      "sha256": "3270ae900867411933376bf1fe80d3a26cd1bbcca884eff5cf890b999ef3805c",
+      "bytes": 469543
+    },
+    {
+      "path": "MAGNUM-OPUS.tex",
+      "sha256": "53bc0933723f32ee5f4f3ee95f338155771762f5543e40519ea6c0cd747fa9c6",
+      "bytes": 58342
+    },
+    {
+      "path": "MAGNUM-OPUS.txt",
+      "sha256": "9686d90c5a7940fd5fd51b0a88d36fa660771778a72b444b6adee3852a26dfa7",
+      "bytes": 56131
+    },
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "7f86d6d89588fbda3c8c24ddae1f8c9faeae069af2bca5fabdd782e3a6aafc99",
+      "bytes": 56065
+    },
+    {
+      "path": "README.md",
+      "sha256": "6fd1337b8319ee2bd7a6e53bf83a4cb101d367ee47af591a3bf92b27da100b99",
+      "bytes": 1769
+    },
+    {
+      "path": "build.py",
+      "sha256": "91631617fc87cb588e24360fb27b66e1e64ebc0f2c114602fda8cff55b4079ea",
+      "bytes": 2843
+    },
+    {
+      "path": "figures/cantor.pdf",
+      "sha256": "e5a4691d04084fb0832484419537c83814ef07dd0c8cbe2eb50fbda30167dd60",
+      "bytes": 20334
+    },
+    {
+      "path": "figures/cantor.png",
+      "sha256": "b18c94ea7f65d7db265f774cb6629688cd3f386e9c0168a24447dd0b7c5e66c8",
+      "bytes": 130644
+    },
+    {
+      "path": "figures/densities.pdf",
+      "sha256": "863908300957083e26e1017bf9584b6742a349901edb6f472239d02e3f0c33ed",
+      "bytes": 19579
+    },
+    {
+      "path": "figures/densities.png",
+      "sha256": "d14ea37715aba3d4e49ac7d07794f4283da253a23c5d3de9fafd1f22da6f4cf5",
+      "bytes": 222700
+    },
+    {
+      "path": "figures/density_3d.pdf",
+      "sha256": "e36a22653d354d1f587768e108ed7ee32ac6de682e024f594346717d24494aa0",
+      "bytes": 137613
+    },
+    {
+      "path": "figures/density_3d.png",
+      "sha256": "f8fd1bd83d5477445c9166377d42b68277ef876bbe579807d03f2e1035c75c08",
+      "bytes": 523365
+    },
+    {
+      "path": "figures/justification.pdf",
+      "sha256": "981d5554a2c504a587b99309b269d67cee3e5acf91602970073ad34971e6feaa",
+      "bytes": 11041
+    },
+    {
+      "path": "figures/justification.png",
+      "sha256": "04a9e2dee9d85482e799277dd8438208b2e716a7f647ddd829a876f8e92b7fe5",
+      "bytes": 78066
+    },
+    {
+      "path": "figures/operators.pdf",
+      "sha256": "0c8e54c8b19bb98eb8c4ec8455086042ab894c353200a405f28bbde689596c91",
+      "bytes": 13579
+    },
+    {
+      "path": "figures/operators.png",
+      "sha256": "74eb878e6c35a2abc9becd7e20104a8f24f3ae7a496bb743bc83d5ed87544808",
+      "bytes": 73001
+    },
+    {
+      "path": "figures/paths.pdf",
+      "sha256": "0857e82057bda7efc4f4fc01ca913b412e501c75fc78fdd11793fdb078fd3b25",
+      "bytes": 10998
+    },
+    {
+      "path": "figures/paths.png",
+      "sha256": "c653087296f0f9f46fccd67b2d53aafff2edb0424912135e97233d60cebacfe9",
+      "bytes": 67864
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "56a7d8a61bc0662b5706845a990f02781782ab3effba7077c65d402981404e17",
+      "bytes": 61
+    },
+    {
+      "path": "verification.json",
+      "sha256": "dba9dd628113c0ad7836c5f3af5fec436d3ee783787314d59630c1918fd03706",
+      "bytes": 931
+    },
+    {
+      "path": "verify_and_plot.py",
+      "sha256": "2075e0fff3e3f0671bceb252e6b6cf181cc1a8b754baafd9f1ceb80aa64c15b8",
+      "bytes": 5221
+    }
+  ]
+}

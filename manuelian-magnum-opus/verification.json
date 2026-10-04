@@ -1,0 +1,88 @@
+{
+  "status": "verified mathematical examples, not empirical findings",
+  "partition_cases": 4,
+  "D": [
+    [
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "R": [
+    [
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "RD_minus_DR": [
+    [
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "discovery_idempotent": true,
+  "resolution_idempotent": true,
+  "normal_integral": 0.9999999999999998,
+  "projective_integral": 1.0,
+  "finite_cantor_injection_verified_through_stage": 10,
+  "figures": 6
+}
