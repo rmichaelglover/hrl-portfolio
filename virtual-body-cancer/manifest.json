@@ -1,0 +1,76 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "da636c72357a632f73a3e864bd71c5d9c90e65e088708ede017d44d702fc4571"
+    },
+    {
+      "path": "RESEARCH-PLAN.md",
+      "sha256": "9f93b87e6d6168d7d586759d8b709d3a37e7224b6194572b06c21aed8ad55821"
+    },
+    {
+      "path": "build_report.py",
+      "sha256": "4a8d4745e0070c4b6de515fda0bf3ea0b982c246b794aad1b26322cd436f0109"
+    },
+    {
+      "path": "model.py",
+      "sha256": "c300e5ec07ee0af6a90a7b75780edb1de8499a83d87da543d1d3e9d1e170cdf1"
+    },
+    {
+      "path": "output/continuous.csv",
+      "sha256": "fc56bf74af679676c4539a2b947e3f48745644f21fa723c4712f5ee95fe8b908"
+    },
+    {
+      "path": "output/feedback.csv",
+      "sha256": "49a63e0a742125ebdf8b96be9b603226ad7deaf0962e86ee7712977d7ebee5ed"
+    },
+    {
+      "path": "output/none.csv",
+      "sha256": "69a4baf2fdf7414ea1f6a7ec4ee4d961e0e25561bf886b138ba4cc33d39e2e59"
+    },
+    {
+      "path": "output/pulsed.csv",
+      "sha256": "8d8416a051877bd546887aadd5d657524fa0a590ab6d71f63e0a95ac5012b627"
+    },
+    {
+      "path": "output/results.json",
+      "sha256": "98e24656565bab76a71fb549d352d84722a086604ccf2051f156ca1641c8524f"
+    },
+    {
+      "path": "output/tradeoffs.png",
+      "sha256": "a6ab5353a01cb4b32c2ad18934fbcb08445d592c430b42bb144d92deef37c0c5"
+    },
+    {
+      "path": "output/trajectories.png",
+      "sha256": "08d8455ee4c7ca0dd13ad5f2a8627f2b00137c7d8a287505588408f5360aec2f"
+    },
+    {
+      "path": "output/verification.json",
+      "sha256": "4d2d7c1858cb49edaf5cc7fe67752a153a450c9eb6eb950cfacdf4289a26b28b"
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "b7a4efe4575ed6d68e0ac03479e113204c09511880783caaf4b6af954a675821"
+    },
+    {
+      "path": "report.html",
+      "sha256": "7c6c8ec12fe9b73f9778f7f0952541619a34e654ceeaaebce9680c7277047671"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "3b30617936665814e14f54e0de8543e6cb46479b3de3c0b8086164a7d1fab81d"
+    },
+    {
+      "path": "run.py",
+      "sha256": "ea7462d30ebc14ca7ecfe8f2c87dd7e32c85c0025820160044a028edab7fd6c5"
+    },
+    {
+      "path": "vendor/hrl_engine.py",
+      "sha256": "59e9654448d14116beb1b135d45acbf6eaff1d559449bb9619445d5172e72dd0"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "69b9d79c0d4fa52ccaa3f7b5f45bd23e02083385b919d28ab3ff054a56e42dfb"
+    }
+  ]
+}
