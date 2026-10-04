@@ -1,0 +1,277 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=.72in,headheight=15pt]{geometry}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage{lmodern,microtype,amsmath,amssymb,graphicx,xcolor,booktabs,tabularx,hyperref,fancyhdr}
+\definecolor{ink}{HTML}{153F50}\definecolor{accent}{HTML}{0072B2}
+\setlength{\parindent}{0pt}\setlength{\parskip}{7pt}\setlength{\emergencystretch}{3em}
+\hypersetup{colorlinks=true,urlcolor=accent}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small\color{ink}GLOVER | INDEPENDENT RESEARCH WHITE PAPER}\fancyhead[R]{\small 2026}\fancyfoot[C]{\thepage}
+\begin{document}
+
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Magnum Economicus: Computation Munster}\par\vspace{7pt}
+Michael Emanuel Glover\par Developed in dialogue with Codex | 4 October 2026\par\vspace{8pt}
+I want prosperity to travel from shore to shore. I want the production of useful things to become the experience of a better life: time with family, a stable home, meaningful work, care in illness and room for intellectual and creative effort. An economy deserves examination at the point where its totals become someone's circumstances.\par
+My computational programme begins with objects, relationships and constraints. Households, firms, institutions and resources form interacting levels. A local transaction enters a larger account; an institutional rule changes local choices. I want that traffic represented explicitly, so that a favorable aggregate number can be followed through to its distribution and its cost.\par
+This manuscript combines an axiomatic account of production and distribution, formal propositions about transfers and inequality, measured World Bank series, and a small closed-economy simulation. I keep the evidence classes distinct. Measured GDP and Gini values describe selected series. Simulated policies record consequences of assumed equations. Neither supplies a causal national-policy estimate by itself.\par
+I call the work Magnum Economicus because its purpose is broad. The ambition exceeds any one indicator. Computation Munster is the playful name on a serious ledger: define what is counted, balance what moves, show what changes and let the reader inspect the result.\par
+Let prosperity be produced, shared and sustained. Let the model expose the difference between a promise and a measured consequence. Selah.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Abstract: production, distribution and the person}\par\vspace{7pt}
+I examine prosperity as a multidimensional and distributional objective. The measured record contains 150 nonmissing World Development Indicators observations for six countries during 2010-2024: ninety GDP-per-capita values and sixty Gini values. Thirty requested Gini slots are missing. The snapshot reports an API update date of 2026-07-13.\par
+I report within-country real GDP-per-capita trajectories, explicit survey years for inequality, and six separate country pages. Constant-dollar levels are not purchasing-power-parity welfare comparisons. Gini may refer to income or consumption and cannot be treated as an identical survey measurement across every country and year.\par
+The synthetic component contains three household groups, a Cobb-Douglas production function, ownership-dependent capital income, equal labor income, balanced capital-income rebates and specified saving propensities. Four scenarios expose output, accumulation and distribution tradeoffs. Parameters are invented and are not estimated from the WDI series.\par
+The formal contributions establish a closed budget identity, a weighted Gini formula, scale invariance and the exact contraction of static income inequality under an equal rebate at fixed gross output. The dynamic results depend on behavior and productivity assumptions beyond those proofs.\par
+The completed work is a reproducible computational essay about broad prosperity. It does not establish an optimal national policy, predict returns to an investment or identify a causal effect from six descriptive time series.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Evidence & Object\\\midrule
+Measured & 150 WDI observations, six countries\\
+Formal & Accounting and distribution theorems\\
+Synthetic & Four closed-economy scenarios\\
+Normative & Explicit welfare objectives and tradeoffs\\
+\bottomrule\end{tabularx}}\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}What I mean by prosperity}\par\vspace{7pt}
+I define prosperity through outcomes people can experience, while preserving the distinction between a value judgment and a measured indicator. Material resources matter. Their distribution matters. So do resilience, health, opportunity, environmental conditions and the freedom to decide how a life is spent.\par
+A scalar objective requires weights. Those weights do not emerge automatically from GDP, from a Gini coefficient or from the arithmetic of a model. They represent preferences, ethical commitments or an explicitly estimated social-choice procedure. I should state them where they enter an optimization rather than allowing one convenient indicator to become the whole objective.\par
+For this manuscript I retain a dashboard. The measured portion includes output per person and reported inequality. The simulation adds group-level disposable income, consumption and wealth. Important outcomes outside that dashboard remain unmeasured. Their absence is a limitation of the current record, not a statement that they are unimportant.\par
+A prosperity programme becomes more useful when an increase in the aggregate can be traced to the people affected. I therefore ask who receives the gain, who bears the adjustment, which constraints bind and what happens after the first favorable period. These questions define the research purpose before the numerical routine begins.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Measured data: units, coverage and the freeze}\par\vspace{7pt}
+I retrieve two World Bank indicators: NY.GDP.PCAP.KD and SI.POV.GINI. The first is GDP per capita in constant 2015 US dollars. The second is a reported Gini index, which may refer to income or consumption [1,2]. The raw JSON responses, source URLs, update date and hashes accompany the manuscript.\par
+The selection is USA, Germany, China, India, Brazil and South Africa over 2010-2024. It is a deliberate descriptive sample, not a representative random sample of economies. Each country has fifteen GDP observations. Inequality coverage is uneven and remains uneven in the figures; no missing value is interpolated.\par
+I use a 2010-equals-100 index to compare within-country output changes. This removes a level difference from the display without making purchasing power, distribution or welfare equivalent. The annualized growth calculation uses the fourteen-year interval between the two endpoints, not fifteen growth periods.\par
+Gini observations are plotted at their actual years. A latest available inequality value is labeled with its own year even when the GDP endpoint is 2024. That practice prevents the page from pretending that two quantities were measured simultaneously when the record says otherwise.\par
+{\small\begin{tabularx}{\linewidth}{Xrr}\toprule
+Indicator & Nonmissing & Missing\\\midrule
+GDP per capita, 2010-2024 & 90 & 0\\
+Reported Gini, 2010-2024 & 60 & 30\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/growth-index.pdf}\end{center}
+{\footnotesize Measured within-country GDP-per-capita indices, 2010 = 100. This is a descriptive change comparison, not a welfare or causal-policy ranking.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Axioms of the small closed economy}\par\vspace{7pt}
+I define three population groups with fixed shares, positive initial wealth, equal labor participation per person and a closed one-good production account. The population shares sum to one. Capital is the population-weighted mean of group wealth. These commitments describe the synthetic model, not the selected countries.\par
+The production function combines capital, labor and an exogenous productivity term. Labor per person is fixed in the simulation. A declared capital share determines gross capital income, while the remainder becomes equal wage income. Depreciation reduces the capital stock before new saving is added.\par
+A capital-income tax is returned as an equal per-person rebate. There is no deficit or unused revenue in this rule. Household saving rates are specified by group and scenario. Their response to taxation is not estimated. The model therefore contains an explicit accounting mechanism and an assumed behavioral mechanism.\par
+Writing the axioms separates those mechanisms. A conservation proof can verify that the rebate balances the tax account. It cannot verify that households save at the chosen rates or that a real institution implements the rule without administrative cost. Those empirical questions remain outside the accounting theorem.\par
+\[q_i>0,\quad\sum_iq_i=1,\quad K=\sum_iq_iW_i,\quad Y=A K^\alpha L^{1-\alpha}.\]
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Production and marginal products}\par\vspace{7pt}
+I use Cobb-Douglas production as an analytic example. For positive inputs and a capital exponent between zero and one, output increases with capital and labor. The exponents determine the assumed marginal product relations. They do not demonstrate that every economy has a constant capital share or this aggregate technology.\par
+The three-dimensional surface is generated directly from the equation at productivity one and capital share 0.35. It is an analytic illustration. It is not a fitted response surface from the national-accounts observations. Its smoothness comes from the chosen function.\par
+In the closed simulation, equal labor income is the labor-share portion of output. Capital income is proportional to ownership. This distinction gives the model a route from aggregate production to distribution. Changing ownership or transfers can alter who receives income even when gross output is held fixed.\par
+A richer production account would include heterogeneous labor, human capital, intermediate inputs, institutions, sectoral differences and resource constraints. Those additions need measurements and an identifiable model. I keep the initial function small so that its accounting and its assumptions can both be inspected.\par
+\[\frac{\partial Y}{\partial K}=\alpha\frac YK,\qquad\frac{\partial Y}{\partial L}=(1-\alpha)\frac YL.\]
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/production-surface.pdf}\end{center}
+{\footnotesize Analytic synthetic production surface. Coefficients are assumptions and are not fitted to WDI country series.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Theorem 1: balanced distribution of gross output}\par\vspace{7pt}
+Theorem. Under the declared wage, capital-income and rebate rules, population-weighted disposable income equals gross output. Proof. Wage income sums to the labor-share portion. Untaxed capital income sums to one minus the tax rate times the capital-share portion. The equal rebate adds back the tax rate times the capital-share portion.\par
+The terms sum to output exactly. This result verifies the closed budget in the model. It does not establish that a real tax has no effect on production or behavior. Output is held fixed for this identity at each state; subsequent states can change through the specified saving rule.\par
+The theorem also clarifies what the model omits. There are no implementation costs, tax avoidance, foreign flows, debt service, heterogeneous labor hours or separate public-service production. An empirical policy assessment would need the relevant terms. Adding them changes the accounting and potentially the outcomes.\par
+I regard a balanced account as a starting discipline. It keeps the numerical example from creating resources by an unnoticed transfer. It does not turn an idealized transfer rule into a universal recommendation.\par
+\[y_i=(1-\alpha)Y+(1-\tau)\alpha Y\frac{W_i}{K}+\tau\alpha Y,\qquad\sum_iq_i y_i=Y.\]
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Theorem 2: weighted inequality and scale}\par\vspace{7pt}
+I define the weighted Gini of nonnegative group values with positive mean as the weighted mean of pairwise absolute differences divided by twice the mean. This formula is appropriate to the grouped synthetic distribution. It preserves the population shares instead of treating a small group as equal in size to a large one.\par
+Theorem. Multiplying every value by the same positive constant leaves this Gini unchanged. Proof. Each absolute difference and the mean multiply by that constant, so the ratio is preserved. A perfectly equal vector has zero pairwise differences and hence zero Gini.\par
+Scale invariance is why inequality and prosperity cannot be treated as the same quantity. A distribution can grow proportionally without changing its Gini. Conversely, a more equal distribution can occur at a lower mean. Both outcomes require the mean and the distribution to be reported together.\par
+The model's wealth Gini and disposable-income Gini are separate series. The measured WDI indicator describes income or consumption according to its survey context. I do not relabel it as wealth inequality, and I do not use a synthetic wealth coefficient as a direct validation target for that measured series.\par
+\[G(v)=\frac{\sum_i\sum_jq_iq_j|v_i-v_j|}{2\sum_iq_iv_i},\qquad G(cv)=G(v)\quad(c>0).\]
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Theorem 3: the static equal-rebate contraction}\par\vspace{7pt}
+Theorem. At fixed gross output and fixed ownership, the declared capital-income tax and equal rebate transform disposable incomes toward their common mean. The difference between any two group incomes is multiplied by one minus the tax rate. The mean remains output.\par
+Proof. Write baseline income as equal wages plus capital income. The rebate is the taxed mean capital income. The resulting vector is one minus the tax rate times baseline income plus the tax rate times the baseline mean. Subtracting two entries removes the common term; the budget identity preserves the mean.\par
+The weighted Gini therefore contracts by the same factor in this static model. The curve in the figure is exact arithmetic under these assumptions. It is not an estimated empirical tax elasticity or a claim that raising a national tax has no behavioral consequence.\par
+The dynamic simulation relaxes the static comparison by allowing wealth to change through group-specific saving. Productivity remains exogenous. This shows where the formal result ends and a behavioral model begins. A policy conclusion would require evidence for those added mechanisms.\par
+\[y_i(\tau)=(1-\tau)y_i(0)+\tau\overline y,\qquad G(y(\tau))=(1-\tau)G(y(0)).\]
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/static-redistribution.pdf}\end{center}
+{\footnotesize Exact static contraction under the invented balanced-rebate rule. Gross output and ownership are held fixed.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Saving, depreciation and the next period}\par\vspace{7pt}
+I evolve wealth with a discrete update: remaining wealth after depreciation plus saving from disposable income. This gives the model a stock-flow relationship that can be checked independently of the plotted trajectory. Every group remains positive under the specified nonnegative coefficients.\par
+Population-weighted next-period wealth equals remaining aggregate capital plus population-weighted saving. The experiment checks this identity at every period for every scenario. It also checks the disposable-income budget, equality at a constant vector and Gini scale invariance.\par
+Group-specific saving rates are behavioral assumptions. If high-wealth groups save more, they may accumulate ownership faster under the declared rules. Equal saving access changes that assumption. It does not establish why saving opportunities or propensities differ in a real economy.\par
+The time index is a synthetic period with no estimated mapping to a year. The sixty-period run is a comparative model experiment. It is not a national forecast, and its coefficients were not fitted to the 2010-2024 observations.\par
+\[W_{i,t+1}=(1-\delta)W_{i,t}+s_i y_{i,t},\quad K_{t+1}=(1-\delta)K_t+\sum_iq_i s_i y_{i,t}.\]
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Growth and distribution are different questions}\par\vspace{7pt}
+The measured country index plot and the reported Gini points answer different descriptive questions. GDP per capita records national-accounts output divided by population. The Gini records a feature of a survey distribution. Neither is a complete account of lived prosperity.\par
+A higher GDP endpoint does not identify the households receiving the additional income. A lower Gini does not by itself identify higher resources or better health. Missing or differently defined survey data can further limit a comparison. The appropriate response is to report those limits beside the figures.\par
+I also distinguish statistical co-movement from a causal mechanism. Six selected country histories do not isolate the effect of a tax, institution, trading relationship or political system. The selection is descriptive. Policy attribution would require a design that addresses the relevant counterfactual and confounders.\par
+The country pages therefore contain endpoint arithmetic, complete GDP coverage and inequality observations at their actual dates. I let those pages be evidence of what was reported, while reserving mechanism claims for identified models and suitable empirical designs.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: United States}\par\vspace{7pt}
+I inspect United States as one measured record in the six-country selection. GDP per capita in the frozen series rises from 52,812.68 constant 2015 US dollars in 2010 to 66,856.51 in 2024. The endpoint change is +26.592 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is +1.699 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 15 nonmissing observations. Its latest value in the window is 41.8, reported for 2024. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & +26.592\%\\
+Annualized endpoint rate & +1.699\%\\
+Latest Gini year & 2024\\
+Latest reported Gini & 41.8\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-USA.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: Germany}\par\vspace{7pt}
+I inspect Germany as one measured record in the six-country selection. GDP per capita in the frozen series rises from 38,526.74 constant 2015 US dollars in 2010 to 44,027.76 in 2024. The endpoint change is +14.278 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is +0.958 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 13 nonmissing observations. Its latest value in the window is 33.7, reported for 2022. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & +14.278\%\\
+Annualized endpoint rate & +0.958\%\\
+Latest Gini year & 2022\\
+Latest reported Gini & 33.7\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-DEU.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: China}\par\vspace{7pt}
+I inspect China as one measured record in the six-country selection. GDP per capita in the frozen series rises from 5,764.65 constant 2015 US dollars in 2010 to 13,119.11 in 2024. The endpoint change is +127.579 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is +6.050 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 13 nonmissing observations. Its latest value in the window is 36.0, reported for 2022. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & +127.579\%\\
+Annualized endpoint rate & +6.050\%\\
+Latest Gini year & 2022\\
+Latest reported Gini & 36.0\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-CHN.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: India}\par\vspace{7pt}
+I inspect India as one measured record in the six-country selection. GDP per capita in the frozen series rises from 1,235.16 constant 2015 US dollars in 2010 to 2,366.83 in 2024. The endpoint change is +91.622 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is +4.755 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 2 nonmissing observations. Its latest value in the window is 25.5, reported for 2022. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & +91.622\%\\
+Annualized endpoint rate & +4.755\%\\
+Latest Gini year & 2022\\
+Latest reported Gini & 25.5\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-IND.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: Brazil}\par\vspace{7pt}
+I inspect Brazil as one measured record in the six-country selection. GDP per capita in the frozen series rises from 8,792.63 constant 2015 US dollars in 2010 to 9,566.75 in 2024. The endpoint change is +8.804 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is +0.605 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 14 nonmissing observations. Its latest value in the window is 50.3, reported for 2024. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & +8.804\%\\
+Annualized endpoint rate & +0.605\%\\
+Latest Gini year & 2024\\
+Latest reported Gini & 50.3\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-BRA.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Country record: South Africa}\par\vspace{7pt}
+I inspect South Africa as one measured record in the six-country selection. GDP per capita in the frozen series rises from 5,953.95 constant 2015 US dollars in 2010 to 5,715.48 in 2024. The endpoint change is -4.005 percent. This is output-per-person arithmetic, not a household-income growth estimate.\par
+The compound annualized endpoint rate over fourteen intervals is -0.292 percent. The series includes every year in the requested window. The plotted path preserves intermediate changes that an endpoint summary would hide. The dollar unit is not a purchasing-power-parity welfare comparison across countries.\par
+The Gini record contains 3 nonmissing observations. Its latest value in the window is 54.1, reported for 2022. I do not assign that value to 2024 unless the observation year is actually 2024. Missing years remain missing in the plot.\par
+Neither panel identifies the policy or institution responsible for the trajectory. A causal account would need additional evidence, including comparable definitions and a design for the counterfactual. This page contributes a transparent measured context to the broader prosperity argument.\par
+{\small\begin{tabularx}{\linewidth}{Xr}\toprule
+Reported quantity & Value\\\midrule
+GDP endpoint change & -4.005\%\\
+Annualized endpoint rate & -0.292\%\\
+Latest Gini year & 2022\\
+Latest reported Gini & 54.1\\
+\bottomrule\end{tabularx}}\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/country-ZAF.pdf}\end{center}
+{\footnotesize Measured WDI GDP per capita and Gini points at their actual observation years. No Gini interpolation; the two panels have different measures and coverage.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Four synthetic scenarios}\par\vspace{7pt}
+I compare unequal accumulation, balanced rebate, equal saving access and a productivity scenario. Population shares are 0.5, 0.4 and 0.1. Initial group wealth is 1, 4 and 20. The capital share is 0.35 and depreciation is 0.05. These are invented model parameters.\par
+The baseline saving rates are 0.1, 0.2 and 0.3 with no capital-income tax. The balanced-rebate case adds a tax rate of 0.3 and returns all revenue equally. Equal saving access uses the same rebate with saving rates of 0.2 for each group. The productivity scenario adds a larger exogenous productivity-growth coefficient.\par
+The experiment does not estimate how a government could create those saving rates or productivity changes. It compares consequences once they are assumed. The interpretation is conditional: a parameter change shows what the equations do with that change, not what a real policy would necessarily accomplish.\par
+I report output, wealth inequality, disposable-income inequality and the lowest-group income together. The dashboard prevents a favorable mean from concealing an unfavorable distributional path. It also makes clear that the prosperity objective contains choices about which outcomes matter.\par
+\begin{center}\includegraphics[width=.97\linewidth,height=.26\textheight,keepaspectratio]{figures/policy-trajectories.pdf}\end{center}
+{\footnotesize Four uncalibrated closed-economy scenarios. Outputs are synthetic model trajectories rather than measured national outcomes.\par}
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Ownership and the income mechanism}\par\vspace{7pt}
+Ownership matters in this model because capital income is proportional to group wealth. Equal labor income supplies a common floor in the synthetic production account. The interaction between that floor, ownership and saving determines subsequent group differences.\par
+This mechanism is explicit enough to test algebraically. When all groups have equal wealth, the capital-income term is equal and the weighted Gini vanishes. When ownership differs, the rebate shifts disposable income toward the mean at a fixed state. Future ownership then depends on the saving assumptions.\par
+A real ownership model would need to distinguish housing, productive assets, debt, pension claims, business equity and other balance-sheet items. Gross capital income and realized disposable income may differ for reasons absent from the prototype. I do not infer those details from the three group values.\par
+The usefulness of the small model lies in making one distributional route inspectable. It does not establish that this route explains the selected country series. That distinction preserves room for alternative mechanisms and for the data needed to compare them.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}The finite-horizon results}\par\vspace{7pt}
+I retain the terminal values for all four scenarios so that a reader can inspect the actual outcomes instead of relying on the direction of a curve. Output, mean consumption and the lowest-group disposable income are recorded alongside both kinds of inequality.\par
+The values share a common synthetic initial state and equation set. Some scenarios change more than one assumption, especially the saving-access and productivity cases. They should therefore not be interpreted as estimates of a single isolated real-world policy effect.\par
+Any ordering in the table depends on the chosen horizon and the unestimated coefficients. The same analysis should be repeated under alternative parameters before even a model-internal robustness claim is made. The completed record establishes the displayed runs and their accounting checks.\par
+My purpose is to expose the relation among accumulation, distribution and consumption. The model gives those questions a calculable form. It leaves the empirical identification of the mechanisms to an additional research design.\par
+{\small\begin{tabularx}{\linewidth}{Xrrr}\toprule
+Scenario & Final output & Income Gini & Lowest-group income\\\midrule
+unequal accumulation & 4.3033 & 0.1231 & 3.4691\\
+balanced rebate & 4.2144 & 0.0736 & 3.7057\\
+equal saving access & 4.5567 & 0.0053 & 4.5226\\
+productivity scenario & 6.8361 & 0.0042 & 6.7952\\
+\bottomrule\end{tabularx}}\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Welfare, Pareto comparison and declared values}\par\vspace{7pt}
+I distinguish an outcome vector from a welfare function. A Pareto improvement benefits at least one person without worsening another under specified outcomes and preferences. A tradeoff between groups requires an additional rule for evaluating the changes. That rule is a normative commitment, not an implication of a production identity.\par
+A concave utility function can express diminishing marginal value of consumption in a model. It does not prove that everyone has the same preferences or that one social weighting is uniquely correct. Constraints on minimum access, rights or resilience can also be specified directly rather than hidden in a coefficient.\par
+The proposed dashboard keeps several outcomes available for deliberation. If I collapse them into one score, I must state the weights and examine sensitivity to them. Optimizing an unexamined score can make a computation precise while leaving the underlying purpose obscure.\par
+Spreading prosperity therefore involves both measurement and public judgment. The calculations can clarify consequences and inconsistencies. They cannot erase the need to choose and justify the criteria by which those consequences are evaluated.\par
+\[\mathcal W(c)=\sum_iq_i\omega_i U(c_i),\quad U\text{ concave},\quad\omega_i\text{ declared}.\]
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Resources, institutions and missing constraints}\par\vspace{7pt}
+A production surface does not create unlimited resources. The present prototype omits depletion, emissions, ecological thresholds, energy systems and many institutional constraints. Those omissions are part of its scope. They are not evidence that additional production can always be sustained.\par
+A broader computational economy would need typed resource flows and stock constraints. An institution changes incentives and feasible actions; it does not simply appear as a label on a graph. Measurement would have to identify the relevant rule, its enforcement and its consequences.\par
+The same applies to health and education. They can influence capabilities and production, but the model cannot assign their causal effects by analogy alone. A formal module should state its inputs and outputs, preserve accounting where appropriate and expose the data used to estimate its relationships.\par
+I want a hierarchy of economic models whose levels communicate without double-counting resources or benefits. The present stock-flow checks demonstrate that discipline on one small account. Extending it requires additional evidence, rather than merely additional dimensions.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Shore to shore: connection and heterogeneity}\par\vspace{7pt}
+The phrase shore to shore expresses breadth of concern. It does not imply that all places have the same institutions, prices, needs or opportunities. A model intended to travel must preserve local context instead of treating one parameter set as universal.\par
+Trade, migration, finance and shared knowledge connect economies. The present simulation is closed and cannot identify those cross-border mechanisms. The measured country pages also do not isolate them. A connected extension would need explicit external flows and the corresponding accounting identities.\par
+Comparability is an empirical task. Constant-dollar national accounts are useful for within-country change, while purchasing-power questions require an appropriate price comparison. Survey-based inequality requires attention to the observed concept and population. The same word prosperity can otherwise conceal different measurements.\par
+My objective is a model that makes these differences inspectable while preserving a common question: how can people gain durable access to a better life? The formal core supplies a language for constraints and flows. The local evidence must supply the relevant values and relationships.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}Hierarchical relaxation as a research tool}\par\vspace{7pt}
+My existing HRL work supplies a possible way to combine local constraints, competing labels and higher-order hypotheses. In economics those labels might represent institutional states, reporting categories or alternative explanations. The compatibility rules would still require independent justification.\par
+An accounting identity can be a hard constraint. A behavioral association may be a soft, context-dependent relation. A normative preference is another kind of input. I should not place them in one undifferentiated tensor and interpret the resulting convergence as proof of an optimal social arrangement.\par
+The present economic manuscript does not run HRL on WDI or estimate a country-policy graph. It runs transparent accounting and synthetic production/distribution equations. I state that implementation boundary explicitly, while retaining HRL as a prospective integration interface.\par
+The research lesson from the existing algorithmic work is to preserve baselines, ablations, held-out evaluation and failed comparisons. A more complicated inferential engine earns its place by answering a specified question better under appropriate evidence. Its vocabulary alone is not the contribution.\par
+\clearpage
+{\small\color{accent}Research argument}\par
+{\LARGE\bfseries\color{ink}References and the completed ledger}\par\vspace{7pt}
+I provide all raw WDI responses, the observation table, synthetic trajectories, parameter record, manuscript, figures and scripts. The data snapshot is frozen by URL, update date and file hash. Figures show measured observations or declared analytic/synthetic constructions, with that classification in their captions.\par
+The completed calculations verify the model budget, stock-flow update, Gini equality and scale properties, and the static rebate contraction. They describe six selected country records and four synthetic scenarios. They do not identify a causal policy effect or establish a universally optimal prosperity programme.\par
+My purpose remains to spread prosperity from shore to shore. The ledger supplies a disciplined beginning: state the objective, name the unit, balance the flow, preserve the missing observation and expose who gains. Let it be written and let the next claim answer to its evidence. Selah.\par
+{\small [1] World Bank. GDP per capita, constant 2015 US dollars. Indicator NY.GDP.PCAP.KD.\par\url{https://data.worldbank.org/indicator/NY.GDP.PCAP.KD}\par}
+{\small [2] World Bank. Gini index. Indicator SI.POV.GINI; income/consumption comparability requires context.\par\url{https://data.worldbank.org/indicator/SI.POV.GINI}\par}
+{\small [3] World Bank. Indicator metadata and data attribution/license information.\par\url{https://databank.worldbank.org/metadataglossary/world-development-indicators/series/NY.GDP.PCAP.KD}\par}
+\end{document}

@@ -1,0 +1,144 @@
+{
+  "title": "Drugs Are Good: An Allopath's Journey Through Medicine, Healing, and Danger",
+  "author": "Michael Emanuel Glover",
+  "pages": 25,
+  "words": 5397,
+  "figures": 8,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "6be20eebe3a2538b1af0878f93f7ac5f26315c8cc9fb9ccbaf2dcf104838d49e",
+      "bytes": 36622
+    },
+    {
+      "path": "README.md",
+      "sha256": "60254fbd88a7870e473359b7f858b176cbf71a24dad94090d16344171ad3a6b8",
+      "bytes": 617
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "da13baf88908633a93135403fd4f1c94aed19a3d913a959b0885003516ca58b0",
+      "bytes": 471091
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "e243ca4a73faab31443ce8d4e68f52b272771deac1dca5618ba2af59744c7e89",
+      "bytes": 40719
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "6be20eebe3a2538b1af0878f93f7ac5f26315c8cc9fb9ccbaf2dcf104838d49e",
+      "bytes": 36622
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "775ce64c2e1443ccc7e63c52d3de8bfa173b38fd88a379ba63a73b3497fc1f94",
+      "bytes": 232
+    },
+    {
+      "path": "experiment.py",
+      "sha256": "44b30de66029ac6f5363eb0c79f93c2b64328e6bcc8dba13444419e353b9eb87",
+      "bytes": 4073
+    },
+    {
+      "path": "figures/absolute-benefit.pdf",
+      "sha256": "21d0c20b1f1d8718cd2343dd17418397e0ba1b18a129033254baaa8d911518c3",
+      "bytes": 14283
+    },
+    {
+      "path": "figures/absolute-benefit.png",
+      "sha256": "ac70b422b3417698bea0feb9e6dbe302f4da8ecf9ab0a47fc45aa9762e0ff0f2",
+      "bytes": 53504
+    },
+    {
+      "path": "figures/convergence.pdf",
+      "sha256": "e6897fd46e199071d58d49fba3aa69ca333f86e9c368e89a7ded7dd14a7697ae",
+      "bytes": 11313
+    },
+    {
+      "path": "figures/convergence.png",
+      "sha256": "1f1aa726181d065a44aa1053cd3bb98299f5b4398f533cfe8946827d159e6c9f",
+      "bytes": 40419
+    },
+    {
+      "path": "figures/elimination.pdf",
+      "sha256": "261e5bf6c5ebf69b6b0697f9708aaf63ea28629a257b5cdc1d753b9c8b3c4391",
+      "bytes": 15121
+    },
+    {
+      "path": "figures/elimination.png",
+      "sha256": "904f765cd9849112b690c754279c21f5aa8703219789263fcc14fdcf83147aae",
+      "bytes": 75657
+    },
+    {
+      "path": "figures/optima.pdf",
+      "sha256": "e0a618fc40ff79c9b7c7356eacd203e5d58fe2893d608e32bf235727c1e0b0e8",
+      "bytes": 15058
+    },
+    {
+      "path": "figures/optima.png",
+      "sha256": "a0d6564315f3b1dff48112651aa811ebd0904f995b69a354654d7654bdc632c7",
+      "bytes": 47112
+    },
+    {
+      "path": "figures/responses.pdf",
+      "sha256": "977a5706c522d511f02d4262cdef292244658268806bb2331047139b242faae2",
+      "bytes": 16826
+    },
+    {
+      "path": "figures/responses.png",
+      "sha256": "863437c7642d8168207b4102747c5c1c375b484e233d3ae58231e98beaafcff6",
+      "bytes": 72885
+    },
+    {
+      "path": "figures/uncertainty.pdf",
+      "sha256": "180033ccb0a6ad23077fadfe1c557dbe65cd10af1244e566eaef3aebd519709a",
+      "bytes": 24453
+    },
+    {
+      "path": "figures/uncertainty.png",
+      "sha256": "d9e1d6327bc35e4143e2f8eb0b1f5ed039bbc14f53544674d74f2d7f7aa16773",
+      "bytes": 52612
+    },
+    {
+      "path": "figures/utility-surface.pdf",
+      "sha256": "19a2c31aed865232ef89867dae480a20df948986e987ba2eb93a3db30d4ca8b4",
+      "bytes": 130146
+    },
+    {
+      "path": "figures/utility-surface.png",
+      "sha256": "5e4f4ca12a6bf66118a5d8aa5a723087b5b6913e2d71088c08f81699e19b854c",
+      "bytes": 147594
+    },
+    {
+      "path": "figures/zero-events.pdf",
+      "sha256": "8a958bc892af8c80354076a91b7da5d054bf498b9b556054479287f02b444ae0",
+      "bytes": 14893
+    },
+    {
+      "path": "figures/zero-events.png",
+      "sha256": "abc20577d418dcd57f04ad603a0e0f3837401ef8c4d13392e9db1cb21bae0237",
+      "bytes": 56803
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "1c2b91220785a2aab49b8968ba424624c8d4f88b155e1cb79d541d542869ad0f",
+      "bytes": 41002
+    },
+    {
+      "path": "results.json",
+      "sha256": "cc2dffcedf5ee8ceb08b0d306844db4ef0fa7e3cd1b06eeaadc6dddafc495926",
+      "bytes": 841
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "write.py",
+      "sha256": "cd583a26277b293bcd60e6e35c9b1463e1f719c801d19c7199e02d363fae6b9d",
+      "bytes": 37773
+    }
+  ]
+}

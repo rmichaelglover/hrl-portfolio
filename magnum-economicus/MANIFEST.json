@@ -1,0 +1,199 @@
+{
+  "title": "Magnum Economicus: Computation Munster",
+  "author": "Michael Emanuel Glover",
+  "pages": 25,
+  "words": 5231,
+  "figures": 10,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "d926ef138900a1b6c59b5f8fb8b975e4bd67b64009d6b7e68f62f16c3bae5f80",
+      "bytes": 35589
+    },
+    {
+      "path": "README.md",
+      "sha256": "170fa5c171e53823e60bbf9c2e611702c022afd4011dea4e87d4089cf7fb3f59",
+      "bytes": 695
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "7adaf45e74026146232a2a835368977131b6a11b76fb5836f6021d43cf55ee4c",
+      "bytes": 450107
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "8c2fd378cad8357e711868c869ed9ceec27196b09b42589c9235a22df766fb9e",
+      "bytes": 40596
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "d926ef138900a1b6c59b5f8fb8b975e4bd67b64009d6b7e68f62f16c3bae5f80",
+      "bytes": 35589
+    },
+    {
+      "path": "data/NY.GDP.PCAP.KD.json",
+      "sha256": "ce954e0a040022e201050abdfda1f1e544d0df92b26cccee43f6e7b19b8a5cff",
+      "bytes": 20331
+    },
+    {
+      "path": "data/SI.POV.GINI.json",
+      "sha256": "4ecd283ee8ebcd30aeee73c0a9b2072c848c735a5ac56be9dba6731d4a4ae53c",
+      "bytes": 16829
+    },
+    {
+      "path": "data/balanced_rebate.csv",
+      "sha256": "374900a9206a3e86dec644b78abca32cd72de1908072052d29e38b0f88ff6c74",
+      "bytes": 12905
+    },
+    {
+      "path": "data/equal_saving_access.csv",
+      "sha256": "0f42961abf961793f3cf6b10aa0c551898b60d859400c15a105765a2d7127db8",
+      "bytes": 12968
+    },
+    {
+      "path": "data/observations.csv",
+      "sha256": "47bb1b65d6f3918549cbf8dbda7ac106b8dc4508d3975882be9b1bf14b82ba7a",
+      "bytes": 7552
+    },
+    {
+      "path": "data/productivity_scenario.csv",
+      "sha256": "7298d84f0d948592da6442be46c2242c8270c0df7d6f69cd48949d1c4b822078",
+      "bytes": 12957
+    },
+    {
+      "path": "data/unequal_accumulation.csv",
+      "sha256": "8dbc177f10d763596dfd29a02f973362a345ee501c8f8e35fb0eab65666548f5",
+      "bytes": 12909
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "daf9d3fc96629b986f358ddc3c4b18d15beb1737331602a9871ed53d585eaf12",
+      "bytes": 196
+    },
+    {
+      "path": "experiment.py",
+      "sha256": "7eb0704600147c1b8a490dfbbe7608b64d9cf84d3410ee0f75771ee2b719443c",
+      "bytes": 6780
+    },
+    {
+      "path": "figures/country-BRA.pdf",
+      "sha256": "3916b047b967f7d6208b189012806f0c5e3434ad694d7b894523c5431666a227",
+      "bytes": 17387
+    },
+    {
+      "path": "figures/country-BRA.png",
+      "sha256": "7148758da7532f75de80366b9c891244608dd54a32597384afe77d32af182a6d",
+      "bytes": 88752
+    },
+    {
+      "path": "figures/country-CHN.pdf",
+      "sha256": "8d139359613851e901eb59fc9b9c225a11668222dd229f2edddec33db0872b6f",
+      "bytes": 17773
+    },
+    {
+      "path": "figures/country-CHN.png",
+      "sha256": "9e052c276d1ad4289cff01dde10c2cc890c9732ed3430141c3d8156e5912e1d6",
+      "bytes": 80937
+    },
+    {
+      "path": "figures/country-DEU.pdf",
+      "sha256": "b1d42871de5f3fcf0485e07576c60a2a6337cc673f4b017e3bdc2f0a9b8d4b24",
+      "bytes": 17369
+    },
+    {
+      "path": "figures/country-DEU.png",
+      "sha256": "fdc4eeed485fa9b32b30b25894d954964310b03a9c519c3cb27202c0fa6966fe",
+      "bytes": 82671
+    },
+    {
+      "path": "figures/country-IND.pdf",
+      "sha256": "4604e0f6504450d8f6bbf1b20b56f9c9f2f45bd0adc1deba50675b4b05576f84",
+      "bytes": 16609
+    },
+    {
+      "path": "figures/country-IND.png",
+      "sha256": "cd0f1fd851ec8a31897130bd12d92a58ae5557de4db7bd45e87a19081cb37163",
+      "bytes": 76590
+    },
+    {
+      "path": "figures/country-USA.pdf",
+      "sha256": "4c656037d15a43c1ab155fcc06ef6863ecea9e9b1c8540a1c3945f822f6ed2ab",
+      "bytes": 16529
+    },
+    {
+      "path": "figures/country-USA.png",
+      "sha256": "2b1a7ba283dc8ec286a6b1968a9c815e0f74b1ff0d370670aedb3062c3c5ffda",
+      "bytes": 82632
+    },
+    {
+      "path": "figures/country-ZAF.pdf",
+      "sha256": "4dbc101cda52ec9f2f241d5788d27bfa4fdb751527c4de6e5f53d6d22d4f710c",
+      "bytes": 17492
+    },
+    {
+      "path": "figures/country-ZAF.png",
+      "sha256": "3d53e7c5ae4d63c58bcc92a72afb42fe10d8e14abd8322daaf8f96631b85e736",
+      "bytes": 81340
+    },
+    {
+      "path": "figures/growth-index.pdf",
+      "sha256": "2349d9165e989fa76bd6b5af7a0fd2cc35adc9e2fc7516da76c7bb283cca170d",
+      "bytes": 17934
+    },
+    {
+      "path": "figures/growth-index.png",
+      "sha256": "e001658816e5541fbbcfa988e2b5720cb49328b2d55feabd5e403eb180828354",
+      "bytes": 120512
+    },
+    {
+      "path": "figures/policy-trajectories.pdf",
+      "sha256": "56f71bb384de8d956112b6baac53a75bb2d40d992c704f185a1dca3343071b74",
+      "bytes": 26393
+    },
+    {
+      "path": "figures/policy-trajectories.png",
+      "sha256": "ff9943f57f27e5b5503fc830ae5b5794ea74c4075b629b81604e786d429a05f9",
+      "bytes": 254021
+    },
+    {
+      "path": "figures/production-surface.pdf",
+      "sha256": "c89233cc3c6f61225573a28a08dd9c2ff4e1c99d01e80c0a8ee833d851ca8ae3",
+      "bytes": 71602
+    },
+    {
+      "path": "figures/production-surface.png",
+      "sha256": "1ad34ef4d301a8fee13002a57d6d45d42131f5da83ee167e4785f7e925bac879",
+      "bytes": 217754
+    },
+    {
+      "path": "figures/static-redistribution.pdf",
+      "sha256": "f2564162514b56ccc0854fdfbd3d56347a10fdbd105105f4dc0de235be731d7e",
+      "bytes": 15923
+    },
+    {
+      "path": "figures/static-redistribution.png",
+      "sha256": "a5e2c87bc5aaf6b1df2e40d1225ee26d38ac2f194c84f04f498e93ab4cf4a0bf",
+      "bytes": 77257
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "175e5d8635e06e0f3871dc49bf8dcb0ac6b8acfd37539cdcdefd51881e5d2c1e",
+      "bytes": 41102
+    },
+    {
+      "path": "results.json",
+      "sha256": "60b20460643587bd9eb2f0ce543578a7f7543281f029d9a3ea0c0b7cec7015ce",
+      "bytes": 5374
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "write.py",
+      "sha256": "5c578977d68e3382a2b67208b3dba136d1982e9eb81ba87364eb7a274e033d69",
+      "bytes": 29803
+    }
+  ]
+}

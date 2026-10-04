@@ -1,0 +1,34 @@
+{
+  "author": "Michael Emanuel Glover",
+  "date": "2026-10-04",
+  "status": "Published companion manuscripts",
+  "papers": [
+    {
+      "title": "An Axiomatic and Numerical Approach to Modeling Bipolar Disorder",
+      "author": "Michael Emanuel Glover",
+      "pages": 25,
+      "words": 5535,
+      "figures": 7,
+      "page_count_verified": true,
+      "overfull_boxes": 0
+    },
+    {
+      "title": "Magnum Economicus: Computation Munster",
+      "author": "Michael Emanuel Glover",
+      "pages": 25,
+      "words": 5231,
+      "figures": 10,
+      "page_count_verified": true,
+      "overfull_boxes": 0
+    },
+    {
+      "title": "Drugs Are Good: An Allopath's Journey Through Medicine, Healing, and Danger",
+      "author": "Michael Emanuel Glover",
+      "pages": 25,
+      "words": 5397,
+      "figures": 8,
+      "page_count_verified": true,
+      "overfull_boxes": 0
+    }
+  ]
+}

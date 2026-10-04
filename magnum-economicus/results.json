@@ -1,0 +1,169 @@
+{
+  "status": "measured WDI descriptions plus synthetic scenarios; no causal policy estimate",
+  "retrieved_date": "2026-10-04",
+  "api_last_updated": "2026-07-13",
+  "source_nonnull_observations": 150,
+  "missing_observations": 30,
+  "countries": [
+    {
+      "country": "USA",
+      "name": "United States",
+      "gdp_2010": 52812.6829869279,
+      "gdp_2024": 66856.5131698371,
+      "gdp_growth_2010_2024_pct": 26.591775665677318,
+      "annualized_growth_pct": 1.6985305875273804,
+      "gini_observations": 15,
+      "latest_gini_year": 2024,
+      "latest_gini": 41.8
+    },
+    {
+      "country": "DEU",
+      "name": "Germany",
+      "gdp_2010": 38526.7371042695,
+      "gdp_2024": 44027.7631554469,
+      "gdp_growth_2010_2024_pct": 14.278463385802208,
+      "annualized_growth_pct": 0.9579012506967688,
+      "gini_observations": 13,
+      "latest_gini_year": 2022,
+      "latest_gini": 33.7
+    },
+    {
+      "country": "CHN",
+      "name": "China",
+      "gdp_2010": 5764.65012366375,
+      "gdp_2024": 13119.1076099516,
+      "gdp_growth_2010_2024_pct": 127.57855773584556,
+      "annualized_growth_pct": 6.049684662385824,
+      "gini_observations": 13,
+      "latest_gini_year": 2022,
+      "latest_gini": 36.0
+    },
+    {
+      "country": "IND",
+      "name": "India",
+      "gdp_2010": 1235.15939132939,
+      "gdp_2024": 2366.8328910323,
+      "gdp_growth_2010_2024_pct": 91.62165690088797,
+      "annualized_growth_pct": 4.754964411713125,
+      "gini_observations": 2,
+      "latest_gini_year": 2022,
+      "latest_gini": 25.5
+    },
+    {
+      "country": "BRA",
+      "name": "Brazil",
+      "gdp_2010": 8792.63436120342,
+      "gdp_2024": 9566.74518687619,
+      "gdp_growth_2010_2024_pct": 8.80408298437214,
+      "annualized_growth_pct": 0.6045247424949052,
+      "gini_observations": 14,
+      "latest_gini_year": 2024,
+      "latest_gini": 50.3
+    },
+    {
+      "country": "ZAF",
+      "name": "South Africa",
+      "gdp_2010": 5953.94506512821,
+      "gdp_2024": 5715.47531469148,
+      "gdp_growth_2010_2024_pct": -4.00523934682282,
+      "annualized_growth_pct": -0.29154968416431615,
+      "gini_observations": 3,
+      "latest_gini_year": 2022,
+      "latest_gini": 54.1
+    }
+  ],
+  "synthetic_parameters": {
+    "population_shares": [
+      0.5,
+      0.4,
+      0.1
+    ],
+    "initial_wealth": [
+      1.0,
+      4.0,
+      20.0
+    ],
+    "capital_share": 0.35,
+    "depreciation": 0.05,
+    "periods": 60
+  },
+  "synthetic_policy_results": {
+    "unequal_accumulation": {
+      "capital_final": 11.650938190887368,
+      "output_final": 4.3033136743362626,
+      "wealth_gini_final": 0.35184338231172957,
+      "disposable_income_gini_final": 0.12314518380910536,
+      "mean_consumption_final": 3.542164111577972,
+      "capital_tax": 0.0,
+      "saving_rates": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "exogenous_productivity_growth": 0.01,
+      "lowest_group_income_final": 3.4691362788766105
+    },
+    "balanced_rebate": {
+      "capital_final": 10.976241800021228,
+      "output_final": 4.214397271818913,
+      "wealth_gini_final": 0.30037550064840696,
+      "disposable_income_gini_final": 0.07359199765885971,
+      "mean_consumption_final": 3.4984119299103833,
+      "capital_tax": 0.3,
+      "saving_rates": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "exogenous_productivity_growth": 0.01,
+      "lowest_group_income_final": 3.705712161450498
+    },
+    "equal_saving_access": {
+      "capital_final": 13.720286362171827,
+      "output_final": 4.556735294309307,
+      "wealth_gini_final": 0.021625099478965314,
+      "disposable_income_gini_final": 0.005298149372346505,
+      "mean_consumption_final": 3.645388235447446,
+      "capital_tax": 0.3,
+      "saving_rates": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "exogenous_productivity_growth": 0.01,
+      "lowest_group_income_final": 4.522561312965731
+    },
+    "productivity_scenario": {
+      "capital_final": 18.553145845746467,
+      "output_final": 6.836143635870565,
+      "wealth_gini_final": 0.01729069597212241,
+      "disposable_income_gini_final": 0.004236220513170007,
+      "mean_consumption_final": 5.468914908696453,
+      "capital_tax": 0.3,
+      "saving_rates": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "exogenous_productivity_growth": 0.015,
+      "lowest_group_income_final": 6.795150861033177
+    }
+  },
+  "checks_passed": true,
+  "sources": {
+    "NY.GDP.PCAP.KD": {
+      "url": "https://api.worldbank.org/v2/country/USA%3BDEU%3BCHN%3BIND%3BBRA%3BZAF/indicator/NY.GDP.PCAP.KD?format=json&date=2010:2024&per_page=1000",
+      "sha256": "ce954e0a040022e201050abdfda1f1e544d0df92b26cccee43f6e7b19b8a5cff"
+    },
+    "SI.POV.GINI": {
+      "url": "https://api.worldbank.org/v2/country/USA%3BDEU%3BCHN%3BIND%3BBRA%3BZAF/indicator/SI.POV.GINI?format=json&date=2010:2024&per_page=1000",
+      "sha256": "4ecd283ee8ebcd30aeee73c0a9b2072c848c735a5ac56be9dba6731d4a4ae53c"
+    }
+  },
+  "scope_notes": [
+    "GDP constant-dollar levels are not PPP welfare comparisons.",
+    "Gini observations may measure income or consumption and have differing survey definitions; no missing values interpolated.",
+    "Synthetic policy responses are consequences of assumptions; coefficients are not fitted to WDI.",
+    "Wealth inequality in the toy model differs from WDI income/consumption inequality."
+  ]
+}

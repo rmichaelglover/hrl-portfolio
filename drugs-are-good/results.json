@@ -1,0 +1,40 @@
+{
+  "seed": 20261004,
+  "status": "All quantities invented and dimensionless; no clinical calibration",
+  "analytic_checks": {
+    "0.25": {
+      "auc": 4.000000000000001,
+      "half_life": 2.772588722239781
+    },
+    "0.5": {
+      "auc": 2.0,
+      "half_life": 1.3862943611198906
+    },
+    "1.0": {
+      "auc": 1.0000000000000002,
+      "half_life": 0.6931471805599453
+    }
+  },
+  "synthetic_k_quantiles": [
+    0.2820202329617155,
+    0.49916102700950593,
+    0.8848081920032795
+  ],
+  "zero_event_upper_bound_n1000": 0.0029912495450953314,
+  "euler_steps": [
+    0.4,
+    0.2,
+    0.1,
+    0.05,
+    0.025
+  ],
+  "euler_errors": [
+    0.027961100836612643,
+    0.013758628646043353,
+    0.006823126671509583,
+    0.0033974778497101177,
+    0.0016952152945580723
+  ],
+  "equal_weight_grid_optimum": 1.744,
+  "checks_passed": true
+}

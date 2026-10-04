@@ -1,0 +1,134 @@
+{
+  "title": "An Axiomatic and Numerical Approach to Modeling Bipolar Disorder",
+  "author": "Michael Emanuel Glover",
+  "pages": 25,
+  "words": 5535,
+  "figures": 7,
+  "files": [
+    {
+      "path": "MANUSCRIPT.md",
+      "sha256": "1c955239e0e771ff8e2bd8a1b96025511eb66778d4e222b8bd6e93a9ef1bad23",
+      "bytes": 38056
+    },
+    {
+      "path": "README.md",
+      "sha256": "dc0a02c108cbd431f0816fbd1d6222d71b6268b39fa4a817008ea7ca5434d269",
+      "bytes": 545
+    },
+    {
+      "path": "WHITE-PAPER.pdf",
+      "sha256": "c2ea55e182db9d515a8fd64480b20d5c8e3081f61050e76433c8d724c60689cf",
+      "bytes": 580836
+    },
+    {
+      "path": "WHITE-PAPER.tex",
+      "sha256": "ee2098d417e8c5594b2fe6f7e233b4a7ea021a257496bd768b7ba082cf4cce02",
+      "bytes": 42443
+    },
+    {
+      "path": "WHITE-PAPER.txt",
+      "sha256": "1c955239e0e771ff8e2bd8a1b96025511eb66778d4e222b8bd6e93a9ef1bad23",
+      "bytes": 38056
+    },
+    {
+      "path": "document-checks.json",
+      "sha256": "6e7805975ae607008cb7b01291649eb9e5f86495f6a3648b6e20ff60c8b45d76",
+      "bytes": 221
+    },
+    {
+      "path": "experiment.py",
+      "sha256": "1297cdb95f7d0d9a113bc8fa99f6b9276e18617d73edac1a947248a0bb866eb0",
+      "bytes": 8007
+    },
+    {
+      "path": "figures/base-rates.pdf",
+      "sha256": "a1b04ba7bb03d91ead8ecb8f8c9e20ae4fcd6a1aaa805013cd1ab82a18df0fdc",
+      "bytes": 14625
+    },
+    {
+      "path": "figures/base-rates.png",
+      "sha256": "b59ecd48ad822a6920c0b9570976cd100a68f4d9a650a9acb73c8b370912d28d",
+      "bytes": 61046
+    },
+    {
+      "path": "figures/cauchy-ratio.pdf",
+      "sha256": "94862fe26617a6be00e1b28da44b044e548327d511e723f7557b26cebbe17d40",
+      "bytes": 21605
+    },
+    {
+      "path": "figures/cauchy-ratio.png",
+      "sha256": "d8bcc7c9d7e70a1a7d223903840d4a80027a03ebb36a51fb04a272723bdc0648",
+      "bytes": 105924
+    },
+    {
+      "path": "figures/horizon-sensitivity.pdf",
+      "sha256": "c3c12379695b832b6df23c0cb138b003ef8892fd678dc592ad91bb3822ab263f",
+      "bytes": 16241
+    },
+    {
+      "path": "figures/horizon-sensitivity.png",
+      "sha256": "e509cbdae0420d8a0f75346d89e2700d9decd746d32296126e81208a24fc0ba7",
+      "bytes": 51617
+    },
+    {
+      "path": "figures/latent-mixture.pdf",
+      "sha256": "841d6b5fec8819fbfe8484e12a431743c6bb030c8607b072ee7aeb9b888e010d",
+      "bytes": 150763
+    },
+    {
+      "path": "figures/latent-mixture.png",
+      "sha256": "4825840a003965568985cad6c6424f6b65d1e9634f7bfd91b5f939fcac83c3fc",
+      "bytes": 273250
+    },
+    {
+      "path": "figures/manifold-noise.pdf",
+      "sha256": "0e81f0ff8a9849f206119887b7b4e6a1533d2741690bffbe3ff58c52aeae79a0",
+      "bytes": 15756
+    },
+    {
+      "path": "figures/manifold-noise.png",
+      "sha256": "ee6f172f63d6f805ce202e083a20a016dde9ce9597fe71f55965023472a3fad3",
+      "bytes": 81785
+    },
+    {
+      "path": "figures/perspective-samples.pdf",
+      "sha256": "560150d152b6fedc0debc61d622816629b53457eee88c2298e9c27d99bd3ce76",
+      "bytes": 28276
+    },
+    {
+      "path": "figures/perspective-samples.png",
+      "sha256": "0d47fbff5ecf7c968c5e8031ab1a676c5d849fcf869e40401f875d67dfc318fc",
+      "bytes": 245548
+    },
+    {
+      "path": "figures/projected-density.pdf",
+      "sha256": "b6a29b7b263c29dd647d8152a5ce7cdfb954a9a4696ab1c49f8b609e54d85366",
+      "bytes": 53309
+    },
+    {
+      "path": "figures/projected-density.png",
+      "sha256": "823f95cc6152e17c9f3f6b74eb090d7bcaeec9efe773d9c242f57621d58d3ce1",
+      "bytes": 229496
+    },
+    {
+      "path": "page-ledger.json",
+      "sha256": "dbbe2ba58df20176827d1c0b96deb3982258edac9519cbdcd7592a667435a896",
+      "bytes": 43955
+    },
+    {
+      "path": "results.json",
+      "sha256": "c2f72d599a492f523b06c90aad09b719b0d6621ab4711e43e1e732cf7cfa30a8",
+      "bytes": 3620
+    },
+    {
+      "path": "typeset.py",
+      "sha256": "eaeb525813d5c999b61506115fcfb9c036b3736e979141c50f4816ea88ece799",
+      "bytes": 4266
+    },
+    {
+      "path": "write.py",
+      "sha256": "1560ce1b0c9bd9a38291e23983d95222f84a895907798d8c9ec32241fd8f8699",
+      "bytes": 39835
+    }
+  ]
+}
