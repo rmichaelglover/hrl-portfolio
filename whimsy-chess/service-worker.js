@@ -1,11 +1,15 @@
 /* Chess Maestro — offline service worker.
    maestro.html is fully self-contained (no external assets), so caching it + the
    icons/manifest makes the installed PWA work with no network at all. */
-const CACHE = "chess-maestro-v6-storybook";
+const CACHE = "chess-maestro-v7-rage-comics";
 const ASSETS = [
   "maestro.html",
   "worldkit.js",
   "storybook.js",
+  "../assets/rage-comics/ragefaces-sprites.png",
+  "../assets/rage-comics/rage-guy.png",
+  "../assets/rage-comics/ComicNeue-Regular.ttf",
+  "../assets/rage-comics/ComicNeue-Bold.ttf",
   "storybook/index.html",
   "storybook/projectnim20261004.pgn",
   "storybook/kruijs20261004.pgn",
