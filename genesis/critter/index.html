@@ -74,16 +74,17 @@ a{color:#7fe0c0;text-decoration:none}
     </select>
   </label>
   <label class="state-option"><input type="checkbox" id="emoji-states" aria-controls="c state-legend"> Emoji node states</label>
+  <label class="state-option">State system <select id="state-system"><option value="confidence">Confidence</option><option value="mood">Happy · Serious · Sad</option></select></label>
   <span class="stat" id="stat"></span>
 </div>
 <p class="speed-note">Start gently at 4 updates/sec. Choose 1 to watch emoji changes, or pause and Step through each update.</p>
 <div class="state-legend" id="state-legend" hidden>
-  <div role="list" aria-label="Node confidence legend">
+  <div id="state-kind-legend" role="list" aria-label="Node state legend">
     <span role="listitem">😵‍💫 Undecided: below 45%</span>
     <span role="listitem">🤔 Leaning: 45% to below 70%</span>
     <span role="listitem">😌 Settled: 70% or more</span>
   </div>
-  <p>Emoji describe the strongest of a node’s three label weights. Colors show its leading cell type.</p>
+  <p id="state-explanation">Emoji describe the strongest of a node’s three label weights. Colors show its leading cell type.</p>
   <p id="state-summary"></p>
   <p class="state-inspect" id="state-inspect">Hover over a node to inspect its label weights.</p>
 </div>
@@ -113,10 +114,30 @@ const K=3, COL=[[95,227,160],[192,96,255],[232,207,112]];   // the three cell ty
 let mode='simplicial', playing=true, frame=0;
 let updatesPerSecond=4, lastUpdateTime=performance.now();
 let showEmojiStates=false, hoveredState=null;
+let stateSystem='confidence';
 const stateKinds=[{emoji:'😵‍💫',name:'Undecided'},{emoji:'🤔',name:'Leaning'},{emoji:'😌',name:'Settled'}];
-function nodeState(p){ const confidence=Math.max(...p);return {...stateKinds[confidence<0.45?0:confidence<0.70?1:2],confidence}; }
-function drawStateEmoji(x,y,p,size){
-  const state=nodeState(p);ctx.save();
+const moodKinds=[{emoji:'🙂',name:'Happy'},{emoji:'😐',name:'Serious'},{emoji:'🙁',name:'Sad'}];
+const moodStates=new Map();let moodRandomState=20261004;
+function moodRandom(){moodRandomState^=moodRandomState<<13;moodRandomState^=moodRandomState>>>17;moodRandomState^=moodRandomState<<5;return (moodRandomState>>>0)/4294967296;}
+function activeStateEntries(){return mode==='simplicial'?[...nodes].map(([key,n])=>[key,n.p]):[...gCells];}
+function moodFor(key){if(!moodStates.has(key))moodStates.set(key,Math.floor(moodRandom()*3));return moodStates.get(key);}
+function advanceMoods(){
+  if(stateSystem!=='mood')return;
+  const entries=activeStateEntries(),alive=new Set(entries.map(([key])=>key));
+  for(const key of moodStates.keys())if(!alive.has(key))moodStates.delete(key);
+  for(const [key] of entries){const old=moodFor(key),r=moodRandom();moodStates.set(key,r<0.88?old:(old+(r<0.94?1:2))%3);}
+}
+function nodeState(p,key){const confidence=Math.max(...p),index=stateSystem==='mood'?moodFor(key):confidence<0.45?0:confidence<0.70?1:2;return {...(stateSystem==='mood'?moodKinds:stateKinds)[index],confidence,index};}
+function renderStateLegend(){
+  const kinds=stateSystem==='mood'?moodKinds:stateKinds;
+  const descriptions=stateSystem==='mood'?['One state per node','Attention','No absorbing state']:['Below 45%','45% to below 70%','70% or more'];
+  const legend=document.getElementById('state-kind-legend');legend.replaceChildren();
+  kinds.forEach((kind,i)=>{const span=document.createElement('span');span.setAttribute('role','listitem');span.textContent=`${kind.emoji} ${kind.name}: ${descriptions[i]}`;legend.append(span);});
+  document.getElementById('state-explanation').textContent=stateSystem==='mood'?'Axioms: each living node has exactly one state; all state transitions are permitted; no state is absorbing. Each update has an 88% chance to stay and a 6% chance to move to each other state. These are playful internal labels. Colors still show cell type.':'Emoji describe the strongest of a node’s three label weights. Colors show its leading cell type.';
+  cv.setAttribute('aria-label',`Animated Critter body: colors show cell types; optional emoji show ${stateSystem==='mood'?'Happy, Serious, or Sad internal states':'confidence'}.`);
+}
+function drawStateEmoji(x,y,p,size,key){
+  const state=nodeState(p,key);ctx.save();
   ctx.fillStyle='rgba(1,2,8,0.78)';ctx.beginPath();ctx.arc(x,y,size*0.52,0,Math.PI*2);ctx.fill();
   const color=COL[dom(p)];ctx.strokeStyle=`rgb(${color.join(',')})`;ctx.lineWidth=1.3;
   ctx.beginPath();ctx.arc(x,y,size*0.6,0,Math.PI*2);ctx.stroke();
@@ -125,13 +146,13 @@ function drawStateEmoji(x,y,p,size){
 }
 function updateStateDescription(){
   if(!showEmojiStates)return;
-  const distributions=mode==='simplicial'?[...nodes.values()].map(n=>n.p):[...gCells.values()];
-  const counts=[0,0,0];for(const p of distributions){const c=Math.max(...p);counts[c<0.45?0:c<0.70?1:2]++;}
-  document.getElementById('state-summary').textContent=stateKinds.map((s,i)=>`${s.emoji} ${s.name}: ${counts[i]}`).join(' · ');
+  const counts=[0,0,0];for(const [key,p] of activeStateEntries())counts[nodeState(p,key).index]++;
+  const kinds=stateSystem==='mood'?moodKinds:stateKinds;
+  document.getElementById('state-summary').textContent=kinds.map((s,i)=>`${s.emoji} ${s.name}: ${counts[i]}`).join(' · ');
   const p=hoveredState===null?null:mode==='simplicial'?nodes.get(hoveredState)?.p:gCells.get(hoveredState);
   const inspect=document.getElementById('state-inspect');
-  if(!p){inspect.textContent='Hover over a node to inspect its label weights.';return;}
-  const state=nodeState(p);
+  if(!p){inspect.textContent='Hover over a node to inspect its internal state and label weights.';return;}
+  const state=nodeState(p,hoveredState);
   inspect.textContent=`${state.emoji} ${state.name} · ${Math.round(state.confidence*100)}% strongest weight · green ${(p[0]*100).toFixed(1)}% · violet ${(p[1]*100).toFixed(1)}% · gold ${(p[2]*100).toFixed(1)}%`;
 }
 
@@ -243,7 +264,7 @@ function sDraw(){
   for(const i of ids){ const n=nodes.get(i); const d=dom(n.p), conf=Math.max(...n.p);
     const c=COL[d]; ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${0.45+0.5*conf})`;
     ctx.beginPath();ctx.arc(n.x,n.y,conf>0.5?3.2:2.2,0,7);ctx.fill();
-    if(showEmojiStates)drawStateEmoji(n.x,n.y,n.p,13); }
+    if(showEmojiStates)drawStateEmoji(n.x,n.y,n.p,13,i); }
 }
 function sPoke(mx,my){ for(const [id,n] of nodes){ if((n.x-mx)**2+(n.y-my)**2<1600){ n.p=rndp(); n.vx+=(Math.random()-0.5)*4; n.vy+=(Math.random()-0.5)*4; } } }
 
@@ -307,18 +328,19 @@ function gDraw(){
     const d=dom(p), conf=Math.max(...p), c=COL[d];
     ctx.fillStyle=`rgba(${c[0]},${c[1]},${c[2]},${0.30+0.6*conf})`;
     ctx.fillRect(px-s/2,py-s/2,s,s);
-    if(showEmojiStates)drawStateEmoji(px,py,p,11);
+    if(showEmojiStates)drawStateEmoji(px,py,p,11,key);
   }
 }
 function gPoke(mx,my){ const CE=G.CELL; const x=Math.round(gCamX+(mx-W/2)/CE), z=Math.round(gCamZ+(my-H/2)/CE);
   for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){ const k=gk(x+dx,z+dz); if(gCells.has(k)) gCells.set(k,rndp()); } }
 
 /* ===================== SHARED DRIVER ===================== */
-function seedActive(){ hoveredState=null;frame=0;lastUpdateTime=performance.now();if(mode==='simplicial') sSeed(); else gSeed(); }
+function seedActive(){ moodStates.clear();moodRandomState=20261004;hoveredState=null;frame=0;lastUpdateTime=performance.now();if(mode==='simplicial') sSeed(); else gSeed(); }
 function advanceSimulation(){
   frame++;
   if(mode==='simplicial'){ sRelax(); sPhysics(); if(frame%8===0) sMorph(); }
   else { gRelax(); if(frame%3===0) gMorph(); }
+  advanceMoods();
 }
 function setPlaying(value){
   playing=value;lastUpdateTime=performance.now();document.getElementById('play').textContent=playing?'⏸ Pause':'▶ Play';
@@ -365,6 +387,7 @@ cv.addEventListener('pointerleave',()=>{hoveredState=null;});
 document.getElementById('emoji-states').addEventListener('change',function(){
   showEmojiStates=this.checked;hoveredState=null;document.getElementById('state-legend').hidden=!showEmojiStates;
 });
+document.getElementById('state-system').addEventListener('change',function(){stateSystem=this.value;showEmojiStates=true;document.getElementById('emoji-states').checked=true;document.getElementById('state-legend').hidden=false;hoveredState=null;renderStateLegend();updateStateDescription();});
 document.getElementById('m-simp').onclick=()=>setMode('simplicial');
 document.getElementById('m-grid').onclick=()=>setMode('grid');
 document.getElementById('play').onclick=()=>setPlaying(!playing);
@@ -372,6 +395,6 @@ document.getElementById('step').onclick=()=>{setPlaying(false);advanceSimulation
 document.getElementById('speed').addEventListener('change',function(){updatesPerSecond=Number(this.value);lastUpdateTime=performance.now();});
 document.getElementById('reset').onclick=seedActive;
 document.getElementById('geo').innerHTML='continuous mesh · cells are nodes on springs, filled as <b>2-simplices</b> — the body flexes like a 3-D form';
-sSeed(); loop();
+renderStateLegend();sSeed(); loop();
 </script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
 </body></html>
