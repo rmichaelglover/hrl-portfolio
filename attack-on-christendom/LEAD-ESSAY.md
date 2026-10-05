@@ -1,67 +1,109 @@
-# Chesshustlagaard Meets the Laboratory Night Owl
-## Cosmic flirtation interrupted by technical support
+# Kierketaard Meets the Laboratory Night Owl
+## Moon. Sky. Sun. Eye. Then Windows entered the chat.
 ### By Michael Emanuel Glover
 
 *Attack on Christendom · Issue One · October 4, 2026*
 
-A comic adaptation of a conversation, with identifying details and private access information omitted. The scenes compress and paraphrase the exchange; the narrator's commentary is newly written.
+*A first-person comic adaptation of the supplied exchange. The dialogue is selectively quoted and rearranged; connective narration is newly written. “Kierketaard” is the author's comic pen name.*
 
-## The Opening: Where Shall We Meet?
+## Either / Or / Which App
 
-The chess is finished, but another contest has begun: choosing an application in which two people can say hello with their actual faces.
+Tbilisi is Georgia. yes. i know that. good. we're picking up what the other is putting down. geography has been established. proceed to the difficult sciences: how do two people get on a video call.
 
 Google Chat? Zoom? Discord? Teams?
 
-The knight has six potential destinations. The humans have four platforms and insufficient agreement about any of them.
+we have discovered four roads to the same hello and are standing at the intersection discussing the pavement.
 
-I explain Linux. This is an operating system. It is not, despite appearances, a monastic vow forbidding all contact with Microsoft. We discuss browsers. Somewhere in the distance, romance clears its throat and wonders whether it should come back after the software demonstration.
+“what is linux? only 1 browser?”
 
-Chesshustlagaard takes notes. The leap of faith now requires a supported browser.
+chrome or firefox. open source operating system. Microsoft stuff can often work in the browser. see. i can explain computers. i cannot necessarily get two computers to arrange a conversation without first delivering a lil lecture about computers.
 
-## The Middlegame: Moon, Sky, Sun, Eye
+Kierketaard. a peculiar kind of rapper. tonight my opening verse is browser compatibility.
 
-Then the conversation changes tempo. Moon! Sky! Sun! Eye! The words stop carrying the furniture of an argument and start tossing cushions around the room.
+## Moon! Sky! Sun! Eye!
 
-A rhyme can be a small invitation. A joke can leave room for an answer. Neither guarantees that two people understand one another perfectly. The pleasure is in discovering that another person is willing to play.
+“ai controls us. i control ai.”
 
-We talk about sleep and coffee, laboratories and distant landscapes. My imagination proposes a large tract of tundra. Hers sends me there and returns to the laboratory. This is an efficient division of labor: I shall manage the imaginary estate; she shall continue being busy.
+“i control u both)))”
 
-There is teasing about computers and control. In this adaptation, the joke stays a joke. Nothing in the exchange establishes that anybody accessed another person's camera or device. The actual technical challenge remains finding the right button.
+precisely. sweetie. honey pie.
 
-## The Interruption: Windows Has Entered the Chat
+moon!
 
-The screen presents an account prompt. It offers to remember an account across the device, simplify sign-ins, and synchronize settings. It also mentions Cortana, which is a remarkable guest to invite to this particular evening.
+sky!
 
-We translate the message. Suddenly the conversation has become technical support.
+before dreaming of pie!
 
-This is the modern comedy of intimacy: one moment the heavens are full of moons and suns; the next, the operating system wants to know the intended scope of your account authorization.
+sun!
 
-Chesshustlagaard considers writing a treatise entitled *Either This App / Or Everywhere*. Publication is delayed while somebody checks the microphone.
+eye!
 
-## The Position: Two People, Not Two Scores
+now we're cooking. no axioms required. just a word tossed over the net and another word coming back. chess wit. sci wit. a lil rhyme. a lil time. another person on the other side of the screen who can answer however she likes.
 
-A number from the tournament appears in the conversation. It prompts admiration and another little misunderstanding. Numbers travel quickly; their meanings require a passport. A performance figure, a rating, a title, and a time of night are distinct things even when the chat window squeezes them together.
+we joke about cameras and hacking. joke is the operative word. the conversation demonstrates no camera access, no hack, no secret machinery. i said a thing. she said a thing. the internet has enough actual confusion without promoting our banter to a forensic finding.
 
-The comedy improves when we remember that neither person is merely a number. Each has a room, a schedule, a life beyond the screen, and the right to end the conversation without losing a match.
+anyways Georgian coffee. i hear they make it good. skies and suns. somebody ought to sleep.
 
-The journal's title, *Attack on Christendom*, takes aim here at the temptation to turn goodness into status: to perform holiness while overlooking the person before us. The attack is an argument and a satire, conducted with words. The narrator is fully eligible to be its first subject.
+## Go to Tundra Now
 
-I can talk magnificently about love. Can I also let someone go to sleep?
+apparently i'm greedy. even for spaces. fair observation. my sentences regularly attempt to retire the space bar before the space bar has qualified for its pension.
 
-## The Ending: A Gentle Stalemate
+“let's keep things light.”
 
-My closing phrase is the Stalemate Gambit: I win; you do not lose.
+excellent instruction. frog legs anyone?
 
-As chess terminology, stalemate is a draw. As a conversational image, the phrase makes a different proposal: we can enjoy an encounter without requiring a defeated party. Let the distinction remain visible. The joke does not need to rewrite the rules of chess to do its work.
+i must retire on a large tract of land in the Russian tundra. this is my contribution to the practical discussion. no survey conducted. no deed acquired. just me suddenly proposing a tundra estate while we have yet to agree on a video app.
 
-The kiss is on the cheek. The blessing asks for someone's good. Neither creates a claim upon their time, their affection, or their next move.
+“go to tundra now)) and i go to my laboratory))”
 
-There are unfinished conversations worth leaving unfinished. One person may go to the laboratory. Another may dream about coffee. The browser may continue requesting permissions until the heat death of its patience.
+okie. division of labor. i get the enormous imaginary yard. she gets on with her evening.
 
-We have reached no cosmic verdict. We have exchanged some wit, met some ambiguity, and tried to part kindly.
+nice to meet u. chess wit. sci wit. vcool.
 
-Good night, laboratory night owl.
+## Twenty-Four Forty-Four
 
-Chesshustlagaard closes the laptop. For once, the last move is allowing the other person their own next move.
+2444?
 
-Wings out. Sleep well.
+what's 2444?
+
+a number turns up and immediately i want the number to introduce itself. rating? performance? something else? then the time turns up too. late over there. my brain starts guessing time zones. Moscow? question mark. keep the question mark. guessing a city does not put somebody in it.
+
+in the exchange she calls herself a master. i say cool. the tournament screenshot separately shows a 2444 performance figure. those are two things we can report with their sources attached; i haven't verified an official title, and one performance number doesn't do that job.
+
+numbers ought to wear lil name tags. hello my name is performance. hello my name is time. hello my name is the number you mistook for the other number.
+
+## Windows, the Uninvited Chaperone
+
+finally. Teams.
+
+i'm logged in. we're getting somewhere.
+
+then Windows presents a Russian paragraph about using the account everywhere on the device. remember your account. simplify sign-ins. synchronize your settings. find your lost device. Cortana may also be involved, apparently.
+
+moon! sky! sun! eye! ACCOUNT SCOPE!
+
+lmao. the operating system has entered the flirtation and would like to establish jurisdiction.
+
+we translate the message. that's what it says. this app? this device? which buttons? the heavens can wait a minute. somebody needs to understand the dialog box.
+
+Kierketaard drops his next single: *Fear and Sign-In*. the beat is a notification sound. the chorus requires accepting cookies.
+
+## The Game Is Up
+
+“The game is up. Stalemate Gambit. I win. You don't lose. Have a good life.”
+
+that's my closing line. cheek kiss. blessing. Russian friend, as i address her in the exchange. may God bless you.
+
+in chess, stalemate is a draw. here i'm borrowing the word for a way of parting: i enjoyed this. you don't owe me anything for having been enjoyable. no defeated party required. no compulsory encore.
+
+we can both go live the rest of our lives. or go to sleep. or go to the laboratory. the tundra remains available to the imagination.
+
+there is no verdict about her identity hidden in the ending. no proof of catfishing. no evidence of an Epstein connection. the comic columnist elsewhere in this journal is an invented pen name. let the story keep its actual size: two people, some jokes, some software, a goodbye.
+
+faith without works is dead? then here's a small work i can actually do: wish another person well and let the wish leave room for her.
+
+not every encounter needs to become a conquest. sometimes a conversation can just be a conversation and still be worth writing down.
+
+Kierketaard. mic down. laptop open. sleep pending.
+
+wings out. selah. goodnight.
