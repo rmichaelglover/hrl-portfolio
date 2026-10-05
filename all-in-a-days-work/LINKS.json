@@ -3,6 +3,20 @@
   "timezone": "America/New_York",
   "items": [
     {
+      "title": "Attack on Christendom",
+      "path": "attack-on-christendom/",
+      "links": [
+        [
+          "Lead essay",
+          "attack-on-christendom/article.html"
+        ],
+        [
+          "Manuscript",
+          "attack-on-christendom/LEAD-ESSAY.md"
+        ]
+      ]
+    },
+    {
       "title": "Chesshustlagaard",
       "path": "chesshustlagaard/",
       "links": [
