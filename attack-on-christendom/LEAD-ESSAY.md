@@ -51,3 +51,8 @@ The supplied record ends there. It does not contain a recording of a completed v
 ## Source Record
 
 This report uses the conversation text and tournament screenshots supplied by Michael Emanuel Glover. No independent identity verification or technical examination of either participant's device was performed. The journal's meeting invitation is published separately at Glover's express request as his own link.
+
+
+## Meeting Invitation
+
+[Open Michael Emanuel Glover’s Teams meeting](https://teams.live.com/meet/9386721843424?p=vvwLNsL37FmeVGwCcA). Published at his express request as his own invitation.
