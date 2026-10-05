@@ -16,7 +16,7 @@
   :root{
     --bg:#e8e6e3; --panel:#ffffff; --ink:#2b2b2b; --mut:#787470; --line:#dcd8d2;
     --accent:#3893e8; --accent2:#629924;
-    --lt:#f0d9b5; --dk:#b58863;            /* board: brown (default) */
+    --lt:#ffffff; --dk:#b58863;            /* board: tan-brown and white (default) */
     --hl:rgba(155,199,0,.55);              /* last-move highlight */
     --sel:#3893e8;
   }
@@ -377,7 +377,7 @@ const SETS = {
   ocean:   {label:"Ocean (emoji)",     kind:"emoji", map:{k:"🦈",q:"🐙",r:"🐚",b:"🐠",n:"🦀",p:"🐟"}},
   garden:  {label:"Garden (emoji)",    kind:"emoji", map:{k:"🌳",q:"🌹",r:"🍄",b:"🦋",n:"🐝",p:"🌱"}},
 };
-const THEMES={brown:"Brown",green:"Green",blue:"Blue",gray:"Gray"};
+const THEMES={brown:"Tan-brown & white",green:"Green",blue:"Blue",gray:"Gray"};
 
 /* ===================== engine (identity-tracked) ===================== */
 const FILES="abcdefgh";
@@ -1640,7 +1640,7 @@ if (maestroParams.get('replay') !== '1') {
   const playButton = document.getElementById('btnOtb');
   if (playButton && !playButton.classList.contains('on')) playButton.click();
 }
-if(document.body.dataset.maestroLanding==='1'){for(const [id,value] of [['selTheme','blue'],['selPieceW','woodland'],['selPieceB','classic']]){const select=document.getElementById(id);select.value=value;select.dispatchEvent(new Event('change'));}}
+if(document.body.dataset.maestroLanding==='1'){for(const [id,value] of [['selTheme','brown'],['selPieceW','woodland'],['selPieceB','classic']]){const select=document.getElementById(id);select.value=value;select.dispatchEvent(new Event('change'));}}
 if (maestroParams.get('embed') === '1') {
   const controls = document.createElement('div'); controls.className = 'embed-controls';
   controls.append(document.getElementById('btnMusic'), document.getElementById('btnQcd'));
@@ -1650,7 +1650,7 @@ if (maestroParams.get('embed') === '1') {
   const reset = document.createElement('button'); reset.type='button'; reset.className='btnrole'; reset.textContent='⏮ Start'; reset.onclick=startMaestroSession; controls.append(reset);
   const full = document.createElement('a'); full.href='maestro.html?play=1'; full.target='_top'; full.textContent='Open full Maestro ↗'; controls.append(full);
   document.body.append(controls);
-  for (const [id, value] of [['selTheme','blue'],['selPieceW','woodland'],['selPieceB','classic']]) {
+  for (const [id, value] of [['selTheme','brown'],['selPieceW','woodland'],['selPieceB','classic']]) {
     const select=document.getElementById(id); select.value=value; select.dispatchEvent(new Event('change'));
   }
   const reportSize=()=>parent.postMessage({type:'maestro-board-size',height:Math.ceil(document.body.getBoundingClientRect().height)},location.origin);
