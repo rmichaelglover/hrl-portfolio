@@ -1,0 +1,285 @@
+{
+  "date": "2026-10-04",
+  "timezone": "America/New_York",
+  "items": [
+    {
+      "title": "Chesshustlagaard",
+      "path": "chesshustlagaard/",
+      "links": [
+        [
+          "Manuscript",
+          "chesshustlagaard/ESSAY.md"
+        ]
+      ]
+    },
+    {
+      "title": "Numerological Speculations",
+      "path": "numerological-speculations/",
+      "links": [
+        [
+          "PDF",
+          "numerological-speculations/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "numerological-speculations/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "numerological-speculations/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Magnum Quantreleviathone",
+      "path": "magnum-quantreleviathone/",
+      "links": [
+        [
+          "PDF",
+          "magnum-quantreleviathone/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "magnum-quantreleviathone/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "magnum-quantreleviathone/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Magnum Chessicus",
+      "path": "magnum-chessicus/",
+      "links": [
+        [
+          "PDF",
+          "magnum-chessicus/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "magnum-chessicus/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "magnum-chessicus/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "The Tree, the Proof, and the Light",
+      "path": "manuelian-magnum-opus/",
+      "links": [
+        [
+          "PDF",
+          "manuelian-magnum-opus/MAGNUM-OPUS.pdf"
+        ],
+        [
+          "Plain text",
+          "manuelian-magnum-opus/MAGNUM-OPUS.txt"
+        ],
+        [
+          "Sources",
+          "manuelian-magnum-opus/MAGNUM-OPUS-SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Three Research White Papers",
+      "path": "research-whitepapers/",
+      "links": [
+        [
+          "Download collection",
+          "research-whitepapers/THREE-WHITE-PAPERS.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Projective Horizon: Bipolar Geometry",
+      "path": "projective-horizon-bipolar/",
+      "links": [
+        [
+          "PDF",
+          "projective-horizon-bipolar/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "projective-horizon-bipolar/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "projective-horizon-bipolar/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Magnum Economicus",
+      "path": "magnum-economicus/",
+      "links": [
+        [
+          "PDF",
+          "magnum-economicus/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "magnum-economicus/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "magnum-economicus/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Drugs Are Good",
+      "path": "drugs-are-good/",
+      "links": [
+        [
+          "PDF",
+          "drugs-are-good/WHITE-PAPER.pdf"
+        ],
+        [
+          "Plain text",
+          "drugs-are-good/WHITE-PAPER.txt"
+        ],
+        [
+          "Sources",
+          "drugs-are-good/SOURCE.zip"
+        ]
+      ]
+    },
+    {
+      "title": "Virtual Body Cancer Research",
+      "path": "virtual-body-cancer/",
+      "links": [
+        [
+          "Dissertation reader",
+          "virtual-body-cancer/dissertation/"
+        ],
+        [
+          "PDF",
+          "virtual-body-cancer/dissertation/VIRTUAL-BODY-DISSERTATION.pdf"
+        ],
+        [
+          "Plain text",
+          "virtual-body-cancer/dissertation/VIRTUAL-BODY-DISSERTATION.txt"
+        ],
+        [
+          "Dissertation sources",
+          "virtual-body-cancer/dissertation/DISSERTATION-SOURCE.zip"
+        ],
+        [
+          "Computational sources",
+          "virtual-body-cancer/dissertation/COMPUTATIONAL-SOURCE.zip"
+        ],
+        [
+          "Research sources",
+          "virtual-body-cancer/VIRTUAL-BODY-SOURCE.zip"
+        ],
+        [
+          "Report",
+          "virtual-body-cancer/report.html"
+        ],
+        [
+          "Audit",
+          "virtual-body-cancer/AUDIT-RESULTS.md"
+        ]
+      ]
+    },
+    {
+      "title": "Storybook Chess Reviews",
+      "path": "whimsy-chess/storybook/",
+      "links": []
+    },
+    {
+      "title": "Maestro",
+      "path": "maestro.html",
+      "links": []
+    },
+    {
+      "title": "Whimsy Chess Maestro",
+      "path": "whimsy-chess/maestro.html",
+      "links": []
+    },
+    {
+      "title": "Whimsy Chess",
+      "path": "whimsy-chess/",
+      "links": []
+    },
+    {
+      "title": "Genesis Maestro",
+      "path": "genesis/maestro/",
+      "links": []
+    },
+    {
+      "title": "Emoji Maestro",
+      "path": "genesis/maestro/emoji.html",
+      "links": []
+    },
+    {
+      "title": "Cyber Maestro",
+      "path": "genesis/maestro/cyber.html",
+      "links": []
+    },
+    {
+      "title": "Maestro Playworld",
+      "path": "genesis/maestro/playworld.html",
+      "links": []
+    },
+    {
+      "title": "King Me",
+      "path": "king-me-bitch/",
+      "links": []
+    },
+    {
+      "title": "Lichess Emulator Maestro",
+      "path": "lichess-emulator/maestro.html",
+      "links": []
+    },
+    {
+      "title": "Super Monkey Chessballs",
+      "path": "super-monkey-chessballs/",
+      "links": []
+    },
+    {
+      "title": "Super Monkey Maestro Tri",
+      "path": "super-monkey-chessballs/maestro-tri.html",
+      "links": []
+    },
+    {
+      "title": "Chess Mind",
+      "path": "chess-mind/",
+      "links": []
+    },
+    {
+      "title": "Chess Logic",
+      "path": "chess-logic/",
+      "links": []
+    },
+    {
+      "title": "Chess Brain",
+      "path": "chess-brain/",
+      "links": []
+    },
+    {
+      "title": "Chess Biometric",
+      "path": "chess-biometric/",
+      "links": []
+    },
+    {
+      "title": "Chess Premove",
+      "path": "chess-premove/",
+      "links": []
+    },
+    {
+      "title": "Project Nim PGN",
+      "path": "whimsy-chess/storybook/projectnim20261004.pgn",
+      "links": []
+    },
+    {
+      "title": "Kruijs PGN",
+      "path": "whimsy-chess/storybook/kruijs20261004.pgn",
+      "links": []
+    }
+  ]
+}
