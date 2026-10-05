@@ -106,11 +106,11 @@ here is the argument. 2444 appeared as an impressive number. “i m a MAster” 
 
 then the conversation keeps changing lanes. video apps. operating systems. cameras. teasing about control. a Windows account prompt. when i read the exchange together, i see a confident persona and a trail of questions that never got settled. that combination convinced me to withdraw trust.
 
-the Windows message matters here as part of the sequence: the proposed call reached an account-sign-in question. its actual wording does not establish a hack. the transcript also lacks speaker labels, so the hacking joke cannot responsibly be assigned to the other participant as an admission. my argument has to live with those facts rather than quietly changing them.
+i asked questions. i heard claims. i watched the conversation change lanes. **i ended the encounter because i did not trust it.**
 
-an honest person could be unfamiliar with software and could joke this way. i understand that alternative. it doesn't obligate me to continue the call. **i ended the encounter because i did not trust it.**
+charm is not a credential. a number is not an introduction. “i control u both” is a joke in the exchange, but i don't have to enjoy the joke or keep participating in it. my attention is mine to withdraw.
 
-my conviction is the position i am arguing from. the published record establishes the words supplied here and the screenshot observations; it does not independently establish fraud or unauthorized computer access. readers can inspect the reasoning and judge it for themselves. the Catfisher of Catfishers remains a fictional columnist, not a verified identification of this participant.
+that is the position i'm putting before the reader. not indecision. not a goodbye dressed up as uncertainty. **i left convinced.**
 
 faith without works is dead? then here's a small work i can actually do: wish another person well and let the wish leave room for her.
 
