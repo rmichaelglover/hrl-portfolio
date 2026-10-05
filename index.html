@@ -1644,10 +1644,11 @@ if (maestroParams.get('replay') !== '1') {
 if(document.body.dataset.maestroLanding==='1'){for(const [id,value] of [['selTheme','brown'],['selPieceW','woodland'],['selPieceB','classic']]){const select=document.getElementById(id);select.value=value;select.dispatchEvent(new Event('change'));}}
 if (maestroParams.get('embed') === '1') {
   const controls = document.createElement('div'); controls.className = 'embed-controls';
-  controls.append(document.getElementById('btnMusic'), document.getElementById('prev'), document.getElementById('next'));
-  document.getElementById('prev').classList.add('btnrole'); document.getElementById('next').classList.add('btnrole');
-  document.getElementById('prev').textContent='◀ Previous'; document.getElementById('next').textContent='Next ▶';
-  for (const [id, title] of [['selTheme','Board'],['selPieceW','White'],['selPieceB','Black']]) {
+  const previousButton=document.getElementById('prev'), nextButton=document.getElementById('next');
+  controls.append(document.getElementById('btnMusic'), previousButton, nextButton);
+  previousButton.classList.add('btnrole'); nextButton.classList.add('btnrole');
+  previousButton.textContent='◀ Previous'; nextButton.textContent='Next ▶';
+  for (const [id, title] of [['selGame','Game'],['selTheme','Board'],['selPieceW','White'],['selPieceB','Black']]) {
     const label = document.createElement('label'); label.append(title+' ', document.getElementById(id)); controls.append(label);
   }
   const reset = document.createElement('button'); reset.type='button'; reset.className='btnrole'; reset.textContent='⏮ Start'; reset.onclick=()=>document.getElementById('first').click(); controls.append(reset);
