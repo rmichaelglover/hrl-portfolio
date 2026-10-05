@@ -1,0 +1,1 @@
+Original illustrations made with Pillow for the October 4 collection. Animations are conceptual illustrations, not measured results or game replays. GIFs play only on request; the static PNG is the default.

@@ -37,4 +37,4 @@ document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.datase
 const prev=document.querySelector('#prev'),next=document.querySelector('#next'),play=document.querySelector('#play');
 function step(n){ply=Math.max(0,Math.min(Math.max(0,pos.length-1),ply+n));draw()}prev.onclick=()=>step(-1);next.onclick=()=>step(1);play.onclick=()=>{if(timer){clearInterval(timer);timer=0;play.textContent='▶ play'}else{play.textContent='❚❚ pause';timer=setInterval(()=>{if(ply>=pos.length-1)ply=0;else ply++;draw()},700)}};draw()})();
 </script><script src="/hrl-portfolio/entry-agreement.js" defer></script>
-</body></html>
+<script defer src="../../assets/day-visuals/gallery.js" data-day-theme="chess"></script></body></html>
