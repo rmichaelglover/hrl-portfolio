@@ -1633,18 +1633,21 @@ function startMaestroSession(){
 document.getElementById('btnNewGame').onclick=startMaestroSession;
 const maestroParams = new URLSearchParams(location.search);
 if (maestroParams.get('replay') !== '1') {
-  startMaestroSession();
+  // Keep the default game's full move history: OTB play and Next both work.
+  load('queendab');
   document.getElementById('first')?.click();
   const playButton = document.getElementById('btnOtb');
   if (playButton && !playButton.classList.contains('on')) playButton.click();
 }
 if (maestroParams.get('embed') === '1') {
   const controls = document.createElement('div'); controls.className = 'embed-controls';
-  controls.append(document.getElementById('btnMusic'), document.getElementById('btnQcd'));
+  controls.append(document.getElementById('btnMusic'), document.getElementById('prev'), document.getElementById('next'));
+  document.getElementById('prev').classList.add('btnrole'); document.getElementById('next').classList.add('btnrole');
+  document.getElementById('prev').textContent='◀ Previous'; document.getElementById('next').textContent='Next ▶';
   for (const [id, title] of [['selTheme','Board'],['selPieceW','White'],['selPieceB','Black']]) {
     const label = document.createElement('label'); label.append(title+' ', document.getElementById(id)); controls.append(label);
   }
-  const reset = document.createElement('button'); reset.type='button'; reset.className='btnrole'; reset.textContent='⏮ Start'; reset.onclick=startMaestroSession; controls.append(reset);
+  const reset = document.createElement('button'); reset.type='button'; reset.className='btnrole'; reset.textContent='⏮ Start'; reset.onclick=()=>document.getElementById('first').click(); controls.append(reset);
   const full = document.createElement('a'); full.href='maestro.html?play=1'; full.target='_top'; full.textContent='Open full Maestro ↗'; controls.append(full);
   document.body.append(controls);
   for (const [id, value] of [['selTheme','brown'],['selPieceW','woodland'],['selPieceB','classic']]) {

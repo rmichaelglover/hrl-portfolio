@@ -2,7 +2,7 @@
 
 ## Homepage: Maestro+++
 
-The hrl-portfolio homepage is the full, native, immediately playable Maestro app, followed by all the other worlds and projects. Visitors enter through standard 2D chess from the usual starting position: the user is the Woodland cast and the opponent uses classical figurines. Default squares are white and tan-brown. Keep music, lectures, profiles, Linux downloads, and the broader project directory available on this same homepage.
+The hrl-portfolio homepage is the full, native, immediately playable Maestro app, followed by all the other worlds and projects. Visitors enter through standard 2D chess from the usual starting position: the user is the Woodland cast and the opponent uses classical figurines. OTB is enabled by default, with the default game loaded at move zero so Next can step through its recorded moves. New game remains available for an empty move history. Default squares are white and tan-brown. Keep music, lectures, profiles, Linux downloads, and the broader project directory available on this same homepage.
 
 The homepage is generated from `maestro.html` and `explore.html` using `python3 packaging/build_landing.py`. Change those sources and regenerate `index.html`; preserve the complete Maestro controls and the project directory.
 
