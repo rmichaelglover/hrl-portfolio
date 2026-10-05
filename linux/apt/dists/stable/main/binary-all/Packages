@@ -1,0 +1,20 @@
+Package: maestro-chess
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Michael Emanuel Glover <glover.rmichael@gmail.com>
+Installed-Size: 19526
+Depends: python3 (>= 3.10), xdg-utils
+Filename: pool/main/maestro-chess_0.1.0-1_all.deb
+Size: 17893500
+MD5sum: e1450da4168f6698946b25ec1d320d48
+SHA1: 28a65b01febcd72ea4a911e1dfd5708b64bf3d5c
+SHA256: 50799b35b9c5b8265613cbdf238ec8694415b6d27a12913665e3571cc31c6f93
+Section: non-free/games
+Priority: optional
+Homepage: https://rmichaelglover.github.io/hrl-portfolio/
+Description: Colorful musical chess and an Audacity music kit
+ Play both sides on the Maestro board in your browser. Explore colorful
+ pieces and musical moves, mix five chess-derived audio tracks in Audacity,
+ and maintain local player profiles. Runs on Linux with a loopback server.
+ This package uses the MIRL-1.0 source-available license.
+

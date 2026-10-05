@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('maestro-embedded');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Chess Maestro — relaxation-labeling chess, scored as music</title>
@@ -141,6 +142,16 @@
   .flag-arrow-line{stroke:#17233c;stroke-width:1.35;stroke-linecap:round;opacity:.78;filter:drop-shadow(0 0 .5px #fff)}
   .flag-arrow-label{font-size:4.8px;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#fff;stroke-width:.7px;stroke-linejoin:round}
   .sq.flagpick{box-shadow:inset 0 0 0 4px #f3b51b !important}
+
+.maestro-embedded body{background:#0a1020;color:#e8f0ff;display:flex;flex-direction:column;align-items:center;margin:0;padding:10px 0}
+.maestro-embedded .app{order:0;display:block;width:min(100%,532px);padding:0 10px;margin:0}
+.maestro-embedded .boardcol{width:100%;margin:0}
+.maestro-embedded .rage-strip,.maestro-embedded .rage-toasts,.maestro-embedded .top,.maestro-embedded .links,.maestro-embedded .side,.maestro-embedded .pbar,.maestro-embedded .narr,.maestro-embedded #otbHint,.maestro-embedded .day-visual{display:none!important}
+.maestro-embedded .embed-controls{order:1;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;width:min(100%,620px);padding:14px 10px 4px}
+.maestro-embedded .embed-controls label{font-size:12px;color:#a4b1cf;display:flex;align-items:center;gap:4px}
+.maestro-embedded .embed-controls select{max-width:135px}
+.maestro-embedded .embed-controls a{color:#37e6ff;font-size:13px;padding:6px}
+.maestro-embedded #loadPanel,.maestro-embedded #exportPanel,.maestro-embedded #flagPanel{order:2;width:100%}
 </style>
 <style data-rage-comics-polish>
 @font-face{font-family:ComicNeue;src:url("./assets/rage-comics/ComicNeue-Regular.ttf");font-weight:400;font-display:swap}@font-face{font-family:ComicNeue;src:url("./assets/rage-comics/ComicNeue-Bold.ttf");font-weight:700;font-display:swap}
@@ -172,13 +183,14 @@
     <button id="btnQcd" class="btnrole" title="QCD disco overlay: the HRL influence field as a full-spectrum colour-charge map — white-control cool, black-control warm, the contested ish seam (Markov blanket) glows">🪩 QCD</button>
     <button id="btnRage" class="btnrole" title="🃏 Rage Comics: pop a classic rage face on captures, checks and checkmate (off by default)">🃏 Rage</button>
     <button id="btnLoad" class="btnrole" title="Load any annotated PGN">📋 Load PGN</button>
+    <button id="btnNewGame" class="btnrole" title="Start a fresh standard chess game: you are the Woodland cast, opponent uses classical figurines">♟ New game</button>
     <button id="btnOtb" class="btnrole" title="Play moves right on the board (hot-seat, both sides)">♟️ Play OTB</button>
     <button id="btnFlags" class="btnrole" title="Add flag emoji to characters, squares, and analysis arrows">🏳️ Flags</button>
     <button id="btnMaterial" class="btnrole" title="Optional final score: standard chess result plus final material difference in pawn units">⚖️ Material</button>
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
   <div class="links">
-    <a href="./">← portfolio</a> · <a href="hrl-lab/">The HRL Lab</a> · <a href="play/">Beat the Engine</a> ·
+    <a href="./">← Home</a> · <a href="chess/">Chess library</a> · <a href="chess-music/">🎧 Listen &amp; mix in Audacity</a> · <a href="community/">My profile / Players</a> · <a href="hrl-lab/">The HRL Lab</a> · <a href="play/">Beat the Engine</a> ·
     <a href="hrlized/">🎵 HRLized</a> <span style="color:var(--mut)">— the same engine that scores this game, composing music</span>
   </div>
   <div id="otbHint">♟️ <b>Play OTB</b> is on — click a piece, then a highlighted square, to move (hot-seat: you play both sides).
@@ -1609,5 +1621,37 @@ if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
 })(typeof window !== "undefined" ? window : this);
 
 </script>
-<script defer src="assets/day-visuals/gallery.js" data-day-theme="chess"></script></body>
+<script defer src="assets/day-visuals/gallery.js" data-day-theme="chess"></script><script>
+function startMaestroSession(){
+  GAMES._new={label:'New game · Standard chess',white:'You · Woodland',black:'Opponent · Classical figurines',hero:'w',heroCast:'woodland',result:'*',tc:'',pgn:''};
+  load('_new');
+  const games=document.getElementById('selGame');
+  if(!games.querySelector('option[value="_new"]')){const option=document.createElement('option');option.value='_new';option.textContent='♟ New game · Standard chess';games.prepend(option);}
+  games.value='_new';
+  if(!otbOn)document.getElementById('btnOtb').click();
+}
+document.getElementById('btnNewGame').onclick=startMaestroSession;
+const maestroParams = new URLSearchParams(location.search);
+if (maestroParams.get('replay') !== '1') {
+  startMaestroSession();
+  document.getElementById('first')?.click();
+  const playButton = document.getElementById('btnOtb');
+  if (playButton && !playButton.classList.contains('on')) playButton.click();
+}
+if (maestroParams.get('embed') === '1') {
+  const controls = document.createElement('div'); controls.className = 'embed-controls';
+  controls.append(document.getElementById('btnMusic'), document.getElementById('btnQcd'));
+  for (const [id, title] of [['selTheme','Board'],['selPieceW','White'],['selPieceB','Black']]) {
+    const label = document.createElement('label'); label.append(title+' ', document.getElementById(id)); controls.append(label);
+  }
+  const reset = document.createElement('button'); reset.type='button'; reset.className='btnrole'; reset.textContent='⏮ Start'; reset.onclick=startMaestroSession; controls.append(reset);
+  const full = document.createElement('a'); full.href='maestro.html?play=1'; full.target='_top'; full.textContent='Open full Maestro ↗'; controls.append(full);
+  document.body.append(controls);
+  for (const [id, value] of [['selTheme','blue'],['selPieceW','woodland'],['selPieceB','classic']]) {
+    const select=document.getElementById(id); select.value=value; select.dispatchEvent(new Event('change'));
+  }
+  const reportSize=()=>parent.postMessage({type:'maestro-board-size',height:Math.ceil(document.body.getBoundingClientRect().height)},location.origin);
+  new ResizeObserver(reportSize).observe(document.body); reportSize();
+}
+</script></body>
 </html>

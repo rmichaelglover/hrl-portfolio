@@ -11,3 +11,7 @@ venv/
 *.wav
 .DS_Store
 .cdpprof/
+
+# Private account databases
+*.sqlite3
+*.sqlite3-*

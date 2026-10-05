@@ -1,0 +1,6 @@
+# Keep account-server and packaging implementation out of the public Pages build.
+exclude:
+  - server
+  - packaging
+  - tests
+  - __pycache__

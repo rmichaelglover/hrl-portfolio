@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro — colorful, musical chess | Manny Glover</title>
+<!-- social-preview:start -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wings Out | HRL Portfolio">
+<meta property="og:title" content="Maestro — colorful, musical chess | Manny Glover">
+<meta property="og:description" content="Play colorful, musical chess with Maestro. Explore chess lessons, studies, player profiles, and Manny Glover’s interactive worlds.">
+<meta property="og:url" content="https://rmichaelglover.github.io/hrl-portfolio/">
+<meta property="og:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/portfolio.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wings Out | Interactive Portfolio — visual preview">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Maestro — colorful, musical chess | Manny Glover">
+<meta name="twitter:description" content="Play colorful, musical chess with Maestro. Explore chess lessons, studies, player profiles, and Manny Glover’s interactive worlds.">
+<meta name="twitter:image" content="https://rmichaelglover.github.io/hrl-portfolio/assets/social/portfolio.png">
+<link rel="canonical" href="https://rmichaelglover.github.io/hrl-portfolio/">
+<!-- social-preview:end -->
+<meta name="description" content="Maestro comes first: colorful, musical chess, followed by chess lessons, studies, player profiles, and interactive exhibits.">
+<meta name="theme-color" content="#04050b">
+<style>
+:root{--bg:#04050b;--ink:#e8f0ff;--dim:#93a0c0;--line:#1a2340;--cy:#37e6ff;--gd:#e8c170;--pu:#c060ff;--gr:#5fe3a0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(900px 500px at 50% -8%,#101b3b 0%,#04050b 62%);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system}
+canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 24px}
+header{position:relative;overflow:hidden;text-align:center;padding:48px 20px 32px;
+ background:radial-gradient(900px 520px at 50% -10%,#16224a,transparent)}
+h1{font:700 clamp(30px,7vw,64px)/1.02 ui-serif,Georgia,serif;margin:0;letter-spacing:-1px;
+ background:linear-gradient(120deg,#fff,#9fd0ff 40%,#c9a0ff);-webkit-background-clip:text;background-clip:text;color:transparent;
+ text-shadow:0 0 60px rgba(120,180,255,.18)}
+.tag{color:var(--dim);font-size:clamp(15px,2.4vw,20px);max-width:660px;margin:16px auto 0}
+.tag b{color:var(--ink)}
+.eyebrow{color:var(--cy);letter-spacing:4px;text-transform:uppercase;font-size:12px;margin-bottom:14px}
+nav{position:sticky;top:12px;z-index:3;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:30px auto 0;padding:8px;width:max-content;max-width:100%;font:13px ui-monospace,monospace;background:rgba(4,5,11,.78);border:1px solid rgba(55,230,255,.15);border-radius:999px;backdrop-filter:blur(14px)}
+nav a{color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:999px;padding:7px 14px;transition:color .16s,background .16s,border-color .16s}
+nav a:hover{color:#fff;border-color:var(--cy);background:#0c1630}
+.new-launch{display:inline-block;margin-top:18px;padding:10px 18px;border:1px solid var(--cy);border-radius:999px;color:#fff;background:#08202a;text-decoration:none;font-weight:700;box-shadow:0 0 28px rgba(55,230,255,.16)}
+section{padding:58px 0 12px;scroll-margin-top:70px}
+h2{font:600 24px ui-serif,Georgia,serif;margin:0 0 4px;color:#fff}
+h2 .k{color:var(--dim);font:12px ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px}
+.lead{color:var(--dim);max-width:720px;margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{display:block;text-decoration:none;color:inherit;background:#0a1020;border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;transition:transform .16s,border-color .16s,box-shadow .16s}
+.card:hover{transform:translateY(-4px);border-color:#2f3f6e;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.card .thumb{aspect-ratio:16/10;width:100%;object-fit:cover;object-position:50% 72%;display:block;background:#02030a}
+.card .body{padding:13px 15px 15px}
+.card h3{margin:0 0 4px;font:600 16px ui-serif,Georgia,serif;color:#fff}
+.card p{margin:0;color:var(--dim);font-size:13px;line-height:1.5}
+.chip{display:inline-block;margin-top:9px;font:10.5px ui-monospace,monospace;letter-spacing:1px;text-transform:uppercase;
+ padding:2px 8px;border-radius:12px;border:1px solid}
+.chip.real{color:var(--gr);border-color:#1e5e3e;background:#0a1a14}
+.chip.sim{color:var(--gd);border-color:#5e4a1e;background:#1a1406}
+.chip.idea{color:var(--pu);border-color:#3a1e5e;background:#140a24}
+.chip.new{color:var(--cy);border-color:#1e4a5e;background:#06141a}
+.fthumb{display:flex;align-items:center;justify-content:center;padding:6px;background:radial-gradient(120% 120% at 50% 0%,#0e1a30,#050a16)}
+.fthumb svg{width:100%;height:100%;display:block}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left}
+th{color:#fff;font-weight:600} td{color:var(--dim)} td b{color:var(--ink)}
+.more{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.more a{color:var(--ink);text-decoration:none;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px}
+.more a:hover{border-color:var(--cy);background:#0c1630}.more a span{color:var(--dim);font-size:12px;display:block;margin-top:2px}
+footer{text-align:center;color:var(--dim);font-size:13px;padding:50px 20px 60px;margin-top:30px;border-top:1px solid var(--line)}
+footer a{color:var(--cy);text-decoration:none}
+.skip{position:absolute;left:16px;top:12px;z-index:10;transform:translateY(-160%);padding:9px 14px;border-radius:9px;background:var(--cy);color:#031016;text-decoration:none;font-weight:700;transition:transform .16s}.skip:focus{transform:translateY(0)}
+:focus-visible{outline:3px solid var(--gd);outline-offset:3px}
+@media(max-width:680px){header{padding-top:70px}.wrap{padding:0 16px}.tag{font-size:16px}.eyebrow{letter-spacing:2px}nav{position:relative;top:auto;width:100%;border-radius:16px;margin-top:24px}nav a{flex:1 1 auto}.grid{grid-template-columns:1fr;gap:14px}section{padding-top:42px}.new-launch{display:block}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,nav a{transition:none}.card:hover{transform:none}}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:22px}.hero-actions .new-launch{margin:0;font-size:20px;padding:14px 28px}.hero-actions>a{color:var(--ink)}.hero-note{color:var(--dim);font-size:13px;margin:18px auto;max-width:600px}.chess-paths .card{border-color:#294e61}.chess-paths .icon{font-size:36px;padding:14px 16px 0}.chess-paths .body{padding-top:8px}
+.landing-board{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:12px 12px 0;scroll-margin-top:0}.landing-board h1{font:700 24px/1.2 system-ui,sans-serif;margin:0 0 8px;text-align:center;letter-spacing:0}.landing-board iframe{width:100%;height:660px;display:block;border:1px solid #294e61;border-radius:14px;background:#0a1020}.landing-board p{color:var(--dim);font-size:13px;text-align:center;margin:10px 0}.landing-board a{color:var(--cy)}
+</style></head><body>
+<a class="skip" href="#chess-first">Skip to chess tools</a>
+<canvas id="stars"></canvas>
+<header>
+<div class="wrap">
+  <div class="eyebrow">Manny Glover · one board, many worlds</div>
+  <h1>Explore all worlds</h1>
+  <p class="tag"><b>Play colorful, musical chess.</b> Make your move, explore the colors of the board, and turn a game into music.</p>
+  <div class="hero-actions"><a class="new-launch" href="maestro.html?play=1">♟ Play Maestro →</a><a href="maestro.html?replay=1">🎼 Watch &amp; listen</a></div>
+  <p class="hero-note">Play both sides on one board, or explore narrated games. No signup required. Switch on Music to hear the game.</p>
+  <nav aria-label="Main navigation">
+    <a href="maestro.html?play=1">Play Maestro</a>
+    <a href="#chess-first">Chess tools</a>
+    <a href="chess/">Studies &amp; stories</a>
+    <a href="chess-lessons/">Lecture One</a>
+    <a href="chess-music/">Chess music</a>
+    <a href="community/">Players &amp; profiles</a>
+    <a href="#featured">Explore more</a>
+    <a href="community/?view=signup" data-account-link>Sign up / Log in</a>
+  </nav>
+</div>
+</header>
+
+<div class="wrap">
+
+<section id="chess-first">
+<h2><span class="k">Start here · chess first</span>Play, learn, make it yours</h2>
+<p class="lead">Maestro is the front door. Choose a game, practice a skill, find a study, or build your player profile.</p>
+<div class="grid chess-paths">
+<a class="card" href="maestro.html?play=1"><div class="icon">♟️🎼</div><div class="body"><h3>Play Maestro</h3><p>Colorful pieces, musical moves, and a board for playing both sides. Explore narrated games and load your own PGN.</p><span class="chip new">Play · music · color</span></div></a>
+<a class="card" href="play/"><div class="icon">⚔️</div><div class="body"><h3>Play the engine</h3><p>Challenge the relaxation-labeling chess engine in your browser.</p><span class="chip real">Human versus engine</span></div></a>
+<a class="card" href="chess/"><div class="icon">📚</div><div class="body"><h3>Studies &amp; stories</h3><p>Find opening studies, archived games, the Woodland trilogy, and every chess experiment in one place.</p><span class="chip new">Chess library</span></div></a>
+<a class="card" href="chess-lessons/"><div class="icon">🧩</div><div class="body"><h3>Lecture One</h3><p>Memorization is key. Compression is more key. Learn patterns, test their boundaries, and verify your moves.</p><span class="chip new">Learn · recognize · calculate</span></div></a>
+<a class="card" href="capture-tutor/"><div class="icon">🎯</div><div class="body"><h3>Practice &amp; learn</h3><p>Before you take: predict the reply, count the exchange, and keep your defenses.</p><span class="chip real">Guided exercises</span></div></a>
+<a class="card" href="chess-music/"><div class="icon">🎧</div><div class="body"><h3>Our first chess track</h3><p>Hear Van’t Kruijsing: an 85 BPM head-nod beat from a real game. Download five tracks and mix them in Audacity.</p><span class="chip new">Listen · download · remix</span></div></a>
+<a class="card" href="mk-ultrabullet/"><div class="icon">🥁</div><div class="body"><h3>Rhythm &amp; speed</h3><p>Explore musical ultrabullet and the rhythm of a chess game.</p><span class="chip new">Chess + music</span></div></a>
+<a class="card" href="community/"><div class="icon">👋</div><div class="body"><h3>Your player profile</h3><p>Choose your colors, introduce yourself, and share your chess interests and favorite music.</p><span class="chip new">Players &amp; profiles</span></div></a>
+</div>
+</section>
+<section id="featured">
+<h2><span class="k">Beyond the board</span>Explore the other worlds</h2>
+<p class="lead">Explore the browser-based exhibits below, including the <a href="genesis/" style="color:var(--cy)">Project Genesis</a> series and the newer sound, geometry, and cellular-automaton labs.</p>
+<div class="grid">
+  <a class="card" href="wave-worlds/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Musical waves crossing from air into water"><rect x="80" width="80" height="100" fill="#0b4b71"/><path d="M80 0V100" stroke="#8ae6ff"/><path d="M5 50 Q10 10 15 50 T25 50 T35 50 T45 50 T55 50 T65 50 T75 50 Q95 20 115 50 T155 50" fill="none" stroke="#7fe4bc" stroke-width="2"/></svg></div><div class="body"><h3>Wave Worlds</h3><p>Hear and see music in air, water, and both. Three synchronized worlds with reflection, transmission, and independent listening controls.</p><span class="chip new">interactive · acoustic worlds</span></div></a>
+  <a class="card" href="hyperobject/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Colored sound waves in stereo perspective"><path d="M0 90 L80 35 L160 90 M0 65 L80 35 L160 65" fill="none" stroke="#314f70"/><path d="M10 70 Q20 30 30 70 T50 60 T70 50 T90 45 T110 40 T150 35" fill="none" stroke="#ff94bf" stroke-width="2"/><path d="M10 80 Q20 40 30 75 T60 55 T90 45 T150 35" fill="none" stroke="#00ff88" stroke-width="2"/><path d="M80 0 V100" stroke="#7896b4"/></svg></div><div class="body"><h3>Projective Sound Field</h3><p>First-person stereo sine waves, a colored octave, live audio, and a null conductor exchanging modeled energy and matter with a reservoir.</p><span class="chip new">interactive · sound + geometry</span></div></a>
+  <a class="card" href="cellular-complexes/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Square and triangular cellular neighborhoods"><g fill="#77e4c644" stroke="#77e4c6" stroke-width="2"><rect x="15" y="25" width="45" height="45"/><path d="M95 70 L145 70 L120 25 Z"/></g><path d="M76 35 V65 M69 50 H83" stroke="#ffcd7c" stroke-width="2"/></svg></div><div class="body"><h3>Cellular Complexes</h3><p>Compare synchronized automata on squares, rectangles, triangles, cubes, and tetrahedra. Same local rule; different neighbors.</p><span class="chip new">interactive · 2D + 3D CA lab</span></div></a>
+  <a class="card" href="projective-resolution/"><div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="Triangle vertices grouped into one observation cell"><rect x="36" y="12" width="88" height="76" rx="6" fill="#ffc87522" stroke="#ffc875"/><path d="M50 72 L110 72 L80 24 Z" fill="none" stroke="#7de2c5" stroke-width="3"/><g fill="#7de2c5"><circle cx="50" cy="72" r="4"/><circle cx="110" cy="72" r="4"/><circle cx="80" cy="24" r="4"/></g></svg></div><div class="body"><h3>Wings Out: Conceptual Resolution</h3><p>Rotate a rod and triangle, adjust distance and observation cells, and explore how three distinct features become one observed class.</p><span class="chip new">interactive · projective geometry</span></div></a>
+  <a class="card" href="calabi-yau-vane/"><img class="thumb" src="assets/thumbs/calabi-yau-vane.jpg" alt="Calabi-Yau-inspired hollow tube vane inside a spherical bearing shell"><div class="body"><h3>Calabi–Yau Vane</h3><p>A weather vane, geomagnetic compass, hollow-tube air bearing, and sphere-of-bearings shell—plus an honest conservation-law ledger.</p><span class="chip new">concept CAD</span></div></a>
+
+  <a class="card" href="promaster-grrle/"><img class="thumb" style="object-position:50% 52%" src="promaster-grrle/assets/promaster-1500-front-left.jpg" alt="white Ram ProMaster 1500 with a part-whole vision field">
+   <div class="body"><h3>ProMaster GRRLE + CRLE-0</h3><p>Watch convolutional edge hypotheses negotiate into a stabilized field, then explore wheels, lights, panels, and doors through part-to-part geometry.</p><span class="chip new">computer vision</span></div></a>
+
+  <a class="card" href="wikimrgrele/"><img class="thumb" style="object-position:50% 50%" src="wikimrgrele/assets/ian-convergence-montage.png" alt="six WikiMRGRELE convergence charts">
+   <div class="body"><h3>WikiMRGRELE — language relaxing</h3><p>206,798 WordNet pairs compete across bytes and protected spans; real HELLO and OPPENHEIMER trajectories converge in Ian Gray’s original plots.</p><span class="chip real">real dictionary data</span></div></a>
+
+  <a class="card" href="hrl-lab/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a DNA helix and a chiral molecule">
+     <g stroke-width="3" fill="none"><path d="M22 12 C60 30 60 70 22 88" stroke="#5fe3a0"/><path d="M54 12 C16 30 16 70 54 88" stroke="#37e6ff"/></g>
+     <g stroke="rgba(150,170,220,.55)" stroke-width="1.5"><line x1="27" y1="24" x2="49" y2="24"/><line x1="19" y1="40" x2="47" y2="40"/><line x1="19" y1="60" x2="47" y2="60"/><line x1="27" y1="76" x2="49" y2="76"/></g>
+     <g transform="translate(114,50)">
+       <line x1="0" y1="0" x2="0" y2="-24" stroke="#c0562e" stroke-width="2"/><line x1="0" y1="0" x2="22" y2="13" stroke="#5fe3a0" stroke-width="2"/><line x1="0" y1="0" x2="-22" y2="13" stroke="#c060ff" stroke-width="2"/>
+       <circle cx="0" cy="0" r="7" fill="#2a3350"/><circle cx="0" cy="-24" r="7" fill="#c0562e"/><circle cx="22" cy="13" r="7" fill="#5fe3a0"/><circle cx="-22" cy="13" r="7" fill="#c060ff"/>
+     </g>
+   </svg></div>
+   <div class="body"><h3>The HRL Lab — live</h3><p>The generic engine running in your browser: DNA complement by relaxation, order-3 molecular chirality (R/S), and few-shot label propagation.</p><span class="chip new">interactive lab</span></div></a>
+
+  <a class="card" href="hrlized/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a rising melody of note blocks">
+     <rect x="8" y="70" width="16" height="12" rx="2" fill="#8f5cff"/><rect x="28" y="58" width="16" height="12" rx="2" fill="#7d6cff"/>
+     <rect x="48" y="44" width="16" height="12" rx="2" fill="#5f8cff"/><rect x="68" y="30" width="16" height="12" rx="2" fill="#37c6ff"/>
+     <rect x="88" y="44" width="16" height="12" rx="2" fill="#5f8cff"/><rect x="108" y="58" width="16" height="12" rx="2" fill="#7d6cff"/>
+     <rect x="128" y="70" width="16" height="12" rx="2" fill="#8f5cff"/>
+     <path d="M16 76 L36 64 L56 50 L76 36 L96 50 L116 64 L136 76" fill="none" stroke="rgba(200,160,255,.65)" stroke-width="2"/>
+   </svg></div>
+   <div class="body"><h3>HRLized — music by relaxation</h3><p>The engine <i>composes</i>: pitches are labels, melodic smoothness &amp; chord tones the constraints. It relaxes a melody and plays it. A tiny answer to Suno.</p><span class="chip new">generative music</span></div></a>
+
+  <a class="card" href="genesis/sdss/"><img class="thumb" src="assets/thumbs/sdss.png" alt="cosmic web">
+   <div class="body"><h3>The Real Cosmic Web</h3><p>25,000 SDSS galaxies, relaxation-labeled into void, filament &amp; cluster.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/light/"><img class="thumb" src="assets/thumbs/genesis.png" alt="self-gravitating light">
+   <div class="body"><h3>Self-Gravitating Light</h3><p>Light condenses cosmic structure from a single rule. The origin of Project Genesis.</p><span class="chip sim">simulation</span></div></a>
+
+  <a class="card" href="genesis/critter/"><img class="thumb" style="object-position:50% 50%" src="assets/thumbs/critter.png" alt="the critter">
+   <div class="body"><h3>The Critter</h3><p>A simplicial organism that labels, grows, grooms &amp; reproduces <i>itself</i> — now in simplicial &amp; grid bodies.</p><span class="chip idea">autopoiesis</span></div></a>
+
+  <a class="card" href="genesis/world/"><img class="thumb" src="assets/thumbs/world.png" alt="a little world of biomes and creatures">
+   <div class="body"><h3>Gooblets &amp; Zappies</h3><p>A little 2-D world that grows itself — grazers, hunters &amp; shifting biomes. Built with Elbie.</p><span class="chip sim">simulation</span></div></a>
+
+  <a class="card" href="genesis/ontology/"><img class="thumb" src="assets/thumbs/ontology.png" alt="four poles tetrahedron">
+   <div class="body"><h3>The Four Poles</h3><p>A tetrahedral ontology — dark matter as the null-set noise at the centroid.</p><span class="chip idea">concept</span></div></a>
+
+  <a class="card" href="genesis/rar/"><img class="thumb" src="assets/thumbs/rar.png" alt="radial acceleration relation">
+   <div class="body"><h3>The Clog Threshold</h3><p>The Radial Acceleration Relation, from 3,343 real measurements.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/sparc/"><img class="thumb" src="assets/thumbs/sparc.png" alt="rotation curves">
+   <div class="body"><h3>The Fingerprint of Dark Matter</h3><p>165 real galaxy rotation curves — the gap with no light behind it.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/brain/"><img class="thumb" src="assets/thumbs/brain.png" alt="connectome">
+   <div class="body"><h3>A Nervous System, Relaxing</h3><p>The real <i>C. elegans</i> connectome, labeled into functional communities.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/cord/"><img class="thumb" src="assets/thumbs/cord.png" alt="trinary cord">
+   <div class="body"><h3>The Cord of Three Strands</h3><p>Trinary relaxation: sensory → interneuron → motor on the real wiring.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/planck/"><img class="thumb" src="assets/thumbs/planck.png" alt="planck power spectrum">
+   <div class="body"><h3>Seeded by the Big Bang</h3><p>A cosmic web grown from the real ΛCDM matter power spectrum.</p><span class="chip sim">simulation</span></div></a>
+
+  <a class="card" href="genesis/forecast/"><img class="thumb" src="assets/thumbs/forecast.png" alt="forecasting ensemble">
+   <div class="body"><h3>Forecasting by Relaxation</h3><p>Compare an adaptive econometric ensemble with its component models.</p><span class="chip real">real data</span></div></a>
+
+  <a class="card" href="genesis/malaria/"><img class="thumb" src="assets/thumbs/malaria.png" alt="malaria mitigation map">
+   <div class="body"><h3>Opening the Escape Valves</h3><p>Malaria &amp; waterborne‑disease mitigation — labeling a watershed, draining the breeding.</p><span class="chip idea">public health</span></div></a>
+
+  <a class="card" href="morphogenesis-grow/"><img class="thumb" src="assets/thumbs/morpho.png" alt="morphogenesis">
+   <div class="body"><h3>Morphogenesis</h3><p>A single cell relaxes into a whole patterned body — growing-graph morphogenesis.</p><span class="chip sim">simulation</span></div></a>
+
+  <a class="card" href="simplicial-3d/"><img class="thumb" src="assets/thumbs/simplicial.png" alt="simplicial complex">
+   <div class="body"><h3>Simplicial Complexes</h3><p>Higher-order relaxation on a growing 3-D complex.</p><span class="chip idea">topology</span></div></a>
+
+</div>
+</section>
+
+<section id="elbie-latest">
+<h2><span class="k">New with Elbie · Gooblets &amp; Zappies</span>Four fresh features in the little world</h2>
+<p class="lead">The <a href="genesis/world/" style="color:var(--cy)">Gooblets &amp; Zappies</a> world keeps growing — designed hand-in-hand
+ with <b>Elbie</b>. The four newest additions, each a small rule layered onto the same relaxation-labeled world:</p>
+<div class="grid">
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a blue flower with a golden centre">
+     <ellipse cx="80" cy="93" rx="66" ry="10" fill="#123a1e" opacity=".55"/>
+     <path d="M80 92 L80 56" stroke="#2e7d32" stroke-width="4" stroke-linecap="round"/>
+     <path d="M80 74 q-17 -3 -23 -16 q17 -1 23 11 z" fill="#2e7d32"/>
+     <g fill="#3b7cff">
+       <circle cx="80" cy="39" r="12"/><circle cx="94" cy="49" r="12"/><circle cx="89" cy="66" r="12"/>
+       <circle cx="71" cy="66" r="12"/><circle cx="66" cy="49" r="12"/>
+     </g>
+     <circle cx="80" cy="53" r="8.5" fill="#ffd23a"/>
+   </svg></div>
+   <div class="body"><h3>🪻 Blue Flowers</h3><p>A peaceful <b>Nature Gooblet</b> crosses the Grove portal up to the surface under a
+    🤝 Helpful King and plants up to <b>three</b> blue flowers as it roams — a new entry in the Plantiary.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="a winged dragon flying home to a red island">
+     <ellipse cx="128" cy="82" rx="32" ry="15" fill="#781c1e"/>
+     <ellipse cx="128" cy="78" rx="27" ry="11" fill="#8f2224"/>
+     <circle cx="86" cy="52" r="1.7" fill="#5fe08a" opacity=".7"/>
+     <circle cx="99" cy="61" r="1.7" fill="#5fe08a" opacity=".5"/>
+     <circle cx="111" cy="69" r="1.7" fill="#5fe08a" opacity=".35"/>
+     <g transform="translate(58,42)">
+       <path d="M-6 0 L-31 -15 L-10 9 Z" fill="#1c8a3c"/>
+       <path d="M6 0 L31 -15 L10 9 Z" fill="#1c8a3c"/>
+       <circle cx="0" cy="0" r="16" fill="#1f8f3f"/>
+       <circle cx="-5.5" cy="-3" r="3.4" fill="#d4ff3a"/><circle cx="5.5" cy="-3" r="3.4" fill="#d4ff3a"/>
+     </g>
+   </svg></div>
+   <div class="body"><h3>🐉 Grown-up Dragonlings</h3><p>Once a Dragonling grows old enough it <b>grows up</b> — bigger, winged — and
+    stops hunting to fly <b>home to the Dragon Island</b> and rule alongside the Dragon King.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><svg viewBox="0 0 160 100" role="img" aria-label="the Red King standing unharmed in lava">
+     <ellipse cx="80" cy="88" rx="64" ry="13" fill="#e87016"/>
+     <path d="M48 86 q4 -18 10 -22 q-2 12 6 14 q6 -6 4 -16 q10 10 6 24 Z" fill="#ff8a1e" opacity=".9"/>
+     <path d="M104 86 q4 -16 9 -20 q-1 10 5 12 q6 -6 4 -14 q9 9 6 22 Z" fill="#ff8a1e" opacity=".9"/>
+     <g transform="translate(80,50)">
+       <path d="M-13 -13 L-7 -25 L0 -16 L7 -25 L13 -13 Z" fill="#ff2030"/>
+       <circle cx="0" cy="0" r="16" fill="#d01020"/>
+       <circle cx="-5.5" cy="-2" r="3.2" fill="#fff"/><circle cx="5.5" cy="-2" r="3.2" fill="#fff"/>
+       <circle cx="-5.5" cy="-2" r="1.6" fill="#160a0a"/><circle cx="5.5" cy="-2" r="1.6" fill="#160a0a"/>
+     </g>
+     <text x="119" y="33" font-size="17">🛡️</text>
+   </svg></div>
+   <div class="body"><h3>👑 A Fireproof Red King</h3><p>The hero who slays the Fire Giant and rises as the <b>Red King</b> now walks
+    through <b>lava and fire completely unharmed</b> — the flames can never touch him again.</p><span class="chip new">new</span></div></a>
+
+  <a class="card" href="genesis/world/">
+   <div class="thumb fthumb"><div style="width:90%;background:#0c1226;border:1px solid #2f5aa0;border-radius:8px;padding:8px 9px;font:9px/1.5 ui-monospace,monospace;text-align:left">
+     <div style="color:#ffd27f;margin-bottom:5px;letter-spacing:1px">👑 THE FIVE MONARCHS</div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🌊 Sea</span><span style="color:#ffd27f">🏆 Sea Dragon</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🐉 Dragon</span><span style="color:#ffd27f">🏆 Green Dragon</span></div>
+     <div style="display:flex;justify-content:space-between;color:#8a97b8"><span>👑 Human</span><span>— none —</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🔥 Fire</span><span style="color:#ffd27f">🏆 Red King</span></div>
+     <div style="display:flex;justify-content:space-between;color:#e8f0ff"><span>🌲 Nature</span><span style="color:#ffd27f">🏆 Nature Giant</span></div>
+   </div></div>
+   <div class="body"><h3>👑 The Monarch Tracker</h3><p>A new tool opens a <b>live panel</b> naming who wears each of the five crowns —
+    Sea, Dragon, Human, Fire and Nature — or <b>— none —</b> when a throne sits empty.</p><span class="chip new">new</span></div></a>
+
+</div>
+</section>
+
+<section id="engine">
+<h2><span class="k">The Engine</span>One core, many compatibilities</h2>
+<p class="lead">Relaxation labeling (Rosenfeld–Hummel–Zucker, extended with a learned <i>noise label</i>) takes a set of objects, a set of
+ labels, and a compatibility function that says how much one labeled pair reinforces another. It iteratively relaxes the field into a
+ mutually consistent labeling. Only the compatibility kernel and prior change between domains:</p>
+<table>
+<tr><th>Domain</th><th>objects</th><th>labels</th><th>what compatibility encodes</th></tr>
+<tr><td><b>Cosmology</b></td><td>galaxies / parcels</td><td>void · filament · cluster</td><td>local density &amp; neighborhood coherence</td></tr>
+<tr><td><b>Neuroscience</b></td><td>neurons</td><td>sensory · inter · motor</td><td>directed synaptic flow through the connectome</td></tr>
+<tr><td><b>Econometrics</b></td><td>forecast origins</td><td>candidate models</td><td>recent accuracy + temporal coherence</td></tr>
+<tr><td><b>Motion capture</b></td><td>measured 3-D points</td><td>skeleton markers</td><td>inter-point distances match the model</td></tr>
+<tr><td><b>Strategy</b></td><td>chess pieces</td><td>tactical roles</td><td>roles that co-occur in a real plan</td></tr>
+</table>
+<p class="lead" style="margin-top:16px">The Python core is a tested library (<code style="color:var(--gd)">hrl.core.RelaxationLabeler</code>) — see the
+ <a href="https://github.com/rmichaelglover/hrl-portfolio" style="color:var(--cy)">repository</a>.</p>
+</section>
+
+<section id="all">
+	<h2><span class="k">All Projects</span>The full portfolio</h2>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">Core &amp; Tools</h3>
+	<div class="more">
+	  <a href="promaster-grrle/">🚐 ProMaster GRRLE <span>part-whole computer vision with licensed exact-model views</span></a>
+	  <a href="wikimrgrele/">🔤 WikiMRGRELE <span>stochastic dictionary language + convergence observatory</span></a>
+	  <a href="hrl-lab/">✦ The HRL Lab <span>the generic engine live — DNA, chirality &amp; few-shot</span></a>
+	  <a href="data-worlds/">▦ Data Worlds <span>voxel, 2-D, TUI/ASCII, and real-data interfaces</span></a>
+	  <a href="play/">🎮 Beat the Engine <span>fewest-seeds puzzle &amp; spot-the-enantiomer</span></a>
+	  <a href="biz-viz/">💼 HRL Business Visualizer <span>seven interactive product directions</span></a>
+	</div>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">Chess &amp; Games</h3>
+	<div class="more">
+	  <a href="chess/">🌲 Chess Worlds <span>boards, Maestro narrations, openings &amp; experiments</span></a>
+	  <a href="whimsy-chess/">⌨️ Whimsy Chess <span>study board in Vim + browser Maestro</span></a>
+	  <a href="chess-logic/">🧠 Chess Logic <span>move engine that reasons by relaxation</span></a>
+	  <a href="chess-premove/">⏱️ Chess Premove <span>entropy-gated premoves in 15-second chess</span></a>
+	  <a href="ultrabullet-lessons/">⚡ Ultrabullet Lessons <span>clock discipline &amp; forcing moves</span></a>
+	</div>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">People, Stories &amp; Discovery</h3>
+<div class="more"><a href="humanity-atlas/">🌍 Humanity Atlas <span>food, flags, stories &amp; a garden of human connections</span></a></div>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">Living Worlds &amp; Simulation</h3>
+	<div class="more">
+	  <a href="genesis/">🌌 Project Genesis <span>the living-simulators hub</span></a>
+	  <a href="genesis/critter/conway.html">🧬 Conway Critter <span>Game of Life duplicate with four emoji families</span></a>
+	  <a href="genesis/critter/chess-life.html">👑 Chess Critter <span>emoji armies, free movement, many kings &amp; legal chess survival</span></a>
+	  <a href="genesis/world/">🌍 Gooblets &amp; Zappies <span>a 2-D world that grows itself</span></a>
+	  <a href="genesis/worlds/">🗺️ Living Worlds <span>Terraformer · Floating Isles · Deep Reef</span></a>
+	  <a href="genesis/voxel-world/">🧱 VoxelData <span>walk any dataset as a Minecraft-like world</span></a>
+	  <a href="morphogenesis/">🧬 Morphogenesis <span>bioelectric pattern formation</span></a>
+	</div>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">Essays &amp; Narrative</h3>
+	<div class="more">
+	  <a href="attack-on-christendom/">📰 Attack on Christendom <span>Issue One — faith, philosophy, chess &amp; the laboratory night owl</span></a>
+	  <a href="all-in-a-days-work/">☀ All in a Day’s Work <span>October 4, 2026 — today’s books, papers, chess worlds &amp; comics in one place</span></a>
+	  <a href="chesshustlagaard/">♞ Chesshustlagaard <span>A peculiar kind of tournament existentialist — a Crazyhouse comic essay</span></a>
+	  <a href="numerological-speculations/">📖 Numerological Speculations <span>Natural language, naming &amp; “it follows” — a short book with reproducible logical experiments</span></a>
+	  <a href="essays/">📚 Essays <span>theological &amp; philosophical writing</span></a>
+	  <a href="research-whitepapers/">📚 Three Research White Papers <span>Bipolar geometry, Magnum Economicus &amp; Drugs Are Good — three 25-page manuscripts</span></a>
+	  <a href="virtual-body-cancer/">🔬 Virtual Body Cancer Research <span>80-page dissertation, measured assay benchmark &amp; interactive body model</span></a>
+	  <a href="manuelian-magnum-opus/">📖 The Tree, the Proof, and the Light <span>26-page Manuelian inquiry into knowledge, perspective, origins &amp; enough</span></a>
+	  <a href="magnum-quantreleviathone/">⚛ Magnum Quantreleviathone <span>Quantum simulation at home: axioms, proof, color plot &amp; 19 computed circuits</span></a>
+	  <a href="magnum-chessicus/">♟ Magnum Chessicus <span>25-page certified-draw inquiry, formal proofs, nine color figures &amp; replayable chess certificates</span></a>
+	  <a href="relaxfish/">♟ Relaxfish <span>27-page research article, rigorous maths, plots &amp; reproducible chess experiments</span></a>
+	  <a href="hrl-cybersecurity/">🛡 HRL Cybersecurity <span>authorized defence, civilian resilience &amp; an 11-page white paper</span></a>
+	  <a href="spreadsheet-dissertation/">🎓 Spreadsheet Auditing Dissertation <span>Gaussian mixtures, semantic colors, PDF &amp; reproducible experiments</span></a>
+	  <a href="no-panzer/">✍️ I Am No Panzer <span>Novella (Book I)</span></a>
+	  <a href="perfect-union/">♟️ A More Perfect Union <span>Novella (Book II)</span></a>
+	  <a href="red-thread/">🧵 The Red Thread <span>illustrated choose-your-own-adventure</span></a>
+	</div>
+
+	<h3 style="margin:20px 0 8px;color:#fff;font-size:15px">Special &amp; Research</h3>
+	<div class="more">
+	  <a href="optics-lab/">🌈 Mirror Garden <span>light experiments, DemystifySci &amp; Trool evidence notes</span></a>
+	  <a href="grrle-strong/">✡️ GRRLE Strong <span>recursive HyperObject reference implementation</span></a>
+	  <a href="chess-relaxation/">♟️ Chess Relaxation <span>all possibilities, compatibility, and labels</span></a>
+	  <a href="chess/recent/2026-09-27/saragossa-mimosa-review.html">🍊 Saragossa Mimosa <span>fresh silly chess review</span></a>
+	  <a href="gospel/">✝️ The Gospel <span>Sunday reflection on love, grace, and living hope</span></a>
+	  <a href="formula-time-v2.html">🌀 Formula Time <span>chess, relaxation, and silver-marble equations</span></a>
+	  <a href="super-monkey-chessballs/">🐒 Super Monkey Chessballs <span>PG-13 extra-ball chess adventure</span></a>
+	  <a href="super-monkey-chessballs/tri_engine.cpp">💻 Tri-Engine C++ <span>STL-only marble, chessball, and physics core</span></a>
+	  <a href="open-chess-brain/">🌍 The World’s Largest Brain <span>open classical-AI chess commons · $FREE.99</span></a>
+	  <a href="super-monkey-chessballs/maestro-tri.html">🎼 Maestro Tri-Engine <span>3D lanes, warped influence, human feedback</span></a>
+	  <a href="tiny-creek-lab/">🌊 Tiny Creek Lab <span>toy molecules, critters, voxels, and World Cups</span></a>
+	  <a href="tiny-creek-lab/recursive_creatures.cpp">🧬 Recursive Creatures C++ <span>RAII constructors and emergent physics</span></a>
+	  <a href="emoji-life/">🌈 Emoji Life <span>Conway-inspired cellular garden for curious kids</span></a>
+	  <a href="ujewhale-macro-report/ujewhale_macro_sleep_report.pdf">🐋 Ujewhale Macro-Sleep Report <span>23-page data, charts, code, and bibliography</span></a>
+	  <a href="political-economy-paper/">🏛️ Political Economy Paper <span>18-page study of keyholes, camouflage, and first moves</span></a>
+	  <a href="education-pathways/">🎓 Education Pathways</a>
+	  <a href="atlanta/">🌀 Atlanta — Great Water Cycle</a>
+	  <a href="bible-hrl/">📖 Gospel-HRL</a>
+	  <a href="beena/">🚂 Beena Train-Brake</a>
+	  <a href="body-pos/">🏃 Body Position</a>
+	  <a href="chronology/">🗓️ Career Chronology</a>
+	</div>
+	</section>
+
+</div>
+<footer>
+<div style="max-width:620px;margin:0 auto 18px;color:#aab6d6;font:italic 15px/1.6 ui-serif,Georgia,serif">
+“An engine for finding <b style="color:#fff;font-style:normal">agreement among difference</b> — cooperation that <i>includes</i>,
+with a gentle <b style="color:var(--gr);font-style:normal">noise label</b> instead of a forced fit. Every object welcome to the table;
+the whole field left to find its harmony.”</div>
+Built by <b style="color:var(--ink)">Manny Glover</b> — hierarchical relaxation labeling, applied everywhere.<br>
+The person behind the algorithm — the Gloverian cycle: <a href="no-panzer/">✍ I Am No Panzer</a> · <a href="the-wall/">🧱 Tear Down This Wall</a> · <a href="perfect-union/">♟ A More Perfect Union</a> · <a href="relax-relabel/">📺 Relax, Relabel</a> · <a href="mother-god-bomb/">💣 Project Mother God</a> · <a href="i-am-what-i-am/">🥬 I Am What I Am</a>.<br>
+<a href="https://github.com/rmichaelglover/hrl-portfolio">github.com/rmichaelglover/hrl-portfolio</a> ·
+<a href="licensing/"><b style="color:var(--gr)">MIRL-1.0 source-available</b></a> · noncommercial sharing welcome ·
+all paid use requires prior Trust of Trusts approval, an independent worker's published significant improvement, and no capital return · dark theme, real data, honestly framed.
+</footer>
+<script>
+// subtle drifting starfield
+const cv=document.getElementById('stars'),x=cv.getContext('2d');let W,H,st=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;st=[];const n=Math.min(150,innerWidth/9|0);
+ for(let i=0;i<n;i++)st.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*0.18+0.02});}
+addEventListener('resize',rs);rs();
+(function loop(){x.clearRect(0,0,W,H);for(const p of st){p.y+=p.s*(0.4+p.z);if(p.y>H)p.y=0;
+ const a=0.25+p.z*0.5;x.fillStyle=`rgba(${160+80*p.z|0},${190+50*p.z|0},255,${a})`;
+ x.fillRect(p.x,p.y,p.z*1.7+0.4,p.z*1.7+0.4);}requestAnimationFrame(loop);})();
+</script>
+<script src="community/nav.js" defer></script>
+
+<script defer src="assets/day-visuals/gallery.js" data-day-theme="chess" data-day-target="#featured h2"></script></body></html>

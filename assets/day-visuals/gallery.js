@@ -1,5 +1,6 @@
 /* Original conceptual illustrations. Static first; animation only on request. */
 (() => {
+  if(document.documentElement.classList.contains('maestro-embedded'))return;
   const script = document.currentScript;
   const theme = script.dataset.dayTheme || 'chess';
   const labels = {chess:'A knight takes the scenic route',language:'Words and their connections',quantum:'Two illustrated waves',economics:'An illustrated cycle of exchange',biology:'An illustrated cell community'};
@@ -21,6 +22,6 @@
   motion.addEventListener('change', e => {if(e.matches)stop();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
   caption.append(label,button);figure.append(img,caption);
-  const heading = document.querySelector('h1');
+  const heading = document.querySelector(script.dataset.dayTarget || 'h1');
   if(heading)heading.after(figure);else (document.querySelector('main')||document.body).prepend(figure);
 })();

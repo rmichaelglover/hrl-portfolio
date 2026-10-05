@@ -1,0 +1,17 @@
+{
+  "title": "Van\u2019t Kruijsing \u2014 Head-Nod Chess",
+  "bpm": 85,
+  "bars": 32,
+  "duration_seconds": 93.3529411764706,
+  "sample_rate": 44100,
+  "source_study": "https://lichess.org/study/7hLlnCHF",
+  "source_chapter": "https://lichess.org/study/7hLlnCHF/wHZor7mJ",
+  "players": {
+    "white": "mannyfresher",
+    "black": "sidpadhi"
+  },
+  "result": "1-0",
+  "half_moves": 75,
+  "peak_dbfs": -3.0000002493010487,
+  "mapping": "Destination files a\u2013h map to D Dorian/minor-compatible scale degrees D E F G A B C D; destination ranks 5\u20138 raise an octave; Black uses the lower register. One half-move per beat, checks add a fifth, captures accent velocity. Accompaniment uses Dm9\u2013Bbmaj7\u2013Fmaj9\u2013Cadd9."
+}
