@@ -98,7 +98,19 @@ in chess, stalemate is a draw. here i'm borrowing the word for a way of parting:
 
 we can both go live the rest of our lives. or go to sleep. or go to the laboratory. the tundra remains available to the imagination.
 
-there is no verdict about her identity hidden in the ending. no proof of catfishing. no evidence of an Epstein connection. the comic columnist elsewhere in this journal is an invented pen name. let the story keep its actual size: two people, some jokes, some software, a goodbye.
+## I Left Convinced
+
+let me say what i actually mean. **i left convinced i was dealing with a scammer.** that is my accusation and my judgment of the encounter. i did not leave undecided, and this essay should not put indecision in my mouth.
+
+here is the argument. 2444 appeared as an impressive number. “i m a MAster” followed. the screenshot supplies a tournament performance figure; the conversation supplies the claim of being a master. those are different sources and different claims. the exchange provides no independent verification of an official title. i am entitled to ask what supports the authority i'm being invited to admire.
+
+then the conversation keeps changing lanes. video apps. operating systems. cameras. teasing about control. a Windows account prompt. when i read the exchange together, i see a confident persona and a trail of questions that never got settled. that combination convinced me to withdraw trust.
+
+the Windows message matters here as part of the sequence: the proposed call reached an account-sign-in question. its actual wording does not establish a hack. the transcript also lacks speaker labels, so the hacking joke cannot responsibly be assigned to the other participant as an admission. my argument has to live with those facts rather than quietly changing them.
+
+an honest person could be unfamiliar with software and could joke this way. i understand that alternative. it doesn't obligate me to continue the call. **i ended the encounter because i did not trust it.**
+
+my conviction is the position i am arguing from. the published record establishes the words supplied here and the screenshot observations; it does not independently establish fraud or unauthorized computer access. readers can inspect the reasoning and judge it for themselves. the Catfisher of Catfishers remains a fictional columnist, not a verified identification of this participant.
 
 faith without works is dead? then here's a small work i can actually do: wish another person well and let the wish leave room for her.
 
