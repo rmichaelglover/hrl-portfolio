@@ -13,7 +13,7 @@ import tarfile
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 NAME = 'maestro-chess'
 PUBLIC = 'https://rmichaelglover.github.io/hrl-portfolio/'
 LAUNCHER = '''#!/usr/bin/python3 -B

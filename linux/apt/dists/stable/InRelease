@@ -4,30 +4,30 @@ Hash: SHA256
 Architectures: all
 Codename: stable
 Components: main
-Date: Mon, 05 Oct 2026 16:56:50 +0000
+Date: Mon, 05 Oct 2026 17:38:31 +0000
 Label: Maestro Chess
 Origin: Maestro Chess
 Suite: stable
 MD5Sum:
- 8a7144d3ab4492139a3f92ffb4aa9a74             1442 Release
- ef0b52bdd764b6fe671354eaea2247f5              852 main/binary-all/Packages
- 92d8aa0e73f07c6d5300c44bf1c824ec              596 main/binary-all/Packages.gz
+ 6baaa30b85db5f6a14178da35b55466f             1442 Release
+ af3fea76482bfcf698cf2e1a7efc02de             1704 main/binary-all/Packages
+ 25578a0abbf970b207c2d860e435d591              724 main/binary-all/Packages.gz
 SHA1:
- 3ed6d882faa7132fd0ce1dcada92667610c02c64             1442 Release
- d5095ff7034e69eb63ceb76cf34a8d0d568f31f6              852 main/binary-all/Packages
- 34dffd0250c22f4f656a05325842417fa3a2656c              596 main/binary-all/Packages.gz
+ 0c0fc54ee6eb74cadc9c117ac4b55e43c601eb5b             1442 Release
+ 52d686d0d69c3198219e3980a4217c80a8e0a740             1704 main/binary-all/Packages
+ fdab1e25fa2d1915185c2bf7ac1346d9ea81bbf3              724 main/binary-all/Packages.gz
 SHA256:
- 8cbfbecf93a9920347eb624777212b710f0d9c66f1c19e09b33435726e379c63             1442 Release
- 7faf8c659cf3eb900d22f901e4a4fac82cbc5361c93a9e05470fb016557e3a3d              852 main/binary-all/Packages
- 5872801c6874018681f7744bf71d2de92b56ddea33c8094d00064daf3ec44aae              596 main/binary-all/Packages.gz
+ a50c29047f01c23dea7cd1d1541dd41bf676f51813589d713dc94f7b56d0c191             1442 Release
+ 7bcdfa193ae83ec1bd07346164071b7ad5475d3b5e768029c09592b3130d9239             1704 main/binary-all/Packages
+ c78c712289a2fc300457bca151f5f0cd73e2f4658024fb10512456365def8ed4              724 main/binary-all/Packages.gz
 SHA512:
- 809bfeca2cd460cbae43bda6781a8792e867433e58bdf4761186f1693e67c8e2c4eeadf993e275086b890034c0d394f780b23e40a6aaaee77c66ccd34db2f137             1442 Release
- 66b2222b597ee53aac904cbb33a79c48350935c84a1f5f34abadedbe91bb3f1421ddba1c88bf3f1a75cf2991d5a1c03ccb8bb38150958a688f43d01b34c6775e              852 main/binary-all/Packages
- e1d4fb6e60752cc82fdc10062f9f99ff38283b49759e58a7c39899b104194f1c0256ea4918916eee178599f8db7815ec06c745624c3e255f67c74af07687bb4c              596 main/binary-all/Packages.gz
+ 55f02ddd975727a773f9450739fcf55a60d7b64ada8ce3e62b8f73f20673f5cb75ba19fcdcd903435a56250a9549a8dd5b1af126a3440673306ba4710f20a3a2             1442 Release
+ 23dd1c5276d3f530c14e61be925402b2f603a8ee8ddba77af9174a72b6cab1621710930433991a610cca21524f5eae5743cfa2d2d18c437840ad07480eae59f4             1704 main/binary-all/Packages
+ 241ec5fc7e0c163803d3e8aa012f1b4c8c15829e84a63485fdbbfc72bcaa589bd3be82088348513bc6debb92cbe1d5902bcd9094e65c03201ba908f432d8c5bc              724 main/binary-all/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYIAB0WIQT9ZVBoDpsKBBUdQt6Z2Bcls6Yx8AUCasPXEwAKCRCZ2Bcls6Yx
-8JvEAQC/wBT6zLiz8/HMTy5xhwLeMG/yqWqsh39Rx3YUiAg+2QD+PDCJqDJRwq+D
-yHHQXhyFUcKtTWAqJUCLiE0SMHW3zQ4=
-=hDOk
+iHUEARYIAB0WIQT9ZVBoDpsKBBUdQt6Z2Bcls6Yx8AUCasPg3QAKCRCZ2Bcls6Yx
+8CcWAP40e52MTdUuh73CK0SshvNBXPXuFdgJz3SvQYi/6tr3sQEAujAUsEsixk7W
+cBbic0oWmyDiv85JtTVnNH4P5Z7ZKwg=
+=DyeH
 -----END PGP SIGNATURE-----

@@ -17,13 +17,13 @@ Requires Python 3.10+, dpkg-deb, dpkg-scanpackages, apt-ftparchive, and optional
 Debian/Ubuntu:
 
 ```sh
-sudo apt install ./maestro-chess_0.1.0-1_all.deb
+sudo apt install ./maestro-chess_0.1.1-1_all.deb
 ```
 
 Fedora/RHEL-family systems with Python 3.10 or newer:
 
 ```sh
-sudo dnf install ./maestro-chess-0.1.0-1.noarch.rpm
+sudo dnf install ./maestro-chess-0.1.1-1.noarch.rpm
 ```
 
 Launch **Maestro Chess** from the applications menu, or run `maestro-chess`. For a terminal-only preview, use `maestro-chess --no-browser`. The web application runs until its launcher process is stopped. Closing the browser tab does not stop that process. Start another session by launching again; existing local data remains available.
