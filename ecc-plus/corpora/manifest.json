@@ -1,0 +1,99 @@
+{
+  "built_at": "2026-10-06T23:20:37.745578+00:00",
+  "collections": [
+    {
+      "id": "ot",
+      "title": "Old Testament",
+      "kind": "scripture",
+      "edition": "King James Version · Project Gutenberg #10",
+      "language": "English translation",
+      "source_url": "https://www.gutenberg.org/files/10/10-h/10-h.htm",
+      "notes": "This edition has 39 Old Testament and 27 New Testament books, without the Apocrypha. It is an English translation, not the original Hebrew, Aramaic, or Greek. Whitespace is normalized; verse labels are separated from the text.",
+      "file": "ot.json",
+      "record_count": 23145,
+      "group_count": 39,
+      "sha256": "b1295b50f4070c46f23180c22527104a1d3c04870eace1801ee362ac8d4610c7",
+      "bytes": 6021955
+    },
+    {
+      "id": "nt",
+      "title": "New Testament",
+      "kind": "scripture",
+      "edition": "King James Version · Project Gutenberg #10",
+      "language": "English translation",
+      "source_url": "https://www.gutenberg.org/files/10/10-h/10-h.htm",
+      "notes": "This edition has 39 Old Testament and 27 New Testament books, without the Apocrypha. It is an English translation, not the original Hebrew, Aramaic, or Greek. Whitespace is normalized; verse labels are separated from the text.",
+      "file": "nt.json",
+      "record_count": 7957,
+      "group_count": 27,
+      "sha256": "538378822ecd1907cd0e25144e0de1a2697696c20dc1e1a8d94f83c8af68e82f",
+      "bytes": 2099941
+    },
+    {
+      "id": "quran",
+      "title": "Qur’an",
+      "kind": "scripture",
+      "edition": "J. M. Rodwell translation · Project Gutenberg #2800",
+      "language": "English translation",
+      "source_url": "https://www.gutenberg.org/cache/epub/2800/pg2800-images.html",
+      "notes": "Historical translation originally published in 1861. Rodwell rearranges surahs; browsing here uses standard surah numbers. References are edition paragraphs, not modern ayah numbers. Introductions and separated footnotes are excluded from the searchable corpus; inline note numbers remain. The translation and its historical perspective are not a replacement for the Arabic text.",
+      "file": "quran.json",
+      "record_count": 6285,
+      "group_count": 114,
+      "sha256": "c08af663628dbb01d767e09ec830a65d38c0d46dc503ff6719bddab9753bcd4f",
+      "bytes": 2004292
+    },
+    {
+      "id": "old-english",
+      "title": "Old English dictionary",
+      "kind": "dictionary",
+      "edition": "J. R. Clark Hall · A Concise Anglo-Saxon Dictionary · second edition, 1916",
+      "language": "Historical headwords with English glosses",
+      "source_url": "https://www.gutenberg.org/cache/epub/31543/pg31543-images.html",
+      "notes": "A later scholarly dictionary of this historical language, not a dictionary compiled during that language period. Entry wording, alternative forms, senses, examples, and abbreviations are kept together; HTML whitespace is normalized. Cross-references and cited material may need consultation of the original.",
+      "file": "old-english.json",
+      "record_count": 29342,
+      "group_count": 30,
+      "sha256": "4da7963f1f2afaf94e3c67b98b354552606ed2b5aa0674b7d2f23ca714b73f37",
+      "bytes": 6842808
+    },
+    {
+      "id": "middle-english",
+      "title": "Middle English dictionary",
+      "kind": "dictionary",
+      "edition": "A. L. Mayhew & Walter W. Skeat · A Concise Dictionary of Middle English, 1888",
+      "language": "Historical headwords with English glosses",
+      "source_url": "https://www.gutenberg.org/cache/epub/10625/pg10625-images.html",
+      "notes": "A later scholarly dictionary of this historical language, not a dictionary compiled during that language period. Entry wording, alternative forms, senses, examples, and abbreviations are kept together; HTML whitespace is normalized. Cross-references and cited material may need consultation of the original.",
+      "file": "middle-english.json",
+      "record_count": 10954,
+      "group_count": 28,
+      "sha256": "307b7f71af4f9fe35cbd72f125a2c674aaef576882b698bfbbb08f8f02c064e2",
+      "bytes": 2950868
+    },
+    {
+      "id": "early-modern",
+      "title": "Early Modern English dictionary",
+      "kind": "dictionary",
+      "edition": "Robert Cawdrey · A Table Alphabeticall, 1604 · SWORD module 1.0",
+      "language": "Early Modern English",
+      "source_url": "https://crosswire.org/sword/modules/ModInfo.jsp?modName=Cawdrey",
+      "notes": "Complete entries in the downloaded SWORD module, not a new transcription of the printed volume. A hard-word dictionary, not a full inventory of English. Alternative explanations remain within entries; one entry is not assumed to mean one sense.",
+      "file": "early-modern.json",
+      "record_count": 2516,
+      "group_count": 21,
+      "sha256": "e94b8d3b1c74eb951f76ba65b26c0827eadd9b17566b5280050ab3cff8277ce9",
+      "bytes": 319655
+    }
+  ],
+  "source_sha256": {
+    "bible": "f59a3ec88f4d575be985cc2f968c762ce0d13e7f67d297bcc6debb3907c6820a",
+    "old": "d17ed3903010ec550e45d44059b9e5e4446120307ddd7902c32f9ab81a16f472",
+    "middle": "60ac7c67c52f55100bfca9880e987db4f455ce501e5f3c3fdf13e74bcd7fa786",
+    "quran": "d88d651c61f9ac926ae14e0eb5e6d7f9d007b78783dc9f99fdabd5bff00a423d",
+    "early": "9e6aaa6e29b1d885dbf70f3bbe1adaf29dc72b823de4c28dc500f3e7d36ea9c5"
+  },
+  "license_file": "SOURCE-LICENSES.txt",
+  "tokenization": "Unicode letters and combining marks; internal apostrophes and hyphens retained. Exact spelling and capitalization are preserved. Case-insensitive matching is a separately labeled search option.",
+  "coverage": "Full extracted source records for the chosen editions/modules. Source introductions, apparatus and footnotes are not counted as scripture. No theological entailment or word-sense resolution is inferred from a search hit."
+}
