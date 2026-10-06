@@ -1,0 +1,55 @@
+{
+  "title": "We Follows",
+  "bpm": 96,
+  "duration_seconds": 165.0,
+  "sample_rate": 32000,
+  "movements": [
+    {
+      "title": "I \u00b7 Symbols awaken",
+      "start_seconds": 0
+    },
+    {
+      "title": "II \u00b7 Meanings gather",
+      "start_seconds": 40
+    },
+    {
+      "title": "III \u00b7 It follows",
+      "start_seconds": 80
+    },
+    {
+      "title": "IV \u00b7 The open world",
+      "start_seconds": 120
+    }
+  ],
+  "letter_notes_midi": {
+    "a": 62,
+    "b": 64,
+    "c": 65,
+    "d": 67,
+    "e": 69,
+    "f": 70,
+    "g": 72,
+    "h": 74,
+    "i": 62,
+    "j": 64,
+    "k": 65,
+    "l": 67,
+    "m": 69,
+    "n": 70,
+    "o": 72,
+    "p": 74,
+    "q": 74,
+    "r": 76,
+    "s": 77,
+    "t": 79,
+    "u": 81,
+    "v": 82,
+    "w": 84,
+    "x": 86,
+    "y": 74,
+    "z": 76
+  },
+  "mapping_note": "Letter-to-note mapping is an artistic convention, not a proof of meaning.",
+  "peak": 0.8899999856948853,
+  "seed": 26
+}

@@ -1,0 +1,4 @@
+0.0	40.0	I · Symbols awaken
+40.0	80.0	II · Meanings gather
+80.0	120.0	III · It follows
+120.0	160.0	IV · The open world

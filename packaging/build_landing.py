@@ -24,7 +24,7 @@ spotlight = (ROOT/'packaging/homepage/discoveries.html').read_text()
 app=app.replace('<div class="boardcol">', '<div class="boardcol"><p class="home-board-hint">Your move. Click a piece, pick a square, make it sing.</p>', 1)
 app=app.replace('<div class="meta" id="meta"></div>', '<div class="meta" id="meta"></div>'+spotlight, 1)
 maestro=maestro[:start]+maestro[end:]
-mast='''<a class="home-skip" href="#board">Skip to chess board</a><div class="home-mast"><h1>♟ Maestro+++ <small>Chess. Music. A little magic.</small></h1><nav aria-label="Main navigation"><a href="chess-music/">Music</a><a href="chess-lessons/">Learn chess</a><a href="community/">Meet the players</a><a href="linux/">Get the app</a><a href="#site-extras">All worlds ↓</a></nav></div>'''
+mast='''<a class="home-skip" href="#board">Skip to chess board</a><div class="home-mast"><h1>♟ Maestro+++ <small>Chess. Music. A little magic.</small></h1><nav aria-label="Main navigation"><a href="we-follows/">We Follows ♫</a><a href="chess-music/">Music</a><a href="chess-lessons/">Learn chess</a><a href="community/">Meet the players</a><a href="linux/">Get the app</a><a href="#site-extras">All worlds ↓</a></nav></div>'''
 maestro=maestro.replace('<body class="maestro-home" data-maestro-landing="1">','<body class="maestro-home" data-maestro-landing="1">'+mast+app,1)
 maestro=maestro.replace('<h1>🎼 Chess Maestro <span>·</span> <small style="font-weight:500;color:var(--mut)">Phase 4 — key &amp; harmony from the game</small></h1>','<h2 style="font-size:18px;margin:0">Maestro controls · play, customize &amp; export</h2>',1)
 maestro=maestro.replace('<a href="./">← Home</a>', '<a href="#site-extras">All worlds ↓</a>',1)

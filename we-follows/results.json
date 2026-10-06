@@ -1,0 +1,89 @@
+{
+  "bachelor_definition": {
+    "models": [
+      {
+        "adult": false,
+        "man": false,
+        "married": false,
+        "bachelor": false
+      },
+      {
+        "adult": false,
+        "man": false,
+        "married": true,
+        "bachelor": false
+      },
+      {
+        "adult": false,
+        "man": true,
+        "married": false,
+        "bachelor": false
+      },
+      {
+        "adult": false,
+        "man": true,
+        "married": true,
+        "bachelor": false
+      },
+      {
+        "adult": true,
+        "man": false,
+        "married": false,
+        "bachelor": false
+      },
+      {
+        "adult": true,
+        "man": false,
+        "married": true,
+        "bachelor": false
+      },
+      {
+        "adult": true,
+        "man": true,
+        "married": false,
+        "bachelor": true
+      },
+      {
+        "adult": true,
+        "man": true,
+        "married": true,
+        "bachelor": false
+      }
+    ],
+    "bachelor_implies_unmarried": true,
+    "existence_entailed": false
+  },
+  "meaning_axiom": {
+    "models": [
+      {
+        "meaning_a": false,
+        "meaning_b": true
+      },
+      {
+        "meaning_a": true,
+        "meaning_b": false
+      },
+      {
+        "meaning_a": true,
+        "meaning_b": true
+      }
+    ],
+    "unique_meaning_entailed": false,
+    "ambiguity_entailed": false
+  },
+  "circular_definition": {
+    "models": [
+      {
+        "p": false,
+        "q": false
+      },
+      {
+        "p": true,
+        "q": true
+      }
+    ],
+    "consistent": true,
+    "unique_interpretation": false
+  },
+  "scope": "Exhaustive checks for the specified finite toy domains. General claims require the proofs in Investigation.md; no claim to have formalized all English or decided arbitrary first-order theories."
+}
