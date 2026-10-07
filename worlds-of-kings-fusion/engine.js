@@ -1,0 +1,48 @@
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.WorldKings=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+'use strict';
+let W=24,H=14,DIRS=[[0,-1],[1,0],[0,1],[-1,0]],DIAGS=[[1,-1],[1,1],[-1,1],[-1,-1]];
+let COUNTRIES=[{id:0,name:'Ember Reach',color:'#f3bd78',x:2,y:8,facing:-1},{id:1,name:'Azure Isles',color:'#7ed9ec',x:10,y:8,facing:-1},{id:2,name:'Moss Coast',color:'#b0dda0',x:18,y:2,facing:1}];
+const id=(x,y)=>y*W+((x%W+W)%W),xy=n=>[n%W,Math.floor(n/W)];
+let atlas=null;let cells=Array.from({length:W*H},(_,n)=>{const[x,y]=xy(n),c=COUNTRIES.find(c=>x>=c.x&&x<c.x+4&&y>=c.y&&y<c.y+4);return{id:n,x,y,country:c?c.id:null,name:c?`${c.name} · Province ${(y-c.y)*4+x-c.x+1}`:`Ocean ${y+1}:${x+1}`,lon:(x+.5)*360/W-180,lat:90-(y+.5)*180/H};});
+function configure(data,codes=['USA','FRA','KOR']){
+ const A=typeof EarthAtlas!=='undefined'?EarthAtlas:require('./atlas-core.js');atlas=A.prepare(data);W=data.regions.length;H=1;
+ COUNTRIES=codes.map((code,id)=>({id,code,name:data.countries.find(c=>c.id===code).name,color:['#3d6ca8','#aa4b40','#5b783a'][id],facing:-1}));
+ cells=data.regions.map(r=>({id:r.id,country:r.country===null?null:Math.max(-1,codes.indexOf(r.country)),name:r.name,lon:r.center[0],lat:r.center[1],x:r.col??-1,y:r.row??-1}));
+}
+function step(n,dx,dy){
+ if(atlas){const dirs=[[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1]],d=dirs.findIndex(v=>v[0]===dx&&v[1]===dy),A=typeof EarthAtlas!=='undefined'?EarthAtlas:require('./atlas-core.js'),st=A.next(atlas,n,d);if(!st)return{at:n,dx,dy,polar:false};return{at:st.to,dx:dirs[st.d][0],dy:dirs[st.d][1],polar:st.polar};}
+ let[x,y]=xy(n);x+=dx;y+=dy;let polar=false;if(y<0){y=0;x+=W/2;dy=-dy;polar=true;}else if(y>=H){y=H-1;x+=W/2;dy=-dy;polar=true;}return{at:id(x,y),dx,dy,polar};
+}
+function fresh(){return{pieces:[],players:COUNTRIES.map(c=>({id:c.id,name:c.name,alive:true,score:null})),alliances:[0,1,2],requests:{},turn:0,round:1,phase:'setup',winner:[],log:[],nextPiece:0,pass:[],km:[0,0,0]};}
+function allied(s,a,b){return s.alliances[a]===s.alliances[b];}
+function occupant(s,n){return s.pieces.find(p=>p.at===n);}
+function addPiece(s,owner,type,at){if(!cells[at]||occupant(s,at))throw Error('Space unavailable');const p={id:s.nextPiece++,owner,type,at,dx:0,dy:COUNTRIES[owner].facing,departed:false};s.pieces.push(p);return p;}
+function deploy(s,owner,random=false,rng=Math.random){
+ let spaces=cells.filter(c=>c.country===owner&&!occupant(s,c.id)).map(c=>c.id);const stock=['K','Q','R','R','B','B','N','N',...Array(8).fill('P')];for(const p of s.pieces.filter(p=>p.owner===owner)){const i=stock.indexOf(p.type);if(i>=0)stock.splice(i,1);}if(spaces.length<stock.length)throw Error('Country lacks sixteen deployment spaces');
+ // Favor connected mainland spaces and a sheltered king over distant islands.
+ spaces.sort((a,b)=>atlas.regions[b].neighbors.filter(n=>cells[n].country===owner).length-atlas.regions[a].neighbors.filter(n=>cells[n].country===owner).length);
+ const first=spaces[0],ordered=[first],seen=new Set([first]);for(let i=0;i<ordered.length;i++)for(const n of atlas.regions[ordered[i]].neighbors)if(cells[n].country===owner&&!seen.has(n)){seen.add(n);ordered.push(n);}
+ spaces=[...ordered,...spaces.filter(n=>!seen.has(n))];if(random)for(let i=Math.min(16,spaces.length)-1;i>0;i--){const j=Math.floor(rng()*(i+1));[spaces[i],spaces[j]]=[spaces[j],spaces[i]];}
+ stock.forEach((type,i)=>addPiece(s,owner,type,spaces[i]));
+}
+function clone(s){return{...s,pieces:s.pieces.map(p=>({...p})),players:s.players.map(p=>({...p})),alliances:[...s.alliances],requests:{...s.requests},winner:[...s.winner],log:[...s.log],pass:[...s.pass],km:[...s.km]};}
+function pseudo(s,p,attack=false){const out=[],seen=new Set();function offer(at,path,dx=p.dx,dy=p.dy){if(at===p.at)return false;const q=occupant(s,at);if(seen.has(at))return !q;if(!attack&&q&&allied(s,p.owner,q.owner))return false;if(!attack&&q&&q.type==='K')return false;seen.add(at);out.push({to:at,path,dx,dy,capture:!!q});return !q;}
+if(['R','B','Q'].includes(p.type)){const dirs=p.type==='R'?DIRS:p.type==='B'?DIAGS:[...DIRS,...DIAGS];for(const d of dirs){let n=p.at,[dx,dy]=d;const visited=new Set([n]),path=[];for(let i=0;i<W*H;i++){const st=step(n,dx,dy);n=st.at;dx=st.dx;dy=st.dy;if(visited.has(n))break;visited.add(n);path.push(n);if(!offer(n,[...path],dx,dy))break;}}}
+if(p.type==='K')for(const[dx,dy]of[...DIRS,...DIAGS]){const st=step(p.at,dx,dy);offer(st.at,[st.at]);}
+if(p.type==='N')for(const[dx,dy]of DIRS)for(const sign of[-1,1]){const a=step(p.at,dx,dy),b=step(a.at,a.dx,a.dy),c=step(b.at,-b.dy*sign,b.dx*sign);offer(c.at,[a.at,b.at,c.at]);}
+if(p.type==='P'){const forward=step(p.at,p.dx,p.dy),left=step(p.at,p.dx-p.dy,p.dy+p.dx),right=step(p.at,p.dx+p.dy,p.dy-p.dx);for(const st of[left,right]){const q=occupant(s,st.at);if(attack||q&&!allied(s,p.owner,q.owner))offer(st.at,[st.at],forward.dx,forward.dy);}if(!attack){if(!occupant(s,forward.at))offer(forward.at,[forward.at],forward.dx,forward.dy);const c=cells[p.at];if(c.country===null&&(c.y===1||c.y===H-2)&&c.x%6===0){for(const sign of[-1,1]){const st=sign<0?left:right;if(!occupant(s,st.at))offer(st.at,[st.at],forward.dx,forward.dy);}}}}
+return out;}
+function inCheck(s,owner){const king=s.pieces.find(p=>p.owner===owner&&p.type==='K');if(!king)return true;return s.pieces.some(p=>!allied(s,p.owner,owner)&&pseudo(s,p,true).some(m=>m.to===king.at));}
+function applyRaw(s,p,m,promotion='Q'){s.pieces=s.pieces.filter(q=>q.at!==m.to||q.id===p.id);if(p.type==='P'){if(cells[p.at].country===p.owner&&cells[m.to].country===null)p.departed=true;p.dx=m.dx;p.dy=m.dy;}p.at=m.to;if(p.type==='P'&&p.departed&&cells[p.at].country===null){const approach=[step(p.at,p.dx,p.dy),step(p.at,p.dx-p.dy,p.dy+p.dx),step(p.at,p.dx+p.dy,p.dy-p.dx)].some(st=>cells[st.at].country!==null&&cells[st.at].country!==p.owner);if(approach)p.type=promotion;} }
+function legal(s,p){return pseudo(s,p).filter(m=>{const copy=clone(s),q=copy.pieces.find(q=>q.id===p.id);applyRaw(copy,q,m);return!inCheck(copy,p.owner);});}
+function allLegal(s,owner){return s.pieces.filter(p=>p.owner===owner).flatMap(p=>legal(s,p).map(m=>({...m,piece:p.id})));}
+function distance(a,b){const rad=Math.PI/180,x=cells[a],y=cells[b],dl=(y.lat-x.lat)*rad,dn=(y.lon-x.lon)*rad,h=Math.sin(dl/2)**2+Math.cos(x.lat*rad)*Math.cos(y.lat*rad)*Math.sin(dn/2)**2;return 6371*2*Math.asin(Math.sqrt(Math.min(1,h)));}
+function winners(s){const alive=s.players.filter(p=>p.alive);if(alive.length&&alive.every(p=>allied(s,p.id,alive[0].id))){s.winner=alive.map(p=>p.id);for(const p of alive)p.score=1;s.phase='finished';s.log.push(`Shared peace: ${alive.map(p=>p.name).join(', ')}. Each earns 1 point.`);}else if(!alive.length){s.phase='finished';s.log.push('No kings remain. No victory awarded.');}}
+function resolveRound(s){let eliminated=[];while(true){const batch=s.players.filter(p=>p.alive&&allLegal(s,p.id).length===0).map(p=>({owner:p.id,check:inCheck(s,p.id)}));if(!batch.length)break;for(const e of batch){const p=s.players[e.owner];p.alive=false;p.score=e.check?0:.5;s.log.push(`${p.name}: ${e.check?'checkmate · 0':'stalemate · ½'}. Entire army leaves the map.`);}const owners=new Set(batch.map(e=>e.owner));s.pieces=s.pieces.filter(p=>!owners.has(p.owner));eliminated.push(...batch);}winners(s);return eliminated;}
+function advance(s){if(s.phase==='finished')return;let next=s.turn+1;while(next<3&&!s.players[next].alive)next++;if(next>=3){resolveRound(s);s.round++;next=s.players.find(p=>p.alive)?.id??0;}s.turn=next;s.pass=[];}
+function move(s,pieceId,to,promotion='Q'){if(s.phase!=='play')throw Error('Game is not in play');if(!['Q','R','B','N'].includes(promotion))throw Error('Invalid promotion');const p=s.pieces.find(p=>p.id===pieceId);if(!p||p.owner!==s.turn)throw Error('Wait for your country’s turn');const m=legal(s,p).find(m=>m.to===to);if(!m)throw Error('Illegal destination');const from=p.at,type=p.type;let prev=from;for(const n of m.path){s.km[p.owner]+=distance(prev,n);prev=n;}applyRaw(s,p,m,promotion);s.log.push(`${COUNTRIES[p.owner].name}: ${type} ${cells[from].name} → ${cells[to].name}${p.type!==type?' · promotes to '+p.type:''}.`);advance(s);return m;}
+function pass(s){if(s.phase!=='play'||allLegal(s,s.turn).length)throw Error('Pass only when no legal moves remain');s.log.push(`${COUNTRIES[s.turn].name} has no legal move; awaiting simultaneous round adjudication.`);advance(s);}
+function request(s,a,b){if(s.phase!=='play'||a===b||!s.players[a]?.alive||!s.players[b]?.alive||allied(s,a,b))throw Error('Choose a living rival');const key=`${a}:${b}`,count=s.requests[key]||0;if(count>=3)throw Error('Three requests already sent to this rival');s.requests[key]=count+1;return{a,b,count:count+1,members:s.players.filter(p=>p.alive&&(allied(s,p.id,a)||allied(s,p.id,b))).map(p=>p.id)};}
+function accept(s,offer){if(s.phase!=='play'||!s.players[offer.a]?.alive||!s.players[offer.b]?.alive)throw Error('Offer is no longer valid');const oldA=s.alliances[offer.a],oldB=s.alliances[offer.b],group=Math.min(oldA,oldB);s.alliances=s.alliances.map(g=>g===oldA||g===oldB?group:g);s.log.push(`${COUNTRIES[offer.b].name} accepts ${COUNTRIES[offer.a].name}; both complete alliances merge.`);winners(s);}
+return{configure,get W(){return W},get H(){return H},get COUNTRIES(){return COUNTRIES},get cells(){return cells},id,xy,step,fresh,clone,allied,occupant,addPiece,deploy,pseudo,legal,allLegal,inCheck,resolveRound,move,pass,request,accept,distance};
+});
