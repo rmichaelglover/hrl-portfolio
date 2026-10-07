@@ -30,3 +30,7 @@ Use a reverse proxy for TLS, request limits, and static files; the built-in HTTP
 The current release supports username/password signup, login, logout, public profile links, profile editing, and a directory of the 100 most recent members. It has no email collection or password recovery, friends, messaging, matchmaking, ratings, or synchronized saved games. External chess account links are self-reported, not verified identities. Authentication attempts are rate limited per connection IP; a proxy should add public-client rate limits because proxied connections share an IP. Profile fields are rendered as text and external profile links use fixed destinations.
 
 No production account service has been provisioned by these changes. On GitHub Pages the profile page explains that the service is not yet connected and links directly to Maestro.
+
+## Authority and restraint
+
+Future capabilities affecting other users or systems must follow the [authority and restraint charter](../white-hat-hackers/authority.html). The current profile endpoint updates only the authenticated user’s own profile; it grants no administrative, security-testing, or external-system authority. A future consequential controller must enforce scoped authorization, expiry and revocation on the server, human approval, safe stopping, and access-controlled audit records. A client checkbox is insufficient. Do not describe these future controller requirements as implemented by the account service.
