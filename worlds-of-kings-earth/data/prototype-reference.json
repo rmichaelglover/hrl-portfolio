@@ -1,0 +1,14 @@
+{
+  "edition": "Original three-country local game",
+  "url": "https://rmichaelglover.github.io/hrl-portfolio/worlds-of-kings/",
+  "git_reference": "dea342175ae806d3c2c8dfa552187a59e1a70efd",
+  "files_sha256": {
+    "index.html": "5ad2a8407932d8ffd2f30166af7a75c05275a37645a7b4b5ac45e2f0340c1d87",
+    "style.css": "d903bdecefca77c9e7e289ebf594259d7f9eeb99f7ef715cdf5e77736041491c",
+    "test-engine.cjs": "1eb9bc5d0a8ac136f133a413b95f29f3d8b9fb68f496bdcdb54d86a624dc19ac",
+    "app.js": "1b189202b6ddd138df35edefe40cbb0421a3411ae4b27a1265ec7d6de1737ff4",
+    "engine.js": "a09e162820b433d515f1ea735e2f160d8f597d292428c30e468beecd48e2a69a",
+    "README.md": "eeb8f3eb5bedf32434e477ef7bf5c4a01aa65866ea883f8e1fde292477962808"
+  },
+  "note": "The original directory remains the playable edition. This manifest records its bytes before starting the separate real-world atlas."
+}

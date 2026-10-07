@@ -1,0 +1,30 @@
+{
+  "source": "Natural Earth",
+  "release": "v5.1.2",
+  "rights": "Public domain map data; source notices remain distinct from portfolio code licensing.",
+  "source_urls": {
+    "countries": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson",
+    "provinces": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_1_states_provinces.geojson",
+    "cities": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places.geojson"
+  },
+  "source_sha256": {
+    "countries": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+    "provinces": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+    "cities": "9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b"
+  },
+  "mapped_countries_and_territories": 258,
+  "source_province_features": 4596,
+  "land_spaces": 4603,
+  "ocean_spaces": 1778,
+  "cities": 7342,
+  "simplification_degrees": 0.012,
+  "connection_tolerance_degrees": 0.02,
+  "notes": [
+    "Natural Earth uses de facto boundaries and includes territories and disputed areas. This pinned snapshot is not a statement of recognition or a live authoritative border service.",
+    "Province features are heterogeneous administrative levels, not an assertion that every region is legally equivalent to a US state.",
+    "Countries lacking a province feature receive a labeled country fallback, not an invented province.",
+    "Routes are candidates for inspection, not a validated full-match movement ruleset. Some cardinal sectors may be empty. Diagonal candidates can skip two edge steps.",
+    "Population values are source estimates of differing vintages, not current census rankings.",
+    "Ocean components separated by land within a grid cell are distinct spaces. The ocean mask follows the country-layer land union; residual inland water may remain."
+  ]
+}
