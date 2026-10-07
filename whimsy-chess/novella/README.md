@@ -37,3 +37,7 @@ Additional editions, companions, and development paths:
   audience-separation, synthetic-likeness, and non-endorsement boundaries.
 
 Open the games in Maestro, move the pieces, and disagree politely with the narrator.
+
+## Later-audience shelf
+
+[The Golden Apple — King Emanuel and the Last Improvement](reader.html?doc=THE-GOLDEN-APPLE.md) is a separate dark-fantasy chapter about utopia, resurrection, consent, and a king’s final unsound improvement. It includes non-graphic death and crucifixion and an instructional chess commentary. It is not part of the tween trilogy. [Source chapter](THE-GOLDEN-APPLE.md).
