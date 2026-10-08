@@ -43,3 +43,11 @@ The geographic layer, wildlife layer, and chess-role layer describe different th
 Natural Earth v5.1.2 via the [preserved Fusion atlas](../worlds-of-kings-fusion/data/atlas.json); geography is public domain. `data/atlas.json` records the baseline SHA256. Existing D3 vendor files and the local geographic engine are reused; no third-party franchise characters or art are included.
 
 Run `python3 tiny-creek-chess/build.py` (Python/Shapely) and `node tiny-creek-chess/test-lesson.cjs` from the portfolio root. Checks cover all map entries’ minimum space counts, exact stocks and unique deployment, safe starting positions, legal moves, small-country additions, bench conservation, whole-alliance agreements, shared peace, and preservation of the source atlas. Browser validation covers practice movement, lesson persistence, accepting/declining alliances, all three countries sharing peace, Singapore/Monaco/Luxembourg placement, and desktop/mobile layouts.
+
+## Whole-world initialization (October 8 update)
+
+The default **Whole-world teamwork** lesson now initializes all 258 mapped countries and territories simultaneously, with exactly sixteen pieces each (4,128 in total). All councils are allied in this cooperative practice mode. USA, Panama, and South Korea are the featured family councils. The opening globe is centered on Atlanta/Georgia and the southeastern United States; the sixteen USA deployment spaces are chosen near Georgia, with roles shuffled among them. Other countries use randomized distinct home-country spaces. A fresh world uses a new stored seed.
+
+Explore any country using the council selector above the sixteen-piece picker. This avoids an unwieldy 4,128-option menu. Visiting a featured family council selects its pieces and frames its deployment. The optional friendly council game still uses the three selected featured countries and its sequential negotiation rules.
+
+The world save uses `tiny-creek-chess-v2`; previous three-country lesson saves remain under the old key. New whole-world saves persist piece positions, featured countries, selection, and lesson progress. The separate garden save remains independent.
