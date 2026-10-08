@@ -53,3 +53,5 @@ Explore any country using the council selector above the sixteen-piece picker. T
 The world save uses `tiny-creek-chess-v2`; previous three-country lesson saves remain under the old key. New whole-world saves persist piece positions, featured countries, selection, and lesson progress. The separate garden save remains independent.
 
 Kings and queens display three symbols: their animal ambassador, classical chess figurine, and their council’s country flag. The flag stays with the council as the piece travels and also appears for promoted queens. Atlas entries without a usable country-flag code use a neutral white flag.
+
+Flag visibility fix: the map and role card use locally bundled Twemoji SVG flag artwork rather than operating-system emoji fonts. Royal badges are repainted above neighboring pieces and are prioritized for selection. Attribution and the CC BY 4.0 graphics license are in `flags/`. Pixel checks verify colored flag artwork while the test deliberately omits emoji-font drawing; desktop/mobile screenshots confirm visibility.

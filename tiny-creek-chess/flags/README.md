@@ -1,0 +1,1 @@
+Country-flag emoji artwork from Twemoji, by Twitter, Inc. and contributors, maintained by jdecked/twemoji. Unmodified SVG assets downloaded from the main branch on October 8, 2026. Graphics licensed under Creative Commons Attribution 4.0; see LICENSE-GRAPHICS. Source: https://github.com/jdecked/twemoji. Local artwork makes flags independent of operating-system emoji-font support.
