@@ -51,3 +51,5 @@ The default **Whole-world teamwork** lesson now initializes all 258 mapped count
 Explore any country using the council selector above the sixteen-piece picker. This avoids an unwieldy 4,128-option menu. Visiting a featured family council selects its pieces and frames its deployment. The optional friendly council game still uses the three selected featured countries and its sequential negotiation rules.
 
 The world save uses `tiny-creek-chess-v2`; previous three-country lesson saves remain under the old key. New whole-world saves persist piece positions, featured countries, selection, and lesson progress. The separate garden save remains independent.
+
+Kings and queens display three symbols: their animal ambassador, classical chess figurine, and their council’s country flag. The flag stays with the council as the piece travels and also appears for promoted queens. Atlas entries without a usable country-flag code use a neutral white flag.
