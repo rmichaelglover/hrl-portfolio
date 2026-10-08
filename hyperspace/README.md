@@ -21,3 +21,7 @@ Publication checks include page-count verification, text extraction, and rasteri
 ## Contents
 
 Physical–informational fibers; typed composition and mixture; Lorentzian causality and a product metric on a spacelike slice; geographic/informational graphs; simplex invariance; stationary means; primitive consensus; anchored block contraction; multiple anchors and hitting probabilities; Dirichlet energy; ternary visualization; nonlinear multiplicative compatibility and exact logit amplification; symmetry limits; periodic and decaying-weight counterexamples; toy network experiments; stopping certificates; first-order sensitivity; a worked home chain; geographic-world applications and held-out evaluation; six bibliography entries.
+
+## Final verification
+
+The published artifact contains 16 letter-sized pages and eight original vector figures. All 16 pages were rasterized and visually inspected; enlarged pages 7, 10, 13, and 14 cover the convergence theorem, nonlinear update, stopping certificate, sensitivity formula, and exact matrix example. Fonts are embedded. Compilation reported no missing characters, overflowing boxes, or unresolved references. The companion page was checked at 1280px and 390px with all preview images loaded and no horizontal overflow.
