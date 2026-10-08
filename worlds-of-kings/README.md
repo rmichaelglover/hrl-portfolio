@@ -37,3 +37,7 @@ Local browser state uses `worlds-of-kings-v1`; no personal data or external netw
 `node worlds-of-kings/test-engine.cjs`
 
 Tests cover full-army deployment, opening mobility, reversible geographic steps, longitude/polar transitions, ray blocking/capture, turn ownership, own-king safety, exceptional pawn routes, coast promotion, alliance acceptance and per-rival request limits, stalemate scoring, army removal, and shared victory. Browser checks exercise multiple synchronized map views, projections, a legal move, timed deployment, alliance acceptance, persistence, and mobile/desktop layout.
+
+## Region/city viewing focus
+
+A shared place selector now focuses Georgia/Alabama, Atlanta, Mobile, Arlington (Alabama), Hoover/Cahaba, and Yellowstone, with lazy search over Natural Earth country/region/city names. Arlington is a supplemental community point in Wilcox County. Navigation changes the camera only, not ownership, deployment, moves, or saves. In the little-world edition, real coordinates are explicitly a viewing reference over its fictional board. These later user-requested UI additions do not change the original game engine; the original visual snapshot remains in Git history.

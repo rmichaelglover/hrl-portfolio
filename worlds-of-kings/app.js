@@ -49,4 +49,5 @@ let drag=null;p.canvas.onpointerdown=e=>{drag={x:e.clientX,y:e.clientY,startX:e.
 function drawAll(){panes.forEach(draw);}function setViews(count){while(panes.length<count)panes.push(createPane(panes.length));while(panes.length>count)panes.pop().el.remove();$('#panes').classList.toggle('multi',count>1);requestAnimationFrame(drawAll);}$('#views').onchange=e=>setViews(Number(e.target.value));setViews(1);update();if(game.phase==='setup')focus(deployment);else if(game.phase==='play')focus(game.turn);
 // The exported snapshot is a local development aid, never an online authority grant.
 window.WorldKingsUI={snapshot:()=>JSON.parse(JSON.stringify(game)),selectPiece:selection,clickSpace:click,projection:project};
+WorldPlaceNavigation.mount(document.getElementById('place-navigation'),place=>{const p=panes[0];if(!p)return;p.lon=place.center[0];p.lat=place.center[1];p.mode='globe';p.el.querySelector('select').value='globe';p.zoom=Math.min(2.5,place.zoom);document.getElementById('hover').textContent=place.name+' · viewing reference; fictional board unchanged.';drawAll();},true);
 })();

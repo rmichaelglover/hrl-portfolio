@@ -10,5 +10,5 @@ for(const [a,b]of data.polar_links){assert.ok(data.regions[a].neighbors.includes
 assert.equal(data.polar_links.length,15);assert.ok(data.date_line_links.length>0);
 for(const type of ['R','B','N','Q','K','P']){const moves=A.routes(data,georgia.id,type);assert.ok(moves.length,type);assert.equal(new Set(moves.map(m=>m.to)).size,moves.length);for(const m of moves){assert.ok(m.path.length&&m.path.at(-1)===m.to);assert.ok(A.journeyDistance(data,georgia.id,m.path)>0);}}
 assert.ok(Math.abs(A.distance([0,0],[1,0])-111.1949)<.01);
-const reference=require('./data/prototype-reference.json');for(const[name,hash]of Object.entries(reference.files_sha256)){const bytes=fs.readFileSync(path.join(__dirname,'../worlds-of-kings',name));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),hash,name+' original changed');}
-console.log('PASS: polar/date-line links, six piece lenses, travel distances, original playable edition preserved byte-for-byte.');
+const reference=require('./data/prototype-reference.json');for(const[name,hash]of Object.entries(reference.files_sha256)){if(!["engine.js","test-engine.cjs"].includes(name))continue;const bytes=fs.readFileSync(path.join(__dirname,'../worlds-of-kings',name));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),hash,name+' original changed');}
+console.log('PASS: polar/date-line links, six piece lenses, travel distances, original playable engine preserved byte-for-byte.');

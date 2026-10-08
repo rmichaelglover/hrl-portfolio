@@ -1,0 +1,746 @@
+{
+  "sources": {
+    "counties": {
+      "sha256": "7047772ee4616e9e6376cbeec4355cd372db25f344e7ab2614e82f5c53fdce97",
+      "features": 226
+    },
+    "tracts": {
+      "sha256": "39ed8844091c3048f4ec14423fb55b166518c53c20a130835486bf52a667d17d",
+      "features": 4233
+    },
+    "blockgroups": {
+      "sha256": "08e6dd2525b1e642bc04d02ec1cac2ef1fa1d4d3c58fcbb1f4ef3d999ff49d5d",
+      "features": 11371
+    },
+    "metros": {
+      "sha256": "b3044bd8c9fdd6db1fd3409157e5386d33cf9871016af667a64517197ae0f75c",
+      "features": 2
+    },
+    "atlanta-core": {
+      "sha256": "ae7c8d9d643166f15e8cc339efbc721be2fbc559966148c64157d30ea5b2100a",
+      "features": 6789
+    },
+    "mobile-core": {
+      "sha256": "8c3738f9be42b5de2ab5272a99ada15edc11c1b7cca275daa1b1aa5d51530039",
+      "features": 4167
+    },
+    "arlington-core": {
+      "sha256": "0dcab94e144a68b76dbf7b414e6949effca94c52a12bd9f18b27564b039312ee",
+      "features": 745
+    },
+    "rivers": {
+      "sha256": "bb854a900ecbd3b408df46d5e16e3e0f974ba55993f9d8b5c26e855273c0905a",
+      "features": 1455
+    },
+    "lakes": {
+      "sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9",
+      "features": 1355
+    },
+    "mountains": {
+      "sha256": "b7b26e50ea917d3696aec87f932def2bf5f890f5770e441d59c162c6f4c92a77",
+      "features": 1047
+    },
+    "roads": {
+      "sha256": "66a0c7b438e92fd124822cc5921cfa11042f48c294ade5e0f03f2c6640fd0248",
+      "features": 56600
+    },
+    "rails": {
+      "sha256": "a0962d7866060ae3e24df255f6d662389ac9ba7e0df40cf329c2281190b861e6",
+      "features": 25413
+    },
+    "urban": {
+      "sha256": "5136ffd816a9b28c0f295e6797b4c03eaa421be80d78b90f542db4a932dd4497",
+      "features": 11878
+    },
+    "atlanta-roads-29": {
+      "sha256": "7d90c7bfba99ddd8a93d978e789bd9c5686893dcc4fee4b07dbd0a0974043b44",
+      "features": 525
+    },
+    "atlanta-roads-30": {
+      "sha256": "568ab20520f6752259d9e397ae3efe7dfd63a79162205bde39e5482c45764d95",
+      "features": 724
+    },
+    "atlanta-roads-31": {
+      "sha256": "8422659a95e661a02bb10fa75ef4191e790e01161cc02c0c053c27fafa36f8ce",
+      "features": 1394
+    },
+    "atlanta-roads-32": {
+      "sha256": "0afd24310041d228ed7476f89e60caaeebb3328fb87bfff605c3870a9b36cd23",
+      "features": 16813
+    },
+    "atlanta-roads-35": {
+      "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c",
+      "features": 0
+    },
+    "atlanta-roads-38": {
+      "sha256": "161be3f9128f8a245caecf02cf720151f5da88e2ca2c5002b780b46871b1a6b3",
+      "features": 226
+    },
+    "atlanta-water-6": {
+      "sha256": "b74d818e47095d7182dea1f34d1216bb4163c2af8c9adbdf54af62d69b709a36",
+      "features": 460
+    },
+    "atlanta-water-12": {
+      "sha256": "9feb0ee355848f9adf6297c69e65add491a005ca432499a55efb97d06e218910",
+      "features": 117
+    },
+    "mobile-roads-29": {
+      "sha256": "6e94fd905e17a8794775e17def5a8732778f69574cd3cd104757e14a81d257f9",
+      "features": 247
+    },
+    "mobile-roads-30": {
+      "sha256": "e8ed7bbfe5bdb09ac9f15500c6bd7510ac3297fa993e22ad07c11977d71c0c8a",
+      "features": 705
+    },
+    "mobile-roads-31": {
+      "sha256": "e49480771b565dbb25f55cf4a9e29c8ae9b3425b8b3e3901825f2d5f998f4de8",
+      "features": 456
+    },
+    "mobile-roads-32": {
+      "sha256": "98e0e050b57c71f247260373fb4b7708e126b2e934857f5b5e5555566c4f42f9",
+      "features": 16370
+    },
+    "mobile-roads-35": {
+      "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c",
+      "features": 0
+    },
+    "mobile-roads-38": {
+      "sha256": "b8a547c54d04df5cddff090499d1814aa41e2cdc446b7e6ef06bf74fc80d64c2",
+      "features": 332
+    },
+    "mobile-water-6": {
+      "sha256": "553564148ae638075b01b9d194b5c53ec23f92702ecd267fa1fed227999c3095",
+      "features": 760
+    },
+    "mobile-water-12": {
+      "sha256": "d2883c69a32661d8d1b80e37aff4ad96bc52f1fb1f4a1df0096d0a50ef7a4447",
+      "features": 366
+    },
+    "arlington-roads-29": {
+      "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c",
+      "features": 0
+    },
+    "arlington-roads-30": {
+      "sha256": "34e4dfaa64adc3e4fed3593544560bbba3309151547002493ce8f3e3f50cad9c",
+      "features": 113
+    },
+    "arlington-roads-31": {
+      "sha256": "3033863edba08af633d3ebaf76d4cdcb2378e4e12acc9523b32874f3d588f261",
+      "features": 328
+    },
+    "arlington-roads-32": {
+      "sha256": "3ee21ce2f7ba385135a5a3233ee7f93260663a66a02043c2f7cb2019ce3fc403",
+      "features": 2258
+    },
+    "arlington-roads-35": {
+      "sha256": "12eb86ee2f4c2038f17f4d592708ea4c9dd17386966ac8112fbaf5e78442b371",
+      "features": 14
+    },
+    "arlington-roads-38": {
+      "sha256": "37bb50f1c727474d940ea52f8fd77a029204a667ba13a547ba2d4b40391d2b5c",
+      "features": 62
+    },
+    "beltline": {
+      "sha256": "87aa399f6739bdd7da34ae9b3afb6aae95241fa772bfe3972ab31fed14ed57d7",
+      "features": 23
+    },
+    "world-countries": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson"
+    }
+  },
+  "files": {
+    "world": {
+      "features": 258,
+      "bytes": 908595,
+      "sha256": "e45993fbca9cf6a152858b9944bb2e44cb3eda500cc9e196d6677f094150960c"
+    },
+    "states": {
+      "features": 226,
+      "bytes": 211889,
+      "sha256": "7396fd58559cd2b84cdad95d9ed436ccc12c46ef0fbeaee5270493ccd561c9f1"
+    },
+    "tracts": {
+      "features": 4233,
+      "bytes": 3832704,
+      "sha256": "234c6c1a7eb0bcbc7d08174c1f19a59ab366991bec1428134da2eea8d2a40a7b"
+    },
+    "atlanta": {
+      "features": 3942,
+      "bytes": 2987165,
+      "sha256": "6b3199aa28a54e4d5b854c9f0000aa16f39ae513c3e5780de17b71b625ce5fa0"
+    },
+    "mobile": {
+      "features": 352,
+      "bytes": 322689,
+      "sha256": "34a3d5d8b89ee5c819c0c1ec75df6e6f4baa132d62baa9cc3bc07ce0ba592384"
+    },
+    "arlington": {
+      "features": 13,
+      "bytes": 46133,
+      "sha256": "7850d7e9dc447acb7f03020e437975a454cd95814a7fc18ec9acddefe1269295"
+    },
+    "atlanta-core": {
+      "features": 6789,
+      "bytes": 3036742,
+      "sha256": "8ddb9adb8d7560bfd815d47e136f4b338e3ba8bb2a8a622149737eb4689b6591"
+    },
+    "mobile-core": {
+      "features": 4167,
+      "bytes": 2006182,
+      "sha256": "6c5ef628e3e282607e1c383f2f5d669347bff9d81e5d624f31993f42d6ca7edd"
+    },
+    "arlington-core": {
+      "features": 745,
+      "bytes": 775921,
+      "sha256": "ad5ec72e7cadbf935cb6eeb2c1ec15e485c79db92422c660b78152a0383e24df"
+    },
+    "world-water": {
+      "features": 2809,
+      "bytes": 2476176,
+      "sha256": "d20da3f8efbbb49d61926b241c5213f0bea70d559010784d7c09755e04aadde7"
+    },
+    "world-relief": {
+      "features": 294,
+      "bytes": 251800,
+      "sha256": "ca9ca0e5c9a6409017dcf2d76166150b5a23e2e03b542e4503bcd3338f8ebd1e"
+    },
+    "world-transport": {
+      "features": 32221,
+      "bytes": 8472549,
+      "sha256": "d8797bddf300f72feae849f452f774e3e2b74e837b8f669690e2d026866a79d1"
+    },
+    "world-urban": {
+      "features": 11878,
+      "bytes": 5077588,
+      "sha256": "e44da62fb636fcd8dd70c1a3364a55d6548a928e8f0365d01231b7575007ec5f"
+    },
+    "regional-geography": {
+      "features": 970,
+      "bytes": 552549,
+      "sha256": "d1dd3238541fe4ea08208988d7e1f53c8f05fbd93b448962aab3abdec3efd97d"
+    },
+    "atlanta-geography": {
+      "features": 20259,
+      "bytes": 4430727,
+      "sha256": "123450d26ea9aefe043ba6bb1b68b87964967918d010eb2edf7da97670393497"
+    },
+    "mobile-geography": {
+      "features": 19236,
+      "bytes": 4259887,
+      "sha256": "6b4fa7fe89c61b066d0118d29b6a964b802530f7033a38fdd9390e9a6e1707fc"
+    },
+    "arlington-geography": {
+      "features": 2775,
+      "bytes": 675620,
+      "sha256": "b6590eb2b23bd7fc20b028c0b78cfc65cd64afe51f28f22eb0a3fa0c95ba2629"
+    },
+    "beltline": {
+      "features": 23,
+      "bytes": 14924,
+      "sha256": "d3d502e3422794134cbbe831021a376970e796bc9e835635d6079bb5ee250645"
+    }
+  },
+  "download-manifest": {
+    "urban": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_urban_areas.geojson",
+      "bytes": 27943663,
+      "sha256": "5136ffd816a9b28c0f295e6797b4c03eaa421be80d78b90f542db4a932dd4497",
+      "count": 11878
+    },
+    "roads": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_roads.geojson",
+      "bytes": 50474096,
+      "sha256": "66a0c7b438e92fd124822cc5921cfa11042f48c294ade5e0f03f2c6640fd0248",
+      "count": 56600
+    },
+    "rails": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_railroads.geojson",
+      "bytes": 39598080,
+      "sha256": "a0962d7866060ae3e24df255f6d662389ac9ba7e0df40cf329c2281190b861e6",
+      "count": 25413
+    },
+    "rivers": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "bytes": 7307743,
+      "sha256": "bb854a900ecbd3b408df46d5e16e3e0f974ba55993f9d8b5c26e855273c0905a",
+      "count": 1455
+    },
+    "lakes": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_lakes.geojson",
+      "bytes": 5043554,
+      "sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9",
+      "count": 1355
+    },
+    "mountains": {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_geography_regions_polys.geojson",
+      "bytes": 5583870,
+      "sha256": "b7b26e50ea917d3696aec87f932def2bf5f890f5770e441d59c162c6f4c92a77",
+      "count": 1047
+    },
+    "tracts": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer/6/query?where=STATE+IN+%28%2701%27%2C%2713%27%29&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CPOP100%2CAREALAND%2CAREAWATER%2CINTPTLAT%2CINTPTLON&outSR=4326&maxAllowableOffset=0.001&f=geojson",
+      "bytes": 3821897,
+      "sha256": "39ed8844091c3048f4ec14423fb55b166518c53c20a130835486bf52a667d17d",
+      "count": 4233
+    },
+    "blockgroups": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer/8/query?where=STATE+IN+%28%2701%27%2C%2713%27%29&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CPOP100%2CAREALAND%2CAREAWATER%2CINTPTLAT%2CINTPTLON&outSR=4326&maxAllowableOffset=0.0003&f=geojson",
+      "bytes": 12873816,
+      "sha256": "08e6dd2525b1e642bc04d02ec1cac2ef1fa1d4d3c58fcbb1f4ef3d999ff49d5d",
+      "count": 11371
+    },
+    "atlanta-core": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer/10/query?where=1%3D1&geometry=-84.47%2C33.68%2C-84.29%2C33.86&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CPOP100%2CAREALAND%2CAREAWATER%2CINTPTLAT%2CINTPTLON&outSR=4326&maxAllowableOffset=8e-05&f=geojson",
+      "bytes": 2947889,
+      "sha256": "ae7c8d9d643166f15e8cc339efbc721be2fbc559966148c64157d30ea5b2100a",
+      "count": 6789
+    },
+    "mobile-core": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer/10/query?where=1%3D1&geometry=-88.16%2C30.59%2C-87.96%2C30.79&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CPOP100%2CAREALAND%2CAREAWATER%2CINTPTLAT%2CINTPTLON&outSR=4326&maxAllowableOffset=8e-05&f=geojson",
+      "bytes": 1954074,
+      "sha256": "8c3738f9be42b5de2ab5272a99ada15edc11c1b7cca275daa1b1aa5d51530039",
+      "count": 4167
+    },
+    "arlington-core": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer/10/query?where=1%3D1&geometry=-87.8%2C31.88%2C-87.38%2C32.23&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CPOP100%2CAREALAND%2CAREAWATER%2CINTPTLAT%2CINTPTLON&outSR=4326&maxAllowableOffset=8e-05&f=geojson",
+      "bytes": 768639,
+      "sha256": "0dcab94e144a68b76dbf7b414e6949effca94c52a12bd9f18b27564b039312ee",
+      "count": 745
+    },
+    "beltline": {
+      "url": "https://gis.beltline.org/server/rest/services/ABI_Trails_public/FeatureServer/0/query?where=1%3D1&outFields=%2A&outSR=4326&f=geojson",
+      "bytes": 180516,
+      "sha256": "87aa399f6739bdd7da34ae9b3afb6aae95241fa772bfe3972ab31fed14ed57d7",
+      "count": 23
+    }
+  },
+  "census_base": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/tigerWMS_Census2020/MapServer",
+  "focus": {
+    "arlington": {
+      "center": [
+        -87.5886139,
+        32.0570917
+      ],
+      "label": "Arlington, Alabama \u00b7 Wilcox County \u00b7 local focus, not a metro",
+      "coordinate_reference": "https://en.wikipedia.org/wiki/Arlington,_Alabama"
+    },
+    "atlanta": {
+      "center": [
+        -84.388,
+        33.749
+      ],
+      "cbsa": "12060"
+    },
+    "mobile": {
+      "center": [
+        -88.0399,
+        30.6954
+      ],
+      "cbsa": "33660"
+    }
+  },
+  "local-download-manifest": {
+    "available": {
+      "atlanta-roads-29": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/29/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 525,
+        "sha256": "7d90c7bfba99ddd8a93d978e789bd9c5686893dcc4fee4b07dbd0a0974043b44"
+      },
+      "atlanta-roads-30": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/30/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 724,
+        "sha256": "568ab20520f6752259d9e397ae3efe7dfd63a79162205bde39e5482c45764d95"
+      },
+      "atlanta-roads-31": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/31/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 1394,
+        "sha256": "8422659a95e661a02bb10fa75ef4191e790e01161cc02c0c053c27fafa36f8ce"
+      },
+      "atlanta-roads-32": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/32/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 16813,
+        "sha256": "0afd24310041d228ed7476f89e60caaeebb3328fb87bfff605c3870a9b36cd23"
+      },
+      "atlanta-roads-35": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/35/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 0,
+        "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c"
+      },
+      "atlanta-roads-38": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/38/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 226,
+        "sha256": "161be3f9128f8a245caecf02cf720151f5da88e2ca2c5002b780b46871b1a6b3"
+      },
+      "atlanta-water-6": {
+        "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 460,
+        "sha256": "b74d818e47095d7182dea1f34d1216bb4163c2af8c9adbdf54af62d69b709a36"
+      },
+      "atlanta-water-12": {
+        "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-84.47,33.68,-84.29,33.86",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 117,
+        "sha256": "9feb0ee355848f9adf6297c69e65add491a005ca432499a55efb97d06e218910"
+      },
+      "mobile-roads-29": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/29/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 247,
+        "sha256": "6e94fd905e17a8794775e17def5a8732778f69574cd3cd104757e14a81d257f9"
+      },
+      "mobile-roads-30": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/30/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 705,
+        "sha256": "e8ed7bbfe5bdb09ac9f15500c6bd7510ac3297fa993e22ad07c11977d71c0c8a"
+      },
+      "mobile-roads-31": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/31/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 456,
+        "sha256": "e49480771b565dbb25f55cf4a9e29c8ae9b3425b8b3e3901825f2d5f998f4de8"
+      },
+      "mobile-roads-32": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/32/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 16370,
+        "sha256": "98e0e050b57c71f247260373fb4b7708e126b2e934857f5b5e5555566c4f42f9"
+      },
+      "mobile-roads-35": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/35/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 0,
+        "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c"
+      },
+      "mobile-roads-38": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/38/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 332,
+        "sha256": "b8a547c54d04df5cddff090499d1814aa41e2cdc446b7e6ef06bf74fc80d64c2"
+      },
+      "mobile-water-6": {
+        "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 760,
+        "sha256": "553564148ae638075b01b9d194b5c53ec23f92702ecd267fa1fed227999c3095"
+      },
+      "mobile-water-12": {
+        "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-88.16,30.59,-87.96,30.79",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 366,
+        "sha256": "d2883c69a32661d8d1b80e37aff4ad96bc52f1fb1f4a1df0096d0a50ef7a4447"
+      },
+      "arlington-roads-29": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/29/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 0,
+        "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c"
+      },
+      "arlington-roads-30": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/30/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 113,
+        "sha256": "34e4dfaa64adc3e4fed3593544560bbba3309151547002493ce8f3e3f50cad9c"
+      },
+      "arlington-roads-31": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/31/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 328,
+        "sha256": "3033863edba08af633d3ebaf76d4cdcb2378e4e12acc9523b32874f3d588f261"
+      },
+      "arlington-roads-32": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/32/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 2258,
+        "sha256": "3ee21ce2f7ba385135a5a3233ee7f93260663a66a02043c2f7cb2019ce3fc403"
+      },
+      "arlington-roads-35": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/35/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 14,
+        "sha256": "12eb86ee2f4c2038f17f4d592708ea4c9dd17386966ac8112fbaf5e78442b371"
+      },
+      "arlington-roads-38": {
+        "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/38/query",
+        "query": {
+          "where": "1=1",
+          "geometry": "-87.8,31.88,-87.38,32.23",
+          "geometryType": "esriGeometryEnvelope",
+          "inSR": 4326,
+          "spatialRel": "esriSpatialRelIntersects",
+          "outFields": "*",
+          "outSR": 4326,
+          "geometryPrecision": 5,
+          "maxAllowableOffset": 0.0001,
+          "resultRecordCount": 10000,
+          "f": "geojson"
+        },
+        "features": 62,
+        "sha256": "37bb50f1c727474d940ea52f8fd77a029204a667ba13a547ba2d4b40391d2b5c"
+      }
+    },
+    "missing": [
+      "arlington-water-6",
+      "arlington-water-12"
+    ]
+  }
+}

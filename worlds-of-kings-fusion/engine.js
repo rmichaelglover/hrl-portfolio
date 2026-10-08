@@ -7,7 +7,7 @@ let atlas=null;let cells=Array.from({length:W*H},(_,n)=>{const[x,y]=xy(n),c=COUN
 function configure(data,codes=['USA','FRA','KOR']){
  const A=typeof EarthAtlas!=='undefined'?EarthAtlas:require('./atlas-core.js');atlas=A.prepare(data);W=data.regions.length;H=1;
  COUNTRIES=codes.map((code,id)=>({id,code,name:data.countries.find(c=>c.id===code).name,color:['#3d6ca8','#aa4b40','#5b783a'][id],facing:-1}));
- cells=data.regions.map(r=>({id:r.id,country:r.country===null?null:Math.max(-1,codes.indexOf(r.country)),name:r.name,lon:r.center[0],lat:r.center[1],x:r.col??-1,y:r.row??-1}));
+ cells=data.regions.map(r=>({id:r.id,country:r.country===null?null:Math.max(-1,codes.indexOf(r.country)),name:r.name,lon:r.center[0],lat:r.center[1],x:r.col??-1,y:r.row??-1,promotion:r.promotion||null}));
 }
 function step(n,dx,dy){
  if(atlas){const dirs=[[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1]],d=dirs.findIndex(v=>v[0]===dx&&v[1]===dy),A=typeof EarthAtlas!=='undefined'?EarthAtlas:require('./atlas-core.js'),st=A.next(atlas,n,d);if(!st)return{at:n,dx,dy,polar:false};return{at:st.to,dx:dirs[st.d][0],dy:dirs[st.d][1],polar:st.polar};}
@@ -33,7 +33,7 @@ if(p.type==='N')for(const[dx,dy]of DIRS)for(const sign of[-1,1]){const a=step(p.
 if(p.type==='P'){const forward=step(p.at,p.dx,p.dy),left=step(p.at,p.dx-p.dy,p.dy+p.dx),right=step(p.at,p.dx+p.dy,p.dy-p.dx);for(const st of[left,right]){const q=occupant(s,st.at);if(attack||q&&!allied(s,p.owner,q.owner))offer(st.at,[st.at],forward.dx,forward.dy);}if(!attack){if(!occupant(s,forward.at))offer(forward.at,[forward.at],forward.dx,forward.dy);const c=cells[p.at];if(c.country===null&&(c.y===1||c.y===H-2)&&c.x%6===0){for(const sign of[-1,1]){const st=sign<0?left:right;if(!occupant(s,st.at))offer(st.at,[st.at],forward.dx,forward.dy);}}}}
 return out;}
 function inCheck(s,owner){const king=s.pieces.find(p=>p.owner===owner&&p.type==='K');if(!king)return true;return s.pieces.some(p=>!allied(s,p.owner,owner)&&pseudo(s,p,true).some(m=>m.to===king.at));}
-function applyRaw(s,p,m,promotion='Q'){s.pieces=s.pieces.filter(q=>q.at!==m.to||q.id===p.id);if(p.type==='P'){if(cells[p.at].country===p.owner&&cells[m.to].country===null)p.departed=true;p.dx=m.dx;p.dy=m.dy;}p.at=m.to;if(p.type==='P'&&p.departed&&cells[p.at].country===null){const approach=[step(p.at,p.dx,p.dy),step(p.at,p.dx-p.dy,p.dy+p.dx),step(p.at,p.dx+p.dy,p.dy-p.dx)].some(st=>cells[st.at].country!==null&&cells[st.at].country!==p.owner);if(approach)p.type=promotion;} }
+function applyRaw(s,p,m,promotion='Q'){s.pieces=s.pieces.filter(q=>q.at!==m.to||q.id===p.id);if(p.type==='P'){if(cells[p.at].country===p.owner&&cells[m.to].country===null)p.departed=true;p.dx=m.dx;p.dy=m.dy;}p.at=m.to;if(p.type==='P'&&cells[p.at].promotion){p.type=promotion;}if(p.type==='P'&&p.departed&&cells[p.at].country===null){const approach=[step(p.at,p.dx,p.dy),step(p.at,p.dx-p.dy,p.dy+p.dx),step(p.at,p.dx+p.dy,p.dy-p.dx)].some(st=>cells[st.at].country!==null&&cells[st.at].country!==p.owner);if(approach)p.type=promotion;} }
 function legal(s,p){return pseudo(s,p).filter(m=>{const copy=clone(s),q=copy.pieces.find(q=>q.id===p.id);applyRaw(copy,q,m);return!inCheck(copy,p.owner);});}
 function allLegal(s,owner){return s.pieces.filter(p=>p.owner===owner).flatMap(p=>legal(s,p).map(m=>({...m,piece:p.id})));}
 function distance(a,b){const rad=Math.PI/180,x=cells[a],y=cells[b],dl=(y.lat-x.lat)*rad,dn=(y.lon-x.lon)*rad,h=Math.sin(dl/2)**2+Math.cos(x.lat*rad)*Math.cos(y.lat*rad)*Math.sin(dn/2)**2;return 6371*2*Math.asin(Math.sqrt(Math.min(1,h)));}

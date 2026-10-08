@@ -44,3 +44,7 @@ node test-atlas.cjs
 ```
 
 The builder requires Shapely. Source data is public domain; D3 libraries keep their licenses in `vendor/`. Browser fetches the static atlas. The local `worlds-of-kings-earth-v1` record stores selected space, token, crowns, and travel ledger without sending them to a server. Clearing this journey affects only this atlas save; the original game remains separate.
+
+## Region/city viewing focus
+
+A shared place selector now focuses Georgia/Alabama, Atlanta, Mobile, Arlington (Alabama), Hoover/Cahaba, and Yellowstone, with lazy search over Natural Earth country/region/city names. Arlington is a supplemental community point in Wilcox County. Navigation changes the camera only, not ownership, deployment, moves, or saves. In the little-world edition, real coordinates are explicitly a viewing reference over its fictional board. These later user-requested UI additions do not change the original game engine; the original visual snapshot remains in Git history.

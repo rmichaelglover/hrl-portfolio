@@ -1,6 +1,6 @@
 # Worlds of Kings · Fusion (version 3)
 
-A separate, playable local three-player Earth prototype. Versions 1 (`../worlds-of-kings/`) and 2 (`../worlds-of-kings-earth/`) remain unchanged, including their saves. Fusion uses `worlds-of-kings-fusion-v1`.
+A separate, playable local three-player Earth prototype. Versions 1 (`../worlds-of-kings/`) and 2 (`../worlds-of-kings-earth/`) keep their engines and saves; all editions now include city/region camera navigation. Fusion uses `worlds-of-kings-fusion-v2`.
 
 Choose three different countries with at least sixteen mapped administrative spaces. Each receives sixteen pieces. Pass the device between players. Select a piece on the map or through “Your piece”, then click a highlighted destination or use the destination selector. “Focus current player” zooms to the king. The default USA/France/South Korea opening has been verified for safe kings and legal moves. Other combinations are experimental; close geographic rivals can have opening checks.
 
@@ -12,13 +12,13 @@ The real atlas supplies province and ocean cells and named geography. The match 
 
 These are **experimental geographic chess conventions**, not a claim that irregular real borders determine unique orthodox moves. Candidate diagonals can connect regions separated by two border steps. Coastal gaps and disconnected spaces remain from version 2. Small countries lacking sixteen mapped spaces cannot be selected yet; city-area supplements and full-country multiplayer remain future work. No timed manual deployment, country reservation, accounts, matchmaking, Elo, or online multiplayer in Fusion yet. The original remains the timed-deployment reference.
 
-Ocean spaces start tan-brown/white. Occupied ocean endpoints permanently reveal the same parity in dark/light blue. Land uses green/yellow/grey, with brown as a fourth color. The source tolerance graph has 28 same-color neighbor connections; it is not certified planar. Borders and selections still make spaces distinguishable.
+Ocean spaces start tan-brown/white. Occupied ocean endpoints permanently reveal the same parity in dark/light blue. Land uses green/yellow/grey, with dark green as a fourth color. The source tolerance graph has 28 same-color neighbor connections; it is not certified planar. Borders and selections still make spaces distinguishable.
 
 ## Responsiveness and language choices
 
 Browser UI, canvas rendering, spherical projections, and the adapted game rules use JavaScript. **C++17 performs build-time graph coloring and spatial indexing**. It completes in about 0.6 seconds on the development machine and ships only its JSON output. Visitors require no native program, compiler, plugin, or cross-origin WebAssembly settings. No runtime C++ speedup is claimed.
 
-Python/Shapely performs topology-preserving cartographic simplification at 0.10 degrees; areas smaller than 0.15 square degrees keep their original geometry. Combined country/region vertices dropped from 653,295 to 187,485 (about 71% fewer). Geometry size drops from approximately 16.6 MB to 7.3 MB. Runtime coloring is skipped because C++ supplies colors, and a native-built 10-degree spatial index narrows exact spherical polygon hit tests. Tiny regions retain geography, and search/focus plus keyboard selectors provide access. Simplified adjacent borders can show small seams; source movement connections remain unchanged.
+Python/Shapely performs topology-preserving cartographic simplification at 0.10 degrees; areas smaller than 0.15 square degrees keep their original geometry. Combined country/region vertices dropped from 653,295 to 187,485 (about 71% fewer). Geometry size drops from approximately 16.6 MB to 7.3 MB. Runtime coloring is skipped because C++ supplies colors, and a native-built 10-degree spatial index narrows exact spherical polygon hit tests. Tiny regions retain geography, and search/focus plus keyboard selectors provide access. Simplified adjacent borders can show small seams; source movement connections are retained except for merging Antarctic spaces into one shared destination.
 
 These are size/work reductions, not a measured FPS guarantee. Browser rendering is still the main runtime cost. A runtime C++/WebAssembly port can be evaluated if profiling shows rules rather than drawing dominate; a C++ source port alone would not run in a web browser.
 
@@ -38,3 +38,11 @@ Tests verify 48-piece deployment, default opening safety and mobility, a legal m
 ## Sources and rights
 
 Natural Earth v5.1.2, public-domain map data; [source manifest](../worlds-of-kings-earth/data/manifest.json) and [source notices](../worlds-of-kings-earth/data/SOURCE-NOTICES.md). Source counts include territories and disputed areas, not exclusively universally recognized states. Source population estimates are not live censuses. D3 7.9.0 and d3-geo-projection 4.0.0 are reused from version 2's locally hosted vendor files with their respective license notices. The [authority and restraint charter](../white-hat-hackers/authority.html) applies to future consequential features; game actions confer no authority over real people or systems.
+
+## Region/city viewing focus
+
+A shared place selector now focuses Georgia/Alabama, Atlanta, Mobile, Arlington (Alabama), Hoover/Cahaba, and Yellowstone, with lazy search over Natural Earth country/region/city names. Arlington is a supplemental community point in Wilcox County. Navigation changes the camera only, not ownership, deployment, moves, or saves. In the little-world edition, real coordinates are explicitly a viewing reference over its fictional board. These later user-requested UI additions do not change the original game engine; the original visual snapshot remains in Git history.
+
+## Polar promotion
+
+Antarctica is one playable space retaining its geographic outline. A pawn entering it or a North Pole ocean cell promotes to the selected queen, rook, bishop, or knight. Entry must remain legal: forward into an empty space or diagonal capture of an enemy non-king. One piece can occupy Antarctica. All other promotion rules remain. Board IDs changed, so this edition uses a fresh v2 local save; the earlier v1 browser save is retained. The two earlier engines are preserved.
