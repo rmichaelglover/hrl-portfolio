@@ -1,0 +1,12 @@
+{
+  "edition": "worlds-of-kings-fusion",
+  "commit": "d7954df5b4165601d938b5152a87c44a6904793f",
+  "files_sha256": {
+    "app.js": "91fbef853f650d9ab02da0c2c63b67757c76f3389214242f35f035ad12bbc1e6",
+    "engine.js": "b6b8b84e26e7fa4097a87961e0546ede4790ef579040915a368689e1d183bd59",
+    "atlas-core.js": "c60905a3a4e11b169de7f394d97ea96e7d39457f85d9a003bcad4f73c1207167",
+    "index.html": "e5f26c3e2563195cf6906145771d3b4a74d3d0fe811ea280aa6a4da0ae5ae0f6",
+    "style.css": "46814dc46a1d9b3b557532640bb9a607d880523efbef964a1722dcda663b036b",
+    "data/atlas.json": "68b4047dd21f617fe8006282f827531003850c47ece79652c1dfec4c36cc558d"
+  }
+}

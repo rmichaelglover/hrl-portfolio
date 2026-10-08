@@ -1,0 +1,19 @@
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.EmojiWorld=factory();})(globalThis,function(){
+'use strict';
+const wildlife={
+ USA:[['🐻','American black bear','https://www.nps.gov/grsm/learn/nature/mammal-checklist.htm'],['🦝','Raccoon','https://www.nps.gov/grsm/learn/nature/mammal-checklist.htm'],['🦌','White-tailed deer','https://www.nps.gov/grsm/learn/nature/mammal-checklist.htm'],['🐿️','Red squirrel · squirrel emoji approximation','https://www.nps.gov/grsm/learn/nature/mammals.htm']],
+ FRA:[['🦊','Red fox','https://isyeb.mnhn.fr/fr/actualites/chronique-ndeg40-le-renard-roux-paris-7323'],['🦌','Roe deer','https://inpn.mnhn.fr/docs/LR_FCE/Liste_rouge_France_Mammiferes_de_metropole_2017.pdf']],
+ KOR:[['🦌','Korean water deer · antlered emoji approximation','https://www.nie.re.kr/nie/pgm/nature/view.do?contIdx=4&menuNo=200038'],['🦦','Eurasian otter','https://www.nie.re.kr/nie/pgm/edSearch/list.do?menuNo=200133']],
+ GBR:[['🦊','Red fox','https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/'],['🦡','Badger','https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/'],['🦌','Roe deer','https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/'],['🐿️','Red squirrel · squirrel emoji approximation','https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/animals/mammals/']],
+ AUS:[['🐨','Koala','https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/priority-mammals/koala']],
+ NZL:[['🐦','Kiwi · bird emoji approximation','https://www.doc.govt.nz/kiwi'],['🐧','Little blue penguin · generic penguin emoji','https://www.doc.govt.nz/penguins']],
+ BRA:[['🐆','Jaguar · leopard emoji approximation','https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade/pan/pan-grandes-felinos']],
+ CHN:[['🐼','Giant panda','https://m.panda.org.cn/en/about/']],
+ ATA:[['🐧','Emperor / Adélie penguin · coastal wildlife, not interior occupancy','https://www.bas.ac.uk/about/education-and-schools/antarctic-wildlife/'],['🦭','Weddell seal · coastal wildlife','https://www.bas.ac.uk/about/education-and-schools/antarctic-wildlife/']]
+};
+function theme(themes,code){return themes.countries[code]||{flag:'🌐',names:['blue','white'],colors:['#275a9e','#ffffff'],symbols:['🌊','☁️','💎','❄️'],basis:'neutral fallback'};}
+function roster(themes,code){const animals=(wildlife[code]||[]).map(([emoji,name,source])=>({emoji,name,source,kind:'native wildlife inspiration'}));const symbols=theme(themes,code).symbols.map(emoji=>({emoji,name:'Flag-colored decorative symbol',kind:'flag decoration',source:null}));return [...animals,...symbols];}
+function character(themes,code,piece){const list=roster(themes,code);return list[((piece.id%16)+16)%16%list.length];}
+function resident(themes,region){const animals=wildlife[region.country];if(animals?.length){const [emoji,name,source]=animals[(region.id*7)%animals.length];return{emoji,name,source,kind:'native wildlife inspiration'};}const t=theme(themes,region.country);return{emoji:t.symbols[(region.id*7)%t.symbols.length],name:'Flag-colored decorative symbol',kind:'flag decoration'};}
+function wash(hex,amount=.68){const rgb=hex.slice(1).match(/../g).map(x=>Math.round(parseInt(x,16)*(1-amount)+255*amount));return'#'+rgb.map(x=>x.toString(16).padStart(2,'0')).join('');}
+return{wildlife,theme,roster,character,resident,wash};});
