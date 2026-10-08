@@ -1,0 +1,23 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/FGrv39Du"]
+[Date "2026.08.01"]
+[Round "-"]
+[White "vuvuvava"]
+[Black "mannyfresher"]
+[Result "0-1"]
+[WhiteElo "928"]
+[BlackElo "806"]
+[TimeControl "600+0"]
+[Termination "Normal"]
+[GameId "FGrv39Du"]
+[Variant "Standard"]
+[ECO "C40"]
+[Opening "King's Knight Opening"]
+[StudyName "Bongcloud"]
+[ChapterName "vuvuvava (928) - mannyfresher (806)"]
+[ChapterURL "https://lichess.org/study/r9fP2MoH/mpztal04"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. e4 { [%eval 0.18] [%clk 0:10:00] } 1... e5 { [%eval 0.22] [%clk 0:10:00] } 2. Nf3 { [%eval 0.18] [%clk 0:09:59] } 2... Ke7?? { [%eval 2.85] } { Blunder. Nc6 was best. } { [%clk 0:09:56] } (2... Nc6 3. Bc4 Nf6 4. d3 a6 5. c3 Bc5 6. O-O d6 7. Re1) 3. Nxe5 { [%eval 3.12] [%clk 0:09:57] } 3... f6 { [%eval 3.54] [%clk 0:09:55] } 4. Nf3?! { [%eval 2.73] } { Inaccuracy. Nc4 was best. } { [%clk 0:09:52] } (4. Nc4 Qe8 5. Nc3 Kd8 6. Be2 Bb4 7. Nd5 a5 8. Bf3 Ne7) 4... d6 { [%eval 3.06] [%clk 0:09:53] } 5. Nc3 { [%eval 3.5] [%clk 0:09:46] } 5... Nc6 { [%eval 3.22] [%clk 0:09:52] } 6. Nd5+ { [%eval 3.06] [%clk 0:09:44] } 6... Ke6 { [%eval 3.57] [%clk 0:09:49] } 7. Nf4+ { [%eval 3.35] [%clk 0:09:42] } 7... Kf7 { [%eval 3.38] [%clk 0:09:44] } 8. Bc4+ { [%eval 3.41] [%clk 0:09:41] } 8... Ke8 { [%eval 3.53] [%clk 0:09:38] } 9. Nh4 { [%eval 2.89] [%clk 0:09:30] } 9... Qe7 { [%eval 2.96] [%clk 0:09:36] } 10. Qh5+?! { [%eval 2.19] } { Inaccuracy. O-O was best. } { [%clk 0:09:28] } (10. O-O Kd8 11. d3 Qe8 12. Nf5 h5 13. Bd2 g6 14. Ne3 Ne5 15. Bb3 g5) 10... g6 { [%eval 2.22] [%clk 0:09:33] } 11. Nhxg6 { [%eval 2.27] [%clk 0:09:26] } 11... Qxe4+ { [%eval 2.15] [%clk 0:09:29] } 12. Kd1?? { [%eval -2.22] } { Blunder. Be2 was best. } { [%clk 0:09:21] } (12. Be2 hxg6 13. Qxh8 Qxf4 14. Qxg8 Qe4 15. f3 Qxc2 16. Bb5 Bf5 17. O-O Kd7) 12... Qxc4?? { [%eval 5.04] } { Blunder. hxg6 was best. } { [%clk 0:09:24] } (12... hxg6 13. Qxh8 Qxc4 14. d3 Qf7 15. f3 Bf5 16. Qh4 g5 17. Qe1+ Kd7 18. Ne2) 13. Nxh8+ { [%eval 5.28] [%clk 0:09:19] } 13... Kd7 { [%eval 5.99] [%clk 0:09:19] } 14. Qxh7+?! { [%eval 4.61] } { Inaccuracy. d3 was best. } { [%clk 0:09:11] } (14. d3 Qd4 15. Qg4+ Ke8 16. Qxg8 Ne5 17. Re1 Kd7 18. Qxf8 Kc6 19. f3 Nxf3) 14... Nce7 { [%eval 5.08] [%clk 0:09:14] } 15. Ne2?? { [%eval 2.28] } { Blunder. Nhg6 was best. } { [%clk 0:08:49] } (15. Nhg6 Ke8 16. d3 Qf7 17. Qxf7+ Kxf7 18. Nxf8 Kxf8 19. Be3 Nf5 20. Kd2 Kf7) 15... Kc6?! { [%eval 3.06] } { Inaccuracy. Qg4 was best. } { [%clk 0:09:11] } (15... Qg4 16. Re1 Qg7 17. Qh3+ Kd8 18. Qh4 Bf5 19. d3 Bh7 20. Bd2 Qxh8 21. Nd4) 16. d3 { [%eval 2.83] [%clk 0:08:44] } 16... Qc5?! { [%eval 3.72] } { Inaccuracy. Qg4 was best. } { [%clk 0:09:08] } (16... Qg4 17. h3 Qxg2 18. Rg1 Qxf2 19. Qe4+ d5 20. Qd4 Qf3 21. Bf4 Be6 22. Qa4+) 17. Qxg8?? { [%eval -4.4] } { Blunder. Ng6 was best. } { [%clk 0:08:13] } (17. Ng6 Qxf2 18. Qh4 Qxh4 19. Nxh4 a5 20. a4 b6 21. h3 Bb7 22. Bd2 Kd7) 17... Nxg8 { [%eval -4.37] } { 0-1 White resigns. } { [%clk 0:09:04] } 0-1
+
+

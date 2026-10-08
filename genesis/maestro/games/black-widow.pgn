@@ -1,0 +1,23 @@
+[Event "rated bullet game"]
+[Site "https://lichess.org/xyRYteqo"]
+[Date "2026.07.28"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "mateito_fullhouse"]
+[Result "1-0"]
+[WhiteElo "950"]
+[BlackElo "899"]
+[TimeControl "60+0"]
+[Termination "Time forfeit"]
+[GameId "xyRYteqo"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Van't Kruijs Opening"]
+[StudyName "Black Widow"]
+[ChapterName "mannyfresher (950) - mateito_fullhouse (899)"]
+[ChapterURL "https://lichess.org/study/oFd45chG/qilMcvWP"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. e3 { [%clk 0:01:00] } 1... b6 { [%clk 0:01:00] } 2. Qh5 { [%clk 0:01:00] } 2... g6 { [%clk 0:00:49] } 3. Qb5 { [%clk 0:00:58] } 3... c6 { [%clk 0:00:45] } 4. Qb3 { [%clk 0:00:56] } 4... b5 { [%clk 0:00:42] } 5. c4 { [%clk 0:00:55] } 5... bxc4 { [%clk 0:00:39] } 6. Qxc4 { [%clk 0:00:53] } 6... Ba6 { [%clk 0:00:32] } 7. Qe4 { [%clk 0:00:49] } 7... e6 { [%clk 0:00:30] } 8. d3 { [%clk 0:00:44] } 8... Nf6 { [%clk 0:00:26] } 9. Qe5 { [%clk 0:00:41] } 9... Ng4 { [%clk 0:00:21] } 10. Qxh8 { [%clk 0:00:38] } 10... Qf6 { [%clk 0:00:12] } 11. Qg8 { [%clk 0:00:35] } 11... Nh6 { [%clk 0:00:07] } 12. Qxh7 { [%clk 0:00:28] } 12... Qg7 { [%clk 0:00:05] } 13. Qxg7 { [%clk 0:00:26] } 13... Bxg7 { [%clk 0:00:04] } 14. e4 { [%clk 0:00:26] } 14... d6 { [%clk 0:00:01] } 15. Bxh6 { [%clk 0:00:26] } 15... Nd7 { [%clk 0:00:00] } 16. Bxg7 { 1-0 White wins on time. } { [%clk 0:00:26] } 1-0
+
+

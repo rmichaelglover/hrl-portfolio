@@ -1,0 +1,49 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/4CGK6ijD"]
+[Date "2026.06.30"]
+[Round "-"]
+[White "pappymagee"]
+[Black "tamizh-ind-2016"]
+[Result "0-1"]
+[GameId "4CGK6ijD"]
+[UTCDate "2026.06.30"]
+[UTCTime "02:34:17"]
+[WhiteElo "947"]
+[BlackElo "976"]
+[WhiteRatingDiff "-13"]
+[BlackRatingDiff "+5"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "D00"]
+[Opening "Blackmar-Diemer Gambit (declined / 2...dxe4 3.c4 lines)"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. d4 { [%eval 0.15] } d5 { [%eval 0.27] }
+2. e4?! { (0.27 -> -0.64) Inaccuracy. c4 was best. } { [%eval -0.64] } { D00 Blackmar-Diemer Gambit }
+dxe4 { [%eval -0.52] } 3. c4?! { (-0.52 -> -1.48) Inaccuracy. Nc3 was best. } { [%eval -1.48] }
+Nf6?! { (-1.48 -> -0.68) } { [%eval -0.68] } 4. d5?! { (-0.68 -> -1.74) } { [%eval -1.74] }
+Qd6?! { (-1.74 -> -1.02) } { [%eval -1.02] } 5. Nc3 { [%eval -0.86] }
+Qc5? { (-0.86 -> 0.25) Mistake. e6 was best. } { [%eval 0.25] } 6. a3 { [%eval 0.17] }
+e6 { [%eval 0.19] } 7. b4 { [%eval -0.31] } Qe7 { [%eval -0.32] }
+8. Bg5?! { (-0.32 -> -1.30) } { [%eval -1.3] } Qd8?! { (-1.30 -> -0.42) } { [%eval -0.42] }
+9. Bxf6 { [%eval -0.64] } Qxf6 { [%eval -0.41] }
+10. h4?? { (-0.41 -> -6.61) Blunder. Nxe4 was best. } { [%eval -6.61] }
+Qxc3+ { [%eval -6.64] } 11. Qd2 { [%eval -8.26] } Qxa1+ { [%eval -8.31] }
+12. Ke2 { [%eval -8.23] } Qxa3 { [%eval -8.23] } 13. h5 { [%eval -8.86] } Qa1 { [%eval -7.65] }
+14. h6 { [%eval -7.64] } gxh6 { [%eval -7.7] } 15. g3 { [%eval -7.87] } Qg7 { [%eval -6.69] }
+16. Rxh6 { [%eval -8.84] } Qxh6 { [%eval -8.93] } 17. Qxh6 { [%eval -8.95] } Bxh6 { [%eval -8.91] }
+18. Bh3 { [%eval -9.18] } exd5 { [%eval -8.24] } 19. Bxc8 { [%eval -8.14] } Nc6 { [%eval -8.23] }
+20. Bxb7 { [%eval -8.09] } Rb8 { [%eval -7.21] } 21. Bxc6+ { [%eval -7.08] } Kd8 { [%eval -7.15] }
+22. f4 { [%eval -7.4] } Rxb4 { [%eval -7.47] } 23. cxd5 { [%eval -7.93] } a5 { [%eval -7.41] }
+24. f5 { [%eval -9.03] } a4 { [%eval -9.1] } 25. d6 { [%eval -9.04] } a3 { [%eval -8.56] }
+26. d7? { (-8.56 -> #-7) Checkmate is now unavoidable. } { [%eval #-7] } a2 { [%eval #-7] }
+27. Kf2 { [%eval #-7] } a1=Q { [%eval #-6] } 28. Kg2 { [%eval #-4] } Rb3 { [%eval #-5] }
+29. Kh2 { [%eval #-4] } Qf1 { [%eval #-3] } 30. Bxe4 { [%eval #-3] } Rb2+ { [%eval #-2] }
+31. Kh1 { [%eval #-2] } Rb1 { [%eval #-4] } 32. Bxb1 { [%eval #-4] } Qxb1 { [%eval #-7] }
+33. Kg2 { [%eval -11.55] } c5 { [%eval -11.47] } 34. Nf3 { [%eval -11.59] } c4 { [%eval -11.04] }
+35. Ne5 { [%eval -12.94] } c3 { [%eval -10.57] } 36. Kf3 { [%eval -14.2] } Rf8 { [%eval -12.62] }
+37. Kg4?! { (-12.62 -> #-6) Checkmate is now unavoidable. } { [%eval #-6] } c2 { [%eval #-6] }
+38. Kh5 { [%eval #-4] } Qh1+ { [%eval #-3] } 39. Kg4 { [%eval #-3] } Rg8+ { [%eval #-2] }
+40. Ng6 { [%eval #-2] } fxg6 { [%eval #-2] } 41. f6 { [%eval #-1] } c1=Q { [%eval #-1] }
+42. f7 { [%eval #-1] } Qg5# { Black wins by checkmate. } 0-1

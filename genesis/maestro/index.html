@@ -42,6 +42,7 @@
   .nav a{color:var(--dim);text-decoration:none;border:1px solid var(--edge);padding:6px 11px;transition:color .12s,border-color .12s;}
   .nav a:hover,.nav a:focus-visible{color:var(--bright);border-color:var(--edge-2);}
   .nav .sib{color:var(--fg);border-color:var(--edge-2);}
+  .nav select{background:var(--frame);color:var(--fg);border:1px solid var(--edge);font-family:var(--mono);font-size:11px;padding:4px 6px;}
   .tbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
     color:var(--dim);border:1px solid var(--edge);padding:8px 12px;cursor:pointer;}
   .tbtn:hover{color:var(--fg);border-color:var(--edge-2);}
@@ -102,6 +103,7 @@
   <nav class="nav" aria-label="where you are">
     <a href="../../">↖ portfolio</a>
     <a href="../">Project Genesis</a>
+    <select id="gameSelect"><option value="">load game…</option></select>
     <a class="sib" href="emoji.html">🎭 the same game, as an emoji cast</a>
     <a class="sib" href="cyber.html">🕶️ Cyberpunk 2045 — ATL edition</a>
     <a class="sib" href="../../whimsy-chess/maestro.html">♫ Chess Maestro — scored as music</a>
@@ -212,7 +214,24 @@
   const lvlOf=b=>{let l=Math.floor(b*LEVELS);return l<0?0:l>LEVELS-1?LEVELS-1:l;};
 
   /* ===== game data (core.js) ===== */
-  const PGN="1. h3 d5 2. a3 e5 3. c3 Nc6 4. e3 Nf6 5. g4 Ne4 6. b4 Nxb4 7. axb4 Qh4 8. Rh2 Bxg4 9. hxg4 Qxh2 10. Qa4+ c6 11. Bb5 a6 12. Bxc6+ bxc6 13. Qxc6+ Kd8 14. Qxd5+ Kc8 15. Qxa8+ Kc7 16. Qxe4 Qxg1+ 17. Ke2 Qxc1 18. b5 axb5 19. Ra7+ Kb8 20. Qa8#";
+  // Loader: supports ?game=<slug> (from games/<slug>.pgn) or falls back to Creepy Crawly
+  const params = new URLSearchParams(location.search);
+  const gameSlug = params.get("game");
+  let PGN = "1. h3 d5 2. a3 e5 3. c3 Nc6 4. e3 Nf6 5. g4 Ne4 6. b4 Nxb4 7. axb4 Qh4 8. Rh2 Bxg4 9. hxg4 Qxh2 10. Qa4+ c6 11. Bb5 a6 12. Bxc6+ bxc6 13. Qxc6+ Kd8 14. Qxd5+ Kc8 15. Qxa8+ Kc7 16. Qxe4 Qxg1+ 17. Ke2 Qxc1 18. b5 axb5 19. Ra7+ Kb8 20. Qa8#";
+  let meta = { label: "Creepy Crawly", white: "mannyfresher", black: "Lerouxdu74", result: "1-0" };
+
+  if (gameSlug) {
+    // Synchronous XHR for zero-dependency static hosting
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "games/" + gameSlug + ".pgn", false);
+    xhr.send();
+    if (xhr.status === 200) {
+      const raw = xhr.responseText;
+      PGN = raw.replace(/\[[^\]]*\]/g, " ").replace(/\{[^}]*\}/g, " ").replace(/;[^\n]*/g, " ").replace(/\$\d+/g, " ").replace(/\.\.\./g, " ").replace(/\s+/g, " ").trim();
+      const tag = (t, d) => { const m = raw.match(new RegExp('\\[' + t + '\\s+"([^"]*)"\\]')); return m ? m[1] : d; };
+      meta = { label: tag("Event", gameSlug), white: tag("White", "?"), black: tag("Black", "?"), result: tag("Result", "*") };
+    }
+  }
   const positions = (window.Maestro && window.Maestro.applyPGN) ? window.Maestro.applyPGN(PGN) : [];
   const LAST = Math.max(0, positions.length-1);
 
@@ -289,7 +308,8 @@
     stPly.textContent="PLY "+P.ply+"/"+LAST;
     const mover = P.ply===0 ? "—" : (P.ply%2===1?"White":"Black");
     stMove.textContent = P.ply===0 ? "start position" : (Math.ceil(P.ply/2)+(P.ply%2===1?". ":"… ")+P.san);
-    sanEl.innerHTML = P.ply===0 ? "The opening bell. <b>Creepy Crawly</b> — 1.h3, a3." : (mover+" plays <b>"+P.san+"</b>");
+    const openingLine = P.ply===0 ? ("The opening bell. <b>"+(meta.label||"Creepy Crawly")+"</b> — 1.h3, a3.") : (mover+" plays <b>"+P.san+"</b>");
+    sanEl.innerHTML = openingLine;
     const tally={attacker:0,defender:0,controller:0,outpost:0,runner:0,noise:0};
     for(const r of P.roles) tally[r.role]=(tally[r.role]||0)+1;
     countsEl.innerHTML = Object.keys(tally).filter(k=>tally[k]).map(k=>`<span>${k}: <b style="color:var(--fg)">${tally[k]}</b></span>`).join("");
@@ -333,6 +353,16 @@
     if(audioOn){ audio ||= new (window.AudioContext||window.webkitAudioContext)();
       await audio.resume(); score ||= new WorldScore(audio,{root:50}); lastCount=null; scorePly(positions[ply]); }
     else if(score){ score.stop(); } });
+
+  /* ===== game selector (populated from games/ dir) ===== */
+  const sel = document.getElementById("gameSelect");
+  if (sel) {
+    // Static list (keeps zero-dependency). Add new .pgn files to games/ and they appear here.
+    const games = ["black-widow","bongcloud","bongcloud_vuvuvava-928-mannyfresher-806","checkers","checkers_keo08-817-mannyfresher-877","creepy-crawly","creepy-crawly-formation","kadas-opening","kings-gambit","lichess_tournament","mantis-queen","newish-openings-to-mannyfresher","newish-openings-to-mannyfresher_waryor26468-933-mannyfresher-1006","pappymagee_vs_tamizh_bdg_2026-06-30.pgn","queen-dab","queen-dab_by_pappymagee","reviewing-mannyfreshers-old-games","spider-crab","stalemate-gambit","the-great-hesitation","the-great-hesitation_coconuthomeboy-897-mannyfresher-822"];
+    games.forEach(g=>{ const o=document.createElement("option"); o.value=g; o.textContent=g; sel.appendChild(o); });
+    sel.addEventListener("change",()=>{ if(sel.value){ location.search="?game="+encodeURIComponent(sel.value); } });
+    if (gameSlug) sel.value=gameSlug;
+  }
 
   /* ===== drag / theme / fit ===== */
   const wrap=document.getElementById("screenWrap"); let px=0,py=0;
