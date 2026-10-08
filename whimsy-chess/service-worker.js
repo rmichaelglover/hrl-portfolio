@@ -1,7 +1,7 @@
 /* Chess Maestro — offline service worker.
    maestro.html is fully self-contained (no external assets), so caching it + the
    icons/manifest makes the installed PWA work with no network at all. */
-const CACHE = "chess-maestro-v8-illustrations";
+const CACHE = "chess-maestro-v9-riverbank-squares";
 const ASSETS = [
   "../assets/day-visuals/gallery.js",
   "../assets/day-visuals/chess.png",
@@ -38,6 +38,18 @@ self.addEventListener("activate", e => {
 // cache-first, fall back to network, then to the app shell for navigations
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  // Riverbank releases must reach returning players instead of an old cached board.
+  const url = new URL(e.request.url);
+  if (url.origin === self.location.origin && url.pathname.includes('/whimsy-chess/riverbank/')) {
+    e.respondWith(fetch(e.request).then(resp => {
+      if (resp.ok) {
+        const copy = resp.clone();
+        e.waitUntil(caches.open(CACHE).then(cache => cache.put(e.request, copy)));
+      }
+      return resp;
+    }).catch(() => caches.match(e.request).then(hit => hit || Response.error())));
+    return;
+  }
   e.respondWith(
     caches.match(e.request).then(hit => hit || fetch(e.request).then(resp => {
       const copy = resp.clone();
