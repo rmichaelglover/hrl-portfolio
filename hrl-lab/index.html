@@ -112,7 +112,7 @@ footer a{color:var(--cy);text-decoration:none}
       <canvas id="mnist" height="300" aria-label="Forty handwritten digits. Use the digit selector to inspect a sample."></canvas>
       <div class="legend" id="mnistLegend"></div>
       <div class="row"><span id="mnistStat" class="pill" style="color:var(--gd);border-color:#5e4a1e">…</span></div>
-      <p class="explanation">Click any digit or choose its sample number. A bright outer frame marks your selection; white frames mark the five known seeds. Tied strengths have no unique prediction.</p>
+      <p class="explanation">Click any digit or choose its sample number. A bright outer frame marks your selection; white frames mark the five known seeds. Gray frames mean tied strengths with no unique prediction.</p>
       <h3>Watch the field settle</h3>
       <div id="fieldMetrics" class="metrics"></div>
       <svg id="deltaPlot" class="plot" viewBox="0 0 460 170" role="img" aria-label="Maximum label-strength change by iteration"></svg>
@@ -323,7 +323,8 @@ function mnistDraw(){const d=Math.min(2,devicePixelRatio||1),W=mCv.clientWidth,H
   DIGITS.forEach((dig,i)=>{const col=i%cols,row=(i/cols|0),x0=col*cw+(cw-bs)/2,y0=row*ch+(ch-bs)/2;
     for(let r=0;r<8;r++)for(let c=0;c<8;c++){const g=Math.round(dig.px[r*8+c]/16*255);mctx.fillStyle='rgb('+g+','+g+','+g+')';mctx.fillRect(x0+c*pp,y0+r*pp,pp+.6,pp+.6);}
     const pred=argmax(mnistState.S[i]),seed=mnistSeeds.has(i);
-    mctx.lineWidth=2;mctx.strokeStyle=DCOL[pred];mctx.strokeRect(x0-2.5,y0-2.5,bs+5,bs+5);
+    const tied=mnistState.S[i].filter(v=>Math.abs(v-mnistState.S[i][pred])<1e-10).length>1;
+    mctx.lineWidth=2;mctx.strokeStyle=tied?'#66718a':DCOL[pred];mctx.strokeRect(x0-2.5,y0-2.5,bs+5,bs+5);
     if(seed){mctx.lineWidth=2;mctx.strokeStyle='#fff';mctx.strokeRect(x0-5,y0-5,bs+10,bs+10);}
     if(typeof selectedSample!=='undefined' && i===selectedSample){mctx.lineWidth=2;mctx.strokeStyle='#fff386';mctx.strokeRect(col*cw+1,row*ch+1,cw-2,ch-2);}
     if(!seed){tot++;if(mnistState.S[i].filter(v=>Math.abs(v-mnistState.S[i][pred])<1e-10).length===1 && pred===dig.y)ok++;}});
