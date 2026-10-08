@@ -14,3 +14,5 @@ console.log('PASS: preserved previous globe hashes, legal 48-piece opening, coun
 for(const c of data.countries){for(const type of ['K','Q'])assert.equal(Emoji.character(themes,c.id,{id:9,type}).emoji,Emoji.theme(themes,c.id).flag);}
 assert.equal(Emoji.character(themes,'USA',{id:8,type:'Q'}).emoji,'🇺🇸');
 console.log('PASS: kings and queens share country flags, including promoted queens.');
+
+const markers=Emoji.capitalMarkers(data,s.pieces);assert.ok(!markers.some(m=>['USA','FRA','KOR'].includes(m.country)));const japan=markers.find(m=>m.country==='JPN');assert.equal(japan.name,'Tokyo');assert.equal(japan.capital,true);assert.deepEqual(japan.center,data.cities.find(c=>c.country==='JPN'&&c.capital).center);const jp=data.countries.find(c=>c.id==='JPN');assert.ok(!Emoji.capitalMarkers(data,[...s.pieces,{at:jp.spaces[0]}]).some(m=>m.country==='JPN'));assert.equal(Emoji.capitalMarkers(data,[]).length,data.countries.length);assert.ok(Emoji.capitalMarkers(data,[]).every(m=>m.center.every(Number.isFinite)));console.log('PASS: flags at mapped capitals, no markers for occupied countries, movement-dependent presence, and finite land-anchor fallbacks.');
