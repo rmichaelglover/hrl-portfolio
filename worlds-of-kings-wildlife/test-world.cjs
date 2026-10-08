@@ -10,3 +10,7 @@ assert.equal(Emoji.resident(themes,{country:'ATA',id:1723}).emoji,'🦭');assert
 const move=E.allLegal(s,0)[0],p=s.pieces.find(p=>p.id===move.piece),symbol=Emoji.character(themes,'USA',p);E.move(s,p.id,move.to);assert.equal(s.turn,1);assert.deepEqual(Emoji.character(themes,'USA',p),symbol);
 assert.equal(data.regions.filter(r=>r.country==='ATA').length,1);assert.ok(data.regions.some(r=>r.promotion==='north-pole'));
 console.log('PASS: preserved previous globe hashes, legal 48-piece opening, country palettes, deterministic province residents, native source links, fallback decorations, unchanged character after moving, turn ownership, polar board.');
+
+for(const c of data.countries){for(const type of ['K','Q'])assert.equal(Emoji.character(themes,c.id,{id:9,type}).emoji,Emoji.theme(themes,c.id).flag);}
+assert.equal(Emoji.character(themes,'USA',{id:8,type:'Q'}).emoji,'🇺🇸');
+console.log('PASS: kings and queens share country flags, including promoted queens.');

@@ -13,7 +13,7 @@ const wildlife={
 };
 function theme(themes,code){return themes.countries[code]||{flag:'🌐',names:['blue','white'],colors:['#275a9e','#ffffff'],symbols:['🌊','☁️','💎','❄️'],basis:'neutral fallback'};}
 function roster(themes,code){const animals=(wildlife[code]||[]).map(([emoji,name,source])=>({emoji,name,source,kind:'native wildlife inspiration'}));const symbols=theme(themes,code).symbols.map(emoji=>({emoji,name:'Flag-colored decorative symbol',kind:'flag decoration',source:null}));return [...animals,...symbols];}
-function character(themes,code,piece){const list=roster(themes,code);return list[((piece.id%16)+16)%16%list.length];}
+function character(themes,code,piece){if(piece.type==='K'||piece.type==='Q')return{emoji:theme(themes,code).flag,name:'Country flag',kind:'country flag',source:null};const list=roster(themes,code);return list[((piece.id%16)+16)%16%list.length];}
 function resident(themes,region){const animals=wildlife[region.country];if(animals?.length){const [emoji,name,source]=animals[(region.id*7)%animals.length];return{emoji,name,source,kind:'native wildlife inspiration'};}const t=theme(themes,region.country);return{emoji:t.symbols[(region.id*7)%t.symbols.length],name:'Flag-colored decorative symbol',kind:'flag decoration'};}
 function wash(hex,amount=.68){const rgb=hex.slice(1).match(/../g).map(x=>Math.round(parseInt(x,16)*(1-amount)+255*amount));return'#'+rgb.map(x=>x.toString(16).padStart(2,'0')).join('');}
 return{wildlife,theme,roster,character,resident,wash};});
