@@ -1,0 +1,17 @@
+.wrap{max-width:1240px}.digit-card{max-width:1200px}
+.digit-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.digit-layout>*{min-width:0}.digit-layout h3{font-size:16px;margin:12px 0 8px}
+.digit-controls{margin:0 0 14px}.digit-controls label{display:flex;align-items:center;gap:6px}
+select{background:#12203a;color:var(--ink);border:1px solid #2f5aa0;border-radius:6px;padding:7px;max-width:100%}
+button:focus-visible,select:focus-visible,canvas:focus-visible{outline:3px solid var(--cy);outline-offset:3px}
+button:disabled{opacity:.5;cursor:default}.table-wrap{overflow-x:auto}
+.guts-table{width:100%;border-collapse:collapse;font:11px/1.6 ui-monospace,monospace;white-space:nowrap}
+.guts-table th,.guts-table td{padding:5px;text-align:right;border-bottom:1px solid var(--line)}.guts-table th:first-child,.guts-table td:first-child{text-align:left}
+.guts-table caption{text-align:left;color:var(--dim);margin:8px 0}.strength{display:inline-block;height:6px;background:var(--cy);vertical-align:middle;max-width:42px}
+.neighbor-list{max-height:170px;overflow:auto;padding-left:20px;font:12px/1.8 ui-monospace,monospace}.neighbor-list button{font-size:11px;padding:2px 6px}
+.inspect-head{display:flex;gap:12px;align-items:center}.inspect-head canvas{width:80px;height:80px;flex-shrink:0;image-rendering:pixelated}
+.digit-card .explanation{margin-top:10px;font-size:12px}.metrics{font:12px/1.8 ui-monospace,monospace;color:var(--dim);margin:10px 0}.metrics b{color:var(--ink)}
+.plot{height:170px;width:100%;background:#02030a;border:1px solid var(--line);border-radius:9px;display:block}.plot text{fill:#93a0c0;font:10px system-ui}
+.formula{font:12px/1.8 ui-monospace,monospace;overflow-wrap:anywhere;background:#070c18;padding:12px;border-radius:8px;color:#b7c8e4}
+.inspect-summary{font:13px/1.6 system-ui;color:var(--ink)}
+@media(max-width:820px){.digit-layout{grid-template-columns:1fr}.digit-card{padding:16px 12px}.guts-table{font-size:10px}.guts-table th,.guts-table td{padding:4px 3px}.wrap{padding-left:12px;padding-right:12px}.crumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}}

@@ -1,0 +1,274 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper,margin=0.82in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,graphicx,booktabs,microtype,xcolor}
+\usepackage[colorlinks=true,linkcolor=teal,urlcolor=teal,citecolor=teal]{hyperref}
+\hypersetup{pdftitle={Hyperspace: Physical-Informational Geometry and Anchored Consistency},pdfauthor={Michael Emanuel Glover and Cypher},pdfsubject={All Roads Lead to Home: averaging, harmonic mixtures, and relaxation labeling}}
+\usepackage{fancyhdr}
+\definecolor{teal}{HTML}{287E88}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Physical--Informational Hyperspace}\fancyhead[R]{\small Glover \& Cypher}\fancyfoot[C]{\thepage}\setlength{\headheight}{14pt}
+\newtheorem{theorem}{Theorem}\newtheorem{proposition}[theorem]{Proposition}\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\R}{\mathbb R}\newcommand{\one}{\mathbf1}\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\page}[1]{\section{#1}}
+\newcommand{\pic}[3]{\begin{figure}[ht]\centering\includegraphics[width=#2\linewidth]{figures/#1.pdf}\caption{#3}\end{figure}}
+\title{\Huge\color{teal}Hyperspace\\[9pt]\Large Physical--Informational Geometry\\and Anchored Consistency\\[12pt]\large All Roads Lead to Home}
+\author{Michael Emanuel Glover (Manny Glover)\\with Cypher, an AI research and writing collaborator}
+\date{October 8, 2026\\HRL Portfolio research note, version 1.0}
+\begin{document}
+\maketitle
+\begin{abstract}
+We develop a mathematical interpretation of hyperspace as a coupled description of physical events and informational states. Composition denotes successive processes; superposition denotes an explicitly chosen algebra on representations. Neither operation establishes additional physical dimensions. On a finite graph, local averaging preserves probability labels. If every unanchored node can reach a fixed informational home through positive weights, we derive finite-block contraction and convergence to home. Multiple homes produce harmonic mixtures, with both random-walk and energy interpretations. We then separate this linear theory from nonlinear compatibility relaxation: an exact example shows how confidence can amplify an arbitrary initial imbalance. Original numerical experiments, counterexamples, a stopping certificate, and sensitivity formulas make the assumptions inspectable. This is a proposed modeling framework and a rederivation of established mathematical tools, not a new physical theory or an empirical validation of human meaning.
+\end{abstract}
+\pic{layers}{.8}{One place can support several coupled descriptions. Vertical arrows represent interpretation and observation, not travel into new physical dimensions. All diagrams and experimental figures in this note are original.}
+\noindent\textbf{Backstory.} This paper grew from a conversation about geographic chess, animal worlds, informational space, and the phrase ``all roads lead to home''. Its purpose is to give that intuition precise conditions while preserving room for imaginative exploration.
+
+\page{Scope, types, and the meaning of a model}
+Let $M$ be a four-dimensional spacetime manifold with Lorentzian metric $g$. Let $I_x$ be the informational states admissible at event $x$. These can be finite records, probability vectors, graphs, or other explicitly typed objects. A record about a place is distinct from the place. A rule assigned to a game piece is distinct from an observation about an animal. We use this distinction throughout.
+\begin{center}\begin{tabular}{ll}\toprule Symbol & Meaning\\\midrule $M,g$ & Spacetime and its Lorentzian metric\\ $I_x,\mathcal H,\pi$ & Informational fiber, coupled space, projection\\ $V,A,W$ & Finite nodes, nonnegative weights, row-stochastic matrix\\ $P,p_i,k$ & Label matrix, a node's label vector, number of labels\\ $\alpha,T$ & Update fraction and effective transition matrix\\ $U,B,Q,R$ & Free nodes, anchors, transient and boundary blocks\\ $Z,K$ & Fundamental matrix and anchor-hitting weights\\\bottomrule\end{tabular}\end{center}
+A probability vector lives in the simplex
+\begin{equation}\Delta^{k-1}=\{p\in\R^k:p_a\geq0,\ \sum_{a=1}^k p_a=1\}.\end{equation}
+Its coordinates can mean model weights over competing interpretations. They are not automatically calibrated probabilities of truth. Calibration requires a separate observation model and external validation. The ternary case is $k=3$; the formulas also apply to two, six, or any finite number of labels.
+
+The graph results below belong to established Markov-chain and spectral-graph mathematics \cite{levin,chung}. The compatibility discussion is motivated by the relaxation-labeling literature \cite{rosenfeld,hummel}. We provide our own proofs for the particular finite models used here. An analogy between meaning and geometry is useful only when the types, update rules, and measured outcomes are specified.
+
+Our discrete clock counts algorithmic updates. It is not automatically relativistic proper time. Our nodes may denote places, documents, agents, or records; choosing one interpretation does not license silently switching to another. ``Home'' will initially mean a fixed boundary label. A person's physical home is instead a location or worldline, and physical return requires additional dynamics.
+
+\page{A fibred physical--informational space}
+Define an admissibility predicate $C$ and the set
+\begin{equation}\mathcal H=\{(x,i):x\in M,\ i\in I_x,\ C(x,i)=1\},\qquad \pi(x,i)=x.\end{equation}
+The fiber at $x$ is $\pi^{-1}(x)$. This definition needs only sets and a projection. Calling it a smooth fiber bundle would require extra assumptions: smoothness, local trivializations, and compatible transition maps. A changing database schema is not a smooth bundle simply because it has fibers.
+
+When every $I_x$ is a common space $I$, the coupled space is a subset of $M\times I$. If no constraints remove states, it is the whole product. A field of descriptions is a section $s$ with $\pi\circ s=\mathrm{id}_M$, so that $s(x)=(x,p(x))$.
+\begin{proposition}
+If $I$ is the interior of $\Delta^{k-1}$ and no further constraints apply, $M\times I$ has dimension $4+k-1$ as a product manifold.
+\end{proposition}
+\begin{proof}
+The simplex interior is parametrized by $p_1,\ldots,p_{k-1}$ with positive coordinates whose sum is less than one; $p_k=1-\sum_{a<k}p_a$. This gives $k-1$ independent local coordinates. Concatenating them with four coordinates of $M$ gives a chart with $4+k-1$ coordinates.
+\end{proof}
+The dimension counts independent coordinates in the description. It does not prove the existence of additional spacetime directions. At the simplex boundary the natural object is a manifold with corners; discrete records need not have a manifold dimension at all.
+
+Admissibility can encode timestamps, provenance, access rights, incompatible descriptions, or uncertainty. If $C$ forbids a statement, that is a model constraint, not a proof that the statement is metaphysically impossible. An empty fiber signals that our modeled requirements cannot be jointly satisfied at that event. Repairing the requirements and discovering a contradiction in reality are different tasks.
+
+\page{Composition and superposition are different operations}
+For typed maps $f:X\to Y$ and $h:Y\to Z$, composition is $h\circ f:X\to Z$. It describes succession. Superposition needs an operation on a common output space; the word alone does not supply one.
+
+For label vectors a natural operation is convex mixture:
+\begin{equation}p\oplus_\lambda q=\lambda p+(1-\lambda)q,\qquad0\leq\lambda\leq1.\end{equation}
+Every coordinate is nonnegative, and the coordinates sum to $\lambda+(1-\lambda)=1$. Thus mixture stays in the simplex. Ordinary vector addition $p+q$ instead sums to two. Graph union is another operation; it can preserve mutually contradictory assertions unless a reconciliation rule is added.
+
+A coupled observation--action process can be typed using a physical configuration space $X$, an observation map $E:X\to O$, an action map $A:I\to\mathcal A$, physical evolution $\Phi_\tau:X\times\mathcal A\to X$, and informational update $U:I\times O\to I$:
+\begin{align}z_{t+1}&=\Phi_\tau(z_t,A(i_t)),\\i_{t+1}&=U(i_t,E(z_{t+1})).\end{align}
+Here $z$ is a configuration, not a spacetime event being mistaken for an entire universe state. A separate event map may attach observations to $M$. Stochastic observation kernels can replace $E$ when measurement is noisy.
+
+\begin{proposition}
+For a linear map $L$, $L(p\oplus_\lambda q)=L(p)\oplus_\lambda L(q)$. This identity can fail for nonlinear updates.
+\end{proposition}
+\begin{proof}Distribute $L$ over addition and scalar multiplication. For a counterexample use $F(x)=x^2$, $p=0$, $q=1$, and $\lambda=1/2$: $F(1/2)=1/4$ while the mixture of the outputs is $1/2$.\end{proof}
+Consequently, ``mix first, then interpret'' and ``interpret first, then mix'' need not agree. No quantum amplitudes, interference law, or quantum measurement rule is implied by these classical constructions.
+
+\page{Physical geometry and causal implementation}
+In local flat spacetime, with signature $(-,+,+,+)$,
+\begin{equation}ds^2=-c^2dt^2+dx^2+dy^2+dz^2.\end{equation}
+This quadratic form can be negative or zero for different events. It is not a nonnegative metric distance suitable for direct use in a Gaussian similarity kernel. Causal influence must respect the light cone; a link between two records does not provide faster-than-light physical communication \cite{einstein}.
+\pic{causal}{.78}{A spacetime slice with one spatial coordinate, in units where light rays have slope one. A logical information link must still have a causal physical implementation.}
+Choose a spacelike slice $\Sigma$ on which a Riemannian distance $d_\Sigma$ is available. A global foliation requires assumptions about spacetime; we do not assume every Lorentzian manifold admits the same convenient global slicing. For $\ell>0$ and $\beta>0$, define
+\begin{equation}d_{\mathcal H}((x,p),(y,q))=\sqrt{d_\Sigma(x,y)^2/\ell^2+\beta\norm{p-q}_2^2}.\end{equation}
+\begin{proof}[Metric verification]
+Nonnegativity and symmetry follow from both component distances. Zero implies $x=y$ and $p=q$. For three points, each component distance obeys its triangle inequality. The Euclidean norm of the two nonnegative component bounds then obeys Minkowski's inequality, giving the triangle inequality for $d_{\mathcal H}$.
+\end{proof}
+The scale $\ell$ removes physical length units; $\beta$ weights informational discrepancy. At $\beta=0$ distinct informational states collapse to zero separation, producing a pseudometric on the product. This is a modeling metric on a slice, not a replacement for Einstein's spacetime metric.
+
+\page{From geographic and informational links to local weights}
+Let $V$ be finite. Two nonnegative adjacency matrices can represent geographic proximity and informational relatedness. For example,
+\begin{equation}A^{\mathrm{geo}}_{ij}=\mathbf1_{\{j\in N(i)\}}\exp[-d_\Sigma(x_i,x_j)^2/(2\ell^2)].\end{equation}
+A second matrix $A^{\mathrm{info}}$ may link records with shared sources or topics. Its entries require an explicit construction; calling them semantic does not make them objectively true. Combine the layers by
+\begin{equation}A=A^{\mathrm{geo}}+\lambda A^{\mathrm{info}},\quad \lambda\geq0,\qquad W_{ij}=\frac{A_{ij}}{\sum_r A_{ir}}.\end{equation}
+Rows with zero degree require a declared rule, such as a self-loop. Otherwise normalization is undefined. A positive weight $W_{ij}$ means that node $i$ listens to node $j$. Following those rows defines the Markov-chain orientation used in our proofs.
+\pic{graph}{.73}{The numerical example: a 40-node cycle, twelve seeded information shortcuts, and one fixed home. Geographic edges are teal; information shortcuts are gold.}
+Adding links changes the normalized weights of existing edges as well as adding new ones. It therefore need not improve every convergence measure in every graph. Our experiment will report the result for this particular construction. Comparisons of algorithm speed also require a communication-cost model: one extra logical edge may have nontrivial latency or energy cost.
+
+\page{Local averaging preserves labels and an invariant mean}
+Stack node labels as rows of $P_t\in\R^{n\times k}$. The lazy averaging update is
+\begin{equation}P_{t+1}=TP_t,\qquad T=(1-\alpha)I+\alpha W,\quad0<\alpha<1.\end{equation}
+\begin{lemma}[Simplex preservation]
+If all rows of $P_0$ belong to $\Delta^{k-1}$, all rows of every $P_t$ do too.
+\end{lemma}
+\begin{proof}$T$ has nonnegative entries and $T\one=\one$. Each new row is a convex combination of old rows. Nonnegativity is preserved, and $P_{t+1}\one_k=TP_t\one_k=T\one_n=\one_n$. Induction completes the proof.\end{proof}
+For matrices of labels we use the entrywise maximum norm, $\norm{P}_{\max}=\max_{i,a}|P_{ia}|$. For a nonnegative transition matrix we use the induced infinity norm, $\norm{T}_\infty=\max_i\sum_jT_{ij}=1$. Thus
+\begin{equation}\norm{TP-T\widetilde P}_{\max}\leq\norm{P-\widetilde P}_{\max}.\end{equation}
+This is nonexpansiveness, not necessarily strict contraction.
+
+If $\pi^TW=\pi^T$ is a stationary probability vector, then
+\begin{equation}\pi^TP_{t+1}=\pi^TTP_t=\pi^TP_t=\pi^TP_0.\end{equation}
+The arithmetic average is invariant only when $\pi$ is uniform, for example when $W$ is doubly stochastic. For a symmetric weighted adjacency matrix, set $d_i=\sum_jA_{ij}$ and $\pi_i=d_i/\sum_rd_r$. Then $\pi_iW_{ij}=A_{ij}/\sum_rd_r=\pi_jW_{ji}$, proving stationarity by summing over $i$.
+
+This degree weighting is consequential: dense neighborhoods can receive more influence. Consensus is agreement under the chosen weights, not a vote that automatically gives every agent equal influence. Distributed averaging and the costs of communication have an extensive literature \cite{boyd}; our synchronous update is not identical to every randomized gossip algorithm.
+
+\page{Unanchored consensus, laziness, and periodicity}
+\begin{theorem}[Finite unanchored consensus]
+Suppose $W$ is irreducible and row-stochastic and $0<\alpha<1$. There is a unique stationary probability vector $\pi$, and
+\begin{equation}\lim_{t\to\infty}T^t=\one\pi^T,\qquad\lim_{t\to\infty}P_t=\one\pi^TP_0.\end{equation}
+\end{theorem}
+\begin{proof}
+Irreducibility gives a positive path between any ordered pair of nodes. Every node has a positive diagonal entry in $T$ because $1-\alpha>0$. In a finite graph a path can be chosen with length at most $n-1$; diagonal steps pad it to a common length. Hence a sufficiently large power of $T$ has all entries positive. The finite primitive stochastic-matrix theorem gives a simple eigenvalue one and all other eigenvalues of modulus less than one. Its stationary projection is $\one\pi^T$. Powers of all other Jordan blocks tend to zero, proving the limit \cite{levin}.
+\end{proof}
+Laziness supplies aperiodicity, not truth. A consensus may be incorrect because its initial evidence is incorrect. It may also destroy distinctions that were worth keeping. Multiple labels do not themselves protect a minority interpretation from averaging.
+
+For two nodes that always copy each other, $W=\left[\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right]$. The difference of their values is multiplied by $-1$ per step at $\alpha=1$, so disagreement oscillates. For the lazy update the difference multiplier is $1-2\alpha$, whose modulus is less than one for $0<\alpha<1$.
+
+This example is an exact failure of a convergence claim made without aperiodicity. Anchored convergence below has a different proof based on absorption; its central requirement is access to fixed boundary values.
+
+\page{One fixed home: a finite-block convergence proof}
+Fix one anchor $h$ at label $p^\star$ and clamp it after each update. Reorder all other nodes into $U$. The clamped transition matrix is
+\begin{equation}\widehat T=\begin{bmatrix}Q&R\\0&1\end{bmatrix},\qquad P_{U,t+1}=QP_{U,t}+Rp^\star.\end{equation}
+Here $Q$ and $R$ come from the effective matrix $T$, not directly from $W$. Since $Q\one+R\one=\one$, the constant field $\one p^\star$ is fixed. Define $E_t=P_{U,t}-\one p^\star$; then $E_{t+1}=QE_t$.
+\begin{theorem}[All nodes reach home]
+Assume each free node has a path to $h$ through positive entries of $\widehat T$. Then some integer $N\geq1$ and $\delta>0$ satisfy
+\begin{equation}\norm{Q^N}_\infty\leq1-\delta,\qquad \norm{E_t}_{\max}\leq(1-\delta)^{\lfloor t/N\rfloor}\norm{E_0}_{\max}.\end{equation}
+In particular, every label converges to $p^\star$.
+\end{theorem}
+\begin{proof}
+For each free node choose a simple positive path to home. Let $N$ be the largest chosen length and $\delta$ the minimum of their positive path-weight products. A Markov chain following those transitions reaches home by time $N$ with probability at least $\delta$, and then stays there. The row sums of $Q^N$ are the probabilities of still being free, so their maximum is at most $1-\delta$. Write $t=mN+r$, $0\leq r<N$. Since $\norm{Q^r}_\infty\leq1$, submultiplicativity gives $\norm{Q^t}_\infty\leq(1-\delta)^m$. Apply this to each label column of $E_0$.
+\end{proof}
+The proof also yields $\rho(Q)<1$. ``All roads'' is poetic shorthand: the theorem says every node has a positive route, and absorption occurs almost surely. It does not say every arbitrarily chosen infinite walk must visit home. Nor does it prove physical travel or universal philosophical agreement.
+
+\page{Many homes: harmonic mixtures and hitting probabilities}
+Let $B$ be a nonempty set of fixed anchors with label matrix $H$. Suppose every free node can reach some anchor. The same block argument gives $\rho(Q)<1$, so
+\begin{equation}Z=(I-Q)^{-1}=\sum_{t=0}^{\infty}Q^t,\qquad P_U^\star=ZR H=KH.\end{equation}
+\begin{theorem}[Anchor mixtures]
+$K=ZR$ has nonnegative entries and each row sums to one. Its entry $K_{ib}$ is the probability that the associated chain is first absorbed at anchor $b$.
+\end{theorem}
+\begin{proof}
+Nonnegativity follows from the series for $Z$. From $R\one=(I-Q)\one$, multiplication by $Z$ gives $K\one=\one$. For a particular anchor, $(Q^tR)_{ib}$ is the probability of spending $t$ transitions in the free set and then entering $b$. These disjoint absorption-time events sum to $K_{ib}$. Convergence of the series and row sum one imply eventual absorption with probability one.
+\end{proof}
+The fixed-point equation $(I-Q)P_U^\star=RH$ has a unique solution. The evolution has the exact form
+\begin{equation}P_{U,t}=Q^tP_{U,0}+\sum_{r=0}^{t-1}Q^rRH\longrightarrow KH.\end{equation}
+Initial conditions disappear, but anchor values remain. Conflicting anchors need not collapse into one label: interior states are mixtures weighted by graph access. Increasing the number of coordinates does not add evidence; changing boundary conditions changes what the system learns.
+
+A useful companion interpretation is expected absorption time. Starting at free node $i$, the expected number of transitions before reaching $B$ is
+\begin{equation}\tau_i=\sum_{t\geq0}\Pr_i(\text{still free after }t)=\sum_jZ_{ij}.\end{equation}
+A slow return to home is reflected in large row sums of $Z$. Algorithmic time remains distinct from physical travel time.
+
+\page{The same solution minimizes disagreement energy}
+For symmetric weights $A_{ij}=A_{ji}$, define the Laplacian $L=D-A$ and the energy
+\begin{equation}\mathcal E(P)=\frac12\sum_{i<j}A_{ij}\norm{p_i-p_j}_2^2.\end{equation}
+Anchors are fixed. Differentiating with respect to a free row gives
+\begin{equation}\frac{\partial\mathcal E}{\partial p_i}=\sum_jA_{ij}(p_i-p_j),\qquad L_{UU}P_U+L_{UB}H=0.\end{equation}
+\begin{proposition}[Unique Dirichlet minimizer]
+If every connected component contains an anchor, $L_{UU}$ is positive definite. The unique minimizer of $\mathcal E$ is the harmonic mixture $KH$.
+\end{proposition}
+\begin{proof}
+Extend a vector $v$ on free nodes by zero on anchors. Then
+\begin{equation}v^TL_{UU}v=\sum_{\substack{i<j\\i,j\in U}}A_{ij}(v_i-v_j)^2+\sum_{\substack{i\in U\\b\in B}}A_{ib}v_i^2.\end{equation}
+If this vanishes, $v$ is constant along each positive free edge and zero next to any anchor. Connectivity to an anchor forces it to be zero everywhere. Thus the quadratic form is strictly positive for nonzero $v$. The energy is strictly convex in free coordinates and its stationary point is unique. Finally, dividing the stationary equation by each positive degree gives $P_U=W_{UU}P_U+W_{UB}H$. Laziness cancels at a fixed point, so the solution equals $KH$.
+\end{proof}
+The minimizer lies in the simplex when the anchors do, because $K$ forms convex combinations. No extra simplex-constrained optimization is needed for this particular harmonic problem. Directed graphs generally lack this symmetric energy representation; their absorption argument still works under the earlier reachability assumption.
+
+Minimizing disagreements is a mathematical objective. It does not establish that disagreement is ethically undesirable or that a boundary consensus is factually correct. Those judgments need evidence and a declared purpose beyond the energy formula.
+
+\page{Three labels: a spatial field and an informational triangle}
+\pic{ternary}{1}{A 190-node triangular lattice with three corner anchors. Each anchor fixes a different label. The left panel displays the harmonic mixtures in geographic layout; the right displays the same vectors in the ternary simplex. These are solved graph-harmonic weights, not assumed linear interpolation.}
+The lattice consists of pairs $(i,j)$ with $i,j\geq0$ and $i+j\leq18$, with planar coordinates $(i+j/2,\sqrt3 j/2)$. Edges connect differences $(\pm1,0),(0,\pm1),(1,-1),(-1,1)$ when both nodes exist. We clamp the three corners to $e_1,e_2,e_3$ and solve the linear system for the remaining nodes.
+
+A ternary vector is displayed at
+\begin{equation}\psi(p)=\left(p_2+\frac12p_3,\frac{\sqrt3}{2}p_3\right).\end{equation}
+The colors in the spatial panel are the same convex combinations of three RGB anchor colors. This visualization makes mixtures visible without inventing an additional categorical decision. A hard label $\arg\max_a p_a$ could be applied later, but it would discard uncertainty and require a tie rule.
+
+The harmonic equation holds on free boundary nodes too; their missing neighbors change their degrees. Consequently these solutions should not be identified with a continuum triangle's affine barycentric coordinates. The numerical calculation checks nonnegativity, row sums, and the free-node residual directly.
+
+Trinary modeling is one useful representation, not a universal escape from binary thinking. Six labels use a five-dimensional simplex, which can be projected for display but cannot retain all coordinates in a single two-dimensional plot. The number of labels should follow the modeled distinctions and available evidence.
+
+\page{Nonlinear relaxation labeling: support, normalization, and bias}
+A compatibility-based update can use nonnegative coefficients $C_{ij}(a,b)$:
+\begin{align}q_i(a)&=\sum_jW_{ij}\sum_b C_{ij}(a,b)p_j(b),\\p_i^+(a)&=\frac{p_i(a)q_i(a)}{\sum_c p_i(c)q_i(c)}.\end{align}
+The displayed form is a specified model motivated by relaxation labeling \cite{rosenfeld,hummel}, not a claim that every historical variant is identical. The denominator must be positive. If it is zero, an implementation must declare a fallback, such as retaining the old vector. Adding an epsilon changes the model and some invariants.
+
+Whenever the denominator is positive, the new vector is nonnegative and sums to one. If $p_i(a)=0$, it stays zero: the multiplicative rule cannot recover a label eliminated from support without an added injection mechanism. Linear averaging, by contrast, can receive positive mass from a neighbor.
+
+Take equal-label compatibility $C_{ij}(a,b)=\mathbf1_{a=b}$ and identical binary vectors at all nodes, $(x,1-x)$. Row-stochasticity gives $q=(x,1-x)$, so
+\begin{equation}x^+=\frac{x^2}{x^2+(1-x)^2},\quad\frac{x^+}{1-x^+}=\left(\frac{x}{1-x}\right)^2.\end{equation}
+For $0<x_0<1$ the exact trajectory is
+\begin{equation}\operatorname{logit}(x_t)=2^t\operatorname{logit}(x_0),\qquad x_t=\frac1{1+\exp[-2^t\operatorname{logit}(x_0)]}.\end{equation}
+Thus $x_0<1/2$ tends to zero, $x_0>1/2$ tends to one, and $x_0=1/2$ remains unchanged. Both extreme labels and the uniform state are fixed points. The anchored linear proof cannot be transferred to this nonlinear map without new assumptions.
+
+\page{Confidence is not evidence, and symmetry cannot name a truth}
+\pic{nonlinear}{1}{Exact equal-label compatibility trajectories. Initial weights 0.49 and 0.51 become opposite near-certainties; 0.50 remains undecided. Entropy falls without the introduction of any new evidence.}
+For a binary label vector, Shannon entropy is
+\begin{equation}\mathsf H(x)=-x\log_2x-(1-x)\log_2(1-x),\qquad0\log_20:=0.\end{equation}
+The plotted entropy is a descriptive uncertainty measure. The model has no external observation distinguishing the two labels, yet it becomes confident. Confidence generated by self-reinforcement cannot be used as independent validation.
+
+More generally, let a label permutation $S$ act on every vector and suppose an update $F$ commutes with it: $F(SP)=SF(P)$. If the initial data are invariant under every label permutation, induction gives $S F^t(P_0)=F^t(P_0)$ for every $t$. Each node's vector must remain uniform when all coordinate permutations act. A deterministic equivariant update cannot select one named label from completely symmetric inputs.
+
+Breaking that symmetry requires a source: an anchor, asymmetric evidence, a prior, a tie rule, or randomness. Randomness can select a label but does not make the selection factually justified. This supplies a precise limit to ``unique meaning from nothing''. Undefined words may have human associations or contextual use, but a formal system cannot extract an identified reference from a perfectly symmetric specification alone.
+
+The conclusion is modest and useful: consistency, certainty, agreement, and correctness are different measurable properties. A relaxation procedure may optimize one while harming another. Keeping these outcomes distinct makes a richer language model scientifically testable.
+
+\page{Failure cases and the cost of changing assumptions}
+\pic{failures}{1}{Left: decaying influence prevents complete anchoring despite a home edge at every step. Right: two-node copying oscillates without laziness, while a partial update removes the period-two behavior.}
+If a connected component cannot reach an anchor, its labels need not converge to home. They may converge to their own unanchored consensus or oscillate. This is why anchor reachability is in the theorem rather than a footnote.
+
+Even reachability at every time is insufficient when weights change. Consider scalar error
+\begin{equation}e_{t+1}=(1-\eta_t)e_t,\qquad\eta_t=\frac1{(t+2)^2}>0.\end{equation}
+A home edge is present at each step, but the product telescopes:
+\begin{equation}\frac{e_t}{e_0}=\prod_{r=2}^{t+1}\left(1-\frac1{r^2}\right)=\prod_{r=2}^{t+1}\frac{r-1}{r}\frac{r+1}{r}=\frac{t+2}{2(t+1)}\longrightarrow\frac12.\end{equation}
+For time-dependent transient matrices a sufficient replacement is a uniform block condition: for some $L$ and $\delta>0$, every consecutive $L$-step product has induced infinity norm at most $1-\delta$. Grouping the product into such blocks gives the same geometric bound as before. Individual weights can vary, but their aggregate access to anchors must not vanish.
+
+Finally, a moving anchor is a different tracking problem. A constant-boundary convergence theorem does not show perfect tracking of arbitrarily changing values. The speed of anchor motion and the graph's response time both matter.
+
+\page{Numerical experiments, reproducibility, and interpretation}
+\pic{mixing}{1}{Original seeded comparison. Both graphs use a fixed home and update fraction 0.5. The additional information edges have weight 0.35 before row normalization. The left plots convergence from initial unit error; the right plots expected absorption time.}
+The experiment uses 40 cycle nodes and twelve uniformly sampled distinct non-cycle edges, with NumPy generator seed 20261008. We use dense matrices for transparent small examples, not to suggest dense computation is efficient for a world atlas. Both initial-error fields are identically one. The published CSV contains all 4,001 plotted update steps.
+
+\input{results.tex}
+These numbers describe this fixed toy construction. They are not statistical estimates of an effect in a population of real networks. One seeded graph does not support a confidence interval about all possible graphs, countries, or users. Repeating across graph families, recording cost, and separating training from evaluation would be necessary for a broader empirical claim.
+
+The reproduction script also verifies the triangular lattice's simplex constraints and harmonic residual, checks the exact two-node fundamental matrix, and checks that the stopping certificate dominates the actual error at every plotted step. Comparisons use floating-point tolerances and accompany, rather than replace, the symbolic proofs.
+
+\page{A stopping certificate and sensitivity to changes}
+Small consecutive updates can be misleading when a graph has a bottleneck. Suppose a valid block bound satisfies $\norm{Q^N}_\infty\leq1-\delta$. For a fixed boundary,
+\begin{equation}P_{t+N}-P_t=(Q^N-I)(P_t-P^\star).\end{equation}
+The inverse has the convergent expansion $(I-Q^N)^{-1}=\sum_{r\geq0}Q^{Nr}$ and norm at most $1/\delta$. Therefore
+\begin{equation}\boxed{\norm{P_t-P^\star}_{\max}\leq\frac{\norm{P_{t+N}-P_t}_{\max}}{\delta}.}\end{equation}
+This is an a posteriori certificate with a proved constant. An observed residual without a bound on the inverse is not the same guarantee.
+
+Differentiate $(I-Q)P^\star=RH$ under small parameter changes, keeping node partitions fixed:
+\begin{equation}dP^\star=Z\left[(dQ)P^\star+(dR)H+R\,dH\right].\end{equation}
+Hence, using compatible induced and entrywise norms,
+\begin{equation}\norm{dP^\star}_{\max}\leq\norm{Z}_\infty\left(\norm{dQ}_\infty\norm{P^\star}_{\max}+\norm{dR}_\infty\norm{H}_{\max}+\norm{R}_\infty\norm{dH}_{\max}\right).\end{equation}
+This is first-order sensitivity, not an exact finite-perturbation identity. Large absorption times mean large $\norm{Z}_\infty$, potentially amplifying small weight changes. Sparse averaging costs $O(|E|k+nk)$ per step when the nonzero edges are stored sparsely; a dense linear solve has a different cost. Network topology is therefore both a modeling choice and a computational choice.
+
+\page{A fully worked home chain}
+Take the physical ordering $h$--$1$--$2$, with $h$ fixed. Node 1 listens equally to its two neighbors, node 2 listens to node 1, and $\alpha=0.6$. Then
+\begin{equation}Q=\begin{bmatrix}.4&.3\\.6&.4\end{bmatrix},\quad R=\begin{bmatrix}.3\\0\end{bmatrix},\quad Z=(I-Q)^{-1}=\begin{bmatrix}10/3&5/3\\10/3&10/3\end{bmatrix}.\end{equation}
+Direct multiplication verifies $ZR=(1,1)^T$, so both nodes converge to home. The characteristic equation is $(.4-\lambda)^2-.18=0$, giving eigenvalues $.4\pm\sqrt{.18}$ and spectral radius approximately $0.824264$. Row sums of $Z$ give expected absorption times $5$ and $20/3$ updates.
+
+For an explicit bound,
+\begin{equation}Q^2=\begin{bmatrix}.34&.24\\.48&.34\end{bmatrix},\qquad\norm{Q^2}_\infty=.82.\end{equation}
+Thus $N=2$, $\delta=.18$, and unit initial error is bounded by $.82^{\lfloor t/2\rfloor}$. This convenient bound is conservative relative to the spectral decay. The certificate uses the actual two-step residual divided by $.18$.
+\pic{certificate}{.9}{Actual error, a proved finite-block upper bound, and an a posteriori residual certificate for the worked chain. Every certificate value is checked against actual error in the reproduction script.}
+The example illustrates three distinct quantities: a limit label, a convergence rate, and an expected absorption time. None should be substituted for another when comparing systems.
+
+\page{Geographic worlds, evaluation, and open questions}
+The original motivation was a layered world: geography supplies places; ecological sketches supply uncertain animal distributions; chess supplies fictional roles and legal actions. Each record should carry a type, a source, a time, and an uncertainty statement. Promoting a pawn changes its game role, not the species of the depicted animal. A fictional garden is not a surveyed city. Keeping those layers separate allows playful visualization without confusing it with an empirical atlas.
+
+For a real inference task, specify an external target $y_i$ and evaluate held-out predictions. For a one-hot outcome, one possible score is
+\begin{equation}\operatorname{Brier}(P,Y)=\frac1n\sum_i\sum_a(P_{ia}-Y_{ia})^2.\end{equation}
+This measures prediction error; harmonic energy measures agreement. Low agreement energy does not imply a low Brier score. An incorrect constant prediction has zero disagreement energy. Parameters such as $\lambda$ and $\alpha$ should be chosen using declared training or validation data rather than the eventual test outcomes.
+
+Useful next experiments include independent geographic, informational, and combined baselines; noisy or unreliable anchors; missing labels; sparse implementations; and time-varying graphs with uniform absorption guarantees. An anchor should not be treated as infallible merely because it is mathematically clamped. Robust anchor selection and evidence provenance are separate research questions.
+
+\textbf{What follows.} A physical--informational product can be defined precisely. Local averaging on a finite anchored graph has a rigorous home-convergence theorem. Multiple homes yield harmonic mixtures. Nonlinear compatibility relaxation can behave very differently, and confidence alone does not validate meaning. These are concrete starting points for a research program; they do not solve semantics, prove a new cosmology, or establish the truth of a chosen anchor.
+
+\textbf{Authorship and availability.} Manny supplied the motivating concepts and discussion; Cypher assisted with formalization, derivations, writing, code, and rendering checks. This note has not undergone external peer review. Source, numeric results, and plots accompany the PDF at \url{https://rmichaelglover.github.io/hrl-portfolio/hyperspace/}.
+
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{einstein} Max Planck Institute for Gravitational Physics. \emph{Special relativity: Spacetime}. Einstein Online, Elementary Tour, part 5. Causal structure and spacetime introduction. \url{https://www.einstein-online.info/en/spacetime/}. Accessed October 8, 2026.
+\bibitem{levin} D. A. Levin and Y. Peres, with contributions by E. L. Wilmer. \emph{Markov Chains and Mixing Times}, second edition. American Mathematical Society, 2017. Author-maintained edition and errata: \url{https://pages.uoregon.edu/dlevin/MARKOV/}. Background for stationary distributions, finite-chain convergence, and absorption.
+\bibitem{chung} F. R. K. Chung. \emph{Spectral Graph Theory}. CBMS Regional Conference Series in Mathematics, vol. 92. American Mathematical Society, 1997. Author's book outline and chapter links: \url{https://fanchung.ucsd.edu/research/outline.html}. Background for graph Laplacians and boundary problems.
+\bibitem{rosenfeld} A. Rosenfeld, R. A. Hummel, and S. W. Zucker. ``Scene Labeling by Relaxation Operations.'' \emph{IEEE Transactions on Systems, Man, and Cybernetics}, SMC-6(6), 420--433, 1976. \href{https://doi.org/10.1109/TSMC.1976.4309519}{doi:10.1109/TSMC.1976.4309519}. Author-maintained bibliography: \url{https://cs.yale.edu/homes/vision/zucker/publications.html}. Historical motivation for compatibility-based iterative labeling.
+\bibitem{hummel} R. A. Hummel and S. W. Zucker. ``On the Foundations of Relaxation Labeling Processes.'' \emph{IEEE Transactions on Pattern Analysis and Machine Intelligence}, PAMI-5(3), 267--287, 1983. \href{https://doi.org/10.1109/TPAMI.1983.4767390}{doi:10.1109/TPAMI.1983.4767390}. Bibliographic record and author-hosted manuscript listed at \url{https://cs.yale.edu/homes/vision/zucker/publications.html}. Background on consistency and the foundations of relaxation labeling; no general convergence theorem from that work is assumed here.
+\bibitem{boyd} S. Boyd, A. Ghosh, B. Prabhakar, and D. Shah. ``Randomized Gossip Algorithms.'' \emph{IEEE Transactions on Information Theory}, 52(6), 2508--2530, 2006. \href{https://doi.org/10.1109/TIT.2006.874516}{doi:10.1109/TIT.2006.874516}. Author page and full text: \url{https://web.stanford.edu/~boyd/papers/gossip.html}. Background for distributed averaging, graph-dependent convergence, and communication constraints.
+\end{thebibliography}
+\vfill\noindent\textbf{Reproduction.} Run \texttt{python3 experiments.py} with Python, NumPy, and Matplotlib. Compile \texttt{paper.tex} twice with pdfLaTeX after generating \texttt{results.tex}. The published companion files include \texttt{metrics.json}, \texttt{convergence.csv}, vector figures, and a build script. All plotted data are synthetic; no personal or ecological observations were collected for the experiments.
+\end{document}

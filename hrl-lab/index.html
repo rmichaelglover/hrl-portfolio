@@ -46,7 +46,7 @@ footer a{color:var(--cy);text-decoration:none}
 .legend{display:flex;gap:5px 14px;flex-wrap:wrap;justify-content:center;margin-top:9px;font:12px ui-monospace,monospace;color:var(--dim)}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
-</style></head><body><div class="wrap">
+</style><link rel="stylesheet" href="inspector.css?v=1"></head><body><div class="wrap">
 <div class="eyebrow">Relaxation Labeling · one engine, live in your browser</div>
 <h1>The HRL Lab</h1>
 <p class="tag">The <b>generic</b> HRL engine — a respected prior, a <b>noise / null-reject</b> label, and
@@ -97,20 +97,51 @@ footer a{color:var(--cy);text-decoration:none}
 </div>
 
 <!-- ============ 4. MNIST ============ -->
-<div class="card">
+<div class="card digit-card" id="digit-lab">
   <h2><span class="k">order-2 · few-shot on real data</span>🔢 Handwritten digits by relaxation</h2>
   <p>Forty <b>real 8×8 handwritten digits</b> (scikit-learn's digits set — MNIST's little cousin — bundled so the page stays
    offline). A pixel-similarity <b>k-NN graph</b> supplies the factors; just <b>one seed per class</b> is labelled. The field
    relaxes those labels across the graph — <i>five seeds paint forty digits</i>. Each frame's colour is the label it relaxed to.</p>
-  <canvas id="mnist" height="300"></canvas>
-  <div class="legend" id="mnistLegend"></div>
-  <div class="row"><button id="mnistNew">🎲 new random seeds</button>
-   <span id="mnistStat" class="pill" style="color:var(--gd);border-color:#5e4a1e">…</span></div>
+  <div class="row digit-controls">
+    <button id="mnistPause" aria-pressed="false">Pause</button><button id="mnistStep">One step</button>
+    <button id="mnistReset">Replay same seeds</button><button id="mnistNew">🎲 New random seeds</button>
+    <label>Step every <select id="mnistSpeed"><option value="1000">1 second</option><option value="500" selected>½ second</option><option value="150">0.15 seconds</option></select></label>
+  </div>
+  <div class="digit-layout">
+    <section aria-label="Digits and convergence">
+      <canvas id="mnist" height="300" aria-label="Forty handwritten digits. Use the digit selector to inspect a sample."></canvas>
+      <div class="legend" id="mnistLegend"></div>
+      <div class="row"><span id="mnistStat" class="pill" style="color:var(--gd);border-color:#5e4a1e">…</span></div>
+      <p class="explanation">Click any digit or choose its sample number. A bright outer frame marks your selection; white frames mark the five known seeds. Tied strengths have no unique prediction.</p>
+      <h3>Watch the field settle</h3>
+      <div id="fieldMetrics" class="metrics"></div>
+      <svg id="deltaPlot" class="plot" viewBox="0 0 460 170" role="img" aria-label="Maximum label-strength change by iteration"></svg>
+      <p class="explanation">Maximum absolute change across all 200 strengths, on a logarithmic scale. Smaller changes indicate numerical stability, which does not imply correct labels.</p>
+      <h3>Same seeds, simpler comparison</h3>
+      <div id="baselineMetrics" class="readout"></div>
+      <p class="explanation">Nearest-seed baseline uses Euclidean pixel distance and the same five labeled seeds. Both scores exclude seeds. This is one 40-sample demonstration, not a general benchmark.</p>
+    </section>
+    <section aria-label="Relaxation internals">
+      <h3>Why did it choose that?</h3>
+      <label for="digitSelect">Inspect sample</label> <select id="digitSelect"></select>
+      <div class="inspect-head"><canvas id="selectedDigit" width="80" height="80" aria-label="Selected handwritten digit"></canvas><p id="inspectSummary" class="inspect-summary"></p></div>
+      <div id="traceCaption" class="metrics"></div>
+      <div class="table-wrap"><table class="guts-table"><caption>Actual strengths and support for the selected sample</caption><thead><tr><th>Label</th><th>Prior</th><th>Before</th><th>Raw support</th><th>Scaled</th><th>After</th><th>Change</th></tr></thead><tbody id="strengthRows"></tbody></table></div>
+      <div id="updateFormula" class="formula"></div>
+      <h3>Where the support comes from</h3>
+      <p class="explanation">Every linked neighbor contributes its previous label-strength vector through identity compatibility. The undirected 5-nearest-neighbor graph can give a sample more than five links. Click a neighbor to inspect it.</p>
+      <ul id="neighborList" class="neighbor-list"></ul>
+      <h3>Selected sample: all five label strengths</h3>
+      <svg id="strengthPlot" class="plot" viewBox="0 0 460 170" role="img" aria-label="Selected sample label strengths by iteration"></svg>
+      <p class="explanation">Strengths sum to one; they are model weights, not calibrated probabilities. Uniform priors and neighbors guide unlabeled samples. Dataset truth is shown for evaluation and is not supplied to the update, except at the five seeds.</p>
+    </section>
+  </div>
 </div>
 
 <footer>The same engine powers all four — <a href="https://github.com/rmichaelglover/hrl-portfolio">hrl_generic</a>.
  Built by <b style="color:var(--ink)">Manny Glover</b>.</footer>
 </div>
+<script src="relaxation.js?v=1"></script>
 <script>
 // ---------- the generic HRL engine, ported to JS (prior + pairwise support) ----------
 const zeros=(n,L)=>Array.from({length:n},()=>new Array(L).fill(0));
@@ -121,10 +152,7 @@ function addPairwise(S,sup,edges,C){const L=C.length;
     for(let j=0;j<L;j++){let a=0;for(let l=0;l<L;l++)a+=C[j][l]*S[k][l];sup[i][j]+=a;}
     for(let l=0;l<L;l++){let a=0;for(let j=0;j<L;j++)a+=C[j][l]*S[i][j];sup[k][l]+=a;}
   }}
-function step(st){const n=st.S.length,L=st.S[0].length;let sup=zeros(n,L);
-  addPairwise(st.S,sup,st.edges,st.C);sup=minmaxRows(sup);
-  const upd=st.S.map((row,i)=>row.map((s,j)=>Math.pow(st.prior[i][j],st.ps)*Math.pow(s,1-st.ps)*(1+sup[i][j])));
-  st.S=normRows(upd);}
+function step(st){const trace=LabRelaxation.traceStep(st);st.S=trace.after;return trace;}
 const argmax=r=>{let mi=0;for(let i=1;i<r.length;i++)if(r[i]>r[mi])mi=i;return mi;};
 function dpr(cv){const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);
   cv.width=r.width*d;cv.height=cv.height*d/(cv._h?1:1);return d;}
@@ -289,33 +317,35 @@ function mnistInit(rand){const n=DIGITS.length,L=DIGIT_CLASSES.length;
     prior[pick]=new Array(L).fill(0); prior[pick][c]=1; mnistSeeds.add(pick);}
   const C=Array.from({length:L},(_,a)=>Array.from({length:L},(_,b)=>a===b?1:0));
   mnistState={S:prior.map(r=>r.slice()),prior,ps:.6,edges,C};}
-function mnistDraw(){const d=Math.min(2,devicePixelRatio||1),W=mCv.clientWidth,H=300;mCv.width=W*d;mCv.height=H*d;mctx.setTransform(d,0,0,d,0,0);
-  mctx.clearRect(0,0,W,H);const cols=10,rows=4,cw=W/cols,ch=H/rows,bs=Math.min(cw,ch)-16,pp=bs/8;
+function mnistDraw(){const d=Math.min(2,devicePixelRatio||1),W=mCv.clientWidth,H=W<430?480:300;mCv.width=W*d;mCv.height=H*d;mctx.setTransform(d,0,0,d,0,0);
+  mctx.clearRect(0,0,W,H);const cols=W<430?5:10,rows=40/cols,cw=W/cols,ch=H/rows,bs=Math.max(8,Math.min(cw,ch)-16),pp=bs/8;
   let ok=0,tot=0;
   DIGITS.forEach((dig,i)=>{const col=i%cols,row=(i/cols|0),x0=col*cw+(cw-bs)/2,y0=row*ch+(ch-bs)/2;
     for(let r=0;r<8;r++)for(let c=0;c<8;c++){const g=Math.round(dig.px[r*8+c]/16*255);mctx.fillStyle='rgb('+g+','+g+','+g+')';mctx.fillRect(x0+c*pp,y0+r*pp,pp+.6,pp+.6);}
     const pred=argmax(mnistState.S[i]),seed=mnistSeeds.has(i);
     mctx.lineWidth=2;mctx.strokeStyle=DCOL[pred];mctx.strokeRect(x0-2.5,y0-2.5,bs+5,bs+5);
     if(seed){mctx.lineWidth=2;mctx.strokeStyle='#fff';mctx.strokeRect(x0-5,y0-5,bs+10,bs+10);}
-    if(!seed){tot++;if(pred===dig.y)ok++;}});
+    if(typeof selectedSample!=='undefined' && i===selectedSample){mctx.lineWidth=2;mctx.strokeStyle='#fff386';mctx.strokeRect(col*cw+1,row*ch+1,cw-2,ch-2);}
+    if(!seed){tot++;if(mnistState.S[i].filter(v=>Math.abs(v-mnistState.S[i][pred])<1e-10).length===1 && pred===dig.y)ok++;}});
   const st=document.getElementById('mnistStat');
   st.textContent=tot?('✓ '+ok+'/'+tot+' correct'):'…';
   const done=ok===tot; st.style.color=done?'var(--gr)':'var(--gd)'; st.style.borderColor=done?'#1e5e3e':'#5e4a1e';}
 document.getElementById('mnistLegend').innerHTML=DIGIT_CLASSES.map((dg,c)=>'<span><i class="dot" style="background:'+DCOL[c]+'"></i>'+dg+'</span>').join('')+' <span style="opacity:.65">· white frame = the one seed</span>';
-document.getElementById('mnistNew').onclick=()=>mnistInit(true);
+
 mnistInit(false);
 
 // ---------- shared loop: relax slowly so you can watch it settle ----------
 let tick=0;
 function loop(){
   tick++;
-  if(tick%3===0){step(dnaState);step(gState);step(mnistState);}
+  if(tick%3===0){step(dnaState);step(gState);}
   if(chiSpin)chiAng+=0.012;
-  dnaDraw();chiDraw();graphDraw();mnistDraw();
+  dnaDraw();chiDraw();graphDraw();
   requestAnimationFrame(loop);
 }
 addEventListener('resize',()=>{});
 loop();
 </script>
+<script src="inspector.js?v=1"></script>
 <script src="/hrl-portfolio/entry-agreement.js" defer></script>
 </body></html>

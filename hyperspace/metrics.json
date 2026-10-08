@@ -1,0 +1,78 @@
+{
+  "seed": 20261008,
+  "shortcuts": [
+    [
+      2,
+      5
+    ],
+    [
+      5,
+      37
+    ],
+    [
+      15,
+      34
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      7,
+      31
+    ],
+    [
+      31,
+      39
+    ],
+    [
+      3,
+      37
+    ],
+    [
+      15,
+      28
+    ],
+    [
+      3,
+      18
+    ],
+    [
+      13,
+      19
+    ],
+    [
+      20,
+      26
+    ],
+    [
+      18,
+      23
+    ]
+  ],
+  "cycle_nodes": 40,
+  "alpha": 0.5,
+  "shortcut_weight": 0.35,
+  "Geographic cycle": {
+    "rho": 0.9984586668665659,
+    "max_expected_absorption_steps": 799.9999999999956,
+    "first_step_below_0.001": null
+  },
+  "Cycle + information links": {
+    "rho": 0.996392607432844,
+    "max_expected_absorption_steps": 326.77858615626013,
+    "first_step_below_0.001": 1964
+  },
+  "ternary": {
+    "nodes": 190,
+    "harmonic_residual": 1.1102230246251565e-16
+  },
+  "small_chain": {
+    "rho": 0.8242640687119285,
+    "block_delta": 0.18,
+    "expected_steps": [
+      5.0,
+      6.666666666666667
+    ]
+  }
+}

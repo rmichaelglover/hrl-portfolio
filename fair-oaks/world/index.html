@@ -1,217 +1,310 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fair Oaks World · Worlds of Kings × Fair Oaks</title>
-<meta name="description" content="A hybrid realistic + fantastical world: real Georgia geography under glowing oak-ring elevation bands, micro-schools, and playful tokens. Built with the Worlds of Kings engine spirit.">
+<title>Fair Oaks World · voxel rings · Worlds of Kings × Fair Oaks</title>
+<meta name="description" content="Walk the Fair Oaks vision as a first-person voxel world. Five glowing oak rings, micro-schools, and groves rendered with the VoxelData engine.">
 <style>
 :root{
-  --paper:#eef1e6; --card:#f7f8f1; --ink:#20261b; --muted:#586150; --line:#d5dbc7;
-  --green:#2f6b3d; --green-deep:#1f4a2a; --leaf:#5f923f; --acorn:#a9631a; --bark:#4a3a28;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
-  color-scheme:light;
+  --bg:#0c1016; --panel:#121824cc; --edge:#26303f; --edge2:#39485c;
+  --ink:#e8eef6; --dim:#8b9bb0; --accent:#5cc8ff; --gold:#f5c542;
+  --mono:"SFMono-Regular","SF Mono","JetBrains Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){
-  :root{ --paper:#11150e; --card:#181e13; --ink:#e9ecdd; --muted:#95a086; --line:#2a331f;
-    --green:#77b46f; --green-deep:#5a9a54; --leaf:#8fc86a; --acorn:#e0a24a; --bark:#c9b590; color-scheme:dark; }
-}
-:root[data-theme="light"]{ --paper:#eef1e6;--card:#f7f8f1;--ink:#20261b;--muted:#586150;--line:#d5dbc7;--green:#2f6b3d;--green-deep:#1f4a2a;--leaf:#5f923f;--acorn:#a9631a;--bark:#4a3a28;color-scheme:light;}
-:root[data-theme="dark"]{ --paper:#11150e;--card:#181e13;--ink:#e9ecdd;--muted:#95a086;--line:#2a331f;--green:#77b46f;--green-deep:#5a9a54;--leaf:#8fc86a;--acorn:#e0a24a;--bark:#c9b590;color-scheme:dark;}
-
 *{box-sizing:border-box;}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;}
-a{color:var(--green);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--green) 35%,transparent);}
-a:hover{border-bottom-color:var(--green);}
-.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
-h1{font-family:var(--serif);font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-.01em;}
-.subtitle{color:var(--muted);font-size:15px;}
-canvas{display:block;margin:0 auto;border:1px solid var(--line);border-radius:14px;background:var(--card);max-width:100%;}
-.controls{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 30px;justify-content:center;}
-button{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:8px 16px;border-radius:8px;font-family:var(--mono);font-size:12px;cursor:pointer;}
-button:hover{border-color:var(--green);color:var(--green);}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:24px;}
-footer{margin-top:60px;border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;color:var(--muted);}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);}
+#app{position:fixed;inset:0;}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;}
+.cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none;z-index:5;opacity:.7;}
+.cross::before,.cross::after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000;}
+.cross::before{left:8px;top:0;width:2px;height:18px;}
+.cross::after{top:8px;left:0;height:2px;width:18px;}
+.hud{position:absolute;z-index:6;font-family:var(--mono);}
+.panel{background:var(--panel);border:1px solid var(--edge);backdrop-filter:blur(8px);padding:14px 16px;}
+#topleft{top:14px;left:14px;max-width:320px;display:flex;flex-direction:column;gap:10px;}
+.brand{display:flex;align-items:baseline;gap:8px;}
+.brand h1{margin:0;font-size:15px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
+.brand .v{font-size:10px;color:var(--dim);letter-spacing:.14em;}
+.back{font-family:var(--mono);font-size:11px;color:var(--dim);text-decoration:none;letter-spacing:.08em;align-self:flex-start;}
+.back:hover{color:var(--accent);}
+.tag{font-size:11px;color:var(--dim);line-height:1.5;font-family:var(--sans);}
+.hint{font-size:10.5px;color:var(--dim);line-height:1.7;}
+.hint kbd{font-family:var(--mono);border:1px solid var(--edge2);border-bottom-width:2px;border-radius:3px;padding:0 5px;color:var(--ink);}
+#fps{position:absolute;top:14px;right:14px;padding:7px 11px;font-size:11px;letter-spacing:.1em;color:var(--dim);}
+#fps b{color:var(--gold);}
+#veil{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;background:radial-gradient(60% 60% at 50% 45%, #0c1016aa, #0c1016ee);}
+#veil .card{text-align:center;pointer-events:none;}
+#veil h2{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;font-size:18px;margin:0 0 8px;}
+#veil p{color:var(--dim);font-size:13px;margin:0;font-family:var(--mono);}
+#veil .keys{margin-top:16px;color:var(--dim);font-size:12px;font-family:var(--mono);line-height:2;}
+#veil kbd{font-family:var(--mono);border:1px solid var(--edge2);border-bottom-width:2px;border-radius:3px;padding:1px 6px;color:var(--ink);margin:0 1px;}
+.hidden{display:none!important;}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div>
-    <a href="../">← Fair Oaks growth sketch</a>
-    <h1>Fair Oaks <span style="color:var(--green);">World</span></h1>
-    <p class="subtitle">Real Georgia geography · five glowing oak rings · playful tokens</p>
+<div id="app">
+  <canvas id="gl"></canvas>
+  <div class="cross"></div>
+
+  <div class="hud panel" id="topleft">
+    <a class="back" href="../">← Fair Oaks</a>
+    <div class="brand"><h1>Fair Oaks World</h1><span class="v">voxel · rings</span></div>
+    <div class="tag">Five glowing oak rings. Micro-schools. Real Georgia spirit. VoxelData engine.</div>
+    <div class="hint">
+      <kbd>click</kbd> look · <kbd>W A S D</kbd> fly · <kbd>Space</kbd>/<kbd>Shift</kbd> up/down · <kbd>scroll</kbd> speed · <kbd>Esc</kbd> release
+    </div>
+    <div class="hint" style="opacity:.6;margin-top:2px">Worlds of Kings × Fair Oaks · Manny Glover</div>
   </div>
-  <button id="theme">◐ theme</button>
-</header>
 
-<canvas id="world" width="880" height="560"></canvas>
+  <div class="hud" id="fps"><b id="fpsv">–</b> fps</div>
 
-<div class="controls">
-  <button id="reset">Reset tokens</button>
-  <button id="random">Random walk</button>
-  <button id="focus">Focus rings</button>
-</div>
-
-<div class="panel">
-  <p><strong>Hybrid world.</strong> The canvas shows real Marietta, Georgia topography (Bellemeade Knolls, Olley Creek watershed) rendered as elevation bands, overlaid with the five oak-ring vision. Tokens move along ring paths and radial connections using simplified Worlds of Kings movement rules. This is a storybook layer — not a game in progress, but a place to explore the dream.</p>
-  <p style="font-size:13px;color:var(--muted);">Mouse over the canvas for gentle parallax. Click a ring or token to inspect. Drag a token to move it along legal paths.</p>
-</div>
-
-<footer>
-  Worlds of Kings engine spirit × Fair Oaks vision · Marietta, Georgia · By Manny Glover
-</footer>
+  <div id="veil"><div class="card">
+    <h2>Fair Oaks World</h2>
+    <p>walk the rings</p>
+    <div class="keys"><kbd>click</kbd> to enter · <kbd>W A S D</kbd> fly · <kbd>Space</kbd>/<kbd>Shift</kbd> up/down · <kbd>Esc</kbd> release</div>
+  </div></div>
 </div>
 
 <script>
-(function(){
-  const c=document.getElementById("world");
-  const ctx=c.getContext("2d",{alpha:true});
-  const W=880,H=560;
-  let mx=W/2,my=H/2;
-  let tokens=[{id:0,x:420,y:280,ring:2,label:"Acorn"},{id:1,x:510,y:310,ring:3,label:"Sapling"},{id:2,x:380,y:340,ring:4,label:"Oak"}];
-  let selected=null;
+(() => {
+  "use strict";
+  const V = {
+    sub:(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],
+    cross:(a,b)=>[a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[0]],
+    dot:(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],
+    norm:a=>{const m=Math.hypot(a[0],a[1],a[2])||1;return [a[0]/m,a[1]/m,a[2]/m];},
+    scale:(a,s)=>[a[0]*s,a[1]*s,a[2]*s],
+    add:(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],
+  };
+  function perspective(fovy,aspect,near,far){
+    const f=1/Math.tan(fovy/2), nf=1/(near-far);
+    return [f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,2*far*near*nf,0];
+  }
+  function viewMat(eye,fwd,up){
+    const z=V.norm([-fwd[0],-fwd[1],-fwd[2]]);
+    const x=V.norm(V.cross(up,z));
+    const y=V.cross(z,x);
+    return [ x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0,
+             -V.dot(x,eye),-V.dot(y,eye),-V.dot(z,eye),1 ];
+  }
+  function mul(a,b){
+    const o=new Array(16);
+    for(let c=0;c<4;c++)for(let r=0;r<4;r++){
+      let s=0; for(let k=0;k<4;k++) s+=a[k*4+r]*b[c*4+k]; o[c*4+r]=s;
+    } return o;
+  }
 
-  function css(name,fb){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()||fb;}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const paper=css("--paper","#eef1e6");
-    ctx.fillStyle=paper;ctx.fillRect(0,0,W,H);
+  const canvas=document.getElementById("gl");
+  const gl=canvas.getContext("webgl2",{antialias:true});
+  if(!gl){ document.getElementById("veil").innerHTML='<div class="card"><h2>No WebGL2</h2></div>'; return; }
 
-    const g=css("--green","#2f6b3d"),gd=css("--green-deep","#1f4a2a");
-    const lf=css("--leaf","#5f923f"),ac=css("--acorn","#a9631a"),bk=css("--bark","#4a3a28");
+  const VS=`#version 300 es
+  precision highp float;
+  in vec3 aPos; in vec3 aNormal; in vec3 aColor;
+  uniform mat4 uVP; uniform vec3 uEye;
+  out vec3 vColor; out vec3 vNormal; out float vDist;
+  void main(){
+    gl_Position = uVP * vec4(aPos,1.0);
+    vColor=aColor; vNormal=aNormal; vDist=length(aPos-uEye);
+  }`;
+  const FS=`#version 300 es
+  precision highp float;
+  in vec3 vColor; in vec3 vNormal; in float vDist;
+  uniform vec3 uSun; uniform vec3 uFogColor; uniform float uFogNear; uniform float uFogFar;
+  out vec4 frag;
+  void main(){
+    vec3 n=normalize(vNormal);
+    float diff=max(dot(n,uSun),0.0);
+    float amb=0.42;
+    float topBias = 0.10*max(n.y,0.0);
+    vec3 col = vColor*(amb+0.72*diff+topBias);
+    float fog = clamp((vDist-uFogNear)/(uFogFar-uFogNear),0.0,1.0);
+    col = mix(col, uFogColor, fog);
+    frag=vec4(col,1.0);
+  }`;
+  function sh(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+  const prog=gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS)); gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));
+  gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
 
-    const cx=W/2,cy=H*0.54;
-    const tilt=(mx-cx)*0.014,ty=(my-cy)*0.006;
+  const aPos=gl.getAttribLocation(prog,"aPos"), aNormal=gl.getAttribLocation(prog,"aNormal"), aColor=gl.getAttribLocation(prog,"aColor");
+  const uVP=gl.getUniformLocation(prog,"uVP"), uEye=gl.getUniformLocation(prog,"uEye");
+  const uSun=gl.getUniformLocation(prog,"uSun"), uFogColor=gl.getUniformLocation(prog,"uFogColor");
+  const uFogNear=gl.getUniformLocation(prog,"uFogNear"), uFogFar=gl.getUniformLocation(prog,"uFogFar");
 
-    // Real-world inspired terrain (Bellemeade Knolls + Olley Creek stylized)
-    ctx.fillStyle="#d2d9c4";ctx.fillRect(120,340,640,180);
-    ctx.fillStyle="#c3cbae";ctx.beginPath();
-    ctx.ellipse(420,390,280,90,0,0,Math.PI*2);ctx.fill(); // gentle hills
+  // Fair Oaks palette (oak rings + schools + terrain)
+  const PAL = [
+    [0.18,0.24,0.18],   // 0 deep bark / ground
+    [0.22,0.32,0.22],   // 1 ring 1 (deep green)
+    [0.28,0.42,0.28],   // 2 ring 2
+    [0.35,0.55,0.32],   // 3 ring 3 (leaf)
+    [0.55,0.68,0.42],   // 4 ring 4
+    [0.68,0.82,0.58],   // 5 ring 5 (outermost)
+    [0.58,0.42,0.22],   // 6 acorn brown (schools)
+    [0.35,0.52,0.28],   // 7 tree foliage
+    [0.45,0.38,0.28],   // 8 path
+    [0.95,0.92,0.78],   // 9 highlight / book
+  ];
 
-    // Five oak rings (fantasy elevation)
-    const rings=[{r:38,c:gd},{r:66,c:g},{r:98,c:lf},{r:138,c:"#9cc67a"},{r:188,c:"#c7e3a8"}];
-    rings.forEach((r,i)=>{
-      ctx.save();
-      ctx.translate(cx+tilt*(i*0.55),cy+ty*(i*0.35)-i*11);
-      ctx.beginPath();
-      ctx.ellipse(0,0,r.r,r.r*0.48,0,0,Math.PI*2);
-      ctx.fillStyle=r.c;ctx.fill();
-      ctx.strokeStyle="rgba(0,0,0,0.07)";ctx.lineWidth=1.2;ctx.stroke();
-      ctx.restore();
-    });
+  // Build the Fair Oaks world: 5 concentric rings + schools + trees + path
+  function colorAt(x,y,z){
+    const cx=0,cz=0,r=Math.hypot(x-cx,z-cz);
+    if(y<0) return 0;
+    if(y>18) return -1;
+    // 5 rings as elevation bands
+    if(r<6 && y<6) return 1;
+    if(r<11 && y<9) return 2;
+    if(r<17 && y<12) return 3;
+    if(r<24 && y<15) return 4;
+    if(r<32 && y<18) return 5;
+    // micro-schools on inner rings (ring 2–3)
+    if(r>7&&r<10 && y>=4&&y<=9 && (Math.abs(x)%5<2 || Math.abs(z)%5<2)) return 6;
+    // trees on outer rings
+    if(r>18 && (Math.floor(x/3)%2===0 && Math.floor(z/3)%2===0) && y<14 && y>6) return 7;
+    // winding path
+    const path=Math.abs(Math.sin(z*0.18+x*0.03)*4 - (r-18));
+    if(path<2.2 && y<6 && r>10) return 8;
+    return -1;
+  }
 
-    // Micro-school buildings on inner rings
-    [[1,-0.9],[1,0.65],[2,-1.7],[2,1.5]].forEach(([ri,a])=>{
-      const rr=rings[ri].r;
-      const x=cx+Math.cos(a)*rr+tilt*ri*0.6;
-      const y=cy-Math.sin(a)*rr*0.48-ty*ri*0.4-ri*12;
-      ctx.fillStyle=bk;ctx.fillRect(x-5,y-12,10,15);
-      ctx.fillStyle=ac;ctx.fillRect(x-2.5,y-17,5,5);
-    });
-
-    // Trees / groves on outer rings
-    [[3,-2.3],[3,2.4],[4,-0.5],[4,0.7],[4,-2.9]].forEach(([ri,a])=>{
-      const rr=rings[ri].r;
-      const x=cx+Math.cos(a)*rr+tilt*ri*0.8;
-      const y=cy-Math.sin(a)*rr*0.48-ty*ri*0.5-ri*13;
-      ctx.fillStyle=lf;ctx.beginPath();ctx.moveTo(x,y-16);ctx.lineTo(x-9,y+3);ctx.lineTo(x+9,y+3);ctx.fill();
-      ctx.fillStyle=bk;ctx.fillRect(x-2,y+3,4,6);
-    });
-
-    // Winding path (real creek + fantasy path)
-    ctx.strokeStyle=ac;ctx.lineWidth=3;ctx.lineJoin="round";
-    ctx.beginPath();
-    ctx.moveTo(cx-110,cy+48);
-    ctx.quadraticCurveTo(cx-30,cy+82,cx+48,cy+52);
-    ctx.quadraticCurveTo(cx+120,cy+88,cx+170,cy+38);
-    ctx.stroke();
-
-    // Tokens
-    tokens.forEach(t=>{
-      const col=t.ring===2?ac:t.ring===3?g:lf;
-      ctx.fillStyle=col;
-      ctx.beginPath();ctx.arc(t.x+tilt*0.8,t.y+ty*0.6,9,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle="#fff";ctx.font="10px "+css("--mono","monospace");
-      ctx.fillText(t.label,t.x-18,t.y+22);
-      if(selected&&selected.id===t.id){
-        ctx.strokeStyle=ac;ctx.lineWidth=2;ctx.beginPath();
-        ctx.arc(t.x+tilt*0.8,t.y+ty*0.6,14,0,Math.PI*2);ctx.stroke();
+  // Greedy mesh (same as VoxelData core)
+  const CS=24;
+  let chunks=[], totalTris=0;
+  function meshChunk(colorAt,lo,hi){
+    const solid=(x,y,z)=>colorAt(x,y,z)>=0;
+    const quads=[];
+    for(let d=0;d<3;d++){
+      const u=(d+1)%3,v=(d+2)%3;
+      const eu=[0,0,0];eu[u]=1; const ev=[0,0,0];ev[v]=1;
+      const Wu=hi[u]-lo[u],Hv=hi[v]-lo[v];
+      if(Wu<=0||Hv<=0)continue;
+      for(let s=lo[d];s<=hi[d];s++){
+        const mask=[];
+        for(let jv=lo[v];jv<hi[v];jv++)for(let iu=lo[u];iu<hi[u];iu++){
+          const A=[0,0,0];A[u]=iu;A[v]=jv;A[d]=s-1;
+          const B=[0,0,0];B[u]=iu;B[v]=jv;B[d]=s;
+          const a=colorAt(A[0],A[1],A[2]),b=colorAt(B[0],B[1],B[2]);
+          if((a>=0)===(b>=0))mask.push(null);
+          else {
+            const owner=(a>=0)?A:B, col=(a>=0)?a:b, dir=(a>=0)?-1:1;
+            mask.push({col,dir});
+          }
+        }
+        for(let j=0;j<Hv;j++)for(let i=0;i<Wu;){
+          if(!mask[j*Wu+i]){i++;continue;}
+          const m=mask[j*Wu+i]; let w=1,h=1;
+          while(i+w<Wu && mask[j*Wu+i+w] && mask[j*Wu+i+w].col===m.col && mask[j*Wu+i+w].dir===m.dir)w++;
+          let ok=true;
+          for(let hh=1;hh<h+1 && ok;hh++)for(let ww=0;ww<w;ww++)if(!mask[(j+hh)*Wu+i+ww] || mask[(j+hh)*Wu+i+ww].col!==m.col || mask[(j+hh)*Wu+i+ww].dir!==m.dir)ok=false;
+          if(ok){
+            const base=[0,0,0];base[u]=lo[u]+i;base[v]=lo[v]+j;base[d]=s;
+            const du=V.scale(eu,w),dv=V.scale(ev,h+1);
+            const p0=base,p1=V.add(base,du),p2=V.add(base,dv),p3=V.add(V.add(base,du),dv);
+            const n=[0,0,0];n[d]=m.dir;
+            const col=PAL[m.col];
+            quads.push({p0,p1,p2,p3,n,col});
+            for(let hh=0;hh<h+1;hh++)for(let ww=0;ww<w;ww++)mask[(j+hh)*Wu+i+ww]=null;
+          }else i++;
+        }
       }
-    });
-
-    // Floating acorns + book
-    ctx.fillStyle=ac;
-    [[cx-95,cy-88,5.5],[cx+130,cy-72,4.2],[cx+62,cy-110,3.8]].forEach(([x,y,s])=>{
-      ctx.save();ctx.translate(x+tilt*1.1,y+ty);ctx.rotate(Date.now()/1600);
-      ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.55,s*0.45);ctx.lineTo(-s*0.55,s*0.45);ctx.fill();
-      ctx.restore();
-    });
-    ctx.fillStyle="#f4e9c8";ctx.fillRect(cx-125,cy-52,16,12);
-    ctx.fillStyle=bk;ctx.fillRect(cx-109,cy-52,2.5,12);
-  }
-
-  function moveToken(t,dx,dy){
-    const step=18;
-    t.x+=dx*step;t.y+=dy*step;
-    // keep inside outer ring roughly
-    const dist=Math.hypot(t.x-W/2,t.y-H*0.54);
-    if(dist>205){t.x=W/2+(t.x-W/2)*0.92;t.y=H*0.54+(t.y-H*0.54)*0.92;}
-  }
-
-  function onMove(e){
-    const r=c.getBoundingClientRect();
-    mx=e.clientX-r.left;my=e.clientY-r.top;
-    draw();
-  }
-  c.addEventListener("mousemove",onMove);
-  c.addEventListener("mouseleave",()=>{mx=W/2;my=H/2;draw();});
-
-  c.addEventListener("click",e=>{
-    const r=c.getBoundingClientRect();
-    const x=e.clientX-r.left,y=e.clientY-r.top;
-    selected=null;
-    for(const t of tokens){
-      if(Math.hypot(t.x-x,t.y-y)<14){selected=t;break;}
     }
-    draw();
+    return quads;
+  }
+
+  function build(){
+    chunks=[];totalTris=0;
+    const minX=-48,maxX=48,minY=0,maxY=20,minZ=-48,maxZ=48;
+    for(let cz=minZ;cz<maxZ;cz+=CS)for(let cy=minY;cy<maxY;cy+=CS)for(let cx=minX;cx<maxX;cx+=CS){
+      const quads=meshChunk(colorAt,[cx,cy,cz],[cx+CS,cy+CS,cz+CS]);
+      if(!quads.length)continue;
+      const verts=[];
+      for(const q of quads){
+        const push=(p,n)=>{verts.push(p[0],p[1],p[2], n[0],n[1],n[2], q.col[0],q.col[1],q.col[2]);};
+        push(q.p0,q.n);push(q.p1,q.n);push(q.p2,q.n);
+        push(q.p2,q.n);push(q.p1,q.n);push(q.p3,q.n);
+      }
+      const vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vbo);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(verts),gl.STATIC_DRAW);
+      chunks.push({vbo,count:verts.length/9});
+      totalTris+=verts.length/9/3;
+    }
+  }
+  build();
+
+  gl.enableVertexAttribArray(aPos);gl.enableVertexAttribArray(aNormal);gl.enableVertexAttribArray(aColor);
+  gl.uniform3fv(uSun,[0.48,0.86,0.32]);
+  gl.uniform3fv(uFogColor,[0.07,0.10,0.14]);
+  gl.uniform1f(uFogNear,28);gl.uniform1f(uFogFar,92);
+
+  let eye=[0,11,-22], fwd=[0,0,1], up=[0,1,0], yaw=0,pitch=0;
+  let keys={}, speed=0.12, last=performance.now(), fpsEl=document.getElementById("fpsv");
+
+  function resize(){
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    canvas.width=canvas.clientWidth*dpr;canvas.height=canvas.clientHeight*dpr;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+  window.addEventListener("resize",resize);resize();
+
+  let dragging=false,prevX=0,prevY=0;
+  canvas.addEventListener("mousedown",e=>{
+    if(e.button!==0)return;
+    dragging=true;prevX=e.clientX;prevY=e.clientY;canvas.requestPointerLock?.();
   });
-
-  // Keyboard movement for selected token
-  window.addEventListener("keydown",e=>{
-    if(!selected)return;
-    if(e.key==="ArrowLeft")moveToken(selected,-1,0);
-    if(e.key==="ArrowRight")moveToken(selected,1,0);
-    if(e.key==="ArrowUp")moveToken(selected,0,-1);
-    if(e.key==="ArrowDown")moveToken(selected,0,1);
-    draw();
+  document.addEventListener("mouseup",()=>{dragging=false;document.exitPointerLock?.();});
+  document.addEventListener("mousemove",e=>{
+    if(!document.pointerLockElement)return;
+    yaw-=(e.movementX||0)*0.0025;pitch-=(e.movementY||0)*0.0025;
+    pitch=Math.max(-1.45,Math.min(1.45,pitch));
+    const cy=Math.cos(pitch),sy=Math.sin(pitch);
+    fwd=[Math.sin(yaw)*cy, sy, Math.cos(yaw)*cy];
   });
+  window.addEventListener("keydown",e=>{keys[e.key.toLowerCase()]=true;if(e.key==="Escape")document.exitPointerLock?.();});
+  window.addEventListener("keyup",e=>keys[e.key.toLowerCase()]=false);
+  canvas.addEventListener("wheel",e=>{speed=Math.max(0.03,Math.min(0.6,speed+(e.deltaY<0?0.03:-0.03)));});
 
-  document.getElementById("reset").onclick=()=>{
-    tokens=[{id:0,x:420,y:280,ring:2,label:"Acorn"},{id:1,x:510,y:310,ring:3,label:"Sapling"},{id:2,x:380,y:340,ring:4,label:"Oak"}];
-    selected=null;draw();
-  };
-  document.getElementById("random").onclick=()=>{
-    tokens.forEach(t=>{t.x+=Math.random()*60-30;t.y+=Math.random()*60-30;});
-    draw();
-  };
-  document.getElementById("focus").onclick=()=>{
-    mx=W/2+40;my=H*0.5;draw();setTimeout(()=>{mx=W/2;my=H/2;draw();},800);
-  };
+  const veil=document.getElementById("veil");
+  canvas.addEventListener("click",()=>{veil.classList.add("hidden");canvas.requestPointerLock?.();});
 
-  document.getElementById("theme").addEventListener("click",()=>{
-    const r=document.documentElement;
-    const cur=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
-    r.setAttribute("data-theme",cur==="dark"?"light":"dark");
-    draw();
-  });
-
-  setTimeout(draw,60);
-  window.requestAnimationFrame(function loop(){draw();requestAnimationFrame(loop);});
+  function frame(){
+    const now=performance.now(),dt=Math.min(0.1,(now-last)/1000);last=now;
+    // movement
+    const right=V.norm(V.cross(fwd,up));
+    let move=[0,0,0];
+    if(keys["w"])move=V.add(move,fwd);
+    if(keys["s"])move=V.add(move,V.scale(fwd,-1));
+    if(keys["a"])move=V.add(move,V.scale(right,-1));
+    if(keys["d"])move=V.add(move,right);
+    if(keys[" "])move=V.add(move,[0,1,0]);
+    if(keys["shift"])move=V.add(move,[0,-1,0]);
+    if(V.dot(move,move)>0.01){
+      move=V.scale(V.norm(move),speed);
+      eye=V.add(eye,move);
+    }
+    // render
+    gl.clearColor(0.07,0.10,0.14,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);
+    const aspect=canvas.width/canvas.height;
+    const proj=perspective(0.9,aspect,0.08,180);
+    const view=viewMat(eye,fwd,up);
+    const vp=mul(proj,view);
+    gl.uniformMatrix4fv(uVP,false,vp);
+    gl.uniform3fv(uEye,eye);
+    for(const ch of chunks){
+      gl.bindBuffer(gl.ARRAY_BUFFER,ch.vbo);
+      gl.vertexAttribPointer(aPos,3,gl.FLOAT,false,36,0);
+      gl.vertexAttribPointer(aNormal,3,gl.FLOAT,false,36,12);
+      gl.vertexAttribPointer(aColor,3,gl.FLOAT,false,36,24);
+      gl.drawArrays(gl.TRIANGLES,0,ch.count);
+    }
+    // fps
+    fpsEl.textContent=(1000/(now-(frame.last||now))).toFixed(0);frame.last=now;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 </script>
-</body>
-</html>
+</body></html>

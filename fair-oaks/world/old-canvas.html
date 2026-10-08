@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fair Oaks World · Worlds of Kings × Fair Oaks</title>
+<meta name="description" content="A hybrid realistic + fantastical world: real Georgia geography under glowing oak-ring elevation bands, micro-schools, and playful tokens. Built with the Worlds of Kings engine spirit.">
+<style>
+:root{
+  --paper:#eef1e6; --card:#f7f8f1; --ink:#20261b; --muted:#586150; --line:#d5dbc7;
+  --green:#2f6b3d; --green-deep:#1f4a2a; --leaf:#5f923f; --acorn:#a9631a; --bark:#4a3a28;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"SFMono-Regular","SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#11150e; --card:#181e13; --ink:#e9ecdd; --muted:#95a086; --line:#2a331f;
+    --green:#77b46f; --green-deep:#5a9a54; --leaf:#8fc86a; --acorn:#e0a24a; --bark:#c9b590; color-scheme:dark; }
+}
+:root[data-theme="light"]{ --paper:#eef1e6;--card:#f7f8f1;--ink:#20261b;--muted:#586150;--line:#d5dbc7;--green:#2f6b3d;--green-deep:#1f4a2a;--leaf:#5f923f;--acorn:#a9631a;--bark:#4a3a28;color-scheme:light;}
+:root[data-theme="dark"]{ --paper:#11150e;--card:#181e13;--ink:#e9ecdd;--muted:#95a086;--line:#2a331f;--green:#77b46f;--green-deep:#5a9a54;--leaf:#8fc86a;--acorn:#e0a24a;--bark:#c9b590;color-scheme:dark;}
+
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;}
+a{color:var(--green);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--green) 35%,transparent);}
+a:hover{border-bottom-color:var(--green);}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+h1{font-family:var(--serif);font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-.01em;}
+.subtitle{color:var(--muted);font-size:15px;}
+canvas{display:block;margin:0 auto;border:1px solid var(--line);border-radius:14px;background:var(--card);max-width:100%;}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 30px;justify-content:center;}
+button{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:8px 16px;border-radius:8px;font-family:var(--mono);font-size:12px;cursor:pointer;}
+button:hover{border-color:var(--green);color:var(--green);}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:24px;}
+footer{margin-top:60px;border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <a href="../">← Fair Oaks growth sketch</a>
+    <h1>Fair Oaks <span style="color:var(--green);">World</span></h1>
+    <p class="subtitle">Real Georgia geography · five glowing oak rings · playful tokens</p>
+  </div>
+  <button id="theme">◐ theme</button>
+</header>
+
+<canvas id="world" width="880" height="560"></canvas>
+
+<div class="controls">
+  <button id="reset">Reset tokens</button>
+  <button id="random">Random walk</button>
+  <button id="focus">Focus rings</button>
+</div>
+
+<div class="panel">
+  <p><strong>Hybrid world.</strong> The canvas shows real Marietta, Georgia topography (Bellemeade Knolls, Olley Creek watershed) rendered as elevation bands, overlaid with the five oak-ring vision. Tokens move along ring paths and radial connections using simplified Worlds of Kings movement rules. This is a storybook layer — not a game in progress, but a place to explore the dream.</p>
+  <p style="font-size:13px;color:var(--muted);">Mouse over the canvas for gentle parallax. Click a ring or token to inspect. Drag a token to move it along legal paths.</p>
+</div>
+
+<footer>
+  Worlds of Kings engine spirit × Fair Oaks vision · Marietta, Georgia · By Manny Glover
+</footer>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById("world");
+  const ctx=c.getContext("2d",{alpha:true});
+  const W=880,H=560;
+  let mx=W/2,my=H/2;
+  let tokens=[{id:0,x:420,y:280,ring:2,label:"Acorn"},{id:1,x:510,y:310,ring:3,label:"Sapling"},{id:2,x:380,y:340,ring:4,label:"Oak"}];
+  let selected=null;
+
+  function css(name,fb){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()||fb;}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const paper=css("--paper","#eef1e6");
+    ctx.fillStyle=paper;ctx.fillRect(0,0,W,H);
+
+    const g=css("--green","#2f6b3d"),gd=css("--green-deep","#1f4a2a");
+    const lf=css("--leaf","#5f923f"),ac=css("--acorn","#a9631a"),bk=css("--bark","#4a3a28");
+
+    const cx=W/2,cy=H*0.54;
+    const tilt=(mx-cx)*0.014,ty=(my-cy)*0.006;
+
+    // Real-world inspired terrain (Bellemeade Knolls + Olley Creek stylized)
+    ctx.fillStyle="#d2d9c4";ctx.fillRect(120,340,640,180);
+    ctx.fillStyle="#c3cbae";ctx.beginPath();
+    ctx.ellipse(420,390,280,90,0,0,Math.PI*2);ctx.fill(); // gentle hills
+
+    // Five oak rings (fantasy elevation)
+    const rings=[{r:38,c:gd},{r:66,c:g},{r:98,c:lf},{r:138,c:"#9cc67a"},{r:188,c:"#c7e3a8"}];
+    rings.forEach((r,i)=>{
+      ctx.save();
+      ctx.translate(cx+tilt*(i*0.55),cy+ty*(i*0.35)-i*11);
+      ctx.beginPath();
+      ctx.ellipse(0,0,r.r,r.r*0.48,0,0,Math.PI*2);
+      ctx.fillStyle=r.c;ctx.fill();
+      ctx.strokeStyle="rgba(0,0,0,0.07)";ctx.lineWidth=1.2;ctx.stroke();
+      ctx.restore();
+    });
+
+    // Micro-school buildings on inner rings
+    [[1,-0.9],[1,0.65],[2,-1.7],[2,1.5]].forEach(([ri,a])=>{
+      const rr=rings[ri].r;
+      const x=cx+Math.cos(a)*rr+tilt*ri*0.6;
+      const y=cy-Math.sin(a)*rr*0.48-ty*ri*0.4-ri*12;
+      ctx.fillStyle=bk;ctx.fillRect(x-5,y-12,10,15);
+      ctx.fillStyle=ac;ctx.fillRect(x-2.5,y-17,5,5);
+    });
+
+    // Trees / groves on outer rings
+    [[3,-2.3],[3,2.4],[4,-0.5],[4,0.7],[4,-2.9]].forEach(([ri,a])=>{
+      const rr=rings[ri].r;
+      const x=cx+Math.cos(a)*rr+tilt*ri*0.8;
+      const y=cy-Math.sin(a)*rr*0.48-ty*ri*0.5-ri*13;
+      ctx.fillStyle=lf;ctx.beginPath();ctx.moveTo(x,y-16);ctx.lineTo(x-9,y+3);ctx.lineTo(x+9,y+3);ctx.fill();
+      ctx.fillStyle=bk;ctx.fillRect(x-2,y+3,4,6);
+    });
+
+    // Winding path (real creek + fantasy path)
+    ctx.strokeStyle=ac;ctx.lineWidth=3;ctx.lineJoin="round";
+    ctx.beginPath();
+    ctx.moveTo(cx-110,cy+48);
+    ctx.quadraticCurveTo(cx-30,cy+82,cx+48,cy+52);
+    ctx.quadraticCurveTo(cx+120,cy+88,cx+170,cy+38);
+    ctx.stroke();
+
+    // Tokens
+    tokens.forEach(t=>{
+      const col=t.ring===2?ac:t.ring===3?g:lf;
+      ctx.fillStyle=col;
+      ctx.beginPath();ctx.arc(t.x+tilt*0.8,t.y+ty*0.6,9,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle="#fff";ctx.font="10px "+css("--mono","monospace");
+      ctx.fillText(t.label,t.x-18,t.y+22);
+      if(selected&&selected.id===t.id){
+        ctx.strokeStyle=ac;ctx.lineWidth=2;ctx.beginPath();
+        ctx.arc(t.x+tilt*0.8,t.y+ty*0.6,14,0,Math.PI*2);ctx.stroke();
+      }
+    });
+
+    // Floating acorns + book
+    ctx.fillStyle=ac;
+    [[cx-95,cy-88,5.5],[cx+130,cy-72,4.2],[cx+62,cy-110,3.8]].forEach(([x,y,s])=>{
+      ctx.save();ctx.translate(x+tilt*1.1,y+ty);ctx.rotate(Date.now()/1600);
+      ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.55,s*0.45);ctx.lineTo(-s*0.55,s*0.45);ctx.fill();
+      ctx.restore();
+    });
+    ctx.fillStyle="#f4e9c8";ctx.fillRect(cx-125,cy-52,16,12);
+    ctx.fillStyle=bk;ctx.fillRect(cx-109,cy-52,2.5,12);
+  }
+
+  function moveToken(t,dx,dy){
+    const step=18;
+    t.x+=dx*step;t.y+=dy*step;
+    // keep inside outer ring roughly
+    const dist=Math.hypot(t.x-W/2,t.y-H*0.54);
+    if(dist>205){t.x=W/2+(t.x-W/2)*0.92;t.y=H*0.54+(t.y-H*0.54)*0.92;}
+  }
+
+  function onMove(e){
+    const r=c.getBoundingClientRect();
+    mx=e.clientX-r.left;my=e.clientY-r.top;
+    draw();
+  }
+  c.addEventListener("mousemove",onMove);
+  c.addEventListener("mouseleave",()=>{mx=W/2;my=H/2;draw();});
+
+  c.addEventListener("click",e=>{
+    const r=c.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    selected=null;
+    for(const t of tokens){
+      if(Math.hypot(t.x-x,t.y-y)<14){selected=t;break;}
+    }
+    draw();
+  });
+
+  // Keyboard movement for selected token
+  window.addEventListener("keydown",e=>{
+    if(!selected)return;
+    if(e.key==="ArrowLeft")moveToken(selected,-1,0);
+    if(e.key==="ArrowRight")moveToken(selected,1,0);
+    if(e.key==="ArrowUp")moveToken(selected,0,-1);
+    if(e.key==="ArrowDown")moveToken(selected,0,1);
+    draw();
+  });
+
+  document.getElementById("reset").onclick=()=>{
+    tokens=[{id:0,x:420,y:280,ring:2,label:"Acorn"},{id:1,x:510,y:310,ring:3,label:"Sapling"},{id:2,x:380,y:340,ring:4,label:"Oak"}];
+    selected=null;draw();
+  };
+  document.getElementById("random").onclick=()=>{
+    tokens.forEach(t=>{t.x+=Math.random()*60-30;t.y+=Math.random()*60-30;});
+    draw();
+  };
+  document.getElementById("focus").onclick=()=>{
+    mx=W/2+40;my=H*0.5;draw();setTimeout(()=>{mx=W/2;my=H/2;draw();},800);
+  };
+
+  document.getElementById("theme").addEventListener("click",()=>{
+    const r=document.documentElement;
+    const cur=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+    r.setAttribute("data-theme",cur==="dark"?"light":"dark");
+    draw();
+  });
+
+  setTimeout(draw,60);
+  window.requestAnimationFrame(function loop(){draw();requestAnimationFrame(loop);});
+})();
+</script>
+</body>
+</html>
