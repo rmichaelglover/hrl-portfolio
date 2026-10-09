@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Stalemate Gambit Explained · Chess Maestro</title>
+<meta name="description" content="Seven playful chess study chapters: a wandering king, a dangerous gift, and the art of building a stalemate cage. Explore and practice in Chess Maestro.">
+<link rel="stylesheet" href="study.css">
+</head>
+<body>
+<header><a href="../maestro.html">♫ Chess Maestro</a><span class="edition">A Woodland Kingdom study · draft 01</span><a href="study.pgn" download>↓ Download study PGN</a></header>
+<main>
+<section class="intro"><div class="eyebrow">THE KING HAS ONE MORE QUESTION</div><h1>The Stalemate<br>Gambit <em>Explained.</em></h1><p>You have taken my army. You have surrounded my king.<br>Before you take your victory—check whether I can still move.</p></section>
+<div class="study-layout">
+<nav class="chapters" aria-label="Study chapters"><h2>Seven little adventures</h2><div id="chapters"></div><p class="nav-note">A story, a cage, a sacrifice,<br>a crown, a walk, an escape,<br>and a laboratory.</p></nav>
+<section class="board-panel" aria-label="Maestro study board">
+<div class="board-heading"><span id="turn">Loading the kingdom…</span><label>Pieces <select id="pieces"><option value="woodland">Woodland</option><option value="classic">Classic</option></select></label></div>
+<iframe id="maestro" data-src="../maestro.html?studyEmbed=1" title="Chess Maestro board: click a piece and its destination to answer a lesson"></iframe>
+<div class="controls"><button id="first" aria-label="Starting position">⏮</button><button id="prev" aria-label="Previous move">←</button><button id="next" aria-label="Next move">→</button><button id="last" aria-label="End of main line">⏭</button><button id="beat">Next story beat</button></div>
+<div id="outcome" aria-live="polite"></div>
+</section>
+<section class="lesson" aria-label="Chapter commentary">
+<div class="lesson-top"><span id="chapterNumber"></span><button id="mode">Practice</button></div>
+<h2 id="title">Opening the study…</h2><p id="chapterIntro"></p>
+<div id="practice"><p id="prompt">Click a piece, then its destination on the board.</p><button id="hintButton">A little hint</button><button id="reveal">Reveal &amp; explore</button><p id="hint" hidden></p><p id="feedback" role="status"></p><div id="promotion" hidden><p>Choose your crown:</p><button data-promo="q">Queen</button><button data-promo="r">Rook</button><button data-promo="b">Bishop</button><button data-promo="n">Knight</button></div></div>
+<div id="explore"><h3 id="positionLabel">Starting position</h3><p id="comment"></p><div id="variations" aria-label="Next moves and variations"></div><details open><summary>Move tree</summary><div id="tree"></div></details></div>
+<div class="chapter-controls"><button id="previousChapter">← Chapter</button><button id="nextChapter">Next chapter →</button></div>
+</section>
+</div>
+<footer><p><strong>The game is still young.</strong> This is our GitHub Pages workshop. When we’re happy with the study, its chapters can travel to Lichess.</p><details><summary>Study notes &amp; sources</summary><p>“Stalemate Gambit” is our creative name for a survival theme, rather than an established opening claim. Composed teaching positions are identified in their comments. The historical game has two queens at its finish.</p><p>Our structure follows <a href="https://lichess.org/@/lichess/blog/study-chess-the-lichess-way/V0KrLSkA">Lichess studies</a>: chapter starting positions, move trees, comments, variations, and hidden lesson solutions. Downloaded PGN preserves those chess contents and colored-square annotations. Chapter practice settings must be set separately on Lichess; they do not transfer as PGN settings.</p><p><a href="https://lichess.org/rdt2NZGH">Founding game</a> · <a href="source-game.pgn" download>Original annotated PGN</a> · <a href="https://handbook.fide.com/chapter/e012023">FIDE rules</a></p></details></footer>
+</main>
+<script src="../../entry-agreement.js"></script>
+<script src="study.js"></script>
+</body></html>

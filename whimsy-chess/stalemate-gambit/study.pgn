@@ -1,0 +1,97 @@
+[Event "01 · The king who refused to die"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "*"]
+[FEN "6k1/4q1p1/5q2/7K/8/8/8/8 b - - 10 80"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "01 · The king who refused to die"]
+
+{ You have taken my army. You have surrounded my king. Before you take your victory: check whether I can still move. Black to move. Explore the historical finish first, then the three checkmates that were available. A practical rescue, not a forced draw. } 80... Qee6 { The final door closes without a check. White has no legal move: stalemate! King Ethelheim lives to tell the tale. [%csl Gh5] } ( 80... Qf5# { Checkmate. The difference is one check: the king is attacked and has no escape. Black could have chosen this instead of the historical stalemate. } ) ( 80... Qg5# { Checkmate. The difference is one check: the king is attacked and has no escape. Black could have chosen this instead of the historical stalemate. } ) ( 80... Qe2# { Checkmate. The difference is one check: the king is attacked and has no escape. Black could have chosen this instead of the historical stalemate. } ) *
+
+[Event "02 · Build your own cage"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "1/2-1/2"]
+[FEN "6k1/6p1/4qq2/7K/8/8/8/8 w - - 11 81"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "02 · Build your own cage"]
+
+{ White to move. Try to find any legal move. There are none! Three questions explain the cage: Is the king in check? No. Can the king move safely? No. Can another white piece move? There are no others. A safe king with no legal move means stalemate, whatever the material count. Inspect g4, g5, g6, h4 and h6: Black controls every neighboring square. [%csl Gh5,Rg4,Rg5,Rg6,Rh4,Rh6] } 1/2-1/2
+
+[Event "03 · The last piece must go"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "*"]
+[FEN "8/8/8/8/8/5k2/5qR1/7K w - - 0 1"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "03 · The last piece must go"]
+
+{ White to move. King Ethelheim is nearly boxed in, but his rook can still move. Offer that last piece with check. This composed position teaches a trap: both captures draw, but Black may decline the gift by moving the king. } 1. Rg3+ { Castle Hessenbach offers himself on g3 with check. Ask what changes if he disappears. } 1... Kxg3 { The king takes the gift. White is not in check and has no legal move: stalemate. } ( 1... Qxg3 { The queen takes instead. The cage is complete again: stalemate. Both captures fall for the same trick. } ) ( 1... Ke4 { Black declines the gift. White still has a movable rook; this is not stalemate. The sacrifice sets a trap rather than forcing a draw. } ) *
+
+[Event "04 · The dangerous gift: promotion"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "*"]
+[FEN "8/k1P5/2K5/8/8/8/8/8 w - - 0 1"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "04 · The dangerous gift: promotion"]
+
+{ White to move. The little c-pawn is ready for a crown. Promote to a piece that avoids immediate stalemate and keeps enough material to checkmate a bare king. A queen can control too much! } 1. c8=R { A castle instead of a dragon! Black can play Ka6. The game continues with king and rook against king. } ( 1. c8=Q { The queen controls a6 as well as the eighth rank. Black has no safe move, yet a7 is not checked: stalemate. More power has bought only half a point. } ) ( 1. c8=B { Black can move, but king and bishop alone cannot checkmate a bare king. This promotion also draws. } ) ( 1. c8=N+ { Black can move, but king and knight alone cannot checkmate a bare king. Choose the rook to retain winning material. } ) *
+
+[Event "05 · The royal walking tour"]
+[Site "Chess Maestro"]
+[Date "2026.08.27"]
+[Round "?"]
+[White "mannyfresher"]
+[Black "EmilioAsoXela"]
+[Result "1/2-1/2"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "05 · The royal walking tour"]
+[TimeControl "180+0"]
+[Source "https://lichess.org/rdt2NZGH"]
+
+{ The founding game: mannyfresher against EmilioAsoXela, 3+0 blitz, 27 August 2026. Follow the king from his castle into the wilderness. The chapter pauses at story beats; the full legal game is here for replay. This is resourceful survival against missed wins, not a proven drawing opening. } 1. Nf3 d5 2. Nc3 Nf6 3. d3 e6 4. e3 Bb4 5. Bd2 O-O 6. Be2 Nc6 7. a3 Bxc3 8. Bxc3 e5 9. Qd2 d4 10. Bb4 Re8 11. O-O-O { 11.O-O-O: the king chooses the castle with the storm outside. Watch how quickly the shelter disappears. } 11... Nxb4 12. Qxb4 Qd5 13. e4 Qa2 14. Kd2 { 14.Kd2: King Ethelheim packs a sandwich and leaves home. } 14... b6 15. Rdg1 c5 16. Qb3 Qxb3 17. cxb3 Be6 18. b4 cxb4 19. a4 a5 20. Ng5 h6 21. Nxe6 Rxe6 22. g3 Rc8 23. h4 Rec6 24. f4 Rc2+ 25. Ke1 Rc1+ 26. Kf2 Rxg1 27. Rxg1 Rc2 28. fxe5 Nd7 29. g4 Rxb2 30. g5 hxg5 31. hxg5 Nxe5 32. g6 Nxg6 33. Rxg6 fxg6 { 33...fxg6: the last rook disappears. White now has a king, a bishop and pawns. The emergency plan is to stay in the game and make Black finish the job. } 34. Ke1 b3 35. Bg4 Rb1+ 36. Ke2 b2 37. e5 Rc1 38. Kf3 b1=Q { 38...b1=Q: a new dragon joins the chase. Black has a forced mate according to the source annotations, but must still execute it. } 39. e6 Qxd3+ 40. Kf4 Rf1+ 41. Ke5 Qe3+ 42. Kd6 Qf4+ 43. Kd7 Qxg4 44. Kd6 Rf6 45. Kc6 Qxe6+ 46. Kb5 { 46.Kb5: across the board again. Locate the checks and the escape squares before continuing. } 46... Rf5+ 47. Ka6 Qc6 48. Ka7 Rf7+ 49. Ka6 Qb7+ 50. Kb5 Rf5+ 51. Kc4 Qd5+ 52. Kd3 Qf3+ 53. Kc4 Rc5+ 54. Kxd4 Qd5+ 55. Ke3 Rc3+ 56. Kf4 Qe6 57. Kg5 Rg3+ 58. Kf4 Qg4+ 59. Ke5 Rf3 60. Kd5 Re3 61. Kc6 Qd4 62. Kb5 Rc3 63. Ka6 Qxa4 { 63...Qxa4: the final white pawn falls. From now on the king has no army to keep the game moving. } 64. Kb7 Qc6+ 65. Ka6 Qc8+ 66. Kb5 Rc5+ 67. Ka4 Rc4+ 68. Kb5 g5 69. Kxb6 g4 70. Kb5 g3 71. Kb6 g2 72. Kb5 g1=Q { 72...g1=Q: Black now has two queens, not three. The original queen and two promotions did not all survive: White captured the original queen on move 16. } 73. Kxa5 Qa7+ 74. Kb5 Qcb8+ 75. Kxc4 Qac7+ 76. Kd5 Qbd8+ 77. Ke6 Qce7+ 78. Kf5 Qdf8+ 79. Kg6 Qff6+ 80. Kh5 { 80.Kh5: one last square. Black can checkmate with Qf5, Qg5 or Qe2. The historical choice is one step away. } 80... Qee6 { 80...Qee6: safe, surrounded, immobile. Stalemate. The king has survived the entire expedition. } 1/2-1/2
+
+[Event "06 · One last square"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "*"]
+[FEN "6k1/4q1p1/5qK1/8/8/8/8/8 w - - 9 80"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "06 · One last square"]
+
+{ White to move in the real game. Two queens loom over the king. Find the only legal escape. Moving there keeps the game alive for Black to make one final decision. } 80. Kh5 { The only legal move! Survival gives the opponent another decision; it does not force the eventual mistake. } 80... Qee6 { Black closes the cage without checking. The historical game ends in stalemate. } ( 80... Qf5# { Black chooses checkmate instead. Even a perfectly chosen escape cannot save a position when the opponent has a forced win. } ) *
+
+[Event "07 · The stalemate laboratory"]
+[Site "Chess Maestro"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Woodland Kingdom"]
+[Black "The visiting army"]
+[Result "*"]
+[FEN "k7/8/2K5/1Q6/8/8/8/8 w - - 0 1"]
+[SetUp "1"]
+[StudyName "The Stalemate Gambit Explained"]
+[ChapterName "07 · The stalemate laboratory"]
+
+{ White to move. Two neighboring queen moves write opposite endings. First deliberately build a stalemate with Qb6; then rewind and find checkmate. This laboratory asks you to understand the cage well enough to create it or avoid it. } 1. Qb6 { No check, no legal move: stalemate. You have built the cage. [%csl Ga8,Rb8,Rb7,Ra7] } ( 1. Qb7# { Check and no legal escape: checkmate! The white king protects the queen on b7. One square changes the ending. } ) *
