@@ -1,0 +1,125 @@
+{
+  "parameters": {
+    "central_mass": 1.0,
+    "extra_mass": 4.0,
+    "shell_inner_radius": 2.0,
+    "outer_radius": 10.0,
+    "halo_core_radius": 0.3,
+    "solar_cloud_earth_masses": 10.0,
+    "earth_to_sun_mass_ratio": 3.00349e-06,
+    "solar_shell_inner_au": 2000.0,
+    "solar_shell_outer_au": 100000.0
+  },
+  "verification": "PASS: mass normalization, cavity cancellation, halo quadrature, monotonic mass, circular force balance, and independent shell-force integration.",
+  "sample_results": [
+    {
+      "radius_r0": 0.5,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 1.4142135623730951,
+        "acceleration": 4.0
+      },
+      "shell": {
+        "extra_mass": 0.0,
+        "speed": 1.4142135623730951,
+        "acceleration": 4.0
+      },
+      "halo": {
+        "extra_mass": 0.08005526832144842,
+        "speed": 1.469731450518392,
+        "acceleration": 4.3202210732857935
+      }
+    },
+    {
+      "radius_r0": 1,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 1.0,
+        "acceleration": 1.0
+      },
+      "shell": {
+        "extra_mass": 0.0,
+        "speed": 1.0,
+        "acceleration": 1.0
+      },
+      "halo": {
+        "extra_mass": 0.25842472171827247,
+        "speed": 1.1217953118632082,
+        "acceleration": 1.2584247217182725
+      }
+    },
+    {
+      "radius_r0": 2,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 0.7071067811865476,
+        "acceleration": 0.25
+      },
+      "shell": {
+        "extra_mass": 0.0,
+        "speed": 0.7071067811865476,
+        "acceleration": 0.25
+      },
+      "halo": {
+        "extra_mass": 0.6598733243989156,
+        "speed": 0.9110085961172143,
+        "acceleration": 0.41496833109972886
+      }
+    },
+    {
+      "radius_r0": 5,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 0.4472135954999579,
+        "acceleration": 0.04
+      },
+      "shell": {
+        "extra_mass": 0.4717741935483871,
+        "speed": 0.5425447803727148,
+        "acceleration": 0.05887096774193548
+      },
+      "halo": {
+        "extra_mass": 1.9068377940327015,
+        "speed": 0.7624746283034867,
+        "acceleration": 0.11627351176130805
+      }
+    },
+    {
+      "radius_r0": 10,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 0.31622776601683794,
+        "acceleration": 0.01
+      },
+      "shell": {
+        "extra_mass": 4.0,
+        "speed": 0.7071067811865476,
+        "acceleration": 0.05
+      },
+      "halo": {
+        "extra_mass": 4.0,
+        "speed": 0.7071067811865476,
+        "acceleration": 0.05
+      }
+    },
+    {
+      "radius_r0": 20,
+      "central": {
+        "extra_mass": 0.0,
+        "speed": 0.22360679774997896,
+        "acceleration": 0.0025
+      },
+      "shell": {
+        "extra_mass": 4.0,
+        "speed": 0.5,
+        "acceleration": 0.0125
+      },
+      "halo": {
+        "extra_mass": 4.0,
+        "speed": 0.5,
+        "acceleration": 0.0125
+      }
+    }
+  ],
+  "solar_maximum_extra_force_ppm": 30.0349
+}

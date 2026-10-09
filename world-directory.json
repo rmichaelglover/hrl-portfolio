@@ -1,5 +1,11 @@
 [
   {
+    "href": "oort-halo/",
+    "title": "Oort Cloud & Galactic Halo",
+    "description": "Compare three gravitational toy models: central mass, outer shell, and extended halo. Plots, assumptions, and reproducible Python code.",
+    "category": "Science & Tools"
+  },
+  {
     "href": "whimsy-chess/stalemate-gambit/",
     "title": "The Stalemate Gambit Explained",
     "description": "Seven playful chapters, four interactive lessons, a wandering king, and a portable study PGN.",

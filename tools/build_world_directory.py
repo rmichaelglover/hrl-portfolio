@@ -17,6 +17,7 @@ MAP = {
  'Writing & Research': 'all-in-a-days-work attack-on-christendom chesshustlagaard drugs-are-good el-cuento essays hrl-cybersecurity hyperspace i-am-what-i-am magnum-economicus magnum-quantreleviathone manuelian-magnum-opus mother-god-bomb no-panzer numerological-speculations perfect-union political-economy-paper projective-horizon-bipolar red-thread relax-relabel research-whitepapers spreadsheet-dissertation the-wall three-white-papers ujewhale-macro-report virtual-body-cancer white-hat-hackers',
 }
 OVERRIDES = {
+ 'oort-halo/': ('Oort Cloud & Galactic Halo','Compare three gravitational toy models: central mass, outer shell, and extended halo. Plots, assumptions, and reproducible Python code.','Science & Tools'),
  'whimsy-chess/stalemate-gambit/': ('The Stalemate Gambit Explained','Seven playful chapters, four interactive lessons, a wandering king, and a portable study PGN.','Chess & Games'),
  'tiny-creek-world/': ('Tiny Creek World','Travel a peaceful world garden, meet wildlife neighbors, make gifts, and collect little welcomes.','Worlds & Nature'),
  'tiny-creek-chess/': ('Tiny Creek Chess','Learn chess with nature councils, animal friends, country flags, and classical figurines.','Worlds & Nature'),
