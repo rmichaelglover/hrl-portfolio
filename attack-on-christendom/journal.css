@@ -1,0 +1,38 @@
+/* A periodical in the manner of the nineteenth century. */
+:root{color-scheme:light}
+body{background:#eee5cf;color:#29251d;font:18px/1.65 Georgia,'Times New Roman',serif}
+main{max-width:1080px;padding:28px 34px;margin:24px auto;background:#faf3e2;border:1px solid #b5a789;box-shadow:0 3px 18px #43392118}
+nav,.strap,.edition,.tag,.byline,footer{font-family:Georgia,'Times New Roman',serif}
+nav{font-size:14px;font-variant:small-caps;letter-spacing:.5px;border-bottom:1px solid #96886c;padding-bottom:10px}
+a{color:#493526;text-decoration-thickness:1px;text-underline-offset:3px}
+.masthead{border-top:3px double #29251d;border-bottom:6px double #29251d;padding:18px 0;text-align:center}
+.masthead h1{font-family:'Old English Text MT','UnifrakturMaguntia',Georgia,serif;font-size:clamp(38px,6.5vw,76px);font-weight:900;letter-spacing:-2px;margin:12px 0}
+.masthead p{font-size:14px;font-style:italic;margin:8px 0}
+.strap{font-size:12px;letter-spacing:2px;font-variant:small-caps}
+.edition{font-size:12px;letter-spacing:.7px;border-bottom:3px double #96886c;padding:9px 0}
+.front{grid-template-columns:2fr 1fr;gap:28px;margin-top:24px}
+.front aside{border-left:1px solid #96886c;padding-left:24px}
+.lead h2{font-size:clamp(28px,4vw,42px);text-align:center;font-weight:normal}
+.tag{color:#493526;font-size:12px;font-variant:small-caps;letter-spacing:1.3px;text-align:center}
+.standfirst{font-size:20px;font-style:italic}
+.lead img{filter:sepia(.8) grayscale(.6);border-top:1px solid #96886c;border-bottom:1px solid #96886c}
+.brief{border-bottom:1px solid #b7aa8e;padding:4px 0 16px}
+.brief h3{font-size:21px;font-weight:normal}
+.brief p{font-size:16px}
+.button{display:inline;background:none;color:#493526;padding:0;font-style:italic}
+.column{background:transparent;border-top:3px double #29251d;padding:22px 0;margin-top:28px}
+.column h2{text-align:center;font-size:29px;font-weight:normal;margin:12px 0}
+.column>p,.lead>p{text-align:justify;hyphens:auto}
+.column:before{content:'❧';display:block;text-align:center;font-size:23px;line-height:1;margin-bottom:12px}
+footer{font-size:13px;border-top:3px double #96886c;margin-top:30px;padding-top:12px}
+.essay{max-width:760px}.essay h1{font-weight:normal;text-align:center;font-size:clamp(32px,6vw,48px)}
+.essay h2{font-size:24px;font-weight:normal;font-variant:small-caps;text-align:center}
+.essay header{border-bottom:3px double #29251d;padding-bottom:18px;margin:28px 0}
+.essay article>p{text-align:justify;hyphens:auto}
+.dialogue{margin:17px 0;padding-left:20px;text-indent:-20px}
+.dialogue strong{font:small-caps 16px/1.65 Georgia,serif;letter-spacing:.5px}
+.direction{font-style:italic;text-align:center;color:#5d513c}
+.ornament{text-align:center;letter-spacing:10px;margin:22px 0}
+a:focus-visible{outline:2px solid #493526;outline-offset:4px}
+@media(max-width:720px){main{margin:0;padding:20px 18px;border:0}.front{grid-template-columns:1fr}.front aside{border-left:0;border-top:3px double #96886c;padding:20px 0 0}.masthead h1{letter-spacing:-1px}.column>p,.lead>p,.essay article>p{text-align:left}}
+@media print{body{background:white}main{border:0;box-shadow:none;background:white;margin:0}nav{display:none}a{color:inherit}.dialogue{break-inside:avoid}}
