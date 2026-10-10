@@ -1,0 +1,182 @@
+{
+  "data_source": "https://arxiv.org/html/1810.09466",
+  "source_sha256": "ee30907bf2a404439e3cd7f1bec5d00a5be8448fe7ca29720bf6168e4c5aff2f",
+  "data_rows": 38,
+  "nominal": {
+    "baryon_mass_scale": 1.0,
+    "assumed_fractional_floor": 0.03,
+    "fit_max_radius_kpc": 20.0,
+    "fit_bins": 30,
+    "rho_s_msun_kpc3": 15395617.570826165,
+    "r_s_kpc": 12.532461337051723,
+    "rmse_fit_km_s": 1.9953791061382469,
+    "rmse_outer_km_s": 15.295665211597065,
+    "halo_mass_inside_20kpc_msun": 129152357256.32777,
+    "local_halo_density_msun_pc3": 0.008746121446488196,
+    "bound_reached": false
+  },
+  "sensitivity": [
+    {
+      "baryon_mass_scale": 0.8,
+      "assumed_fractional_floor": 0.02,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 42495922.76211054,
+      "r_s_kpc": 7.861795900896645,
+      "rmse_fit_km_s": 1.9577616989441042,
+      "rmse_outer_km_s": 14.438538355512154,
+      "halo_mass_inside_20kpc_msun": 142048668794.11398,
+      "local_halo_density_msun_pc3": 0.009951526940123391,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 0.8,
+      "assumed_fractional_floor": 0.03,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 42852025.36433373,
+      "r_s_kpc": 7.826570577763971,
+      "rmse_fit_km_s": 1.9573679353815827,
+      "rmse_outer_km_s": 14.386568068256441,
+      "halo_mass_inside_20kpc_msun": 141920359169.70468,
+      "local_halo_density_msun_pc3": 0.009944417672676953,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 0.8,
+      "assumed_fractional_floor": 0.05,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 43058588.805961944,
+      "r_s_kpc": 7.806299486271291,
+      "rmse_fit_km_s": 1.9575430997441383,
+      "rmse_outer_km_s": 14.356035801571633,
+      "halo_mass_inside_20kpc_msun": 141844375312.68753,
+      "local_halo_density_msun_pc3": 0.009940165334496261,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.0,
+      "assumed_fractional_floor": 0.02,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 15216846.387015242,
+      "r_s_kpc": 12.620865977392574,
+      "rmse_fit_km_s": 1.9955177734013492,
+      "rmse_outer_km_s": 15.38473080287787,
+      "halo_mass_inside_20kpc_msun": 129354666298.084,
+      "local_halo_density_msun_pc3": 0.008753699087757453,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.0,
+      "assumed_fractional_floor": 0.03,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 15395617.570826165,
+      "r_s_kpc": 12.532461337051723,
+      "rmse_fit_km_s": 1.9953791061382469,
+      "rmse_outer_km_s": 15.295665211597065,
+      "halo_mass_inside_20kpc_msun": 129152357256.32777,
+      "local_halo_density_msun_pc3": 0.008746121446488196,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.0,
+      "assumed_fractional_floor": 0.05,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 15499863.144311463,
+      "r_s_kpc": 12.48164246898479,
+      "rmse_fit_km_s": 1.9959998858682082,
+      "rmse_outer_km_s": 15.243924643194333,
+      "halo_mass_inside_20kpc_msun": 129034044633.80092,
+      "local_halo_density_msun_pc3": 0.00874162320874614,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.2,
+      "assumed_fractional_floor": 0.02,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 3591761.840121824,
+      "r_s_kpc": 27.520031679125104,
+      "rmse_fit_km_s": 2.2811517717284673,
+      "rmse_outer_km_s": 17.4055850842236,
+      "halo_mass_inside_20kpc_msun": 117931609477.2684,
+      "local_halo_density_msun_pc3": 0.007255484717203465,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.2,
+      "assumed_fractional_floor": 0.03,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 3663421.190327309,
+      "r_s_kpc": 27.12951139519581,
+      "rmse_fit_km_s": 2.281343941281563,
+      "rmse_outer_km_s": 17.23147901955443,
+      "halo_mass_inside_20kpc_msun": 117582607729.08366,
+      "local_halo_density_msun_pc3": 0.007247601406498221,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.2,
+      "assumed_fractional_floor": 0.05,
+      "fit_max_radius_kpc": 20.0,
+      "fit_bins": 30,
+      "rho_s_msun_kpc3": 3705454.7489156704,
+      "r_s_kpc": 26.907032825599632,
+      "rmse_fit_km_s": 2.282873653923647,
+      "rmse_outer_km_s": 17.131532021694397,
+      "halo_mass_inside_20kpc_msun": 117381216556.81076,
+      "local_halo_density_msun_pc3": 0.00724301962430593,
+      "bound_reached": false
+    },
+    {
+      "baryon_mass_scale": 1.0,
+      "assumed_fractional_floor": 0.03,
+      "fit_max_radius_kpc": 15.0,
+      "fit_bins": 20,
+      "rho_s_msun_kpc3": 14785854.561759295,
+      "r_s_kpc": 12.818399323909555,
+      "rmse_fit_km_s": 1.160334567512174,
+      "rmse_outer_km_s": 10.541729431461855,
+      "halo_mass_inside_20kpc_msun": 129414614029.50546,
+      "local_halo_density_msun_pc3": 0.008744095994767229,
+      "bound_reached": false
+    }
+  ],
+  "baryon_only_rmse_fit_km_s": 66.72440972755535,
+  "checks": "NFW formula, radial potential gradient, component-force addition, table endpoints passed",
+  "packages": {
+    "galpy": "1.12.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.9",
+    "beautifulsoup4": "4.15.0"
+  },
+  "illustrative_samples": [
+    {
+      "radius_kpc": 8.19,
+      "observed_km_s": 228.86,
+      "baryons_km_s": 176.89066765448982,
+      "fitted_total_km_s": 229.84439883988728,
+      "unaccounted_radial_force_fraction": 0.40259334664300805
+    },
+    {
+      "radius_kpc": 14.74,
+      "observed_km_s": 217.6,
+      "baryons_km_s": 143.2369920448519,
+      "fitted_total_km_s": 216.48881577113147,
+      "unaccounted_radial_force_fraction": 0.5666960953961127
+    },
+    {
+      "radius_kpc": 19.71,
+      "observed_km_s": 201.91,
+      "baryons_km_s": 124.50905358594136,
+      "fitted_total_km_s": 207.93186913705853,
+      "unaccounted_radial_force_fraction": 0.6197351295115103
+    }
+  ]
+}

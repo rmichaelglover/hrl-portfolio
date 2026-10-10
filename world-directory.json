@@ -540,6 +540,12 @@
     "category": "Community"
   },
   {
+    "href": "oort-halo/milky-way/",
+    "title": "Milky Way Rotation",
+    "description": "A reproducible comparison of a published Milky Way rotation curve with ordinary matter and a fitted dark-matter halo.",
+    "category": "Science & Tools"
+  },
+  {
     "href": "optics-lab/",
     "title": "Mirror Garden",
     "description": "Explore reflection with a hands-on optics lab, DemystifySci discussion link, and a Trool/HRL evidence notebook.",
