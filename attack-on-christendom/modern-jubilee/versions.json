@@ -1,0 +1,15 @@
+{
+  "current": "0.1",
+  "final": null,
+  "editions": [
+    {
+      "version": "0.1",
+      "published": "2026-10-11",
+      "status": "discussion draft",
+      "page": "versions/v0.1/",
+      "manuscript": "versions/v0.1/white-paper.md",
+      "sha256": "b2d4103c255640775173fb8ae19d6302214cbc656b04a227e069d615dd255b93",
+      "changes": "First publication of the approved conversational draft."
+    }
+  ]
+}
