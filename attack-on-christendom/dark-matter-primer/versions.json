@@ -1,0 +1,15 @@
+{
+  "current": "0.1",
+  "final": null,
+  "editions": [
+    {
+      "version": "0.1",
+      "date": "2026-10-11",
+      "status": "educational first edition",
+      "page": "versions/v0.1/",
+      "manuscript": "versions/v0.1/primer.md",
+      "sha256": "6e8905f9f8dcd1603a9126e2a878d587fd76ddc0ce2c9298e9c8d264bba79250",
+      "changes": "Initial complete primer and interactive teaching model."
+    }
+  ]
+}
