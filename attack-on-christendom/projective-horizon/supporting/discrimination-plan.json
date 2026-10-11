@@ -1,0 +1,23 @@
+{
+  "status": "prospective model diagnostic; no new vertical-force dataset consulted",
+  "models": [
+    {"name": "A: lighter ordinary matter", "baryon_mass_scale": 0.8},
+    {"name": "B: heavier ordinary matter", "baryon_mass_scale": 1.2}
+  ],
+  "source": "results.json sensitivity cases; fractional weighting floor 0.03; R < 20 kpc",
+  "freeze": "Reuse stored rotation fits; do not refit either model to vertical-force observations.",
+  "prospective_observable": {
+    "name": "vertical gravitational acceleration magnitude",
+    "radius_kpc": 8.122,
+    "height_kpc": 1.1,
+    "units": "(km/s)^2/kpc",
+    "geometry": "axisymmetric; measured from the Galactic midplane"
+  },
+  "illustrative_design": {
+    "gaussian_measurement_sigma_fraction_of_prediction_midpoint": 0.05,
+    "interpretation": "Assumed total measurement error for experimental design only; not a published error bar or discovery significance."
+  },
+  "decision_rule": "Compare both frozen predictions with the measurement using its published likelihood and correlated systematics. If both fail, reconsider the shared assumptions rather than automatically adding parameters.",
+  "independence_caveat": "McMillan17 used dynamical constraints when deriving its original parameters. A vertical comparison is not automatically an independent blind validation. Audit overlapping data and priors before applying the decision rule to real observations.",
+  "scope": "Distinguishes two chosen mass distributions, not microscopic dark-matter particle identities."
+}

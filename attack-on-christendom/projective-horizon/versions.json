@@ -1,0 +1,15 @@
+{
+  "current": "0.1",
+  "final": null,
+  "editions": [
+    {
+      "version": "0.1",
+      "date": "2026-10-10",
+      "status": "working draft",
+      "page": "versions/v0.1/",
+      "manuscript": "versions/v0.1/paper-01.md",
+      "sha256": "b5c7c7f226de70c87868662d88efbf57ce6b874e66b48e59c1f89339a52665c0",
+      "changes": "First published manuscript; local supporting-source link adapted for publication."
+    }
+  ]
+}
