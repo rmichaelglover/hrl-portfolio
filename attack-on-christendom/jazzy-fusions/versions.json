@@ -1,0 +1,21 @@
+{
+  "title": "From Melting Pots to Jazzy Fusions",
+  "authors": [
+    "Michael Emanuel Glover",
+    "Cypher"
+  ],
+  "current_version": "v001",
+  "final_version": null,
+  "versions": [
+    {
+      "id": "v001",
+      "date": "2026-10-10",
+      "label": "First draft \u00b7 first attempt",
+      "status": "draft",
+      "page": "versions/v001/",
+      "manuscript": "versions/v001/manuscript.md",
+      "sha256": "13a63cd6f8e9b4639467a469391fd16c125b6f2139751f37f3b4e3406dbc1d1d",
+      "changes": "Initial complete twelve-chapter short-form manuscript."
+    }
+  ]
+}
