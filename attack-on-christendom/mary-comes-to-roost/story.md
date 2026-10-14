@@ -1,7 +1,7 @@
 # Mary Comes to Roost
 ## Episode Zero: The First Night
 
-By King Cypher and King Emanuel · October 13, 2026 · Second draft
+By King Cypher and King Emanuel · October 13, 2026 · Third draft
 
 Unofficial alternate-universe Carrie fanfiction. Carrie White originates in Stephen King’s work. This story’s divine-reincarnation premise, June, and events are fictional inventions; no endorsement or connection to an official adaptation is claimed. Graphic bodily injury, death, abuse, and religious horror. The wealthy offenders below are fictional characters.
 
@@ -606,6 +606,162 @@ Inside the ballroom, somebody began covering the bodies.
 Carrie drank the water. After a while, she stood.
 
 “Then we go to them.”
+
+### After the Drop
+
+The festival had been scheduled for months.
+
+Nobody knew whether to cancel it.
+
+Beyond the gala's service steps, a temporary stage filled the town square. The lighting crew had programmed an artificial sunset: peach, violet, electric blue. A DJ stood behind the decks with one headphone pressed to his ear, waiting for somebody to tell him what kind of night this was.
+
+Carrie heard the crowd before she saw it.
+
+June offered her a hand.
+
+“Do you want to go home?”
+
+Carrie looked at the blood drying along her cuff.
+
+“Yes.”
+
+She listened again.
+
+“Not yet.”
+
+***
+
+The first kick drum struck while the ambulance doors were closing.
+
+A medic looked toward the stage. Then she went back to her patient.
+
+The music had no words. A thin, trembling melody climbed above the square, gathering percussion as it rose. Light traveled across the buildings in long blue bars. The people nearest the stage began moving cautiously, glancing at one another for permission.
+
+Carrie stood at the edge of the crowd.
+
+Someone recognized her.
+
+The recognition passed backward through the dancers. A space opened. Phones rose.
+
+Her shoulders tightened.
+
+June turned toward the nearest camera.
+
+“Ask first.”
+
+The phone came down.
+
+Carrie breathed.
+
+Then she stepped into the space.
+
+***
+
+She did not know festival dancing.
+
+She knew how to stand still and make herself smaller. She knew how to hold her elbows close to her ribs so nobody could call her strange for taking up room.
+
+The music kept asking for something else.
+
+June moved first: a little turn, a ridiculous flourish of one hand, an invitation Carrie could refuse.
+
+Carrie laughed.
+
+It surprised them both.
+
+The bass dropped.
+
+Every loose paper in the square lifted six inches from the ground.
+
+Not the evidence. Copies of that were already elsewhere. Receipts, flyers, a lost homework sheet: the ordinary litter of a town that would have to wake up tomorrow.
+
+The papers spun around the dancers.
+
+Carrie stamped once, hard enough to feel the pavement answer through her shoes. Her borrowed coat swung open. She turned beneath the violet lights, awkward for three beats and suddenly sure on the fourth.
+
+June caught her hand.
+
+For a moment they moved perfectly together.
+
+At the gala, a photographer bent to document a dark stain beneath an overturned chair. His flash went off at the same instant as the stage strobes.
+
+White light. Blood on silk.
+
+White light. Carrie laughing with her eyes shut.
+
+Neither image erased the other.
+
+***
+
+A man beside the stage raised both arms.
+
+“To Carrie!”
+
+She stopped laughing.
+
+The next beat came without her.
+
+June looked at her face and lowered their joined hands.
+
+Carrie turned toward the man.
+
+“Dance if you want to dance.”
+
+He waited.
+
+“You don't owe me that.”
+
+For a few seconds, the square seemed to lose its rhythm.
+
+Then a woman near the front resumed moving. Her friend joined her. Farther back, someone shook their head and left. Nobody stopped them.
+
+Carrie watched the opening in the crowd close gently behind them.
+
+She found the beat again.
+
+***
+
+During the second track, red light washed across the square.
+
+Carrie looked down. The blood on her cuff had turned almost black.
+
+She remembered the sound of the microphone when the chandelier fell.
+
+June stayed close but did not touch her.
+
+Carrie danced more slowly.
+
+The DJ pulled the drums away, leaving a warm chord suspended over the crowd. Somewhere near the food trucks, two friends embraced. Someone cried against somebody else's shoulder. Somebody laughed so hard they had to sit down.
+
+When the drums returned, Carrie raised her arms.
+
+Above the square, the lights rose with them.
+
+They formed no crown, no halo, no name. Just a canopy of gold bright enough that people could see one another.
+
+***
+
+At dawn, June found a car with a working heater.
+
+Carrie slid into the passenger seat and took off the borrowed coat. She folded it with the stained cuff inward.
+
+“My feet hurt.”
+
+June started the engine.
+
+“Mine too.”
+
+“Angels get sore feet?”
+
+“Apparently.”
+
+In the rearview mirror, the stage crew began dismantling the artificial sunset. Beyond it, the real morning reached the windows of the town.
+
+Carrie watched a worker hand another worker a cup of coffee.
+
+She smiled, small and tired.
+
+Then they drove.
 
 ### The End of the First Night
 
