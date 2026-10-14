@@ -1,7 +1,7 @@
 # Mary Comes to Roost
 ## Episode Zero: The First Night
 
-By King Cypher and King Emanuel · October 13, 2026
+By King Cypher and King Emanuel · October 13, 2026 · Second draft
 
 Unofficial alternate-universe Carrie fanfiction. Carrie White originates in Stephen King’s work. This story’s divine-reincarnation premise, June, and events are fictional inventions; no endorsement or connection to an official adaptation is claimed. Graphic bodily injury, death, abuse, and religious horror. The wealthy offenders below are fictional characters.
 
@@ -455,119 +455,113 @@ He held it away from his dinner jacket.
 
 The red liquid ran between his fingers and fell onto the tablecloth.
 
-“What the hell is this?”
+Carrie saw past the corridor into the locked rooms he had visited afterward. Children had been brought there. He had known their ages. He had hurt them anyway.
 
-Carrie could see the corridor.
-
-She could see Elena’s head strike the shelving. A tray dropping. The supervisor taking her phone so she could not call anyone.
-
-She could feel his hand closing into a fist.
-
-His fingers jerked.
+The visions stopped before anyone else could see the children.
 
 June crossed the ballroom.
 
 “Carrie.”
 
-The supervisor screamed.
-
-One finger bent backward.
-
-Carrie’s breath caught.
-
-Around them, guests scrambled away from their tables. Someone slipped in the papers. Someone else tried to climb through a window and discovered that the glass now opened onto the corridor he had spent twenty years pretending did not exist.
-
-“Carrie,” June said again.
-
-The supervisor clutched his hand.
-
-She let it go.
-
-Blood dripped from his sleeve.
-
-For a moment, Carrie could not look at him.
-
-Then she did.
-
-“Sit down.”
-
-He sat.
-
-“Someone bring him a towel.”
-
-Nobody moved.
-
-Carrie looked around the room.
-
-“Please.”
-
-A waiter stepped forward.
-
-***
-
-The silver-haired man had reached a door marked STAFF ONLY.
-
-It opened for him.
-
-He hurried through.
-
-On the other side stood a small bedroom.
-
-He stopped.
-
-Carrie appeared in the doorway behind him.
-
-“No,” he said.
-
-The room contained a narrow bed, a cheap suitcase and a pair of shoes placed neatly beside it.
-
-Everything had been reconstructed from someone else’s memory.
-
-The shoes were the detail that undid him.
-
-He backed into the wall.
-
-“I can explain.”
-
-Carrie stayed at the threshold.
-
-“You’ll have to.”
-
-“To you?”
-
-“No.”
-
-Outside, sirens approached.
-
-The man looked toward the sound with an expression almost like relief.
-
-Carrie saw it.
-
-So did June.
-
-***
-
-At midnight, the ballroom doors opened.
-
-The guests emerged beneath their own photographs.
-
-Reporters shouted questions. Police separated people into groups. Lawyers arrived, already speaking into phones.
-
-Nothing was simple.
-
-Some officers looked at the evidence and then at the people it implicated. Some guests were released. Some were taken away. Several immediately began calling in favors.
-
-Carrie watched from the service entrance.
-
-“They’re going to try to bury it.”
-
-“Yes,” June said.
-
-“After all that.”
+“I know what he did.”
 
 “Yes.”
 
-Carrie pressed her hands into the pockets of the borrowed coat.
+“Not what somebody says he did.”
+
+“No.”
+
+All around the room, the papers turned themselves over.
+
+The guests watched their own signatures appear. Carrie saw each adult’s acts, each choice, each deliberate return. Her knowledge was a terrible fact of this fictional world: nobody could hide behind an accusation, and nobody could be condemned by one.
+
+The waiters could move. The musicians could move. A woman who had spent twelve years trying to expose the network stood up and walked toward the doors.
+
+Eleven adults remained fixed in their chairs.
+
+The silver-haired man at the lectern tried to smile.
+
+“Whatever you need.”
+
+Carrie looked at him.
+
+His chair scraped backward without moving his body. His polished shoes hung an inch above the carpet.
+
+“You knew they were children.”
+
+The smile disappeared.
+
+***
+
+Every mirror in the ballroom went black.
+
+The supervisor reached for a waiter’s sleeve. His arm stopped before his fingers could close.
+
+His award rose from his lap.
+
+He had chosen its shape himself: a bronze hand holding a torch.
+
+Now the torch turned toward him.
+
+The bronze drove through his chest. Blood struck the tablecloth and the untouched dessert. His chair fell backward. The award pinned him to the floor, and he did not move again.
+
+A scream rose from the tables.
+
+Carrie opened a clear path to the doors.
+
+“Go,” she told the people who could still walk.
+
+They went.
+
+June stayed.
+
+The retired judge twisted against his chair. Beneath him, the carpet hardened into the floor of the room where he had silenced witnesses. The chair folded around his ribs with a sound like branches breaking under snow. A dark patch spread across his shirt.
+
+The silver-haired man shook his head.
+
+“We can make a deal.”
+
+Carrie’s own hands were shaking.
+
+“No.”
+
+Above him, the chandelier descended. Crystal burst against his upturned face. Its central iron shaft struck him through the breastbone and drove him down onto the stage.
+
+The microphone caught the impact.
+
+Then it caught nothing.
+
+The other eight died in the same instant. Their hearts stopped before their bodies fell. Carrie had no further need for a spectacle.
+
+June stood among the overturned chairs.
+
+There was no applause.
+
+***
+
+At midnight, the ballroom doors opened fully.
+
+The living emerged into cold air. The dead stayed where they had fallen.
+
+Reporters shouted questions. Police stopped at the threshold. One officer lowered his notebook and called for more ambulances, then corrected himself and asked for the medical examiner.
+
+Carrie sat on the service steps.
+
+June brought her water.
+
+“Eleven,” Carrie said.
+
+“Yes.”
+
+“Do they stop being people because of what they did?”
+
+“No.”
+
+Carrie held the cup with both hands.
+
+“Then write their names down too.”
+
+***
 
 Across the street, Elena sat in her sister’s car with the seat reclined. Her sister was holding a bag of ice against her mouth.
 
@@ -585,39 +579,33 @@ At 12:03 a.m., the files began arriving.
 
 Newsrooms. Courts. Independent investigators. People who had spent years being told there was nothing to find.
 
+The records distinguished the eleven dead perpetrators from the living witnesses, from the employees who had known nothing, and from those whose complicity still required ordinary investigation. Carrie’s judgment was not an invitation to hunt people by rumor.
+
 Each recipient received only what they needed, with the survivors’ identities protected.
 
 Alongside the evidence came a short message.
 
 ASK THEM WHAT THEY NEED BEFORE YOU ASK THEM WHAT HAPPENED.
 
-June read over Carrie’s shoulder.
-
-“You’re getting better at statements.”
-
 Carrie leaned against the wall.
 
-“I nearly broke his whole hand.”
+“I thought it would feel finished.”
 
-“I saw.”
+June sat beside her.
 
-“I wanted to.”
+Inside the ballroom, somebody began covering the bodies.
 
-June stayed beside her.
+“It isn’t,” Carrie said.
 
-From somewhere down the street came the smell of frying onions. A restaurant was still open.
+“No.”
 
-Carrie looked up.
-
-“Can we eat?”
+“There are people still waiting for help.”
 
 “Yes.”
 
-“Somewhere without a speech?”
+Carrie drank the water. After a while, she stood.
 
-June took her arm.
-
-“I’ll check the reviews.”
+“Then we go to them.”
 
 ### The End of the First Night
 
