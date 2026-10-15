@@ -1,0 +1,39 @@
+PRAGMA journal_mode=WAL;
+PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS users (
+ id TEXT PRIMARY KEY, username TEXT NOT NULL COLLATE NOCASE UNIQUE,
+ password_hash TEXT NOT NULL, age_group TEXT NOT NULL DEFAULT 'under18',
+ age_declared INTEGER NOT NULL, role TEXT NOT NULL DEFAULT 'member',
+ created INTEGER NOT NULL, timeout_until INTEGER NOT NULL DEFAULT 0,
+ timeout_reason TEXT NOT NULL DEFAULT '', must_change_password INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS sessions (
+ token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS topics (
+ id TEXT PRIMARY KEY, room TEXT NOT NULL, title TEXT NOT NULL,
+ author_id TEXT NOT NULL REFERENCES users(id), created INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS topics_room ON topics(room, created);
+CREATE TABLE IF NOT EXISTS messages (
+ id INTEGER PRIMARY KEY AUTOINCREMENT, room TEXT NOT NULL, topic_id TEXT REFERENCES topics(id),
+ author_id TEXT NOT NULL REFERENCES users(id), body TEXT NOT NULL,
+ created INTEGER NOT NULL, hidden INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS messages_room ON messages(room, id);
+CREATE INDEX IF NOT EXISTS messages_topic ON messages(topic_id, id);
+CREATE TABLE IF NOT EXISTS reports (
+ id INTEGER PRIMARY KEY AUTOINCREMENT, message_id INTEGER NOT NULL REFERENCES messages(id),
+ reporter_id TEXT NOT NULL REFERENCES users(id), reason TEXT NOT NULL,
+ created INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'open',
+ UNIQUE(message_id, reporter_id)
+);
+CREATE TABLE IF NOT EXISTS appeals (
+ id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT NOT NULL REFERENCES users(id),
+ body TEXT NOT NULL, created INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'open'
+);
+CREATE TABLE IF NOT EXISTS audit (
+ id INTEGER PRIMARY KEY AUTOINCREMENT, moderator_id TEXT NOT NULL REFERENCES users(id),
+ target_id TEXT, action TEXT NOT NULL, reason TEXT NOT NULL, created INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS rates (key TEXT PRIMARY KEY, started INTEGER NOT NULL, count INTEGER NOT NULL);

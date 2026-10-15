@@ -1,0 +1,23 @@
+[Unit]
+Description=HumansOnly forum and shared HRL game chat
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/rmichaelglover/Code/hrl-portfolio
+ExecStart=/usr/bin/python3 /home/rmichaelglover/Code/hrl-portfolio/humans-only/backend/server.py serve --host 127.0.0.1 --port 8787 --origin https://rmichaelglover-ideapad-5-15ial7.tailc30ce9.ts.net
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/rmichaelglover/.local/share/humansonly
+LimitNOFILE=1024
+TasksMax=100
+MemoryMax=512M
+
+[Install]
+WantedBy=default.target
