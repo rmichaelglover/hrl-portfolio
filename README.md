@@ -1,5 +1,14 @@
 # hrl — hierarchical relaxation labeling
 
+## Meta-Renormalization · Experiment 002
+
+[Autonomous interaction selection](meta-renormalization/) tests finite
+hierarchical promotion on seeded systems without supplying the generating
+supports. The [report](meta-renormalization/WHITEPAPER.pdf) compares additive,
+coarse, hierarchical, no-relaxation and exhaustive polynomial models, including
+hidden-interaction and correlated-input failures.
+
+
 ## Reciprocal Grounding
 
 [Things ↔ Words](reciprocal-grounding/) implements two-view relaxation labeling

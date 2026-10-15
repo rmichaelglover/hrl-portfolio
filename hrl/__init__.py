@@ -21,11 +21,14 @@ from .body_pos import (
     classify_session, synthetic_session, canonical_positions,
     affinity_prior, POSITION_NAMES,
 )
+from .meta_discovery import discover as discover_interactions, DiscoveryResult
 from .recursive_grounding import recursive_refine, RecursiveConfig, RecursiveResult
 from .reciprocal import relax_view, accept_reciprocal, audit_anchors, anchor_logits, ViewResult, ReciprocalResult
 from .meggers import MeggersResult, relax_delimitation, lift_evidence
 
 __all__ = [
+    "discover_interactions",
+    "DiscoveryResult",
     "recursive_refine",
     "RecursiveConfig",
     "RecursiveResult",

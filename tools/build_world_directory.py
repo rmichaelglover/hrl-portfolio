@@ -17,6 +17,7 @@ MAP = {
  'Writing & Research': 'all-in-a-days-work attack-on-christendom chesshustlagaard drugs-are-good el-cuento essays hrl-cybersecurity hyperspace i-am-what-i-am magnum-economicus magnum-quantreleviathone manuelian-magnum-opus mother-god-bomb no-panzer numerological-speculations perfect-union political-economy-paper projective-horizon-bipolar red-thread relax-relabel research-whitepapers spreadsheet-dissertation the-wall three-white-papers ujewhale-macro-report virtual-body-cancer white-hat-hackers',
 }
 OVERRIDES = {
+ 'meta-renormalization/': ('Meta-Renormalization · Experiment 002','Autonomous interaction selection in seeded synthetic systems, with hierarchical relaxation, polynomial baselines, failure cases, and reproducible data.','Science & Tools'),
  'reciprocal-grounding/': ('Reciprocal Grounding · Things ↔ Words','Recursive two-way labeling with identity anchoring, validation rollback, explicit unknowns, reproducible benchmarks, and interactive depth controls.','Science & Tools'),
  'virtual-earth/': ('A World Before Names · Virtual Earth','Explore a borderless Earth, zoom into synthetic landscapes, and watch animal-inspired agents forage and interact. Open-source, seeded ecological model.','Worlds & Nature'),
  'oort-halo/': ('Oort Cloud & Galactic Halo','Compare three gravitational toy models: central mass, outer shell, and extended halo. Plots, assumptions, and reproducible Python code.','Science & Tools'),

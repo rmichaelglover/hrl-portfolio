@@ -1,0 +1,1376 @@
+{
+  "schema": 1,
+  "experiment": "002",
+  "kind": "Seeded synthetic autonomous interaction discovery within a fixed grammar",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "observations_per_seed": 12000,
+  "fit_observations": 6000,
+  "selection_observations": 3000,
+  "test_observations": 3000,
+  "noise_variance": 0.09,
+  "grammar": "linear leaves; all unordered pairs; degree-four products of selected disjoint pairs",
+  "polynomial_baseline": "all square-free monomials through degree 4, 162 features plus intercept",
+  "selection": {
+    "max_interactions": 12,
+    "gain_fraction": 0.002,
+    "active_strength_minimum": 0.8,
+    "refit_on_all_9000": true
+  },
+  "scenarios": [
+    "Pair-supported hierarchy",
+    "Hidden fourth order",
+    "Correlated inputs",
+    "Additive control"
+  ],
+  "methods": [
+    "Additive",
+    "Fixed pair averages",
+    "Hierarchical relaxation",
+    "Hierarchy without relaxation",
+    "Exhaustive polynomial"
+  ],
+  "results": [
+    {
+      "scenario": "Pair-supported hierarchy",
+      "method": "Additive",
+      "mse": 4.256020293900048,
+      "explained_variance": 0.03854785707700722,
+      "r2": 0.03818057458889616,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        3.979387679407314,
+        4.537507797607397
+      ],
+      "explained_variance_ci95": [
+        0.03499193809346079,
+        0.042836793961726245
+      ]
+    },
+    {
+      "scenario": "Pair-supported hierarchy",
+      "method": "Fixed pair averages",
+      "mse": 4.255575164110758,
+      "explained_variance": 0.03862150553050976,
+      "r2": 0.038250805465817474,
+      "parameters": 5.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        3.9546225221034654,
+        4.540916741523369
+      ],
+      "explained_variance_ci95": [
+        0.034778552030346264,
+        0.042360695063717965
+      ]
+    },
+    {
+      "scenario": "Pair-supported hierarchy",
+      "method": "Hierarchical relaxation",
+      "mse": 0.09076415506140695,
+      "explained_variance": 0.9789968324757178,
+      "r2": 0.9789888182973939,
+      "parameters": 14.0,
+      "selected": 5.0,
+      "true_support_matches": 5.0,
+      "relaxation_iterations": 87.3,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": 1.0,
+      "support_recall": 1.0,
+      "mse_ci95": [
+        0.08981459545602886,
+        0.0916140779015139
+      ],
+      "explained_variance_ci95": [
+        0.9775039701135462,
+        0.9804185323203528
+      ]
+    },
+    {
+      "scenario": "Pair-supported hierarchy",
+      "method": "Hierarchy without relaxation",
+      "mse": 0.09076415506140695,
+      "explained_variance": 0.9789968324757178,
+      "r2": 0.9789888182973939,
+      "parameters": 14.0,
+      "selected": 5.0,
+      "true_support_matches": 5.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": 1.0,
+      "support_recall": 1.0,
+      "mse_ci95": [
+        0.08984682280988926,
+        0.09169337049238477
+      ],
+      "explained_variance_ci95": [
+        0.9774988454095612,
+        0.9803438838354586
+      ]
+    },
+    {
+      "scenario": "Pair-supported hierarchy",
+      "method": "Exhaustive polynomial",
+      "mse": 0.09237110231781047,
+      "explained_variance": 0.9786231378305906,
+      "r2": 0.9786152408556928,
+      "parameters": 163.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.09144895049225664,
+        0.0932882373555206
+      ],
+      "explained_variance_ci95": [
+        0.9769778806031487,
+        0.9800762955641311
+      ]
+    },
+    {
+      "scenario": "Hidden fourth order",
+      "method": "Additive",
+      "mse": 0.8904497836328987,
+      "explained_variance": 0.17196976859777063,
+      "r2": 0.17168034179035382,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.8364907046620428,
+        0.9553322191235909
+      ],
+      "explained_variance_ci95": [
+        0.15987539118237723,
+        0.18283050897970504
+      ]
+    },
+    {
+      "scenario": "Hidden fourth order",
+      "method": "Fixed pair averages",
+      "mse": 0.8894075378308968,
+      "explained_variance": 0.17292458386685278,
+      "r2": 0.17264497136935059,
+      "parameters": 5.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.8336825716443386,
+        0.9514487202299797
+      ],
+      "explained_variance_ci95": [
+        0.16148952083279458,
+        0.18439126807875872
+      ]
+    },
+    {
+      "scenario": "Hidden fourth order",
+      "method": "Hierarchical relaxation",
+      "mse": 0.8904497836328987,
+      "explained_variance": 0.17196976859777063,
+      "r2": 0.17168034179035382,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 1.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": 0.0,
+      "mse_ci95": [
+        0.8354974960448747,
+        0.9538436323856725
+      ],
+      "explained_variance_ci95": [
+        0.16010410428575064,
+        0.18288274790708745
+      ]
+    },
+    {
+      "scenario": "Hidden fourth order",
+      "method": "Hierarchy without relaxation",
+      "mse": 0.8904497836328987,
+      "explained_variance": 0.17196976859777063,
+      "r2": 0.17168034179035382,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": 0.0,
+      "mse_ci95": [
+        0.8388057133636602,
+        0.948568664363625
+      ],
+      "explained_variance_ci95": [
+        0.16027733401221067,
+        0.1822952001823815
+      ]
+    },
+    {
+      "scenario": "Hidden fourth order",
+      "method": "Exhaustive polynomial",
+      "mse": 0.0923711023178105,
+      "explained_variance": 0.9127837038065618,
+      "r2": 0.9127486198982548,
+      "parameters": 163.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.09151504580701007,
+        0.09325012823685966
+      ],
+      "explained_variance_ci95": [
+        0.9091079936232008,
+        0.9169952306027767
+      ]
+    },
+    {
+      "scenario": "Correlated inputs",
+      "method": "Additive",
+      "mse": 11.337754489696048,
+      "explained_variance": 0.06976727876041226,
+      "r2": 0.06944292445814534,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.08959893236296537,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        9.016742733962337,
+        13.818137127678952
+      ],
+      "explained_variance_ci95": [
+        0.05440049550155834,
+        0.08829082993883572
+      ]
+    },
+    {
+      "scenario": "Correlated inputs",
+      "method": "Fixed pair averages",
+      "mse": 11.327765350243292,
+      "explained_variance": 0.07041394630225024,
+      "r2": 0.07009468405573396,
+      "parameters": 5.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.08959893236296537,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        8.977678872285027,
+        13.854327623187487
+      ],
+      "explained_variance_ci95": [
+        0.05416612978606365,
+        0.08939989717824677
+      ]
+    },
+    {
+      "scenario": "Correlated inputs",
+      "method": "Hierarchical relaxation",
+      "mse": 1.5994252492342123,
+      "explained_variance": 0.8135331175581791,
+      "r2": 0.8134713011456333,
+      "parameters": 13.25,
+      "selected": 4.25,
+      "true_support_matches": 3.5,
+      "relaxation_iterations": 75.0,
+      "realized_noise_mse": 0.08959893236296537,
+      "support_precision": 0.8308333333333333,
+      "support_recall": 0.7,
+      "mse_ci95": [
+        1.0995744533528127,
+        2.1185160814312773
+      ],
+      "explained_variance_ci95": [
+        0.7487772117533597,
+        0.8767884543884259
+      ]
+    },
+    {
+      "scenario": "Correlated inputs",
+      "method": "Hierarchy without relaxation",
+      "mse": 1.6118143912478522,
+      "explained_variance": 0.8126861290254407,
+      "r2": 0.8126185112003135,
+      "parameters": 13.05,
+      "selected": 4.05,
+      "true_support_matches": 3.5,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.08959893236296537,
+      "support_precision": 0.8675,
+      "support_recall": 0.7,
+      "mse_ci95": [
+        1.0895236654059792,
+        2.113219858611911
+      ],
+      "explained_variance_ci95": [
+        0.7515557684167721,
+        0.8756163402871083
+      ]
+    },
+    {
+      "scenario": "Correlated inputs",
+      "method": "Exhaustive polynomial",
+      "mse": 0.09145474796027694,
+      "explained_variance": 0.9908499584171123,
+      "r2": 0.9908464865494875,
+      "parameters": 163.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.08959893236296537,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.09059616837838042,
+        0.09236734142627762
+      ],
+      "explained_variance_ci95": [
+        0.9890681725200228,
+        0.992349108287358
+      ]
+    },
+    {
+      "scenario": "Additive control",
+      "method": "Additive",
+      "mse": 0.09073290696046563,
+      "explained_variance": 0.6640304321019435,
+      "r2": 0.6638920373746217,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.08978498280785141,
+        0.09162308296876173
+      ],
+      "explained_variance_ci95": [
+        0.6606089464385302,
+        0.6673231298138118
+      ]
+    },
+    {
+      "scenario": "Additive control",
+      "method": "Fixed pair averages",
+      "mse": 0.09069424518046618,
+      "explained_variance": 0.6641734823085548,
+      "r2": 0.6640343505392082,
+      "parameters": 5.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.08978359415018054,
+        0.0915541690938623
+      ],
+      "explained_variance_ci95": [
+        0.660842511429155,
+        0.667543150865236
+      ]
+    },
+    {
+      "scenario": "Additive control",
+      "method": "Hierarchical relaxation",
+      "mse": 0.09073290696046563,
+      "explained_variance": 0.6640304321019435,
+      "r2": 0.6638920373746217,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 1.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.08973424847403749,
+        0.09162058813819232
+      ],
+      "explained_variance_ci95": [
+        0.660784725515735,
+        0.66753219937858
+      ]
+    },
+    {
+      "scenario": "Additive control",
+      "method": "Hierarchy without relaxation",
+      "mse": 0.09073290696046563,
+      "explained_variance": 0.6640304321019435,
+      "r2": 0.6638920373746217,
+      "parameters": 9.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.08981293600348425,
+        0.09171206367765784
+      ],
+      "explained_variance_ci95": [
+        0.6606069628203366,
+        0.6675500923287623
+      ]
+    },
+    {
+      "scenario": "Additive control",
+      "method": "Exhaustive polynomial",
+      "mse": 0.0923711023178105,
+      "explained_variance": 0.6579445775561348,
+      "r2": 0.6578071040246951,
+      "parameters": 163.0,
+      "selected": 0.0,
+      "true_support_matches": 0.0,
+      "relaxation_iterations": 0.0,
+      "realized_noise_mse": 0.09065199913242435,
+      "support_precision": null,
+      "support_recall": null,
+      "mse_ci95": [
+        0.09149443523251702,
+        0.0932626460955831
+      ],
+      "explained_variance_ci95": [
+        0.6544565346299845,
+        0.6614566392537565
+      ]
+    }
+  ],
+  "examples": {
+    "Pair-supported hierarchy": {
+      "seed": 0,
+      "generator": {
+        "pairs": [
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "coefficients": [
+          1.1671283033974198,
+          -0.8887906624790289,
+          -0.953049239759084,
+          -0.7706221211552857
+        ],
+        "meta_support": [
+          0,
+          1,
+          3,
+          7
+        ]
+      },
+      "true_supports": [
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          0,
+          1,
+          3,
+          7
+        ]
+      ],
+      "discovered": {
+        "Hierarchical relaxation": [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            1,
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "Hierarchy without relaxation": [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            1,
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            2,
+            5
+          ]
+        ]
+      },
+      "histories": {
+        "Hierarchical relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 4.540120970345613,
+            "selected": [],
+            "proposed": 28,
+            "candidate": [
+              1,
+              3
+            ],
+            "gain": 1.3591679168078281,
+            "active_strength": 0.999999411359369
+          },
+          {
+            "round": 1,
+            "validation_mse": 3.1809530535377797,
+            "selected": [
+              [
+                1,
+                3
+              ]
+            ],
+            "proposed": 28,
+            "candidate": [
+              0,
+              7
+            ],
+            "gain": 0.9009635547496796,
+            "active_strength": 0.9999233038001474
+          },
+          {
+            "round": 2,
+            "validation_mse": 2.2799894987880953,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              0,
+              1,
+              3,
+              7
+            ],
+            "gain": 0.8526967533304189,
+            "active_strength": 0.9999050902463922
+          },
+          {
+            "round": 3,
+            "validation_mse": 1.427292745457674,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              4,
+              6
+            ],
+            "gain": 0.8028879978316715,
+            "active_strength": 0.9997825272107114
+          },
+          {
+            "round": 4,
+            "validation_mse": 0.6244047476260033,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ],
+              [
+                4,
+                6
+              ]
+            ],
+            "proposed": 31,
+            "candidate": [
+              2,
+              5
+            ],
+            "gain": 0.5342405466632707,
+            "active_strength": 0.9962340878694271
+          },
+          {
+            "round": 5,
+            "validation_mse": 0.09016420096273454,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                2,
+                5
+              ]
+            ],
+            "proposed": 34,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ],
+        "Hierarchy without relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 4.540120970345613,
+            "selected": [],
+            "proposed": 28,
+            "candidate": [
+              1,
+              3
+            ],
+            "gain": 1.3591679168078281,
+            "active_strength": 0.999999411359369
+          },
+          {
+            "round": 1,
+            "validation_mse": 3.1809530535377797,
+            "selected": [
+              [
+                1,
+                3
+              ]
+            ],
+            "proposed": 28,
+            "candidate": [
+              0,
+              7
+            ],
+            "gain": 0.9009635547496796,
+            "active_strength": 0.9999233038001474
+          },
+          {
+            "round": 2,
+            "validation_mse": 2.2799894987880953,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              0,
+              1,
+              3,
+              7
+            ],
+            "gain": 0.8526967533304189,
+            "active_strength": 0.9998719029888238
+          },
+          {
+            "round": 3,
+            "validation_mse": 1.427292745457674,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              4,
+              6
+            ],
+            "gain": 0.8028879978316715,
+            "active_strength": 0.9997825272107114
+          },
+          {
+            "round": 4,
+            "validation_mse": 0.6244047476260033,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ],
+              [
+                4,
+                6
+              ]
+            ],
+            "proposed": 31,
+            "candidate": [
+              2,
+              5
+            ],
+            "gain": 0.5342405466632707,
+            "active_strength": 0.9962340878694271
+          },
+          {
+            "round": 5,
+            "validation_mse": 0.09016420096273454,
+            "selected": [
+              [
+                1,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                1,
+                3,
+                7
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                2,
+                5
+              ]
+            ],
+            "proposed": 34,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ]
+      }
+    },
+    "Hidden fourth order": {
+      "seed": 0,
+      "generator": {
+        "pairs": [
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "coefficients": [
+          1.1671283033974198,
+          -0.8887906624790289,
+          -0.953049239759084,
+          -0.7706221211552857
+        ],
+        "meta_support": [
+          0,
+          1,
+          3,
+          7
+        ]
+      },
+      "true_supports": [
+        [
+          0,
+          1,
+          3,
+          7
+        ]
+      ],
+      "discovered": {
+        "Hierarchical relaxation": [],
+        "Hierarchy without relaxation": []
+      },
+      "histories": {
+        "Hierarchical relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 0.9225939493867407,
+            "selected": [],
+            "proposed": 28,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ],
+        "Hierarchy without relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 0.9225939493867407,
+            "selected": [],
+            "proposed": 28,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ]
+      }
+    },
+    "Correlated inputs": {
+      "seed": 0,
+      "generator": {
+        "pairs": [
+          [
+            1,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            6
+          ]
+        ],
+        "coefficients": [
+          0.8296125847974045,
+          -0.6216051211717694,
+          1.015793581380885,
+          1.0653385777760007
+        ],
+        "meta_support": [
+          1,
+          2,
+          5,
+          6
+        ]
+      },
+      "true_supports": [
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          2,
+          5,
+          6
+        ]
+      ],
+      "discovered": {
+        "Hierarchical relaxation": [
+          [
+            2,
+            6
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            2,
+            5,
+            6
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "Hierarchy without relaxation": [
+          [
+            2,
+            6
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            2,
+            5,
+            6
+          ],
+          [
+            0,
+            4
+          ]
+        ]
+      },
+      "histories": {
+        "Hierarchical relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 14.655855144222219,
+            "selected": [],
+            "proposed": 28,
+            "candidate": [
+              2,
+              6
+            ],
+            "gain": 7.151861680164608,
+            "active_strength": 0.9999999999512177
+          },
+          {
+            "round": 1,
+            "validation_mse": 7.503993464057577,
+            "selected": [
+              [
+                2,
+                6
+              ]
+            ],
+            "proposed": 28,
+            "candidate": [
+              1,
+              5
+            ],
+            "gain": 3.500396053242946,
+            "active_strength": 0.999990554868214
+          },
+          {
+            "round": 2,
+            "validation_mse": 4.003597410814628,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "gain": 2.7312024125855356,
+            "active_strength": 0.9999090847560884
+          },
+          {
+            "round": 3,
+            "validation_mse": 1.2723949982291005,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                2,
+                5,
+                6
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              0,
+              4
+            ],
+            "gain": 0.8022769449111288,
+            "active_strength": 0.9292166601821465
+          },
+          {
+            "round": 4,
+            "validation_mse": 0.4701180533179677,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                2,
+                5,
+                6
+              ],
+              [
+                0,
+                4
+              ]
+            ],
+            "proposed": 31,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ],
+        "Hierarchy without relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 14.655855144222219,
+            "selected": [],
+            "proposed": 28,
+            "candidate": [
+              2,
+              6
+            ],
+            "gain": 7.151861680164608,
+            "active_strength": 0.9999999999512177
+          },
+          {
+            "round": 1,
+            "validation_mse": 7.503993464057577,
+            "selected": [
+              [
+                2,
+                6
+              ]
+            ],
+            "proposed": 28,
+            "candidate": [
+              1,
+              5
+            ],
+            "gain": 3.500396053242946,
+            "active_strength": 0.999990554868214
+          },
+          {
+            "round": 2,
+            "validation_mse": 4.003597410814628,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "gain": 2.7312024125855356,
+            "active_strength": 0.9998772919777466
+          },
+          {
+            "round": 3,
+            "validation_mse": 1.2723949982291005,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                2,
+                5,
+                6
+              ]
+            ],
+            "proposed": 29,
+            "candidate": [
+              0,
+              4
+            ],
+            "gain": 0.8022769449111288,
+            "active_strength": 0.9292166601821465
+          },
+          {
+            "round": 4,
+            "validation_mse": 0.4701180533179677,
+            "selected": [
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                2,
+                5,
+                6
+              ],
+              [
+                0,
+                4
+              ]
+            ],
+            "proposed": 31,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ]
+      }
+    },
+    "Additive control": {
+      "seed": 0,
+      "generator": {
+        "pairs": [
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "coefficients": [
+          1.1671283033974198,
+          -0.8887906624790289,
+          -0.953049239759084,
+          -0.7706221211552857
+        ],
+        "meta_support": [
+          0,
+          1,
+          3,
+          7
+        ]
+      },
+      "true_supports": [],
+      "discovered": {
+        "Hierarchical relaxation": [],
+        "Hierarchy without relaxation": []
+      },
+      "histories": {
+        "Hierarchical relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 0.08982601423051309,
+            "selected": [],
+            "proposed": 28,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ],
+        "Hierarchy without relaxation": [
+          {
+            "round": 0,
+            "validation_mse": 0.08982601423051309,
+            "selected": [],
+            "proposed": 28,
+            "candidate": null,
+            "gain": 0.0,
+            "active_strength": 0.0
+          }
+        ]
+      }
+    }
+  },
+  "reported_001": {
+    "verification": "User-supplied summary; source code and a_j coefficients not provided in workspace. Not independently reproduced here.",
+    "observations": 12000,
+    "held_out": 3000,
+    "mse": {
+      "Additive": 4.75248,
+      "Ordinary coarse-graining": 4.74778,
+      "Relational + meta-interaction": 0.08968
+    },
+    "explained_variance": [
+      0.023,
+      0.024,
+      0.982
+    ]
+  },
+  "software": {
+    "python": "3.10.12",
+    "numpy": "1.26.4"
+  },
+  "source_sha256": {
+    "hrl/meta_discovery.py": "95ebb9d8c0aaac5666b9dc26efb318bfa1070d30cf692f8a72a4c342d1595470",
+    "meta-renormalization/experiment.py": "9e97329cb63d0b9b5c02b15addde39d195a0cf3bef116a3ac3ecf8383199a4c7"
+  },
+  "runtime_seconds": 9.514
+}

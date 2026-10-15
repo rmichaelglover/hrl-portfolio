@@ -1,5 +1,11 @@
 [
   {
+    "href": "meta-renormalization/",
+    "title": "Meta-Renormalization · Experiment 002",
+    "description": "Autonomous interaction selection in seeded synthetic systems, with hierarchical relaxation, polynomial baselines, failure cases, and reproducible data.",
+    "category": "Science & Tools"
+  },
+  {
     "href": "reciprocal-grounding/",
     "title": "Reciprocal Grounding · Things ↔ Words",
     "description": "Recursive two-way labeling with identity anchoring, validation rollback, explicit unknowns, reproducible benchmarks, and interactive depth controls.",
