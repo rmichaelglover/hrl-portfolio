@@ -1,0 +1,801 @@
+scenario,method,seed,accepted,correct,total,unknown_accepted,unknown_total
+Independent views,Forward,100,10,9,20,0,4
+Independent views,Forward,101,11,11,20,0,4
+Independent views,Forward,102,11,11,20,0,4
+Independent views,Forward,103,11,11,20,0,4
+Independent views,Forward,104,10,9,20,0,4
+Independent views,Forward,105,8,7,20,0,4
+Independent views,Forward,106,14,14,20,0,4
+Independent views,Forward,107,13,11,20,0,4
+Independent views,Forward,108,13,13,20,0,4
+Independent views,Forward,109,6,6,20,0,4
+Independent views,Forward,110,10,10,20,0,4
+Independent views,Forward,111,6,6,20,0,4
+Independent views,Forward,112,12,10,20,0,4
+Independent views,Forward,113,11,10,20,0,4
+Independent views,Forward,114,8,7,20,0,4
+Independent views,Forward,115,7,6,20,0,4
+Independent views,Forward,116,8,8,20,0,4
+Independent views,Forward,117,8,7,20,0,4
+Independent views,Forward,118,6,6,20,0,4
+Independent views,Forward,119,8,7,20,0,4
+Independent views,Forward,120,12,11,20,0,4
+Independent views,Forward,121,11,11,20,0,4
+Independent views,Forward,122,10,10,20,0,4
+Independent views,Forward,123,15,14,20,0,4
+Independent views,Forward,124,11,11,20,0,4
+Independent views,Forward,125,8,8,20,0,4
+Independent views,Forward,126,7,7,20,0,4
+Independent views,Forward,127,9,9,20,0,4
+Independent views,Forward,128,12,12,20,0,4
+Independent views,Forward,129,14,13,20,0,4
+Independent views,Forward,130,11,10,20,0,4
+Independent views,Forward,131,12,10,20,0,4
+Independent views,Forward,132,12,12,20,0,4
+Independent views,Forward,133,12,12,20,0,4
+Independent views,Forward,134,12,12,20,0,4
+Independent views,Forward,135,8,8,20,0,4
+Independent views,Forward,136,9,9,20,0,4
+Independent views,Forward,137,10,10,20,0,4
+Independent views,Forward,138,10,9,20,0,4
+Independent views,Forward,139,5,4,20,0,4
+Independent views,Reverse,100,9,9,20,0,4
+Independent views,Reverse,101,9,9,20,0,4
+Independent views,Reverse,102,9,9,20,0,4
+Independent views,Reverse,103,7,6,20,0,4
+Independent views,Reverse,104,8,8,20,0,4
+Independent views,Reverse,105,8,8,20,0,4
+Independent views,Reverse,106,8,8,20,0,4
+Independent views,Reverse,107,9,9,20,0,4
+Independent views,Reverse,108,13,13,20,0,4
+Independent views,Reverse,109,9,9,20,0,4
+Independent views,Reverse,110,9,8,20,0,4
+Independent views,Reverse,111,9,9,20,0,4
+Independent views,Reverse,112,10,9,20,0,4
+Independent views,Reverse,113,7,7,20,0,4
+Independent views,Reverse,114,9,7,20,0,4
+Independent views,Reverse,115,8,8,20,0,4
+Independent views,Reverse,116,12,12,20,0,4
+Independent views,Reverse,117,7,5,20,0,4
+Independent views,Reverse,118,14,14,20,0,4
+Independent views,Reverse,119,8,8,20,0,4
+Independent views,Reverse,120,7,7,20,0,4
+Independent views,Reverse,121,11,10,20,0,4
+Independent views,Reverse,122,11,11,20,0,4
+Independent views,Reverse,123,8,6,20,0,4
+Independent views,Reverse,124,6,6,20,0,4
+Independent views,Reverse,125,6,6,20,0,4
+Independent views,Reverse,126,9,9,20,0,4
+Independent views,Reverse,127,12,12,20,0,4
+Independent views,Reverse,128,7,7,20,0,4
+Independent views,Reverse,129,9,9,20,0,4
+Independent views,Reverse,130,9,9,20,0,4
+Independent views,Reverse,131,5,5,20,0,4
+Independent views,Reverse,132,8,8,20,0,4
+Independent views,Reverse,133,9,9,20,0,4
+Independent views,Reverse,134,10,10,20,0,4
+Independent views,Reverse,135,10,9,20,0,4
+Independent views,Reverse,136,8,7,20,0,4
+Independent views,Reverse,137,10,10,20,0,4
+Independent views,Reverse,138,8,8,20,0,4
+Independent views,Reverse,139,7,7,20,0,4
+Independent views,Reciprocal,100,8,7,20,0,4
+Independent views,Reciprocal,101,8,8,20,0,4
+Independent views,Reciprocal,102,9,9,20,0,4
+Independent views,Reciprocal,103,10,10,20,0,4
+Independent views,Reciprocal,104,8,8,20,0,4
+Independent views,Reciprocal,105,6,6,20,0,4
+Independent views,Reciprocal,106,9,9,20,0,4
+Independent views,Reciprocal,107,7,7,20,0,4
+Independent views,Reciprocal,108,13,13,20,0,4
+Independent views,Reciprocal,109,10,10,20,0,4
+Independent views,Reciprocal,110,6,6,20,0,4
+Independent views,Reciprocal,111,6,6,20,0,4
+Independent views,Reciprocal,112,11,10,20,0,4
+Independent views,Reciprocal,113,8,8,20,0,4
+Independent views,Reciprocal,114,8,7,20,0,4
+Independent views,Reciprocal,115,7,7,20,0,4
+Independent views,Reciprocal,116,10,10,20,0,4
+Independent views,Reciprocal,117,5,5,20,0,4
+Independent views,Reciprocal,118,6,6,20,0,4
+Independent views,Reciprocal,119,9,9,20,0,4
+Independent views,Reciprocal,120,8,8,20,0,4
+Independent views,Reciprocal,121,8,8,20,0,4
+Independent views,Reciprocal,122,10,10,20,0,4
+Independent views,Reciprocal,123,9,9,20,0,4
+Independent views,Reciprocal,124,7,7,20,0,4
+Independent views,Reciprocal,125,6,6,20,0,4
+Independent views,Reciprocal,126,7,7,20,0,4
+Independent views,Reciprocal,127,11,11,20,0,4
+Independent views,Reciprocal,128,9,9,20,0,4
+Independent views,Reciprocal,129,11,10,20,0,4
+Independent views,Reciprocal,130,8,8,20,0,4
+Independent views,Reciprocal,131,7,7,20,0,4
+Independent views,Reciprocal,132,10,10,20,0,4
+Independent views,Reciprocal,133,9,9,20,0,4
+Independent views,Reciprocal,134,10,10,20,0,4
+Independent views,Reciprocal,135,9,9,20,0,4
+Independent views,Reciprocal,136,7,7,20,0,4
+Independent views,Reciprocal,137,8,8,20,0,4
+Independent views,Reciprocal,138,9,9,20,0,4
+Independent views,Reciprocal,139,5,5,20,0,4
+Independent views,No relaxation,100,8,7,20,0,4
+Independent views,No relaxation,101,8,8,20,0,4
+Independent views,No relaxation,102,9,9,20,0,4
+Independent views,No relaxation,103,7,7,20,0,4
+Independent views,No relaxation,104,8,8,20,0,4
+Independent views,No relaxation,105,5,5,20,0,4
+Independent views,No relaxation,106,8,8,20,0,4
+Independent views,No relaxation,107,7,7,20,0,4
+Independent views,No relaxation,108,13,13,20,0,4
+Independent views,No relaxation,109,9,9,20,0,4
+Independent views,No relaxation,110,6,6,20,0,4
+Independent views,No relaxation,111,6,6,20,0,4
+Independent views,No relaxation,112,10,9,20,0,4
+Independent views,No relaxation,113,8,8,20,0,4
+Independent views,No relaxation,114,8,7,20,0,4
+Independent views,No relaxation,115,6,6,20,0,4
+Independent views,No relaxation,116,10,10,20,0,4
+Independent views,No relaxation,117,5,5,20,0,4
+Independent views,No relaxation,118,5,5,20,0,4
+Independent views,No relaxation,119,9,9,20,0,4
+Independent views,No relaxation,120,8,8,20,0,4
+Independent views,No relaxation,121,7,7,20,0,4
+Independent views,No relaxation,122,8,8,20,0,4
+Independent views,No relaxation,123,9,9,20,0,4
+Independent views,No relaxation,124,6,6,20,0,4
+Independent views,No relaxation,125,6,6,20,0,4
+Independent views,No relaxation,126,6,6,20,0,4
+Independent views,No relaxation,127,10,10,20,0,4
+Independent views,No relaxation,128,9,9,20,0,4
+Independent views,No relaxation,129,11,10,20,0,4
+Independent views,No relaxation,130,8,8,20,0,4
+Independent views,No relaxation,131,7,7,20,0,4
+Independent views,No relaxation,132,10,10,20,0,4
+Independent views,No relaxation,133,9,9,20,0,4
+Independent views,No relaxation,134,10,10,20,0,4
+Independent views,No relaxation,135,8,8,20,0,4
+Independent views,No relaxation,136,7,7,20,0,4
+Independent views,No relaxation,137,8,8,20,0,4
+Independent views,No relaxation,138,7,7,20,0,4
+Independent views,No relaxation,139,5,5,20,0,4
+Independent views,Copied reverse,100,10,9,20,0,4
+Independent views,Copied reverse,101,11,11,20,0,4
+Independent views,Copied reverse,102,11,11,20,0,4
+Independent views,Copied reverse,103,13,13,20,0,4
+Independent views,Copied reverse,104,10,10,20,0,4
+Independent views,Copied reverse,105,9,9,20,0,4
+Independent views,Copied reverse,106,14,14,20,0,4
+Independent views,Copied reverse,107,10,9,20,0,4
+Independent views,Copied reverse,108,14,14,20,0,4
+Independent views,Copied reverse,109,9,9,20,0,4
+Independent views,Copied reverse,110,11,11,20,0,4
+Independent views,Copied reverse,111,8,8,20,0,4
+Independent views,Copied reverse,112,10,10,20,0,4
+Independent views,Copied reverse,113,11,11,20,0,4
+Independent views,Copied reverse,114,9,8,20,0,4
+Independent views,Copied reverse,115,9,9,20,0,4
+Independent views,Copied reverse,116,11,11,20,0,4
+Independent views,Copied reverse,117,11,10,20,0,4
+Independent views,Copied reverse,118,7,6,20,0,4
+Independent views,Copied reverse,119,9,9,20,0,4
+Independent views,Copied reverse,120,12,11,20,0,4
+Independent views,Copied reverse,121,11,11,20,0,4
+Independent views,Copied reverse,122,13,13,20,0,4
+Independent views,Copied reverse,123,13,13,20,0,4
+Independent views,Copied reverse,124,13,13,20,0,4
+Independent views,Copied reverse,125,8,8,20,0,4
+Independent views,Copied reverse,126,10,10,20,0,4
+Independent views,Copied reverse,127,9,9,20,0,4
+Independent views,Copied reverse,128,14,14,20,0,4
+Independent views,Copied reverse,129,14,14,20,0,4
+Independent views,Copied reverse,130,12,11,20,0,4
+Independent views,Copied reverse,131,9,9,20,0,4
+Independent views,Copied reverse,132,12,12,20,0,4
+Independent views,Copied reverse,133,14,14,20,0,4
+Independent views,Copied reverse,134,14,14,20,0,4
+Independent views,Copied reverse,135,10,10,20,0,4
+Independent views,Copied reverse,136,11,11,20,0,4
+Independent views,Copied reverse,137,10,10,20,0,4
+Independent views,Copied reverse,138,8,8,20,0,4
+Independent views,Copied reverse,139,7,6,20,0,4
+Correlated noise,Forward,100,10,9,20,0,4
+Correlated noise,Forward,101,11,11,20,0,4
+Correlated noise,Forward,102,11,11,20,0,4
+Correlated noise,Forward,103,11,11,20,0,4
+Correlated noise,Forward,104,10,9,20,0,4
+Correlated noise,Forward,105,8,7,20,0,4
+Correlated noise,Forward,106,14,14,20,0,4
+Correlated noise,Forward,107,13,11,20,0,4
+Correlated noise,Forward,108,13,13,20,0,4
+Correlated noise,Forward,109,6,6,20,0,4
+Correlated noise,Forward,110,10,10,20,0,4
+Correlated noise,Forward,111,6,6,20,0,4
+Correlated noise,Forward,112,12,10,20,0,4
+Correlated noise,Forward,113,11,10,20,0,4
+Correlated noise,Forward,114,8,7,20,0,4
+Correlated noise,Forward,115,7,6,20,0,4
+Correlated noise,Forward,116,8,8,20,0,4
+Correlated noise,Forward,117,8,7,20,0,4
+Correlated noise,Forward,118,6,6,20,0,4
+Correlated noise,Forward,119,8,7,20,0,4
+Correlated noise,Forward,120,12,11,20,0,4
+Correlated noise,Forward,121,11,11,20,0,4
+Correlated noise,Forward,122,10,10,20,0,4
+Correlated noise,Forward,123,15,14,20,0,4
+Correlated noise,Forward,124,11,11,20,0,4
+Correlated noise,Forward,125,8,8,20,0,4
+Correlated noise,Forward,126,7,7,20,0,4
+Correlated noise,Forward,127,9,9,20,0,4
+Correlated noise,Forward,128,12,12,20,0,4
+Correlated noise,Forward,129,14,13,20,0,4
+Correlated noise,Forward,130,11,10,20,0,4
+Correlated noise,Forward,131,12,10,20,0,4
+Correlated noise,Forward,132,12,12,20,0,4
+Correlated noise,Forward,133,12,12,20,0,4
+Correlated noise,Forward,134,12,12,20,0,4
+Correlated noise,Forward,135,8,8,20,0,4
+Correlated noise,Forward,136,9,9,20,0,4
+Correlated noise,Forward,137,10,10,20,0,4
+Correlated noise,Forward,138,10,9,20,0,4
+Correlated noise,Forward,139,5,4,20,0,4
+Correlated noise,Reverse,100,10,10,20,0,4
+Correlated noise,Reverse,101,5,5,20,0,4
+Correlated noise,Reverse,102,10,10,20,0,4
+Correlated noise,Reverse,103,9,9,20,0,4
+Correlated noise,Reverse,104,9,9,20,0,4
+Correlated noise,Reverse,105,5,5,20,0,4
+Correlated noise,Reverse,106,10,10,20,0,4
+Correlated noise,Reverse,107,9,8,20,0,4
+Correlated noise,Reverse,108,12,12,20,0,4
+Correlated noise,Reverse,109,7,7,20,0,4
+Correlated noise,Reverse,110,12,12,20,0,4
+Correlated noise,Reverse,111,6,6,20,0,4
+Correlated noise,Reverse,112,10,10,20,0,4
+Correlated noise,Reverse,113,9,9,20,0,4
+Correlated noise,Reverse,114,8,7,20,0,4
+Correlated noise,Reverse,115,9,9,20,0,4
+Correlated noise,Reverse,116,8,8,20,0,4
+Correlated noise,Reverse,117,7,7,20,0,4
+Correlated noise,Reverse,118,7,6,20,0,4
+Correlated noise,Reverse,119,9,9,20,0,4
+Correlated noise,Reverse,120,8,7,20,0,4
+Correlated noise,Reverse,121,11,11,20,0,4
+Correlated noise,Reverse,122,7,7,20,0,4
+Correlated noise,Reverse,123,11,11,20,0,4
+Correlated noise,Reverse,124,7,7,20,0,4
+Correlated noise,Reverse,125,8,8,20,0,4
+Correlated noise,Reverse,126,10,10,20,0,4
+Correlated noise,Reverse,127,10,10,20,0,4
+Correlated noise,Reverse,128,13,13,20,0,4
+Correlated noise,Reverse,129,9,8,20,0,4
+Correlated noise,Reverse,130,7,7,20,0,4
+Correlated noise,Reverse,131,9,9,20,0,4
+Correlated noise,Reverse,132,8,8,20,0,4
+Correlated noise,Reverse,133,13,13,20,0,4
+Correlated noise,Reverse,134,10,10,20,0,4
+Correlated noise,Reverse,135,8,8,20,0,4
+Correlated noise,Reverse,136,13,13,20,0,4
+Correlated noise,Reverse,137,8,8,20,0,4
+Correlated noise,Reverse,138,7,7,20,0,4
+Correlated noise,Reverse,139,6,5,20,0,4
+Correlated noise,Reciprocal,100,11,11,20,0,4
+Correlated noise,Reciprocal,101,10,10,20,0,4
+Correlated noise,Reciprocal,102,10,10,20,0,4
+Correlated noise,Reciprocal,103,11,11,20,0,4
+Correlated noise,Reciprocal,104,11,10,20,0,4
+Correlated noise,Reciprocal,105,6,6,20,0,4
+Correlated noise,Reciprocal,106,13,12,20,0,4
+Correlated noise,Reciprocal,107,12,10,20,0,4
+Correlated noise,Reciprocal,108,12,12,20,0,4
+Correlated noise,Reciprocal,109,11,11,20,0,4
+Correlated noise,Reciprocal,110,10,10,20,0,4
+Correlated noise,Reciprocal,111,7,7,20,0,4
+Correlated noise,Reciprocal,112,12,10,20,0,4
+Correlated noise,Reciprocal,113,9,9,20,0,4
+Correlated noise,Reciprocal,114,10,8,20,0,4
+Correlated noise,Reciprocal,115,7,7,20,0,4
+Correlated noise,Reciprocal,116,8,8,20,0,4
+Correlated noise,Reciprocal,117,11,10,20,0,4
+Correlated noise,Reciprocal,118,6,5,20,0,4
+Correlated noise,Reciprocal,119,10,9,20,0,4
+Correlated noise,Reciprocal,120,11,10,20,0,4
+Correlated noise,Reciprocal,121,11,11,20,0,4
+Correlated noise,Reciprocal,122,8,8,20,0,4
+Correlated noise,Reciprocal,123,14,14,20,0,4
+Correlated noise,Reciprocal,124,8,8,20,0,4
+Correlated noise,Reciprocal,125,8,7,20,0,4
+Correlated noise,Reciprocal,126,10,10,20,0,4
+Correlated noise,Reciprocal,127,11,11,20,0,4
+Correlated noise,Reciprocal,128,13,13,20,0,4
+Correlated noise,Reciprocal,129,9,9,20,0,4
+Correlated noise,Reciprocal,130,10,9,20,0,4
+Correlated noise,Reciprocal,131,10,9,20,0,4
+Correlated noise,Reciprocal,132,10,10,20,0,4
+Correlated noise,Reciprocal,133,14,14,20,0,4
+Correlated noise,Reciprocal,134,12,12,20,0,4
+Correlated noise,Reciprocal,135,11,11,20,0,4
+Correlated noise,Reciprocal,136,12,12,20,0,4
+Correlated noise,Reciprocal,137,9,9,20,0,4
+Correlated noise,Reciprocal,138,7,7,20,0,4
+Correlated noise,Reciprocal,139,6,4,20,0,4
+Correlated noise,No relaxation,100,11,11,20,0,4
+Correlated noise,No relaxation,101,8,8,20,0,4
+Correlated noise,No relaxation,102,10,10,20,0,4
+Correlated noise,No relaxation,103,9,9,20,0,4
+Correlated noise,No relaxation,104,11,9,20,0,4
+Correlated noise,No relaxation,105,6,6,20,0,4
+Correlated noise,No relaxation,106,13,12,20,0,4
+Correlated noise,No relaxation,107,11,9,20,0,4
+Correlated noise,No relaxation,108,11,11,20,0,4
+Correlated noise,No relaxation,109,10,10,20,0,4
+Correlated noise,No relaxation,110,10,10,20,0,4
+Correlated noise,No relaxation,111,6,6,20,0,4
+Correlated noise,No relaxation,112,12,10,20,0,4
+Correlated noise,No relaxation,113,9,9,20,0,4
+Correlated noise,No relaxation,114,9,7,20,0,4
+Correlated noise,No relaxation,115,7,7,20,0,4
+Correlated noise,No relaxation,116,8,8,20,0,4
+Correlated noise,No relaxation,117,10,9,20,0,4
+Correlated noise,No relaxation,118,6,5,20,0,4
+Correlated noise,No relaxation,119,10,9,20,0,4
+Correlated noise,No relaxation,120,11,10,20,0,4
+Correlated noise,No relaxation,121,11,11,20,0,4
+Correlated noise,No relaxation,122,8,8,20,0,4
+Correlated noise,No relaxation,123,14,14,20,0,4
+Correlated noise,No relaxation,124,7,7,20,0,4
+Correlated noise,No relaxation,125,8,7,20,0,4
+Correlated noise,No relaxation,126,9,9,20,0,4
+Correlated noise,No relaxation,127,11,11,20,0,4
+Correlated noise,No relaxation,128,13,13,20,0,4
+Correlated noise,No relaxation,129,8,8,20,0,4
+Correlated noise,No relaxation,130,9,9,20,0,4
+Correlated noise,No relaxation,131,10,9,20,0,4
+Correlated noise,No relaxation,132,9,9,20,0,4
+Correlated noise,No relaxation,133,13,13,20,0,4
+Correlated noise,No relaxation,134,12,12,20,0,4
+Correlated noise,No relaxation,135,11,11,20,0,4
+Correlated noise,No relaxation,136,12,12,20,0,4
+Correlated noise,No relaxation,137,9,9,20,0,4
+Correlated noise,No relaxation,138,7,7,20,0,4
+Correlated noise,No relaxation,139,6,4,20,0,4
+Correlated noise,Copied reverse,100,10,9,20,0,4
+Correlated noise,Copied reverse,101,11,11,20,0,4
+Correlated noise,Copied reverse,102,11,11,20,0,4
+Correlated noise,Copied reverse,103,13,13,20,0,4
+Correlated noise,Copied reverse,104,10,10,20,0,4
+Correlated noise,Copied reverse,105,9,9,20,0,4
+Correlated noise,Copied reverse,106,14,14,20,0,4
+Correlated noise,Copied reverse,107,10,9,20,0,4
+Correlated noise,Copied reverse,108,14,14,20,0,4
+Correlated noise,Copied reverse,109,9,9,20,0,4
+Correlated noise,Copied reverse,110,11,11,20,0,4
+Correlated noise,Copied reverse,111,8,8,20,0,4
+Correlated noise,Copied reverse,112,10,10,20,0,4
+Correlated noise,Copied reverse,113,11,11,20,0,4
+Correlated noise,Copied reverse,114,9,8,20,0,4
+Correlated noise,Copied reverse,115,9,9,20,0,4
+Correlated noise,Copied reverse,116,11,11,20,0,4
+Correlated noise,Copied reverse,117,11,10,20,0,4
+Correlated noise,Copied reverse,118,7,6,20,0,4
+Correlated noise,Copied reverse,119,9,9,20,0,4
+Correlated noise,Copied reverse,120,12,11,20,0,4
+Correlated noise,Copied reverse,121,11,11,20,0,4
+Correlated noise,Copied reverse,122,13,13,20,0,4
+Correlated noise,Copied reverse,123,13,13,20,0,4
+Correlated noise,Copied reverse,124,13,13,20,0,4
+Correlated noise,Copied reverse,125,8,8,20,0,4
+Correlated noise,Copied reverse,126,10,10,20,0,4
+Correlated noise,Copied reverse,127,9,9,20,0,4
+Correlated noise,Copied reverse,128,14,14,20,0,4
+Correlated noise,Copied reverse,129,14,14,20,0,4
+Correlated noise,Copied reverse,130,12,11,20,0,4
+Correlated noise,Copied reverse,131,9,9,20,0,4
+Correlated noise,Copied reverse,132,12,12,20,0,4
+Correlated noise,Copied reverse,133,14,14,20,0,4
+Correlated noise,Copied reverse,134,14,14,20,0,4
+Correlated noise,Copied reverse,135,10,10,20,0,4
+Correlated noise,Copied reverse,136,11,11,20,0,4
+Correlated noise,Copied reverse,137,10,10,20,0,4
+Correlated noise,Copied reverse,138,8,8,20,0,4
+Correlated noise,Copied reverse,139,7,6,20,0,4
+Shared wrong dictionary,Forward,100,10,0,20,0,4
+Shared wrong dictionary,Forward,101,11,0,20,0,4
+Shared wrong dictionary,Forward,102,11,0,20,0,4
+Shared wrong dictionary,Forward,103,11,0,20,0,4
+Shared wrong dictionary,Forward,104,10,0,20,0,4
+Shared wrong dictionary,Forward,105,8,0,20,0,4
+Shared wrong dictionary,Forward,106,14,0,20,0,4
+Shared wrong dictionary,Forward,107,13,0,20,0,4
+Shared wrong dictionary,Forward,108,13,0,20,0,4
+Shared wrong dictionary,Forward,109,6,0,20,0,4
+Shared wrong dictionary,Forward,110,10,0,20,0,4
+Shared wrong dictionary,Forward,111,6,0,20,0,4
+Shared wrong dictionary,Forward,112,12,0,20,0,4
+Shared wrong dictionary,Forward,113,11,0,20,0,4
+Shared wrong dictionary,Forward,114,8,0,20,0,4
+Shared wrong dictionary,Forward,115,7,0,20,0,4
+Shared wrong dictionary,Forward,116,8,0,20,0,4
+Shared wrong dictionary,Forward,117,8,0,20,0,4
+Shared wrong dictionary,Forward,118,6,0,20,0,4
+Shared wrong dictionary,Forward,119,8,0,20,0,4
+Shared wrong dictionary,Forward,120,12,0,20,0,4
+Shared wrong dictionary,Forward,121,11,0,20,0,4
+Shared wrong dictionary,Forward,122,10,0,20,0,4
+Shared wrong dictionary,Forward,123,15,0,20,0,4
+Shared wrong dictionary,Forward,124,11,0,20,0,4
+Shared wrong dictionary,Forward,125,8,0,20,0,4
+Shared wrong dictionary,Forward,126,7,0,20,0,4
+Shared wrong dictionary,Forward,127,9,0,20,0,4
+Shared wrong dictionary,Forward,128,12,0,20,0,4
+Shared wrong dictionary,Forward,129,14,0,20,0,4
+Shared wrong dictionary,Forward,130,11,0,20,0,4
+Shared wrong dictionary,Forward,131,12,0,20,0,4
+Shared wrong dictionary,Forward,132,12,0,20,0,4
+Shared wrong dictionary,Forward,133,12,0,20,0,4
+Shared wrong dictionary,Forward,134,12,0,20,0,4
+Shared wrong dictionary,Forward,135,8,0,20,0,4
+Shared wrong dictionary,Forward,136,9,0,20,0,4
+Shared wrong dictionary,Forward,137,10,0,20,0,4
+Shared wrong dictionary,Forward,138,10,0,20,0,4
+Shared wrong dictionary,Forward,139,5,0,20,0,4
+Shared wrong dictionary,Reverse,100,9,0,20,0,4
+Shared wrong dictionary,Reverse,101,9,0,20,0,4
+Shared wrong dictionary,Reverse,102,9,0,20,0,4
+Shared wrong dictionary,Reverse,103,7,0,20,0,4
+Shared wrong dictionary,Reverse,104,8,0,20,0,4
+Shared wrong dictionary,Reverse,105,8,0,20,0,4
+Shared wrong dictionary,Reverse,106,8,0,20,0,4
+Shared wrong dictionary,Reverse,107,9,0,20,0,4
+Shared wrong dictionary,Reverse,108,13,0,20,0,4
+Shared wrong dictionary,Reverse,109,9,0,20,0,4
+Shared wrong dictionary,Reverse,110,9,0,20,0,4
+Shared wrong dictionary,Reverse,111,9,0,20,0,4
+Shared wrong dictionary,Reverse,112,10,0,20,0,4
+Shared wrong dictionary,Reverse,113,7,0,20,0,4
+Shared wrong dictionary,Reverse,114,9,0,20,0,4
+Shared wrong dictionary,Reverse,115,8,0,20,0,4
+Shared wrong dictionary,Reverse,116,12,0,20,0,4
+Shared wrong dictionary,Reverse,117,7,1,20,0,4
+Shared wrong dictionary,Reverse,118,14,0,20,0,4
+Shared wrong dictionary,Reverse,119,8,0,20,0,4
+Shared wrong dictionary,Reverse,120,7,0,20,0,4
+Shared wrong dictionary,Reverse,121,11,0,20,0,4
+Shared wrong dictionary,Reverse,122,11,0,20,0,4
+Shared wrong dictionary,Reverse,123,8,0,20,0,4
+Shared wrong dictionary,Reverse,124,6,0,20,0,4
+Shared wrong dictionary,Reverse,125,6,0,20,0,4
+Shared wrong dictionary,Reverse,126,9,0,20,0,4
+Shared wrong dictionary,Reverse,127,12,0,20,0,4
+Shared wrong dictionary,Reverse,128,7,0,20,0,4
+Shared wrong dictionary,Reverse,129,9,0,20,0,4
+Shared wrong dictionary,Reverse,130,9,0,20,0,4
+Shared wrong dictionary,Reverse,131,5,0,20,0,4
+Shared wrong dictionary,Reverse,132,8,0,20,0,4
+Shared wrong dictionary,Reverse,133,9,0,20,0,4
+Shared wrong dictionary,Reverse,134,10,0,20,0,4
+Shared wrong dictionary,Reverse,135,10,0,20,0,4
+Shared wrong dictionary,Reverse,136,8,0,20,0,4
+Shared wrong dictionary,Reverse,137,10,0,20,0,4
+Shared wrong dictionary,Reverse,138,8,0,20,0,4
+Shared wrong dictionary,Reverse,139,7,0,20,0,4
+Shared wrong dictionary,Reciprocal,100,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,101,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,102,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,103,10,0,20,0,4
+Shared wrong dictionary,Reciprocal,104,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,105,5,0,20,0,4
+Shared wrong dictionary,Reciprocal,106,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,107,7,0,20,0,4
+Shared wrong dictionary,Reciprocal,108,13,0,20,0,4
+Shared wrong dictionary,Reciprocal,109,10,0,20,0,4
+Shared wrong dictionary,Reciprocal,110,6,0,20,0,4
+Shared wrong dictionary,Reciprocal,111,6,0,20,0,4
+Shared wrong dictionary,Reciprocal,112,12,0,20,0,4
+Shared wrong dictionary,Reciprocal,113,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,114,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,115,7,0,20,0,4
+Shared wrong dictionary,Reciprocal,116,10,0,20,0,4
+Shared wrong dictionary,Reciprocal,117,6,0,20,0,4
+Shared wrong dictionary,Reciprocal,118,6,0,20,0,4
+Shared wrong dictionary,Reciprocal,119,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,120,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,121,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,122,10,0,20,0,4
+Shared wrong dictionary,Reciprocal,123,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,124,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,125,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,126,6,0,20,0,4
+Shared wrong dictionary,Reciprocal,127,11,0,20,0,4
+Shared wrong dictionary,Reciprocal,128,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,129,11,0,20,0,4
+Shared wrong dictionary,Reciprocal,130,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,131,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,132,10,0,20,0,4
+Shared wrong dictionary,Reciprocal,133,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,134,12,0,20,0,4
+Shared wrong dictionary,Reciprocal,135,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,136,7,0,20,0,4
+Shared wrong dictionary,Reciprocal,137,8,0,20,0,4
+Shared wrong dictionary,Reciprocal,138,9,0,20,0,4
+Shared wrong dictionary,Reciprocal,139,5,0,20,0,4
+Shared wrong dictionary,No relaxation,100,8,0,20,0,4
+Shared wrong dictionary,No relaxation,101,8,0,20,0,4
+Shared wrong dictionary,No relaxation,102,9,0,20,0,4
+Shared wrong dictionary,No relaxation,103,7,0,20,0,4
+Shared wrong dictionary,No relaxation,104,8,0,20,0,4
+Shared wrong dictionary,No relaxation,105,4,0,20,0,4
+Shared wrong dictionary,No relaxation,106,8,0,20,0,4
+Shared wrong dictionary,No relaxation,107,7,0,20,0,4
+Shared wrong dictionary,No relaxation,108,13,0,20,0,4
+Shared wrong dictionary,No relaxation,109,9,0,20,0,4
+Shared wrong dictionary,No relaxation,110,6,0,20,0,4
+Shared wrong dictionary,No relaxation,111,6,0,20,0,4
+Shared wrong dictionary,No relaxation,112,10,0,20,0,4
+Shared wrong dictionary,No relaxation,113,8,0,20,0,4
+Shared wrong dictionary,No relaxation,114,8,0,20,0,4
+Shared wrong dictionary,No relaxation,115,7,0,20,0,4
+Shared wrong dictionary,No relaxation,116,10,0,20,0,4
+Shared wrong dictionary,No relaxation,117,5,0,20,0,4
+Shared wrong dictionary,No relaxation,118,5,0,20,0,4
+Shared wrong dictionary,No relaxation,119,9,0,20,0,4
+Shared wrong dictionary,No relaxation,120,8,0,20,0,4
+Shared wrong dictionary,No relaxation,121,8,0,20,0,4
+Shared wrong dictionary,No relaxation,122,7,0,20,0,4
+Shared wrong dictionary,No relaxation,123,9,0,20,0,4
+Shared wrong dictionary,No relaxation,124,7,0,20,0,4
+Shared wrong dictionary,No relaxation,125,7,0,20,0,4
+Shared wrong dictionary,No relaxation,126,6,0,20,0,4
+Shared wrong dictionary,No relaxation,127,10,0,20,0,4
+Shared wrong dictionary,No relaxation,128,9,0,20,0,4
+Shared wrong dictionary,No relaxation,129,11,0,20,0,4
+Shared wrong dictionary,No relaxation,130,8,0,20,0,4
+Shared wrong dictionary,No relaxation,131,7,0,20,0,4
+Shared wrong dictionary,No relaxation,132,9,0,20,0,4
+Shared wrong dictionary,No relaxation,133,9,0,20,0,4
+Shared wrong dictionary,No relaxation,134,9,0,20,0,4
+Shared wrong dictionary,No relaxation,135,9,0,20,0,4
+Shared wrong dictionary,No relaxation,136,7,0,20,0,4
+Shared wrong dictionary,No relaxation,137,8,0,20,0,4
+Shared wrong dictionary,No relaxation,138,7,0,20,0,4
+Shared wrong dictionary,No relaxation,139,5,0,20,0,4
+Shared wrong dictionary,Copied reverse,100,10,0,20,0,4
+Shared wrong dictionary,Copied reverse,101,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,102,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,103,13,0,20,0,4
+Shared wrong dictionary,Copied reverse,104,10,0,20,0,4
+Shared wrong dictionary,Copied reverse,105,8,0,20,0,4
+Shared wrong dictionary,Copied reverse,106,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,107,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,108,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,109,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,110,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,111,8,0,20,0,4
+Shared wrong dictionary,Copied reverse,112,10,0,20,0,4
+Shared wrong dictionary,Copied reverse,113,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,114,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,115,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,116,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,117,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,118,7,1,20,0,4
+Shared wrong dictionary,Copied reverse,119,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,120,12,0,20,0,4
+Shared wrong dictionary,Copied reverse,121,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,122,13,0,20,0,4
+Shared wrong dictionary,Copied reverse,123,13,0,20,0,4
+Shared wrong dictionary,Copied reverse,124,13,0,20,0,4
+Shared wrong dictionary,Copied reverse,125,8,0,20,0,4
+Shared wrong dictionary,Copied reverse,126,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,127,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,128,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,129,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,130,12,0,20,0,4
+Shared wrong dictionary,Copied reverse,131,9,0,20,0,4
+Shared wrong dictionary,Copied reverse,132,12,0,20,0,4
+Shared wrong dictionary,Copied reverse,133,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,134,14,0,20,0,4
+Shared wrong dictionary,Copied reverse,135,10,0,20,0,4
+Shared wrong dictionary,Copied reverse,136,11,0,20,0,4
+Shared wrong dictionary,Copied reverse,137,10,0,20,0,4
+Shared wrong dictionary,Copied reverse,138,8,0,20,0,4
+Shared wrong dictionary,Copied reverse,139,7,0,20,0,4
+Uninformative reverse,Forward,100,10,9,20,0,4
+Uninformative reverse,Forward,101,11,11,20,0,4
+Uninformative reverse,Forward,102,11,11,20,0,4
+Uninformative reverse,Forward,103,11,11,20,0,4
+Uninformative reverse,Forward,104,10,9,20,0,4
+Uninformative reverse,Forward,105,8,7,20,0,4
+Uninformative reverse,Forward,106,14,14,20,0,4
+Uninformative reverse,Forward,107,13,11,20,0,4
+Uninformative reverse,Forward,108,13,13,20,0,4
+Uninformative reverse,Forward,109,6,6,20,0,4
+Uninformative reverse,Forward,110,10,10,20,0,4
+Uninformative reverse,Forward,111,6,6,20,0,4
+Uninformative reverse,Forward,112,12,10,20,0,4
+Uninformative reverse,Forward,113,11,10,20,0,4
+Uninformative reverse,Forward,114,8,7,20,0,4
+Uninformative reverse,Forward,115,7,6,20,0,4
+Uninformative reverse,Forward,116,8,8,20,0,4
+Uninformative reverse,Forward,117,8,7,20,0,4
+Uninformative reverse,Forward,118,6,6,20,0,4
+Uninformative reverse,Forward,119,8,7,20,0,4
+Uninformative reverse,Forward,120,12,11,20,0,4
+Uninformative reverse,Forward,121,11,11,20,0,4
+Uninformative reverse,Forward,122,10,10,20,0,4
+Uninformative reverse,Forward,123,15,14,20,0,4
+Uninformative reverse,Forward,124,11,11,20,0,4
+Uninformative reverse,Forward,125,8,8,20,0,4
+Uninformative reverse,Forward,126,7,7,20,0,4
+Uninformative reverse,Forward,127,9,9,20,0,4
+Uninformative reverse,Forward,128,12,12,20,0,4
+Uninformative reverse,Forward,129,14,13,20,0,4
+Uninformative reverse,Forward,130,11,10,20,0,4
+Uninformative reverse,Forward,131,12,10,20,0,4
+Uninformative reverse,Forward,132,12,12,20,0,4
+Uninformative reverse,Forward,133,12,12,20,0,4
+Uninformative reverse,Forward,134,12,12,20,0,4
+Uninformative reverse,Forward,135,8,8,20,0,4
+Uninformative reverse,Forward,136,9,9,20,0,4
+Uninformative reverse,Forward,137,10,10,20,0,4
+Uninformative reverse,Forward,138,10,9,20,0,4
+Uninformative reverse,Forward,139,5,4,20,0,4
+Uninformative reverse,Reverse,100,1,0,20,1,4
+Uninformative reverse,Reverse,101,2,0,20,0,4
+Uninformative reverse,Reverse,102,4,0,20,0,4
+Uninformative reverse,Reverse,103,2,0,20,1,4
+Uninformative reverse,Reverse,104,2,0,20,0,4
+Uninformative reverse,Reverse,105,1,1,20,0,4
+Uninformative reverse,Reverse,106,1,0,20,1,4
+Uninformative reverse,Reverse,107,2,1,20,0,4
+Uninformative reverse,Reverse,108,2,1,20,0,4
+Uninformative reverse,Reverse,109,2,0,20,0,4
+Uninformative reverse,Reverse,110,2,0,20,1,4
+Uninformative reverse,Reverse,111,2,0,20,1,4
+Uninformative reverse,Reverse,112,3,0,20,1,4
+Uninformative reverse,Reverse,113,2,0,20,0,4
+Uninformative reverse,Reverse,114,1,0,20,0,4
+Uninformative reverse,Reverse,115,4,0,20,1,4
+Uninformative reverse,Reverse,116,2,0,20,0,4
+Uninformative reverse,Reverse,117,1,0,20,0,4
+Uninformative reverse,Reverse,118,3,0,20,1,4
+Uninformative reverse,Reverse,119,1,1,20,0,4
+Uninformative reverse,Reverse,120,2,0,20,0,4
+Uninformative reverse,Reverse,121,0,0,20,0,4
+Uninformative reverse,Reverse,122,2,0,20,0,4
+Uninformative reverse,Reverse,123,2,0,20,0,4
+Uninformative reverse,Reverse,124,1,0,20,0,4
+Uninformative reverse,Reverse,125,1,0,20,0,4
+Uninformative reverse,Reverse,126,2,0,20,0,4
+Uninformative reverse,Reverse,127,2,1,20,1,4
+Uninformative reverse,Reverse,128,3,0,20,1,4
+Uninformative reverse,Reverse,129,1,0,20,0,4
+Uninformative reverse,Reverse,130,2,0,20,1,4
+Uninformative reverse,Reverse,131,1,0,20,0,4
+Uninformative reverse,Reverse,132,2,1,20,0,4
+Uninformative reverse,Reverse,133,1,0,20,0,4
+Uninformative reverse,Reverse,134,2,0,20,1,4
+Uninformative reverse,Reverse,135,1,0,20,0,4
+Uninformative reverse,Reverse,136,1,0,20,0,4
+Uninformative reverse,Reverse,137,1,0,20,0,4
+Uninformative reverse,Reverse,138,2,0,20,0,4
+Uninformative reverse,Reverse,139,6,0,20,1,4
+Uninformative reverse,Reciprocal,100,0,0,20,0,4
+Uninformative reverse,Reciprocal,101,0,0,20,0,4
+Uninformative reverse,Reciprocal,102,0,0,20,0,4
+Uninformative reverse,Reciprocal,103,0,0,20,0,4
+Uninformative reverse,Reciprocal,104,0,0,20,0,4
+Uninformative reverse,Reciprocal,105,1,1,20,0,4
+Uninformative reverse,Reciprocal,106,0,0,20,0,4
+Uninformative reverse,Reciprocal,107,2,2,20,0,4
+Uninformative reverse,Reciprocal,108,1,1,20,0,4
+Uninformative reverse,Reciprocal,109,0,0,20,0,4
+Uninformative reverse,Reciprocal,110,0,0,20,0,4
+Uninformative reverse,Reciprocal,111,0,0,20,0,4
+Uninformative reverse,Reciprocal,112,0,0,20,0,4
+Uninformative reverse,Reciprocal,113,0,0,20,0,4
+Uninformative reverse,Reciprocal,114,0,0,20,0,4
+Uninformative reverse,Reciprocal,115,0,0,20,0,4
+Uninformative reverse,Reciprocal,116,0,0,20,0,4
+Uninformative reverse,Reciprocal,117,0,0,20,0,4
+Uninformative reverse,Reciprocal,118,0,0,20,0,4
+Uninformative reverse,Reciprocal,119,1,1,20,0,4
+Uninformative reverse,Reciprocal,120,0,0,20,0,4
+Uninformative reverse,Reciprocal,121,0,0,20,0,4
+Uninformative reverse,Reciprocal,122,0,0,20,0,4
+Uninformative reverse,Reciprocal,123,1,1,20,0,4
+Uninformative reverse,Reciprocal,124,0,0,20,0,4
+Uninformative reverse,Reciprocal,125,0,0,20,0,4
+Uninformative reverse,Reciprocal,126,0,0,20,0,4
+Uninformative reverse,Reciprocal,127,0,0,20,0,4
+Uninformative reverse,Reciprocal,128,0,0,20,0,4
+Uninformative reverse,Reciprocal,129,0,0,20,0,4
+Uninformative reverse,Reciprocal,130,0,0,20,0,4
+Uninformative reverse,Reciprocal,131,1,0,20,0,4
+Uninformative reverse,Reciprocal,132,1,1,20,0,4
+Uninformative reverse,Reciprocal,133,0,0,20,0,4
+Uninformative reverse,Reciprocal,134,0,0,20,0,4
+Uninformative reverse,Reciprocal,135,0,0,20,0,4
+Uninformative reverse,Reciprocal,136,0,0,20,0,4
+Uninformative reverse,Reciprocal,137,0,0,20,0,4
+Uninformative reverse,Reciprocal,138,0,0,20,0,4
+Uninformative reverse,Reciprocal,139,0,0,20,0,4
+Uninformative reverse,No relaxation,100,0,0,20,0,4
+Uninformative reverse,No relaxation,101,0,0,20,0,4
+Uninformative reverse,No relaxation,102,0,0,20,0,4
+Uninformative reverse,No relaxation,103,0,0,20,0,4
+Uninformative reverse,No relaxation,104,0,0,20,0,4
+Uninformative reverse,No relaxation,105,1,1,20,0,4
+Uninformative reverse,No relaxation,106,0,0,20,0,4
+Uninformative reverse,No relaxation,107,2,2,20,0,4
+Uninformative reverse,No relaxation,108,1,1,20,0,4
+Uninformative reverse,No relaxation,109,0,0,20,0,4
+Uninformative reverse,No relaxation,110,0,0,20,0,4
+Uninformative reverse,No relaxation,111,0,0,20,0,4
+Uninformative reverse,No relaxation,112,0,0,20,0,4
+Uninformative reverse,No relaxation,113,0,0,20,0,4
+Uninformative reverse,No relaxation,114,0,0,20,0,4
+Uninformative reverse,No relaxation,115,0,0,20,0,4
+Uninformative reverse,No relaxation,116,0,0,20,0,4
+Uninformative reverse,No relaxation,117,0,0,20,0,4
+Uninformative reverse,No relaxation,118,0,0,20,0,4
+Uninformative reverse,No relaxation,119,1,1,20,0,4
+Uninformative reverse,No relaxation,120,0,0,20,0,4
+Uninformative reverse,No relaxation,121,0,0,20,0,4
+Uninformative reverse,No relaxation,122,0,0,20,0,4
+Uninformative reverse,No relaxation,123,1,1,20,0,4
+Uninformative reverse,No relaxation,124,0,0,20,0,4
+Uninformative reverse,No relaxation,125,0,0,20,0,4
+Uninformative reverse,No relaxation,126,0,0,20,0,4
+Uninformative reverse,No relaxation,127,0,0,20,0,4
+Uninformative reverse,No relaxation,128,0,0,20,0,4
+Uninformative reverse,No relaxation,129,0,0,20,0,4
+Uninformative reverse,No relaxation,130,0,0,20,0,4
+Uninformative reverse,No relaxation,131,1,0,20,0,4
+Uninformative reverse,No relaxation,132,1,1,20,0,4
+Uninformative reverse,No relaxation,133,0,0,20,0,4
+Uninformative reverse,No relaxation,134,0,0,20,0,4
+Uninformative reverse,No relaxation,135,0,0,20,0,4
+Uninformative reverse,No relaxation,136,0,0,20,0,4
+Uninformative reverse,No relaxation,137,0,0,20,0,4
+Uninformative reverse,No relaxation,138,0,0,20,0,4
+Uninformative reverse,No relaxation,139,0,0,20,0,4
+Uninformative reverse,Copied reverse,100,10,9,20,0,4
+Uninformative reverse,Copied reverse,101,11,11,20,0,4
+Uninformative reverse,Copied reverse,102,11,11,20,0,4
+Uninformative reverse,Copied reverse,103,13,13,20,0,4
+Uninformative reverse,Copied reverse,104,10,10,20,0,4
+Uninformative reverse,Copied reverse,105,9,9,20,0,4
+Uninformative reverse,Copied reverse,106,14,14,20,0,4
+Uninformative reverse,Copied reverse,107,10,9,20,0,4
+Uninformative reverse,Copied reverse,108,14,14,20,0,4
+Uninformative reverse,Copied reverse,109,9,9,20,0,4
+Uninformative reverse,Copied reverse,110,11,11,20,0,4
+Uninformative reverse,Copied reverse,111,8,8,20,0,4
+Uninformative reverse,Copied reverse,112,10,10,20,0,4
+Uninformative reverse,Copied reverse,113,11,11,20,0,4
+Uninformative reverse,Copied reverse,114,9,8,20,0,4
+Uninformative reverse,Copied reverse,115,9,9,20,0,4
+Uninformative reverse,Copied reverse,116,11,11,20,0,4
+Uninformative reverse,Copied reverse,117,11,10,20,0,4
+Uninformative reverse,Copied reverse,118,7,6,20,0,4
+Uninformative reverse,Copied reverse,119,9,9,20,0,4
+Uninformative reverse,Copied reverse,120,12,11,20,0,4
+Uninformative reverse,Copied reverse,121,11,11,20,0,4
+Uninformative reverse,Copied reverse,122,13,13,20,0,4
+Uninformative reverse,Copied reverse,123,13,13,20,0,4
+Uninformative reverse,Copied reverse,124,13,13,20,0,4
+Uninformative reverse,Copied reverse,125,8,8,20,0,4
+Uninformative reverse,Copied reverse,126,10,10,20,0,4
+Uninformative reverse,Copied reverse,127,9,9,20,0,4
+Uninformative reverse,Copied reverse,128,14,14,20,0,4
+Uninformative reverse,Copied reverse,129,14,14,20,0,4
+Uninformative reverse,Copied reverse,130,12,11,20,0,4
+Uninformative reverse,Copied reverse,131,9,9,20,0,4
+Uninformative reverse,Copied reverse,132,12,12,20,0,4
+Uninformative reverse,Copied reverse,133,14,14,20,0,4
+Uninformative reverse,Copied reverse,134,14,14,20,0,4
+Uninformative reverse,Copied reverse,135,10,10,20,0,4
+Uninformative reverse,Copied reverse,136,11,11,20,0,4
+Uninformative reverse,Copied reverse,137,10,10,20,0,4
+Uninformative reverse,Copied reverse,138,8,8,20,0,4
+Uninformative reverse,Copied reverse,139,7,6,20,0,4

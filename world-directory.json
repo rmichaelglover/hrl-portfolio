@@ -1,5 +1,11 @@
 [
   {
+    "href": "reciprocal-grounding/",
+    "title": "Reciprocal Grounding · Things ↔ Words",
+    "description": "Two-way relaxation labeling with explicit unknowns, synthetic benchmarks, interactive strength fields, and a reproducible white paper.",
+    "category": "Science & Tools"
+  },
+  {
     "href": "virtual-earth/",
     "title": "A World Before Names · Virtual Earth",
     "description": "Explore a borderless Earth, zoom into synthetic landscapes, and watch animal-inspired agents forage and interact. Open-source, seeded ecological model.",

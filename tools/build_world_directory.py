@@ -17,6 +17,7 @@ MAP = {
  'Writing & Research': 'all-in-a-days-work attack-on-christendom chesshustlagaard drugs-are-good el-cuento essays hrl-cybersecurity hyperspace i-am-what-i-am magnum-economicus magnum-quantreleviathone manuelian-magnum-opus mother-god-bomb no-panzer numerological-speculations perfect-union political-economy-paper projective-horizon-bipolar red-thread relax-relabel research-whitepapers spreadsheet-dissertation the-wall three-white-papers ujewhale-macro-report virtual-body-cancer white-hat-hackers',
 }
 OVERRIDES = {
+ 'reciprocal-grounding/': ('Reciprocal Grounding · Things ↔ Words','Two-way relaxation labeling with explicit unknowns, synthetic benchmarks, interactive strength fields, and a reproducible white paper.','Science & Tools'),
  'virtual-earth/': ('A World Before Names · Virtual Earth','Explore a borderless Earth, zoom into synthetic landscapes, and watch animal-inspired agents forage and interact. Open-source, seeded ecological model.','Worlds & Nature'),
  'oort-halo/': ('Oort Cloud & Galactic Halo','Compare three gravitational toy models: central mass, outer shell, and extended halo. Plots, assumptions, and reproducible Python code.','Science & Tools'),
  'whimsy-chess/stalemate-gambit/': ('The Stalemate Gambit Explained','Seven playful chapters, four interactive lessons, a wandering king, and a portable study PGN.','Chess & Games'),

@@ -1,5 +1,13 @@
 # hrl — hierarchical relaxation labeling
 
+## Reciprocal Grounding
+
+[Things ↔ Words](reciprocal-grounding/) implements two-view relaxation labeling
+with abstention and audit records. The exhibit includes synthetic benchmark
+data, interactive strength fields, a [white paper](reciprocal-grounding/WHITEPAPER.pdf),
+and reproducible accuracy–coverage comparisons, including shared-error failures.
+
+
 ## Terminal explorer
 
 Run `python3 terminal/hrl.py tui` for a searchable terminal world directory,
