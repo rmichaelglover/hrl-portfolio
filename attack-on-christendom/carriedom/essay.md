@@ -28,6 +28,20 @@ In this journal, *Attack on Christendom* asks what happens when sacred language 
 
 The answer cannot be that wounded people are secretly monsters. We are all just people. That is why their suffering counts. It is also why everyone else’s life counts.
 
+## Catharsis and the mirror
+
+In the reading of the new *Carrie* that prompted this essay, extreme cyberbullying leads into a morally ambiguous climax in which Carrie kills her bullies. The intensity matters. The wounded viewer may recognize both the humiliation and the imagined bloody triumph. The moral question is what we do with that recognition.
+
+The catharsis I want from such a story is the moment the fantasy turns into a mirror: “No. I have gone too far. These are people. I must not hurt another human being for the sake of my deep, real, painful wounds.” The viewer can acknowledge the desire for revenge without accepting it as an instruction. The imagined triumph can expose what we need to refuse.
+
+That is a hope for an encounter with fiction, not a promise about its effect on every audience. A violent story can trouble one viewer and encourage another’s identification with vengeance. Calling something cathartic does not settle the question. The interpretation has to make its moral turn explicit: let the recognition interrupt the violence we might otherwise excuse.
+
+For me, that turn also has the language of [Matthew 5:44](https://biblehub.com/web/matthew/5.htm): love your enemies; pray for those who persecute you. I do not read that as an instruction to keep giving a bully access to a victim. We can seek safety, insist on boundaries, report abuse, and demand accountability while refusing to make another person’s suffering our reward.
+
+Love does not require us to call cruelty good. Prayer does not replace protection. Neither requires a feeling of warmth toward someone who harmed us. Here they begin with a difficult refusal: I will not make my wound a justification for destroying you.
+
+The person who cannot yet pray can still refuse to kill. The person whose faith differs from mine can still recognize another person’s life. The appeal is open to both. What we suffered was real. What we do next is still our responsibility.
+
 ## Believe the wound; refuse the warrant
 
 A dangerous argument can begin with something true: “They hurt me.”
