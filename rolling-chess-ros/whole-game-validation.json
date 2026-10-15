@@ -1,0 +1,20 @@
+[
+  {
+    "randomness": true,
+    "plies": 65,
+    "fen": "7k/1R4Q1/8/2B5/r3N2P/4PN1P/3P4/5R1K b - - 0 33",
+    "status": "Game complete: 1-0 \u00b7 CHECKMATE (draw claimed where applicable).",
+    "outcome": "Outcome(termination=<Termination.CHECKMATE: 1>, winner=True)",
+    "seconds": 7.66,
+    "collisions": 0
+  },
+  {
+    "randomness": false,
+    "plies": 161,
+    "fen": "2q2rk1/3rbp2/1ppppnp1/p6p/P1bP3P/R1N1BNP1/4PP2/2K2B1R b - - 99 81",
+    "status": "Game complete: 1/2-1/2 \u00b7 FIFTY_MOVES (draw claimed where applicable).",
+    "outcome": "Outcome(termination=<Termination.FIFTY_MOVES: 6>, winner=None)",
+    "seconds": 19.44,
+    "collisions": 0
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "date": "2026-10-15",
+  "backend": "https://janetta-nongelatinous-clemmie.ngrok-free.dev",
+  "ros": "ROS 2 Humble",
+  "topics": [
+    "/rolling_chess/state",
+    "/rolling_chess/command",
+    "/rolling_chess/events",
+    "/rolling_chess/markers",
+    "/tf"
+  ],
+  "backend_lifetime": "Live host ROS node and HTTPS tunnel must remain online. Offline is reported explicitly.",
+  "default_randomness": true,
+  "public_controls": [
+    "autoplay",
+    "restart",
+    "randomness"
+  ],
+  "private_controls": [
+    "apparatus",
+    "PGN import",
+    "mergers",
+    "capture forecast"
+  ],
+  "autoplay_repeat_seconds": 10,
+  "automated_tests": 38
+}

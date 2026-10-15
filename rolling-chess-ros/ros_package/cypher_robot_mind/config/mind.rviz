@@ -1,0 +1,49 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: map
+    Background Color: 19; 30; 38
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.5
+      Plane Cell Count: 20
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Virtual robot and world
+      Enabled: true
+      Topic:
+        Value: /cypher/visualization
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Map
+      Name: Bayesian belief map
+      Enabled: true
+      Alpha: 0.5
+      Topic:
+        Value: /cypher/belief_map
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Path
+      Name: Current plan
+      Enabled: true
+      Color: 111; 235; 203
+      Line Style: Lines
+      Line Width: 0.06
+      Topic:
+        Value: /cypher/plan
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 15
+      Pitch: 0.8
+      Yaw: 0.8
+      Focal Point:
+        X: 5
+        Y: 5
+        Z: 0

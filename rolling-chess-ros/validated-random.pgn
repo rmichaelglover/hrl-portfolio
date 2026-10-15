@@ -1,0 +1,12 @@
+[Event "Glover Labs validated numerical rolling-physics run"]
+[Site "?"]
+[Date "2026.10.15"]
+[Round "?"]
+[White "?"]
+[Black "?"]
+[Result "1-0"]
+[Noise "on"]
+[Seed "2026"]
+[Termination "CHECKMATE"]
+
+1. Nc3 Nf6 2. Nf3 Nc6 3. a4 a5 4. e3 e6 5. Bc4 Bd6 6. h3 O-O 7. O-O g5 8. Nxg5 e5 9. g3 Re8 10. Bxf7+ Kf8 11. Bxe8 Kxe8 12. Qe2 h6 13. Nf3 h5 14. b3 b5 15. axb5 Nb4 16. Qc4 Nxc2 17. Rb1 c5 18. bxc6 dxc6 19. Qxc6+ Bd7 20. Qxd6 Nxe3 21. fxe3 a4 22. Qxe5+ Be6 23. Qxe6+ Kf8 24. Ba3+ Kg7 25. bxa4 Nh7 26. Rb7+ Kh8 27. Qe5+ Nf6 28. Bc5 h4 29. gxh4 Qg8+ 30. Kh1 Ra6 31. Ne4 Rxa4 32. Qxf6+ Qg7 33. Qxg7# 1-0
