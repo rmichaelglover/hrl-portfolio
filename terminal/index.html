@@ -1,24 +1,20 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HRL Terminal · browser worlds</title>
-<meta name="description" content="Explore HRL worlds in a browser terminal with CLI commands, keyboard navigation, and a rotating 3D knot.">
+<title>HRL Matrix Terminal · worlds</title>
+<meta name="description" content="Explore HRL worlds as a green phosphor terminal: searchable worlds, linked pages and character-rendered graphics.">
 <link rel="stylesheet" href="terminal.css"><script defer src="terminal.js"></script>
-</head>
-<body>
-<header><a href="../">← HRL portfolio</a><h1>HRL TERMINAL <span>browser worlds</span></h1><span id="connection" role="status">Loading directory…</span></header>
-<main>
-<section class="window" aria-label="Terminal explorer">
-<div class="bar"><span class="lights" aria-hidden="true">● ● ●</span><span>hrl@portfolio:~</span><button id="pause" aria-pressed="false">Pause animation</button></div>
-<div class="toolbar"><label for="search">Filter worlds</label><input id="search" type="search" placeholder="chess, physics, nature…" autocomplete="off"><button id="browse">Worlds</button><button id="read">Read</button><a id="open" href="../" target="_blank" rel="noopener">Open world ↗</a></div>
-<div class="workspace"><div id="worlds" role="listbox" aria-label="Portfolio worlds" tabindex="0"></div><section class="scene" aria-label="Animated 3D trefoil"><pre id="knot" aria-hidden="true"></pre><p>3D trefoil / character renderer</p></section></div>
-<section id="reader" hidden aria-label="Page reader"><h2 id="reader-title"></h2><div id="page-text" tabindex="0"></div><p><a id="reader-link" target="_blank" rel="noopener">Open full interactive page ↗</a></p></section>
-<div id="detail" aria-live="polite"></div>
-<section class="shell" aria-label="Command terminal"><div id="output" role="log" aria-live="polite" aria-relevant="additions"></div><form id="command-form"><label for="command">hrl:~ $</label><input id="command" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-label="Terminal command"><button>Run</button></form></section>
-</section>
-<p class="hint">↑ ↓ choose · Enter read · / filter · Esc worlds · commands: help, ls, search, read, open, clear, pause</p>
-<p class="hint">A browser terminal for the portfolio. Pages open with their full graphics; the reader shows static text. RelaxGPT is a future connection.</p>
-<noscript>This explorer needs JavaScript. <a href="../explore.html">Browse the portfolio directory.</a></noscript>
-</main>
-</body></html>
+</head><body>
+<pre id="rain" aria-hidden="true"></pre>
+<header><a href="../">[ HRL HOME ]</a><h1>HRL<span>://</span>MATRIX</h1><span id="connection" role="status">CONNECTING…</span></header>
+<main class="window">
+<div class="bar"><span>╔═ RELAX / WORLD TERMINAL ═╗</span><button id="pause" aria-pressed="false">[ PAUSE MOTION ]</button></div>
+<div class="toolbar"><button id="browse">⌂ Worlds</button><button id="back" disabled>← Back</button><label class="sr-only" for="search">Search all worlds</label><input id="search" type="search" placeholder="/ Search every world…" autocomplete="off"><button id="read">Enter world →</button></div>
+<nav id="categories" aria-label="World categories"></nav>
+<div id="breadcrumb">ROOT / WORLDS</div>
+<div class="workspace"><section class="directory"><div class="pane-heading">WORLD INDEX <span id="count"></span></div><div id="worlds" role="listbox" aria-label="Portfolio worlds" tabindex="0"></div></section><section class="scene" aria-label="3D terminal preview"><div class="pane-heading">CHARACTER ENGINE / LIVE</div><pre id="knot" aria-hidden="true"></pre><div id="detail" aria-live="polite"></div><button id="enter-preview">[ ENTER SELECTED WORLD → ]</button></section></div>
+<section id="reader" hidden aria-label="World terminal"><h2 id="reader-title"></h2><div id="page-status" role="status"></div><nav class="tabs" aria-label="World views"><button data-tab="text" aria-pressed="true">[1] Read</button><button data-tab="links" aria-pressed="false">[2] Explore links <span id="link-count"></span></button><button data-tab="visuals" aria-pressed="false">[3] ASCII graphics <span id="image-count"></span></button><button data-tab="live" aria-pressed="false">[4] Live scene</button></nav><div id="page-text" class="reader-pane" tabindex="0"></div><div id="page-links" class="reader-pane" hidden></div><div id="page-visuals" class="reader-pane" hidden></div><div id="page-live" class="reader-pane" hidden><p id="live-status" role="status"></p><details id="live-control-panel"><summary>[ + WORLD CONTROLS ]</summary><div id="live-controls"></div></details><div id="live-frames"></div></div></section>
+<section class="shell" aria-label="Command terminal"><details id="console"><summary>COMMAND LOG <span>help · search · open · back · links · graphics</span></summary><div id="output" role="log" aria-live="polite" aria-relevant="additions"></div></details><form id="command-form"><label for="command">hrl@matrix:~$</label><input id="command" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type help, or just click a world" aria-label="Terminal command"><button>[ RUN ]</button></form></section>
+<footer><span>↑ ↓ select · Enter explore · / search · Esc back</span><button id="help">? Help</button><span>ALL WORLDS STAY IN THE TERMINAL</span></footer>
+<noscript>This terminal needs JavaScript. <a href="../explore.html">Browse the portfolio.</a></noscript>
+</main></body></html>

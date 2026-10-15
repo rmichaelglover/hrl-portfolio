@@ -1,16 +1,37 @@
 # HRL terminal worlds
 
-## Browser terminal
+## Browser Matrix terminal
 
-Visit `terminal/` on the portfolio website for the browser explorer. It shares
-`world-directory.json` with the native CLI and provides search, keyboard
-navigation, static page reading, full-page links, a 3D character animation, and
-a command prompt (`help`, `ls`, `search`, `read`, `open`, `worlds`, `pause`,
-`clear`). Up/down at the prompt recalls command history. It runs entirely in
-the browser and supports mobile screens and reduced-motion preferences.
+Visit `terminal/` on the portfolio website. The Matrix-inspired interface uses
+phosphor green, scanlines, falling code, category shortcuts, numbered worlds,
+one-click entry, a Back stack, and keyboard navigation. Reduced-motion settings
+pause the animated background and knot automatically.
+
+Every portfolio page opens inside the terminal. World views:
+
+- **Read:** static page text, with scripts and styles removed.
+- **Explore links:** follow local page and document links within the terminal.
+- **ASCII graphics:** rasterize page images into green character cells.
+- **Live scene:** run the selected world's existing engine in an offscreen,
+  sandboxed frame, sample up to eight canvases into ASCII, and mirror up to
+  eighty visible buttons/selectors/inputs as terminal controls. Click the
+  character surface to send a pointer click to its original canvas.
+
+Commands: `help`, `ls`, `search`, `open`, `read`, `back`, `worlds`, `links`,
+`graphics`, `live`, `pause`, `clear`. `open 3` enters world 3 in the current
+filtered list. Up/down chooses worlds or recalls commands; Enter opens;
+`/` focuses search; Escape goes back; 1–4 switch views inside a world.
+
+Live rendering reuses the original world engine; it does not reimplement the
+simulation. WebGL buffers are preserved for character sampling. Protected
+cross-origin canvases cannot be read. DOM-only games, SVG scenes, PDF pages,
+audio/video and drag/continuous keyboard controls still need dedicated TUI
+adapters. Static GIFs are sampled as a still image. External references do not
+launch outside pages. No LLM is connected. Avoid running untrusted page engines;
+this adapter is for the repository's own portfolio pages.
 
 To preview locally, run `python3 -m http.server 8796` in the repository and
-visit `http://localhost:8796/terminal/`. It needs HTTP hosting, not `file://`.
+visit `http://localhost:8796/terminal/`. HTTP hosting is required.
 
 ## Native terminal
 
