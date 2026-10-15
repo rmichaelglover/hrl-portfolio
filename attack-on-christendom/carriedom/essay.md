@@ -80,6 +80,28 @@ You are allowed to refuse the assignment. You are allowed to disappoint people w
 
 No claim of sacred authority, no promise of revenge, and no demand for loyalty removes your responsibility for another person’s life.
 
+## Conscience, free will, and the work of the living
+
+My reading places this story beside Columbine and similar acts of horror. I am describing the questions it raises for me, rather than claiming an account of the creators’ intentions: what happens when chronic bullying, teasing, and harassment meet a desire to make the world answer? Where is conscience? What remains of free will when a person feels cornered? What does God want each of us, and all of us together, to do?
+
+Responsibility cannot fall only on the person whose anger has become dangerous. It also belongs to people who can interrupt the cruelty before that point. Adults must listen and act on abuse. Peers can refuse to supply an audience for humiliation. Institutions can protect the targeted person and hold perpetrators accountable. A community can make room for someone without asking them to entertain it with their pain.
+
+Free will, in the moral sense I am invoking, means that the next act is still a question we must answer. A wound can constrain a life without becoming an order to kill. Other people’s failures do not exhaust the possibilities of our response. Nor does individual responsibility relieve the community of its duty to help.
+
+There is a call to arms here, if we understand what we are being called to take up: the pen, the performance, the truthful witness, the practical work of protection. Writers and actors can give expression to pain that a viewer cannot yet articulate. Their skill can make a moral question visible. In the reading that prompted this essay, the goodness of that appeal shines through the frightening spectacle: see where cruelty leads; hear the conscience that refuses to follow it further.
+
+Art does not discharge our duty by moving us. We still have to decide whether to join the teasing, whether to believe a frightened person, whether to help someone leave an abusive situation, whether to refuse a violent plan. The work belongs to the audience when the performance ends.
+
+## I exist, therefore I worship
+
+For me, fearing God rather than fearing man means refusing to let a crowd’s contempt become the highest authority over my conduct. It also means refusing to make my anger that authority. Neither a bully’s approval nor a revenge group’s praise can tell me what another person’s life is worth.
+
+“I exist, therefore I worship.” That is my confession here: existence calls me into a relation of gratitude, responsibility, and reverence. It is not a deduction that I expect every reader to share. It asks something of the person who says it. If I claim to honor the giver of life, how will I treat the lives in front of me?
+
+The question is individual and collective. What am I being asked to refuse? Whom are we being asked to protect? What cruelty have we allowed to become ordinary? What help can we offer before someone starts to believe destruction is their only remaining language?
+
+I cannot make someone else’s humiliation holy by enjoying it. I cannot make my retaliation holy by naming God over it. I can seek courage to oppose abuse, mercy toward the person I am tempted to hate, and the company of people willing to do that work with me.
+
 ## A small audience, a consequential refusal
 
 This essay does not need a cheering crowd. Its most consequential reader might be someone who never agrees with the author about anything else.
