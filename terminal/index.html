@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HRL Terminal · browser worlds</title>
+<meta name="description" content="Explore HRL worlds in a browser terminal with CLI commands, keyboard navigation, and a rotating 3D knot.">
+<link rel="stylesheet" href="terminal.css"><script defer src="terminal.js"></script>
+</head>
+<body>
+<header><a href="../">← HRL portfolio</a><h1>HRL TERMINAL <span>browser worlds</span></h1><span id="connection" role="status">Loading directory…</span></header>
+<main>
+<section class="window" aria-label="Terminal explorer">
+<div class="bar"><span class="lights" aria-hidden="true">● ● ●</span><span>hrl@portfolio:~</span><button id="pause" aria-pressed="false">Pause animation</button></div>
+<div class="toolbar"><label for="search">Filter worlds</label><input id="search" type="search" placeholder="chess, physics, nature…" autocomplete="off"><button id="browse">Worlds</button><button id="read">Read</button><a id="open" href="../" target="_blank" rel="noopener">Open world ↗</a></div>
+<div class="workspace"><div id="worlds" role="listbox" aria-label="Portfolio worlds" tabindex="0"></div><section class="scene" aria-label="Animated 3D trefoil"><pre id="knot" aria-hidden="true"></pre><p>3D trefoil / character renderer</p></section></div>
+<section id="reader" hidden aria-label="Page reader"><h2 id="reader-title"></h2><div id="page-text" tabindex="0"></div><p><a id="reader-link" target="_blank" rel="noopener">Open full interactive page ↗</a></p></section>
+<div id="detail" aria-live="polite"></div>
+<section class="shell" aria-label="Command terminal"><div id="output" role="log" aria-live="polite" aria-relevant="additions"></div><form id="command-form"><label for="command">hrl:~ $</label><input id="command" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-label="Terminal command"><button>Run</button></form></section>
+</section>
+<p class="hint">↑ ↓ choose · Enter read · / filter · Esc worlds · commands: help, ls, search, read, open, clear, pause</p>
+<p class="hint">A browser terminal for the portfolio. Pages open with their full graphics; the reader shows static text. RelaxGPT is a future connection.</p>
+<noscript>This explorer needs JavaScript. <a href="../explore.html">Browse the portfolio directory.</a></noscript>
+</main>
+</body></html>

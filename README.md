@@ -1,5 +1,12 @@
 # hrl — hierarchical relaxation labeling
 
+## Terminal explorer
+
+Run `python3 terminal/hrl.py tui` for a searchable terminal world directory,
+local page reading, and an animated 3D trefoil. CLI search, JSON output, and
+rendering are also available. See [terminal/README.md](terminal/README.md) for
+commands, current limits, and the path toward a Relax-assisted LLM interface.
+
 ## Homepage: Maestro+++
 
 The hrl-portfolio homepage is the full, native, immediately playable Maestro app, followed by all the other worlds and projects. Visitors enter through standard 2D chess from the usual starting position: the user is the Woodland cast and the opponent uses classical figurines. OTB is enabled by default, with the default game loaded at move zero so Next can step through its recorded moves. New game remains available for an empty move history. Default squares are white and tan-brown. Keep music, lectures, profiles, Linux downloads, and the broader project directory available on this same homepage.
