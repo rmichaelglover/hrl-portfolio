@@ -1,5 +1,11 @@
 [
   {
+    "href": "virtual-earth/",
+    "title": "A World Before Names · Virtual Earth",
+    "description": "Explore a borderless Earth, zoom into synthetic landscapes, and watch animal-inspired agents forage and interact. Open-source, seeded ecological model.",
+    "category": "Worlds & Nature"
+  },
+  {
     "href": "oort-halo/",
     "title": "Oort Cloud & Galactic Halo",
     "description": "Compare three gravitational toy models: central mass, outer shell, and extended halo. Plots, assumptions, and reproducible Python code.",

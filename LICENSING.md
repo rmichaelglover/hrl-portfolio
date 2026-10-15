@@ -39,3 +39,11 @@ ideas, skills, or expertise outside the legal scope of copyright and patent.
 Entry to the published Gaia Worlds is also presented with the versioned
 [Gaia Worlds Entry Terms](TERMS.md). Browser acceptance does not expand the
 scope of copyright or revoke earlier grants.
+
+## Virtual Earth exception
+
+Original code and documentation under [`virtual-earth/`](virtual-earth/) are
+MIT licensed under [`virtual-earth/LICENSE`](virtual-earth/LICENSE), as
+explicitly requested for this open-source module. Vendored D3 retains its ISC
+license; Natural Earth geometry is public domain. This exception does not
+change the license of other portfolio material.
