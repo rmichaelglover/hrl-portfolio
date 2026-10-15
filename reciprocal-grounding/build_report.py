@@ -19,7 +19,7 @@ stress='\n'.join('| '+' | '.join([s,pct(row(s,'Reciprocal')['accuracy']),pct(row
 text=f'''# Reciprocal Grounding
 ## Things as objects, words as objects, agreement as provisional ground truth
 
-R. Michael Glover · HRL Portfolio · October 15, 2026 · Research prototype v1
+R. Michael Glover · HRL Portfolio · October 15, 2026 · Research prototype v2: original study plus recursive supplement
 
 ### Abstract
 
@@ -54,7 +54,7 @@ Accept only if j is thing i's unique strongest label, i is word j's unique stron
 
 Perturbations add Gaussian noise of standard deviation 0.12 to the original logits, keep the relation graphs fixed, and rerun relaxation. This tests small numerical/evidence perturbations, not independent observations or resistance to all distribution shifts. The unrelaxed ablation uses the same perturbation draws.
 
-The audit API accepts a separate verifier and emits candidate, rejected, or revoked provenance records. The representative example uses the simulator's hidden labels as an oracle solely to demonstrate this interface. That oracle is not available to a real grounding system and is not used for fitting or selection. The anchor_logits helper can add a bounded logit bonus to audited pairs in both directions, starting each round from fresh base evidence. Revoking a pair removes its bonus on the next fresh rebuild; conflicting one-to-one anchors are rejected. Sharing anchors couples the views, so subsequent agreement is not fresh independent confirmation. This release does not feed pseudo-labels back automatically, benchmark multiple anchor-growth rounds, or guarantee an independent real-world verifier.
+The audit API accepts a separate verifier and emits candidate, rejected, or revoked provenance records. The representative example uses the simulator's hidden labels as an oracle solely to demonstrate this interface. That oracle is not available to a real grounding system and is not used for fitting or selection. The anchor_logits helper can add a bounded logit bonus to audited pairs in both directions, starting each round from fresh base evidence. Revoking a pair removes its bonus on the next fresh rebuild; conflicting one-to-one anchors are rejected. Sharing anchors couples the views, so subsequent agreement is not fresh independent confirmation. The original study does not feed pseudo-labels back automatically, benchmark multiple anchor-growth rounds, or guarantee an independent real-world verifier. The recursive supplement adds a separately benchmarked representation-refinement loop.
 
 Mutual unique winners imply that no two accepted things share one word, and no accepted thing has two words. This is an acceptance restriction, not a learned general semantic principle. A stable, confident wrong permutation satisfies every reciprocal test: agreement cannot by itself establish correctness.
 
@@ -111,7 +111,7 @@ This follows by separating agreement into both-correct and same-wrong-label even
 
 Run the experiment, plots, and report builders from the repository root. JSON stores parameters, seed ranges, thresholds, raw strengths for one example, base convergence diagnostics, environment versions, and SHA256 hashes of the engine and experiment script. CSV contains all 800 held-out seed/method/condition count rows. Reproducing on a different numerical runtime may change last-bit values and threshold-boundary outcomes. No claim of measurement outside the synthetic generator is made.
 
-Limitations include a small synthetic benchmark, a strong unique-instance matching assumption, fixed dimensionality and noise scales, a coarse threshold grid, no external semantic dataset, no independent real-world verifier, no learning of relation graphs, no proof of convergence or calibrated confidence, and no multi-round anchor-feedback benchmark. Computational cost is increased by fitting two views and three perturbations of each. Dense graph products scale roughly as O(n^2*m+n*m^2) per update, with O(n^2+m^2+n*m) storage per direction; sparse graphs are future work. The separate four-index engine is not allocated here.
+Limitations of this original study include a small synthetic benchmark, a strong unique-instance matching assumption, fixed dimensionality and noise scales, a coarse threshold grid, no external semantic dataset, no independent real-world verifier, no learning of relation graphs, no proof of convergence or calibrated confidence, and no multi-round anchor-feedback benchmark. Computational cost is increased by fitting two views and three perturbations of each. Dense graph products scale roughly as O(n^2*m+n*m^2) per update, with O(n^2+m^2+n*m) storage per direction; sparse graphs are future work. The separate four-index engine is not allocated here.
 
 ### 8. Relationship to prior work and next experiments
 
@@ -127,6 +127,8 @@ Next experiments should use real referring expressions and physical observations
 
 [3] Y. Geifman and R. El-Yaniv. Selective Classification for Deep Neural Networks. NeurIPS, 2017. https://papers.neurips.cc/paper_files/paper/2017/hash/4a8423d5e91fda00bb7e46540e2b0cf1-Abstract.html
 '''
+if (ROOT/'RECURSION.md').exists():
+    text += '\n\n' + (ROOT/'RECURSION.md').read_text()
 (ROOT/'WHITEPAPER.md').write_text(text)
 styles=getSampleStyleSheet();styles['BodyText'].fontSize=9;styles['BodyText'].leading=13;styles['BodyText'].spaceAfter=8
 styles['Code'].fontSize=8;styles['Code'].leading=11;styles['Title'].fontSize=25;styles['Heading2'].spaceBefore=15

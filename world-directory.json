@@ -2,7 +2,7 @@
   {
     "href": "reciprocal-grounding/",
     "title": "Reciprocal Grounding · Things ↔ Words",
-    "description": "Two-way relaxation labeling with explicit unknowns, synthetic benchmarks, interactive strength fields, and a reproducible white paper.",
+    "description": "Recursive two-way labeling with identity anchoring, validation rollback, explicit unknowns, reproducible benchmarks, and interactive depth controls.",
     "category": "Science & Tools"
   },
   {

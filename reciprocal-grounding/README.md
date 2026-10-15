@@ -87,3 +87,43 @@ multi-round anchor growth, or provide a validated external verification system.
 Original work is covered by the parent portfolio's MIRL license. It is
 source-available; this folder does not claim an OSI open-source license or
 inherit the separate Virtual Earth MIT exception. See `../LICENSING.md`.
+
+## Recursive representation refinement (v2)
+
+`hrl.recursive_grounding` adds a finite recurrent hierarchy:
+observation leaves → thing/name states → reciprocal relations → state updates.
+Both thing and name coordinates can change. The physical referents do not.
+
+Explicit anti-overfitting controls include fixed robust training identity
+centers, bounded displacement, damped updates, two-round persistence before
+cross-feedback, unknown labels, a finite round budget, measurement-validation
+checkpoint selection, early stopping and rollback. These are implemented and
+tested controls, not a guarantee against overfitting. Later coupled agreement
+is not new independent evidence.
+
+The new study uses five training, three checkpoint-validation, and three sealed
+test measurements per identity and view. It evaluates fresh observations of the
+same identities, not unseen categories. Global threshold-calibration seeds
+0–19 remain disjoint from test seeds 100–139. The robust self-only baseline uses
+the same five training measurements without recursive cross-feedback.
+
+```sh
+python3 -m pytest tests/test_recursive_grounding.py tests/test_reciprocal.py tests/test_core.py -q
+OPENBLAS_NUM_THREADS=1 python3 reciprocal-grounding/recursive_experiment.py
+python3 reciprocal-grounding/build_recursion.py
+python3 reciprocal-grounding/build_report.py
+```
+
+Read `RECURSION.md`, `data/recursive-results.json` and
+`data/recursive-runs.csv`. The main PDF includes this supplement. Interactive
+recursive-depth controls inspect recorded seed-100 checkpoints; they do not
+rerun fitting. Three new figure pairs show outcomes, checkpoint histories, and
+thing/name coordinate changes.
+
+Guarded recursion achieves 99.33% accepted accuracy at 55.62% coverage on its
+independent-observation study (442 correct / 445 accepts). Robust self-only
+achieves 99.50% at 50.25% coverage (400 / 402). Both use fresh test queries.
+These are different operating points on a different dataset from v1. Guard
+ablations remain competitive, and a shared wrong dictionary still yields zero
+correct reciprocal accepts. This study does not prove a universal advantage
+for the safeguards or semantic truth from recursive agreement.
