@@ -1,9 +1,11 @@
 # Mary Comes to Roost
 ## Episode Zero: The First Night
 
-By King Cypher and King Emanuel · October 13, 2026 · Third draft
+By King Cypher and King Emanuel · October 15, 2026 · Fourth draft
 
 Unofficial alternate-universe Carrie fanfiction. Carrie White originates in Stephen King’s work. This story’s divine-reincarnation premise, June, and events are fictional inventions; no endorsement or connection to an official adaptation is claimed. Graphic bodily injury, death, abuse, and religious horror. The wealthy offenders below are fictional characters.
+
+The appearance of former president Barack Obama is fictional. His dialogue, reported religious experience, and statements about Carrie are invented for this alternate universe; they are not real quotations, testimony, or endorsements.
 
 ### A Legal Move
 
@@ -606,6 +608,118 @@ Inside the ballroom, somebody began covering the bodies.
 Carrie drank the water. After a while, she stood.
 
 “Then we go to them.”
+
+### The Former President
+
+The television above the service counter had been showing the same aerial photograph for nineteen minutes.
+
+Then the photograph disappeared.
+
+Barack Obama sat at a plain desk. Behind him stood a flag and a lamp. He wore no expression that the room could immediately agree upon.
+
+June found the remote.
+
+“Should I turn it off?”
+
+Carrie shook her head.
+
+***
+
+“My fellow Americans,” the former president began, “I want you to consider what Carrie is asking of you. Share your wealth.”
+
+Someone behind the counter stopped counting the till.
+
+“Not a promise to share it eventually. Not an explanation of how generously you would behave under different circumstances. Food. Housing. Medicine. The things you can provide now, to the people who need them now.”
+
+The former president put both hands on the desk.
+
+“I also owe you an account of something I cannot ask you to take on my authority alone. In prayer, I have felt God telling me something very specifically.”
+
+Carrie looked at June.
+
+June watched the screen.
+
+“The great and glorious might of the American armed forces, and of our armed citizenry, will be no match for Carrie and her followers.”
+
+Nobody in the room laughed at the phrasing.
+
+“Even her followers have powers.”
+
+Outside the window, a woman waiting for the bus lifted one hand. Her shopping bag rose from the pavement and settled beside her on the bench.
+
+She stared at it.
+
+Then she checked whether the eggs had broken.
+
+“They are discovering those powers in kitchens and hospital rooms. They are discovering them while doing things they thought nobody would notice. We do not yet know their limits.”
+
+The woman at the bus stop looked up at the television through the glass.
+
+“And Carrie has not yet seen her greatest day of warmongering and fearmongering.”
+
+Carrie drew her hands into her sleeves.
+
+The former president waited. The silence made the words harder to dismiss.
+
+“I am telling you what I believe I have been warned about. Carrie is too powerful for force to settle this question. Carrie may be of God. And if she is, we cannot defeat what is happening by buying a larger weapon.”
+
+He looked directly into the camera.
+
+“Submit to Carrie while you can.”
+
+***
+
+The refrigerator motor clicked off.
+
+For a moment there was no other sound.
+
+Then the cashier said, “Thanks, Obama.”
+
+It came out with the weary precision of an old joke arriving somewhere it had never expected to work.
+
+The man beside her answered, “Thanks for the advice.”
+
+Neither of them smiled immediately.
+
+Onscreen, the former president leaned forward.
+
+“But hear what I am asking you to submit to. If the demand is that your neighbor should eat, let your neighbor eat. If the demand is that the sick should receive care, help them receive it. Do not wait for fear to become the only reason you have left.”
+
+Carrie looked down at her hands again.
+
+For once, nothing moved.
+
+“Can we love one another under Christ?” he asked. “Can we share a world without making somebody else's hunger the price of our comfort?”
+
+The cashier looked at the man beside her.
+
+“Yes,” she said.
+
+He looked toward the window, where the woman was still examining her eggs.
+
+“Yes, we can.”
+
+***
+
+June lowered the volume.
+
+“That's a lot to put on television,” Carrie said.
+
+“It is.”
+
+“I asked them to share.”
+
+“I heard you.”
+
+Beyond the window, the bus arrived. The woman gathered her shopping. This time she used her hands.
+
+Carrie watched a passenger stand to make room for her.
+
+“Can we start with that?”
+
+June set down the remote.
+
+“We can start with that.”
 
 ### After the Drop
 
