@@ -1,0 +1,30 @@
+{
+  "verification": "Numerically reproduced from supplied source; generating features supplied, not discovered",
+  "seed": 20261015,
+  "components": "independent binary -1/+1",
+  "observations": 12000,
+  "train": 9000,
+  "test": 3000,
+  "noise_variance": 0.09,
+  "source_sha256": "574581d65e781540bfd16a78af9ecc39703d7e19f2322d2585a11251c35d46d8",
+  "results": [
+    {
+      "method": "Additive",
+      "mse": 4.752475523960223,
+      "r2": 0.0228122581723732,
+      "explained_variance": 0.023995421355115676
+    },
+    {
+      "method": "Fixed pair averages",
+      "mse": 4.747775420923865,
+      "r2": 0.0237786772626557,
+      "explained_variance": 0.025029328334078116
+    },
+    {
+      "method": "Supplied relational features",
+      "mse": 0.089684412633467,
+      "r2": 0.981559398209082,
+      "explained_variance": 0.9815634998787593
+    }
+  ]
+}

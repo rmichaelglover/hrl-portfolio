@@ -1349,19 +1349,34 @@
       }
     }
   },
-  "reported_001": {
-    "verification": "User-supplied summary; source code and a_j coefficients not provided in workspace. Not independently reproduced here.",
+  "experiment_001": {
+    "verification": "Numerically reproduced from supplied source; generating features supplied, not discovered",
+    "seed": 20261015,
+    "components": "independent binary -1/+1",
     "observations": 12000,
-    "held_out": 3000,
-    "mse": {
-      "Additive": 4.75248,
-      "Ordinary coarse-graining": 4.74778,
-      "Relational + meta-interaction": 0.08968
-    },
-    "explained_variance": [
-      0.023,
-      0.024,
-      0.982
+    "train": 9000,
+    "test": 3000,
+    "noise_variance": 0.09,
+    "source_sha256": "574581d65e781540bfd16a78af9ecc39703d7e19f2322d2585a11251c35d46d8",
+    "results": [
+      {
+        "method": "Additive",
+        "mse": 4.752475523960223,
+        "r2": 0.0228122581723732,
+        "explained_variance": 0.023995421355115676
+      },
+      {
+        "method": "Fixed pair averages",
+        "mse": 4.747775420923865,
+        "r2": 0.0237786772626557,
+        "explained_variance": 0.025029328334078116
+      },
+      {
+        "method": "Supplied relational features",
+        "mse": 0.089684412633467,
+        "r2": 0.981559398209082,
+        "explained_variance": 0.9815634998787593
+      }
     ]
   },
   "software": {
@@ -1370,7 +1385,9 @@
   },
   "source_sha256": {
     "hrl/meta_discovery.py": "95ebb9d8c0aaac5666b9dc26efb318bfa1070d30cf692f8a72a4c342d1595470",
-    "meta-renormalization/experiment.py": "9e97329cb63d0b9b5c02b15addde39d195a0cf3bef116a3ac3ecf8383199a4c7"
+    "meta-renormalization/experiment.py": "929ed018b9f159cbb625ea012ca7f6f71f5e4bf164aae6014f543aacc74d5d8c",
+    "meta-renormalization/reproduce_001.py": "5c9bfd330f17699b7674518c8a0fadbe743690b8061f6ecdadcdb7bc7f3f77a6",
+    "meta-renormalization/meta_renormalization_experiment.py": "574581d65e781540bfd16a78af9ecc39703d7e19f2322d2585a11251c35d46d8"
   },
-  "runtime_seconds": 9.514
+  "runtime_seconds": 9.29
 }

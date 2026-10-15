@@ -5,10 +5,13 @@ raw components, active/inactive hypotheses exchange bounded support, and
 selected disjoint pair objects can promote canonical fourth-order features.
 Generating supports and coefficients are hidden from the learner.
 
-Experiment 001's reported values are retained as a user-supplied reference in
-results JSON. Its source code and a_j coefficients were not available in the
-workspace, so those exact numbers have not been independently reproduced here.
-Experiment 002 uses a new, fully specified seeded generator.
+Experiment 001's original supplied source is preserved byte-for-byte as
+`meta_renormalization_experiment.py`. Its exact seed, binary input generator,
+shuffled split and matched features are numerically reproduced by
+`reproduce_001.py`, which avoids the original fixed `/mnt/data` plot path.
+The original code reports **R²**, although the supplied summary called it
+explained variance. Both are recorded in the reproduction artifact. Experiment
+002 uses a distinct continuous-input generator and randomized hidden supports.
 
 ## Reproduce
 
@@ -17,6 +20,7 @@ pytest available. The inference runtime only requires NumPy.
 
 ```sh
 python3 -m pytest tests/test_meta_discovery.py -q
+python3 meta-renormalization/reproduce_001.py
 OPENBLAS_NUM_THREADS=1 python3 meta-renormalization/experiment.py
 python3 meta-renormalization/build_report.py
 python3 -m http.server 8796
@@ -60,7 +64,7 @@ projection, not a complete renormalization-group baseline.
 - `../hrl/meta_discovery.py`: reusable learner and prediction object.
 - `experiment.py`: actual generator, execution and held-out evaluation.
 - `build_report.py`: PNG/PDF figures, Markdown paper and standalone report PDF.
-- `figures/`: three scientific figure pairs.
+- `figures/`: four scientific figure pairs.
 - `data/`: all measured counts, per-seed metrics and example histories.
 
 Original work follows the parent portfolio's MIRL license. This is

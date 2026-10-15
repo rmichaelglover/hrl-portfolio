@@ -20,6 +20,15 @@ def save(fig,name):
     for ext in ['png','pdf']:fig.savefig(ROOT/f'figures/{name}.{ext}',bbox_inches='tight')
     plt.close(fig)
 def pct(x):return f'{100*x:.2f}%'
+reference=D['experiment_001']['results']
+fig,axes=plt.subplots(1,2,figsize=(10,4.2),layout='constrained')
+for ax,key,title in zip(axes,['r2','mse'],['Held-out R-squared','Held-out mean squared error']):
+    values=[r[key] for r in reference];ax.bar(range(3),values,color=[COLORS[0],COLORS[1],COLORS[2]]);ax.set_xticks(range(3),['Additive','Pair averages','Supplied relations']);ax.set_title(title)
+    if key=='r2':ax.set_ylim(0,1.1)
+    else:ax.set_yscale('log');ax.axhline(.09,color='#333',ls='--')
+    for i,value in enumerate(values):ax.text(i,value+.025 if key=='r2' else value*1.12,f'{value:.3%}' if key=='r2' else f'{value:.5f}',ha='center',fontsize=9)
+fig.suptitle('Experiment 001 · exact supplied-source reproduction\nBinary components, seed 20261015, 9,000 training and 3,000 held-out observations')
+save(fig,'experiment001-reproduction')
 fig,axes=plt.subplots(2,2,figsize=(11,8),layout='constrained')
 for ax,scenario in zip(axes.flat,D['scenarios']):
     rows=[row(scenario,m) for m in D['methods']];v=np.array([r['explained_variance'] for r in rows]);ci=np.array([r['explained_variance_ci95'] for r in rows]);ax.bar(range(5),v,color=COLORS);ax.errorbar(range(5),v,yerr=[v-ci[:,0],ci[:,1]-v],fmt='none',ecolor='#293441',capsize=3);ax.set_ylim(0,1.1);ax.set_title(scenario);ax.set_ylabel('Held-out explained variance');ax.set_xticks(range(5),['Additive','Pair\naverages','Relaxed\nhierarchy','No-relax\nhierarchy','Exhaustive\npolynomial'],fontsize=8)
@@ -54,7 +63,9 @@ Experiment 001 supplied a relational model with interaction features matched to 
 
 ### 1. Provenance of Experiment 001
 
-The supplied Experiment 001 summary described eight components and 12,000 observations, reporting 9,000 training and 3,000 test observations, additive/coarse/relational explained variance of 2.3%, 2.4%, and 98.2%, and MSE 4.75248, 4.74778, and 0.08968. Its source file and coefficients a_j were not available in the workspace. Those are reported reference values, not an independently reproduced run here. The new generator below is fully specified, seeded, executed, and published. Its different coefficients and random supports mean its metrics should not numerically equal Experiment 001.
+The supplied Experiment 001 source was recovered and numerically reproduced. It uses seed 20261015, eight independent binary -1/+1 components, pair coefficients 1.1, 0.95, 1.0 and 0.85, meta coefficient 0.9, and Gaussian noise standard deviation 0.3. A shuffled split gives 9,000 training and 3,000 held-out observations. Reproduced MSE values are 4.75248, 4.74778 and 0.08968. The original script reports R-squared (2.281%, 2.378% and 98.156%), although the supplied summary called this explained variance. Both distinct metrics are included in the new reproduction artifact. The original file is preserved byte-for-byte; a portable runner avoids its fixed /mnt/data plot path. Experiment 002 uses continuous Gaussian inputs, randomized coefficients and randomized supports, so it is a different system family and not a like-for-like numerical comparison.
+
+![Experiment 001 reproduced from supplied source](figures/experiment001-reproduction.png)
 
 The important lesson of the first report is preserved: representing interactions known to generate the target can produce a large gain over additive summaries. That alone does not demonstrate autonomous discovery, a learned compatibility function, or an iterative relaxation process.
 
@@ -166,4 +177,4 @@ while i<len(lines):
 def footer(canvas,doc):
     canvas.saveState();canvas.setFont('Helvetica',8);canvas.drawString(44,26,'Meta-Renormalization | Experiment 002 | Synthetic observations');canvas.drawRightString(568,26,str(doc.page));canvas.restoreState()
 SimpleDocTemplate(str(ROOT/'WHITEPAPER.pdf'),pagesize=(612,792),leftMargin=44,rightMargin=44,topMargin=40,bottomMargin=44,title='Meta-Renormalization: Experiment 002',author='R. Michael Glover').build(story,onFirstPage=footer,onLaterPages=footer)
-print('Built three figure pairs, Markdown paper, and PDF.')
+print('Built four figure pairs, Markdown paper, and PDF.')

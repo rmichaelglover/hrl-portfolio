@@ -12,6 +12,7 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from hrl.meta_discovery import discover,features,fit_linear
+from reproduce_001 import reproduce
 OUT=Path(__file__).resolve().parent
 METHODS=['Additive','Fixed pair averages','Hierarchical relaxation','Hierarchy without relaxation','Exhaustive polynomial']
 SCENARIOS=['Pair-supported hierarchy','Hidden fourth order','Correlated inputs','Additive control']
@@ -81,9 +82,9 @@ def main():
             'polynomial_baseline':'all square-free monomials through degree 4, 162 features plus intercept',
             'selection':{'max_interactions':12,'gain_fraction':.002,'active_strength_minimum':.8,'refit_on_all_9000':True},
             'scenarios':SCENARIOS,'methods':METHODS,'results':results,'examples':examples,
-            'reported_001':{'verification':'User-supplied summary; source code and a_j coefficients not provided in workspace. Not independently reproduced here.','observations':12000,'held_out':3000,'mse':{'Additive':4.75248,'Ordinary coarse-graining':4.74778,'Relational + meta-interaction':.08968},'explained_variance':[.023,.024,.982]},
+            'experiment_001':reproduce(),
             'software':{'python':platform.python_version(),'numpy':np.__version__},
-            'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'hrl/meta_discovery.py',Path(__file__).resolve()]},
+            'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'hrl/meta_discovery.py',Path(__file__).resolve(),OUT/'reproduce_001.py',OUT/'meta_renormalization_experiment.py']},
             'runtime_seconds':round(time.perf_counter()-start,3)}
     (OUT/'data/results.json').write_text(json.dumps(output,indent=2,allow_nan=False)+'\n')
     with (OUT/'data/runs.csv').open('w') as f:

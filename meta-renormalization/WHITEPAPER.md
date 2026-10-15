@@ -9,7 +9,9 @@ Experiment 001 supplied a relational model with interaction features matched to 
 
 ### 1. Provenance of Experiment 001
 
-The supplied Experiment 001 summary described eight components and 12,000 observations, reporting 9,000 training and 3,000 test observations, additive/coarse/relational explained variance of 2.3%, 2.4%, and 98.2%, and MSE 4.75248, 4.74778, and 0.08968. Its source file and coefficients a_j were not available in the workspace. Those are reported reference values, not an independently reproduced run here. The new generator below is fully specified, seeded, executed, and published. Its different coefficients and random supports mean its metrics should not numerically equal Experiment 001.
+The supplied Experiment 001 source was recovered and numerically reproduced. It uses seed 20261015, eight independent binary -1/+1 components, pair coefficients 1.1, 0.95, 1.0 and 0.85, meta coefficient 0.9, and Gaussian noise standard deviation 0.3. A shuffled split gives 9,000 training and 3,000 held-out observations. Reproduced MSE values are 4.75248, 4.74778 and 0.08968. The original script reports R-squared (2.281%, 2.378% and 98.156%), although the supplied summary called this explained variance. Both distinct metrics are included in the new reproduction artifact. The original file is preserved byte-for-byte; a portable runner avoids its fixed /mnt/data plot path. Experiment 002 uses continuous Gaussian inputs, randomized coefficients and randomized supports, so it is a different system family and not a like-for-like numerical comparison.
+
+![Experiment 001 reproduced from supplied source](figures/experiment001-reproduction.png)
 
 The important lesson of the first report is preserved: representing interactions known to generate the target can produce a large gain over additive summaries. That alone does not demonstrate autonomous discovery, a learned compatibility function, or an iterative relaxation process.
 
