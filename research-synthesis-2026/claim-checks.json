@@ -1,0 +1,95 @@
+{
+  "scope": "Selected key numerical claims checked against source JSON or exact source-report values; not a rerun of scientific benchmarks.",
+  "checks": [
+    {
+      "claim": "Wearable aggregate: 23 subjects and 85.2% mean accuracy",
+      "passed": true,
+      "source": "S10"
+    },
+    {
+      "claim": "Initial chess search remains unresolved at depth three",
+      "passed": true,
+      "source": "S28"
+    },
+    {
+      "claim": "Three accepted small chess certificates",
+      "passed": true,
+      "source": "S28"
+    },
+    {
+      "claim": "Relaxfish exact agreement test p=.125",
+      "passed": true,
+      "source": "S24"
+    },
+    {
+      "claim": "Anchored graph absorption comparison",
+      "passed": true,
+      "source": "S33"
+    },
+    {
+      "claim": "Nineteen checked GHZ circuits with 20-qubit payload comparison",
+      "passed": true,
+      "source": "S37"
+    },
+    {
+      "claim": "Economic snapshot: 150 nonmissing and 30 missing",
+      "passed": true,
+      "source": "S19"
+    },
+    {
+      "claim": "Recorded full rolling games: 65 and 161 plies",
+      "passed": true,
+      "source": "S30/S32"
+    },
+    {
+      "claim": "SDSS algorithmic partition totals 25,000",
+      "passed": true,
+      "source": "S47"
+    },
+    {
+      "claim": "Connectome partition has lower modularity than recorded comparator",
+      "passed": true,
+      "source": "S48"
+    },
+    {
+      "claim": "RAR display source coverage",
+      "passed": true,
+      "source": "S49"
+    },
+    {
+      "claim": "100,000-node actual sparse operators versus hypothetical dense bytes",
+      "passed": true,
+      "source": "S02"
+    },
+    {
+      "claim": "Principal discovery gain cannot be attributed to relaxation",
+      "passed": true,
+      "source": "S08"
+    },
+    {
+      "claim": "Reciprocal JSON match counts and shared-error failure",
+      "passed": true,
+      "source": "S07"
+    },
+    {
+      "claim": "Reciprocal match counts and shared-error counterexample",
+      "passed": true,
+      "source": "S07"
+    },
+    {
+      "claim": "Discovery principal and failure results retained",
+      "passed": true,
+      "source": "S08"
+    },
+    {
+      "claim": "Cybersecurity pooling remains stronger than HRL in the pilot",
+      "passed": true,
+      "source": "S16"
+    },
+    {
+      "claim": "CRISPR split metrics and infeasible exposure thresholds preserved",
+      "passed": true,
+      "source": "S14/S15"
+    }
+  ]
+}

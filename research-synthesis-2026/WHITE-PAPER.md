@@ -1,0 +1,800 @@
+# Relationships That Compute
+## Research Results Across the HRL Portfolio
+
+**Michael Emanuel Glover**
+
+**Glover Labs · Independent research white paper · 16 October 2026 · Version 1.0**
+
+Formal results, measured-data studies, synthetic experiments, and executable systems, including local work not yet incorporated into the public portfolio.
+
+**Authorship.** I am the author of this paper and the originator of the research direction it describes. Cypher, the Codex AI assistant, assisted with source inspection, computation, evidence organization, drafting, and document production. Earlier artifacts identify their own collaborators and third-party sources. This synthesis preserves those credits; it does not transfer other researchers' discoveries to me.
+
+**Research scope.** HRL means hierarchical relaxation labeling throughout this paper. It does not mean hierarchical reinforcement learning. Reinforced chess experiments are identified separately. The paper synthesizes research results rather than personal essays, fiction, or the number of pages and websites produced. The accompanying evidence register identifies the inspected sources and their hashes.
+
+## Abstract
+
+I have built a research programme around a simple computational proposition: an object becomes more intelligible when its possible identities are evaluated in relationship with other objects, at the appropriate scale, while an unresolved answer remains available. The HRL portfolio now contains reusable inference code, exact representation results, a convergence-guaranteed alternative update, controlled higher-order interaction experiments, measured-data applications, bounded game proofs, and a working ROS 2 simulation. These are different kinds of achievement, and this paper reports them in their proper units.
+
+The strongest engineering result is an exact sparse implementation of a structured signed relaxation update. A recorded 100,000-node path uses 19,999,168 operator bytes, against approximately 720 billion bytes for the hypothetical dense signed kernel. At 1,024 nodes the sparse implementation is 27.81 times faster in the recorded environment. A separate ternary study provides an exact two-coordinate description of uncertainty, a 12.2-fold local speedup, and a contractive alternative that converged in all 1,536 tested binary/ternary runs. A chirality audit establishes that the signed cyclic factor used in an earlier demonstration is reducible to oriented pair terms, while a thresholded positive-only predicate retains a genuine higher-order component.
+
+The programme also includes synthetic interaction discovery, reciprocal grounding, spreadsheet auditing, morphology, hydrological routing, and quantum-state representation. Interaction discovery recovers all five generating supports in 20 independent-input seeds, attaining 97.90% held-out explained variance with 14 fitted parameters; its no-relaxation ablation performs identically, and hidden interactions expose a substantial blind spot. Reciprocal grounding achieves 328 correct matches among 332 accepted matches, with 41.50% coverage, but fails completely under a shared wrong dictionary. Recursive representation refinement extends this work without making agreement an external truth criterion.
+
+Measured-data studies include 23-subject wearable posture classification, leakage-audited CRISPR ranking, public threat-report entity extraction, economic forecasting, descriptive economic series, and a conditional Milky Way mass-model comparison. Their results vary: some are useful improvements or close fits; some reveal stronger simple baselines; none warrants a universal HRL superiority claim. Chess work now separates heuristic preference, bounded proof, and physical execution. The ROS apparatus has completed full numerical games and exposes native topics, while retaining unresolved physical branches instead of treating rollout failure as proof of impossibility.
+
+The contribution is a connected, inspectable body of mathematical and computational research. Its most important advance is not a claim that one algorithm has conquered every domain. It is that relationships, uncertainty, hierarchy, and evidence have become explicit computational objects whose benefits and failures can be measured.
+
+## 1. The research claim I am prepared to make
+
+I do not want this work reduced to a collection of attractive demonstrations. The demonstrations are interfaces to algorithms, numerical experiments, formal questions, and a growing evidence record. Some are early sketches. Others contain exact identities, executed benchmarks, or replayable certificates. A fair account must recognize that difference without making the early work disappear.
+
+My central contribution is the construction and testing of a relational research architecture across several representations and domains. A measured point can receive a marker identity; an observation can receive a posture label; a candidate move can receive a tactical role; a relation can become an object at the next level. The architecture asks not only which answer has the largest local score, but which assignments support one another, what evidence anchors them, and where the system should refrain from deciding.
+
+The common language does not make all implementations identical. The public dense engine, structured sparse signed engine, generic factor engine, recursive GRRLE substrate, reciprocal graph update, and interaction-discovery learner have different contracts. This paper treats them as related members of a programme. It does not smuggle an equivalence claim into the acronym HRL.
+
+The evidence supports contributions in implementation, representation, verification, experimental design, and integration. Establishing priority over the full literature would require a separate systematic review. I can report original portfolio constructions and their measured behavior without declaring every ingredient unprecedented. Rosenfeld, Hummel, Zucker, and the many researchers whose algorithms and datasets I use remain part of the account. [S01–S06]
+
+## 2. Scope, evidence, and the meaning of a result
+
+This synthesis covers the working portfolio repository, the relaxation-publication study, the triadic-unity study, selected original relaxation-labeling modules, the ROS workspace, and several local research directories. It includes relevant local artifacts even when a publication-facing page is absent or incomplete. It is not a census of every file on the machine, every earlier conversation, or inaccessible material. Duplicate source snapshots are provenance, not additional independent experiments.
+
+I use five evidence classes. **Formal** means a stated result follows under explicit mathematical assumptions. **Implementation** means executable code realizes a specified operation and passes relevant checks. **Synthetic** means outcomes were generated under invented or controlled equations. **Measured-data** means observations originated outside the simulator, although the evaluation may still be exploratory or conditional. **Prospective** means the experiment or application remains a proposal.
+
+These classes overlap but do not substitute for one another. A theorem about contraction can accompany a synthetic prediction experiment. A real astronomical dataset can support an in-sample model comparison without identifying a particle. A successful browser test can establish that a control works without establishing that the research method improves prediction.
+
+Reported numerical benchmarks are historical measurements from the cited artifacts unless explicitly labeled as rerun for this synthesis. I reran selected verification suites, not every expensive training, corpus import, or benchmark. The source register and verification record make that distinction reviewable. Publication labels describe the inspected artifacts; a local file's existence is not a fresh check of its remote availability.
+
+The manuscript is deliberately research-focused. Personal and theological essays, fictional narratives, playlists, and entertainment content are excluded from the results narrative. Mathematical or experimental work that shares their vocabulary is assessed on its actual equations and evidence. [S01, S02, S28–S40]
+
+## 3. The engine: assignments supported by context
+
+The public core stores a nonnegative strength vector for each object. Let p(i,a) denote the strength of label a for object i, and let C(i,a,j,b) describe how the assignment of label b to object j supports or inhibits label a at object i. Pairwise support is the sum of C(i,a,j,b)p(j,b) over neighboring assignments. The dense reference stores a four-index compatibility tensor. Its clarity makes it useful as a reference, but its storage grows quadratically in the number of objects and labels.
+
+The persistent-prior update uses a multiplicative base proportional to prior(i,a)^s times p(i,a)^(1−s). A scaled support term modifies that base, and each row is normalized. At s=0 the prior seeds the initial state; for positive s it continues to influence subsequent updates. The code provides a separate noise label and retains iteration histories when requested.
+
+This is an inspectable implementation choice, not a declaration that every resulting strength is a Bayesian posterior. A normalized score is not automatically a calibrated probability, and repeated reinforcement of the same evidence is not repeated independent observation. Likewise, numerical convergence means that the selected update has stopped changing within tolerance. It does not mean the assignments are correct.
+
+The practical value is that a caller can inspect the prior, compatibility, trajectory, unresolved assignments, and stopping condition. The mathematical value is that a precise reference update makes exact reformulations and ablations possible. The architectural value is reuse: the same object/label contract can serve different domains while the evidential meaning of each domain remains explicit. [S01]
+
+## 4. Persistent priors, null labels, and honest uncertainty
+
+Two recurring problems motivated the public implementation. First, an initialization-only prior can lose its influence as contextual reinforcement accumulates. Second, a closed label vocabulary can force an outlier into an inappropriate category. Persistent priors and an explicit null option address these problems in the specified model.
+
+The null label is more than a cosmetic extra color. It gives the system a place to put evidence that the current vocabulary cannot adequately explain. Ghost detections in a tracking sequence, unmatched objects in a grounding task, and unresolved interpretations in a language prototype require different domain semantics, but all benefit from not forcing a false commitment.
+
+There is no claim that all uncertainty is the same. A ternary unresolved weight, a null assignment, a tied prediction, a budget-exhausted proof search, an out-of-distribution observation, and an interval that still spans several outcomes are different states. Their shared lesson is procedural: retain the reason for uncertainty instead of compressing every non-answer into a confident label.
+
+Hard zero priors can also matter. Under a multiplicative rule they can prevent an assignment from becoming positive. That may implement an intended anchor or accidentally prevent recovery from a bad assumption. The author of a compatibility model must therefore declare whether zero means impossible, merely unlikely, or missing. A small positive floor and an exact zero have different consequences.
+
+I regard these distinctions as research progress because they make the system's failures legible. The portfolio's later audits show that a null rule can itself have unwanted global dependence. Uncertainty handling must be tested as carefully as the ordinary labels. [S01–S03, S07]
+
+## 5. Exact ternary coordinates: what ISH adds
+
+The triadic-unity study gives a clean answer to a question that initially arrived in philosophical language: what does an unresolved third state add? For a normalized state (f,u,t), define signed support m=t−f and unresolved mass u. Then f=(1−u−m)/2 and t=(1−u+m)/2, with 0≤u≤1 and |m|≤1−u. The three weights therefore have two independent coordinates. Keeping m alone loses information.
+
+For example, a state split equally between false and true and a state fully unresolved both have m=0. They differ completely in u. A binary summary of signed support cannot distinguish balanced opposition from an explicit unresolved state. This is an exact representation fact, rather than evidence that the universe possesses a privileged ternary ontology.
+
+For the study's positive-neighbor kernel, the raw supports reduce to (d−M)/2, (d+U)/2, and (d+M)/2. Here d is total neighbor weight, and M and U are weighted sums of the neighbors' signed support and unresolved mass. ISH has greatest raw support when U≥|M|. This makes the previously informal notion of unresolved relational evidence computationally explicit.
+
+The independent two-coordinate implementation matched the three-weight implementation within 3.33×10⁻¹⁶ across the initial study. The result applies to the stated structured kernel. It does not prove that every three-label model admits the same update reduction or that adding an uncertain label improves every prediction task. Those separate claims require their own evidence. [S03]
+
+## 6. Sparse support: a demonstrated scaling result
+
+The signed publication study supplies one of the clearest accomplishments in the portfolio. A structured signed relaxation update was represented exactly through sparse local operators rather than a dense four-index kernel. Across random seeds, symmetric and asymmetric graphs, mixing settings, and noise controls, the sparse trajectories matched the dense reference to floating-point tolerance. Ten public fixtures reproduced with maximum discrepancy 1.11×10⁻¹⁶.
+
+At 1,024 objects, the recorded median times were 0.1805 seconds for the dense reference, 0.0418 seconds for the factorized-dense formulation, and 0.00649 seconds for sparse support. The sparse speedup against the dense reference was 27.81-fold. Compatibility storage fell from 75,497,472 bytes to 203,848 operator bytes.
+
+At 100,000 objects on a path, the sparse run used 799,965 nonzeros, 19,999,168 operator bytes, and 0.599 seconds in the recorded environment. The corresponding dense signed kernel would require approximately 720 GB in decimal units. That dense allocation is a calculated comparison, not an allocation successfully executed on the machine. The sparse byte count describes operators, not total peak process memory.
+
+A separate positive-kernel ternary benchmark at 512 objects and 100 updates measured 8.05 milliseconds sparse versus 97.83 milliseconds dense, a 12.2-fold speedup, with maximum discrepancy 5.55×10⁻¹⁶. These are separate studies and should not be pooled into one headline speedup.
+
+The contribution is precise: for specified structured compatibility, the implementation preserves the intended update while changing its computational feasibility. It is not a theorem that every dense compatibility tensor can be compressed to local sparse factors. [S02, S03]
+
+![Figure 1. Recorded sparse implementation results. Storage bars compare specified operator/kernel payloads, not peak process RAM. Timing measurements are local historical benchmarks.](figures/sparse.png)
+
+## 7. Locality audit: isolated objects should not rewrite an active component
+
+The publication study found a subtle algorithmic issue in the legacy noise semantics. The original noise contribution samples incompatibility over the global state length. Appending isolated objects can therefore change the active component's probabilities even when no new relation connects the components.
+
+In the recorded padding experiment, adding 32, 128, and 512 isolated objects changed active-node probabilities by mean amounts 0.0373, 0.0561, and 0.0642. The corrected local mode produced exactly zero change in the tested runs. That is a testable locality property: unrelated padding should not alter a component whose support is defined locally.
+
+The distinction between an exact optimization and a semantic correction matters here. Sparse legacy mode can reproduce the old global behavior exactly. Local mode intentionally changes the model to repair the unwanted dependence. Calling both operations an optimization would conceal a substantive change in what the algorithm means.
+
+This result has consequences beyond one implementation. A system that adds more observed objects, map cells, candidate words, or recursive structures should know whether its normalization changes existing evidence. Otherwise scale itself becomes a hidden input. Locality tests should accompany sparse reformulations and null-label designs.
+
+I count the discovery and repair as a contribution. The research programme improved by finding a counterexample to its own assumptions and producing a controlled alternative. Preserving the old reference makes the repair auditable rather than silently rewriting history. [S02]
+
+## 8. Convergence: a guaranteed alternative with explicit assumptions
+
+The original row-minmax normalization can amplify very small support differences. The triadic study found 48 nonconverged binary conditions among 768 follow-up conditions even after 1,000 iterations. Their prediction scores are finite-iteration outputs. A plot that appears settled and a small last-step change do not supply a theorem for all inputs.
+
+The study therefore implemented a separate prior-respecting alternative of the form p_next=softmax(log(prior)+β·normalized_neighbor_support). Under the stated assumptions—nonnegative graph weights with row sums at most one, bounded similarities in [0,1], and β<1—the update is contractive in the maximum per-object L1 metric. A contraction supplies a unique fixed point and convergence from every admissible initial state. Zero-prior handling must respect the proof's support conventions.
+
+With β=0.8, all 1,536 binary and ternary runs in the follow-up converged. A residual-based bound translates the size of an update into a bound on distance from the fixed point under the contraction constant. This is stronger than merely choosing an iteration cap.
+
+The guarantee belongs to the modified update, not to the whole portfolio. Its prediction accuracy was not uniformly better than the original rule or the local smoother. That outcome is informative. Stability and predictive usefulness are distinct objectives; a stable method can converge reliably to a poor answer.
+
+The practical next step is to make update families and their assumptions explicit in the engine interface. A caller should be able to choose exact legacy equivalence, local corrected semantics, or a convergent alternative, and understand what changes with that choice. [S03]
+
+## 9. Higher-order structure: the chirality claim after audit
+
+The portfolio's earlier chirality demonstration claimed a sharp contrast between pairwise compatibility and a triangular interaction. The audit made the claim more accurate. Exhaustive enumeration showed that the particular signed cyclic score is exactly decomposable into oriented pair terms. An undirected symmetric pair model cannot represent the relevant orientation; an oriented pair model can.
+
+On 77 disjoint triangles over 40 seeds, the symmetric pair rule averaged 2.05 positive, 1.95 negative, and 73 degenerate outcomes. Exact three-body and oriented-pair rules averaged 74.65 positive, 0.90 negative, and 1.45 degenerate outcomes. Their trajectories agreed with maximum error 1.62×10⁻¹². This is a result about the information retained by a representation, not a universal victory of triangles over edges.
+
+A hard positive-only predicate remained different from the pairwise signed score, with reported RMS discrepancy 0.157 and a genuine higher-order residual. The relevant distinction is therefore between a decomposable score and an irreducible factor under a specified label representation and allowed pair family. Merely drawing a triangle does not prove irreducible three-body computation.
+
+This correction strengthens the programme. Orientation, interaction order, auxiliary variables, and the permitted representation must be specified before comparing expressive power. A pairwise model augmented with new state variables is not the same comparator as a symmetric pair model over the original labels.
+
+I retain the ambition to study higher-order relational structure. I also retain the audit that prevents an attractive example from carrying a theorem it does not establish. The next benchmarks should deliberately include both pair-decomposable and irreducible factors. [S02, S04]
+
+## 10. GRRLE and Simplicial Relax: recursion made executable
+
+Simplicial Relax names the broader architecture: objects and label fields, pair and higher-order factors, respected evidence, an unresolved option, and inspectable interfaces. The generic factor engine stores explicit sparse rules rather than the full dense compatibility tensor. GRRLE Strong adds finite recursive structures, dual roles, promotion, and perturbation diagnostics.
+
+The inspected GRRLE Strong release contains Python and header-only C++ implementations. Its original Python demonstration constructed 20 nodes across depths −2 through 2; the C++ demonstration compiled and ran. A repair made the Python extra-depth argument control actual repeated promotion passes. Structural, boundedness, duality, depth, and input checks accompany the exhibit.
+
+These achievements establish an executable substrate. They do not make the Python and C++ implementations numerically interchangeable. Their random generators, defaults, and updates differ. Cross-language equivalence needs serialized fixtures that fix initial trees, relation values, update schedules, and observables.
+
+Projection is another important boundary. A default demonstration quickly reaches a projection boundary; thereafter its output changes little. That is a property of the selected projected dynamics. It should not be mistaken for discovery of a uniquely correct interpretation.
+
+The architecture's useful promise is that relations can become objects in a finite next-level problem, while the entire computation remains inspectable. Whether a given promotion rule improves generalization is an empirical question. The interaction-discovery and recursive-grounding studies begin to answer it under controlled conditions rather than relying on the presence of a hierarchy as evidence of benefit. [S04–S07]
+
+## 11. Meta-renormalization I: representation can dominate an additive summary
+
+Experiment 001 began from a synthetic equation containing specified pair interactions and a fourth-order term. Its recovered source uses eight independent binary components, 12,000 observations, a 9,000/3,000 train/test split, and noise standard deviation 0.3. Reproduction gave MSE values 4.75248, 4.74778, and 0.08968 for the three reported representations.
+
+The strongest model was given features matched to the generating interactions. That is a meaningful demonstration of representational adequacy. An additive or lossy coarse summary cannot generally retain information that an interaction-dependent target requires. But supplying the right interactions is not autonomous discovery.
+
+The reproduction also corrected a metric label. The original script reported R-squared values of approximately 2.281%, 2.378%, and 98.156%, while an earlier summary called them explained variance. These metrics are related but different: explained variance removes the mean residual before taking its variance, while R-squared uses mean squared error. The new artifact stores both.
+
+This is the right role for an initial proof of concept. It exposes a question worth pursuing: can the system discover the useful interaction supports without receiving them? The first experiment does not answer that question, but it makes clear why the question matters.
+
+I also distinguish the portfolio's name meta-renormalization from a demonstrated physical renormalization-group method. Fixed pair averages are a deliberately lossy comparator, not a full implementation of the established physical theory. The research here concerns representation, recursive promotion, and predictive structure selection. [S08]
+
+## 12. Meta-renormalization II: autonomous selection within a finite grammar
+
+Experiment 002 removes the identities of the generating supports from the learner. Each seed generates 12,000 observations of eight Gaussian components. Four randomly chosen disjoint pairs contribute to the target, and two pairs jointly contribute a fourth-order term. Linear contributions and independent Gaussian noise remain present.
+
+The protocol uses 6,000 fitting observations, 3,000 structure-selection observations, and 3,000 sealed test observations. All 28 unordered pairs are candidates. Selected disjoint pairs can propose canonical four-component products. Equivalent parenthesizations are deduplicated. The hidden supports are used for evaluation, not passed to the learner.
+
+Candidate evidence comes from validation MSE changes after fitting or removing a term. Active/inactive strengths receive damped relational updates. Positive-gain and strength gates control promotion. The grammar, gain calculation, gates, and compatibility weights are designed. The learned part is which candidates are selected.
+
+Across 20 independent-input seeds, the hierarchy recovered all four pair supports and the fourth-order support in every seed. It achieved 97.90% mean held-out explained variance and MSE 0.09076, using 14 fitted parameters. The exhaustive degree-four multilinear baseline achieved 97.86%, MSE 0.09237, and 163 fitted parameters. The additive model achieved 3.85% and MSE 4.25602.
+
+This is a substantial controlled result in compact structure discovery. The correct parameter comparison is fitted model size, not total computational cost: the hierarchy also spends work proposing and evaluating candidates. Selection repeatedly queries validation data, so its selection score is not an untouched generalization estimate. The final test remains separate. [S08]
+
+![Figure 2. Interaction-discovery results across four synthetic conditions. The no-relaxation hierarchy matches the relaxed hierarchy in the principal condition.](figures/discovery.png)
+
+## 13. What the discovery failures teach
+
+The no-relaxation ablation produced the same predictions and selected structure in the independent-input principal condition. Therefore the observed gain belongs to the whole representation-and-selection procedure; it cannot be attributed specifically to the recurrent relaxation step. Including an iterative update does not show that the update earned its cost.
+
+The pure hidden fourth-order condition is more revealing. When useful pair-level parents are absent, the hierarchy does not propose the hidden interaction. Mean explained variance falls to 17.20%, while exhaustive enumeration achieves 91.28%. With correlated inputs, the hierarchy reaches 81.35% against 99.08% for the exhaustive baseline, and generating-support recall falls to 0.70.
+
+These failures identify an architectural restriction: a parent-first grammar can miss interactions whose lower-level components have little predictive evidence individually. Correlation also makes greedy commitments ambiguous. The current learner does not prune selected terms or revisit the full structure globally.
+
+There is an identifiability limit even with perfect prediction. Products such as (x1x2)(x3x4) and (x1x3)(x2x4) define the same four-component monomial. Recovering the support set does not recover a unique latent tree or establish causality.
+
+My next claim should therefore be earned by stronger comparisons: sparse polynomial regression, hierarchical interaction selection, beam search, and equation-family holdouts. Candidate generation should sometimes leap over unsupported intermediate levels. The paper's contribution is not that recursion always wins; it is that we now know a concrete regime where compact discovery succeeds and concrete regimes where the promotion rule fails. [S08]
+
+## 14. Reciprocal grounding: things label words, words label things
+
+Reciprocal grounding operationalizes one of my central intuitions: exchange the roles of objects and labels, and inspect where differently informed assignments support one another. The first experiment is deliberately narrow. Sixteen word identifiers and sixteen matching thing instances share a hidden correspondence, with four unmatched things. These are synthetic feature vectors, not a general model of language meaning.
+
+Each direction receives its own evidence and relation graphs. The graph-factorized support is A·P_real·Bᵀ. A damped softmax update keeps the original logits present at every step and retains an unknown column. Mutual unique winners, directional strength thresholds, margins, and perturbation checks define acceptance.
+
+On held-out independent-view seeds, reciprocal acceptance produced 328 correct matches among 332 accepted, or 98.80% accepted accuracy at 41.50% coverage. Forward-only selection produced 381 correct among 401, or 95.01% at 50.12% coverage. Thresholds were selected on separate seeds and frozen before the held-out conditions.
+
+These are different operating points. Higher accuracy among fewer accepted cases does not automatically establish a better system. The source publishes risk–coverage curves and whole-seed bootstrap intervals, rather than treating all observations as independent.
+
+The implementation also offers an audit interface with provisional, rejected, and revoked records. Its illustrative oracle is explicitly a simulator oracle, not an available real-world verifier. Bounded anchor bonuses can be removed on a fresh rebuild after revocation. This establishes an auditable mechanism for provisional assignments; it does not establish that agreement creates truth. [S07]
+
+## 15. Agreement can be completely wrong
+
+The reciprocal study contains an especially important counterexample. Shift both dictionaries by the same wrong permutation, and both directions can agree confidently while naming the wrong things. Under that condition, the reciprocal rule accepted 338 pairs and got zero correct. The internal consistency tests did not rescue correctness.
+
+A copied-reverse baseline is also strong. It adds no independent evidence, yet achieves 423 correct matches among 431 accepts, or 98.14% at 53.87% coverage in the independent-view condition. Mutual uniqueness can filter assignments even when the second view is derived from the first. The filtering effect must not be reported as independent corroboration.
+
+With correlated noise, reciprocal accepted accuracy was 95.76% at 50.12% coverage. With an uninformative reverse view, it retained only eight accepts, seven correct, or 1.00% coverage. That small surviving sample cannot carry a broad grounding claim.
+
+The no-relaxation ablation reached 98.73% at 39.25% coverage. The small difference from relaxed reciprocal selection does not establish a general benefit from graph relaxation. It does establish an appropriate experiment: compare the exact gate with and without the relational update.
+
+For me, these failures sharpen the meaning of provisional ground truth. A relation earns temporary operational status through evidence, acceptance criteria, and an audit trail. Agreement can be one ingredient. Independence, external checks, and revocation remain necessary questions. This lesson connects directly to model consensus, scientific inference, and robot perception. [S07]
+
+![Figure 3. Reciprocal grounding operating points. Accuracy is conditional on acceptance; coverage is the fraction accepted. The shared-wrong-dictionary failure is shown separately.](figures/grounding.png)
+
+## 16. Recursive grounding: changing representations without moving the referents
+
+The recursive extension revisits observation leaves, thing/name representations, and relation hypotheses. Accepted relations that persist over two rounds can influence the next representation update. Thing and name coordinates both change, but the physical or simulated referents do not. This is representation refinement, not a claim that naming alters an external object.
+
+The study uses five training measurements, three checkpoint-validation measurements, and three sealed test measurements per identity and view. Robust training centers anchor the updates. Damping, bounded displacement, unknown labels, a finite 24-round budget, early stopping, and checkpoint rollback constrain the recurrence. The robust self-only baseline receives the same training measurements.
+
+Guarded recursion achieved 442 correct matches among 445 accepted, or 99.33% accepted accuracy at 55.62% coverage. Robust self-only achieved 400 correct among 402, or 99.50% at 50.25% coverage. These results concern a different dataset from the original study; they are not a direct before/after comparison with its 98.80% result.
+
+The same identities recur across splits, so the experiment tests fresh observations of known identities. It does not test unseen categories, arbitrary names, or broad semantic understanding. Guard ablations remain competitive, and a shared wrong dictionary still produces zero correct reciprocal accepts.
+
+The controls are implemented, meaningful safeguards against particular feedback failures. They are not a general theorem against overfitting. Once both views share anchors, later agreement is coupled evidence. Repeating the loop does not manufacture new independent confirmation. The advance is a finite, inspectable recursive mechanism with recorded checkpoints and tested failure conditions. [S09]
+
+## 17. Motion correspondence and real wearable posture
+
+The original application thread is geometric correspondence. A measured 3D point receives a named model-marker label, with inter-point geometry supplying compatibility. Temporal predictions become priors for the next frame. The public synthetic sequence contains a moving five-marker body, shuffled detections, ghosts, and dropouts. It reports 146 of 146 real-marker identities correct, four of five ghosts rejected, and zero identity switches over 30 frames.
+
+That is a successful controlled tracking fixture, not a representative motion-capture benchmark. Occlusion, nonrigid bodies, calibration errors, and dense ambiguous constellations require broader testing. The historical work matters because it supplied the object/label architecture from which later experiments grew.
+
+The wearable posture study adds real observations. The public aggregate artifact reports 23 subjects and 85.2% mean accuracy against clinician labels, using torso accelerometer gravity direction, per-subject calibration, temporal support, and a noise option. This is stronger evidence of domain use than synthetic posture alone.
+
+The aggregate should not be interpreted as unseen-subject generalization. Calibration protocol, posture imbalance, temporal dependence, and subject-level uncertainty all affect its meaning. This synthesis uses the aggregate release and does not copy private physiology records into the paper bundle. It also does not turn a posture classifier into a diagnostic claim.
+
+The train-brake application contributes another historical bridge: a recovered 2014 compatibility tensor with 33 detected lines and four component labels runs through the modern core. That establishes continuity and reproducibility of the labeling formulation. It is not a newly measured deployed inspection accuracy. [S01, S10, S11]
+
+## 18. Morphogenesis: growth, repair, and editable pattern memory
+
+The morphology work asks whether local identity assignment, relational coupling, and a persistent target memory can produce repair-like behavior. Cells are objects; head, trunk, and tail are labels; local coupling supports coherent regions. The target memory is a modeled setpoint. It is supplied rather than discovered from biological measurements.
+
+The fixed-lattice demonstration reports complete closure of interior wounds and approximately 88% tail regrowth under its chosen configuration. The growing-graph version recruits occupied neighboring slots from a seed and reached all 369 target slots. After posterior amputation, the wild-type memory restores a tail, while an edited posterior memory produces a second head with the same label vocabulary and coupling rule.
+
+Subsequent remodeling code adds commitment, division decisions, and apoptosis-like removal. It demonstrates a synthetic resorption-and-replacement response when the target changes without an injury. The biological vocabulary names the intended analogy; these are categorical computational cells rather than calibrated tissue mechanics or measured electrophysiology.
+
+The simplicial extension makes topology observable. A wound can change the first Betti number of the modeled complex. A 3D example contains 701 cells, 5,160 junctions, and 10,424 tissue patches. Its pairwise and tissue-scale assignments agree on the well-posed example; it does not establish that the higher-order terms improve accuracy there.
+
+The contribution is a sequence of executable models connecting labeling, a changing substrate, stored targets, and topological diagnostics. A biological claim would require quantitative voltage/morphology data, competing mechanisms, and held-out interventions. The current achievements are substantial as computational constructions and appropriately limited as biology. [S12, S13]
+
+## 19. Virtual cells and a mathematically explicit feasibility failure
+
+The virtual-body work moves from morphological analogy toward coupled dynamical models and measured assay ranking. An audit found that the original HRL2026 virtual-cell step failed because a required membrane method was absent. An isolated repaired snapshot computes an entropy observation, normalizes categorical weights, copies the old state before mutation, and gives abstention a distinct code.
+
+A seven-node, three-level hierarchy completed ten recursive steps with checked child propagation, finite nonnegative distributions, normalized entropy, meaningful initial state change, and distinct abstention. This establishes an executable categorical hierarchy. It does not establish measured cellular communication or organism physiology.
+
+The synthetic body model also yielded a useful negative result. For constant exposure C, local tumor-free stability requires negative largest eigenvalues in both sensitive and resistant clone blocks. At the nominal invented parameters, the sensitive threshold is C=0.789234 and the resistant threshold is C=5.181195. Preserving an assumed normalized reserve floor of 0.7 permits at most C=0.136364.
+
+The intersection is empty. At the resistant threshold, minimum equilibrium reserve is approximately 0.057858. All 24 parameter configurations in the earlier sensitivity set also had empty intersections under the specified criterion.
+
+This is a completed result about the implemented equations: constant exposure cannot simultaneously satisfy the modeled local-stability and reserve requirements. It does not settle time-varying control or actual therapy. The research advance is the explicit incompatibility certificate, which is more informative than continuing to tune a model as though a feasible solution must exist. [S14]
+
+## 20. CRISPR ranking: real measurements and cleaner separation
+
+The measured CRISPR benchmark uses a cached Doench/Azimuth assay table with 5,310 rows, 4,379 distinct sequences, and 17 target genes. Its target is the supplied within-drug/gene assay-rank score. This is a measured molecular assay task, not a measurement of tumor eradication or whole-organism safety.
+
+The earlier row-random evaluation had 271 distinct test sequences also present in training, among 1,034 distinct test sequences. Repeated consultation of the same test metric made the historical model-selection record exploratory. The new evaluation uses fixed five-fold sequence-disjoint and gene-disjoint splits and explicitly checks overlap.
+
+Twenty-five annotation, drug, gene, and stacking fields were discarded, including a precomputed prediction column whose training provenance was not established. The portable sequence-feature extraction matched the original extraction on all rows. Feature scaling was fitted on training rows only. The graph may include held-out input sequences, making the method transductive, but it does not use their assay labels.
+
+Pooled sequence-disjoint Spearman correlation was 0.395318 for one-hot Ridge, 0.479858 for engineered sequence features plus Ridge, and 0.480544 for the HRL graph extension. Gene-disjoint values were 0.388453, 0.400323, and 0.403291 respectively.
+
+The small HRL increases do not establish statistical superiority. The defensible progress is a leakage-audited benchmark, retained out-of-fold predictions, portable features, and a precisely defined relational extension. Stronger validation can now focus on the actual incremental benefit rather than inherited optimistic metrics. [S14, S15]
+
+## 21. Cybersecurity entity extraction: a real-model pilot with a stronger simple baseline
+
+The defensive cybersecurity programme produced a concrete labeling pilot using 40 sentences from one AnnoCTR training report, containing 51 gold entities. A pinned GLiNER model ran locally on CPU after the weight hash was verified. It proposed 101 candidate spans, and the relational graph used 37 repeated-mention edges derived from text and document identity.
+
+Exact span/type F1 was 0.504 for native extraction, 0.525 for the matched score-transformed candidates without HRL, 0.548 for sparse HRL, and 0.608 for simple same-text pooling. HRL improved over its immediate matched comparator, but the simpler pooling baseline was better in this pilot.
+
+The experiment used training data and illustrative default parameters. It is not a held-out benchmark win. The full training/development export alignment check covered 9,120 sentences with zero alignment errors, and four evaluator tests passed. That strengthens the plumbing but does not broaden the 40-sentence efficacy sample.
+
+The recorded neural runtime combines two inference operations and must not be treated as standalone baseline latency. HRL refinement took 0.00457 seconds; a fair end-to-end resource comparison still needs matched inference, pooling timing, and memory accounting.
+
+The contribution is the integration of a contemporary neural candidate producer with inspectable sparse refinement, exact evaluation, and reproducible provenance. The immediate research priority is to understand why pooling corrected errors that HRL did not. Richer graphs should earn their place against that baseline, not be assumed superior because they are more elaborate. [S16]
+
+## 22. Forecasting and causal evaluation
+
+The portfolio's forecasting exhibit illustrates adaptive support over candidate forecasters. The publication audit found that its original batch temporal kernel and full-sample error scale allowed information after a forecast origin to influence the reported prediction. Appending or perturbing future data changed earlier predictions. That invalidates a causal forecasting interpretation of the original procedure.
+
+Causal corrections removed future perturbation sensitivity exactly in the tested controls. On frozen local snapshots, RSXFSN mean absolute error was 18,540.51 for the original batch method, 17,872.75 for the causal prior, 18,142.68 for causal HRL, and 32,062.69 for naive prediction. For INDPRO, the corresponding values were 1.2509, 1.2480, 1.2514, and 1.2395; for UNRATE, 0.6354, 0.6184, 0.6280, and 0.5360.
+
+Thus neither a corrected implementation nor a favorable comparison on one series establishes universal skill. Causal HRL did not beat the causal prior on the reported mean errors, and naive prediction was better on two series. The RSXFSN block-bootstrap difference between causal HRL and causal prior was positive, with a reported interval excluding zero in that exploratory comparison.
+
+The snapshots are revised economic series, not a real-time vintage archive. A causal algorithm evaluated on finalized observations is still not the same experiment as historical real-time forecasting with revision uncertainty.
+
+This is a methodological contribution with practical consequences: future-intervention invariance is now an executable requirement. The audit converts an appealing retrospective display into a properly stated forecasting question and prevents a leaked score from becoming a scientific headline. [S02, S17]
+
+## 23. HyperStar model support and measured economic descriptions
+
+The HyperStar synthetic benchmark compares closure-aware support with predictive performance across OLS, instrumental variables, difference-in-differences, and state-space examples, with 80 replicates per task. The support rule combines a normalized closure measure and held-out MSE before relaxation. It is a designed scoring rule, not a universal estimator.
+
+The instrumental-variable example is especially useful. Its IV model has near-zero closure residual, while OLS predicts the observed outcome more accurately in the constructed setup. The support winner and prediction winner differ. That is not a contradiction in the evaluation: structural identification and predictive fit answer different questions, provided the structural assumptions are justified independently.
+
+The economic research also includes a frozen World Development Indicators description: 150 nonmissing values for six countries during 2010–2024, comprising 90 GDP-per-capita and 60 Gini observations, with 30 requested Gini slots missing. The recorded API update date is July 13, 2026. These are historical snapshot values, not a claim about the latest release.
+
+The accompanying closed-economy model has three household groups, production, saving, depreciation, and redistribution. Its formal accounting and static transfer results follow under stated assumptions; its simulated distributional trajectories are not causal national-policy estimates. Constant-dollar GDP levels also do not supply purchasing-power-adjusted welfare rankings.
+
+The research connection is a disciplined ledger: what is conserved, what is observed, what is assumed, and which objective is optimized? HRL's possible role is to organize competing interpretations and constraints. The measured economic series do not themselves validate a particular HRL policy recommender. [S18, S19]
+
+## 24. Spreadsheet auditing: when context helps and when it misleads
+
+The spreadsheet study constructs an auditable method combining numerical mixture models, formula signatures, optional formatting context, and dependency structure. It generates eight clean training workbooks and twelve held-out content realizations under four paired formatting conditions, yielding 48 test files. Each ledger contains 1,080 scored cells and 24 injected defects.
+
+Under stable semantic formatting, the formatting-aware Gaussian mixture obtains mean average precision 0.751, compared with 0.560 for a column-mode rule and 0.314 for a global Gaussian mixture. That is a meaningful conditional ranking result. It shows that visual conventions can carry useful contextual information when the convention is stable.
+
+The result changes with the question. At a 54-cell inspection budget, formatting-aware recall is approximately 0.747, while the global mixture reaches 0.778 and the column rule 0.757. A method with higher average precision need not recover more defects at a fixed practical review budget. AUROC, average precision, and inspection-budget recall are not interchangeable.
+
+Decorative and reversed formatting reduce the formatting-aware average precision to approximately 0.330 and 0.309. Context can become an error channel. The paired formatting design is valuable because it changes that channel while preserving the underlying content realization.
+
+This is synthetic spreadsheet evidence, not deployment on audited enterprise workbooks or successful automatic repair. Reinforcement learning appears as a proposed future sequential comparison, not an executed result. The completed contribution is the experimental framework, the conditional contextual gain, and the demonstrated fragility under misleading conventions. [S20]
+
+![Figure 4. Formatting-aware audit performance depends on the formatting convention. The adjacent panel shows why average precision and fixed-budget recall require separate reporting.](figures/spreadsheets.png)
+
+## 25. Language and vision: inspectable hypotheses before claims of understanding
+
+WikiMRGRELE includes a deterministic repository-grounded assistant and a separate stochastic byte/span transducer. The transducer receives a delimited stream of segments and successors; similarity supplies priors, relation patterns supply support, and candidates vote over bytes and limited spans. The delimiter and stream organization are supplied. The system has not discovered arbitrary grammar from raw experience.
+
+The WordNet observatory uses 206,798 lemma-definition pairs. A typed lexicon contains 145,442 headwords with WordNet and pronunciation information. A frozen seven-prompt comparison measures English-word coverage, pronounceability, definition overlap, sense switching, and protected spans. Pronunciation raises mean English-word coverage from 0.538 to 0.561; enabling all typed channels lowers it to 0.438.
+
+The nonsense control exposed a specific mechanism: downweighting a secondary PLUM sense did not remove a shared phrase because PLUMB retained that definition as a primary sense. Internal agreement and rank weighting were insufficient to enforce relevance to the input. This is a useful forensic result, rather than evidence of fluent language generation.
+
+The ProMaster vision checkpoint similarly separates the frontend from relational inference. Two licensed photographs have frozen region proposals and appearance priors; GRRLE resolves uncertain part labels using geometry and compatibility. It does not yet perform automatic region detection or establish robustness on unseen vehicles.
+
+Both projects contribute inspectable hypothesis fields and concrete failure analyses. The next experiments require held-out images, hard negatives, input-relevance controls, and stronger language or matching baselines. Readable authored explanations should remain separate from learned generated bytes. [S21, S22]
+
+## 26. Controlled language and conflict without explosion
+
+The ecc+++ compiler supplies a small but exact linguistic research object. It parses a restricted English fragment into unary facts and rules. Positive and negative conclusions are retained separately. A query can be supported, opposed, unresolved, or both. The both state records conflicting derivations; it does not announce that the underlying world contains a true contradiction.
+
+The forward-chaining engine introduces no new names or predicates during inference. Duplicate facts are suppressed. The possible fact set is finite, so cyclic rules terminate. Each derived fact preserves the rule line and supporting fact step. Unsupported source lines are reported and excluded rather than silently interpreted.
+
+This is neither a complete classical first-order prover nor a complete paraconsistent calculus. It does not implement unrestricted quantifier nesting, contraposition, or explosion. Its contribution is a controlled, provenance-preserving interface between a language fragment and a finite inference system.
+
+The six-source explorer preserves historical text editions and their identifiers, including 31,102 KJV verses, historical English dictionaries, and a specified English Qur'an translation. Corpus coverage is an ingestion result, not evidence that the inference grammar understands those texts. Translation, source edition, paragraph numbering, and word-token identity remain distinct issues.
+
+This work gives the portfolio a concrete way to represent conflict without forcing a premature verdict. It also clarifies a recurring philosophical question in operational terms: an unresolved state, opposing evidence, and a formally contradictory set of premises can be represented separately without claiming that any one interpretation has settled metaphysics. [S23]
+
+## 27. Chess preference: a research engine earns its claims on the board
+
+The Relaxfish pilot compares a static evaluator, a relationally refined evaluator, and limited-budget Stockfish outputs on 24 fixed positions. Agreement with the stronger reference increases from six positions for static evaluation to ten for Relaxfish; the 2,000-node Stockfish comparator agrees on sixteen. Seven positions improve in reference-score gap, two worsen, and fifteen tie.
+
+The exact paired agreement test gives p=0.125. The reported mean score-gap improvement is 63.71 centipawns, with a descriptive bootstrap interval, but the selected small suite and reference dependence limit generalization. Four diagnostic continuations are losses for the prototype. The relational implementation also costs time: the recorded ratio of median timings is approximately 3.88 against its static comparator.
+
+The manuscript's title, Better Than Stockfish, names an ambition. It is not a measured superiority result. This distinction protects a legitimate pilot from being dismissed for a claim the experiment did not establish.
+
+The broader corpus-trained brain records 5,488 unique games and 378,900 plies. Its global SAN frequencies are observed move popularity, not position-specific optimality. A separate argument-chess project imports a larger archive into a different rule database. These corpora have different inclusion rules and purposes; they should not be added together as though they were disjoint training observations.
+
+The useful research direction is to connect relational roles to bounded search, then compare against material, history, and engine-ordering baselines at a shared resource budget. A relation becomes valuable when it improves a specified decision or proof search, not merely when it produces an intuitively pleasing tactical label. [S24, S25]
+
+## 28. Unpublished reinforced chess: report the regression, retain the learning
+
+The local argument-chess run imported 20,000 distinct archived games containing 1,369,661 pre-move positions, plus 64 exploratory simulations with 6,104 positions. The combined database records 20,064 games, 1,375,765 positions, and 29,349 origin-specific rule rows. Duplicate, malformed, and empty games were counted explicitly. The archive cap means this is not every available PGN.
+
+The first teacher experiment used 128 training, 64 development, and 64 test positions, balanced by origin. Stockfish 14.1 supplied limited-budget MultiPV reference evaluations from complete iterations. After four champion/challenger rounds and 32 self-play games, one candidate was promoted under the local development criterion.
+
+Held-out mean regret was 564.33 centipawns for the corpus baseline, 1,999.11 before self-play, and 1,989.77 after self-play. Best-move agreement rose from 15.63% to 20.31%, yet aggregate regret became much worse than the baseline. A mate-in-one failure with mapped regret near 100,000 dominated the mean. Agreement and risk-sensitive failure are different measurements.
+
+A fresh tactical experiment used 64 positions from 45 games, excluding previously sampled games, with shared depth-three search and 3,000-node budgets. The old champion with common search had mean regret 261.02, while the tactical candidate had 1,806.75. No self-play challenger was promoted. The known mate-in-one regression was fixed by the shared search control as well as the candidate; the fix cannot be credited solely to the new hierarchy.
+
+This is real experimental progress: a corpus, frozen checkpoints, teacher evidence, regression fixtures, and a candidate rejected on evidence. It is not an engine-strength breakthrough. Generated-byte language probes did not demonstrate useful search reduction or learned fluency. [S26, S27]
+
+## 29. Chess proof: preference, certificate, and unknown are different outputs
+
+Magnum Chessicus uses exact outcome intervals rather than treating heuristic scores as proofs. A frontier with unknown continuation remains enclosed by [−1,+1], with White win +1, draw 0, and Black win −1. Max/min propagation preserves sound bounds when terminals and legal actions are handled correctly.
+
+From the standard initial position, the executed depth-three search visits 9,323 nodes and leaves the interval [−1,+1]. This is an honest unresolved result. Small fixtures certify a mate, stalemate, and insufficient-material draw, and an intentionally incorrect mate witness is rejected.
+
+The draw model matters. Threefold repetition and fifty-move claims are optional legal actions; fivefold repetition and other automatic endings have different semantics. Identical FEN strings can have different relevant histories. The recorded repetition example demonstrates why a transposition key cannot casually omit the move stack or claim state.
+
+The newer local research-guided solver uses existing chess predicates and multiplicative relaxation to order bounded forced-mate search. At attacking nodes one successful continuation suffices; at defending nodes every legal reply must be covered. It emits a strategy certificate that a separate replay procedure checks without using the ranking heuristic. The verifier shares python-chess rules, so it is independent of ranking rather than a wholly independent chess implementation.
+
+Five tests rerun for this synthesis passed. The solver distinguishes proven mate, exhaustive failure within a finite bound, and exhausted budget. No move is discarded merely for a low belief score. There is not yet a measured search-speed advantage. These distinctions are the foundation for future evidence-producing search, not a completed solution of chess. [S28, S29]
+
+## 30. Rolling chess: physical execution as an additional constraint system
+
+The rolling-chess apparatus connects a legal symbolic game to a two-axis wooden maze. A replenishable metal sphere represents a move attempt. Its source is the selected piece's square; open destination wells correspond to legal landing squares. Entering a well commits a legal move rather than disposing of the mover's chess material.
+
+The implemented board is 0.8 metres square, with 0.1-metre squares, sphere radius 0.012 metres, and hole radius 0.034 metres. Fixed substeps are 1/240 second. For a uniform solid sphere under no-slip rolling, the acceleration factor is 5/7 of the tangential gravitational acceleration. The model adds illustrative resistance, damping, contact response, a speed cap, and bounded roll/pitch.
+
+This is a quasi-static rigid apparatus with absorbing wells. It omits slipping, actuator inertia, full angular contact, calibrated wood/metal friction, and detailed high-speed rim collisions. The chess-piece shapes are visual markers; wood and stranded spheres are physical obstacles.
+
+The initial-position observation experiment narrows compatible legal transitions from 20 to two when the source e2 is known, and from two to one when entry at e4 is observed. That is state-transition reconstruction from evidence. The controller found physical witnesses for all 20 opening moves, so the supplied maze establishes no additional opening-move exclusion.
+
+A failed route remains unresolved. It is not a proof that no continuous trajectory exists, nor a reason to remove an orthodox legal move. Physical exclusion would require a sound apparatus-specific certificate and a clear declaration of whether the claim concerns ordinary chess or a new physical variant. [S30]
+
+## 31. Topology, imprisonment, and forced capture
+
+The apparatus also implements explicitly defined merger rules. Black–black mergers join destination policies, white–white mergers group source identities, and a directed black-to-white relay releases a linked group. These are computational topology rules, not simulations of relativistic black holes or white holes.
+
+The default policy is imprisonment until release. Each piece has separate existence, mobility, topology, and exposure records. Captured pieces remain captured in the ledger; release cannot resurrect them. An imprisoned piece is not automatically captured, and an attacked square is not identical to an available legal capture.
+
+Ordinary mode retains standard chess legality while showing annotations. Enforcing mobility restrictions explicitly creates a variant. The castling rook's mobility matters, standard king-safety attack geometry is preserved, and no available variant move is reported as a blocked state rather than silently labeled ordinary checkmate.
+
+A finite capture inspector asks whether an adversary can force capture of a selected non-king within one to four plies against every permitted defense. Node-budget exhaustion remains unknown. A symbolic capture proof does not guarantee that every future rolling controller action can be executed physically.
+
+The implementation also separates chess repetition, symbolic topology signatures, exact apparatus diagnostics, and quantized path similarity. An approximate one-centimetre trajectory signature is never substituted for exact future-relevant state. No current transposition pruning uses the apparatus hash.
+
+The research value is semantic discipline in a hybrid state space. Legal capture, imprisonment, observation, physical reachability, and probabilistic eventual capture are different claims. Making them separate prevents the simulator's visual metaphor from silently changing the theorem being tested. [S30, S31]
+
+## 32. Actual ROS integration and whole-game execution
+
+The rolling console uses ROS 2 rather than a browser imitation of ROS. It publishes state and events as native messages, shaped board geometry through MarkerArray, and a map-to-board transform through TF. Browser control requests pass through the signed ROS command topic and subscriber before acknowledgement. The interface exposes node identity, clock, publication sequence, and subscriber information.
+
+The numerical full-game validation completed a 65-ply White checkmate with injected randomness enabled and a valid fifty-move draw claim after 161 plies with it disabled. Both runs reported zero blocked-motion attempts. These are complete policy games under a small two-ply material/development policy, not a strong chess-engine benchmark. The randomness control disables both move-order and tilt perturbations; deterministic continuation still depends on current state and history.
+
+The separate virtual robot combines Bayesian occupancy, Kalman tracking, local/regional HRL fields, and obstacle-aware planning. Its authority design distinguishes public stop/shutdown, basic wake/presence, and higher-authority task commands. Signed expiring commands, replay checks, and an explicit presence lease are implemented.
+
+The voice tests used generated speech. Their success demonstrates command-path plumbing and also demonstrates why recognition cannot be claimed as human liveness or actual hearing-distance verification. Presence is an operational lease in this prototype, not a physical measurement that an authorized human remains nearby.
+
+The ROS package's 38 automated tests were rerun for this synthesis. Historical live checks also exercised native subscribers and browser controls. No physical humanoid, nuclear apparatus, or banking transaction was operated. The completed integration is a virtual research system with real middleware and explicit permissions. [S30–S32]
+
+## 33. Anchored geometry: information links and convergence certificates
+
+Hyperspace develops physical–informational geometry as a modeling proposal and proves results for specified finite averaging systems. In an anchored graph, free-node states can be written x_free(next)=Qx_free+Rx_anchor. When every free node reaches an anchor under the stated transition assumptions, the free block is transient, and the equilibrium is determined by (I−Q)⁻¹Rx_anchor.
+
+This supports a useful interpretation of multiple anchors: each free node receives a mixture of anchor values weighted by hitting probabilities. The same system connects to a Dirichlet-energy formulation under the appropriate symmetry assumptions. These are established mathematical families applied and worked through in the portfolio, not discoveries of new physical dimensions.
+
+In the 40-node synthetic geographic cycle, recorded spectral radius was approximately 0.998459 and the largest expected absorption time was 800 steps. Adding twelve information links changed these to approximately 0.996393 and 326.78. The shortcut run crossed error 10⁻³ at update 1,964; the original cycle had not crossed within 4,000 updates.
+
+The work also includes a harmonic residual of 1.11×10⁻¹⁶ on a triangular lattice, exact small-chain calculations, first-order sensitivity, and a stopping certificate under its contraction conditions. These results make the phrase all roads lead home mathematically specific: reachability, weight conditions, and anchors do the work.
+
+The counterexamples matter. Periodic systems and unsuitable decaying weights can invalidate naive convergence intuitions. Adding a link is not universally beneficial under every normalization or objective. The contribution is a documented finite model, worked derivations, and reproducible tests of when informational connections accelerate anchored agreement. [S33]
+
+## 34. Triadic closure: correct finite mathematics and a physical programme still open
+
+The closure work became more rigorous by separating descriptive slots from physical degrees of freedom and by placing gravitational and electromagnetic residuals in typed spaces. A direct-sum residual can require both sectors to vanish without adding incompatible quantities as though their units and domains were identical.
+
+One exact finite construction is F_P(u,v)=(u+v,v+Pu). Its kernel satisfies v=−u and Pu=u. The nullity is the number of cycles in the permutation P. For six-component u, identity, a transposition, and a six-cycle give nullities six, five, and one while the descriptive slot count remains fixed. This demonstrates bridge-controlled compatible modes.
+
+Another conditional result says that a continuous multiplicative map from additive action to U(1) has exponential phase form. The assumptions already specify the phase group and composition. The result does not derive the Born rule, Planck's constant, or quantum theory from closure.
+
+The paired-real control is essential. A complex operator A+iB can be represented by the real block matrix with rows (A,−B) and (B,A). Complex propagation therefore has an equivalent paired-real implementation. Individual unit-modulus path weights also do not imply a unitary summed kernel; reversible norm preservation needs its own condition.
+
+The finite mesh implementation verifies gauge invariance and refinement for a flat-background U(1) model. The Wilson action approaches 0.25, with absolute error falling from 3.25×10⁻⁴ at mesh size two to approximately 4.89×10⁻⁹ at size 32. Interior Regge deficits are zero by construction. This is successful discrete gauge numerics, with non-flat coupled gravitational dynamics still a research target. [S34–S36]
+
+![Figure 5. Flat-background gauge refinement through mesh size 32. Zero Regge deficit is an input property of the geometry, not a recovered gravitational prediction.](figures/refinement.png)
+
+## 35. Quantum-state representation: large possibility spaces can have small descriptions
+
+Magnum Quantreleviathone studies a specific family of entangled states on a classical computer. Starting from zero qubits, a Hadamard gate on the first qubit followed by controlled-NOT gates produces the GHZ state: two basis branches with equal amplitudes. An induction supplies the exact family-level result.
+
+The code checked dense simulations for every qubit count from two through twenty—nineteen circuits. All final amplitudes matched the expected floating-point values in the implementation, with normalization error at rounding scale. At twenty qubits, dense complex128 amplitude storage is 16,777,216 bytes. The tested sparse payload contains two amplitudes and two unsigned indices, totaling 48 bytes.
+
+That payload comparison excludes Python object overhead, metadata, temporary arrays, and executable memory. It is not a claim that the complete program uses 48 bytes, and it is not a timing demonstration of quantum advantage. The sparse index convention also has a finite tested range.
+
+The important result is structural: a state can inhabit an exponentially large ambient coordinate space while the particular state family has a concise exact description. Subsequent gates can destroy sparsity. Generic quantum states need not admit this representation.
+
+This connects to the sparse HRL result at the level of research strategy, not mathematical equivalence. Before allocating a large representation, ask which structure the task actually requires and whether its operations preserve that structure. Established stabilizer and tensor-network methods provide broader context. The portfolio contribution here is a proven family, checked implementation, explicit accounting, and a clear next question about representation growth under richer circuits. [S37]
+
+## 36. Astronomy: from a shell analogy to a measured-data comparison
+
+The Oort–halo inquiry began with spherical Newtonian models. Equal total mass in a hollow shell and an extended cored halo produces different interior forces. A spherical shell contributes zero net acceleration in its cavity but a nonzero constant potential relative to infinity. The extended halo contains mass inside the tracer radius and can contribute substantial local acceleration. Geometry alone does not identify composition.
+
+The next study uses all 38 numerical rows of Eilers and colleagues' published Milky Way rotation table and a specified flattened baryonic potential based on McMillan's model. A two-parameter NFW halo is fitted to the 30 bins below 20 kpc, with a declared illustrative weighting floor. Disk force is computed from the flattened potential; speeds are combined in quadrature, not added linearly.
+
+The fixed baryonic model has RMS speed residual 66.72 km/s over the fitting interval. Adding the fitted halo lowers it to approximately 2.00 km/s. The eight excluded outer bins have RMS residual 15.30 km/s. The fit therefore does not precisely explain the entire radial range.
+
+Changing baryonic mass normalization from 0.8 to 1.2 moves the fitted halo scale radius from 7.83 to 27.13 kpc while retaining small fitting-interval residuals. This is a sensitivity range, not a confidence interval. The data are inferred circular speeds under dynamical assumptions, and the baryonic baseline has its own inherited modeling constraints.
+
+The contribution is a reproducible conditional mass-model comparison with source extraction, numerical-force checks, and a visible degeneracy. It neither identifies dark-matter particles nor eliminates every possible alternative mass distribution or gravitational model. [S38, S39]
+
+## 37. A prospective discriminating observable, frozen before retuning
+
+The local follow-up asks what another observable could contribute. Two previously fitted models—lighter and heavier baryonic normalization—make similar rotation predictions but different vertical-force predictions. Their halo parameters are copied rather than refitted for the new calculation.
+
+At radius 8.122 kpc and height 1.1 kpc, the models predict vertical acceleration magnitudes 1,792.06 and 2,258.55 in (km/s)²/kpc. The gap is approximately 466.48 in those units, or 23.0% of the mean prediction. Their maximum rotation-prediction difference over the sampled 5–20 kpc grid is 2.97 km/s.
+
+No new vertical-force dataset was used. The calculation is a prospective discriminator: if an independently suitable observation constrains the vertical derivative of the potential, it may distinguish mass allocations that fit the radial derivative similarly. A hypothetical five-percent Gaussian error illustration is experimental design, not observed significance.
+
+Independence is a substantive concern because the baseline mass model already used dynamical information. Reusing overlapping vertical data would not provide a genuinely independent validation. The local freeze record and hashes document the proposed comparison, but do not amount to external preregistration.
+
+The associated conditional identifiability statement is also useful. Descriptions that produce the same effective density and boundary conditions in the chosen Newtonian continuum model produce the same gravitational field. That does not establish permanent undetectability across all possible experiments. It identifies what the specified observable can and cannot distinguish.
+
+This is a research result about model predictions and a concrete design for the next test. It remains prospective at the point where observational discrimination would begin. [S40]
+
+![Figure 6. Two frozen mass models: similar in-sample rotation residuals, different prospective vertical-force predictions. No vertical-force observation is plotted.](figures/astronomy.png)
+
+## 38. Hydrology, waves, and conservation as executable constraints
+
+HydroGRRLE couples a small graph-routing model to relational interpretation. Hydraulic head determines flow direction; simultaneous transfer limits prevent overdrawing storage; rainfall, infiltration, evaporation, and boundary discharge are recorded explicitly. Role hypotheses and reach/basin structures receive support from the routed state.
+
+The implemented conservation ledger is the important foundation. Water routing and semantic interpretation have different quantities and should not silently share units. A future metaphor of evidence evaporation needs its own equation; it is not automatically the same operation as physical evaporation.
+
+The Lake Michael topology is synthetic and provisional. The kernel does not solve full groundwater, Richards, or shallow-water dynamics. Its contribution is an auditable physical toy model linked to an inspectable hierarchy, with per-step storage accounting and versioned outputs. No measured hydrological prediction gain is established.
+
+Wave Worlds supplies another controlled mechanics model: linear, lossless, normal-incidence air/water wave paths, coherent superposition, signed reflection/transmission gains, and delays. The movable obstacle uses bounded ray encounters rather than a complete 3D wave solver. Listening controls are separate from emitters, allowing an important implementation check: muting a monitor must not change the simulated field.
+
+The musical hyperobject similarly separates a normalized internal state, an empty selection, a coupling matrix, and its graphical organization. A cube drawing does not become a physical realization of every coupling in the matrix.
+
+These systems support the programme by turning constraints and accounting into observable computations. Their value is not a count of scenic worlds. It is that a user can alter an input, inspect a conserved or normalized quantity, and discover precisely which model produces the response. [S41–S43]
+
+## 39. Geographic worlds and inspectable interfaces as research infrastructure
+
+The geographic chess worlds are primarily interactive systems and testbeds, rather than completed studies of learning or ecology. Their research contribution is architectural: separate geographic geometry, route rules, agent identity, game role, rendering, and saved state so that each can be inspected and tested.
+
+Tiny Creek's whole-world practice initializes 258 mapped countries and territories with sixteen pieces each, or 4,128 pieces. The geographic atlas contains 7,941 spaces after recorded city additions and explicitly imaginary learning gardens. Geographic movement is a variant; it is not orthodox square-board chess. Piece conservation, legal starting states, alliances, and promotion semantics have executable checks.
+
+Virtual Earth supplies a different testbed: real coastline geometry combined with a seeded synthetic local ecosystem. Its 72×72 resource field, fixed-step update, bounded population, and exported PRNG state support deterministic replay and checkpoint restoration. The local patch is a separate synthetic model anchored to a coordinate, not a hidden high-resolution reconstruction of the real location.
+
+HRL Lab exposes prior, previous strength, raw support, scaled support, and next strength for a forty-image transductive digit example. Five seeds are excluded from its 35-sample evaluation. It compares against the same labeled seeds, separates ties, and stops on a numerical criterion. This is an inspectable demonstration, not a handwritten-digit benchmark win.
+
+Across these interfaces, the scientific opportunity is reproducible intervention. An attractive visualization becomes research infrastructure when it exposes its state, assumptions, evidence, and export. Browser correctness and usability checks support that infrastructure; controlled user studies and task-performance studies remain separate work. [S44–S46]
+
+## 40. Project Genesis: observational structure and constructed dynamics
+
+The Genesis series deserves a place in the results record because it brought external scientific data into the relational interface. Its cosmic-web example loads 25,000 SDSS galaxy records and constructs a projected redshift wedge. Sixth-neighbor density supplies ordinal priors, and sixteen sparse updates produce 4,504 void, 14,091 filament, and 6,405 cluster assignments. These counts describe the algorithm's partition. There is no independent morphological truth set demonstrating that those assignments are astronomically correct.
+
+The coordinate construction uses a linear Hubble-distance approximation and a display wedge rather than a complete redshift-space cosmological analysis. Sample selection, projection, peculiar velocities, and boundaries can influence inferred density. Labeling a low-density region void does not independently measure dark energy there. The implemented achievement is real-data ingestion and sparse contextual segmentation, with the next scientific question being agreement with established web classifiers under controlled geometry. [S47]
+
+The connectome example uses a source-derived C. elegans wiring graph. The released node list contains 399 retained cells, including muscle nodes; it should not be described as 399 neurons. The graph is symmetrized for the community calculation, and a six-label multiplicative modularity update produces a recorded modularity of 0.439. The recorded NetworkX comparator is 0.509. That baseline is stronger on the reported objective; the interface's earlier suggestion that they are on par needs this numerical qualification.
+
+Its activity animation is a clipped spreading model on measured wiring. The structural edges originate in connectome data, but the animated values are not recorded neural activity or validated behavior. The contribution is a transparent link between a measured relational substrate, an explicit partition objective, and constructed dynamics. Preserving the distinction makes this a reusable experiment rather than an unsupported claim to have simulated an animal's mind. [S48]
+
+The SPARC exhibit retains 165 galaxies after its stated filters and computes baryonic rotation contributions using fixed disk and bulge mass-to-light assumptions. Its reported mean outer force-shortfall fraction is 0.702, calculated from the last three radial samples per galaxy and clipped to the stated range. That is a conditional force diagnostic, not an independently measured dark-matter mass fraction. Sixteen galaxies are selected for detailed display.
+
+The related radial-acceleration exhibit contains 3,343 points from 165 galaxies and labels galaxy regimes using derived features. The characteristic acceleration scale is supplied from the established radial-acceleration relation; it is not discovered by HRL. The same SPARC inputs feed both displays, so their counts cannot be treated as independent observational replications. The scientific contribution is a reproducible visualization and relational classification of an existing observational relationship. [S49]
+
+The Planck-seeded construction is different again. It uses stated cosmological parameters and a transfer-function approximation to generate correlated initial conditions, then a two-dimensional displacement construction produces illustrative structure. It is not direct processing of a Planck sky map, a full N-body simulation, or evidence that the portfolio has derived cosmology. Its value is the controlled comparison between uncorrelated and physically motivated correlated seeds under the chosen model. [S50]
+
+Together these projects demonstrate breadth in data interfaces and model construction. They also show why provenance must follow every layer: measured input, transformed geometry, assigned label, simulated trajectory, and scientific interpretation are successive operations. The source code now lets a reviewer identify exactly where each operation occurs.
+
+## 41. What has been contributed across the programme
+
+I can now identify a set of contributions that survives a demanding reading. First, exact sparse formulations make structured relational dynamics feasible at scales where the dense reference is prohibitive. Second, ternary coordinates and locality audits clarify what uncertainty represents and how normalization can change its meaning. Third, convergence is available for a stated alternative rather than asserted for every update.
+
+Fourth, the higher-order work distinguishes orientation loss from genuinely irreducible interaction. Fifth, recursive interaction discovery and grounding have become executable experiments with sealed tests, ablations, and explicit failure conditions. Sixth, the applied work has produced real-data evaluations whose limits are inspectable rather than hidden behind a gallery image.
+
+Seventh, chess research now has a separation between preference and proof, including replayable bounded certificates and history-sensitive draw semantics. Eighth, ROS integration connects beliefs, authority, symbolic decisions, and physical execution in a working virtual apparatus. Ninth, the physics-facing programme contains correct finite results and controlled numerical constructions while retaining a clear boundary around untested physical hypotheses.
+
+These contributions form a research platform. They do not add up by summing incompatible percentages, multiplying benchmark speedups, or treating repeated copies of a dataset as new evidence. Their coherence comes from a common method: represent relationships, retain uncertainty, expose the computation, and let a counterexample change the claim.
+
+I intend the next stage to be more demanding, not more timid. The work is ready for focused external scrutiny: independent reruns, stronger baselines, real task families, and explicit tests of which relational mechanisms improve decisions. The accomplishments already made provide the means to conduct that scrutiny. [S01–S50]
+
+## 42. The next experiments that can change the conclusion
+
+For the engine, compare update families under identical compatibility, data, stopping, and memory conventions. Include construction cost and peak memory. Test adversarial priors, disconnected components, oscillatory cases, and high label counts. Calibrated prediction, numerical stability, and selective risk should be measured separately.
+
+For hierarchy, hold out equation families and vary degree, dimension, correlation, and noise. Compare sparse polynomial and hierarchical interaction methods. Permit proposals that do not depend on successful lower-order parents. A relaxation-specific gain should survive a matched no-relaxation comparator.
+
+For grounding and language, move to measured referring expressions or sensor observations, with many-to-many relations, unknown objects, correlated evidence, and stronger assignment baselines. Audit anchors with genuinely separate evidence. Evaluate fresh identities as well as fresh observations of existing identities.
+
+For chess, freeze a position suite, compare shared search with different ordering policies, and verify every claimed strategy. Report solved fraction, node count, wall time, proof size, and budget exhaustion. For physical chess, add sound reachability enclosures before claiming exclusion. For robotics, measure sensor and speech performance independently of permission enforcement.
+
+For astronomy and closure, define observables before fitting. Preserve non-flat geometry, units, gauge structure, and refinement controls where they are relevant. Compare equivalent representations with matched resources. In biomedical work, strengthen assay generalization and model identification before escalating to organism-level interpretations.
+
+The decisive question is not whether the programme can generate another impressive display. It can. The decisive question is which additional evidence would make a skeptical expert change a particular conclusion. Each next experiment should be designed around that question.
+
+## 43. Author's closing statement
+
+I began with objects, labels, and the relationships that let an uncertain interpretation become a more coherent one. The work now reaches from geometric correspondence to recursive representation, from a body-shaped graph to a legal game, from signed support to exact sparse operators, and from a speculative physical analogy to a calculation that can be checked.
+
+I will not undersell that progress. We have built working systems, recovered mathematical structure, repaired algorithms, assembled real-data evaluations, and found failures that change what should be attempted next. A rejected candidate, a corrected headline, and a proven limitation can be genuine research achievements when they leave the next investigator with a sharper question and better tools.
+
+The standard I want is straightforward. Show the rule. Show the data. Show the counterexample. Preserve what remains unresolved. Let an attractive idea become a computation, and let the computation answer to evidence.
+
+The ambition remains broad: relationships that compute, uncertainty that remains visible, and machines whose explanations can be inspected. The present contribution is the body of results documented here. The next contribution must earn its place beside them.
+
+**Wings out.**
+
+## Appendix A. A compact ledger of principal claims
+
+| Claim | Evidence class | Result and boundary |
+| --- | --- | --- |
+| Structured signed support scales sparsely | Implementation and benchmark | 100,000-node path; about 20 MB operators; exact reference agreement within floating-point tolerance |
+| Ternary uncertainty needs two coordinates | Formal and numerical | Signed support plus unresolved mass exactly reconstruct the normalized ternary state |
+| Local null semantics avoid isolated padding effects | Counterexample and repair | Tested active-state change becomes zero in corrected local mode |
+| A prior-respecting alternative converges | Conditional formal result | Contraction under stated weight and gain assumptions; 1,536/1,536 tested runs converged |
+| Cyclic chirality requires orientation in the comparator | Exact audit | Signed cyclic score decomposes into oriented pairs; thresholded predicate remains higher-order |
+| Restricted interaction discovery succeeds | Synthetic held-out | All five supports recovered in 20 principal seeds; no relaxation-specific gain there |
+| Parent-first promotion has a blind spot | Synthetic counterexample | Hidden fourth order: 17.20% versus 91.28% explained variance for exhaustive model |
+| Reciprocal selection can be accurate and selective | Synthetic held-out | 328/332 correct accepts at 41.50% coverage |
+| Agreement is not external correctness | Synthetic counterexample | Shared wrong dictionary: 0/338 correct accepts |
+| Recursive representations are executable | Synthetic held-out | 442/445 correct accepts; fresh observations of known identities |
+| Wearable posture works on real logs | Measured-data aggregate | 85.2% mean accuracy over 23 subjects with per-subject calibration |
+| CRISPR graph refinement has small positive point estimates | Measured-data exploratory | Clean group splits; significance and practical improvement not established |
+| Threat-entity refinement is operational | Measured training pilot | F1 0.548; simple pooling is stronger at 0.608 |
+| Forecast leakage is detected and removed | Audit and intervention test | Future sensitivity removed; universal predictive advantage absent |
+| Spreadsheet context can help or hurt | Synthetic paired benchmark | AP 0.751 with stable semantic format; misleading format degrades it |
+| Bounded chess proofs are replayable | Implementation and fixtures | Initial position unresolved; finite mate witnesses verified |
+| ROS chess completes full games | Integration and numerical trials | 65-ply mate and 161-ply claimed draw in two recorded policy runs |
+| Closure selects modes in a finite bridge | Formal | Permutation-cycle nullities 6, 5, 1; no physical quantum derivation |
+| Flat gauge refinement behaves as designed | Numerical | Action approaches 0.25; gravity flat by construction |
+| GHZ states have a compact exact family description | Formal and implementation | Nineteen dense checks; two-amplitude sparse payload |
+| Specified baryonic mass model leaves a force shortfall | Measured-data conditional | In-sample RMS 66.72 to 2.00 km/s with fitted halo |
+| Vertical force can discriminate frozen models | Prospective numerical prediction | 23.0% prediction gap; no independent vertical observation yet |
+
+## Appendix B. Numerical comparisons that should travel with the headlines
+
+### B1. Structured signed support at 1,024 objects
+
+| Implementation | Recorded median seconds | Reported compatibility/operator bytes |
+| --- | --- | --- |
+| Dense reference | 0.1805 | 75,497,472 |
+| Factorized dense | 0.0418 | Not used for the headline storage comparison |
+| Sparse | 0.00649 | 203,848 |
+
+These numbers belong to the publication-study environment and task. They are not a cross-platform promise. The 100,000-node dense comparison is theoretical storage, while the sparse case was executed. [S02]
+
+### B2. Interaction discovery, principal independent-input condition
+
+| Method | Explained variance | Test MSE | Fitted parameters |
+| --- | --- | --- | --- |
+| Additive | 3.85% | 4.25602 | 9 |
+| Fixed pair averages | 3.86% | 4.25558 | 5 |
+| Hierarchical relaxation | 97.90% | 0.09076 | 14 |
+| Hierarchy without relaxation | 97.90% | 0.09076 | 14 |
+| Exhaustive polynomial | 97.86% | 0.09237 | 163 |
+
+Fitted parameters exclude selection work. Twenty seeds describe this synthetic generator, not a population of all scientific equations. [S08]
+
+### B3. Grounding operating points are not interchangeable
+
+| Study and method | Correct / accepted | Accepted accuracy | Coverage |
+| --- | --- | --- | --- |
+| Original forward-only | 381 / 401 | 95.01% | 50.12% |
+| Original reciprocal | 328 / 332 | 98.80% | 41.50% |
+| Original copied reverse | 423 / 431 | 98.14% | 53.87% |
+| Recursive guarded | 442 / 445 | 99.33% | 55.62% |
+| Recursive robust self-only | 400 / 402 | 99.50% | 50.25% |
+
+The recursive study uses a different observation protocol from the original. Its rows are not evidence of a direct improvement over the original experiment. Shared-error controls must accompany any grounding headline. [S07, S09]
+
+### B4. Real-data CRISPR ranking
+
+| Model | Sequence-disjoint Spearman | Gene-disjoint Spearman |
+| --- | --- | --- |
+| One-hot Ridge | 0.395318 | 0.388453 |
+| Sequence-feature Ridge | 0.479858 | 0.400323 |
+| Sequence-feature HRL | 0.480544 | 0.403291 |
+
+The comparison uses fixed folds and pooled out-of-fold predictions. Sequence overlap was checked; the graph is feature-transductive. Small positive differences remain exploratory. [S14, S15]
+
+### B5. Entity extraction pilot
+
+| Method | Precision | Recall | Exact span/type F1 |
+| --- | --- | --- | --- |
+| Native extractor | 0.421 | 0.627 | 0.504 |
+| Matched candidates, no HRL | 0.451 | 0.627 | 0.525 |
+| Same-text pooling | 0.514 | 0.745 | 0.608 |
+| Sparse HRL | 0.466 | 0.667 | 0.548 |
+
+One training report is a plumbing pilot. Candidate recall constrains every refinement method that uses the same proposed spans. [S16]
+
+## Appendix C. An operational vocabulary for interpreting the portfolio
+
+**Strength** is a numerical state used by an update rule. Normalization alone does not make it a calibrated probability. **Support** is the contribution of other assignments or evidence under an explicit compatibility rule. **Confidence** is often a winning strength or margin in these implementations; its empirical reliability must be measured separately.
+
+**Prior** is input preference or evidence that precedes the current relational update. It may be heuristic, learned, measured, or fixed by a domain rule. The word does not guarantee a complete Bayesian generative model. **Anchor** is an assignment deliberately held or biased by stronger evidence. Reusing an anchor across views couples their errors.
+
+**ISH** is an unresolved ternary component in specified models. **Null** can mean no available label explains an object. **Abstention** is a decision not to return an ordinary answer. **Conflict** can mean both positive and negative derivations are present. These states need explicit semantics rather than one universal interpretation.
+
+**Hierarchy** means that representations or constraints are organized across declared levels. **Recursion** means that an operation revisits or constructs related structures through a finite process in the executed systems. Neither word proves infinite depth, improved accuracy, or causal identification.
+
+**Convergence** is a statement about a sequence under a rule and a metric. **Correctness** concerns whether the output meets its contract or matches a specified reference. **Truth** about an external phenomenon requires the corresponding external evidence. The three should not share one dashboard light.
+
+**Certificate** is an object a verifier can check against a defined claim. **Witness** may establish that one route or continuation exists. **Exclusion** requires ruling out all relevant alternatives. A failed search, sampled rollout, or exhausted budget supplies neither an exclusion certificate nor a draw theorem by itself.
+
+**Closure** names a specified residual or composition condition. A small closure residual is not automatically a good prediction, a causal identification result, or a physical unification. **Mass**, **informational weight**, and **surprisal** likewise belong to different mathematical and physical contracts unless a bridge is explicitly defined and tested.
+
+## Appendix D. Reproduction and verification record
+
+This synthesis reran selected tests without changing the underlying research algorithms. The portfolio command `python3 -m pytest tests -q` passed 68 tests. The publication-study command `PYTHONPATH=src python3 -m unittest discover -s tests -v` passed 17 tests. The local research-guided solver command `python3 -m unittest -v` passed five tests. The ROS package, after sourcing ROS Humble, passed 38 tests. The verification JSON records commands, working directories, and observed outcomes.
+
+These are four suites with different scopes. They are not four independent scientific replications, and their sum is not an effect size. Some check shared primitives or small fixtures; some validate interfaces. The original scientific benchmark runs remain the runs cited in their source reports.
+
+For the signed study, rerun the signed, chirality, and forecast benchmark scripts in the publication-study directory. For interaction discovery, run the experiment and report builders in meta-renormalization. For grounding, use the original and recursive experiment scripts, keeping threshold selection and sealed test seeds separate. For spreadsheet auditing, preserve paired formatting realizations and the injected-defect labels. For astronomy, use the frozen source table and the recorded environment rather than silently fetching a revised dataset.
+
+ROS live tests can alter the demonstration state and are not part of this synthesis's noninteractive verification. The paper relies on their historical validation record and reruns the package's model tests. The synthesis does not reconnect a tunnel, operate a physical robot, or claim that the public backend is currently online.
+
+The paper bundle contains the editable manuscript, generated PDF, figures, build script, evidence register, verification record, claim checks, and manifest. It does not bundle private physiology records, operator credentials, raw personal inventories, model weights, or third-party datasets merely because they were accessible locally. The source register provides enough location and hash information for authorized local review.
+
+## Appendix E. Coverage and exclusions
+
+The principal research families reviewed are the public core and historical applications; generic sparse factors and GRRLE; triadic uncertainty and signed support; closure and mesh refinement; morphology and virtual cells; biomedical assay ranking; cybersecurity extraction; forecasting and econometric toy comparisons; economic accounting; spreadsheet auditing; language/vision prototypes; chess preference, reinforcement, proof, and physical execution; ROS perception and authority; anchored geometry; quantum-state compression; astronomical model comparisons; hydrology and acoustic models; and geographic/ecological testbeds.
+
+The coverage is deliberately uneven because the evidence is uneven. A theorem with an implementation audit warrants more space than an untested visual proposal. The paper does not assign each project equal scientific maturity in order to make the portfolio look balanced.
+
+Personal essays, fictional stories, theological conclusions, playlists, narrated entertainment, and fictional macro-sleep models are outside the research-results scope. The numerical projective-horizon mental-health illustrations have no patient validation; they are acknowledged as mathematical prototypes rather than promoted as measured clinical results. Broad philosophical claims about logic, reality, personhood, or information having physical mass remain outside the established results.
+
+Unpublished is not a synonym for unreviewable. Local reinforced-chess artifacts, the untracked bounded solver, and frozen astronomical follow-up calculations have concrete methods and outputs. Conversely, publication on a website is not a synonym for peer review. This paper's evidence classes apply to both public and local work.
+
+The register includes selected source documents and supporting code/data artifacts, not every vendored dependency or every historical version. Its hashes freeze what was inspected for this edition. Subsequent edits may improve the underlying projects; those edits require a new evidence snapshot if their results are to be incorporated into a later edition.
+
+## Appendix F. Prior work and attribution
+
+The foundational relaxation-labeling literature is A. Rosenfeld, R. Hummel, and S. Zucker, Scene Labeling by Relaxation Operations (1976), and R. Hummel and S. Zucker, On the Foundations of Relaxation Labeling Processes (1983), DOI 10.1109/TPAMI.1983.4767390. The portfolio's prior-respecting and uncertainty-aware implementations build on that tradition; this paper does not claim to originate contextual labeling.
+
+Hierarchical interaction selection has an established literature, including Bien, Taylor, and Tibshirani, A Lasso for Hierarchical Interactions (2013), and Hazimeh and Mazumder, Learning Hierarchical Interactions at Scale (2020). Co-training and selective classification provide context for reciprocal grounding, including Blum and Mitchell (1998) and Geifman and El-Yaniv (2017). These references identify related research areas; this synthesis does not claim to have completed a new systematic comparison with every method in them.
+
+The CRISPR assay originates in the Doench/Azimuth work, including Doench and colleagues, Nature Biotechnology (2016), DOI 10.1038/nbt.3437. The threat-report pilot uses AnnoCTR annotations and the pinned model named in its report. Astronomical inputs include Eilers and colleagues' Milky Way rotation curve and McMillan's Galactic mass model, accessed through the implementation documented in the local study. World Development Indicators belong to the World Bank. WordNet, CMU pronunciation data, Natural Earth, and historical text editions retain their own provenance.
+
+The GHZ construction is established quantum information, and Gottesman's stabilizer work supplies broader simulation context. The anchored-graph arguments belong to established averaging, absorbing-chain, and harmonic-analysis traditions. Gauge cochains, Wilson actions, and Regge geometry are not new inventions of this portfolio. My contribution is the specified construction, integration, proof application, audit, or experiment identified in each section.
+
+Software includes NumPy, SciPy, Matplotlib, python-chess, Stockfish, ROS 2, browser libraries, and other dependencies credited in the original artifacts. Source availability and license status vary. The parent portfolio uses its stated source-available license, Virtual Earth has an explicit MIT exception, and third-party material keeps its own terms. This synthesis grants no additional rights over third-party data or code.
+
+## Source register
+
+The following primary project artifacts are identified by source ID. Complete supporting-file hashes are in `evidence-register.json`.
+
+**S01. Public HRL engine and historical applications.** portfolio: `hrl/core.py`.
+
+**S02. Signed sparse support, chirality audit, and causal forecasting.** publication-study: `PAPER.md`.
+
+**S03. Triadic uncertainty: exact coordinates, controls, and contraction.** triadic-study: `REPORT.md`.
+
+**S04. Generic sparse pair and triangle factor engine.** original-python: `hrl_generic/README.md`.
+
+**S05. Simplicial Relax architecture.** portfolio: `SIMPLICIAL_RELAX.md`.
+
+**S06. GRRLE Strong executable recursive substrate.** portfolio: `grrle-strong/README.md`.
+
+**S07. Reciprocal grounding, original study.** portfolio: `reciprocal-grounding/WHITEPAPER.md`.
+
+**S08. Meta-renormalization experiments 001 and 002.** portfolio: `meta-renormalization/WHITEPAPER.md`.
+
+**S09. Recursive grounding supplement.** portfolio: `reciprocal-grounding/RECURSION.md`.
+
+**S10. Wearable posture aggregate and implementation.** portfolio: `body_pos_data.json`.
+
+**S11. Recovered train-brake labeling exhibit.** portfolio: `beena/index.html`.
+
+**S12. Growing-graph morphology and remodeling.** portfolio: `morphogenesis-grow/REPORT.md`.
+
+**S13. Simplicial morphology.** portfolio: `simplicial.py`.
+
+**S14. Virtual-body audit, nested repairs, and constant-exposure feasibility.** portfolio: `virtual-body-cancer/AUDIT-RESULTS.md`.
+
+**S15. Measured CRISPR group-split ranking.** portfolio: `virtual-body-cancer/output/crispr-benchmark.json`.
+
+**S16. AnnoCTR real-model training pilot.** cybersecurity: `PILOT-REPORT.md`.
+
+**S17. Causal forecast protocol and results.** publication-study: `FORECAST_PROTOCOL.md`.
+
+**S18. HyperStar synthetic econometric benchmark.** publication-study: `results/hyperstar_benchmark/REPORT.md`.
+
+**S19. Economic accounting, frozen WDI descriptions, and synthetic scenarios.** portfolio: `magnum-economicus/MANUSCRIPT.md`.
+
+**S20. Formatting-aware spreadsheet audit.** portfolio: `spreadsheet-dissertation/manuscript.md`.
+
+**S21. WikiMRGRELE lexical/byte experiments and typed ablation.** original-python: `wikimrgrele/README.md`.
+
+**S22. Frozen-proposal ProMaster vision checkpoint.** original-python: `vision_grrle/README.md`.
+
+**S23. Controlled-English inference and source explorer.** portfolio: `ecc-plus/README.md`.
+
+**S24. Relaxfish fixed-position pilot.** portfolio: `relaxfish/README.md`.
+
+**S25. Corpus-trained relaxed chess brain.** portfolio: `relaxed-chess-brain/README.md`.
+
+**S26. Local reinforced argument-chess results.** original-python: `argument_chess/RESULTS.md`.
+
+**S27. Local tactical chess follow-up.** original-python: `argument_chess/TACTICAL_RESULTS.md`.
+
+**S28. Magnum Chessicus bounds and certificates.** portfolio: `magnum-chessicus/README.md`.
+
+**S29. Local research-guided bounded mate solver.** portfolio: `relaxed-chess-brain/solver/README.md`.
+
+**S30. Rolling chess model and whole-game records.** ros-package: `CHESS_PHYSICS.md`.
+
+**S31. Merger, lifecycle, and bounded-capture implementation.** ros-package: `cypher_robot_mind/hole_topology.py`.
+
+**S32. ROS robot and chess validation.** ros-package: `VALIDATION.md`.
+
+**S33. Hyperspace anchored graph mathematics.** portfolio: `hyperspace/README.md`.
+
+**S34. Triadic closure assessment and toy extension.** publication-study: `TRIADIC_CLOSURE_EVALUATION.md`.
+
+**S35. TQC III bridge evaluation.** publication-study: `TQC_III_EVALUATION.md`.
+
+**S36. TQC IV typed closure and refinement.** publication-study: `paper/TQC_IV_REPORT.tex`.
+
+**S37. Compact GHZ-family representation.** portfolio: `magnum-quantreleviathone/MANUSCRIPT.md`.
+
+**S38. Spherical Oort-shell and halo comparison.** oort-study: `README.md`.
+
+**S39. Milky Way rotation-curve comparison.** milky-way-study: `README.md`.
+
+**S40. Frozen vertical-force discriminator.** milky-way-study: `discrimination-report.md`.
+
+**S41. HydroGRRLE routed storage and relational interpretation.** original-python: `hydro_grrle/README.md`.
+
+**S42. Wave Worlds acoustic path model.** portfolio: `wave-worlds/README.md`.
+
+**S43. Musical hyperobject and projective field.** portfolio: `hyperobject/README.md`.
+
+**S44. Geographic chess variant and whole-world initialization.** portfolio: `tiny-creek-chess/README.md`.
+
+**S45. Virtual Earth seeded ecological testbed.** portfolio: `virtual-earth/README.md`.
+
+**S46. HRL Lab numerical inspector.** portfolio: `hrl-lab/README.md`.
+
+**S47. Genesis SDSS sparse segmentation.** portfolio: `genesis/sdss/build_sdss.py`.
+
+**S48. Genesis connectome communities and constructed activity.** portfolio: `genesis/brain/build_brain.py`.
+
+**S49. Genesis SPARC and radial-acceleration displays.** portfolio: `genesis/sparc/build_sparc.py`.
+
+**S50. Genesis correlated cosmological seed construction.** portfolio: `genesis/planck/build_planck.py`.

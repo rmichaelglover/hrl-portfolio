@@ -1,0 +1,224 @@
+{
+  "note": "Redrawn historical results, not new benchmark executions; rounded values follow source reports.",
+  "sparse": {
+    "source": "S02",
+    "seconds": [
+      0.1805,
+      0.0418,
+      0.00649
+    ],
+    "bytes": [
+      75497472,
+      203848
+    ]
+  },
+  "discovery": {
+    "source": "S08",
+    "hierarchy": [
+      97.9,
+      17.2,
+      81.35,
+      66.4
+    ],
+    "exhaustive": [
+      97.86,
+      91.28,
+      99.08,
+      65.79
+    ]
+  },
+  "grounding": {
+    "source": "S07",
+    "forward": [
+      50.12,
+      95.01
+    ],
+    "reciprocal": [
+      41.5,
+      98.8
+    ],
+    "copied_reverse": [
+      53.87,
+      98.14
+    ],
+    "no_relaxation": [
+      39.25,
+      98.73
+    ]
+  },
+  "spreadsheets": {
+    "source": "S20",
+    "scenarios": [
+      "semantic",
+      "decorative",
+      "reversed"
+    ],
+    "format_ap": [
+      0.7513244038008584,
+      0.32964953703349126,
+      0.30917433115082554
+    ],
+    "semantic_comparison": [
+      {
+        "scenario": "semantic",
+        "method": "column_mode",
+        "ap": 0.5597041153291153,
+        "ap_ci": [
+          0.5308465666278166,
+          0.5896426767676768
+        ],
+        "auroc": 0.8718828914141413,
+        "auroc_ci": [
+          0.8712515782828283,
+          0.8725142045454545
+        ],
+        "precision_at_5pct": 0.33641975308641975,
+        "precision_at_5pct_ci": [
+          0.3333333333333333,
+          0.3410493827160494
+        ],
+        "recall_at_5pct": 0.7569444444444443,
+        "recall_at_5pct_ci": [
+          0.75,
+          0.7673611111111112
+        ],
+        "recall_wrong_operator": 1.0,
+        "recall_wrong_operator_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_wrong_reference": 1.0,
+        "recall_wrong_reference_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_hardcode": 1.0,
+        "recall_hardcode_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_numeric_scale": 0.027777777777777776,
+        "recall_numeric_scale_ci": [
+          0.0,
+          0.06944444444444443
+        ]
+      },
+      {
+        "scenario": "semantic",
+        "method": "global_gmm",
+        "ap": 0.31427897836330704,
+        "ap_ci": [
+          0.3063743484046069,
+          0.3220882056505541
+        ],
+        "auroc": 0.9730672611531989,
+        "auroc_ci": [
+          0.970475178214436,
+          0.9756715100220962
+        ],
+        "precision_at_5pct": 0.345679012345679,
+        "precision_at_5pct_ci": [
+          0.3395061728395061,
+          0.3518518518518519
+        ],
+        "recall_at_5pct": 0.7777777777777778,
+        "recall_at_5pct_ci": [
+          0.7638888888888888,
+          0.7916666666666669
+        ],
+        "recall_wrong_operator": 0.9027777777777778,
+        "recall_wrong_operator_ci": [
+          0.8472222222222222,
+          0.9583333333333335
+        ],
+        "recall_wrong_reference": 1.0,
+        "recall_wrong_reference_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_hardcode": 1.0,
+        "recall_hardcode_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_numeric_scale": 0.20833333333333334,
+        "recall_numeric_scale_ci": [
+          0.125,
+          0.2916666666666667
+        ]
+      },
+      {
+        "scenario": "semantic",
+        "method": "format_gmm",
+        "ap": 0.7513244038008584,
+        "ap_ci": [
+          0.7429023991784792,
+          0.7588834450089622
+        ],
+        "auroc": 0.9169264257154882,
+        "auroc_ci": [
+          0.9136267870764941,
+          0.9207591458201808
+        ],
+        "precision_at_5pct": 0.33179012345679015,
+        "precision_at_5pct_ci": [
+          0.3287037037037038,
+          0.3333333333333333
+        ],
+        "recall_at_5pct": 0.7465277777777777,
+        "recall_at_5pct_ci": [
+          0.7395833333333334,
+          0.75
+        ],
+        "recall_wrong_operator": 0.9861111111111112,
+        "recall_wrong_operator_ci": [
+          0.9583333333333334,
+          1.0
+        ],
+        "recall_wrong_reference": 1.0,
+        "recall_wrong_reference_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_hardcode": 1.0,
+        "recall_hardcode_ci": [
+          1.0,
+          1.0
+        ],
+        "recall_numeric_scale": 0.0,
+        "recall_numeric_scale_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "refinement": {
+    "source": "S34/S36",
+    "n": [
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "error": [
+      0.000325,
+      2.03e-05,
+      1.27e-06,
+      7.95e-08,
+      4.89e-09
+    ]
+  },
+  "astronomy": {
+    "source": "S40",
+    "rotation_rms": [
+      1.96,
+      2.28
+    ],
+    "vertical_force": [
+      1792.06,
+      2258.55
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "author": "Michael Emanuel Glover",
+  "date": "2026-10-16",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1929,
+      "sha256": "abeb4565eefa5945a5d89a2c70971056fe7efb1deda59688a96e9319a1683734"
+    },
+    {
+      "path": "RELATIONSHIPS-THAT-COMPUTE.pdf",
+      "bytes": 766674,
+      "sha256": "86c61452b017dfbb3fec17539b1e05cb425bfef7826babb55b2650cfeabde792"
+    },
+    {
+      "path": "RELATIONSHIPS-THAT-COMPUTE.txt",
+      "bytes": 123928,
+      "sha256": "633d53e2281618fbf2819ec23bb961b4b23b756538a4a62bcc8bf972381df047"
+    },
+    {
+      "path": "WHITE-PAPER.md",
+      "bytes": 106804,
+      "sha256": "8165188643b36b2b57b5e700d00bada864865d543e803846450e8e318b4bcbf8"
+    },
+    {
+      "path": "build.py",
+      "bytes": 30347,
+      "sha256": "1470e5f5b30d100473abda2aaaa03784a477d90bc8a5235a8b85b10ed5ee8104"
+    },
+    {
+      "path": "claim-checks.json",
+      "bytes": 2455,
+      "sha256": "7b8563731d9b6f18f28b03bae34ec2c6e7d3548e3d891f90ba3be4aaceae6f54"
+    },
+    {
+      "path": "document-checks.json",
+      "bytes": 432,
+      "sha256": "d231a116751122b78040f9b4d050ef87477ff947c5b457ff321939cbd912236e"
+    },
+    {
+      "path": "evidence-register.json",
+      "bytes": 34936,
+      "sha256": "23c00b74844567dc561e5556fede207ccc3b09f52f745f60e3b7f6ee000e38e5"
+    },
+    {
+      "path": "figure-data.json",
+      "bytes": 4713,
+      "sha256": "b4487cd2782e874933cad88556ecdc052fa85d9d91e6ffec50d6e90039d815d4"
+    },
+    {
+      "path": "figures/astronomy.pdf",
+      "bytes": 22245,
+      "sha256": "e77199dd8c3860bb2eb71c92e369d4499d1f61e77ba6422976021054369877ec"
+    },
+    {
+      "path": "figures/astronomy.png",
+      "bytes": 64357,
+      "sha256": "ac16d5d238ba437439e274336b8f8fa598c1632e8b805152323983920ed7ca0d"
+    },
+    {
+      "path": "figures/discovery.pdf",
+      "bytes": 21679,
+      "sha256": "64bef8bd3a9527736f0369599c2985f66ce53b26a2aad12f3b9948689f380787"
+    },
+    {
+      "path": "figures/discovery.png",
+      "bytes": 68855,
+      "sha256": "c25048c63bd8649d207f7b85e440ca009b5cce4ac84fbe0152bea6c4e4db9e77"
+    },
+    {
+      "path": "figures/grounding.pdf",
+      "bytes": 25637,
+      "sha256": "4b631e5bacf2966a5ab423475e6c0fead62e3626681921821f16a4ce8a0bd5aa"
+    },
+    {
+      "path": "figures/grounding.png",
+      "bytes": 95378,
+      "sha256": "2f15b38ddc8053e3c62ef2e4d72fd6167ce7922e454d8c5ca1568e7765db5261"
+    },
+    {
+      "path": "figures/refinement.pdf",
+      "bytes": 21995,
+      "sha256": "6cc3f3f0c18361ee0d3fdfeec0bbe486d68f47106258a5c176eaac1e85b0b224"
+    },
+    {
+      "path": "figures/refinement.png",
+      "bytes": 77317,
+      "sha256": "1d12cc81cb1f6b43f0294809fa0bd2936ef418cb8fa0f868ea35a59d5561ab80"
+    },
+    {
+      "path": "figures/sparse.pdf",
+      "bytes": 23407,
+      "sha256": "b976697abe31a85aa3b55719242b4efb0a825d265418cf3dbee8b4482b79edcf"
+    },
+    {
+      "path": "figures/sparse.png",
+      "bytes": 78371,
+      "sha256": "90be88c22c987cfef5033a215385e9e0a81c53b69141ebaddc73b9efd63fa584"
+    },
+    {
+      "path": "figures/spreadsheets.pdf",
+      "bytes": 23446,
+      "sha256": "30d83758f58f043236dbc3b3c42d951beb256b3621fe41b2f81b6e6cc8d09938"
+    },
+    {
+      "path": "figures/spreadsheets.png",
+      "bytes": 76761,
+      "sha256": "ba504e920cbfd2887731b82e2a76d2d6c25ae28be010b27e583950b15dc4eb83"
+    },
+    {
+      "path": "index.html",
+      "bytes": 6924,
+      "sha256": "0b37129f4327fdd8cf79a4a93a25e17afdcf1c141500051df5b6d106b3c45873"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 892,
+      "sha256": "365549210d2f671342739554ab13810a747cbfe616cddfc79c723e5dc21bdfb7"
+    }
+  ]
+}

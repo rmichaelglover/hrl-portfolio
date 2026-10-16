@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-16",
+  "scope": "Verification suites rerun during preparation of this synthesis. Historical scientific benchmarks were inspected, not all rerun.",
+  "runs": [
+    {"directory":"/home/rmichaelglover/Code/hrl-portfolio","command":"python3 -m pytest tests -q","result":"68 passed in 1.05s","exit_code":0},
+    {"directory":"/home/rmichaelglover/relaxation-publication-study","command":"PYTHONPATH=src python3 -m unittest discover -s tests -v","result":"17 tests passed in 1.665s","exit_code":0},
+    {"directory":"/home/rmichaelglover/Code/hrl-portfolio/relaxed-chess-brain/solver","command":"python3 -m unittest -v","result":"5 tests passed in 0.135s","exit_code":0},
+    {"directory":"/home/rmichaelglover/ros2_ws/src/cypher_robot_mind","command":"source /opt/ros/humble/setup.bash && /usr/bin/python3 -m pytest test -q","result":"38 passed in 4.09s","exit_code":0}
+  ]
+}

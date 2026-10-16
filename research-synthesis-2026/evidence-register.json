@@ -1,0 +1,1107 @@
+{
+  "edition_date": "2026-10-16",
+  "author": "Michael Emanuel Glover",
+  "scope": "Selected inspected research artifacts; not a complete drive census or independent replication.",
+  "roots": {
+    "portfolio": "/home/rmichaelglover/Code/hrl-portfolio",
+    "publication-study": "/home/rmichaelglover/relaxation-publication-study",
+    "triadic-study": "/home/rmichaelglover/triadic-unity-research",
+    "original-python": "/home/rmichaelglover/Code/relaxation-labeling/python",
+    "ros-package": "/home/rmichaelglover/ros2_ws/src/cypher_robot_mind",
+    "cybersecurity": "/home/rmichaelglover/hrl-cybersecurity-research",
+    "oort-study": "/home/rmichaelglover/dark-matter-oort-study",
+    "milky-way-study": "/home/rmichaelglover/dark-matter-milky-way-study"
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Public HRL engine and historical applications",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "hrl/core.py",
+          "bytes": 11912,
+          "sha256": "e7e9a965ac94acf15d4a2bb067a84225d5abb26c43d136845b0159d0f4e7425d"
+        },
+        {
+          "path": "README.md",
+          "bytes": 31704,
+          "sha256": "f80e9c12947fbb678b71a9bae0b58ca001738091479900c934315aff18b909c5"
+        },
+        {
+          "path": "hrl/tracking.py",
+          "bytes": 5919,
+          "sha256": "e4c3cd9146e6d6dc6030d75fc65c808d485068ac81593d2f2b3c4b1ba455f55a"
+        },
+        {
+          "path": "tests/test_core.py",
+          "bytes": 4580,
+          "sha256": "84c3c36f01f66a22d89da1ef35f8a5d87390624347eac1049a55d6731bba8f30"
+        },
+        {
+          "path": "tests/test_tracking.py",
+          "bytes": 1680,
+          "sha256": "9546a62bc6b5fb1ed2ebf8cd555df97733566b75862fbffc1b994305563f094d"
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Signed sparse support, chirality audit, and causal forecasting",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "PAPER.md",
+          "bytes": 8423,
+          "sha256": "20e55c8dc3676eae27108d46ffde9f38e4bea2dc753a8a71fae6fc39f439e533"
+        },
+        {
+          "path": "results/signed_results.json",
+          "bytes": 8432,
+          "sha256": "bbae742bbd9bce7399ee37a484613653f2c724d5dd36c29c62ae9f17ddca9393"
+        },
+        {
+          "path": "results/chirality_results.json",
+          "bytes": 931,
+          "sha256": "3e76365fc1d9ff023fa9f2e27f53f0d11b5ec0d98184ba97f612625e88f363c8"
+        },
+        {
+          "path": "results/forecast_results.json",
+          "bytes": 3790,
+          "sha256": "922b263c2c9a92dc3d8778877d548fbc472ed6d743497aabd8a88b3ece70600f"
+        },
+        {
+          "path": "benchmark_signed.py",
+          "bytes": 4679,
+          "sha256": "00b8a77bf5389eba5b18724f16d2b145f39e2541b3cfae768d9dc7274aa782a5"
+        },
+        {
+          "path": "benchmark_chirality.py",
+          "bytes": 2936,
+          "sha256": "10d0b9aa4ea1e339b52920497a1f1a05922ef6e136ddaf00894bd6cc3a095c6f"
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Triadic uncertainty: exact coordinates, controls, and contraction",
+      "root": "triadic-study",
+      "files": [
+        {
+          "path": "REPORT.md",
+          "bytes": 8915,
+          "sha256": "db4cfebaf2a3cc549c77e3ffd7e745f7d2528a8eced617bb77106c82e066fb7e"
+        },
+        {
+          "path": "THEORY.md",
+          "bytes": 6184,
+          "sha256": "3c20ba6145d4b904ee6a3c21aec699fd32bf64dde0b036a5faa5b1bd7e22080b"
+        },
+        {
+          "path": "PROTOCOL.md",
+          "bytes": 4249,
+          "sha256": "927f96efef2f3fb78dc4ff9fd63f3bb502dad0396a042b134c00205e4fe84f82"
+        },
+        {
+          "path": "FOLLOWUP_PROTOCOL.md",
+          "bytes": 1864,
+          "sha256": "8339628c156d80e9a9ff910fe29a66daa90e05161a6fde5588604559ea1cb3cb"
+        },
+        {
+          "path": "sparse_trool.py",
+          "bytes": 3054,
+          "sha256": "2e7a92c67210fd413ca78bcfeb92ccc6c130b939f653e73a558773c189f281ce"
+        },
+        {
+          "path": "contractive.py",
+          "bytes": 3347,
+          "sha256": "cc921bfc1b3f4f78ed20cb5f3b6fac93eb93c882b11bfd8816b8269438722ffd"
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "Generic sparse pair and triangle factor engine",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "hrl_generic/README.md",
+          "bytes": 4712,
+          "sha256": "5e7fe8a7836d5f9a84345a2a9ecb088976bb4b6d67645e517acb0652bb5333c5"
+        },
+        {
+          "path": "hrl_generic/selftest.py",
+          "bytes": 6917,
+          "sha256": "3ebee58837978d8eb83e2ffb56541e62459db5da58a5a32165a7f61e62ea9a3f"
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "Simplicial Relax architecture",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "SIMPLICIAL_RELAX.md",
+          "bytes": 4673,
+          "sha256": "f4ae989016218e303cc479fa1cab65abca25b0b388a1ef31239c67771f232723"
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "GRRLE Strong executable recursive substrate",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "grrle-strong/README.md",
+          "bytes": 2075,
+          "sha256": "ad541a8c6134ebeb3362076fce7c70460dc9bfe8eb5c645113ba4bfdc5dde6f8"
+        },
+        {
+          "path": "grrle-strong/python/grrle.py",
+          "bytes": 17109,
+          "sha256": "3733439d2b6a80c009e35859c93267d72666b119a73912445891e247735ac2b5"
+        },
+        {
+          "path": "grrle-strong/python/test_grrle.py",
+          "bytes": 1811,
+          "sha256": "815ebbb993deb38f1b8b85cded547a374af3fafeeb15b4c98971370af76ba275"
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "Reciprocal grounding, original study",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "reciprocal-grounding/WHITEPAPER.md",
+          "bytes": 23490,
+          "sha256": "bb286ef66cd4a60e1088734991c023eaacc73f82d88ba71305c20ea3221efb45"
+        },
+        {
+          "path": "reciprocal-grounding/data/results.json",
+          "bytes": 242001,
+          "sha256": "c70752a43d2c6dc5f104138aac3b56895290880fc5354fda30c23c8daf84babd"
+        },
+        {
+          "path": "reciprocal-grounding/data/runs.csv",
+          "bytes": 38582,
+          "sha256": "0fa9508f2fe9f5cef2a16a042958bd9a556181bcfafbf8d339ce48892c6ebb48"
+        },
+        {
+          "path": "hrl/reciprocal.py",
+          "bytes": 8261,
+          "sha256": "a4d7a2fcab68e2f0ebc6a957a14b1d9431e60e26481b202a1b13ba298b817902"
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "Meta-renormalization experiments 001 and 002",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "meta-renormalization/WHITEPAPER.md",
+          "bytes": 12314,
+          "sha256": "a19f35de45927f44e0bae23c7f332bdc4dca2861996d41488277aaed787eaec1"
+        },
+        {
+          "path": "meta-renormalization/data/results.json",
+          "bytes": 32121,
+          "sha256": "4040bc07ee1e7d4cd467efe4499a993102637ec0294e3c8ea86bf046da86012e"
+        },
+        {
+          "path": "meta-renormalization/data/experiment001.json",
+          "bytes": 858,
+          "sha256": "b4f9c493bfbfd288ed96c509d63a9ec4a9b98e89945afec0159833b6b71a95e0"
+        },
+        {
+          "path": "hrl/meta_discovery.py",
+          "bytes": 6723,
+          "sha256": "95ebb9d8c0aaac5666b9dc26efb318bfa1070d30cf692f8a72a4c342d1595470"
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "title": "Recursive grounding supplement",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "reciprocal-grounding/RECURSION.md",
+          "bytes": 9504,
+          "sha256": "098c401ae29db9916e4d2980119b414451a017502f8c64b49b534f9ea9597603"
+        },
+        {
+          "path": "reciprocal-grounding/data/recursive-results.json",
+          "bytes": 2320672,
+          "sha256": "b08129628800fbe77ebae4eb23d493dbc1276be1cdf4d1b3728ff627ae5d6746"
+        },
+        {
+          "path": "reciprocal-grounding/data/recursive-runs.csv",
+          "bytes": 81458,
+          "sha256": "b498d9c55a9cff042bb01cb19d7b264f9d22978db2caca4e4d7f595e98769529"
+        },
+        {
+          "path": "hrl/recursive_grounding.py",
+          "bytes": 7096,
+          "sha256": "9026b4ed6b07550acec3c159d54de62a89e6d797216481dbef8864099a616978"
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "Wearable posture aggregate and implementation",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "body_pos_data.json",
+          "bytes": 50331,
+          "sha256": "f8d7366a018f001c5e6608edd1de587f8aa8d3f85540b3fac3ebda8b097366d5"
+        },
+        {
+          "path": "body_pos_testbed.py",
+          "bytes": 14413,
+          "sha256": "2fcdb979751adb2946c1ac105fe31c9694aafca8895f7ffa6cdd1e544f0e8337"
+        },
+        {
+          "path": "hrl/body_pos.py",
+          "bytes": 8756,
+          "sha256": "5d81744ed400130800a175a1e077db7611b326ccc290907da8581d4a190084c5"
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "Recovered train-brake labeling exhibit",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "beena/index.html",
+          "bytes": 80948,
+          "sha256": "b05cf9f55af911e63e318213c82e00f271628ccdf21d561357b28e7585c9cd8b"
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "Growing-graph morphology and remodeling",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "morphogenesis-grow/REPORT.md",
+          "bytes": 4042,
+          "sha256": "0fbb51cc9f168c76447bf463347ea77eb89ee4d3f522f15c75ca772dc4eb6fb8"
+        },
+        {
+          "path": "morphogenesis_v3.py",
+          "bytes": 10812,
+          "sha256": "7ce000607d6871bce6c3ab4701681befdf26cfc79a8a3181418c4badfad00d60"
+        },
+        {
+          "path": "morphogenesis_v4.py",
+          "bytes": 11505,
+          "sha256": "25a31c063780da917f6fe08c1bcbc7a9303785650624437588c4f10c12c5e768"
+        },
+        {
+          "path": "morphogenesis/proposal.md",
+          "bytes": 4238,
+          "sha256": "fc217099d9b89d7c17f75689428f90ca2c879efd60032359fb11533b82baf34e"
+        }
+      ]
+    },
+    {
+      "id": "S13",
+      "title": "Simplicial morphology",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "simplicial.py",
+          "bytes": 11131,
+          "sha256": "1ea137bf84186d223b2197d585590af59d8699881ef8b1348599838195efccec"
+        },
+        {
+          "path": "simplicial3d.py",
+          "bytes": 12276,
+          "sha256": "f91ab825cbd08c8ebb20b48d33603a3187285b3ec23976f018816273c8479aff"
+        },
+        {
+          "path": "simplicial3d_data.json",
+          "bytes": 255644,
+          "sha256": "d3802f7fc1e2fc38a922fb53e0e54bb35f80e085d4c7e974f4f256d86bc366fc"
+        },
+        {
+          "path": "simplicial/roadmap.md",
+          "bytes": 2240,
+          "sha256": "a2ad53b8dd88dc36f4774f1e9e3eea1c94824b16b5da843597487978795be386"
+        }
+      ]
+    },
+    {
+      "id": "S14",
+      "title": "Virtual-body audit, nested repairs, and constant-exposure feasibility",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "virtual-body-cancer/AUDIT-RESULTS.md",
+          "bytes": 8733,
+          "sha256": "0e52438dfbc0e4c3f532b805db26f62ca950c30563fd5edc75d3caf0a46485fd"
+        },
+        {
+          "path": "virtual-body-cancer/output/nested-cell-checks.json",
+          "bytes": 28007,
+          "sha256": "d398de9d5d94e53828309fd7738673f341593994d60cc7d5c3c9e1d5f3dca90a"
+        },
+        {
+          "path": "virtual-body-cancer/output/extinction-feasibility.json",
+          "bytes": 12560,
+          "sha256": "fb40cd31adff5c8fdc107d666c2f531dc92ec36d7034d7f7806818c13fee7adc"
+        },
+        {
+          "path": "virtual-body-cancer/analyze_extinction.py",
+          "bytes": 3912,
+          "sha256": "4133dfdd9576029034183d9fc85dbc57ee72716f074e9e1d84faa190189147fd"
+        }
+      ]
+    },
+    {
+      "id": "S15",
+      "title": "Measured CRISPR group-split ranking",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "virtual-body-cancer/output/crispr-benchmark.json",
+          "bytes": 8944,
+          "sha256": "6365f922c67719cb81b92a8926f341c3fc22a920fb8e26e192903b4a3200a4b1"
+        },
+        {
+          "path": "virtual-body-cancer/benchmark_existing_crispr.py",
+          "bytes": 6913,
+          "sha256": "8e78e1e84f8e378615fe1cb38eabaddc1cde3f70ae210dd49f3e3b4755a10f4f"
+        },
+        {
+          "path": "virtual-body-cancer/output/feature-extraction-provenance.json",
+          "bytes": 346,
+          "sha256": "9771e0a0fa9564c62b67e19435726f9d1ad909da337f58b8d96256f388b622b8"
+        }
+      ]
+    },
+    {
+      "id": "S16",
+      "title": "AnnoCTR real-model training pilot",
+      "root": "cybersecurity",
+      "files": [
+        {
+          "path": "PILOT-REPORT.md",
+          "bytes": 3079,
+          "sha256": "1c59f8583697076cc3fab63b377f30263b11b4dd1ec5fcaeba2601546b49b421"
+        },
+        {
+          "path": "DATA-LABELING-PROTOCOL.md",
+          "bytes": 4604,
+          "sha256": "b1033937f698ffe08b5ef0fd72d820f2989baba693314e93b4a57d41c5686b3c"
+        }
+      ]
+    },
+    {
+      "id": "S17",
+      "title": "Causal forecast protocol and results",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "FORECAST_PROTOCOL.md",
+          "bytes": 2380,
+          "sha256": "80c55a84ab321c134f4eed1127c5ef29e08865b0d0a9bc9dc576000acf86531b"
+        },
+        {
+          "path": "results/forecast_results.json",
+          "bytes": 3790,
+          "sha256": "922b263c2c9a92dc3d8778877d548fbc472ed6d743497aabd8a88b3ece70600f"
+        },
+        {
+          "path": "benchmark_forecast.py",
+          "bytes": 5240,
+          "sha256": "8e21c21a3d81d7690e92292169c7bb3989982e3bbeee86e29f6fbf6c6d6fb9cb"
+        }
+      ]
+    },
+    {
+      "id": "S18",
+      "title": "HyperStar synthetic econometric benchmark",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "results/hyperstar_benchmark/REPORT.md",
+          "bytes": 2381,
+          "sha256": "28883f54d9b50a989127753dee3f8a6059331895bad61af31532a89a15e729e6"
+        },
+        {
+          "path": "results/hyperstar_benchmark/summary.csv",
+          "bytes": 1068,
+          "sha256": "f7bf9bab777d657e3f472036d76cdbcaf3836849755a6b2dbf85c61132562894"
+        },
+        {
+          "path": "hyperstar_benchmark.py",
+          "bytes": 7366,
+          "sha256": "467c3b90610e37a70e1c566025d753ba5ddcae5e1cf774f7887dfddf485ffade"
+        }
+      ]
+    },
+    {
+      "id": "S19",
+      "title": "Economic accounting, frozen WDI descriptions, and synthetic scenarios",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "magnum-economicus/MANUSCRIPT.md",
+          "bytes": 35589,
+          "sha256": "d926ef138900a1b6c59b5f8fb8b975e4bd67b64009d6b7e68f62f16c3bae5f80"
+        },
+        {
+          "path": "magnum-economicus/results.json",
+          "bytes": 5374,
+          "sha256": "60b20460643587bd9eb2f0ce543578a7f7543281f029d9a3ea0c0b7cec7015ce"
+        },
+        {
+          "path": "magnum-economicus/experiment.py",
+          "bytes": 6780,
+          "sha256": "7eb0704600147c1b8a490dfbbe7608b64d9cf84d3410ee0f75771ee2b719443c"
+        }
+      ]
+    },
+    {
+      "id": "S20",
+      "title": "Formatting-aware spreadsheet audit",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "spreadsheet-dissertation/manuscript.md",
+          "bytes": 35365,
+          "sha256": "82b1e96103990782cb72b74038a7fbc80c3a7be6ae0409d19703998e223e6b0f"
+        },
+        {
+          "path": "spreadsheet-dissertation/results/summary.json",
+          "bytes": 19584,
+          "sha256": "8dca24fccddf056300b622bcedd5dd265c0109f923f0b815f0ada3faebcfdb52"
+        },
+        {
+          "path": "spreadsheet-dissertation/results/runs.csv",
+          "bytes": 32816,
+          "sha256": "b5cccad15c84623cc7f11e919a21603f5e03e60dcb53f4157766f171d81e6170"
+        },
+        {
+          "path": "spreadsheet-dissertation/experiment.py",
+          "bytes": 12507,
+          "sha256": "f560acf0f1b68ef9e968f801b28734c0735ae7f7dd331d5021f2535cea7629dc"
+        }
+      ]
+    },
+    {
+      "id": "S21",
+      "title": "WikiMRGRELE lexical/byte experiments and typed ablation",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "wikimrgrele/README.md",
+          "bytes": 4565,
+          "sha256": "fc481e092be8e97c6328e4d33f9d010cef8307415c3e52838a4335c74170fe24"
+        },
+        {
+          "path": "wikimrgrele/TYPED_ABLATION_RESULTS.md",
+          "bytes": 3253,
+          "sha256": "c136323c0a516cf416ac4caa3af3a9260862a0aad273a20e4e75636b519a6520"
+        },
+        {
+          "path": "wikimrgrele/output/typed_ablation/results.json",
+          "bytes": 19358,
+          "sha256": "33d834c352cc68b3d339c37b38b500141f05bb11d5ace316067b5a4b801e633f"
+        }
+      ]
+    },
+    {
+      "id": "S22",
+      "title": "Frozen-proposal ProMaster vision checkpoint",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "vision_grrle/README.md",
+          "bytes": 1133,
+          "sha256": "e34b6d2397af7bcaafcf3f55e755d425ecdeff89808e89c8d805ac0103e7eb0b"
+        }
+      ]
+    },
+    {
+      "id": "S23",
+      "title": "Controlled-English inference and source explorer",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "ecc-plus/README.md",
+          "bytes": 6099,
+          "sha256": "fb565a04c41f0e73e9c426c6bf25abb42c3a26e32d812e974860d4cf45acec62"
+        },
+        {
+          "path": "ecc-plus/corpora/manifest.json",
+          "bytes": 5820,
+          "sha256": "cf71105074e2f6780b737efcbc2f13f6c7a0ed9b241a0e192fda0586e6343ea6"
+        },
+        {
+          "path": "ecc-plus/test-engine.cjs",
+          "bytes": 1347,
+          "sha256": "2b1879e67981adc2cbc7294c2f45142ad7be8c4ec06607658a92ea9e3c53c226"
+        }
+      ]
+    },
+    {
+      "id": "S24",
+      "title": "Relaxfish fixed-position pilot",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "relaxfish/README.md",
+          "bytes": 2673,
+          "sha256": "242fc33e6a73a622d08341c56e005a4702e39ab2faffe28595b4e14d4c36a7eb"
+        },
+        {
+          "path": "relaxfish/data/statistics.json",
+          "bytes": 319,
+          "sha256": "e46637a6f1f476ddaed1604ab020164e9e1edfe20a5812f50086716710b84df8"
+        },
+        {
+          "path": "relaxfish/data/summary.json",
+          "bytes": 5031,
+          "sha256": "deadd202d56088a881fe5f9f7d3022bb6300d6338be06b058036a3039379635b"
+        },
+        {
+          "path": "relaxfish/data/positions.csv",
+          "bytes": 5598,
+          "sha256": "60bbf72564d92e6a0ef74f4feac40d317a5f47f2d1a3f66d665fc6e85d11d1ab"
+        }
+      ]
+    },
+    {
+      "id": "S25",
+      "title": "Corpus-trained relaxed chess brain",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "relaxed-chess-brain/README.md",
+          "bytes": 730,
+          "sha256": "b0bb3394c2860f26f8dc0fa32f8fc136f09431007cf6e861ab0a692b029dad5a"
+        },
+        {
+          "path": "relaxed-chess-brain/brain.json",
+          "bytes": 925979,
+          "sha256": "85abd4784f693f9eca7a3fba8fde0b3a9060a84c27d4c587cb663c2971b26a69"
+        },
+        {
+          "path": "relaxed-chess-brain/build_brain.py",
+          "bytes": 7724,
+          "sha256": "f5ad9b447567d1c91d5f063762685180ce25932a5224a2421829faf64df083f4"
+        }
+      ]
+    },
+    {
+      "id": "S26",
+      "title": "Local reinforced argument-chess results",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "argument_chess/RESULTS.md",
+          "bytes": 3854,
+          "sha256": "0c81f3c8fb712e16c66a160609e2c370dd4c30d3a5922712f558e4caa1a663ce"
+        },
+        {
+          "path": "argument_chess/REINFORCED_RELAXATION.md",
+          "bytes": 8873,
+          "sha256": "2ebea97b7c326af472aa107555b9d50bb1c3de0d947df4e3e0f13d252ad14591"
+        }
+      ]
+    },
+    {
+      "id": "S27",
+      "title": "Local tactical chess follow-up",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "argument_chess/TACTICAL_RESULTS.md",
+          "bytes": 4386,
+          "sha256": "d69c85bb949f6bbcc3e504ca63f1f080e2b5a12fdbc67c915ab548ccfa7f6bf3"
+        },
+        {
+          "path": "argument_chess/TACTICAL_EXPERIMENT.md",
+          "bytes": 8205,
+          "sha256": "ec4d18428e48e8d0a9bc49b147b43da4068d2573fa026457c9a3b073995e8042"
+        }
+      ]
+    },
+    {
+      "id": "S28",
+      "title": "Magnum Chessicus bounds and certificates",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "magnum-chessicus/README.md",
+          "bytes": 941,
+          "sha256": "1b036376a65d5b603dfa24c7b25a6327183a450f033e725714dc0850d38d5665"
+        },
+        {
+          "path": "magnum-chessicus/results.json",
+          "bytes": 7352,
+          "sha256": "911a44476b0633a5f7c60bfc1879be6766a05f3c54a5fbc614b758680243885d"
+        },
+        {
+          "path": "magnum-chessicus/verification.json",
+          "bytes": 511,
+          "sha256": "ef4aac01677b799092128e419a829d265ea1ce0b9ddc3906827b53b7e189429c"
+        },
+        {
+          "path": "magnum-chessicus/data/certificates.json",
+          "bytes": 572,
+          "sha256": "6f78bb497f14b14e62d1d3ac775ebbda992d54c926e9dbe140929dc1cd897fc7"
+        }
+      ]
+    },
+    {
+      "id": "S29",
+      "title": "Local research-guided bounded mate solver",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "relaxed-chess-brain/solver/README.md",
+          "bytes": 2518,
+          "sha256": "2ac6dfd4b859bcc61063362df46f5a09e158573cd32ec42615a139d39ce66082"
+        },
+        {
+          "path": "relaxed-chess-brain/solver/solve.py",
+          "bytes": 4873,
+          "sha256": "2c5af6b79ed5c9f611a7cb864a800da1570031a9ecb097c92aab3758d27d4171"
+        },
+        {
+          "path": "relaxed-chess-brain/solver/test_solve.py",
+          "bytes": 1652,
+          "sha256": "8df4696d78b26fac33bd2817977bd80477a619c10c152acfd2e43e323be1be15"
+        }
+      ]
+    },
+    {
+      "id": "S30",
+      "title": "Rolling chess model and whole-game records",
+      "root": "ros-package",
+      "files": [
+        {
+          "path": "CHESS_PHYSICS.md",
+          "bytes": 15403,
+          "sha256": "541d50569d4a7dc4a921031138efbaee8bf913c33585e92754f1ef19674ac54c"
+        },
+        {
+          "path": "cypher_robot_mind/chess_physics.py",
+          "bytes": 29207,
+          "sha256": "4546cf74a6ea69de3bf0fcef3f8a5008d54836c042f3c4c5525b5c3da23a091f"
+        },
+        {
+          "path": "cypher_robot_mind/chess_autoplay.py",
+          "bytes": 2417,
+          "sha256": "95fbef37c647a69e0a4116666844d8a13831485c6dd4412af5054f4fe9a766aa"
+        }
+      ]
+    },
+    {
+      "id": "S31",
+      "title": "Merger, lifecycle, and bounded-capture implementation",
+      "root": "ros-package",
+      "files": [
+        {
+          "path": "cypher_robot_mind/hole_topology.py",
+          "bytes": 12210,
+          "sha256": "cfa189fa253b2ea7c9d2fbe5871f6afa551ea3bbb1d29dab4ced01efaf68ad24"
+        },
+        {
+          "path": "cypher_robot_mind/chess_lab_node.py",
+          "bytes": 11965,
+          "sha256": "cfd738aee2f33774ff16b941a18481e4807d8fbd9640dabe43c5e08d96cc9dae"
+        }
+      ]
+    },
+    {
+      "id": "S32",
+      "title": "ROS robot and chess validation",
+      "root": "ros-package",
+      "files": [
+        {
+          "path": "VALIDATION.md",
+          "bytes": 4177,
+          "sha256": "3d840891177a603deb000448915e852cde2994a09a12c68161fb6eb5604cd1fb"
+        },
+        {
+          "path": "README.md",
+          "bytes": 7179,
+          "sha256": "70584bdb9f86666881ff3dd2d809c59cd67c3aa6e116bbbd65131bb5733714dd"
+        }
+      ]
+    },
+    {
+      "id": "S33",
+      "title": "Hyperspace anchored graph mathematics",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "hyperspace/README.md",
+          "bytes": 2649,
+          "sha256": "af36f501a3b7355f9393549395c2f68452c174b7339c49e19c4a8661871db769"
+        },
+        {
+          "path": "hyperspace/paper.tex",
+          "bytes": 37159,
+          "sha256": "815fcb752bcc31e12824b96fe97772fb36c414ab3986caf3a8d07d66a08c6ce6"
+        },
+        {
+          "path": "hyperspace/metrics.json",
+          "bytes": 1027,
+          "sha256": "7a38f20339494e14f1c7dbf6734f405b4578d6cd101f98eeacbae2f507296e14"
+        },
+        {
+          "path": "hyperspace/convergence.csv",
+          "bytes": 300115,
+          "sha256": "aa24427b5df4cd21bb61986c018db28819986ecb8d05325afce1eb97341038bb"
+        }
+      ]
+    },
+    {
+      "id": "S34",
+      "title": "Triadic closure assessment and toy extension",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "TRIADIC_CLOSURE_EVALUATION.md",
+          "bytes": 7817,
+          "sha256": "a9c5e1719de73b223141ee2a36fc1c36bb22bced32aab31bab248010d6ceb644"
+        },
+        {
+          "path": "results/closure_results.json",
+          "bytes": 764,
+          "sha256": "a34b36d3669b21a3301115214f54124d155dc448204cfa37e4176f0fe002544a"
+        },
+        {
+          "path": "results/triangulated_results.json",
+          "bytes": 1371,
+          "sha256": "542c793f70adbf405119e46c15a0b9853beadeddde8ed765b3b289f3c7cffc61"
+        }
+      ]
+    },
+    {
+      "id": "S35",
+      "title": "TQC III bridge evaluation",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "TQC_III_EVALUATION.md",
+          "bytes": 6678,
+          "sha256": "a8beccbb600a4d084ce98f53793be38b767866d8b82b09dfd988ca0bbd0330b7"
+        },
+        {
+          "path": "paper/TQC_III_REPORT.tex",
+          "bytes": 10357,
+          "sha256": "34b5f1bbebce9179e65b767c1fb5b27841f20401b98f8abab36effade482a176"
+        }
+      ]
+    },
+    {
+      "id": "S36",
+      "title": "TQC IV typed closure and refinement",
+      "root": "publication-study",
+      "files": [
+        {
+          "path": "paper/TQC_IV_REPORT.tex",
+          "bytes": 10674,
+          "sha256": "88e7d71c18525cae64ded0092b850c5228cfde0d727454182aed466489ac79a7"
+        },
+        {
+          "path": "src/triangulated_closure.py",
+          "bytes": 3394,
+          "sha256": "10fc04eb631b9576a9dd4db439ca483953bb7e07b265d43f653e28a57bfad85c"
+        },
+        {
+          "path": "benchmark_triangulated.py",
+          "bytes": 944,
+          "sha256": "616b9459c6c6632e3af467a3029b6b82bb8a75b58a14d4c705f1ea2172fbc519"
+        }
+      ]
+    },
+    {
+      "id": "S37",
+      "title": "Compact GHZ-family representation",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "magnum-quantreleviathone/MANUSCRIPT.md",
+          "bytes": 6840,
+          "sha256": "0dc50ad47cd5d176412f86306a9e297276fea7510540925774670cf93079a132"
+        },
+        {
+          "path": "magnum-quantreleviathone/results.json",
+          "bytes": 2959,
+          "sha256": "8fb07bf139640f0e2235c83186be89b0047147a374d61505e1bd6990a5c69531"
+        },
+        {
+          "path": "magnum-quantreleviathone/compute.py",
+          "bytes": 1598,
+          "sha256": "86e4d7309f813c6a94a6c2446d26577de96766ab69ee1f77bddb035cbc812524"
+        }
+      ]
+    },
+    {
+      "id": "S38",
+      "title": "Spherical Oort-shell and halo comparison",
+      "root": "oort-study",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 5189,
+          "sha256": "1b249b98b6706c4a4bcf88a777ff52d27d7f9c10d61c692f15b4bd3313e3be97"
+        },
+        {
+          "path": "results.json",
+          "bytes": 3000,
+          "sha256": "ca7da2a984610dd125a84956385246ea01dde2ae3cad7d0d6bd0566f47caddd1"
+        },
+        {
+          "path": "model.py",
+          "bytes": 9088,
+          "sha256": "29e9cbc935e0baf32d62695c5773a22560a94e9d37609ef45041bbcccc4503eb"
+        }
+      ]
+    },
+    {
+      "id": "S39",
+      "title": "Milky Way rotation-curve comparison",
+      "root": "milky-way-study",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 6064,
+          "sha256": "32beda010dfa107fd1042437e26c2c6f2ffa5d5a7ccbc7e21696430b8be2053c"
+        },
+        {
+          "path": "results.json",
+          "bytes": 6164,
+          "sha256": "d5336b6d8c169610bc4dd3dc33eb0e549cebfb7436786c9c30496bbf4c4aa0cd"
+        },
+        {
+          "path": "model.py",
+          "bytes": 8307,
+          "sha256": "f162fe5a489dd0bdf8f145e49ca49e417a6858fd16ee111b7f567e5dbaa19f08"
+        }
+      ]
+    },
+    {
+      "id": "S40",
+      "title": "Frozen vertical-force discriminator",
+      "root": "milky-way-study",
+      "files": [
+        {
+          "path": "discrimination-report.md",
+          "bytes": 6014,
+          "sha256": "a6ba80b1b2c2e024af1be825712fa833df55f086e62d6905e2af28d4b426eee8"
+        },
+        {
+          "path": "discrimination-results.json",
+          "bytes": 2260,
+          "sha256": "7e3b35016f0db237b16f085641f8474722841e8f65b124cd35fa8a22b58fa858"
+        },
+        {
+          "path": "discrimination-plan.json",
+          "bytes": 1528,
+          "sha256": "515bc02f06a8bc6ce74d920bf39315928e732e1591f66cef86fa9cfbd354e575"
+        },
+        {
+          "path": "working-propositions.md",
+          "bytes": 6683,
+          "sha256": "4f73448a54bcf503537121ad904d903c4e60a5dcc87f715c2523c9c92250ef7e"
+        },
+        {
+          "path": "discrimination.py",
+          "bytes": 5795,
+          "sha256": "82c0c03cbb4fe86d454971de6fec0ba299fc5c0216d593e61c04c8a8be68abe9"
+        }
+      ]
+    },
+    {
+      "id": "S41",
+      "title": "HydroGRRLE routed storage and relational interpretation",
+      "root": "original-python",
+      "files": [
+        {
+          "path": "hydro_grrle/README.md",
+          "bytes": 3682,
+          "sha256": "7e03ce10dc3b005d42f4ecb101890b7928a0187e9fd19c72be36e97a087eba54"
+        }
+      ]
+    },
+    {
+      "id": "S42",
+      "title": "Wave Worlds acoustic path model",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "wave-worlds/README.md",
+          "bytes": 2001,
+          "sha256": "dd9389ab5e8d54caa05bd766af93a25f45b9f0288fcf4a8851250c071dad8579"
+        },
+        {
+          "path": "wave-worlds/model.js",
+          "bytes": 4238,
+          "sha256": "7ed08683126375235bb8972cb736ea3963b7de5c97276b1f52c350df851a734b"
+        }
+      ]
+    },
+    {
+      "id": "S43",
+      "title": "Musical hyperobject and projective field",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "hyperobject/README.md",
+          "bytes": 2566,
+          "sha256": "3a4fc6a6a72c8b8568e8d1dc4a2fb3c475f9541285cec27cb3bbb6b3d2169608"
+        },
+        {
+          "path": "hyperobject/hyperobject.json",
+          "bytes": 26080,
+          "sha256": "7d0979d89e62745ef7b311d364fe81d9e65d7d7666e5e95be906e25f4df52679"
+        }
+      ]
+    },
+    {
+      "id": "S44",
+      "title": "Geographic chess variant and whole-world initialization",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "tiny-creek-chess/README.md",
+          "bytes": 8559,
+          "sha256": "7545de3aae6d7139e85d0b83bcca5ca23f8ed081742b47f4fcd36607df440831"
+        }
+      ]
+    },
+    {
+      "id": "S45",
+      "title": "Virtual Earth seeded ecological testbed",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "virtual-earth/README.md",
+          "bytes": 4655,
+          "sha256": "69e0997d1e5a6175d247e2abd0a1b190bb8ca959ce2534474172c182ff6feb1d"
+        },
+        {
+          "path": "virtual-earth/model.js",
+          "bytes": 6713,
+          "sha256": "0aa5346cc20e5d2c36c3ee4c4567fe2f98e949f66fb801607310bcf420547d8e"
+        }
+      ]
+    },
+    {
+      "id": "S46",
+      "title": "HRL Lab numerical inspector",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "hrl-lab/README.md",
+          "bytes": 2356,
+          "sha256": "640142ec1b6ec434338749b2e8bcd4acc5376fc002f5c0a8eaf3529dc45e3229"
+        },
+        {
+          "path": "hrl-lab/relaxation.js",
+          "bytes": 1563,
+          "sha256": "ee5fc0755bf4bdd6f1c14000f0f26129b50593232a82961543f0f424910ca60b"
+        }
+      ]
+    },
+    {
+      "id": "S47",
+      "title": "Genesis SDSS sparse segmentation",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "genesis/sdss/build_sdss.py",
+          "bytes": 9577,
+          "sha256": "8d79ee254deb604b99aeb3d8b73627ed5b14f7abc51a2e855a8cfa67199ea161"
+        },
+        {
+          "path": "genesis/sdss/data.json",
+          "bytes": 349584,
+          "sha256": "e9144442a77df31044e09fe4a58077c162bf368ee9ac72234496e92bcb18efc7"
+        }
+      ]
+    },
+    {
+      "id": "S48",
+      "title": "Genesis connectome communities and constructed activity",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "genesis/brain/build_brain.py",
+          "bytes": 13637,
+          "sha256": "f04a2a03d20ae3dade6298fe2de35f5dc3882108a9eb8b001bd6e61e3ca8c87a"
+        },
+        {
+          "path": "genesis/brain/data.json",
+          "bytes": 90930,
+          "sha256": "d1a80d40a89123e7a81ed1b1280af712ff73c7e0732795258cc9e1aee91509a1"
+        },
+        {
+          "path": "genesis/cord/build_cord.py",
+          "bytes": 14881,
+          "sha256": "d389ed4c369204a1df6f08574bf24171006800a5fa40199db6aa9bfdfeee6142"
+        }
+      ]
+    },
+    {
+      "id": "S49",
+      "title": "Genesis SPARC and radial-acceleration displays",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "genesis/sparc/build_sparc.py",
+          "bytes": 12547,
+          "sha256": "691ed4e98dd2787e1970d4076b1b17b9f88c7fff32348f6695a81c5e8a71b97c"
+        },
+        {
+          "path": "genesis/sparc/data.json",
+          "bytes": 20279,
+          "sha256": "5f284a9e6d8fcb94ad808412eac58cc387fb8fab82233cbfbcea29ad3dfb9ce1"
+        },
+        {
+          "path": "genesis/rar/build_rar.py",
+          "bytes": 12603,
+          "sha256": "78ee6d928e6fac360a225458ecaffa46966464b455356f463fdca96f76657fb4"
+        },
+        {
+          "path": "genesis/rar/data.json",
+          "bytes": 66100,
+          "sha256": "d78a43349f64126d0c3a95d2366bfba4fb6af1e2f929c09bad68ac9f2a02c85f"
+        }
+      ]
+    },
+    {
+      "id": "S50",
+      "title": "Genesis correlated cosmological seed construction",
+      "root": "portfolio",
+      "files": [
+        {
+          "path": "genesis/planck/build_planck.py",
+          "bytes": 11926,
+          "sha256": "00a8d88b40a0a5d1f04849a9a9d495618afd75bdf1f6d0884fc6bd9542faf83c"
+        },
+        {
+          "path": "genesis/planck/data.json",
+          "bytes": 1618,
+          "sha256": "3166ddda349e9865e67fadf858241266f89a1f1424d05aa65f0cf9c8ca7ab146"
+        }
+      ]
+    }
+  ]
+}
