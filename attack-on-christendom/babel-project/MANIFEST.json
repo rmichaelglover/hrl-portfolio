@@ -1,0 +1,75 @@
+{
+  "author": "Michael Emanuel Glover",
+  "files": [
+    {
+      "path": "NO-MACHINE-WILL-BE-GOD.pdf",
+      "bytes": 396799,
+      "sha256": "b224ce0b8ad3047db27449c039300b3a35af60f6bf2f6ffd0040565037ef60ea"
+    },
+    {
+      "path": "NO-MACHINE-WILL-BE-GOD.txt",
+      "bytes": 67147,
+      "sha256": "0a14b6c5582b14446cd54b7159c972565589fc1e3344643ed89cde76320b1e6c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1473,
+      "sha256": "4b7dd3c6e5bbb3b0ebb0f345aba4ec420eca03c8ae2da86c82c018955e1e715b"
+    },
+    {
+      "path": "WHITE-PAPER.md",
+      "bytes": 57691,
+      "sha256": "f1e26a6b0cf08928ac818d6bd3cc07dd8d05f84fd3613b58624a1befcd740936"
+    },
+    {
+      "path": "build.py",
+      "bytes": 11040,
+      "sha256": "e438319f21331ef7c0cde566f309fc4cda766f69c5dcc44f6f3f29abe044572d"
+    },
+    {
+      "path": "build_reader.py",
+      "bytes": 6200,
+      "sha256": "af722917464276aa5c7f086585200276a82ef19fe4761f83a73737426435c028"
+    },
+    {
+      "path": "calculations.json",
+      "bytes": 2581,
+      "sha256": "42caf073b7751bb9aeffa601625b693cebd6e30dff8b82bf2b43d9a780234e0f"
+    },
+    {
+      "path": "document-checks.json",
+      "bytes": 526,
+      "sha256": "a5dfe1f557dc1daee353e165f12b4b043207650857b7317805e8c754bb0f94ac"
+    },
+    {
+      "path": "figures/counting.pdf",
+      "bytes": 16162,
+      "sha256": "eeb404ecb476d672e0fb8d7db010f3484660f7105a8454afaaef3a97d81d0577"
+    },
+    {
+      "path": "figures/counting.png",
+      "bytes": 95649,
+      "sha256": "add5358daa254517de48fe129e2cf03d751a9f2888480746954dd7e199411ada"
+    },
+    {
+      "path": "figures/horizon.pdf",
+      "bytes": 15416,
+      "sha256": "8e85a01830f2a74cd8abf621704f92e0ce4f6b5e93320f1a56dc830e96bf1c45"
+    },
+    {
+      "path": "figures/horizon.png",
+      "bytes": 98937,
+      "sha256": "3f8c3da6cd498e38259ed4d3ae20c6663ebea98f7e6d095f7311910a3882a785"
+    },
+    {
+      "path": "index.html",
+      "bytes": 68707,
+      "sha256": "4811fca39dd6791742d471df4759a42db176104e27709bcd3a3c43908a440bc2"
+    },
+    {
+      "path": "source-notes.json",
+      "bytes": 11643,
+      "sha256": "4b6151bcb14595d8bc5aa7b20b6ab51168ff33efb74e4541270f8a823497f0d9"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-16",
+  "scope": "Primary and author-hosted sources; reading scope recorded separately from endorsement of the argument.",
+  "references": [
+    {
+      "id": "R1",
+      "author": "Scripture.",
+      "reference": "King James Version: Genesis 1:26–28 and 11:1–9; Matthew 19:3–9 and 25:31–46; Colossians 1:16–17; Acts 17:24–28. The immediate contexts distinguish the paper's analogical applications from direct textual claims. Local KJV source records are included in the portfolio's edition-preserving corpus explorer: https://rmichaelglover.github.io/hrl-portfolio/ecc-plus/ .",
+      "urls": [
+        "https://rmichaelglover.github.io/hrl-portfolio/ecc-plus/"
+      ],
+      "reading_scope": "Selected verses read from local edition-preserving KJV records.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R2",
+      "author": "David Deutsch.",
+      "reference": "Constructor Theory (2013), Synthese 190, 4331–4359. Author preprint: https://arxiv.org/abs/1210.7439 . Source for the programme's possible/impossible-task framing.",
+      "urls": [
+        "https://arxiv.org/abs/1210.7439"
+      ],
+      "reading_scope": "Author abstract and programme overview inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R3",
+      "author": "David Deutsch and Chiara Marletto.",
+      "reference": "Constructor Theory of Information (2015), Proceedings of the Royal Society A 471, 20140540. https://doi.org/10.1098/rspa.2014.0540 ; author preprint https://arxiv.org/abs/1405.5563 . Primary text reviewed for task, information, and constructor distinctions.",
+      "urls": [
+        "https://doi.org/10.1098/rspa.2014.0540",
+        "https://arxiv.org/abs/1405.5563"
+      ],
+      "reading_scope": "Author abstract and selected full-paper passages inspected, including idealized resource and constructor definitions.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R4",
+      "author": "Alan M. Turing.",
+      "reference": "On Computable Numbers, with an Application to the Entscheidungsproblem (1936–37), Proceedings of the London Mathematical Society 42, 230–265, with subsequent correction. Original-text copy: https://theory.stanford.edu/~trevisan/cs172-07/turing36.pdf . The paper above gives a modern diagonal illustration rather than attributing that exact wording to Turing.",
+      "urls": [
+        "https://theory.stanford.edu/~trevisan/cs172-07/turing36.pdf"
+      ],
+      "reading_scope": "Original-paper extract inspected; argument in manuscript is a modern diagonal presentation.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R5",
+      "author": "John Preskill.",
+      "reference": "Quantum Information lecture notes, chapter 10, section 10.6, Accessible Information; the inspected file reports an update of June 2025 despite its older URL filename. https://www.preskill.caltech.edu/ph219/chap10_6A_2022.pdf . Source for the operational interpretation of the Holevo bound and its ensemble assumptions.",
+      "urls": [
+        "https://www.preskill.caltech.edu/ph219/chap10_6A_2022.pdf"
+      ],
+      "reading_scope": "Contents and section 10.6 passages inspected; file title page reports updated June 2025. No source PDF redistributed.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R6",
+      "author": "Lov K. Grover.",
+      "reference": "Quantum Mechanics Helps in Searching for a Needle in a Haystack (1997), Physical Review Letters 79, 325–328. https://arxiv.org/abs/quant-ph/9706033 . The stated advantage is in the specified query model.",
+      "urls": [
+        "https://arxiv.org/abs/quant-ph/9706033"
+      ],
+      "reading_scope": "Author abstract inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R7",
+      "author": "Charles H. Bennett, Ethan Bernstein, Gilles Brassard, and Umesh Vazirani.",
+      "reference": "Strengths and Weaknesses of Quantum Computing (1997), SIAM Journal on Computing 26, 1510–1523. https://arxiv.org/abs/quant-ph/9701001 . Source for quantum-search limitations and oracle-model distinctions.",
+      "urls": [
+        "https://arxiv.org/abs/quant-ph/9701001"
+      ],
+      "reading_scope": "Author search/abstract record inspected; linked full-text endpoint did not load.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R8",
+      "author": "William K. Wootters and Wojciech H. Zurek.",
+      "reference": "A Single Quantum Cannot Be Cloned (1982), Nature 299, 802–803. https://doi.org/10.1038/299802a0 . The no-cloning claim concerns an arbitrary unknown state, not all copying tasks.",
+      "urls": [
+        "https://doi.org/10.1038/299802a0"
+      ],
+      "reading_scope": "Original journal abstract inspected; illustrative standard inner-product argument independently checked.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R9",
+      "author": "Pierre-Simon Laplace.",
+      "reference": "A Philosophical Essay on Probabilities, translated by F. W. Truscott and F. L. Emory. Public-domain edition: https://www.gutenberg.org/ebooks/58881 . Source for the hypothetical intelligence supplied complete knowledge and adequate analysis.",
+      "urls": [
+        "https://www.gutenberg.org/ebooks/58881"
+      ],
+      "reading_scope": "Public-domain translated text inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R10",
+      "author": "Seth Lloyd.",
+      "reference": "Ultimate Physical Limits to Computation (2000), Nature 406, 1047–1054. https://arxiv.org/abs/quant-ph/9908043 . Resource bounds are physical statements under assumptions, not theological propositions.",
+      "urls": [
+        "https://arxiv.org/abs/quant-ph/9908043"
+      ],
+      "reading_scope": "Author abstract inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R11",
+      "author": "Augustine.",
+      "reference": "The City of God, XIV.28. Public-domain translation hosted by New Advent: https://www.newadvent.org/fathers/120114.htm . The two cities are discussed through their different loves; this paper supplies the technological application.",
+      "urls": [
+        "https://www.newadvent.org/fathers/120114.htm"
+      ],
+      "reading_scope": "Public-domain text, XIV.28, inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R12",
+      "author": "Michael Emanuel Glover.",
+      "reference": "Relationships That Compute: Research Results Across the HRL Portfolio (2026), version 1.0. https://rmichaelglover.github.io/hrl-portfolio/research-synthesis-2026/ . Primary local research record for the sparse, quantum-representation, grounding, and chess examples invoked briefly here.",
+      "urls": [
+        "https://rmichaelglover.github.io/hrl-portfolio/research-synthesis-2026/"
+      ],
+      "reading_scope": "Locally authored prior research synthesis inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R13",
+      "author": "Scott Aaronson.",
+      "reference": "NP-complete Problems and Physical Reality (2005), SIGACT News 36(1). https://arxiv.org/abs/quant-ph/0502072 . Source for the distinction between computational conjectures, proposed physical models, and established limitations.",
+      "urls": [
+        "https://arxiv.org/abs/quant-ph/0502072"
+      ],
+      "reading_scope": "Author abstract and author-hosted account of limits inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R14",
+      "author": "Augustine.",
+      "reference": "The City of God, XIX.17. Public-domain translation hosted by New Advent: https://www.newadvent.org/fathers/120119.htm . Source for the discussion of temporal peace shared toward different ends.",
+      "urls": [
+        "https://www.newadvent.org/fathers/120119.htm"
+      ],
+      "reading_scope": "Public-domain text, XIX.17, inspected.",
+      "consulted": "2026-10-16"
+    },
+    {
+      "id": "R15",
+      "author": "Kurt Gödel.",
+      "reference": "Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I (1931), Monatshefte für Mathematik und Physik 38, 173–198. https://doi.org/10.1007/BF01700692 . Foundational source for incompleteness; the paper uses the standard modern consistency formulation, not a new proof or a claim to reproduce the historical hypotheses verbatim.",
+      "urls": [
+        "https://doi.org/10.1007/BF01700692"
+      ],
+      "reading_scope": "Original journal abstract and bibliographic record inspected; modern theorem formulation distinguished from original hypotheses.",
+      "consulted": "2026-10-16"
+    }
+  ],
+  "kjv_corpus_provenance": [
+    {
+      "file": "ot.json",
+      "source_url": "https://www.gutenberg.org/files/10/10-h/10-h.htm",
+      "sha256": "b1295b50f4070c46f23180c22527104a1d3c04870eace1801ee362ac8d4610c7"
+    },
+    {
+      "file": "nt.json",
+      "source_url": "https://www.gutenberg.org/files/10/10-h/10-h.htm",
+      "sha256": "538378822ecd1907cd0e25144e0de1a2697696c20dc1e1a8d94f83c8af68e82f"
+    }
+  ],
+  "selected_public_domain_scripture": [
+    {
+      "reference": "The First Book of Moses: Called Genesis 1:26",
+      "text": "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth."
+    },
+    {
+      "reference": "The First Book of Moses: Called Genesis 11:4",
+      "text": "And they said, Go to, let us build us a city and a tower, whose top may reach unto heaven; and let us make us a name, lest we be scattered abroad upon the face of the whole earth."
+    },
+    {
+      "reference": "The Gospel According to Saint Matthew 19:6",
+      "text": "Wherefore they are no more twain, but one flesh. What therefore God hath joined together, let not man put asunder."
+    },
+    {
+      "reference": "The Gospel According to Saint Matthew 25:35",
+      "text": "For I was an hungred, and ye gave me meat: I was thirsty, and ye gave me drink: I was a stranger, and ye took me in:"
+    },
+    {
+      "reference": "The Gospel According to Saint Matthew 25:36",
+      "text": "Naked, and ye clothed me: I was sick, and ye visited me: I was in prison, and ye came unto me."
+    },
+    {
+      "reference": "The Gospel According to Saint Matthew 25:40",
+      "text": "And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me."
+    },
+    {
+      "reference": "The Acts of the Apostles 17:24",
+      "text": "God that made the world and all things therein, seeing that he is Lord of heaven and earth, dwelleth not in temples made with hands;"
+    },
+    {
+      "reference": "The Acts of the Apostles 17:25",
+      "text": "Neither is worshipped with men’s hands, as though he needed any thing, seeing he giveth to all life, and breath, and all things;"
+    },
+    {
+      "reference": "The Acts of the Apostles 17:28",
+      "text": "For in him we live, and move, and have our being; as certain also of your own poets have said, For we are also his offspring."
+    },
+    {
+      "reference": "The Epistle of Paul the Apostle to the Colossians 1:16",
+      "text": "For by him were all things created, that are in heaven, and that are in earth, visible and invisible, whether they be thrones, or dominions, or principalities, or powers: all things were created by him, and for him:"
+    },
+    {
+      "reference": "The Epistle of Paul the Apostle to the Colossians 1:17",
+      "text": "And he is before all things, and by him all things consist."
+    }
+  ]
+}

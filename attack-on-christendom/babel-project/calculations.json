@@ -1,0 +1,88 @@
+{
+  "status": "Exact finite counts and stipulated analytic illustrations; no empirical result or theological proof.",
+  "counting": [
+    {
+      "input_bits": 1,
+      "inputs": 2,
+      "truth_table_bits": 2,
+      "boolean_functions_exact": "4",
+      "boolean_function_decimal_digits": 1
+    },
+    {
+      "input_bits": 2,
+      "inputs": 4,
+      "truth_table_bits": 4,
+      "boolean_functions_exact": "16",
+      "boolean_function_decimal_digits": 2
+    },
+    {
+      "input_bits": 3,
+      "inputs": 8,
+      "truth_table_bits": 8,
+      "boolean_functions_exact": "256",
+      "boolean_function_decimal_digits": 3
+    },
+    {
+      "input_bits": 4,
+      "inputs": 16,
+      "truth_table_bits": 16,
+      "boolean_functions_exact": "65536",
+      "boolean_function_decimal_digits": 5
+    },
+    {
+      "input_bits": 5,
+      "inputs": 32,
+      "truth_table_bits": 32,
+      "boolean_functions_exact": "4294967296",
+      "boolean_function_decimal_digits": 10
+    },
+    {
+      "input_bits": 6,
+      "inputs": 64,
+      "truth_table_bits": 64,
+      "boolean_functions_exact": "18446744073709551616",
+      "boolean_function_decimal_digits": 20
+    },
+    {
+      "input_bits": 8,
+      "inputs": 256,
+      "truth_table_bits": 256,
+      "boolean_functions_exact": "115792089237316195423570985008687907853269984665640564039457584007913129639936",
+      "boolean_function_decimal_digits": 78
+    },
+    {
+      "input_bits": 10,
+      "inputs": 1024,
+      "truth_table_bits": 1024,
+      "boolean_functions_exact": "179769313486231590772930519078902473361797697894230657273430081157732675805500963132708477322407536021120113879871393357658789768814416622492847430639474124377767893424865485276302219601246094119453082952085005768838150682342462881473913110540827237163350510684586298239947245938479716304835356329624224137216",
+      "boolean_function_decimal_digits": 309
+    }
+  ],
+  "hundred_bit_configurations_exact": "1267650600228229401496703205376",
+  "cloning": {
+    "initial_overlap": 0.7071067811865475,
+    "proposed_copied_overlap": 0.4999999999999999,
+    "unitary_preservation_residual": 0.20710678118654757
+  },
+  "sensitivity": [
+    {
+      "initial_error": 0.01,
+      "tolerated_error": 0.1,
+      "lambda": 1.0,
+      "horizon": 2.302585092994046
+    },
+    {
+      "initial_error": 0.0001,
+      "tolerated_error": 0.1,
+      "lambda": 1.0,
+      "horizon": 6.907755278982137
+    },
+    {
+      "initial_error": 1e-06,
+      "tolerated_error": 0.1,
+      "lambda": 1.0,
+      "horizon": 11.512925464970229
+    }
+  ],
+  "checks_passed": true
+}
