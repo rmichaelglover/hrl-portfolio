@@ -25,8 +25,12 @@ from .meta_discovery import discover as discover_interactions, DiscoveryResult
 from .recursive_grounding import recursive_refine, RecursiveConfig, RecursiveResult
 from .reciprocal import relax_view, accept_reciprocal, audit_anchors, anchor_logits, ViewResult, ReciprocalResult
 from .meggers import MeggersResult, relax_delimitation, lift_evidence
+from .finalization import MutualBestLabeler, FinalizationPolicy, FinalizationResult
 
 __all__ = [
+    "MutualBestLabeler",
+    "FinalizationPolicy",
+    "FinalizationResult",
     "discover_interactions",
     "DiscoveryResult",
     "recursive_refine",

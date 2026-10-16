@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mutual-best early finalization — Michael Emanuel Glover</title>
+<meta name="description" content="Relaxed Communications and mutual-best early finalization: research by Michael Emanuel Glover, with conditional mathematics, implementation and reproducible synthetic measurements.">
+<style>
+:root{color-scheme:light;--ink:#172b35;--accent:#086c70}
+*{box-sizing:border-box}body{margin:0;background:#f5f3ec;color:var(--ink);font:18px/1.75 Georgia,serif}
+nav,main,footer{max-width:980px;margin:auto;padding:24px}nav{font:15px/1.6 system-ui;display:flex;flex-wrap:wrap;gap:18px;border-bottom:1px solid #ccd3ce}
+a{color:var(--accent);text-underline-offset:3px}h1,h2,h3{font-family:system-ui;line-height:1.2;letter-spacing:-.025em}h1{font-size:clamp(2.2rem,6vw,4rem);margin-top:40px}h2{margin-top:48px}h3{margin-top:36px}p{max-width:78ch}pre{overflow:auto;background:#e6ebe6;padding:20px;font:14px/1.6 monospace;border-radius:8px}code{font-size:.86em}table{display:block;overflow:auto;border-collapse:collapse;font:14px/1.6 system-ui;width:100%}th,td{padding:10px;border-bottom:1px solid #c7d2cd;text-align:left}blockquote,.intro{border-left:4px solid var(--accent);padding:12px 22px;background:#e8ede5}footer{font:14px/1.6 system-ui;border-top:1px solid #ccd3ce}section{margin-top:56px}@media print{body{background:white;font-size:11pt}nav,.downloads{display:none}main{padding:0;max-width:none}h1{font-size:28pt}pre,table{break-inside:avoid}a{color:inherit}}
+</style></head><body>
+<nav aria-label="Research navigation"><a href="../">HRL portfolio</a><a href="theory.html">Relaxed Communications</a><a href="./">Mutual-best finalization</a><a href="SOURCE.zip">Source &amp; data ZIP</a></nav>
+<main><h1>Mutual-best early finalization</h1><p><strong>Michael Emanuel Glover</strong> · Implementation and measured research · October 16, 2026</p>
+<p class="intro">Which label is best for this object—and which object is best for this label? When a strong mutual match persists, settle it early and retain its influence while spending computation elsewhere.</p>
+<p>The opt-in implementation uses three eligible sweeps by default, caches frozen soft distributions, and permits reopening through audits. All 81 repository tests passed. The larger exploratory aggressive-audited cases achieved 3.69× and 3.94× speedups; smaller workloads showed mixed performance. Finalized assignments can have a nonzero full-update residual.</p>
+<p><a href="theory.html">Read the companion theory: Relaxed Communications</a> · <a href="SOURCE.zip">Download runnable source, tests and data</a> · <a href="https://github.com/rmichaelglover/hrl-portfolio/tree/main/mutual-finalization">Browse source on GitHub</a></p><section><h1>Mutual-best early finalization: first measured pilot</h1>
+<p>Michael Emanuel Glover · 16 October 2026 · synthetic correspondence experiments</p>
+<p>Matched comparator: identical dense-to-matrix update with finalization disabled. Timing includes constructor copies, cache packing, audits, and result construction. Input generation is excluded for all methods. Three timing repetitions per case; four seeds at each of 12, 24, and 36 objects. These are exploratory local timings, not a calibrated risk guarantee.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Policy</th>
+<th style="text-align: right;">Median speedup</th>
+<th style="text-align: right;">Median work ratio</th>
+<th style="text-align: right;">Disagreements / objects</th>
+<th style="text-align: right;">Locked disagreements</th>
+<th style="text-align: right;">Finalized</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geometric</td>
+<td>off</td>
+<td style="text-align: right;">1.000×</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>geometric</td>
+<td>audited</td>
+<td style="text-align: right;">0.895×</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">144</td>
+</tr>
+<tr>
+<td>geometric</td>
+<td>permanent</td>
+<td style="text-align: right;">1.129×</td>
+<td style="text-align: right;">0.355</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">144</td>
+</tr>
+<tr>
+<td>near_duplicate</td>
+<td>off</td>
+<td style="text-align: right;">1.000×</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>near_duplicate</td>
+<td>audited</td>
+<td style="text-align: right;">0.516×</td>
+<td style="text-align: right;">0.522</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">134</td>
+</tr>
+<tr>
+<td>near_duplicate</td>
+<td>permanent</td>
+<td style="text-align: right;">0.609×</td>
+<td style="text-align: right;">0.374</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">134</td>
+</tr>
+<tr>
+<td>tied_tail</td>
+<td>off</td>
+<td style="text-align: right;">1.000×</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>tied_tail</td>
+<td>audited</td>
+<td style="text-align: right;">4.106×</td>
+<td style="text-align: right;">0.118</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">240</td>
+</tr>
+<tr>
+<td>tied_tail</td>
+<td>permanent</td>
+<td style="text-align: right;">4.349×</td>
+<td style="text-align: right;">0.118</td>
+<td style="text-align: right;">0 / 288</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">240</td>
+</tr>
+</tbody>
+</table>
+<h2>Delayed support reversal</h2>
+<p>A four-object fixed compatibility tensor makes two initially strong reciprocal winners swap after a weak driver gains strength. Permanent locking retains wrong early labels; periodic full support audits reopen them. This is one tested recovery case, not proof that auditing catches every late reversal.</p>
+<ul>
+<li>off: [2, 1, 0, 3]; 57 sweeps; 0 reopenings; full-update residual 5.31e-10.</li>
+<li>audited: [2, 1, 0, 3]; 30 sweeps; 2 reopenings; full-update residual 0.003768.</li>
+<li>permanent: [0, 1, 2, 3]; 17 sweeps; 0 reopenings; full-update residual 0.003768.</li>
+</ul>
+<h2>Interpretation</h2>
+<p>The geometric cases use noisy, shuffled 3D point constellations and partial informative priors. The near-duplicate cases deliberately make two identities geometrically ambiguous. The tied-tail workload is a hand-built scheduling control with four unresolved tied rows, not an independent real-data benchmark. Ground-truth accuracy and unfrozen-reference agreement are separate columns in the CSV/JSON.</p>
+<p>Frozen distributions remain soft. A stopped finalized solution can have a nonzero full-update residual and different strengths from the unfrozen solution. <code>converged</code> is true only when that full residual is below tolerance. Cache arithmetic, audits, and rebuilding are charged to the work count. Multiplication counts exclude memory copies, sorting, and allocation; wall-clock measurements include them.</p>
+<p>Three observed mutual wins are an operational policy, not a theorem about future winners or truth. Column comparisons use raw support, which can be degree-biased on irregular graphs. Ordinary many-to-one class labeling is outside this policy. Real marker logs, larger label vocabularies, distribution shifts, and stronger assignment baselines remain future evaluation.</p></section><section><h1>Larger-field exploratory probe</h1>
+<p>One seed at 48 and 64 objects, with the same input construction and update as the first pilot. The aggressive preset was added during development; this is an exploratory follow-up, not an independently registered confirmation. All timings include constructor copies, cache packing, audits, and result assembly.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Objects</th>
+<th>Policy</th>
+<th style="text-align: right;">Seconds</th>
+<th style="text-align: right;">Speedup</th>
+<th style="text-align: right;">Work ratio</th>
+<th style="text-align: right;">Finalized</th>
+<th style="text-align: right;">Disagreements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">48</td>
+<td>off</td>
+<td style="text-align: right;">0.20220</td>
+<td style="text-align: right;">1.000×</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">48</td>
+<td>audited</td>
+<td style="text-align: right;">0.20639</td>
+<td style="text-align: right;">0.980×</td>
+<td style="text-align: right;">0.782</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">48</td>
+<td>permanent</td>
+<td style="text-align: right;">0.17184</td>
+<td style="text-align: right;">1.177×</td>
+<td style="text-align: right;">0.624</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">48</td>
+<td>aggressive_audited</td>
+<td style="text-align: right;">0.05474</td>
+<td style="text-align: right;">3.694×</td>
+<td style="text-align: right;">0.095</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">48</td>
+<td>aggressive_permanent</td>
+<td style="text-align: right;">0.05399</td>
+<td style="text-align: right;">3.745×</td>
+<td style="text-align: right;">0.095</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td>off</td>
+<td style="text-align: right;">0.63788</td>
+<td style="text-align: right;">1.000×</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td>audited</td>
+<td style="text-align: right;">0.60464</td>
+<td style="text-align: right;">1.055×</td>
+<td style="text-align: right;">0.766</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td>permanent</td>
+<td style="text-align: right;">0.50885</td>
+<td style="text-align: right;">1.254×</td>
+<td style="text-align: right;">0.613</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td>aggressive_audited</td>
+<td style="text-align: right;">0.16194</td>
+<td style="text-align: right;">3.939×</td>
+<td style="text-align: right;">0.125</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td>aggressive_permanent</td>
+<td style="text-align: right;">0.15565</td>
+<td style="text-align: right;">4.098×</td>
+<td style="text-align: right;">0.116</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>These are two particular synthetic constellations, not a proof of general speedup or correctness. A full-update residual can remain nonzero after assignment finalization. The delayed-swap failure and recovery case remains in REPORT.md.</p></section><section><h1>Mutual-best early finalization and Relaxed Communications</h1>
+<p>Michael Emanuel Glover's proposal: examine both the best label for each object and the best object for each label. When a sufficiently strong mutual match persists for three fresh iterations, consider finalizing it early to avoid repeating settled work.</p>
+<p>The original C++ <code>assign()</code> postpass in <code>Code/relaxation-labeling/cpp/source/relax/relax.cpp</code> (approximately lines 218–278) selects row winners and resolves competing ordinary-label assignments by strength. The implementation here moves mutual-support eligibility into the iteration loop. The original three-iteration mechanism has not been located in the inspected source; this is a new implementation of the described idea.</p>
+<h2>Read the work</h2>
+<ul>
+<li><a href="RELAXED-COMMUNICATIONS.md">Relaxed Communications: theory note</a>: countably many messages, convergence under explicit assumptions, finite approximations, and the possibility that an infinite candidate set has no best object.</li>
+<li><a href="REPORT.md">Measured finite pilot</a>: 36 synthetic instances, three policies, three timing repetitions.</li>
+<li><a href="LARGE-PROBE.md">Larger exploratory probe</a>: one seed at each of 48 and 64 objects, including an explicit aggressive preset.</li>
+<li><a href="../hrl/finalization.py"><code>hrl/finalization.py</code></a>: opt-in implementation.</li>
+<li><a href="https://github.com/rmichaelglover/hrl-portfolio/blob/main/tests/test_finalization.py"><code>tests/test_finalization.py</code></a>: trajectory equivalence, ties, cached influence, delayed reversal, reopening, and result semantics.</li>
+</ul>
+<h2>Use</h2>
+<pre><code class="language-python">from hrl import MutualBestLabeler, FinalizationPolicy
+
+# C and prior describe a fixed one-to-one correspondence problem.
+result = MutualBestLabeler(
+    C, prior, one_to_one=True,
+    policy=FinalizationPolicy.aggressive(),
+).run()
+
+settled_pairs = [(i, result.assignments[i])
+                 for i in range(len(result.assignments)) if result.finalized[i]]
+print(result.stop_reason, result.full_update_residual)
+</code></pre>
+<p>Use ordinary relaxation labeling for many-to-one classes or meanings. Label reservation is appropriate to identities, not a general semantic vocabulary. The compatibility tensor is copied and made read-only: new evidence requires a new instance. Call <code>run()</code> once per instance.</p>
+<h2>Eligibility and commitment</h2>
+<p>A candidate must be the unique raw-support winner both across its object's labels and across the active objects competing for its unreserved label. It must also win in updated strength and pass strength, strength-gap, normalized support-gap, and row-change gates. Three consecutive eligible sweeps are required by default; a broken condition resets persistence. Ties are rejected. Noise never finalizes or reserves a label.</p>
+<p>The default audited policy requires strength ≥ .45, strength gap ≥ .05, row and column support margins ≥ .05, and maximum row change ≤ .03. Audits occur every six sweeps; a one-step change above .06 can release a lock. The aggressive preset lowers these gates, retaining three sweeps and strict tie rejection; it audits every eight sweeps. Neither preset supplies a calibrated error guarantee.</p>
+<p>Finalization freezes the whole soft row. Its influence on active objects is cached, rather than removed or rounded to a one-hot assignment. Full audits can reopen locks when fresh support invalidates eligibility or indicates excessive change. Audits can still miss later reversals. Permanent mode is useful as an experimental comparison and demonstrably fails on the delayed-reversal fixture.</p>
+<p><code>assignments</code> includes provisional argmax labels for unfinalized rows, including tied rows. Inspect <code>finalized</code> before treating a pair as settled. Finalized ordinary labels are unique; provisional labels need not be.</p>
+<p><code>converged</code> means the full unfrozen one-step residual is below tolerance. <code>assignment_converged</code> means every row has finalized. Stopping because active rows have reached a fixed point conditional on frozen rows is reported separately as <code>active_fixed_point_with_finalized_assignments</code>. These conditions are not interchangeable, and none certifies ground-truth correctness.</p>
+<h2>Reproduce</h2>
+<p>From the repository root, run these commands sequentially to avoid contaminating timings:</p>
+<pre><code class="language-sh">python3 -m pytest tests -q
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 mutual-finalization/experiment.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 mutual-finalization/large_experiment.py
+</code></pre>
+<p>Reduced arithmetic need not improve time: cache packing, audits, and bookkeeping can dominate smaller problems. The implementation retains the dense compatibility tensor and can allocate an additional packed active matrix; it does not solve dense storage or input-construction costs. The finite experiments evaluate this scheduler, not the distinct contraction operator proposed in the communication theory note.</p></section></main><footer>Michael Emanuel Glover · October 16, 2026 · Research proposal and finite experimental results. Computational assistance: Cypher.</footer></body></html>
