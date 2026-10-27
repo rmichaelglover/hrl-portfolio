@@ -52,6 +52,7 @@ function download(kind){
  const url=URL.createObjectURL(new Blob([content],{type:type+';charset=utf-8'}));const a=el('a');a.href=url;a.download=data.filename.replace(/\.xlsx$/i,'')+'-review.'+extension;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
 }
 $('#file').onchange=e=>handleFile(e.target.files[0]);$('#sample').onclick=async()=>{try{const r=await fetch('sample-lighting-quote.xlsx');if(!r.ok)throw Error();handleFile(new File([await r.blob()],'Fictional lighting quote.xlsx'));}catch{message('The sample could not load. You can still choose your own .xlsx workbook.',true);}};
+$('#another').onclick=()=>$('#file').click();
 $('#cancel').onclick=()=>{reset();message('Review cancelled. No workbook changes were made.');};$('#clear').onclick=reset;
 for(const id of ['filter','sheet','search'])$('#'+id).addEventListener(id==='search'?'input':'change',render);
 $('#download').onclick=()=>download('text');$('#json').onclick=()=>download('json');
