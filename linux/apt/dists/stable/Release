@@ -1,23 +1,19 @@
 Architectures: all
 Codename: stable
 Components: main
-Date: Mon, 05 Oct 2026 17:38:31 +0000
+Date: Tue, 27 Oct 2026 01:35:25 +0000
 Label: Maestro Chess
 Origin: Maestro Chess
 Suite: stable
 MD5Sum:
- 6baaa30b85db5f6a14178da35b55466f             1442 Release
- af3fea76482bfcf698cf2e1a7efc02de             1704 main/binary-all/Packages
- 25578a0abbf970b207c2d860e435d591              724 main/binary-all/Packages.gz
+ a491f8c3e973cea9070584cf3e5a6188             3469 main/binary-all/Packages
+ 168c7bac924a6994fab2d5574a9a4868             1350 main/binary-all/Packages.gz
 SHA1:
- 0c0fc54ee6eb74cadc9c117ac4b55e43c601eb5b             1442 Release
- 52d686d0d69c3198219e3980a4217c80a8e0a740             1704 main/binary-all/Packages
- fdab1e25fa2d1915185c2bf7ac1346d9ea81bbf3              724 main/binary-all/Packages.gz
+ a7427c094c24f332e9751f471d3461e1690172f9             3469 main/binary-all/Packages
+ 6ef9b041d486d0ca9cb37f4645e432218c488e7a             1350 main/binary-all/Packages.gz
 SHA256:
- a50c29047f01c23dea7cd1d1541dd41bf676f51813589d713dc94f7b56d0c191             1442 Release
- 7bcdfa193ae83ec1bd07346164071b7ad5475d3b5e768029c09592b3130d9239             1704 main/binary-all/Packages
- c78c712289a2fc300457bca151f5f0cd73e2f4658024fb10512456365def8ed4              724 main/binary-all/Packages.gz
+ 79f5e6f86fc1cf14ea143b8bf9c740ab7908a01a5a571c39e75f5eacb5c01b62             3469 main/binary-all/Packages
+ 97d6be2e878a2925021f7fc730c73c2184e02e81ec9801ab9425ca24b42a0bdd             1350 main/binary-all/Packages.gz
 SHA512:
- 55f02ddd975727a773f9450739fcf55a60d7b64ada8ce3e62b8f73f20673f5cb75ba19fcdcd903435a56250a9549a8dd5b1af126a3440673306ba4710f20a3a2             1442 Release
- 23dd1c5276d3f530c14e61be925402b2f603a8ee8ddba77af9174a72b6cab1621710930433991a610cca21524f5eae5743cfa2d2d18c437840ad07480eae59f4             1704 main/binary-all/Packages
- 241ec5fc7e0c163803d3e8aa012f1b4c8c15829e84a63485fdbbfc72bcaa589bd3be82088348513bc6debb92cbe1d5902bcd9094e65c03201ba908f432d8c5bc              724 main/binary-all/Packages.gz
+ 1cf30167f1fbf1d4548bba13dfc9bc05a805642456a230bbe59f252471f285b796b56f0d1c2b13be0656d656eb996ae0ba7ba311968ac88798cbba199b0a7272             3469 main/binary-all/Packages
+ ade6791806ace246bb47c887a141c3b39f8d7e18a108584e8021c8fcb0f7f88522168f3bc3f230c112a7ff1fb3c6839524dcb005ab5e4f34dad287e7b1ff4e86             1350 main/binary-all/Packages.gz

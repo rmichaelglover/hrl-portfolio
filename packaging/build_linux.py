@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import tarfile
 import tempfile
+from update_apt import update
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = '0.1.1'
@@ -112,7 +113,10 @@ StartupNotify=false
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT/'linux')
+    parser.add_argument('--signing-home', type=Path, help='GPG home containing the established repository key')
     args=parser.parse_args(); out=args.output.resolve(); out.mkdir(parents=True,exist_ok=True)
+    if (out/'apt/dists/stable/InRelease').exists() and args.signing_home is None:
+        parser.error('Existing signed repository: supply --signing-home, or build into a separate --output staging directory.')
     with tempfile.TemporaryDirectory(prefix='maestro-linux-') as temp:
         work=Path(temp); stage=work/'stage'; stage.mkdir(); payload(stage)
         installed_size=sum(p.stat().st_size for p in stage.rglob('*') if p.is_file())//1024
@@ -179,17 +183,9 @@ cp -a usr/* %{{buildroot}}/usr/
             run('rpmbuild','--define',f'_topdir {rpm}','-ba',str(spec),stdout=subprocess.DEVNULL)
             for file in (rpm/'RPMS').rglob('*.rpm'): shutil.copy2(file,out/file.name)
             for file in (rpm/'SRPMS').rglob('*.rpm'): shutil.copy2(file,out/file.name)
-        apt=out/'apt'; pool=apt/'pool/main'; pool.mkdir(parents=True,exist_ok=True)
-        shutil.copy2(deb,pool/deb.name)
-        binary=apt/'dists/stable/main/binary-all'; binary.mkdir(parents=True,exist_ok=True)
-        result=run('dpkg-scanpackages','--multiversion','pool',cwd=apt,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        (binary/'Packages').write_bytes(result.stdout)
-        with gzip.GzipFile(filename=str(binary/'Packages.gz'),mode='wb',mtime=0) as f: f.write(result.stdout)
-        release=run('apt-ftparchive','-o','APT::FTPArchive::Release::Origin=Maestro Chess','-o','APT::FTPArchive::Release::Label=Maestro Chess','-o','APT::FTPArchive::Release::Suite=stable','-o','APT::FTPArchive::Release::Codename=stable','-o','APT::FTPArchive::Release::Architectures=all','-o','APT::FTPArchive::Release::Components=main','release','dists/stable',cwd=apt,stdout=subprocess.PIPE)
-        (apt/'dists/stable/Release').write_bytes(release.stdout)
+        update(out, args.signing_home)
         public_files=sorted(p for p in out.iterdir() if p.is_file() and p.suffix in ['.deb','.rpm','.gz'])
-        (out/'SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in public_files))
         print('Built:',*[p.name for p in public_files],sep='\n  ')
-        print('APT metadata ready; sign Release before publishing installation instructions.')
+        print('APT metadata refreshed; signatures regenerated when --signing-home is supplied.')
 
 if __name__=='__main__': main()

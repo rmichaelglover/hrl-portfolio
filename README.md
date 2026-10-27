@@ -659,3 +659,8 @@ MIT remain under MIT.
 ## Recent work collection — October 26, 2026
 
 [Browse the recent research, RelaxFish code, vision notebooks, PDFs, and artwork](archive/2026-10-26-recent-work/README.md).
+
+
+## Ubuntu installation
+
+[Ubuntu downloads and signed APT setup](https://rmichaelglover.github.io/hrl-portfolio/linux/) now include `python3-hrl` (the current HRL Python engine), `python3-relaxation-labeling` (the separate classic RL core), and `maestro-chess`. After repository setup, run `sudo apt install python3-hrl` and `hrl-demo`. Direct DEB downloads are also available. See the [packaging audit](packaging/UBUNTU-AUDIT-2026-10-26.md) for tested Ubuntu versions and GRRLE status.

@@ -1,0 +1,16 @@
+{
+  "upstream": "https://github.com/rmichaelglover/relaxation-labeling-python",
+  "commit": "0698f5c9c2b8659521236a5be9cfa37838efa849",
+  "files": {
+    "relax.py": "9e828dccde1e727743c128f1d4576c498c6263cb8f765b822501871361ae73ad",
+    "triangles_gt_squares.py": "630439e3440b9724fc26640aead34d001e0b86b1b0b3f1e7caf229b18bcab64e",
+    "example_clusters.py": "1735a9a5cdde987b003065a89f50389afb9cdc1132947be5bbac458ddabbb5b0",
+    "README.md": "ddca1b1056091ea981ce1f3f74a8debda1db378f08a380abb206ec14cb61048e",
+    "LICENSE": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "NOTICE": "bc3d574ad6502afbec85deb17da80dd18a9e6cd62956d20348628cb7ba1951ef",
+    "pyproject.toml": "24fedd4bc6532a4ac6b346399941961187e764e8ee81079ee04eda18894faed8",
+    "setup.cfg": "37a30ebf799c24812dc854d9b81d44e4e66afa35b0c47c117a51f3dd0d2a0031",
+    "tests/test_relax.py": "86387642db8c5128f74feb92eae0a0010bae26ad17b9ce1758be058f94911149",
+    "tests/test_trool.py": "b1991ac77b0eb331889bba4e3dc2177a44f1b3c689e874c4e29af4a8e8a6252a"
+  }
+}

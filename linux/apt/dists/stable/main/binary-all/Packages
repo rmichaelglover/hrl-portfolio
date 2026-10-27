@@ -38,3 +38,43 @@ Description: Colorful musical chess and an Audacity music kit
  and maintain local player profiles. Runs on Linux with a loopback server.
  This package uses the MIRL-1.0 source-available license.
 
+Package: python3-hrl
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Michael Emanuel Glover <glover.michaele@gmail.com>
+Installed-Size: 166
+Depends: python3 (>= 3.10), python3-numpy (>= 1.21)
+Filename: pool/main/python3-hrl_0.1.0-1_all.deb
+Size: 50050
+MD5sum: c7cbe550a876eea427e62d1569b042d3
+SHA1: f99e5423e0415699a2d91c21166b115d16c73d11
+SHA256: 2baafd096785dfddf544bcc6aca0f77d6b4706f80a194d49a9a30176e9b49bdd
+Section: non-free/python
+Priority: optional
+Homepage: https://rmichaelglover.github.io/hrl-portfolio/
+Description: HRL engine with persistent priors and a noise label
+ NumPy-based contextual labeling with point correspondence, temporal
+ tracking, model consensus and additional experimental modules.
+ Includes a runnable hrl-demo and Python API. Optional NLI and LLM
+ dependencies are not installed. MIRL-1.0 source-available license.
+
+Package: python3-relaxation-labeling
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Michael Emanuel Glover <glover.michaele@gmail.com>
+Installed-Size: 90
+Depends: python3 (>= 3.10), python3-numpy (>= 1.21.5)
+Filename: pool/main/python3-relaxation-labeling_0.1.0-1_all.deb
+Size: 19966
+MD5sum: 0962dc731ddd9af4dd4a7f9fc4abf815
+SHA1: 83346bd06343f41f169cc4db33e1e8cfff01b1bd
+SHA256: daede5d4d828a3ac9678ee4c243e8fab52b6f97a703b3d2682c27c3903e2328b
+Section: python
+Priority: optional
+Homepage: https://github.com/rmichaelglover/relaxation-labeling-python
+Description: NumPy relaxation-labeling core and clustered-object demonstration
+ Reusable pairwise and order-three compatibility-based labeling engine,
+ with a runnable demonstration and Python API. This is the classic RL
+ core, not the complete hierarchical HRL or recursive GRRLE research suite.
+ Licensed under AGPL-3.0; see installed copyright and NOTICE files.
+
