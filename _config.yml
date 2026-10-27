@@ -4,3 +4,6 @@ exclude:
   - packaging
   - tests
   - __pycache__
+
+  - "archive/2026-10-26-recent-work/images/Faceless Arabian Warrior Gamebook Cover.png"
+  - "archive/2026-10-26-recent-work/images/Neon Cyberpunk Prophet Study Poster.png"
