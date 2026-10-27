@@ -654,3 +654,8 @@ The engineers-only, zero-compensation review board is described in the
 
 Third-party material retains its own license. Earlier versions released under
 MIT remain under MIT.
+
+
+## Recent work collection — October 26, 2026
+
+[Browse the recent research, RelaxFish code, vision notebooks, PDFs, and artwork](archive/2026-10-26-recent-work/README.md).

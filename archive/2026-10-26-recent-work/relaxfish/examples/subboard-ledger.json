@@ -1,0 +1,32 @@
+{
+  "{\"fen\": \"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\", \"moves\": [], \"origin\": [0, 0], \"root\": \"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\", \"size\": 4}": {
+    "evaluation": 0.0,
+    "certified": false,
+    "cells": [
+      [
+        "r",
+        "n",
+        "b",
+        "q"
+      ],
+      [
+        "p",
+        "p",
+        "p",
+        "p"
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "."
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "."
+      ]
+    ]
+  }
+}

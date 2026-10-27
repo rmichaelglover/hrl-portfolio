@@ -1,0 +1,22 @@
+[
+  {
+    "paper": "RelaxFish_Quantum_WhitePaper (1).pdf",
+    "accepted_plies": 87,
+    "first_error": {
+      "token": "Qxc4",
+      "ply": 88,
+      "error": "illegal san: 'Qxc4' in 8/2p5/8/3k1ppp/2R1p3/PN2K1PP/5P2/8 b - - 0 44"
+    },
+    "last_valid_fen": "8/2p5/8/3k1ppp/2R1p3/PN2K1PP/5P2/8 b - - 0 44"
+  },
+  {
+    "paper": "RelaxFish_Quantum_WhitePaper.pdf",
+    "accepted_plies": 99,
+    "first_error": {
+      "token": "Point_Convergence",
+      "ply": 100,
+      "error": "invalid san: 'Point_Convergence'"
+    },
+    "last_valid_fen": "8/2p5/8/4N2p/Pk4p1/4K1P1/8/8 b - - 1 50"
+  }
+]

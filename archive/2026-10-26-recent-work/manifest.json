@@ -1,0 +1,275 @@
+[
+  {
+    "source": "Documents/RelaxFish-Polished/README.md",
+    "archived_path": "relaxfish/README.md",
+    "sha256": "be3e6fdaf6cce68f148ccaed1782475c750f89432595951f38e1f35550318234",
+    "bytes": 3850,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/REPORT.md",
+    "archived_path": "relaxfish/REPORT.md",
+    "sha256": "65e934d7fc2e2ec3648344fc4178fe4f1db1c6fe7d19ad2e06e88f81ecef6667",
+    "bytes": 4793,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/examples/environment.json",
+    "archived_path": "relaxfish/examples/environment.json",
+    "sha256": "6f574e8b58fa7ffa266bbf5ad28476f9264425f89b0f85346124e82ba1057663",
+    "bytes": 72,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/examples/paper-game-audit.json",
+    "archived_path": "relaxfish/examples/paper-game-audit.json",
+    "sha256": "8f5353d1d6daa2c9fd5c2f137ef3d188408bb07b59935066629eaa3862f881a4",
+    "bytes": 595,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/examples/selfplay.pgn",
+    "archived_path": "relaxfish/examples/selfplay.pgn",
+    "sha256": "a3801606048e96ce07df1816ba90f08bb0c89857604c833b22fadd4082c079bd",
+    "bytes": 163,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/examples/starting-position.json",
+    "archived_path": "relaxfish/examples/starting-position.json",
+    "sha256": "e098db48c51f92bc3f540cbdca7dc6f8703ca57a224c8002de3f0fa77cdfba7b",
+    "bytes": 13640,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/examples/subboard-ledger.json",
+    "archived_path": "relaxfish/examples/subboard-ledger.json",
+    "sha256": "0ee19afa5fda7e8d64b1f62409a6f55291b269f1fd90a8b8f4a8ae9569e6acfc",
+    "bytes": 546,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/notebooks/HRL_Quantum_Chess_Distributed_Engine.ipynb",
+    "archived_path": "relaxfish/notebooks/HRL_Quantum_Chess_Distributed_Engine.ipynb",
+    "sha256": "209c277c7ed2a7b68cca6d8395cb60a538641afb8ee5eaded3b1b49e7063fec2",
+    "bytes": 2228,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/notebooks/dual_architecture_and_tactical_inversion.ipynb",
+    "archived_path": "relaxfish/notebooks/dual_architecture_and_tactical_inversion.ipynb",
+    "sha256": "8119e8f376ec159a458229f739b10780e4c897bf2cc0111c578759e79430a5e3",
+    "bytes": 2019,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/notebooks/quantum_superposition.ipynb",
+    "archived_path": "relaxfish/notebooks/quantum_superposition.ipynb",
+    "sha256": "69dcdb2ad5cbfc3f64c7b3e01060765c7b2d2d962a63f0af5ab674ef27cd523c",
+    "bytes": 1792,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/notebooks/the_structural_matrix_and_database_schema_architecture.ipynb",
+    "archived_path": "relaxfish/notebooks/the_structural_matrix_and_database_schema_architecture.ipynb",
+    "sha256": "527e14f496ecd8ff4e54a444f68edd5ebabedb6e343145a2423e7f52e6eeb565",
+    "bytes": 1729,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/HRL_Quantum_Chess_Distributed_Engine.ipynb",
+    "archived_path": "relaxfish/originals/HRL_Quantum_Chess_Distributed_Engine.ipynb",
+    "sha256": "84dd85068c89459958c016d7b50f95ced19c3d58d432f25cd8d0d6f9e2bdb1a2",
+    "bytes": 9737,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/RelaxFish_Quantum_WhitePaper (1).pdf",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper (1).pdf",
+    "sha256": "7087094da0f774c3f49c56f8aefc0a3901be6f80a541f02786e66bf4f3779678",
+    "bytes": 226349,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/RelaxFish_Quantum_WhitePaper (1).txt",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper (1).txt",
+    "sha256": "b84f0b399807b14b08a011467d913b8215b95f553aa6599c8f071ba325fcebf8",
+    "bytes": 5268,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/RelaxFish_Quantum_WhitePaper.pdf",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper.pdf",
+    "sha256": "3ba4b6a3e4f710b5bc5d6d66c6c0ba24ee0731f636f95646332ad4eb32f879df",
+    "bytes": 8684,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/RelaxFish_Quantum_WhitePaper.txt",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper.txt",
+    "sha256": "5f840a0fde9732d4948651bb4c852372a82724795996b70d46c31d05aef1e768",
+    "bytes": 5966,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/dual_architecture_and_tactical_inversion.ipynb",
+    "archived_path": "relaxfish/originals/dual_architecture_and_tactical_inversion.ipynb",
+    "sha256": "856135c824312c8e6a04e4a70313fdf1f6d518ca93cb7a16b033e83f113bc2bf",
+    "bytes": 7512,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/quantum_superposition.ipynb",
+    "archived_path": "relaxfish/originals/quantum_superposition.ipynb",
+    "sha256": "abf09e94777e960a42305748a610f3a5e916e7ff13b1e8528151ff1463ff22e6",
+    "bytes": 6434,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/originals/the_structural_matrix_and_database_schema_architecture.ipynb",
+    "archived_path": "relaxfish/originals/the_structural_matrix_and_database_schema_architecture.ipynb",
+    "sha256": "f51e9f484314a8e32a9cad9653ef03acf21d02e9d1af28cb86da9ce641d6cc35",
+    "bytes": 7639,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/relaxfish.py",
+    "archived_path": "relaxfish/relaxfish.py",
+    "sha256": "54980c36114cd80b86e63cf3913962c3067750eff97a1a53e4a2a0e4e811825a",
+    "bytes": 12614,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/requirements.txt",
+    "archived_path": "relaxfish/requirements.txt",
+    "sha256": "543f12133f92b1ad47ab99ccdcba9fac669b6d9a39a1edb03e10dd95f3cfadc4",
+    "bytes": 34,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish-Polished/test_relaxfish.py",
+    "archived_path": "relaxfish/test_relaxfish.py",
+    "sha256": "7716312138f5b0123f4558ba979e59169f3843e5fa9bacf77fa8b32a3ab82355",
+    "bytes": 4732,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/2028PREZ.png",
+    "archived_path": "images/2028PREZ.png",
+    "sha256": "0483e444acf02db9348c688049f3aefd579acf114d9b54cdf2d8892d260c8ed1",
+    "bytes": 2139954,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Celestial Creator Over a Radiant Paradise.png",
+    "archived_path": "images/Celestial Creator Over a Radiant Paradise.png",
+    "sha256": "022d920f1f1db7f696828c4f80221706b41802b4019cac32da57e17344f92172",
+    "bytes": 3303669,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Celestial Mother Earth Goddess.png",
+    "archived_path": "images/Celestial Mother Earth Goddess.png",
+    "sha256": "d492e632fdd2279f6984b2762fbfeacf20d363377ad263f17a32510eceea76b9",
+    "bytes": 3656499,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Cosmic Aboriginal Divine Trinity Triptych.png",
+    "archived_path": "images/Cosmic Aboriginal Divine Trinity Triptych.png",
+    "sha256": "527ae9d11729720929e2a5bfa6312367467ab9e5725e52a9b258b5af20f059c1",
+    "bytes": 3721238,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Cosmic Christ in a Neon Space Cathedral.png",
+    "archived_path": "images/Cosmic Christ in a Neon Space Cathedral.png",
+    "sha256": "5cdaff0c6e1805489a355a62e1d1eed4ef8461ab25fb182acbca934061b085d8",
+    "bytes": 3372667,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Faceless Arabian Warrior Gamebook Cover.png",
+    "archived_path": "images/Faceless Arabian Warrior Gamebook Cover.png",
+    "sha256": "86534b6e4ddc71adf87151912ca397911b225d3aafecc6be938d72c1d35597c2",
+    "bytes": 2826577,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Neon Cosmic Divine Triptych.png",
+    "archived_path": "images/Neon Cosmic Divine Triptych.png",
+    "sha256": "ec8573fb6d819a3a62ca000033ce9a92d799abdc6ea4862ac9069e9f9f0ab47c",
+    "bytes": 3367548,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Neon Cyberpunk Prophet Study Poster.png",
+    "archived_path": "images/Neon Cyberpunk Prophet Study Poster.png",
+    "sha256": "97d87bf8c80081514cb1d37f9c16f67f6d924795d4102fb41ecf1e576f7ab2f0",
+    "bytes": 3184493,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/Patriotic Power Couple 2028.png",
+    "archived_path": "images/Patriotic Power Couple 2028.png",
+    "sha256": "860c9d9f6373586e79ea4159a605f9dc8b5f8b32f1e1a09c193e2a036469ed33",
+    "bytes": 2262184,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/RelaxFish_Quantum_WhitePaper (1).pdf",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper (1).pdf",
+    "sha256": "7087094da0f774c3f49c56f8aefc0a3901be6f80a541f02786e66bf4f3779678",
+    "bytes": 226349,
+    "duplicate": true
+  },
+  {
+    "source": "Documents/RelaxFish_Quantum_WhitePaper.pdf",
+    "archived_path": "relaxfish/originals/RelaxFish_Quantum_WhitePaper.pdf",
+    "sha256": "3ba4b6a3e4f710b5bc5d6d66c6c0ba24ee0731f636f95646332ad4eb32f879df",
+    "bytes": 8684,
+    "duplicate": true
+  },
+  {
+    "source": "Documents/The Grand Unified Theory_ Solved.pdf",
+    "archived_path": "papers/The Grand Unified Theory_ Solved.pdf",
+    "sha256": "b1b68bf8374a2834cfaa25e6c497a50b88c927d23f90b41987e588e776c86a38",
+    "bytes": 185597,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/cantor_hrl_ellipse_detector.ipynb",
+    "archived_path": "vision-notebooks/cantor_hrl_ellipse_detector.ipynb",
+    "sha256": "81f72b33eef51672cdaa2d7f1f2236d7caf765d319c2a4b8e33d9830f9931940",
+    "bytes": 11197,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/cantor_hrl_rotated_ellipse_detector.ipynb",
+    "archived_path": "vision-notebooks/cantor_hrl_rotated_ellipse_detector.ipynb",
+    "sha256": "022e54fb25e463c0aefb87ede2751427cdabec3b7b9b04939186585ac08563f0",
+    "bytes": 10232,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/download.pdf",
+    "archived_path": "papers/download.pdf",
+    "sha256": "f5c89e8dc38d0a53d25204568b22d9ce5122e585ee29f572e3401c97bff8272d",
+    "bytes": 113834,
+    "duplicate": false
+  },
+  {
+    "source": "Documents/ephemeral_vision_prototype.ipynb",
+    "archived_path": "vision-notebooks/ephemeral_vision_prototype.ipynb",
+    "sha256": "f6ce4143f6ef243184e0d974d95c8bbdbda4c99ba59a3edf5d28f50093106231",
+    "bytes": 5726,
+    "duplicate": false
+  },
+  {
+    "source": "Pictures/hrlcantorellipse.png",
+    "archived_path": "images/hrlcantorellipse.png",
+    "sha256": "6af28be16ef19d43f9f7b89af229bb12a08db632cd156a62e4dadef40f80ea9e",
+    "bytes": 68085,
+    "duplicate": false
+  }
+]
