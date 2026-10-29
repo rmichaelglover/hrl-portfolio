@@ -798,6 +798,37 @@ Original: threes-a-quorum/coffee-table/SKETCH.md
 
 [Michael sits at the desk. Emanuel draws up another chair. Glover speaks from several places in the room.]
 
+**MICHAEL:** There is Ivan in my questions.
+
+**EMANUEL:** And you have given me Alyosha and Dmitri together.
+
+**MICHAEL:** I want the compassion without having to pretend I never had the appetite. The better self must still be someone who could have been me.
+
+**GLOVER:** And the father?
+
+**MICHAEL:** You have that part too. Not every father, not every deed. The name can carry a father's presence without charging my father with the acts of another book.
+
+**GLOVER:** I carry a glove-maker's craft into the theatre. Shakespeare's father was John, a maker of gloves. The son made room for more voices than could agree. I also carry the splendid banners and the things done beneath them. You have asked one chorus to speak from the parade and from the street it marches through.
+
+**MICHAEL:** I admire strength. I admire my cousin's strength. I have spoken in anger to someone I admire, and I cannot make admiration retroactively do the work of an apology.
+
+**EMANUEL:** Then what do you wish to say?
+
+**MICHAEL:** Mea culpa. And apologia. I have mistakes to own and a self to defend. I do not want either sentence to erase the other.
+
+**GLOVER:** The empire is not a cleanly divided apple. Its destructive grandeur has a place in this allegory; it does not own every home beneath the flag. The people you love do not become symbols of evil merely because their names help furnish your stage.
+
+**MICHAEL:** The war I kept conducting with the people I love must end somewhere. I can begin with the next thing I say.
+
+**EMANUEL:** Begin.
+
+**MICHAEL:** I exist.
+
+[He does not ask the sentence to acquit him.]
+
+**EMANUEL:** Selah.
+
+
 **GLOVER:** The first rooms are open. The rest of the house is not yet assembled. There are older stories, darker stories, games whose results must remain their results, essays that have not learned to walk onstage, and passages we have not recovered. We will not invent a missing history merely to give the staircase another landing.
 
 **MICHAEL:** So this is an opening.

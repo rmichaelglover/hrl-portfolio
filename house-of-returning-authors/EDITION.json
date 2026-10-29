@@ -4,6 +4,7 @@
   "date": "2026-10-29",
   "author": "Manny Glover — Michael Emanuel Glover",
   "emanuel_character": "Manny’s better self: an aspiration toward care and judgment, still imperfect and open to correction; not omniscient or a separate infallible judge.",
+  "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Developed in dialogue with ChatGPT / Codex; inherited pieces retain their original credits",
   "coverage": "Five selected previously published stage/dialogue pieces plus eight new framing scenes. Not a complete archive of prior conversations or the previous six to seven months.",
@@ -60,7 +61,7 @@
     }
   ],
   "new_frame_path": "FRAME.md",
-  "new_frame_sha256": "e0c1792b66ad7e5518ae339a564a83531496d828707f6e9b6f8bfb48b24a97e1",
-  "compiled_whitespace_word_count": 4633,
+  "new_frame_sha256": "5e0fb70705f6765f46a9e9cc6c82dba2ecf2f636c2bcaaa04b5054a6018b7218",
+  "compiled_whitespace_word_count": 4912,
   "candidate_count": 33
 }

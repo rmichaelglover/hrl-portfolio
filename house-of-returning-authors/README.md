@@ -6,7 +6,7 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, eight new framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 4,600 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, eight new framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 4,900 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
