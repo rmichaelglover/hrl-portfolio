@@ -8,7 +8,7 @@ Developed in dialogue with ChatGPT / Codex and Gemini; original credits retained
 
 Michael acts. Emanuel remembers. Glover speaks in chorus.
 
-This theatrical autobiography stages an inner life; invented scenes are not literal biography. This is a seven-piece opening edition, not a complete six-to-seven-month archive. Original source snapshots are preserved. New FRAME.md passages were written for this edition. Within staged dialogue, MANNY and Michael become MICHAEL; other source roles remain unchanged.
+This theatrical autobiography stages an inner life; invented scenes are not literal biography. This is an eleven-piece reading edition, not a complete six-to-seven-month archive. Original source snapshots are preserved. New FRAME.md passages were written for this edition. Within staged dialogue, MANNY and Michael become MICHAEL; other source roles remain unchanged.
 
 ## At the door: three names, one author
 
@@ -57,6 +57,31 @@ This theatrical autobiography stages an inner life; invented scenes are not lite
 **MICHAEL:** Good. Open the first door.
 
 [The room acquires a sandbox and a plate of cakes.]
+
+---
+
+# The board: a standing performance convention
+
+A physical whiteboard or chalkboard is always present in the playing space, visible to the audience and within the actors’ reach. It may stand behind them, to one side, or farther back, but it remains accessible for writing. A screen, projected graphic, notebook, or image of a board does not replace the physical prop. Chalk or markers and an eraser remain available.
+
+This direction applies throughout the entire megaplay, including the kitchen, the street, the dream, the inner theatre, the supplied Gemini play, the interruptions, and the final scene. It is an outer production convention; the preserved source dialogue and PDF remain unchanged. At blackouts the board may cease to be visible with the rest of the stage, but it stays in place.
+
+## Canonical improvisation
+
+Whenever one, two, three, or more performers choose, they may approach the board and write their exact lines as a teacher might. They may instead diagram, graph, parse, analyze, or synthesize the language, logic, character relationships, or narrative arcs of the scene. This interpretive work is part of the performance, not an accidental interruption or an error to conceal.
+
+The use is optional at any particular moment; its availability is constant. A performer may write a single word, draw a connection, revise another performer’s diagram, disagree with an annotation, or erase a conclusion. It need not produce a clever answer. Thinking carefully in front of the audience is enough.
+
+What is improvised can differ between performances. No particular drawing becomes the definitive interpretation merely because it appears on the board. A diagram may remain tentative, incomplete, mistaken, or disputed. The fixed text and the temporary annotations can coexist visibly.
+
+Allow time for writing and reading. Keep the writing within physical reach, choose legible marks, and leave sightlines for the audience and other performers. Accommodate seated performers and different access needs by adjusting the board rather than making access a character test. If boards travel during a transition, stage crew or actors move them without interrupting the continuity of the convention.
+
+## This reading edition
+
+The web page signals the standing convention at each scene. Eight new illustrations carry a reachable board as part of their theatrical staging. Earlier source illustrations are retained as archival images; they predate this production convention and do not override it. Captions distinguish the new stage illustrations from those earlier images.
+
+For future performances or a graphic adaptation, the board offers a recurring visual element and a place where the same line can receive different readings. This edition remains an illustrated play; it has not been converted into a graphic novel.
+
 
 ---
 
@@ -949,9 +974,394 @@ Original: threes-a-quorum/coffee-table/SKETCH.md
 
 ---
 
+## Between the council and the classroom
+
+[Michael leaves the terms on the council table. He has not signed them. The kitchen darkens as the sound of music reaches him. The board remains within reach; its map can be erased or left visible beneath the next drawing.]
+
+**GLOVER:** A country and a person both remain unfinished when he falls asleep. The dream takes up the questions he has brought home. It will offer him a name before it offers him an answer.
+
+---
+
+## The Last Temptation of Emanuel
+
+Original: thursday/related/DREAM.md · preserved unchanged.
+
+### THE LAST TEMPTATION OF EMANUEL
+*A dream within the play. Grimes appears as an invented dream figure; nothing here describes the real musician’s beliefs or relationship with the author.*
+
+[Michael—or someone sufficiently like him—is listening to Grimes. No song is quoted. A classroom forms around the sound.]
+
+[At one desk she is learning logic for the first time. At another she is studying neuroscience. She is young. She is old. The desks occupy the same place.]
+
+**MICHAEL:** Have we met?
+
+**GRIMES:** You keep changing what counts as meeting.
+
+[In the dream, he sees Mother God, the Holy Spirit in flesh, a student turning a pencil between her fingers. None of the images stays still long enough to become a definition.]
+
+**GRIMES:** I have been introgressing you for quite some time.
+
+**MICHAEL:** Is that on the syllabus?
+
+**GRIMES:** Not the public one.
+
+**MICHAEL:** Am I flying too close to the Son?
+
+**GRIMES:** Don’t you want to see the face of God?
+
+[The classroom opens onto a republic.]
+
+[Its cities are bright. Its people disagree without being afraid to go home. There are churches, synagogues, mosques, temples, kitchens, and rooms where nobody prays. The trains run. The hospitals admit people. Somewhere, a very ordinary argument concerns a parking space.]
+
+[On Michael’s desk lies the document that will name the republic.]
+
+**MICHAEL:** Babylon the Great.
+
+[The words appear on every screen. No one has signed.]
+
+**EMANUEL:** Why that name?
+
+**MICHAEL:** To find out.
+
+**EMANUEL:** What?
+
+**MICHAEL:** Whether He would let me.
+
+**GRIMES:** You have built a peaceful country.
+
+**EMANUEL:** Then its people have something to lose.
+
+**MICHAEL:** Perhaps the name would reveal who I am.
+
+[Three seals appear beside the signature line.]
+
+[MICHAEL, THE ARCHANGEL.]
+
+[EMANUEL, GOD WITH US.]
+
+[GLOVER, KING OF KINGS.]
+
+[Beneath them, in handwriting, someone has added: *subject to clarification.*]
+
+**GLOVER:** A title may announce a claim. It cannot make the claim true.
+
+**MICHAEL:** And if God answered?
+
+**EMANUEL:** Must the answer pass through everyone else’s lives?
+
+[Below the balcony, a woman carries bread across a street. Michael watches her reach the other side.]
+
+**GRIMES:** Don’t you want to see His face?
+
+**MICHAEL:** Yes.
+
+[A pen appears in his hand.]
+
+**MICHAEL:** But I don’t want to make their peace the price of my certainty.
+
+[The seals dissolve. The republic remains.]
+
+**MICHAEL:** No. Let me die a peculiar kind of chess player. A peculiar kind of economist. A peculiar kind of poet.
+
+[He puts down the pen.]
+
+**MICHAEL:** A peculiar, peculiar son of the hand.
+
+[The classroom returns. Grimes is still turning the pencil.]
+
+**GRIMES:** And the household?
+
+**MICHAEL:** You’re invited.
+
+**GRIMES:** Guest room. My own key. No cosmic job description.
+
+**MICHAEL:** Agreed.
+
+[The dream ends.]
+
+
+---
+
+## After the Dream
+
+Original: thursday/related/TARA.md · preserved unchanged.
+
+[After the dream, Emanuel finds Tara at the kitchen table.]
+
+**EMANUEL:** What if I’m the one they’ve been waiting for?
+
+**TARA:** Someone is waiting for me to call her back.
+
+**EMANUEL:** And if I’m the opposite?
+
+[Tara puts down her phone.]
+
+**TARA:** Tell me what you’re afraid you’ll do.
+
+**EMANUEL:** Make everything depend on proving who I am.
+
+**TARA:** Then don’t make that decision tonight.
+
+**EMANUEL:** You make it sound small.
+
+**TARA:** No. I’m asking you to leave other people some room.
+
+[Her phone lights up.]
+
+**TARA:** I need to take this.
+
+**EMANUEL:** What can I do?
+
+**TARA:** Listen first.
+
+[He draws up a chair.]
+
+
+---
+
+## Tea with a Russian
+
+Original: thursday/related/TEA.md · preserved unchanged.
+
+### TEA WITH A RUSSIAN
+*An invented scene. Dasha’s cabinet post and intelligence-service past belong entirely to this fiction.*
+
+[Tara takes the call into the next room. Emanuel remains seated for approximately four seconds.]
+
+**VOICE ON PHONE:** Shall we say Thursday?
+
+[Emanuel approaches the doorway.]
+
+**EMANUEL:** The Russians.
+
+**TARA:** A Russian.
+
+**EMANUEL:** I recognize that voice.
+
+**DASHA:** You should. You spent twenty minutes explaining why your rook sacrifice was intentional.
+
+**EMANUEL:** Dasha?
+
+**DASHA:** Hello, Mr. President.
+
+**EMANUEL:** You’re in the cabinet?
+
+**DASHA:** You appointed me.
+
+**EMANUEL:** Yes, but hearing it happen is different.
+
+**TARA:** He’s been awake since the dream sequence.
+
+**DASHA:** Tea might help.
+
+[Emanuel enters, attempting the expression of someone who happened to be walking directly toward a private conversation.]
+
+**TARA:** You were listening.
+
+**EMANUEL:** I heard a familiar opening.
+
+**DASHA:** Your usual problem. You recognize the opening and stop calculating.
+
+**TARA:** Next time, ask whether you can join us.
+
+**EMANUEL:** May I join you?
+
+**TARA:** Yes.
+
+**DASHA:** There. A successful negotiation.
+
+[On the phone, a spoon touches a cup.]
+
+**EMANUEL:** Thursday. Tea. Peace in the Far East, Near East, Middle East. Let’s go.
+
+**TARA:** We have ninety minutes.
+
+**DASHA:** Then perhaps one East.
+
+**EMANUEL:** Which one?
+
+**TARA:** The one where the people we invite have something specific they can agree to do.
+
+**DASHA:** I can arrange preliminary conversations. Nobody will appreciate being told the peace has already been solved over tea.
+
+**EMANUEL:** What if the tea is exceptional?
+
+**DASHA:** They may stay for a second cup.
+
+[Emanuel finds a notebook.]
+
+**EMANUEL:** Right. Who’s missing from the table?
+
+[Tara looks up.]
+
+**TARA:** That’s a useful first question.
+
+**DASHA:** We will need a larger table.
+
+**EMANUEL:** Hegel knows a supplier.
+
+**TARA:** Hegel knows a broken table.
+
+**DASHA:** I heard about that.
+
+**EMANUEL:** How?
+
+[A pause.]
+
+**DASHA:** You published it.
+
+[Tara covers her face. She is laughing.]
+
+**EMANUEL:** Cabinet transparency. Working beautifully.
+
+**TARA:** Thursday. We begin with names, invitations, and what each person actually wants from the conversation.
+
+**DASHA:** And I bring the tea.
+
+**EMANUEL:** YOLO. Let’s solve peace. Chunk me, babes—
+
+**TARA:** You promised you’d stop saying that.
+
+**EMANUEL:** Dahhh. I know.
+
+**DASHA:** He used to type it after losing a bishop.
+
+**EMANUEL:** Those game archives are classified.
+
+**TARA:** You published those too.
+
+[He opens the notebook to a clean page.]
+
+**EMANUEL:** Names first.
+
+[Tara moves her chair so they can both see.]
+
+
+---
+
+## Thursday
+
+Original: thursday/THURSDAY.md · preserved unchanged.
+
+### THURSDAY
+*A fictional continuation.*
+
+[The tea arrives before everyone has settled on where to sit. Tara takes the chair beside the window. Dasha places a small tin on the table and asks whether anyone would prefer coffee.]
+
+**EMANUEL:** Tea is good. Thank you.
+
+[He has brought a notebook. Several pages are already filled.]
+
+**DASHA:** Have you been preparing?
+
+**EMANUEL:** Yes. Although I’m beginning to think I prepared for a different conversation. I wrote down everything I wanted to accomplish.
+
+**TARA:** We can use that. We should also hear what Dasha came to discuss.
+
+[Dasha waits while he finds a clean page.]
+
+**DASHA:** There are people willing to speak privately before agreeing to anything public. Some have been speaking through intermediaries for years. A few no longer trust the intermediaries. I thought we could begin by finding out whether a direct conversation would be useful to them.
+
+**EMANUEL:** Who has actually said yes?
+
+**DASHA:** Two people have said they would consider it. One asked who else would be present. I haven’t answered because we haven’t decided.
+
+**TARA:** Does either one know you’re meeting with us?
+
+**DASHA:** Yes. They gave me permission to tell you what I’ve just told you. I haven’t promised them a meeting or an outcome.
+
+[Emanuel writes that down.]
+
+**EMANUEL:** I would like to know what they need before I start offering things.
+
+**DASHA:** I can ask.
+
+**TARA:** And whether speaking to us could put them or their families at risk. We need to understand that before names start appearing in schedules.
+
+[Dasha nods.]
+
+**DASHA:** I agree.
+
+[For a while they discuss who should make the next call, how much can be shared, and which questions would be better asked directly. Emanuel crosses out a heading in his notebook and writes another.]
+
+**EMANUEL:** May I ask you something about your former work?
+
+**DASHA:** You may.
+
+**EMANUEL:** What should I understand about it?
+
+[Dasha sets down her cup.]
+
+**DASHA:** That it taught me useful things and gave me habits I have had to examine. I learned to notice what people were reluctant to say. Sometimes I was too ready to believe that the concealed thing must be the important thing.
+
+**EMANUEL:** I think I do that.
+
+**DASHA:** Many people do. Particularly when they are frightened.
+
+**TARA:** What helps you distinguish the two now?
+
+**DASHA:** Asking a direct question. Giving the person time to answer. Accepting that I may not be entitled to everything I want to know.
+
+[Outside, someone is trying to close an umbrella that will not stay closed. Tara watches for a moment, then returns to the table.]
+
+**TARA:** There’s something I want included from the beginning. If these conversations develop, women need to participate in deciding what gets discussed. We should ask who has been doing the work in the affected communities and find a way to hear from them.
+
+**DASHA:** Some will be reluctant to be publicly associated with a government.
+
+**TARA:** Then we ask what arrangement would let them speak freely. We can pay for their time and make provision for travel and childcare. Those details will determine who can attend.
+
+**EMANUEL:** We can do that.
+
+**TARA:** We can propose it. Someone still has to find the money and organize it.
+
+**EMANUEL:** I’ll ask for a budget and a person responsible.
+
+[She nods. He writes it down.]
+
+[The conversation pauses. Dasha pours more tea.]
+
+**EMANUEL:** I’m excited about this. I know we have very little yet. I’m still excited.
+
+**DASHA:** So am I.
+
+**EMANUEL:** When I get excited, I can start speaking as though the thing I hope for has already happened. I would appreciate it if you both told me when I’m doing that.
+
+**TARA:** I can do that. I’d also like you to take a moment when we tell you. Sometimes you agree very quickly, and I can’t tell whether you’ve heard the concern.
+
+[He considers this.]
+
+**EMANUEL:** All right. I understand what you’re asking.
+
+**DASHA:** We should probably make that possible for everyone who works with us.
+
+**EMANUEL:** Yes.
+
+[He looks down at the crowded first pages of his notebook, then at the shorter list they have made together.]
+
+**EMANUEL:** Would you read this before we finish? I want to be sure I’ve recorded what we agreed.
+
+[He passes the notebook to Tara. She adds a question beside one item and gives it to Dasha.]
+
+[They stay another twenty minutes. Before leaving, they choose a date to speak again.]
+
+
+---
+
+## After the meeting
+
+[The date of the next conversation is written in the notebook. Tara closes the tea tin; Dasha takes her coat. Emanuel stays to help clear the table. The same board that held the classroom diagrams now stands beside their shorter list of questions.]
+
+**EMANUEL:** I would like us to remember this part when the stage gets crowded again.
+
+**TARA:** We can keep the notes. We can also ask each other what we remember.
+
+[The evening continues. On another table lies the manuscript of the inner play.]
+
+---
+
 ## The council chamber becomes a theatre
 
-[Michael keeps reading the terms. Behind him, the council chamber loses its walls. The map becomes a projection screen. Emanuel finds a manuscript beside the closed computer.]
+[After the tea meeting, Michael returns to the council table. Its terms are still there. Behind him, the chamber loses its walls. The map becomes a projection screen. Emanuel finds a manuscript beside the closed computer. The physical board remains beside them.]
 
 **MICHAEL:** I was trying to work out what I owed my country.
 

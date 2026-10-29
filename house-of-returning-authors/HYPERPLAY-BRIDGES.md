@@ -4,7 +4,7 @@ New connective scenes for the expanded edition. The supplied Gemini drama and th
 
 ## The council chamber becomes a theatre
 
-[Michael keeps reading the terms. Behind him, the council chamber loses its walls. The map becomes a projection screen. Emanuel finds a manuscript beside the closed computer.]
+[After the tea meeting, Michael returns to the council table. Its terms are still there. Behind him, the chamber loses its walls. The map becomes a projection screen. Emanuel finds a manuscript beside the closed computer. The physical board remains beside them.]
 
 **MICHAEL:** I was trying to work out what I owed my country.
 

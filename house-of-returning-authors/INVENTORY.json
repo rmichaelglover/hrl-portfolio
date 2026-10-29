@@ -266,6 +266,38 @@
       "kind": "prose, essay, or chess narrative; editorial review pending"
     },
     {
+      "path": "thursday/related/DREAM.md",
+      "title": "The Last Temptation of Emanuel",
+      "whitespace_word_count": 446,
+      "sha256": "ef24ead8d85b916fe90339193ec1666cb7abc8cfb5dced8aac2052ed0964be95",
+      "status": "included in reading edition",
+      "kind": "preserved source scene"
+    },
+    {
+      "path": "thursday/related/TARA.md",
+      "title": "After the Dream",
+      "whitespace_word_count": 105,
+      "sha256": "1a618532603a3bb2064f8b8e1e45375512617ec0e681e8a5f83d9dac5df5273f",
+      "status": "included in reading edition",
+      "kind": "preserved source scene"
+    },
+    {
+      "path": "thursday/related/TEA.md",
+      "title": "Tea with a Russian",
+      "whitespace_word_count": 394,
+      "sha256": "3ea28d328466b0103eea70b87dbc1c35592e875c817571917a0ace9407295801",
+      "status": "included in reading edition",
+      "kind": "preserved source scene"
+    },
+    {
+      "path": "thursday/THURSDAY.md",
+      "title": "Thursday",
+      "whitespace_word_count": 739,
+      "sha256": "33bab6557469ee106a064a43b690d845fa480e4eb166eca1048f0d7208e74603",
+      "status": "included in reading edition",
+      "kind": "preserved source scene"
+    },
+    {
       "path": "six-authors-in-search-of-an-ending/Unproduceable_Closeted_Drama_HRL_Portfolio.pdf",
       "title": "An Unproduceable Closeted Drama!",
       "whitespace_word_count": 1959,

@@ -1,0 +1,7 @@
+# Rainbow Hyperstars of David
+
+Fictional republic flag for the play. Generated with the built-in OpenAI imagegen tool. A separate emblem design, rather than an illustration of a performance; no actors or board are depicted.
+
+## Generation prompt
+
+Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise.
