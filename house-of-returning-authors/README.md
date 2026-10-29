@@ -6,11 +6,11 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, eight new framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 4,900 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, eleven new framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 7,400 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
-`INVENTORY.md` and `INVENTORY.json` list 33 tracked local portfolio candidates. Essays, prose, and chess narratives remain candidates; they have not been silently turned into literal memories. No private files, Facebook exports, or inaccessible earlier chats were imported. Development-only future notes were excluded.
+`INVENTORY.md` and `INVENTORY.json` list 35 local portfolio candidates and included works. Essays, prose, and chess narratives remain candidates; they have not been silently turned into literal memories. The author expressly supplied the Gemini PDF from Documents for inclusion. No other private files, Facebook exports, or inaccessible earlier chats were imported. Development-only future notes were excluded.
 
 ## Editorial handling
 
@@ -25,3 +25,7 @@ Review the candidate inventory with the author; identify missing earlier materia
 ## Build
 
 From the portfolio root, run `python3 house-of-returning-authors/build.py`. It uses Python Markdown and tracked-file metadata. Rebuilding regenerates the edition and inventory; source snapshots must continue to match their originals.
+
+## Hyperplay integration
+
+The council chamber becomes a theatre; the complete supplied Gemini document plays within it; its repeated endings lead to the unchanged Six Authors exchange; the raised hand returns the audience to Michael and Emanuel for Babylon. `HYPERPLAY-BRIDGES.md` contains the three new transitions. Supplemental works receive no speaker-label mapping. Their unchanged PDF/Markdown snapshots and hashes are recorded in `EDITION.json`. The Gemini program note describes Acts I–IV but does not supply their scripts; this edition does not invent the missing 860,000-word stream.

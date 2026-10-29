@@ -37,3 +37,5 @@ Scope: tracked local portfolio candidates only. Earlier conversations, Facebook,
 | The Lantern Archive | candidate only; not staged or incorporated | [whimsy-chess/novella/THE-LANTERN-ARCHIVE.md](../whimsy-chess/novella/THE-LANTERN-ARCHIVE.md) | 2032 |
 | The Woodland Losers | candidate only; not staged or incorporated | [whimsy-chess/novella/TWEEN-EDITION.md](../whimsy-chess/novella/TWEEN-EDITION.md) | 2059 |
 | Woodland Chronicles | candidate only; not staged or incorporated | [whimsy-chess/novella/WOODLAND-CHRONICLES-ATTACK-OF-THE-NARNIAN-CLONES.md](../whimsy-chess/novella/WOODLAND-CHRONICLES-ATTACK-OF-THE-NARNIAN-CLONES.md) | 1789 |
+| An Unproduceable Closeted Drama! | included in opening edition | [six-authors-in-search-of-an-ending/Unproduceable_Closeted_Drama_HRL_Portfolio.pdf](../six-authors-in-search-of-an-ending/Unproduceable_Closeted_Drama_HRL_Portfolio.pdf) | 1959 |
+| Six Authors in Search of an Ending | included in opening edition | [six-authors-in-search-of-an-ending/CONVERSATION.md](../six-authors-in-search-of-an-ending/CONVERSATION.md) | 99 |

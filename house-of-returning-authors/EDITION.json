@@ -6,8 +6,8 @@
   "emanuel_character": "Manny’s better self: an aspiration toward care and judgment, still imperfect and open to correction; not omniscient or a separate infallible judge.",
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
-  "collaboration": "Developed in dialogue with ChatGPT / Codex; inherited pieces retain their original credits",
-  "coverage": "Five selected previously published stage/dialogue pieces plus eight new framing scenes. Not a complete archive of prior conversations or the previous six to seven months.",
+  "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, and eleven new framing scenes. Not a complete archive of prior conversations or the previous six to seven months.",
   "sources": [
     {
       "id": "cakes",
@@ -58,10 +58,34 @@
       "sha256": "6fd209d04e65a8c4ecfdc9693bf2e5d46aa97146235469e3c6b5a6e3821d9e5d",
       "original_whitespace_word_count": 387,
       "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    },
+    {
+      "id": "gemini-drama",
+      "title": "An Unproduceable Closeted Drama!",
+      "source_path": "six-authors-in-search-of-an-ending/Unproduceable_Closeted_Drama_HRL_Portfolio.pdf",
+      "source_url": "../six-authors-in-search-of-an-ending/#gemini",
+      "snapshot": "sources/gemini-drama.pdf",
+      "sha256": "96f688f904b5a20ecb5e355fb8b9205d5217666be7f0f20550b474d0f2b405c3",
+      "original_whitespace_word_count": 1959,
+      "role_change": "none; preserved verbatim",
+      "collaboration": "Manny Glover with Gemini; original PDF byline retained"
+    },
+    {
+      "id": "six-authors",
+      "title": "Six Authors in Search of an Ending",
+      "source_path": "six-authors-in-search-of-an-ending/CONVERSATION.md",
+      "source_url": "../six-authors-in-search-of-an-ending/#conversation",
+      "snapshot": "sources/six-authors.md",
+      "sha256": "c8a0e8c19f95850171c1407fa82036d6393cafb36a3b56a2ddef06d4cd1fd067",
+      "original_whitespace_word_count": 99,
+      "role_change": "none; preserved verbatim",
+      "collaboration": "Manny Glover with ChatGPT / Codex"
     }
   ],
   "new_frame_path": "FRAME.md",
   "new_frame_sha256": "5e0fb70705f6765f46a9e9cc6c82dba2ecf2f636c2bcaaa04b5054a6018b7218",
-  "compiled_whitespace_word_count": 4912,
-  "candidate_count": 33
+  "hyperplay_bridges_path": "HYPERPLAY-BRIDGES.md",
+  "hyperplay_bridges_sha256": "6a2ba9396175dc56587bb6dcdf2cb03dfa6727bd972493b016f8882c87721798",
+  "compiled_whitespace_word_count": 7376,
+  "candidate_count": 35
 }

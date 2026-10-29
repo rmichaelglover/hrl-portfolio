@@ -264,6 +264,22 @@
       "sha256": "fafba85741e660837835f6fddd00f50a907d9f9863212fe66b12428683099cab",
       "status": "candidate only; not staged or incorporated",
       "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "six-authors-in-search-of-an-ending/Unproduceable_Closeted_Drama_HRL_Portfolio.pdf",
+      "title": "An Unproduceable Closeted Drama!",
+      "whitespace_word_count": 1959,
+      "sha256": "96f688f904b5a20ecb5e355fb8b9205d5217666be7f0f20550b474d0f2b405c3",
+      "status": "included in opening edition",
+      "kind": "supplied PDF drama"
+    },
+    {
+      "path": "six-authors-in-search-of-an-ending/CONVERSATION.md",
+      "title": "Six Authors in Search of an Ending",
+      "whitespace_word_count": 99,
+      "sha256": "c8a0e8c19f95850171c1407fa82036d6393cafb36a3b56a2ddef06d4cd1fd067",
+      "status": "included in opening edition",
+      "kind": "verbatim conversation miniature"
     }
   ]
 }
