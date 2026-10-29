@@ -1,0 +1,28 @@
+{
+  "version": "0.1",
+  "date": "2026-10-28",
+  "status": "Fixed local benchmark; not externally preregistered",
+  "particle": "generic ultralight ALP, no QCD mass-decay-constant relation",
+  "m_eV": 1e-20,
+  "M_eV": 1.3464394887811705e-25,
+  "reference_z": 99,
+  "rho0_definition": "0.265 * 3*(67.4 km/s/Mpc)^2/(8*pi*G)",
+  "baseline": "Same m, rho and initial delta and ddelta/dln(s); M=infinity",
+  "cosmological_benchmark": "ALP-only matter domination",
+  "evolution_interval_z": [
+    99,
+    9
+  ],
+  "initial_linear_response": {
+    "delta_normalized": 1,
+    "ddelta_dlns_normalized": 1
+  },
+  "primary_discriminant": "Instantaneous comoving Jeans boundary; not primordial power-spectrum cutoff",
+  "dispersion_natural_units": "epsilon=p^2/(2m)*(1+p^2/M^2)",
+  "sources_of_uncertainty": [
+    "UV completion and preferred-frame dynamics unspecified",
+    "no abundance or cosmological likelihood fit",
+    "radiation and baryons omitted",
+    "higher spatial operators not derived"
+  ]
+}

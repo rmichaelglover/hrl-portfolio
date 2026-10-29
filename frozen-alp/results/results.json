@@ -1,0 +1,52 @@
+{
+  "status": "Proposed model benchmark, not data fit, detection, or validated cosmology",
+  "mass_eV": 1e-20,
+  "H0_reference_km_s_Mpc": 67.4,
+  "Omega_ALP_density_normalization": 0.265,
+  "background": "ALP-only matter domination; baryons/radiation/Lambda omitted",
+  "reference_redshift": 99,
+  "M_crossover_eV": 1.3464394887811705e-25,
+  "standard_kJ_comoving_Mpc_inverse": 210.54790065919465,
+  "modified_kJ_comoving_Mpc_inverse": 182.93179832898977,
+  "kJ_ratio": 0.8688369618327093,
+  "kJ_percent_change": -13.116303816729069,
+  "Jeans_associated_mass_ratio": 1.5247025799298517,
+  "standard_Jeans_associated_mass_Msun": 464898.6888276158,
+  "modified_Jeans_associated_mass_Msun": 708832.2302614711,
+  "mass_convention": "(4pi/3) rho (pi/qJ)^3; not a calibrated halo abundance threshold",
+  "reference_q_over_rest_mass_in_natural_units": 1.3464394887811707e-05,
+  "validation": {
+    "standard_Jeans_limit_error": 0.0,
+    "Jeans_root_residual": 4.3076653355456074e-14,
+    "independent_evolution_and_refinement": [
+      {
+        "x": 0.1,
+        "two_formulations_relative_error": 1.842747894356105e-09,
+        "tolerance_refinement_error": 1.8378328179152513e-09
+      },
+      {
+        "x": 0.5,
+        "two_formulations_relative_error": 1.0499942708700468e-09,
+        "tolerance_refinement_error": 1.0569699206720941e-09
+      },
+      {
+        "x": 0.9,
+        "two_formulations_relative_error": 2.66072444037558e-10,
+        "tolerance_refinement_error": 2.5986061752498275e-10
+      },
+      {
+        "x": 1,
+        "two_formulations_relative_error": 1.0116118148936515e-10,
+        "tolerance_refinement_error": 1.0984679159664569e-10
+      },
+      {
+        "x": 2,
+        "two_formulations_relative_error": 1.379596408722636e-09,
+        "tolerance_refinement_error": 1.3616888489891168e-09
+      }
+    ],
+    "long_wavelength_dust_relative_error": 2.9839771764628154e-09,
+    "free_kinetic_positive_on_test_grid": true,
+    "density_phase_determinant_matches_Jeans_condition": true
+  }
+}
