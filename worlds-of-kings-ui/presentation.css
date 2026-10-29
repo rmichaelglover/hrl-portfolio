@@ -1,0 +1,37 @@
+/* Shared presentation for the four Kings editions. */
+:root{--paper:#f5f3ed;--ink:#203b40;--muted:#546b70;--line:#d5dfd9;--gold:#956737}
+body{background:radial-gradient(ellipse at 80% 0,#e4eee8 0,transparent 48%),var(--paper)}
+header{border-bottom:1px solid var(--line)}
+header a{font-weight:600;text-decoration:none}header a:hover{text-decoration:underline}
+.intro{padding:26px 0 24px;gap:28px}h1{font-size:clamp(42px,5.2vw,76px);letter-spacing:-.055em;line-height:1.08}
+.intro .stage{border:1px solid #d5dfd4;border-left:3px solid #a78a55;background:#ffffff80;padding:18px 20px;border-radius:0 12px 12px 0}
+.world-editions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 24px}
+.world-editions a{display:flex;gap:8px;align-items:center;padding:8px 15px;border:1px solid #cbd8d1;border-radius:24px;text-decoration:none;font-size:12px;color:#38595b;background:#ffffff8c;min-height:44px}
+.world-editions a:hover{background:#e2ebe2;border-color:#8fa99a}.world-editions a[aria-current="page"]{background:#244b47;color:#fff;border-color:#244b47;box-shadow:0 3px 10px #244b471a}
+.world-editions small{font-size:10px;opacity:.8}.map-panel,.atlas{border-radius:22px;box-shadow:0 18px 48px #243c3712;border:1px solid #c5d7d6}
+.workspace,.game{gap:20px}.workspace>aside,.game>aside{border-radius:20px;box-shadow:0 8px 28px #243c3709;padding:24px;background:#fffef9}
+.map-toolbar,.atlas-bar{padding:18px 20px}.map-toolbar input{min-height:46px}
+.pane-tools{padding:12px;gap:7px;border-bottom:1px solid #7b9caa30}
+.pane-tools button,.pane-tools select,.view-more summary{min-height:40px;font-size:12px;border-radius:9px}
+.pane-tools button:hover{filter:brightness(.95)}.pane-tools button[aria-pressed="true"]{box-shadow:inset 0 -3px #a6b87a}
+.pane canvas{background:radial-gradient(ellipse at center,#e9f3f3,#dae9eb);aspect-ratio:1.25}
+.atlas .pane canvas{background:#102c43}
+.legend{font-size:11px;gap:10px 18px;padding-top:18px}.legend i{flex-shrink:0}
+.map-caption,.map-note{font-size:12px;line-height:1.6}
+.world-view-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:#e8efea;color:#355453;border-bottom:1px solid #c7d7d0}
+.world-view-bar p{margin:0;font-size:12px;line-height:1.5}.world-view-bar strong{display:block;font-weight:650}.world-view-bar button{flex-shrink:0;min-height:44px;font-size:12px;background:#fffef9;border:1px solid #b6c9c0;color:#244b47}
+.world-place-drawer{margin:0;padding:0;border:0;border-bottom:1px solid #bdced0;background:#edf3ef;color:#355453}.world-place-drawer>summary{padding:10px 20px;min-height:44px;font-size:12px;font-weight:500}.world-place-drawer>.place-navigation{border-bottom:0}
+.world-focus .workspace,.world-focus .game{grid-template-columns:minmax(0,1fr)}
+.world-focus .workspace>aside,.world-focus .game>aside{max-width:none}
+.world-focus .pane canvas{aspect-ratio:1.8;max-height:78vh}
+.world-focus .panes.multi .pane canvas{aspect-ratio:1.25}
+aside #status,aside #place-meta{font-size:14px;line-height:1.65}
+aside summary{min-height:36px;display:list-item;align-content:center}
+.player{padding:12px}.player.active{background:#e5eddf;box-shadow:0 0 0 2px #668774}.player.active strong::after{content:' · YOUR TURN';font-size:9px;letter-spacing:.06em}
+#match-start,button.primary{background:#244b47;color:white;border-color:#244b47;min-height:48px}#match-start:hover,button.primary:hover{background:#35675f}
+.note-grid article,.rule-grid article{padding:20px;background:#ffffff70;border:1px solid #dce3da;border-radius:14px}.note-grid,.rule-grid{gap:16px}
+.note-grid h3,.rule-grid h3{margin-top:0}button,input,select{transition:background-color .15s,border-color .15s}
+:focus-visible{outline:3px solid #bc7531;outline-offset:3px}
+@media(min-width:1100px){.workspace>aside,.game>aside{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto;scrollbar-width:thin}.world-focus .workspace>aside,.world-focus .game>aside{position:static;max-height:none}}
+@media(max-width:760px){.intro{padding:26px 0 22px}.world-editions{gap:6px;margin-bottom:18px}.world-editions a{padding:8px 12px}.world-editions small{display:none}.world-view-bar{padding:12px;align-items:flex-start}.world-view-bar p{font-size:11px}.world-view-bar button{padding:8px 10px}.pane-tools button,.pane-tools select{min-height:44px}.panes.multi{grid-template-columns:1fr}.pane canvas,.world-focus .pane canvas{aspect-ratio:1;max-height:none}.workspace>aside,.game>aside{padding:20px}.intro h1{overflow-wrap:anywhere}.map-toolbar{flex-wrap:wrap}.map-toolbar label:first-child{min-width:180px}.note-grid article,.rule-grid article{padding:18px}}
+@media(prefers-reduced-motion:reduce){button,input,select{transition:none}}

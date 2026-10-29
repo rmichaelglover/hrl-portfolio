@@ -46,3 +46,8 @@ A shared place selector now focuses Georgia/Alabama, Atlanta, Mobile, Arlington 
 ## Polar promotion
 
 Antarctica is one playable space retaining its geographic outline. A pawn entering it or a North Pole ocean cell promotes to the selected queen, rook, bishop, or knight. Entry must remain legal: forward into an empty space or diagonal capture of an enemy non-king. One piece can occupy Antarctica. All other promotion rules remain. Board IDs changed, so this edition uses a fresh v2 local save; the earlier v1 browser save is retained. The two earlier engines are preserved.
+
+
+Earth education labels use Natural Earth v5.1.2 admin-1 `postal`, falling back to `abbrev`, keyed by `adm1_code`. `data/province-labels.json` retains the source name alongside each abbreviation. Where neither field is supplied, display the full province name; city names remain full because the source supplies no city abbreviation field. Source: https://github.com/nvkelso/natural-earth-vector/blob/v5.1.2/geojson/ne_10m_admin_1_states_provinces.geojson
+
+Occupied city labels mean cities geographically contained in a province with a piece, not independent city squares. Labels are decluttered at map scale; selecting a province reveals its full mapped city list and the abbreviation expansion. Global deployment remains an exploration display, separate from the three-player match.

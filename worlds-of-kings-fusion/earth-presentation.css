@@ -1,0 +1,18 @@
+/* Earth is the focused edition, with the colors of a classroom political globe. */
+:root{--paper:#f7f5ee;--ink:#243e49;--muted:#516974;--ocean:#edf4f6}
+body{background:radial-gradient(ellipse at 50% 10%,#eaf2f3,transparent 65%),var(--paper)}
+header{padding-block:18px}header>a:nth-child(2){display:none}
+.intro{padding:30px 0}.intro .stage{background:#ffffff90;border-color:#9abdc9}
+h1 em{color:#477c94}.workspace{grid-template-columns:minmax(0,1fr) 310px}
+.map-panel{border-radius:18px;background:#edf4f6}.pane canvas{aspect-ratio:1.15;background:#edf4f6}.pane-tools{background:#e7eff1}
+.map-toolbar input{background:#fff;color:#243e49}.map-toolbar label,.legend,.map-caption,.pane-tools span{color:#48626d}
+.legend .province{background:linear-gradient(90deg,#e9d798 33%,#b9d5a3 33% 66%,#edb8ad 66%)}
+.legend .ocean{background:#a9d7ec;border:1px solid #6eabc8}.legend .activated{background:#458db5}
+.world-view-bar{background:#e1ecef;border-color:#c1d5dc;color:#355460}
+.world-place-drawer{background:#edf3f4}.workspace>aside{background:#fffef9}
+@media(max-width:1050px){.workspace{grid-template-columns:minmax(0,1fr) 270px}}
+@media(max-width:760px){.workspace{grid-template-columns:1fr}.pane canvas{aspect-ratio:1}.intro{padding:22px 0}header span{letter-spacing:.08em}}
+
+.army-guide{margin:0;padding:14px 20px 0;color:#36596a;font-size:12px;line-height:1.6}
+
+.learning-card{padding:16px;background:#edf3ed;border:1px solid #ccdaca;border-radius:12px;margin:18px 0}.learning-card h3{margin:0;font-size:20px}.learning-card p{font-size:12px}.learning-cities{max-height:220px;overflow:auto}.learning-cities button{text-align:left;background:#fff;font-size:12px}
