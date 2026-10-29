@@ -1,0 +1,269 @@
+{
+  "scope": "Tracked local portfolio narrative candidates discovered by documented path selection in build.py; not a complete conversation, Drive, Facebook, or lifetime archive. Counts include source markup. Candidate status does not imply inclusion or approval for adaptation.",
+  "candidates": [
+    {
+      "path": "attack-on-christendom/LEAD-ESSAY.md",
+      "title": "Kierketaard Meets the Laboratory Night Owl",
+      "whitespace_word_count": 573,
+      "sha256": "04269b495a04cacbd2cc6a9f95276859a9994adfd05efb85d2f622de8a41aefc",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/ancient-art-and-the-private-browser.md",
+      "title": "Before the Private Browser",
+      "whitespace_word_count": 616,
+      "sha256": "8ff7cdaa2856b411f8bee077308216b05c1827ac3dc304e06abddbf3a9885c7f",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/beatles-and-the-invention-of-puberty.md",
+      "title": "Did the Beatles’ Nude Photographs Awaken an Age of Horny Teenagers?",
+      "whitespace_word_count": 509,
+      "sha256": "3f591b8af361e3f9b8171b2b754b76fea46f5b1c9f8e795d6aff420f95fa0886",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/carrie-and-lilith/essay.md",
+      "title": "Carrie, Emaline, and the Shared Conscience",
+      "whitespace_word_count": 1633,
+      "sha256": "4bade6ab64cb65e33e27a945eb4fa45936c43ed743f51dadddc427694115dac8",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/carrie-and-lilith/story.md",
+      "title": "The Road Beyond the Fire",
+      "whitespace_word_count": 2593,
+      "sha256": "1f6b799ad473b4ae191115aecdba70122df9935422911ce384a7c9d29d840e39",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/carriedom/essay.md",
+      "title": "We’re All Just People: An Attack on Carriedom",
+      "whitespace_word_count": 2290,
+      "sha256": "cf89ad5e8841e8f2281159bb9a12fa46d1b0c96c6e22b24e0265b12e86c9b5d6",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/christening-essay.md",
+      "title": "The Christening of the American Christian Bolshevik Revolution",
+      "whitespace_word_count": 970,
+      "sha256": "1c5b3b9ee87e43aa29f8a6e0c956ff864e2b83f8b9807191015be022dfbd7773",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/christening.md",
+      "title": "The Christening of the American Christian Bolshevik Revolution",
+      "whitespace_word_count": 1897,
+      "sha256": "d9335ee9d43238ab4c64baf08b9b42a7fd32d33207e4537b72235ad141d3bffb",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/fair-and-balanced.md",
+      "title": "Fair and Balanced?",
+      "whitespace_word_count": 586,
+      "sha256": "61d44351c262509aab3e026a1f3023218df17652f65ab4e3367836fc501a1d30",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/golden-apple-cakes.md",
+      "title": "The Sandbox and the Golden Apple Cakes",
+      "whitespace_word_count": 304,
+      "sha256": "58a1e8ebe19c42c98faf4b8ff3139b497b5ca99937e6dae707e58a9b7dfc4cb8",
+      "status": "included in opening edition",
+      "kind": "stage/dialogue"
+    },
+    {
+      "path": "attack-on-christendom/hip-hop-is-american-bolshevism.md",
+      "title": "Hip-Hop Is American Bolshevism",
+      "whitespace_word_count": 1201,
+      "sha256": "cf9151fc8942035160113728e8e1e7080a8e397f6ff693dd1569d5a368e784c6",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/love-first-categorize-second.md",
+      "title": "Love First, Categorize Second",
+      "whitespace_word_count": 1133,
+      "sha256": "4068d284729539429494976aa5c211a1225a61a0b6370a20853bb9ed386b1a78",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/mary-comes-to-roost/story.md",
+      "title": "Mary Comes to Roost",
+      "whitespace_word_count": 4089,
+      "sha256": "8f08ca67074fa6941d2f2854a45e4ece0de1a5af9f5fddf2583e54994d0a1a4a",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "attack-on-christendom/two-tracts-and-a-sandwich.md",
+      "title": "Two Tracts and a Sandwich",
+      "whitespace_word_count": 509,
+      "sha256": "e86252aca85ec0c912eb0c64c0c5a03ed082ce5b035f655b3224a7463084b4d5",
+      "status": "included in opening edition",
+      "kind": "stage/dialogue"
+    },
+    {
+      "path": "attack-on-christendom/werpity-jazz/story.md",
+      "title": "Werpity Jazz & the Carp-ta-copter",
+      "whitespace_word_count": 510,
+      "sha256": "e5eb18443c89ad85733e1e44618b0b307003aa7b612ccc7871983db5abea4f7a",
+      "status": "included in opening edition",
+      "kind": "stage/dialogue"
+    },
+    {
+      "path": "essays/almost.html",
+      "title": "Almost — essays of a post-Christian · Manny Glover",
+      "whitespace_word_count": 700,
+      "sha256": "eab88f337d762c68c15617308b1404cc32157d6bdd61ce8842905945766a1733",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/augustines-folly.html",
+      "title": "Augustine's Folly — Almost · Manny Glover",
+      "whitespace_word_count": 1605,
+      "sha256": "5f20030821ece33c24dc1826d0aeca3bbebf4ecc22fc49a18e0985232656a774",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/beetlemania.html",
+      "title": "Beetlemania — Essays · Manny Glover",
+      "whitespace_word_count": 1118,
+      "sha256": "5a00d06394a7de9757579e8f26bf139280180e41f0d50d16ee41c68deb051e05",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/flying-colors.html",
+      "title": "Spreadsheet Auditing Dissertation — HRL Portfolio",
+      "whitespace_word_count": 43,
+      "sha256": "410346d8ffff6a77cff30ca321d5366c19871ee3f56a48efd8c87b90693161fb",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/poor-king-agrippa.html",
+      "title": "Poor King Agrippa — Almost · Manny Glover",
+      "whitespace_word_count": 1803,
+      "sha256": "832d54c29446c9e781d93e94ae34986c560883eac8034d559706948d6a9b9c5d",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/some-quotes-from-a-book-i-like.html",
+      "title": "Some Quotes from a Book I Like — Almost · Manny Glover",
+      "whitespace_word_count": 1253,
+      "sha256": "5ca04d2f6cde350eb1207069228c994c769d443eb44a64de54e96fc76d9b8a95",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/the-parable-of-the-farmer.html",
+      "title": "The Parable of the Farmer — Almost · Manny Glover",
+      "whitespace_word_count": 623,
+      "sha256": "beb8b176bccbdbc62550e15d85c5f824c12b6663a5290fbca053f2bd63bb9597",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "essays/war-to-end-all-wars.html",
+      "title": "The War to End All Wars — Almost · Manny Glover",
+      "whitespace_word_count": 1265,
+      "sha256": "d553e61efc54816c87f4c1490cc5550fe1f46690c53f6c63119b9fdc0ede3134",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "manuelian-magnum-opus/MANUSCRIPT.md",
+      "title": "The Tree, the Proof, and the Light",
+      "whitespace_word_count": 8336,
+      "sha256": "7f86d6d89588fbda3c8c24ddae1f8c9faeae069af2bca5fabdd782e3a6aafc99",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "threes-a-quorum/SKETCH.md",
+      "title": "Three’s a Quorum",
+      "whitespace_word_count": 959,
+      "sha256": "0ed98364787d801e7deb9e74fdda1f7f408585f1ceefcdab77df3cbc4b43175b",
+      "status": "included in opening edition",
+      "kind": "stage/dialogue"
+    },
+    {
+      "path": "threes-a-quorum/coffee-table/SKETCH.md",
+      "title": "The Phenomenology of the Coffee Table",
+      "whitespace_word_count": 387,
+      "sha256": "6fd209d04e65a8c4ecfdc9693bf2e5d46aa97146235469e3c6b5a6e3821d9e5d",
+      "status": "included in opening edition",
+      "kind": "stage/dialogue"
+    },
+    {
+      "path": "whimsy-chess/novella/ADVANCED-EDITION.md",
+      "title": "The Woodland Losers — Advanced Companion",
+      "whitespace_word_count": 213,
+      "sha256": "f82a9213f81a69fb5fc23cce48f0c5cc25cf4ff9dba5a82578108206481a2c36",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/CHOOSE-YOUR-OWN-ADVENTURE.md",
+      "title": "The Master Board",
+      "whitespace_word_count": 2160,
+      "sha256": "8c35df48f93640fbb1d19cfca4e66b4ebecd1fdcf1c293406c34d89a350f224e",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/CLASSROOM-EDITION.md",
+      "title": "The Woodland Losers — Classroom Edition",
+      "whitespace_word_count": 189,
+      "sha256": "7dc522acb9c01f60dd171b5154cb788dcdf8ae669e2ddc2618d45f08be461adf",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/THE-GOLDEN-APPLE.md",
+      "title": "The Golden Apple",
+      "whitespace_word_count": 1060,
+      "sha256": "d30a159e07262d87668aea6b601c89cbe3dc16c6cf731eabf7dac081183b5865",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/THE-LANTERN-ARCHIVE.md",
+      "title": "The Lantern Archive",
+      "whitespace_word_count": 2032,
+      "sha256": "7194f5b879d8a4e9facdc722de83398e5e1c4a8705616c8b33c54b296a269656",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/TWEEN-EDITION.md",
+      "title": "The Woodland Losers",
+      "whitespace_word_count": 2059,
+      "sha256": "40c3cf97742bf970b5b3b73286553c2c142026270f180c4408402d2aeae3f9e0",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    },
+    {
+      "path": "whimsy-chess/novella/WOODLAND-CHRONICLES-ATTACK-OF-THE-NARNIAN-CLONES.md",
+      "title": "Woodland Chronicles",
+      "whitespace_word_count": 1789,
+      "sha256": "fafba85741e660837835f6fddd00f50a907d9f9863212fe66b12428683099cab",
+      "status": "candidate only; not staged or incorporated",
+      "kind": "prose, essay, or chess narrative; editorial review pending"
+    }
+  ]
+}

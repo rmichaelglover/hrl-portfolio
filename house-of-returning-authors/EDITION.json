@@ -1,0 +1,66 @@
+{
+  "title": "The House of Returning Authors",
+  "edition": "Opening reading edition",
+  "date": "2026-10-29",
+  "author": "Manny Glover — Michael Emanuel Glover",
+  "emanuel_character": "Manny’s better self: an aspiration toward care and judgment, still imperfect and open to correction; not omniscient or a separate infallible judge.",
+  "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
+  "collaboration": "Developed in dialogue with ChatGPT / Codex; inherited pieces retain their original credits",
+  "coverage": "Five selected previously published stage/dialogue pieces plus eight new framing scenes. Not a complete archive of prior conversations or the previous six to seven months.",
+  "sources": [
+    {
+      "id": "cakes",
+      "title": "The Sandbox and the Golden Apple Cakes",
+      "source_path": "attack-on-christendom/golden-apple-cakes.md",
+      "source_url": "../attack-on-christendom/golden-apple-cakes.html",
+      "snapshot": "sources/cakes.md",
+      "sha256": "58a1e8ebe19c42c98faf4b8ff3139b497b5ca99937e6dae707e58a9b7dfc4cb8",
+      "original_whitespace_word_count": 304,
+      "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    },
+    {
+      "id": "jazz",
+      "title": "Werpity Jazz & the Carp-ta-copter",
+      "source_path": "attack-on-christendom/werpity-jazz/story.md",
+      "source_url": "../attack-on-christendom/werpity-jazz/",
+      "snapshot": "sources/jazz.md",
+      "sha256": "e5eb18443c89ad85733e1e44618b0b307003aa7b612ccc7871983db5abea4f7a",
+      "original_whitespace_word_count": 510,
+      "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    },
+    {
+      "id": "tracts",
+      "title": "Two Tracts and a Sandwich",
+      "source_path": "attack-on-christendom/two-tracts-and-a-sandwich.md",
+      "source_url": "../attack-on-christendom/two-tracts-and-a-sandwich.html",
+      "snapshot": "sources/tracts.md",
+      "sha256": "e86252aca85ec0c912eb0c64c0c5a03ed082ce5b035f655b3224a7463084b4d5",
+      "original_whitespace_word_count": 509,
+      "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    },
+    {
+      "id": "quorum",
+      "title": "Three’s a Quorum",
+      "source_path": "threes-a-quorum/SKETCH.md",
+      "source_url": "../threes-a-quorum/",
+      "snapshot": "sources/quorum.md",
+      "sha256": "0ed98364787d801e7deb9e74fdda1f7f408585f1ceefcdab77df3cbc4b43175b",
+      "original_whitespace_word_count": 959,
+      "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    },
+    {
+      "id": "table",
+      "title": "The Phenomenology of the Coffee Table",
+      "source_path": "threes-a-quorum/coffee-table/SKETCH.md",
+      "source_url": "../threes-a-quorum/coffee-table/",
+      "snapshot": "sources/table.md",
+      "sha256": "6fd209d04e65a8c4ecfdc9693bf2e5d46aa97146235469e3c6b5a6e3821d9e5d",
+      "original_whitespace_word_count": 387,
+      "role_change": "MANNY / Michael dialogue labels become MICHAEL; all other roles retained"
+    }
+  ],
+  "new_frame_path": "FRAME.md",
+  "new_frame_sha256": "e0c1792b66ad7e5518ae339a564a83531496d828707f6e9b6f8bfb48b24a97e1",
+  "compiled_whitespace_word_count": 4633,
+  "candidate_count": 33
+}
