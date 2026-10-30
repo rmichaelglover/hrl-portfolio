@@ -1,0 +1,172 @@
+{
+  "evidence_status": "synthetic externally supplied events; no prediction",
+  "initial": {
+    "fused_sperm": [],
+    "activated": false,
+    "block_established": false,
+    "meiosis_complete": false,
+    "pronuclei": false,
+    "maternal_nuclear_dna_C": 2,
+    "paternal_nuclear_dna_C": 0,
+    "second_polar_body_dna_C": 0,
+    "total_accounted_nuclear_dna_C": 2,
+    "status": "in_progress"
+  },
+  "normal": {
+    "fused_sperm": [
+      "sperm-1"
+    ],
+    "activated": true,
+    "block_established": true,
+    "meiosis_complete": true,
+    "pronuclei": true,
+    "history": [
+      {
+        "event_index": 0,
+        "event": "fusion",
+        "sperm_id": "sperm-1",
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": false,
+          "block_established": false,
+          "meiosis_complete": false,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 2,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 0,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "in_progress"
+        }
+      },
+      {
+        "event_index": 1,
+        "event": "activation",
+        "sperm_id": null,
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": true,
+          "block_established": false,
+          "meiosis_complete": false,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 2,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 0,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "in_progress"
+        }
+      },
+      {
+        "event_index": 2,
+        "event": "block_established",
+        "sperm_id": null,
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": true,
+          "block_established": true,
+          "meiosis_complete": false,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 2,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 0,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "in_progress"
+        }
+      },
+      {
+        "event_index": 3,
+        "event": "meiosis_II_completion",
+        "sperm_id": null,
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": true,
+          "block_established": true,
+          "meiosis_complete": true,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 1,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 1,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "in_progress"
+        }
+      },
+      {
+        "event_index": 4,
+        "event": "pronuclear_formation",
+        "sperm_id": null,
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": true,
+          "block_established": true,
+          "meiosis_complete": true,
+          "pronuclei": true,
+          "maternal_nuclear_dna_C": 1,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 1,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "two_pronuclei"
+        }
+      }
+    ]
+  },
+  "polyspermy": {
+    "fused_sperm": [
+      "sperm-1",
+      "sperm-2"
+    ],
+    "activated": false,
+    "block_established": false,
+    "meiosis_complete": false,
+    "pronuclei": false,
+    "history": [
+      {
+        "event_index": 0,
+        "event": "fusion",
+        "sperm_id": "sperm-1",
+        "state": {
+          "fused_sperm": [
+            "sperm-1"
+          ],
+          "activated": false,
+          "block_established": false,
+          "meiosis_complete": false,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 2,
+          "paternal_nuclear_dna_C": 1,
+          "second_polar_body_dna_C": 0,
+          "total_accounted_nuclear_dna_C": 3,
+          "status": "in_progress"
+        }
+      },
+      {
+        "event_index": 1,
+        "event": "fusion",
+        "sperm_id": "sperm-2",
+        "state": {
+          "fused_sperm": [
+            "sperm-1",
+            "sperm-2"
+          ],
+          "activated": false,
+          "block_established": false,
+          "meiosis_complete": false,
+          "pronuclei": false,
+          "maternal_nuclear_dna_C": 2,
+          "paternal_nuclear_dna_C": 2,
+          "second_polar_body_dna_C": 0,
+          "total_accounted_nuclear_dna_C": 4,
+          "status": "polyspermy"
+        }
+      }
+    ]
+  }
+}
