@@ -1,0 +1,24 @@
+{
+  "title": "Dilorias Takes Her Bow",
+  "page": "index.html",
+  "story_images": 3,
+  "parent_review": "../",
+  "source_game": "WC1AuJwO",
+  "preserved_parent_review_hashes": {
+    "index.html": "f5a2ed2f074f64185ba8fd3859db01b7e5eb7d9e87775449644f137592c138cb",
+    "page-template.html": "dce007f425e1459157c0c22c2aa68547220a91dbf38528b4caf66770567c6179",
+    "style.css": "88b4bfb743dd2bc5e6acd0b1d5906e9b1749615fce0e796dea186e7703abb4cd",
+    "app.js": "55350ca3d7752e921d68d2fd58254b62bdc1a0980a256783703b350395811fd6",
+    "REVIEW.md": "dc838dbc8d416225ce91d458f9650b05c9e86b877d4ad28da69b6c58612c85eb",
+    "review.json": "c0061f15fa5ec2b7f48feb6dfa5b3b7c9fa4765cfe9a16a99031278a6c8b99be",
+    "analysis.json": "2b43ba6111fbc2baf30c029c15eb812495f51964ce492bc18e51ddf98ed7f034",
+    "selected-analysis.json": "6aeb1ebed588837cd3af98ae0770cd05b78fabf50e63cdab34f7e811e0ee048e",
+    "original.pgn": "b12b6036b26b4e2b0185f23f166817a75cf16ca4dafe4533dbe18e64d5722396",
+    "reviewed.pgn": "a9347e6429f3a2ee2dbec3842270f3d73087a9215a3db810d05b5d0e82c96169",
+    "editorial.py": "5475c91e9bb6da8a17e5747f3304632e40a871a2633472f46e33b1b212ef95d2",
+    "cover.svg": "5912718826dca2b15df12be04da2b473bdc91bf838c593a54b981e4d52bc590b",
+    "build_review.py": "a9b2b2d06445b916d6494b99b37d3575c962c94134beeb90ace9122f42791a9c",
+    "manifest.json": "d3756bb6d4d32fb23e3062d3384faa1cf7b7f321a8c55226ca13f5076490f318"
+  },
+  "art_manifest": "art/prompts.json"
+}

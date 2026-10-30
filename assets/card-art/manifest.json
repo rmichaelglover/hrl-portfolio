@@ -240,6 +240,14 @@
     "kind": "existing destination artwork"
   },
   {
+    "route": "chess/recent/2026-10-30/eastern-bullet/story/",
+    "title": "Dilorias Takes Her Bow · Manninja Storybook",
+    "image": "chess/recent/2026-10-30/eastern-bullet/story/art/01-dilorias-exit.png",
+    "alt": "Artwork from Dilorias Takes Her Bow · Manninja Storybook",
+    "motif": "fox-chess",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "chesshustlagaard/",
     "title": "♞ Chesshustlagaard",
     "image": "assets/card-art/chesshustlagaard-1add186.svg",

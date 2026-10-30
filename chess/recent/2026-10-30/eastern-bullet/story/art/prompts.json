@@ -1,0 +1,41 @@
+{
+  "title": "Dilorias Takes Her Bow",
+  "date": "2026-10-30",
+  "workspace_directory": "/home/rmichaelglover/Code/hrl-portfolio/chess/recent/2026-10-30/eastern-bullet/story/art",
+  "art_direction": "Cheerful CMYK risograph storybook; cyan, magenta, yellow and black on warm paper.",
+  "images": [
+    {
+      "file": "01-dilorias-exit.png",
+      "prompt": "Use case: illustration-story. Asset type: one finished landscape storybook illustration for a tween-friendly chess saga webpage. Art direction: exuberant CMYK risograph storybook print, saturated process cyan, hot magenta, sunshine yellow, warm ivory paper, confident near-black ink outlines, cheerful overlapping ink textures, handmade expressive shapes, beautifully detailed painterly screenprint rather than flat clip-art. Landscape 3:2 composition, no panel grid, no text, no letters, no logos, no watermarks. All people are original fictional character designs, not portraits of real people. The scene is theatrical and symbolic rather than an exact chess diagram. No weapons, injuries, menace, or dark gritty lighting. Scene 1: The queen's dramatic exit. Queen Dilorias is a small charismatic dragon queen with a magenta cape, cyan scales, sunshine-yellow crown and mischievous friendly eyes. She makes a grand playful theatrical exit in a swirl of cyan and magenta confetti beside an oversized colorful chessboard. Bullet Manninja is a cheerful original masked woodland adventurer in a cyan tunic with yellow scarf, eyes expressive and delighted, no weapons. A hedgehog in a bright yellow little jacket watches with an amused look. Woodland chess pieces include a castle rook and a lion king. A large round one-minute chess clock and stage curtains are supporting details. A real physical whiteboard on a reachable stand with colorful abstract chalk arrows is visible behind the stage; no readable writing. The focal point is the dragon queen's joyfully theatrical gesture. Let color explode across the whole scene, with crisp light paper spaces and clear silhouettes. Nothing resembles a branded ninja or film character.",
+      "mode": "built-in image_gen",
+      "intent": "generate",
+      "transparent_background": false,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3543514,
+      "sha256": "76e0638eeb996656ac82ce6b9aab3d9f55e0163497d5b23eece451f6ce130320"
+    },
+    {
+      "file": "02-andora-entrance.png",
+      "prompt": "Use case: illustration-story. Asset type: one finished landscape storybook illustration for a tween-friendly chess saga webpage. Art direction: exuberant CMYK risograph storybook print, saturated process cyan, hot magenta, sunshine yellow, warm ivory paper, confident near-black ink outlines, cheerful overlapping ink textures, handmade expressive shapes, beautifully detailed painterly screenprint rather than flat clip-art. Landscape 3:2 composition, no panel grid, no text, no letters, no logos, no watermarks. All people are original fictional character designs, not portraits of real people. The scene is theatrical and symbolic rather than an exact chess diagram. No weapons, injuries, menace, or dark gritty lighting. Scene 2: The rook's brilliant entrance. Castle Andora is a friendly anthropomorphic golden castle rook with windows as bright eyes, cyan and magenta pennants, purposeful cheerful expression. The rook rolls along a long cyan lane across a whimsical chessboard and theatrically collects a classical ivory queen token beneath a burst of magenta-and-yellow paper confetti. Queen Dilorias, a small cyan dragon queen with a magenta cape and yellow crown, applauds from a safe side-stage perch. The lion king and hedgehog friend cheer. This depicts a chess capture as a playful stage exchange: all characters are safe, the captured queen is a chess token held up as a recovered trophy, no violence. A freestanding physical whiteboard with chalk arrows but no text remains visible in the background. The board lane and delighted castle are the main visual, strong motion and warm humor. Lots of brilliant cyan, magenta and yellow against warm white paper with black-ink hand drawn detail.",
+      "mode": "built-in image_gen",
+      "intent": "generate",
+      "transparent_background": false,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3644771,
+      "sha256": "2d58cd495271f09311c26d55e9de022e10e84490fd3dcb61fedc361485f4c23d"
+    },
+    {
+      "file": "03-the-cast-table.png",
+      "prompt": "Use case: illustration-story. Asset type: one finished landscape storybook illustration for a tween-friendly chess saga webpage. Art direction: exuberant CMYK risograph storybook print, saturated process cyan, hot magenta, sunshine yellow, warm ivory paper, confident near-black ink outlines, cheerful overlapping ink textures, handmade expressive shapes, beautifully detailed painterly screenprint rather than flat clip-art. Landscape 3:2 composition, no panel grid, no text, no letters, no logos, no watermarks. All people are original fictional character designs, not portraits of real people. The scene is theatrical and symbolic rather than an exact chess diagram. No weapons, injuries, menace, or dark gritty lighting. Scene 3: The colorful after-game table. A welcoming theatre workshop with five original fictional adult review characters gathered at a chess table: Tara, a thoughtful woman with a short dark bob in a bright magenta jacket holding a cyan marker; Dasha, a practical woman with a long dark braid in a cyan coat pointing to a chess square; Michael, a curious bespectacled man in a yellow sweater leaning forward; Emanuel, a gentle man with curly hair and a magenta scarf thoughtfully resetting a piece; Glover, an older bearded theatrical man in an exuberant cyan-and-yellow patterned waistcoat with a warm amused smile. They are accompanied at table edge by a tiny friendly cyan dragon queen with magenta cape and yellow crown, a friendly golden castle rook, and a hedgehog. A real large physical whiteboard on a reachable stand is directly behind them, with abstract hand-drawn colored arrows, no words. Tea cups, scattered chess tokens, flowers and paper stars. Everyone has independent engaged expressions. Joyful collaborative human scene, rich color on everyone and everything, warm paper background, crisp expressive ink lines. Compose a wide tableau with the people and chessboard clearly visible and room for the whiteboard. No text.",
+      "mode": "built-in image_gen",
+      "intent": "generate",
+      "transparent_background": false,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3639767,
+      "sha256": "2c8c9bf6e0f8a7cfd48f2bdec8eb15185374b01eba4ddf5070a94e8dc4e2d607"
+    }
+  ]
+}
