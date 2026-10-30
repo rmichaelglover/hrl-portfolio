@@ -1,0 +1,30 @@
+{
+  "source_file": "original.pgn",
+  "sha256": "b12b6036b26b4e2b0185f23f166817a75cf16ca4dafe4533dbe18e64d5722396",
+  "games": 29,
+  "plies": 1621,
+  "outcomes": {
+    "loss": 24,
+    "win": 4,
+    "draw": 1
+  },
+  "queen_departures": 15,
+  "engine": {
+    "name": "Stockfish 14.1",
+    "author": "the Stockfish developers (see AUTHORS file)"
+  },
+  "files": [
+    "index.html",
+    "REVIEW.md",
+    "original.pgn",
+    "reviewed.pgn",
+    "review.json",
+    "analysis.json",
+    "selected-analysis.json"
+  ],
+  "cast_sources": [
+    "../../../../house-of-returning-authors/CAST.md",
+    "../../../../thursday/THURSDAY.md",
+    "../../../../whimsy-chess/CAST-POLICY.md"
+  ]
+}

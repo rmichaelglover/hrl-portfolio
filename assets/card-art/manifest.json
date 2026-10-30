@@ -232,6 +232,14 @@
     "kind": "original SVG illustration"
   },
   {
+    "route": "chess/recent/2026-10-30/eastern-bullet/",
+    "title": "Bullet Manninja & the Queen-Sac Force",
+    "image": "chess/recent/2026-10-30/eastern-bullet/cover.svg",
+    "alt": "Artwork from Bullet Manninja & the Queen-Sac Force",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "chesshustlagaard/",
     "title": "♞ Chesshustlagaard",
     "image": "assets/card-art/chesshustlagaard-1add186.svg",

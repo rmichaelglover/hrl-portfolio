@@ -15,6 +15,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'assets/card-art'
 OVERRIDES = {
+    'chess/recent/2026-10-30/eastern-bullet/': 'chess/recent/2026-10-30/eastern-bullet/cover.svg',
     'capture-tutor/': 'assets/social/capture-tutor--index.png',
     'calabi-yau-vane/': 'assets/thumbs/calabi-yau-vane.jpg',
     'promaster-grrle/': 'promaster-grrle/assets/promaster-1500-front-left.jpg',
