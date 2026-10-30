@@ -1,0 +1,110 @@
+[
+  {
+    "name": "American crow",
+    "image": "assets/american-crow.jpg",
+    "credit": "See source",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Corvus-brachyrhynchos-001.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/American_crow"
+  },
+  {
+    "name": "Blue jay",
+    "image": "assets/blue-jay.jpg",
+    "credit": "<a href=\"//commons.wikimedia.org/wiki/User:Rhododendrites\" title=\"User:Rhododendrites\">Rhododendrites</a>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Blue_jay_in_PP_(30960).jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Blue_jay"
+  },
+  {
+    "name": "Carolina chickadee",
+    "image": "assets/carolina-chickadee.jpg",
+    "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/10017367@N03\">Dan Pancamo</a>",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Carolina_Chickadee1_by_Dan_Pancamo.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Carolina_chickadee"
+  },
+  {
+    "name": "Tufted titmouse",
+    "image": "assets/tufted-titmouse.jpg",
+    "credit": "<a href=\"//commons.wikimedia.org/wiki/User:Rhododendrites\" title=\"User:Rhododendrites\">Rhododendrites</a>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tufted_titmouse_(84917).jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Tufted_titmouse"
+  },
+  {
+    "name": "Black-capped chickadee",
+    "image": "assets/black-capped-chickadee.jpg",
+    "credit": "No machine-readable author provided. <a href=\"//commons.wikimedia.org/wiki/User:Mdf\" title=\"User:Mdf\">Mdf</a> assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Poecile-atricapilla-001.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Black-capped_chickadee"
+  },
+  {
+    "name": "New Caledonian crow",
+    "image": "assets/new-caledonian-crow.jpg",
+    "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.inaturalist.org/users/1891727\">Donald Davesne</a>",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Corvus_moneduloides_718440887.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/New_Caledonian_crow"
+  },
+  {
+    "name": "Common raven",
+    "image": "assets/common-raven.jpg",
+    "credit": "<bdi><a href=\"https://www.wikidata.org/wiki/Q57175365\" class=\"extiw\" title=\"d:Q57175365\"><span title=\"German-American photographer, Wikipedian, and Executive Director of the Wiki Education Foundation\">Frank Schulenburg</span></a></bdi>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Corvus_corax_clarionensis,_Point_Reyes_National_Seashore.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Common_raven"
+  },
+  {
+    "name": "Rook (bird)",
+    "image": "assets/rook-bird.jpg",
+    "credit": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rook_(Corvus_frugilegus)_Heligan.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Rook_(bird)"
+  },
+  {
+    "name": "Eurasian jay",
+    "image": "assets/eurasian-jay.jpg",
+    "credit": "<a href=\"//commons.wikimedia.org/wiki/User:Lviatour\" title=\"User:Lviatour\">Luc Viatour</a>",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Garrulus_glandarius_1_Luc_Viatour.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Eurasian_jay"
+  },
+  {
+    "name": "Grey parrot",
+    "image": "assets/grey-parrot.jpg",
+    "credit": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Florettesokeng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Florettesokeng (page does not exist)\">Florettesokeng</a>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Perroquet_%C3%A0_Yampopo_Beach_-_Douala.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Grey_parrot"
+  },
+  {
+    "name": "Red-tailed hawk",
+    "image": "assets/red-tailed-hawk.jpg",
+    "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/130819719@N05\">Becky Matsubara</a> from El Sobrante, California",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Red-tailed_Hawk_(45812546121).jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Red-tailed_hawk"
+  },
+  {
+    "name": "Turkey vulture",
+    "image": "assets/turkey-vulture.jpg",
+    "credit": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Turkey_vulture_(Cathartes_aura)_Orange_Walk.jpg",
+    "speciesPage": "https://en.wikipedia.org/wiki/Turkey_vulture"
+  }
+]
