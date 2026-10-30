@@ -2,11 +2,13 @@
 """Compose the full Maestro app and the preserved site directory into the homepage."""
 from pathlib import Path
 import re
+from card_art import CardIllustrator
 ROOT=Path(__file__).resolve().parents[1]
 maestro=(ROOT/'maestro.html').read_text()
 directory=(ROOT/'explore.html').read_text()
 styles=re.search(r'<style>(.*?)</style>',directory,re.S).group(1)
 styles=styles.replace(':root',':host').replace('html{',':host{').replace('body{',':host{')
+styles += (ROOT/'homepage-cards.css').read_text()
 content=directory[directory.index('<header>'):directory.index('<script>')]
 # The directory retains its own style inside a shadow root so its buttons and
 # headings cannot alter the chess board's established layout.
@@ -31,7 +33,7 @@ maestro=maestro.replace('<a href="./">← Home</a>', '<a href="#site-extras">All
 maestro=maestro.replace("if (maestroParams.get('play') === '1') {", "if (maestroParams.get('play') === '1' || document.body.dataset.maestroLanding === '1') {")
 maestro=maestro.replace("if (maestroParams.get('embed') === '1') {", "if(document.body.dataset.maestroLanding==='1'){for(const [id,value] of [['selTheme','brown'],['selPieceW','woodland'],['selPieceB','classic']]){const select=document.getElementById(id);select.value=value;select.dispatchEvent(new Event('change'));}}\nif (maestroParams.get('embed') === '1') {")
 maestro=re.sub(r'<script defer src="assets/day-visuals/gallery.js"[^>]*></script>','',maestro)
-maestro=maestro.replace('</head>', '<style>'+ (ROOT/'packaging/homepage/style.css').read_text()+'</style><link rel="stylesheet" href="world-directory.css"></head>', 1)
+maestro=maestro.replace('</head>', '<style>'+ (ROOT/'packaging/homepage/style.css').read_text()+'</style><link rel="stylesheet" href="world-directory.css"><link rel="stylesheet" href="homepage-cards.css"></head>', 1)
 quick_actions = '''<script>
 const quick=document.createElement('div');quick.className='home-quick-actions';quick.setAttribute('aria-label','Play and listen');
 for(const id of ['btnMusic','btnNewGame'])quick.append(document.getElementById(id));
@@ -41,5 +43,8 @@ for(const [id,label] of [['first','⏮ Start'],['prev','◀ Back'],['play','▶ 
 </script>'''
 maestro=maestro.replace('</body>',quick_actions+extras+'<script src="capture-tutor/lessons.js"></script><script src="home-mini.js"></script><script src="world-directory.js"></script></body>',1)
 maestro=maestro.replace('<title>Chess Maestro — relaxation-labeling chess, scored as music</title>','<title>Maestro+++ — play colorful, musical chess | Manny Glover</title>')
+illustrator = CardIllustrator()
+maestro = illustrator.decorate(maestro)
+illustrator.save()
 (ROOT/'index.html').write_text(maestro)
 print('Homepage built: native full Maestro first; preserved site directory below.')

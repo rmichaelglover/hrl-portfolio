@@ -1,0 +1,1386 @@
+[
+  {
+    "route": "all-in-a-days-work/",
+    "title": "☀ All in a Day’s Work",
+    "image": "assets/card-art/all-in-a-days-work-022643d.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "atlanta/",
+    "title": "🌀 Atlanta — Great Water Cycle",
+    "image": "assets/card-art/atlanta-e68e42b.svg",
+    "alt": "Coral, kelp and tiny fish in a glowing underwater world",
+    "motif": "reef",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "attack-on-christendom/",
+    "title": "📰 Attack on Christendom",
+    "image": "assets/card-art/attack-on-christendom-59d54b6.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "beena/",
+    "title": "🚂 Beena Train-Brake",
+    "image": "assets/card-art/beena-f3eab7d.svg",
+    "alt": "A small train on a curved rail with visible wheels and brake mechanism",
+    "motif": "train",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/",
+    "title": "📖 Gospel-HRL",
+    "image": "assets/card-art/bible-hrl-6aa32ce.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/explorer.html",
+    "title": "Verse Explorer",
+    "image": "assets/card-art/bible-hrl-explorer-html-719b988.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/relaxation.html",
+    "title": "Watch Relaxation Labeling Settle",
+    "image": "assets/card-art/bible-hrl-relaxation-html-7ccb1e2.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/scatter.html",
+    "title": "The Machine's Signal Space",
+    "image": "assets/card-art/bible-hrl-scatter-html-d34bc70.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/simplex.html",
+    "title": "Objects Converging to Labels",
+    "image": "assets/card-art/bible-hrl-simplex-html-255d3e0.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/tensor.html",
+    "title": "The Compatibility Tensor",
+    "image": "assets/card-art/bible-hrl-tensor-html-107d74d.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "bible-hrl/trajectories.html",
+    "title": "Convergence Curves",
+    "image": "assets/card-art/bible-hrl-trajectories-html-2ddeedf.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "biz-viz/",
+    "title": "💼 HRL Business Visualizer",
+    "image": "assets/card-art/biz-viz-a78507f.svg",
+    "alt": "A rising chart, a table of values and stacks of golden coins",
+    "motif": "economics",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "body-pos/",
+    "title": "🏃 Body Position",
+    "image": "assets/body_pos.png",
+    "alt": "Artwork from 🏃 Body Position",
+    "motif": "vision",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "calabi-yau-vane/",
+    "title": "Calabi–Yau Vane",
+    "image": "assets/thumbs/calabi-yau-vane.jpg",
+    "alt": "Artwork from Calabi–Yau Vane",
+    "motif": "geometry",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "capture-tutor/",
+    "title": "Practice & learn",
+    "image": "assets/social/capture-tutor--index.png",
+    "alt": "Artwork from Practice & learn",
+    "motif": "puzzle",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "catfish-lane/",
+    "title": "Catfish Lane",
+    "image": "assets/card-art/catfish-lane-b41c9e0.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "cellular-complexes/",
+    "title": "Cellular Complexes",
+    "image": "assets/card-art/cellular-complexes-5ac6aa4.svg",
+    "alt": "A colorful cellular grid with neighboring patterns and a growing cluster",
+    "motif": "cells-grid",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-biometric/",
+    "title": "Chess Biometric",
+    "image": "assets/card-art/chess-biometric-8011888.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-brain/",
+    "title": "Chess Brain",
+    "image": "assets/card-art/chess-brain-4d90432.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-lessons/",
+    "title": "Lecture One",
+    "image": "assets/card-art/chess-lessons-641afc3.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-logic/",
+    "title": "🧠 Chess Logic",
+    "image": "assets/card-art/chess-logic-f5b3386.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-mind/",
+    "title": "Cognitive Fingerprints",
+    "image": "assets/card-art/chess-mind-591f44f.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-music/",
+    "title": "Our first chess track",
+    "image": "assets/card-art/chess-music-091687e.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-premove/",
+    "title": "⏱️ Chess Premove",
+    "image": "assets/card-art/chess-premove-6b1c6ff.svg",
+    "alt": "A chessboard with a highlighted move and a curious knight",
+    "motif": "puzzle",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess-relaxation/",
+    "title": "♟️ Chess Relaxation",
+    "image": "assets/card-art/chess-relaxation-70e439a.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess/",
+    "title": "🌲 Chess Worlds",
+    "image": "chess/recent/2026-09-26/garden-spider-englund-gambit.png",
+    "alt": "Artwork from 🌲 Chess Worlds",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "chess/recent/2026-09-27/saragossa-mimosa-review.html",
+    "title": "🍊 Saragossa Mimosa",
+    "image": "assets/card-art/chess-recent-2026-09-27-saragossa-mimosa-review-html-27e7584.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chess/recent/2026-09-28/hrl-portfolio-van-mieses/chess-worlds/van-mieses/",
+    "title": "Van Mieses",
+    "image": "chess/recent/2026-09-28/hrl-portfolio-van-mieses/chess-worlds/van-mieses/assets/van-mieses-hero.png",
+    "alt": "Artwork from Van Mieses",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "chess/recent/2026-10-01/missed-mates/",
+    "title": "54 Missed Mates",
+    "image": "assets/card-art/chess-recent-2026-10-01-missed-mates-96fb16e.svg",
+    "alt": "A chessboard with a highlighted move and a curious knight",
+    "motif": "puzzle",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chesshustlagaard/",
+    "title": "♞ Chesshustlagaard",
+    "image": "assets/card-art/chesshustlagaard-1add186.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "chronology/",
+    "title": "🗓️ Career Chronology",
+    "image": "assets/card-art/chronology-39f28ed.svg",
+    "alt": "A circle of colorful people gathered around a shared table",
+    "motif": "community",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "community/",
+    "title": "Your player profile",
+    "image": "assets/card-art/community-4bb9a3f.svg",
+    "alt": "A circle of colorful people gathered around a shared table",
+    "motif": "community",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "cover-songs/",
+    "title": "Cover Songs Workshop",
+    "image": "assets/card-art/cover-songs-1eed2ef.svg",
+    "alt": "A bright melody, flowing notes and a miniature piano keyboard",
+    "motif": "music",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "cv/",
+    "title": "Michael \"Manny\" Glover",
+    "image": "assets/card-art/cv-05fa1e6.svg",
+    "alt": "A circle of colorful people gathered around a shared table",
+    "motif": "community",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "data-worlds/",
+    "title": "▦ Data Worlds",
+    "image": "assets/card-art/data-worlds-b8bea38.svg",
+    "alt": "Colorful stacks of small cubes forming an explorable voxel landscape",
+    "motif": "voxels",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "drugs-are-good/",
+    "title": "Drugs Are Good: An Allopath’s Journey Through Medicine, Healing, and Danger",
+    "image": "drugs-are-good/figures/elimination.png",
+    "alt": "Artwork from Drugs Are Good: An Allopath’s Journey Through Medicine, Healing, and Danger",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "easy-bible-reader/",
+    "title": "Easy Bible Reader",
+    "image": "assets/card-art/easy-bible-reader-4a253b9.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "ecc-plus/",
+    "title": "ecc+++",
+    "image": "assets/card-art/ecc-plus-9ce0c2d.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "education-pathways/",
+    "title": "🎓 Education Pathways",
+    "image": "assets/card-art/education-pathways-c15e5fc.svg",
+    "alt": "A circle of colorful people gathered around a shared table",
+    "motif": "community",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "el-cuento/",
+    "title": "El Cuento",
+    "image": "assets/card-art/el-cuento-6b6a4fa.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "elbies-world/music.html",
+    "title": "Elbie’s World · Music",
+    "image": "assets/card-art/elbies-world-music-html-ab9c593.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "emoji-life/",
+    "title": "🌈 Emoji Life",
+    "image": "assets/card-art/emoji-life-cc9ba4d.svg",
+    "alt": "A colorful cellular grid with neighboring patterns and a growing cluster",
+    "motif": "cells-grid",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "essays/",
+    "title": "📚 Essays",
+    "image": "assets/card-art/essays-58800d4.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "fair-oaks/",
+    "title": "Fair Oaks",
+    "image": "assets/card-art/fair-oaks-1e35fe9.svg",
+    "alt": "A broad oak canopy, a little schoolhouse and a winding garden path",
+    "motif": "oak",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "fair-oaks/world/",
+    "title": "Fair Oaks World",
+    "image": "assets/card-art/fair-oaks-world-3f61322.svg",
+    "alt": "A broad oak canopy, a little schoolhouse and a winding garden path",
+    "motif": "oak",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "floating-guitar/",
+    "title": "The Floating Guitar",
+    "image": "floating-guitar/journey.png",
+    "alt": "Artwork from The Floating Guitar",
+    "motif": "islands",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "formula-time-v2.html",
+    "title": "🌀 Formula Time",
+    "image": "assets/formula-labyrinth-1200.png",
+    "alt": "Artwork from 🌀 Formula Time",
+    "motif": "geometry",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "frustrated/",
+    "title": "Chirality",
+    "image": "assets/card-art/frustrated-db40555.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "gay-georgia/",
+    "title": "Gay, Georgia",
+    "image": "assets/card-art/gay-georgia-7d2fb49.svg",
+    "alt": "A circle of colorful people gathered around a shared table",
+    "motif": "community",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/",
+    "title": "🌌 Project Genesis",
+    "image": "assets/card-art/genesis-885f0de.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/brain/",
+    "title": "A Nervous System, Relaxing",
+    "image": "assets/thumbs/brain.png",
+    "alt": "Artwork from A Nervous System, Relaxing",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/clog/",
+    "title": "Does the Threshold Emerge?",
+    "image": "assets/card-art/genesis-clog-656aa60.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/cord/",
+    "title": "The Cord of Three Strands",
+    "image": "assets/thumbs/cord.png",
+    "alt": "Artwork from The Cord of Three Strands",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/critter/",
+    "title": "The Critter",
+    "image": "assets/card-art/genesis-critter-d5af346.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/critter/chess-life.html",
+    "title": "👑 Chess Critter",
+    "image": "assets/card-art/genesis-critter-chess-life-html-3bae31f.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/critter/conway.html",
+    "title": "🧬 Conway Critter",
+    "image": "assets/card-art/genesis-critter-conway-html-9b48836.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/energy/",
+    "title": "Energy = Diversity × Unity",
+    "image": "assets/card-art/genesis-energy-90967fe.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/forecast/",
+    "title": "Forecasting by Relaxation",
+    "image": "assets/thumbs/forecast.png",
+    "alt": "Artwork from Forecasting by Relaxation",
+    "motif": "economics",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/games/",
+    "title": "The Critter, in Worlds You Can Play",
+    "image": "assets/card-art/genesis-games-2c67723.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/isles/",
+    "title": "Floating Isles",
+    "image": "assets/card-art/genesis-isles-2be0f64.svg",
+    "alt": "Floating green islands with trees and lanterns under a glowing moon",
+    "motif": "islands",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/ladder/",
+    "title": "The Simplex Ladder",
+    "image": "assets/card-art/genesis-ladder-45e5751.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/light/",
+    "title": "Project Genesis",
+    "image": "assets/card-art/genesis-light-d3f78a0.svg",
+    "alt": "Orbiting worlds, stars and a spiral of galactic light",
+    "motif": "space",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/maestro/",
+    "title": "Maestro · Voxel Chess",
+    "image": "assets/card-art/genesis-maestro-cf1a807.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/maestro/cyber.html",
+    "title": "Maestro // CYBERPUNK 2045",
+    "image": "assets/card-art/genesis-maestro-cyber-html-99e11fe.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/maestro/emoji.html",
+    "title": "Maestro",
+    "image": "assets/card-art/genesis-maestro-emoji-html-9951927.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/maestro/playworld.html",
+    "title": "Maestro · Playworld",
+    "image": "assets/card-art/genesis-maestro-playworld-html-0af00af.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/malaria/",
+    "title": "Opening the Escape Valves",
+    "image": "assets/card-art/genesis-malaria-11e975f.svg",
+    "alt": "A blue globe with land, orbiting routes and a bright sunrise",
+    "motif": "earth",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/monad/",
+    "title": "The Windowed Monad",
+    "image": "assets/card-art/genesis-monad-ee49edf.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/ontology/",
+    "title": "The Four Poles",
+    "image": "assets/thumbs/ontology.png",
+    "alt": "Artwork from The Four Poles",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/planck/",
+    "title": "Seeded by the Big Bang",
+    "image": "assets/thumbs/planck.png",
+    "alt": "Artwork from Seeded by the Big Bang",
+    "motif": "space",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/rar/",
+    "title": "The Clog Threshold",
+    "image": "assets/thumbs/rar.png",
+    "alt": "Artwork from The Clog Threshold",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/reef/",
+    "title": "The Deep Reef",
+    "image": "assets/card-art/genesis-reef-0ba93fc.svg",
+    "alt": "Coral, kelp and tiny fish in a glowing underwater world",
+    "motif": "reef",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/regard/",
+    "title": "The Two Directions",
+    "image": "assets/card-art/genesis-regard-8aa804e.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/scrabble-4d/",
+    "title": "4-D Scrabble",
+    "image": "assets/card-art/genesis-scrabble-4d-ed442e5.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/scrabble/",
+    "title": "Scrabble",
+    "image": "assets/card-art/genesis-scrabble-b84d020.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/sdss/",
+    "title": "The Real Cosmic Web",
+    "image": "assets/thumbs/sdss.png",
+    "alt": "Artwork from The Real Cosmic Web",
+    "motif": "space",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/sparc/",
+    "title": "The Fingerprint of Dark Matter",
+    "image": "assets/thumbs/sparc.png",
+    "alt": "Artwork from The Fingerprint of Dark Matter",
+    "motif": "space",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "genesis/terraform/",
+    "title": "Terraformer",
+    "image": "assets/card-art/genesis-terraform-dec0c80.svg",
+    "alt": "Floating green islands with trees and lanterns under a glowing moon",
+    "motif": "islands",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/voxel-tty/",
+    "title": "Elbie's Genesis World",
+    "image": "assets/card-art/genesis-voxel-tty-a278490.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/voxel-world/",
+    "title": "🧱 VoxelData",
+    "image": "assets/card-art/genesis-voxel-world-c1effc7.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/voxel/",
+    "title": "In the Beginning",
+    "image": "assets/card-art/genesis-voxel-0a69050.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/waterize/",
+    "title": "Waterize the World",
+    "image": "assets/card-art/genesis-waterize-cdd3e6d.svg",
+    "alt": "Coral, kelp and tiny fish in a glowing underwater world",
+    "motif": "reef",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/world/",
+    "title": "🌍 Gooblets & Zappies",
+    "image": "assets/card-art/genesis-world-9e4d85c.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "genesis/worlds/",
+    "title": "🗺️ Living Worlds",
+    "image": "assets/card-art/genesis-worlds-0efd1ab.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "gospel/",
+    "title": "✝️ The Gospel",
+    "image": "assets/card-art/gospel-315e2c8.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "grrle-strong/",
+    "title": "✡️ GRRLE Strong",
+    "image": "assets/card-art/grrle-strong-60d62f2.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "house-of-returning-authors/",
+    "title": "The House of Returning Authors",
+    "image": "house-of-returning-authors/art/01-three-names.png",
+    "alt": "Artwork from The House of Returning Authors",
+    "motif": "theatre",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "hrl-cybersecurity/",
+    "title": "🛡 HRL Cybersecurity",
+    "image": "assets/card-art/hrl-cybersecurity-155347d.svg",
+    "alt": "A glowing shield protecting a network of connected points",
+    "motif": "shield",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "hrl-lab/",
+    "title": "✦ The HRL Lab",
+    "image": "assets/card-art/hrl-lab-7ad68c3.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "hrlized/",
+    "title": "HRLized",
+    "image": "assets/card-art/hrlized-83fea22.svg",
+    "alt": "A bright melody, flowing notes and a miniature piano keyboard",
+    "motif": "music",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "humanity-atlas/",
+    "title": "🌍 Humanity Atlas",
+    "image": "assets/card-art/humanity-atlas-6b868f1.svg",
+    "alt": "A blue globe with land, orbiting routes and a bright sunrise",
+    "motif": "earth",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "hyperobject/",
+    "title": "Wings Out",
+    "image": "assets/card-art/hyperobject-75d0fff.svg",
+    "alt": "Colorful wave fronts traveling across a luminous sound field",
+    "motif": "waves",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "hyperspace/",
+    "title": "Hyperspace",
+    "image": "hyperspace/figures/ternary.png",
+    "alt": "Artwork from Hyperspace",
+    "motif": "geometry",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "i-am-what-i-am/",
+    "title": "I Am What I Am",
+    "image": "assets/card-art/i-am-what-i-am-107633c.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "licensing/",
+    "title": "Licensing & the Trust of Trusts",
+    "image": "assets/card-art/licensing-3d7d892.svg",
+    "alt": "A glowing shield protecting a network of connected points",
+    "motif": "shield",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "lichess-emulator/",
+    "title": "Ultrabullet Emulator",
+    "image": "assets/card-art/lichess-emulator-ba76d1c.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "linux/",
+    "title": "Maestro for Linux",
+    "image": "assets/card-art/linux-2a9d5c9.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "lion-and-the-lamb/",
+    "title": "The Lion and the Lamb",
+    "image": "assets/card-art/lion-and-the-lamb-226f673.svg",
+    "alt": "A lion and lamb sharing a green landscape beside a blue globe",
+    "motif": "coexist",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "lion-and-the-lamb/world/",
+    "title": "The Lion and the Lamb · World Atlas",
+    "image": "assets/card-art/lion-and-the-lamb-world-91080ce.svg",
+    "alt": "A lion and lamb sharing a green landscape beside a blue globe",
+    "motif": "coexist",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "maestro.html",
+    "title": "Play Maestro",
+    "image": "assets/card-art/maestro-html-68cd80c.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "magnum-chessicus/",
+    "title": "♟ Magnum Chessicus",
+    "image": "magnum-chessicus/figures/outcome-gap.png",
+    "alt": "Artwork from ♟ Magnum Chessicus",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "magnum-economicus/",
+    "title": "Magnum Economicus: Computation Munster",
+    "image": "magnum-economicus/figures/growth-index.png",
+    "alt": "Artwork from Magnum Economicus: Computation Munster",
+    "motif": "economics",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "magnum-quantreleviathone/",
+    "title": "⚛ Magnum Quantreleviathone",
+    "image": "magnum-quantreleviathone/figures/memory.png",
+    "alt": "Artwork from ⚛ Magnum Quantreleviathone",
+    "motif": "geometry",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "manuelian-magnum-opus/",
+    "title": "📖 The Tree, the Proof, and the Light",
+    "image": "manuelian-magnum-opus/figures/justification.png",
+    "alt": "Artwork from 📖 The Tree, the Proof, and the Light",
+    "motif": "books",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "meta-renormalization/",
+    "title": "Meta-Renormalization · Experiment 002",
+    "image": "meta-renormalization/figures/experiment001-reproduction.png",
+    "alt": "Artwork from Meta-Renormalization · Experiment 002",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "mk-ultrabullet/",
+    "title": "Rhythm & speed",
+    "image": "assets/card-art/mk-ultrabullet-447c760.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "morphogenesis-grow/",
+    "title": "A Body Grows Itself",
+    "image": "assets/card-art/morphogenesis-grow-a639016.svg",
+    "alt": "A luminous cell with folded organelles and two colored DNA compartments",
+    "motif": "cell",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "morphogenesis-remodel/",
+    "title": "Remodelling Without Injury",
+    "image": "assets/card-art/morphogenesis-remodel-b1fd9b5.svg",
+    "alt": "A luminous cell with folded organelles and two colored DNA compartments",
+    "motif": "cell",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "morphogenesis/",
+    "title": "🧬 Morphogenesis",
+    "image": "assets/card-art/morphogenesis-c756f32.svg",
+    "alt": "A luminous cell with folded organelles and two colored DNA compartments",
+    "motif": "cell",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "mother-god-bomb/",
+    "title": "Project Mother God",
+    "image": "assets/card-art/mother-god-bomb-ec4db33.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "mother-god-shrine/",
+    "title": "Mother God Shrine",
+    "image": "assets/card-art/mother-god-shrine-a60fa29.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "mutual-finalization/",
+    "title": "Mutual-Best Early Finalization",
+    "image": "assets/card-art/mutual-finalization-8c4cfec.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "mutual-finalization/theory.html",
+    "title": "Relaxed Communications",
+    "image": "assets/card-art/mutual-finalization-theory-html-e30d8a6.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "no-choice-chess/",
+    "title": "No-Choice Chess",
+    "image": "assets/card-art/no-choice-chess-15ee22a.svg",
+    "alt": "A chessboard with a highlighted move and a curious knight",
+    "motif": "puzzle",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "no-panzer/",
+    "title": "✍️ I Am No Panzer",
+    "image": "assets/card-art/no-panzer-258f93b.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "numerological-speculations/",
+    "title": "📖 Numerological Speculations",
+    "image": "assets/card-art/numerological-speculations-43e5b1c.svg",
+    "alt": "Speech bubbles and letter tiles linked by a web of connections",
+    "motif": "language",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "oort-halo/",
+    "title": "Oort Cloud & Galactic Halo",
+    "image": "oort-halo/three-models.png",
+    "alt": "Artwork from Oort Cloud & Galactic Halo",
+    "motif": "space",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "oort-halo/milky-way/",
+    "title": "Milky Way Rotation",
+    "image": "oort-halo/milky-way/rotation-curve.png",
+    "alt": "Artwork from Milky Way Rotation",
+    "motif": "space",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "open-chess-brain/",
+    "title": "🌍 The World’s Largest Brain",
+    "image": "assets/formula-labyrinth-1200.png",
+    "alt": "Artwork from 🌍 The World’s Largest Brain",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "optics-lab/",
+    "title": "🌈 Mirror Garden",
+    "image": "assets/card-art/optics-lab-253fa35.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "penrose/",
+    "title": "Tizzy-Tight Tilings",
+    "image": "assets/card-art/penrose-6711fed.svg",
+    "alt": "Intersecting polyhedra, orbital curves and a bright geometric center",
+    "motif": "geometry",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "perfect-union/",
+    "title": "♟️ A More Perfect Union",
+    "image": "assets/card-art/perfect-union-65e33e0.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "play/",
+    "title": "🎮 Beat the Engine",
+    "image": "assets/card-art/play-b2e6303.svg",
+    "alt": "A colorful cellular grid with neighboring patterns and a growing cluster",
+    "motif": "cells-grid",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "political-economy-paper/",
+    "title": "🏛️ Political Economy Paper",
+    "image": "political-economy-paper/mechanisms.png",
+    "alt": "Artwork from 🏛️ Political Economy Paper",
+    "motif": "economics",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "projective-horizon-bipolar/",
+    "title": "An Axiomatic and Numerical Approach to Modeling Bipolar Disorder",
+    "image": "projective-horizon-bipolar/figures/latent-mixture.png",
+    "alt": "Artwork from An Axiomatic and Numerical Approach to Modeling Bipolar Disorder",
+    "motif": "geometry",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "projective-resolution/",
+    "title": "Wings Out",
+    "image": "assets/card-art/projective-resolution-fe302ea.svg",
+    "alt": "Intersecting polyhedra, orbital curves and a bright geometric center",
+    "motif": "geometry",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "promaster-grrle/",
+    "title": "🚐 ProMaster GRRLE",
+    "image": "promaster-grrle/assets/promaster-1500-front-left.jpg",
+    "alt": "Artwork from 🚐 ProMaster GRRLE",
+    "motif": "vision",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "reciprocal-grounding/",
+    "title": "Reciprocal Grounding · Things ↔ Words",
+    "image": "reciprocal-grounding/figures/accuracy-coverage.png",
+    "alt": "Artwork from Reciprocal Grounding · Things ↔ Words",
+    "motif": "language",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "red-thread/",
+    "title": "🧵 The Red Thread",
+    "image": "assets/card-art/red-thread-190ee09.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "relax-relabel/",
+    "title": "Relax, Relabel",
+    "image": "assets/card-art/relax-relabel-47a2c9c.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "relaxed-chess-brain/",
+    "title": "Relaxed Chess Brain",
+    "image": "assets/card-art/relaxed-chess-brain-911aa78.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "relaxed-chess-brain/arena.html",
+    "title": "Relaxed Chess Brain · Arena",
+    "image": "assets/card-art/relaxed-chess-brain-arena-html-ffb138a.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "relaxfish/",
+    "title": "♟ Relaxfish",
+    "image": "relaxfish/figures/role_field.png",
+    "alt": "Artwork from ♟ Relaxfish",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "research-whitepapers/",
+    "title": "📚 Three Research White Papers",
+    "image": "assets/card-art/research-whitepapers-dbbd7b0.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "rolling-chess-ros/",
+    "title": "Rolling Chess",
+    "image": "assets/card-art/rolling-chess-ros-bc3bf14.svg",
+    "alt": "A tilted wooden chess maze with pieces, metal marbles and curved paths",
+    "motif": "rolling",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "simplicial-3d/",
+    "title": "The Body in 3D",
+    "image": "assets/card-art/simplicial-3d-dff9fc4.svg",
+    "alt": "Intersecting polyhedra, orbital curves and a bright geometric center",
+    "motif": "geometry",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "simplicial/",
+    "title": "The Body as a Simplicial Complex",
+    "image": "assets/card-art/simplicial-f08a053.svg",
+    "alt": "Intersecting polyhedra, orbital curves and a bright geometric center",
+    "motif": "geometry",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "six-authors-in-search-of-an-ending/",
+    "title": "Six Authors in Search of an Ending",
+    "image": "assets/card-art/six-authors-in-search-of-an-ending-ecb57dd.svg",
+    "alt": "An open stage, illustrated book and warm pools of theatrical light",
+    "motif": "theatre",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "spreadsheet-dissertation/",
+    "title": "🎓 Spreadsheet Auditing Dissertation",
+    "image": "spreadsheet-dissertation/results/performance.png",
+    "alt": "Artwork from 🎓 Spreadsheet Auditing Dissertation",
+    "motif": "economics",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "st-james/",
+    "title": "St. James Park",
+    "image": "st-james/assets/rose-of-hawthorne-manger.png",
+    "alt": "Artwork from St. James Park",
+    "motif": "forest",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "super-monkey-chessballs/",
+    "title": "🐒 Super Monkey Chessballs",
+    "image": "assets/formula-labyrinth-1200.png",
+    "alt": "Artwork from 🐒 Super Monkey Chessballs",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "super-monkey-chessballs/maestro-tri.html",
+    "title": "🎼 Maestro Tri-Engine",
+    "image": "assets/card-art/super-monkey-chessballs-maestro-tri-html-bb940ba.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "super-monkey-chessballs/tri_engine.cpp",
+    "title": "💻 Tri-Engine C++",
+    "image": "assets/card-art/super-monkey-chessballs-tri-engine-cpp-d2e9b07.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "terms/",
+    "title": "Gaia Worlds Entry Terms",
+    "image": "assets/card-art/terms-11efc2c.svg",
+    "alt": "A glowing shield protecting a network of connected points",
+    "motif": "shield",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "the-wall/",
+    "title": "Tear Down This Wall",
+    "image": "assets/card-art/the-wall-b4055c9.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "threes-a-quorum/",
+    "title": "Three’s a Quorum",
+    "image": "threes-a-quorum/poster.png",
+    "alt": "Artwork from Three’s a Quorum",
+    "motif": "theatre",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "thursday/",
+    "title": "Thursday",
+    "image": "house-of-returning-authors/art/08-thursday-tea.png",
+    "alt": "Artwork from Thursday",
+    "motif": "theatre",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "tiny-creek-chess/",
+    "title": "Tiny Creek Chess",
+    "image": "assets/card-art/tiny-creek-chess-dc48658.svg",
+    "alt": "A woodland fox beside a colorful chessboard and knight",
+    "motif": "fox-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "tiny-creek-lab/",
+    "title": "🌊 Tiny Creek Lab",
+    "image": "assets/card-art/tiny-creek-lab-72dbb82.svg",
+    "alt": "Colored nodes and paths forming a layered web of connected ideas",
+    "motif": "network",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "tiny-creek-lab/recursive_creatures.cpp",
+    "title": "🧬 Recursive Creatures C++",
+    "image": "assets/card-art/tiny-creek-lab-recursive-creatures-cpp-c1c4c47.svg",
+    "alt": "A luminous terminal window with code brackets and connected modules",
+    "motif": "code",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "tiny-creek-world/",
+    "title": "Tiny Creek World",
+    "image": "assets/card-art/tiny-creek-world-f3ac10a.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "ujewhale-macro-report/",
+    "title": "Ujewhale Macro-Sleep Working Paper",
+    "image": "ujewhale-macro-report/real_sleep_anchors.png",
+    "alt": "Artwork from Ujewhale Macro-Sleep Working Paper",
+    "motif": "books",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "ujewhale-macro-report/interactive.html",
+    "title": "Ujewhale Macro-Sleep Explorer",
+    "image": "assets/card-art/ujewhale-macro-report-interactive-html-61d1109.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "ujewhale-macro-report/ujewhale_macro_sleep_report.pdf",
+    "title": "🐋 Ujewhale Macro-Sleep Report",
+    "image": "assets/card-art/ujewhale-macro-report-ujewhale-macro-sleep-report-pdf-95b2266.svg",
+    "alt": "Open books, warm lamplight and a constellation of ideas",
+    "motif": "books",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "ultrabullet-lessons/",
+    "title": "⚡ Ultrabullet Lessons",
+    "image": "assets/card-art/ultrabullet-lessons-a171e3b.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "virtual-body-cancer/",
+    "title": "🔬 Virtual Body Cancer Research",
+    "image": "virtual-body-cancer/output/trajectories.png",
+    "alt": "Artwork from 🔬 Virtual Body Cancer Research",
+    "motif": "cell",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "virtual-body-cancer/dissertation/",
+    "title": "To Cure Cancer: The Virtual Body",
+    "image": "virtual-body-cancer/dissertation/figures/measured-3d.png",
+    "alt": "Artwork from To Cure Cancer: The Virtual Body",
+    "motif": "cell",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "virtual-cell-gametes/",
+    "title": "🧬 Virtual Cell: Beginning with Two Cells",
+    "image": "assets/card-art/virtual-cell-gametes-e565787.svg",
+    "alt": "A luminous cell with folded organelles and two colored DNA compartments",
+    "motif": "cell",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "virtual-earth/",
+    "title": "A World Before Names · Virtual Earth",
+    "image": "assets/card-art/virtual-earth-c4fc609.svg",
+    "alt": "A blue globe with land, orbiting routes and a bright sunrise",
+    "motif": "earth",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "wave-worlds/",
+    "title": "Wave Worlds",
+    "image": "assets/card-art/wave-worlds-81e3455.svg",
+    "alt": "A welcoming little forest with a garden path and a fox",
+    "motif": "forest",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "we-follows/",
+    "title": "We Follows",
+    "image": "assets/card-art/we-follows-23d05d0.svg",
+    "alt": "A bright melody, flowing notes and a miniature piano keyboard",
+    "motif": "music",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "whimsy-chess/",
+    "title": "⌨️ Whimsy Chess",
+    "image": "whimsy-chess/media/maestro_kadas.gif",
+    "alt": "Artwork from ⌨️ Whimsy Chess",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "whimsy-chess/maestro.html",
+    "title": "Chess Maestro",
+    "image": "assets/card-art/whimsy-chess-maestro-html-6dff396.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "whimsy-chess/novella/reader.html",
+    "title": "Woodland Chess Reader",
+    "image": "assets/card-art/whimsy-chess-novella-reader-html-cecb87f.svg",
+    "alt": "A woodland fox beside a colorful chessboard and knight",
+    "motif": "fox-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "whimsy-chess/riverbank/",
+    "title": "The Last Ferry",
+    "image": "assets/card-art/whimsy-chess-riverbank-35c6f5c.svg",
+    "alt": "Chess pieces finding stepping stones across a winding blue river",
+    "motif": "river",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "whimsy-chess/stalemate-gambit/",
+    "title": "The Stalemate Gambit Explained",
+    "image": "assets/card-art/whimsy-chess-stalemate-gambit-e52c3cc.svg",
+    "alt": "An ivory chess knight overlooking a colorful patterned board",
+    "motif": "knight",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "whimsy-chess/storybook/",
+    "title": "Chess Storybook",
+    "image": "assets/card-art/whimsy-chess-storybook-65c1467.svg",
+    "alt": "A woodland fox beside a colorful chessboard and knight",
+    "motif": "fox-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "white-hat-hackers/",
+    "title": "White Hat Hackers",
+    "image": "assets/card-art/white-hat-hackers-6ab921a.svg",
+    "alt": "A glowing shield protecting a network of connected points",
+    "motif": "shield",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "wikimrgrele/",
+    "title": "🔤 WikiMRGRELE",
+    "image": "wikimrgrele/assets/test-a-strength.png",
+    "alt": "Artwork from 🔤 WikiMRGRELE",
+    "motif": "language",
+    "kind": "existing destination artwork"
+  },
+  {
+    "route": "worlds-of-kings-earth/",
+    "title": "Worlds of Kings · Earth Atlas",
+    "image": "assets/card-art/worlds-of-kings-earth-9c17967.svg",
+    "alt": "Chess towers and routes across an illustrated globe",
+    "motif": "atlas-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "worlds-of-kings-fusion/",
+    "title": "Worlds of Kings · Fusion",
+    "image": "assets/card-art/worlds-of-kings-fusion-49d1eb9.svg",
+    "alt": "Chess towers and routes across an illustrated globe",
+    "motif": "atlas-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "worlds-of-kings-wildlife/",
+    "title": "Worlds of Kings · Emoji Wilds",
+    "image": "assets/card-art/worlds-of-kings-wildlife-0cfae55.svg",
+    "alt": "Chess towers and routes across an illustrated globe",
+    "motif": "atlas-chess",
+    "kind": "original SVG illustration"
+  },
+  {
+    "route": "worlds-of-kings/",
+    "title": "Worlds of Kings · Original",
+    "image": "assets/card-art/worlds-of-kings-09ca8e8.svg",
+    "alt": "Chess towers and routes across an illustrated globe",
+    "motif": "atlas-chess",
+    "kind": "original SVG illustration"
+  }
+]

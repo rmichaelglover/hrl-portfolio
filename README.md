@@ -42,6 +42,14 @@ The homepage is generated from `maestro.html`, `explore.html`, and the retained
 preserves the advanced project links. The illustrated cell lesson lives at
 `virtual-cell-gametes/`, with cell-part selection, saved event states, DNA bars,
 and a retryable quiz.
+
+Every homepage destination card includes a visual. The landing-page build uses
+`packaging/card_art.py` to retain existing images and diagrams, reuse destination
+artwork, and generate small subject-specific SVG illustrations where needed.
+The image inventory is `assets/card-art/manifest.json`; card layouts live in
+`homepage-cards.css`. New cards receive imagery when the homepage is rebuilt.
+Titles and descriptions stay searchable text, and added images have alt text,
+reserved dimensions and lazy loading. This also covers the expanded archive.
  Change those sources and regenerate `index.html`; preserve the complete Maestro controls and the project directory.
 
 **One engine that assigns labels under context.** Give it a set of *objects*, a
