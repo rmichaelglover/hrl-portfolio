@@ -111,3 +111,12 @@ Then add sperm CatSper/pH/voltage signaling as a separately validated module,
 couple fusion to PLCζ delivery, and only later add first cleavage with explicit
 DNA replication and daughter-cell partitioning. Cell-type-specific models can
 share interfaces without assuming identical biology.
+
+## Illustrated learning experience
+
+The published page adds a schematic SVG cell with selectable membrane, DNA, ER,
+mitochondria and sperm, a six-state tour driven by `demonstration.json`, DNA
+amount bars, a two-sperm branch and a retryable knowledge check. The diagram's
+organelles, colors and activation glow are illustrations, not simulated geometry
+or fitted calcium dynamics. Keyboard controls and reduced-motion preferences
+are supported. `app.js` and `style.css` have no external dependencies.
