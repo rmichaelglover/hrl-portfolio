@@ -1400,6 +1400,14 @@
     "kind": "original SVG illustration"
   },
   {
+    "route": "worlds-of-kings/nuclear-globe/",
+    "title": "Nuclear Chess Globe",
+    "image": "worlds-of-kings/nuclear-globe/cover.svg",
+    "alt": "Artwork from Nuclear Chess Globe",
+    "motif": "atlas-chess",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "worlds-of-kings/nuclear/",
     "title": "Nuclear Chess · Worlds of Kings",
     "image": "worlds-of-kings/nuclear/cover.svg",

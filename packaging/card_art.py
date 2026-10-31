@@ -15,6 +15,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'assets/card-art'
 OVERRIDES = {
+    'worlds-of-kings/nuclear-globe/': 'worlds-of-kings/nuclear-globe/cover.svg',
     'worlds-of-kings/nuclear/': 'worlds-of-kings/nuclear/cover.svg',
     'chess/recent/2026-10-30/eastern-bullet/story/': 'chess/recent/2026-10-30/eastern-bullet/story/art/01-dilorias-exit.png',
     'chess/recent/2026-10-30/eastern-bullet/': 'chess/recent/2026-10-30/eastern-bullet/cover.svg',

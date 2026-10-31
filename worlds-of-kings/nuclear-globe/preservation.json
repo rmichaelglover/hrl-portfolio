@@ -1,0 +1,11 @@
+{
+  "flat_board_files": {
+    "worlds-of-kings/nuclear/index.html": "3c70b6725b7af3f865228b9e5255a7e058ff902ab7173ccbeca7e3955bb33360",
+    "worlds-of-kings/nuclear/style.css": "556879cb7bdc1d5d03fc91997fcc76aaea921d82d4e825a094436ec4c61ae54b",
+    "worlds-of-kings/nuclear/test-engine.cjs": "75a18051797191e9d975a9ec780e80764d549317dfe3e764f0d45a4c66eeb5b1",
+    "worlds-of-kings/nuclear/app.js": "2ead74e4f51bd0feced5fcb474a1127bebd6d2fb2b0a53271b2f7692898c9e20",
+    "worlds-of-kings/nuclear/engine.js": "056a09b427d4bbf65a1b873062d84ac84f9b8b7dec91d5a126603dbeccdf432a",
+    "worlds-of-kings/nuclear/cover.svg": "b0111271e4ff45288a8d5c21c43962a57dfc537086bcf968fb8376bd0ac1e7d3",
+    "worlds-of-kings/nuclear/README.md": "61530951278698e1b3f91e9bb06078186eb03d232c113aaa6a3d4cb8ea78b5de"
+  }
+}

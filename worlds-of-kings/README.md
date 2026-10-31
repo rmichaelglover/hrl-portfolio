@@ -41,3 +41,7 @@ Tests cover full-army deployment, opening mobility, reversible geographic steps,
 ## Region/city viewing focus
 
 A shared place selector now focuses Georgia/Alabama, Atlanta, Mobile, Arlington (Alabama), Hoover/Cahaba, and Yellowstone, with lazy search over Natural Earth country/region/city names. Arlington is a supplemental community point in Wilcox County. Navigation changes the camera only, not ownership, deployment, moves, or saves. In the little-world edition, real coordinates are explicitly a viewing reference over its fictional board. These later user-requested UI additions do not change the original game engine; the original visual snapshot remains in Git history.
+
+## Nuclear Chess Globe
+
+The separate three-player full-globe variant is at [`nuclear-globe/`](nuclear-globe/). It reuses Fusion's Natural Earth province and ocean graph for movement and fire, with a distinct engine, interface, and `worlds-of-kings-nuclear-globe-v1` browser save. The flat-board variant is [`nuclear/`](nuclear/); its rules and original files remain separate.
