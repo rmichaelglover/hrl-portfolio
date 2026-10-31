@@ -1,0 +1,327 @@
+{
+  "decision_count": 40,
+  "scored_count": 39,
+  "coverage": 0.975,
+  "means": {
+    "decoded_cost": 4.871794871794871,
+    "random_expected_cost": 8.2991452991453,
+    "shuffled_mapping_cost": 8.318384615384614,
+    "exact_best_cost": 4.82051282051282
+  },
+  "scores": [
+    {
+      "trial": "synthetic-000",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 9.333333333333334,
+      "shuffled_mapping_cost": 9.59,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-001",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 5,
+      "random_expected_cost": 6.666666666666667,
+      "shuffled_mapping_cost": 6.668,
+      "exact_best_cost": 5
+    },
+    {
+      "trial": "synthetic-002",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 7.134,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-003",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 6,
+      "random_expected_cost": 9.333333333333334,
+      "shuffled_mapping_cost": 9.297,
+      "exact_best_cost": 6
+    },
+    {
+      "trial": "synthetic-004",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 6.333333333333333,
+      "shuffled_mapping_cost": 6.264,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-005",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 6.0,
+      "shuffled_mapping_cost": 6.029,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-006",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 10.0,
+      "shuffled_mapping_cost": 10.113,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-007",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 9.0,
+      "shuffled_mapping_cost": 9.15,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-009",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 11.0,
+      "shuffled_mapping_cost": 11.02,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-010",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 11,
+      "random_expected_cost": 11.666666666666666,
+      "shuffled_mapping_cost": 11.659,
+      "exact_best_cost": 10
+    },
+    {
+      "trial": "synthetic-011",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 5,
+      "random_expected_cost": 6.0,
+      "shuffled_mapping_cost": 6.035,
+      "exact_best_cost": 5
+    },
+    {
+      "trial": "synthetic-012",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 7.333333333333333,
+      "shuffled_mapping_cost": 7.382,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-013",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 9,
+      "random_expected_cost": 9.666666666666666,
+      "shuffled_mapping_cost": 9.646,
+      "exact_best_cost": 9
+    },
+    {
+      "trial": "synthetic-014",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 9,
+      "random_expected_cost": 11.333333333333334,
+      "shuffled_mapping_cost": 11.328,
+      "exact_best_cost": 9
+    },
+    {
+      "trial": "synthetic-015",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 6.717,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-016",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 8,
+      "random_expected_cost": 8.666666666666666,
+      "shuffled_mapping_cost": 8.662,
+      "exact_best_cost": 8
+    },
+    {
+      "trial": "synthetic-017",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 7.333333333333333,
+      "shuffled_mapping_cost": 7.462,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-018",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 6,
+      "random_expected_cost": 9.0,
+      "shuffled_mapping_cost": 9.097,
+      "exact_best_cost": 6
+    },
+    {
+      "trial": "synthetic-019",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 6,
+      "random_expected_cost": 8.0,
+      "shuffled_mapping_cost": 7.962,
+      "exact_best_cost": 6
+    },
+    {
+      "trial": "synthetic-020",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 5,
+      "random_expected_cost": 7.666666666666667,
+      "shuffled_mapping_cost": 7.46,
+      "exact_best_cost": 5
+    },
+    {
+      "trial": "synthetic-021",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 6.942,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-022",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 4.666666666666667,
+      "shuffled_mapping_cost": 4.66,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-023",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 3.6666666666666665,
+      "shuffled_mapping_cost": 3.665,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-024",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 7.666666666666667,
+      "shuffled_mapping_cost": 7.908,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-025",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 8.333333333333334,
+      "shuffled_mapping_cost": 8.24,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-026",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 7.055,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-027",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 2,
+      "random_expected_cost": 7.666666666666667,
+      "shuffled_mapping_cost": 7.648,
+      "exact_best_cost": 2
+    },
+    {
+      "trial": "synthetic-028",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 5,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 7.016,
+      "exact_best_cost": 5
+    },
+    {
+      "trial": "synthetic-029",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 6,
+      "random_expected_cost": 10.666666666666666,
+      "shuffled_mapping_cost": 10.696,
+      "exact_best_cost": 6
+    },
+    {
+      "trial": "synthetic-030",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 6,
+      "random_expected_cost": 7.0,
+      "shuffled_mapping_cost": 7.078,
+      "exact_best_cost": 5
+    },
+    {
+      "trial": "synthetic-031",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 8.333333333333334,
+      "shuffled_mapping_cost": 8.25,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-032",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 10,
+      "random_expected_cost": 12.0,
+      "shuffled_mapping_cost": 12.016,
+      "exact_best_cost": 10
+    },
+    {
+      "trial": "synthetic-033",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 10,
+      "random_expected_cost": 11.666666666666666,
+      "shuffled_mapping_cost": 11.702,
+      "exact_best_cost": 10
+    },
+    {
+      "trial": "synthetic-034",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 8,
+      "random_expected_cost": 11.333333333333334,
+      "shuffled_mapping_cost": 11.453,
+      "exact_best_cost": 8
+    },
+    {
+      "trial": "synthetic-035",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 8.0,
+      "shuffled_mapping_cost": 7.909,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-036",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 8.0,
+      "shuffled_mapping_cost": 8.036,
+      "exact_best_cost": 3
+    },
+    {
+      "trial": "synthetic-037",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 9,
+      "random_expected_cost": 11.666666666666666,
+      "shuffled_mapping_cost": 11.612,
+      "exact_best_cost": 9
+    },
+    {
+      "trial": "synthetic-038",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 4,
+      "random_expected_cost": 6.0,
+      "shuffled_mapping_cost": 6.028,
+      "exact_best_cost": 4
+    },
+    {
+      "trial": "synthetic-039",
+      "party": "synthetic-ant-traffic",
+      "decoded_cost": 3,
+      "random_expected_cost": 7.666666666666667,
+      "shuffled_mapping_cost": 7.828,
+      "exact_best_cost": 3
+    }
+  ],
+  "interpretation": "Offline association only. No causal benefit or animal intelligence established.",
+  "data_origin": "SYNTHETIC: generator explicitly assigns more traffic to cheaper routes"
+}
