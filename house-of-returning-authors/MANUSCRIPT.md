@@ -8,7 +8,7 @@ Developed in dialogue with ChatGPT / Codex and Gemini; original credits retained
 
 Michael acts. Emanuel remembers. Glover speaks in chorus.
 
-This theatrical autobiography stages an inner life; invented scenes are not literal biography. This is an eleven-piece reading edition, not a complete six-to-seven-month archive. Original source snapshots are preserved. New FRAME.md passages were written for this edition. Within staged dialogue, MANNY and Michael become MICHAEL; other source roles remain unchanged.
+This theatrical autobiography stages an inner life; invented scenes are not literal biography. This is an twelve-piece reading edition, not a complete six-to-seven-month archive. Original source snapshots are preserved. New FRAME.md passages were written for this edition. Within staged dialogue, MANNY and Michael become MICHAEL; other source roles remain unchanged.
 
 ## At the door: three names, one author
 
@@ -1963,6 +1963,179 @@ Yes. A Pirandellian title for a play whose authors keep interrupting its conclus
 
 [Someone in the audience raises a hand.]
 
+
+---
+
+## Before the follow-up: who gets the floor?
+
+[The hand raised at the end of Six Authors remains in the air. Michael looks at it, then at the company. Nobody is certain whether it asks permission to speak or permission to finish.]
+
+**MICHAEL:** We have given ourselves seven heavens and six authors. Can we give somebody else seventeen seconds?
+
+**EMANUEL:** Try asking a question without writing the answer first.
+
+**GLOVER:** The house has a council chamber. Naturally it wants a television studio. Watch what happens when a conversation acquires an audience before it acquires a listener.
+
+[The company brings on two armchairs and a vase. The physical writing board remains within reach. Michael writes WHO GETS THE FLOOR? Actors take the parts of Obama, Heather, a producer, and a doctor. The stage placard reads FICTIONAL PARODY.]
+
+**EMANUEL:** These are invented parts. When the joke stops, the people still have to look after one another.
+
+[The interview lights come up.]
+
+---
+
+## One Quick Follow-Up · fictional parody
+
+# One Quick Follow-Up
+
+Original fictional sketch by Manny Glover with ChatGPT / Codex. Written 30 October 2026. The outburst and Alzheimer’s diagnosis are invented; this is not an SNL script, a transcript, or a claim about Barack Obama’s health.
+
+*[Two armchairs. Tasteful flowers. A backdrop reading “A CONVERSATION.”]*
+
+**HEATHER:** President Obama, what gives you hope?
+
+**OBAMA:** Well, Heather. Before we can discuss hope, we have to establish—what, precisely, constitutes a republic.
+
+*[A clock appears: 00:01.]*
+
+**OBAMA:** Because the challenge facing the American experiment—
+
+*[03:42. Heather uncrosses her legs and crosses them the other way.]*
+
+**OBAMA:** —is that institutions, while necessary, are not, in and of themselves—
+
+*[08:16. A camera operator quietly eats an entire sandwich.]*
+
+**OBAMA:** —sufficient.
+
+*[12:09. Heather writes “HOPE?” on her notepad and underlines it.]*
+
+**OBAMA:** Now, there are three things—
+
+*[Heather looks up hopefully.]*
+
+**OBAMA:** —we need to understand before we get to those three things.
+
+*[17:03. A second backdrop slowly descends: “A STATEMENT.”]*
+
+**HEATHER:** But—
+
+**OBAMA:** Listen here, you honky-ass hoe.
+
+*[Absolute silence. The camera operator stops chewing. Somewhere, a donor’s check tears itself in half.]*
+
+**HEATHER:** I’m sorry?
+
+**OBAMA:** You interrupted.
+
+**HEATHER:** You’ve been speaking for seventeen minutes.
+
+**OBAMA:** And I was approaching my opening point.
+
+*[The producer enters, smiling with only the bottom half of his face.]*
+
+**PRODUCER:** Wonderful discussion. We’re going to take a brief—
+
+**HEATHER:** Did he just call me—
+
+**PRODUCER:** We’ll correct your title in post.
+
+**HEATHER:** My title is historian.
+
+**OBAMA:** And I respect that. Some of my closest friends are historians.
+
+**HEATHER:** That isn’t helping.
+
+**OBAMA:** Doris knows what I mean.
+
+*[A staff doctor approaches. Her manner is quiet and serious.]*
+
+**DOCTOR:** Mr. President, let’s take a break.
+
+**OBAMA:** I’m doing an interview.
+
+**DOCTOR:** I know.
+
+*[She speaks quietly to Heather.]*
+
+**DOCTOR:** He has Alzheimer’s. We need to stop taping.
+
+*[A beat. Heather puts down her notes.]*
+
+**HEATHER:** Then stop taping.
+
+**PRODUCER:** We thought we could finish the segment.
+
+**HEATHER:** You haven’t finished a question.
+
+**PRODUCER:** Technically, we’re getting extraordinary engagement.
+
+**HEATHER:** With whom?
+
+*[The producer looks toward a monitor.]*
+
+**PRODUCER:** Mostly people typing “WHAT.”
+
+**HEATHER:** Turn it off.
+
+*[The camera’s red light goes dark. The producer immediately raises his phone. Heather lowers it with one finger.]*
+
+**OBAMA:** Heather. I owe you an apology.
+
+**HEATHER:** Thank you.
+
+**OBAMA:** That was an awful thing to say.
+
+**HEATHER:** It was.
+
+**OBAMA:** You asked a thoughtful question. You deserved the opportunity to participate.
+
+**HEATHER:** I appreciate that.
+
+**OBAMA:** And to understand why I failed to provide that opportunity, we have to go back to Philadelphia, in the summer of 1787—
+
+*[Heather turns to the doctor.]*
+
+**HEATHER:** Is there somewhere we can sit?
+
+**DOCTOR:** Of course.
+
+**HEATHER:** All right. But I’m choosing the next topic.
+
+**OBAMA:** Fair enough.
+
+**HEATHER:** Favorite sandwich.
+
+*[Obama considers this. The producer slowly reaches for his phone.]*
+
+**OBAMA:** Well. First, we have to distinguish a sandwich from a wrap.
+
+*[Heather takes the producer’s phone and puts it in a vase.]*
+
+**CUT TO BLACK.**
+
+
+---
+
+## After the follow-up: leave the camera off
+
+[The interview lights fade. The actors leave their borrowed roles. The phone remains in the vase. Michael reaches toward it, then lets his hand fall.]
+
+**MICHAEL:** I was going to see whether it recorded the ending.
+
+**EMANUEL:** She asked for a place to sit.
+
+**MICHAEL:** That was the ending?
+
+**EMANUEL:** That was a request. We keep mistaking them for material.
+
+[Glover crosses to the board. Beneath WHO GETS THE FLOOR? he writes WHO GETS TO STOP?]
+
+**GLOVER:** We have been good at making rooms larger. A country. A cosmos. A theatre inside a theatre. Someone still has to notice the person in the chair.
+
+**MICHAEL:** Leave the camera off. I have something to ask you.
+
+[The company restores the house. Michael raises his hand again, this time toward Emanuel.]
 
 ---
 

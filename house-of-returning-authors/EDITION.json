@@ -1,13 +1,13 @@
 {
   "title": "The House of Returning Authors",
   "edition": "Opening reading edition",
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "author": "Manny Glover — Michael Emanuel Glover",
   "emanuel_character": "Manny’s better self: an aspiration toward care and judgment, still imperfect and open to correction; not omniscient or a separate infallible judge.",
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
-  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and thirteen framing scenes. Eight new stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. Eleven stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
   "sources": [
     {
       "id": "cakes",
@@ -124,8 +124,53 @@
       "original_whitespace_word_count": 99,
       "role_change": "none; preserved verbatim",
       "collaboration": "Manny Glover with ChatGPT / Codex"
+    },
+    {
+      "id": "one-quick-follow-up",
+      "title": "One Quick Follow-Up",
+      "source_path": "house-of-returning-authors/ONE-QUICK-FOLLOW-UP.md",
+      "snapshot": "ONE-QUICK-FOLLOW-UP.md",
+      "sha256": "32255a8b3b4c26090be7c066bd4b9ba0f090ea55e52583d83a792abf3b4f329d",
+      "original_whitespace_word_count": 495,
+      "role_change": "none; sketch dialogue preserved",
+      "collaboration": "Manny Glover with ChatGPT / Codex"
     }
   ],
+  "follow_up_bridges_sha256": "5d719b54090c30f220897f81a2bb658be15b339a93265e2cdb11b3b260e42322",
+  "follow_up_art": {
+    "title": "One Quick Follow-Up",
+    "mode": "built-in image_gen",
+    "saved_directory": "/home/rmichaelglover/Code/hrl-portfolio/artwork/one-quick-follow-up",
+    "images": [
+      {
+        "file": "01-seventeen-minutes.png",
+        "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 1: Two tasteful armchairs and flowers beneath a stage backdrop reading 'A CONVERSATION'. Obama talks expansively with one hand raised and three fingers extended, still in the introductory point of an absurdly long answer. Heather sits opposite with a very patient but increasingly incredulous expression, holding a notepad. An oversized visible studio clock reads '17:03'. In the background, a bored camera operator is eating an enormous sandwich. Compose a clear wide tableau, Obama and Heather equally prominent, with the clock as a comic secondary focal point. The mood is witty and affectionate rather than hostile.",
+        "mode": "built-in image_gen",
+        "fictional_parody": true,
+        "width": 1536,
+        "height": 1024,
+        "sha256": "0fede49b5177d784335b6f251c2fba37f4a0dd294332af90dbe7e7d4e0b6ce83"
+      },
+      {
+        "file": "02-a-statement.png",
+        "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 2: The interview room freezes in an exaggerated comic beat. Obama has just finished a startling remark, Heather stares at him with a powerful raised eyebrow and an expression of 'Excuse me?', and a visibly flustered producer steps between the armchairs with both hands out. Behind them, the camera operator stops mid-bite of a sandwich, cheeks full, and another crew member has frozen holding a clipboard. A huge backdrop now reads 'A STATEMENT'. Use bold expressive faces, bright cyan and magenta stage curtains, yellow spotlights and a small vase of flowers. Do not write the offensive remark or any speech bubbles. Clearly a cartoon comedy set.",
+        "mode": "built-in image_gen",
+        "fictional_parody": true,
+        "width": 1536,
+        "height": 1024,
+        "sha256": "dbded4ce2e566b1aea588c5269c8a78da33d443ae770dc5d0a3acca3e2575d39"
+      },
+      {
+        "file": "03-the-sandwich-question.png",
+        "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 3: Heather calmly and decisively drops the producer's smartphone into a vase of flowers while he looks hilariously dismayed. Across the interview table, Obama is already enthusiastically explaining another point with a sandwich in one hand and an index finger raised, his expression thoughtful and genial. A stage cue card propped against a chair reads 'FAVORITE SANDWICH?'. The main television camera's tally light is off. A funny but warm closing tableau about shutting down an exploitative production. CMYK colors on costumes, furniture and stage decor. Keep Heather's decisive action the central focus. No doctors, no medical implications, no aggressive gestures.",
+        "mode": "built-in image_gen",
+        "fictional_parody": true,
+        "width": 1536,
+        "height": 1024,
+        "sha256": "957bc92727e9c860de004fd1ba57adfd7341c01fc8ee1cca92fa3aa783adcb72"
+      }
+    ]
+  },
   "new_frame_path": "FRAME.md",
   "new_frame_sha256": "5e0fb70705f6765f46a9e9cc6c82dba2ecf2f636c2bcaaa04b5054a6018b7218",
   "hyperplay_bridges_path": "HYPERPLAY-BRIDGES.md",
@@ -226,6 +271,6 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 9729,
+  "compiled_whitespace_word_count": 10530,
   "candidate_count": 39
 }

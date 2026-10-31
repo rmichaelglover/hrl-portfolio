@@ -1,0 +1,34 @@
+{
+  "title": "One Quick Follow-Up",
+  "mode": "built-in image_gen",
+  "saved_directory": "/home/rmichaelglover/Code/hrl-portfolio/artwork/one-quick-follow-up",
+  "images": [
+    {
+      "file": "01-seventeen-minutes.png",
+      "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 1: Two tasteful armchairs and flowers beneath a stage backdrop reading 'A CONVERSATION'. Obama talks expansively with one hand raised and three fingers extended, still in the introductory point of an absurdly long answer. Heather sits opposite with a very patient but increasingly incredulous expression, holding a notepad. An oversized visible studio clock reads '17:03'. In the background, a bored camera operator is eating an enormous sandwich. Compose a clear wide tableau, Obama and Heather equally prominent, with the clock as a comic secondary focal point. The mood is witty and affectionate rather than hostile.",
+      "mode": "built-in image_gen",
+      "fictional_parody": true,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "0fede49b5177d784335b6f251c2fba37f4a0dd294332af90dbe7e7d4e0b6ce83"
+    },
+    {
+      "file": "02-a-statement.png",
+      "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 2: The interview room freezes in an exaggerated comic beat. Obama has just finished a startling remark, Heather stares at him with a powerful raised eyebrow and an expression of 'Excuse me?', and a visibly flustered producer steps between the armchairs with both hands out. Behind them, the camera operator stops mid-bite of a sandwich, cheeks full, and another crew member has frozen holding a clipboard. A huge backdrop now reads 'A STATEMENT'. Use bold expressive faces, bright cyan and magenta stage curtains, yellow spotlights and a small vase of flowers. Do not write the offensive remark or any speech bubbles. Clearly a cartoon comedy set.",
+      "mode": "built-in image_gen",
+      "fictional_parody": true,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "dbded4ce2e566b1aea588c5269c8a78da33d443ae770dc5d0a3acca3e2575d39"
+    },
+    {
+      "file": "03-the-sandwich-question.png",
+      "prompt": "Use case: illustration-story. Generate one landscape 3:2 editorial cartoon illustration of an ORIGINAL FICTIONAL late-night television comedy sketch, NOT a real event or a documentary still. Recognizable expressive caricatures of Barack Obama and historian Heather Cox Richardson on a theatrical interview set. Bright cheerful CMYK screenprint palette: process cyan, hot magenta, sunshine yellow, strong black ink outlines, warm ivory paper texture. Rich hand-drawn satirical magazine illustration, exaggerated gestures, visually sophisticated and humorous. Absolutely not photorealistic. Every image must have a small, clear, readable lower-corner label with the exact text 'FICTIONAL PARODY'. No medical diagnosis, medical document, news-channel graphics, racial or sexual insults, logos or watermarks. Characters are actors in a comic stage scene; this image makes no health claims. Scene 3: Heather calmly and decisively drops the producer's smartphone into a vase of flowers while he looks hilariously dismayed. Across the interview table, Obama is already enthusiastically explaining another point with a sandwich in one hand and an index finger raised, his expression thoughtful and genial. A stage cue card propped against a chair reads 'FAVORITE SANDWICH?'. The main television camera's tally light is off. A funny but warm closing tableau about shutting down an exploitative production. CMYK colors on costumes, furniture and stage decor. Keep Heather's decisive action the central focus. No doctors, no medical implications, no aggressive gestures.",
+      "mode": "built-in image_gen",
+      "fictional_parody": true,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "957bc92727e9c860de004fd1ba57adfd7341c01fc8ee1cca92fa3aa783adcb72"
+    }
+  ]
+}
