@@ -43,3 +43,9 @@ The original fictional interview sketch and its three CMYK illustrations enter a
 ## World War III: The Room That Remains · 30 October 2026
 
 WWIII.md adds three fictional scenes after the interview movement and before the existing final conversation. The Warning, The Crossing, and The Room That Remains follow Michael and Emanuel through an evacuation, a bridge rescue, and a theatre shelter. This separate imagined future does not extend the real interview or claim to predict events. Three PG-13 illustrations and full built-in image generation prompts are preserved in ../artwork/wwiii-the-room-that-remains/. The reader now contains thirteen works and fourteen stage illustrations plus the flag.
+
+## Two Studies at the Crossing
+
+TWO-STUDIES.md brings the two supplied 31 October study exports into another night in the WWIII shelter. Three new PG-13 illustrations introduce Maya, Leon, and Ruth alongside the existing company. Dialogue follows real captures, two missed queen captures, three rook underpromotions, and the final five-rook stalemate, while practical shelter action carries the scene. The original PGNs, complete mainline replays, exact diagrams, source hashes, and notes on the RickUp clock discrepancy are published at ../chess/studies/2026-10-31/. Original PGN annotations and variations remain in the downloads; no new engine scores are claimed. This expands the reader to fourteen works and seventeen stage illustrations plus the flag.
+
+The movement now continues into The Atlanta Porch. ATLANTA-PORCH.md preserves the author-supplied recollection with reading punctuation and spacing. The transition is invented, and no dialogue is fabricated for Brandon, Keema, Miya, or Norman. A fourth illustration is an imagined reconstruction, not likenesses of the named friends. The new total is eighteen stage illustrations plus the flag.

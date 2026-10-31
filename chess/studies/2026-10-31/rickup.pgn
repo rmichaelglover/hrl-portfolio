@@ -1,0 +1,23 @@
+[Event "rated bullet game"]
+[Site "https://lichess.org/game/vYJ8cIEV"]
+[Date "2026.10.31"]
+[Round "-"]
+[White "mannyfresher"]
+[Black "RickUp"]
+[Result "1-0"]
+[WhiteElo "1235"]
+[BlackElo "1255"]
+[TimeControl "60+0"]
+[Termination "Time forfeit"]
+[GameId "vYJ8cIEV"]
+[Variant "Standard"]
+[ECO "A00"]
+[Opening "Mieses Opening"]
+[StudyName "Van Mieses"]
+[ChapterName "mannyfresher (1235) - RickUp (1255)"]
+[ChapterURL "https://lichess.org/study/da9uLoen/NohLbP9U"]
+[Annotator "https://lichess.org/@/mannyfresher"]
+
+1. d3 { [%eval -0.15] [%clk 0:01:00] } 1... d5 { [%eval 0.0] [%clk 0:01:00] } 2. e4 { [%eval -0.12] [%clk 0:00:59] } 2... Nc6 { [%eval 0.0] [%clk 0:01:00] } 3. exd5 { [%eval 0.0] [%clk 0:00:54] } 3... Qxd5 { [%eval 0.0] [%clk 0:01:00] } 4. Qf3?! { [%eval -0.62] } { Inaccuracy. Nf3 was best. } { [%clk 0:00:53] } (4. Nf3 e5 5. Nc3 Qd8 6. Be3 Bb4 7. d4 e4 8. Ne5 Nxe5) 4... Bf5?? { [%eval 7.21] } { Blunder. Qd6 was best. } { [%clk 0:00:58] } (4... Qd6 5. Nd2 e5 6. c3 Be6 7. Qd1 O-O-O 8. Ngf3 Bf5 9. Nc4) 5. Qxd5 { [%eval 6.86] [%clk 0:00:51] } 5... Nb4 { [%eval 8.88] [%clk 0:00:56] } 6. Qxf5 { [%eval 9.44] [%clk 0:00:46] } 6... Nxc2+ { [%eval 9.23] [%clk 0:00:56] } 7. Kd1 { [%eval 9.33] [%clk 0:00:44] } 7... Nxa1 { [%eval 11.67] [%clk 0:00:56] } 8. b3 { [%eval 7.48] [%clk 0:00:42] } 8... e6 { [%eval 9.02] [%clk 0:00:53] } 9. Bb2?? { [%eval 2.2] } { Blunder. Qb5+ was best. } { [%clk 0:00:42] } (9. Qb5+ Kd8 10. Qxb7 Rc8 11. d4 Bd6 12. Nf3 Ne7 13. Ne5 Bxe5 14. dxe5 c6) 9... O-O-O?? { [%eval 9.01] } { Blunder. exf5 was best. } { [%clk 0:00:52] } (9... exf5 10. Bxa1 O-O-O 11. Nf3 f6 12. Kc2 Bd6 13. d4 Ne7 14. Nc3 Nc6 15. Bc4) 10. Qe4 { [%eval 7.5] [%clk 0:00:39] } 10... Nxb3 { [%eval 7.42] [%clk 0:00:50] } 11. axb3 { [%eval 7.73] [%clk 0:00:33] } 11... Nf6 { [%eval 7.78] [%clk 0:00:46] } 12. Qa4 { [%eval 7.7] [%clk 0:00:33] } 12... Nd5 { [%eval 7.87] [%clk 0:00:42] } 13. Qxa7 { [%eval 7.82] [%clk 0:00:32] } 13... g5 { [%eval 10.46] [%clk 0:00:40] } 14. Qa8+ { [%eval 9.23] [%clk 0:00:30] } 14... Kd7 { [%eval 9.1] [%clk 0:00:39] } 15. Qxb7 { [%eval 8.97] [%clk 0:00:23] } 15... Nf4 { [%eval 13.21] [%clk 0:00:38] } 16. Qb5+ { [%eval 12.27] [%clk 0:00:21] } 16... c6 { [%eval 15.61] [%clk 0:00:37] } 17. Bxh8?! { [%eval 6.91] } { Inaccuracy. Qb7+ was best. } { [%clk 0:00:21] } (17. Qb7+ Ke8 18. Qxc6+ Ke7 19. Bxh8 f6 20. Qc7+ Ke8 21. Bxf6 Rxd3+ 22. Bxd3 Nxd3) 17... Nxd3?! { [%eval 15.32] } { Inaccuracy. cxb5 was best. } { [%clk 0:00:35] } (17... cxb5 18. Bb2 g4 19. Bc1 Nd5 20. Ne2) 18. Qxd3+ { [%eval 16.29] [%clk 0:00:15] } 1-0
+
+

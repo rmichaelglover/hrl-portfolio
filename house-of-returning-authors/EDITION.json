@@ -7,7 +7,7 @@
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
-  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Fourteen stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Two Studies at the Crossing adds a further fictional chess-and-shelter movement based on two supplied PGNs. The author’s Atlanta porch recollection and a fourth illustration close the movement. Eighteen stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
   "sources": [
     {
       "id": "cakes",
@@ -144,6 +144,16 @@
       "original_whitespace_word_count": 914,
       "role_change": "none; original fictional movement",
       "collaboration": "Manny Glover with ChatGPT / Codex"
+    },
+    {
+      "id": "two-studies",
+      "title": "Two Studies at the Crossing",
+      "source_path": "house-of-returning-authors/TWO-STUDIES.md",
+      "snapshot": "TWO-STUDIES.md",
+      "sha256": "9acb035cedbb7f91bd2f26a8a36a2946905f6c84712daea3d896c6047f4d5a4c",
+      "original_whitespace_word_count": 1363,
+      "role_change": "none; original fiction grounded in two supplied study PGNs",
+      "collaboration": "Manny Glover with ChatGPT / Codex"
     }
   ],
   "follow_up_bridges_sha256": "5d719b54090c30f220897f81a2bb658be15b339a93265e2cdb11b3b260e42322",
@@ -196,6 +206,32 @@
       "03-the-room-that-remains.png"
     ]
   },
+  "two_studies_art": {
+    "mode": "built-in image_gen",
+    "title": "Two Studies at the Crossing",
+    "prompts": [
+      "Use case: illustration-story. Landscape 3:2 painterly graphic novel illustration, dramatic humane near-future fictional World War III story intertwined with chess, cinematic composition, textured ink and CMYK print, deep cyan shadows, restrained magenta and amber light, rich expressive faces. PG-13, no gore, no wounds, no dead bodies. African American characters are naturally central participants with agency, not symbolic background figures. No captions, lettering, insignia, watermarks, or text. Fictional people and city, no real politicians. Scene: inside a damaged theatre shelter at night, Maya, an African American woman about 35 with dark skin, short natural twists, slate work jacket with orange lining, is playing a tense chess study at a real wooden chessboard against Leon, African American man about 50, brown skin, salt-and-pepper beard, navy utility jacket. Maya has just spotted a queen capture and points with a spare chess queen held lightly in her fingers. Leon leans forward grinning in disbelief, a dark-curly-haired middle-aged man in charcoal coat stands watching. At the open loading door behind them an urgent orange flash and rain, a Black woman radio operator in burgundy rain jacket turns toward the door, action poised to interrupt the game. Physical wheeled whiteboard blank beside stage. Chess pieces plausible rather than demanding an exact position. Mid shot with strong faces, suspense, warmth of an actual fleeting joke amid danger, no grand speech.",
+      "Use case: illustration-story. Landscape 3:2 painterly graphic novel illustration, dramatic humane near-future fictional World War III story intertwined with chess, cinematic composition, textured ink and CMYK print, deep cyan shadows, restrained magenta and amber light, rich expressive faces. PG-13, no gore, no wounds, no dead bodies. African American characters are naturally central participants with agency, not symbolic background figures. No captions, lettering, insignia, watermarks, or text. Fictional people and city, no real politicians. Chess fantasy within a fictional WWIII story: enormous rain-slick ruined city square laid out like a chessboard, a lone white marble king sculpture stands on a central dark square, four towering black rook sculptures occupy distant streets, their searchlights trapping empty lanes but none shining directly on the white king. In foreground Maya, dark-skinned African American woman with short natural twists and slate work jacket with orange lining, and Leon, brown-skinned African American man about 50 with salt-and-pepper beard in navy utility jacket, pull an actual civilian evacuation cart through a narrow opening in ruined masonry while a Black woman in burgundy rain jacket signals them forward. Dramatic dust plume, distant explosions and aircraft silhouettes, no casualties, humane intense rescue action, distinctly surreal chess imagery rather than a literal accurate board diagram. A feeling of the impossible escape, epic scale and human exertion.",
+      "Use case: illustration-story. Landscape 3:2 painterly graphic novel illustration, dramatic humane near-future fictional World War III story intertwined with chess, cinematic composition, textured ink and CMYK print, deep cyan shadows, restrained magenta and amber light, rich expressive faces. PG-13, no gore, no wounds, no dead bodies. African American characters are naturally central participants with agency, not symbolic background figures. No captions, lettering, insignia, watermarks, or text. Fictional people and city, no real politicians. Scene: dawn in a damaged theatre now a shelter, African American woman radio operator Ruth about 40 with braided hair tied back and burgundy rain jacket is kneeling to reconnect a portable radio power lead, her flashlight clenched in one hand, focused resourceful expression. Maya, African American woman with short natural twists, slate work jacket orange lining, steadies a folding chess table so Leon, African American man about 50 salt-and-pepper beard navy jacket, can sweep loose chess pieces into a cloth bag. A dark curly-haired middle-aged man in charcoal coat and gray-haired man in olive coat carry a heavy supply crate through the doorway together, tired faces, survivors of many backgrounds in seats. Blank physical whiteboard at stage edge. Outside broken doors rain clearing over smoke-filled city. Quiet human dialogue implied through gestures and glances, urgent practical action, no pious or heroic posing. Beautiful cinematic painting, sad and alive."
+    ],
+    "files": [
+      "01-dont-touch-the-queen.png",
+      "02-five-rooks-no-move.png",
+      "03-the-service-lane.png"
+    ]
+  },
+  "atlanta_porch_art": {
+    "mode": "built-in image_gen",
+    "title": "The Atlanta Porch",
+    "prompt": "Use case: illustration-story. Landscape 3:2 warm painterly graphic-novel illustration for a theatrical autobiographical memory of Atlanta, Georgia. An illustrative imagined reconstruction, not portraits of known real people. A modest lived-in wooden front porch on a leafy Atlanta residential street at early evening, full of five adult friends of mixed ages sharing a relaxed, affectionate, lively conversation after working together. Four friends are African American, with varied brown and dark skin, natural varied hair and everyday casual clothing; the fifth is a light-skinned adult man with dark curly hair in an ordinary soft shirt, seated as one equal member of the group. Three men and two women, every person an individual with expressive face, unposed informal body language, someone laughing while another listens and someone gestures in a friendly disagreement. A small table with cups, a plain notebook, a grocery bag and a few ordinary tools suggests shared work and ordinary life. No money display, no stereotypes, no luxury styling, no war imagery. Some worn porch chairs drawn close enough that the porch feels almost full. A clear empty chair just at the edge suggests someone remembering the gathering with love. Textured cinematic ink and CMYK painterly print matching a serious graphic novel, but warm soft amber porchlight and deep leafy cyan evening shadows, tender and specific, no sentimental halos, no moral slogan, no text, no captions, no logos, no watermark. The image should feel like the memory of people one misses, lively rather than solemn.",
+    "identity_note": "Illustrative reconstruction of the author's supplied memory; not likenesses of the named friends."
+  },
+  "atlanta_recollection": {
+    "path": "house-of-returning-authors/ATLANTA-PORCH.md",
+    "sha256": "beeeb0863ae9f7159fd3c38437824ab25d59196efd26db7f548a068d14ed32f4",
+    "handling": "Author-supplied account with spacing and punctuation for reading; no invented quotations from named friends."
+  },
+  "study_evidence_path": "chess/studies/2026-10-31/games.json",
   "new_frame_path": "FRAME.md",
   "new_frame_sha256": "5e0fb70705f6765f46a9e9cc6c82dba2ecf2f636c2bcaaa04b5054a6018b7218",
   "hyperplay_bridges_path": "HYPERPLAY-BRIDGES.md",
@@ -296,6 +332,6 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 11453,
+  "compiled_whitespace_word_count": 12823,
   "candidate_count": 39
 }

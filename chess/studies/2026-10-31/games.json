@@ -1,0 +1,1343 @@
+{
+  "scope": "Exact PGN mainlines; imported source comments and analysis variations retained in original PGNs. No new engine evaluations claimed.",
+  "games": [
+    {
+      "id": "rickup",
+      "headers": {
+        "Event": "rated bullet game",
+        "Site": "https://lichess.org/game/vYJ8cIEV",
+        "Date": "2026.10.31",
+        "Round": "-",
+        "White": "mannyfresher",
+        "Black": "RickUp",
+        "Result": "1-0",
+        "WhiteElo": "1235",
+        "BlackElo": "1255",
+        "TimeControl": "60+0",
+        "Termination": "Time forfeit",
+        "GameId": "vYJ8cIEV",
+        "Variant": "Standard",
+        "ECO": "A00",
+        "Opening": "Mieses Opening",
+        "StudyName": "Van Mieses",
+        "ChapterName": "mannyfresher (1235) - RickUp (1255)",
+        "ChapterURL": "https://lichess.org/study/da9uLoen/NohLbP9U",
+        "Annotator": "https://lichess.org/@/mannyfresher"
+      },
+      "sha256": "b25fcd3404ecbe751b2ed954ebcec070ae1a8cea9b4fa497bd35e9954cce08d2",
+      "frames": [
+        {
+          "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          "san": "Start",
+          "label": "Start",
+          "note": "",
+          "clock": null
+        },
+        {
+          "fen": "rnbqkbnr/pppppppp/8/8/8/3P4/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+          "san": "d3",
+          "label": "1. d3",
+          "note": "",
+          "clock": 60.0
+        },
+        {
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/8/3P4/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+          "san": "d5",
+          "label": "1... d5",
+          "note": "",
+          "clock": 60.0
+        },
+        {
+          "fen": "rnbqkbnr/ppp1pppp/8/3p4/4P3/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+          "san": "e4",
+          "label": "2. e4",
+          "note": "",
+          "clock": 59.0
+        },
+        {
+          "fen": "r1bqkbnr/ppp1pppp/2n5/3p4/4P3/3P4/PPP2PPP/RNBQKBNR w KQkq - 1 3",
+          "san": "Nc6",
+          "label": "2... Nc6",
+          "note": "",
+          "clock": 60.0
+        },
+        {
+          "fen": "r1bqkbnr/ppp1pppp/2n5/3P4/8/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 3",
+          "san": "exd5",
+          "label": "3. exd5",
+          "note": "",
+          "clock": 54.0
+        },
+        {
+          "fen": "r1b1kbnr/ppp1pppp/2n5/3q4/8/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 4",
+          "san": "Qxd5",
+          "label": "3... Qxd5",
+          "note": "",
+          "clock": 60.0
+        },
+        {
+          "fen": "r1b1kbnr/ppp1pppp/2n5/3q4/8/3P1Q2/PPP2PPP/RNB1KBNR b KQkq - 1 4",
+          "san": "Qf3",
+          "label": "4. Qf3",
+          "note": "",
+          "clock": 53.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/2n5/3q1b2/8/3P1Q2/PPP2PPP/RNB1KBNR w KQkq - 2 5",
+          "san": "Bf5",
+          "label": "4... Bf5",
+          "note": "4...Bf5 leaves Black\u2019s queen on d5 available to Qxd5.",
+          "clock": 58.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/2n5/3Q1b2/8/3P4/PPP2PPP/RNB1KBNR b KQkq - 0 5",
+          "san": "Qxd5",
+          "label": "5. Qxd5",
+          "note": "5.Qxd5 captures the black queen.",
+          "clock": 51.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/3Q1b2/1n6/3P4/PPP2PPP/RNB1KBNR w KQkq - 1 6",
+          "san": "Nb4",
+          "label": "5... Nb4",
+          "note": "",
+          "clock": 56.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/5Q2/1n6/3P4/PPP2PPP/RNB1KBNR b KQkq - 0 6",
+          "san": "Qxf5",
+          "label": "6. Qxf5",
+          "note": "",
+          "clock": 46.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/5Q2/8/3P4/PPn2PPP/RNB1KBNR w KQkq - 0 7",
+          "san": "Nxc2+",
+          "label": "6... Nxc2+",
+          "note": "",
+          "clock": 56.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/5Q2/8/3P4/PPn2PPP/RNBK1BNR b kq - 1 7",
+          "san": "Kd1",
+          "label": "7. Kd1",
+          "note": "",
+          "clock": 44.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/5Q2/8/3P4/PP3PPP/nNBK1BNR w kq - 0 8",
+          "san": "Nxa1",
+          "label": "7... Nxa1",
+          "note": "",
+          "clock": 56.0
+        },
+        {
+          "fen": "r3kbnr/ppp1pppp/8/5Q2/8/1P1P4/P4PPP/nNBK1BNR b kq - 0 8",
+          "san": "b3",
+          "label": "8. b3",
+          "note": "",
+          "clock": 42.0
+        },
+        {
+          "fen": "r3kbnr/ppp2ppp/4p3/5Q2/8/1P1P4/P4PPP/nNBK1BNR w kq - 0 9",
+          "san": "e6",
+          "label": "8... e6",
+          "note": "",
+          "clock": 53.0
+        },
+        {
+          "fen": "r3kbnr/ppp2ppp/4p3/5Q2/8/1P1P4/PB3PPP/nN1K1BNR b kq - 1 9",
+          "san": "Bb2",
+          "label": "9. Bb2",
+          "note": "9.Bb2 leaves White\u2019s queen on f5 available to the e6-pawn. This is a missed opportunity, not an actual capture.",
+          "clock": 42.0
+        },
+        {
+          "fen": "2kr1bnr/ppp2ppp/4p3/5Q2/8/1P1P4/PB3PPP/nN1K1BNR w - - 2 10",
+          "san": "O-O-O",
+          "label": "9... O-O-O",
+          "note": "9...O-O-O misses exf5; White\u2019s queen survives.",
+          "clock": 52.0
+        },
+        {
+          "fen": "2kr1bnr/ppp2ppp/4p3/8/4Q3/1P1P4/PB3PPP/nN1K1BNR b - - 3 10",
+          "san": "Qe4",
+          "label": "10. Qe4",
+          "note": "",
+          "clock": 39.0
+        },
+        {
+          "fen": "2kr1bnr/ppp2ppp/4p3/8/4Q3/1n1P4/PB3PPP/1N1K1BNR w - - 0 11",
+          "san": "Nxb3",
+          "label": "10... Nxb3",
+          "note": "",
+          "clock": 50.0
+        },
+        {
+          "fen": "2kr1bnr/ppp2ppp/4p3/8/4Q3/1P1P4/1B3PPP/1N1K1BNR b - - 0 11",
+          "san": "axb3",
+          "label": "11. axb3",
+          "note": "",
+          "clock": 33.0
+        },
+        {
+          "fen": "2kr1b1r/ppp2ppp/4pn2/8/4Q3/1P1P4/1B3PPP/1N1K1BNR w - - 1 12",
+          "san": "Nf6",
+          "label": "11... Nf6",
+          "note": "",
+          "clock": 46.0
+        },
+        {
+          "fen": "2kr1b1r/ppp2ppp/4pn2/8/Q7/1P1P4/1B3PPP/1N1K1BNR b - - 2 12",
+          "san": "Qa4",
+          "label": "12. Qa4",
+          "note": "",
+          "clock": 33.0
+        },
+        {
+          "fen": "2kr1b1r/ppp2ppp/4p3/3n4/Q7/1P1P4/1B3PPP/1N1K1BNR w - - 3 13",
+          "san": "Nd5",
+          "label": "12... Nd5",
+          "note": "",
+          "clock": 42.0
+        },
+        {
+          "fen": "2kr1b1r/Qpp2ppp/4p3/3n4/8/1P1P4/1B3PPP/1N1K1BNR b - - 0 13",
+          "san": "Qxa7",
+          "label": "13. Qxa7",
+          "note": "",
+          "clock": 32.0
+        },
+        {
+          "fen": "2kr1b1r/Qpp2p1p/4p3/3n2p1/8/1P1P4/1B3PPP/1N1K1BNR w - - 0 14",
+          "san": "g5",
+          "label": "13... g5",
+          "note": "",
+          "clock": 40.0
+        },
+        {
+          "fen": "Q1kr1b1r/1pp2p1p/4p3/3n2p1/8/1P1P4/1B3PPP/1N1K1BNR b - - 1 14",
+          "san": "Qa8+",
+          "label": "14. Qa8+",
+          "note": "",
+          "clock": 30.0
+        },
+        {
+          "fen": "Q2r1b1r/1ppk1p1p/4p3/3n2p1/8/1P1P4/1B3PPP/1N1K1BNR w - - 2 15",
+          "san": "Kd7",
+          "label": "14... Kd7",
+          "note": "",
+          "clock": 39.0
+        },
+        {
+          "fen": "3r1b1r/1Qpk1p1p/4p3/3n2p1/8/1P1P4/1B3PPP/1N1K1BNR b - - 0 15",
+          "san": "Qxb7",
+          "label": "15. Qxb7",
+          "note": "",
+          "clock": 23.0
+        },
+        {
+          "fen": "3r1b1r/1Qpk1p1p/4p3/6p1/5n2/1P1P4/1B3PPP/1N1K1BNR w - - 1 16",
+          "san": "Nf4",
+          "label": "15... Nf4",
+          "note": "",
+          "clock": 38.0
+        },
+        {
+          "fen": "3r1b1r/2pk1p1p/4p3/1Q4p1/5n2/1P1P4/1B3PPP/1N1K1BNR b - - 2 16",
+          "san": "Qb5+",
+          "label": "16. Qb5+",
+          "note": "",
+          "clock": 21.0
+        },
+        {
+          "fen": "3r1b1r/3k1p1p/2p1p3/1Q4p1/5n2/1P1P4/1B3PPP/1N1K1BNR w - - 0 17",
+          "san": "c6",
+          "label": "16... c6",
+          "note": "",
+          "clock": 37.0
+        },
+        {
+          "fen": "3r1b1B/3k1p1p/2p1p3/1Q4p1/5n2/1P1P4/5PPP/1N1K1BNR b - - 0 17",
+          "san": "Bxh8",
+          "label": "17. Bxh8",
+          "note": "17.Bxh8 takes a rook but leaves the queen on b5 available to cxb5.",
+          "clock": 21.0
+        },
+        {
+          "fen": "3r1b1B/3k1p1p/2p1p3/1Q4p1/8/1P1n4/5PPP/1N1K1BNR w - - 0 18",
+          "san": "Nxd3",
+          "label": "17... Nxd3",
+          "note": "17...Nxd3 misses cxb5.",
+          "clock": 35.0
+        },
+        {
+          "fen": "3r1b1B/3k1p1p/2p1p3/6p1/8/1P1Q4/5PPP/1N1K1BNR b - - 0 18",
+          "san": "Qxd3+",
+          "label": "18. Qxd3+",
+          "note": "18.Qxd3+ is check, not mate. The source records 1\u20130 by time forfeit, while the last clock annotations still show Black 35 seconds and White 15 seconds. The export does not resolve that discrepancy.",
+          "clock": 15.0
+        }
+      ],
+      "legal_plies": 35,
+      "final_stalemate": false,
+      "final_check": true,
+      "final_legal_moves": 5,
+      "final_piece_count": 19,
+      "source": "rickup.pgn"
+    },
+    {
+      "id": "dmiiitr",
+      "headers": {
+        "Event": "rated blitz tournament https://lichess.org/tournament/cdaoCqkV",
+        "Site": "https://lichess.org/game/yFUi7qS7",
+        "Date": "2026.10.31",
+        "Round": "-",
+        "White": "mannyfresher",
+        "Black": "Dmiiitr",
+        "Result": "1/2-1/2",
+        "WhiteElo": "1086",
+        "BlackElo": "1679",
+        "TimeControl": "180+0",
+        "Termination": "Normal",
+        "GameId": "yFUi7qS7",
+        "Variant": "Standard",
+        "ECO": "A00",
+        "Opening": "Van't Kruijs Opening",
+        "StudyName": "Van't Kruijsing",
+        "ChapterName": "mannyfresher (1086) - Dmiiitr (1679)",
+        "ChapterURL": "https://lichess.org/study/7hLlnCHF/3qbrIJIN",
+        "Annotator": "https://lichess.org/@/mannyfresher"
+      },
+      "sha256": "4eecfd31d35cdaf1f03bd37a5e849b60cf73da9276a1563763b379f8ee3a22b6",
+      "frames": [
+        {
+          "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          "san": "Start",
+          "label": "Start",
+          "note": "",
+          "clock": null
+        },
+        {
+          "fen": "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+          "san": "e3",
+          "label": "1. e3",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "rnbqkbnr/pp1ppppp/8/2p5/8/4P3/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+          "san": "c5",
+          "label": "1... c5",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "rnbqkbnr/pp1ppppp/8/2p5/5P2/4P3/PPPP2PP/RNBQKBNR b KQkq - 0 2",
+          "san": "f4",
+          "label": "2. f4",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/5P2/4P3/PPPP2PP/RNBQKBNR w KQkq - 1 3",
+          "san": "Nc6",
+          "label": "2... Nc6",
+          "note": "",
+          "clock": 178.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1ppppp/2n5/2p5/5P2/4P1P1/PPPP3P/RNBQKBNR b KQkq - 0 3",
+          "san": "g3",
+          "label": "3. g3",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1ppp/2n1p3/2p5/5P2/4P1P1/PPPP3P/RNBQKBNR w KQkq - 0 4",
+          "san": "e6",
+          "label": "3... e6",
+          "note": "",
+          "clock": 177.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1ppp/2n1p3/2p5/5P2/4PNP1/PPPP3P/RNBQKB1R b KQkq - 1 4",
+          "san": "Nf3",
+          "label": "4. Nf3",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1p1p/2n1p1p1/2p5/5P2/4PNP1/PPPP3P/RNBQKB1R w KQkq - 0 5",
+          "san": "g6",
+          "label": "4... g6",
+          "note": "",
+          "clock": 177.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1p1p/2n1p1p1/2p1N3/5P2/4P1P1/PPPP3P/RNBQKB1R b KQkq - 1 5",
+          "san": "Ne5",
+          "label": "5. Ne5",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1p1p/4p1p1/2p1n3/5P2/4P1P1/PPPP3P/RNBQKB1R w KQkq - 0 6",
+          "san": "Nxe5",
+          "label": "5... Nxe5",
+          "note": "",
+          "clock": 175.0
+        },
+        {
+          "fen": "r1bqkbnr/pp1p1p1p/4p1p1/2p1P3/8/4P1P1/PPPP3P/RNBQKB1R b KQkq - 0 6",
+          "san": "fxe5",
+          "label": "6. fxe5",
+          "note": "",
+          "clock": 180.0
+        },
+        {
+          "fen": "r1bqk1nr/pp1p1pbp/4p1p1/2p1P3/8/4P1P1/PPPP3P/RNBQKB1R w KQkq - 1 7",
+          "san": "Bg7",
+          "label": "6... Bg7",
+          "note": "",
+          "clock": 175.0
+        },
+        {
+          "fen": "r1bqk1nr/pp1p1pbp/4p1p1/2p1P3/3P4/4P1P1/PPP4P/RNBQKB1R b KQkq - 0 7",
+          "san": "d4",
+          "label": "7. d4",
+          "note": "",
+          "clock": 179.0
+        },
+        {
+          "fen": "r1bqk1nr/pp1p1pbp/4p1p1/4P3/3p4/4P1P1/PPP4P/RNBQKB1R w KQkq - 0 8",
+          "san": "cxd4",
+          "label": "7... cxd4",
+          "note": "",
+          "clock": 173.0
+        },
+        {
+          "fen": "r1bqk1nr/pp1p1pbp/4p1p1/4P3/3P4/6P1/PPP4P/RNBQKB1R b KQkq - 0 8",
+          "san": "exd4",
+          "label": "8. exd4",
+          "note": "",
+          "clock": 179.0
+        },
+        {
+          "fen": "r1bqk1nr/pp3pbp/3pp1p1/4P3/3P4/6P1/PPP4P/RNBQKB1R w KQkq - 0 9",
+          "san": "d6",
+          "label": "8... d6",
+          "note": "",
+          "clock": 171.0
+        },
+        {
+          "fen": "r1bqk1nr/pp3pbp/3pp1p1/4P3/3P4/3Q2P1/PPP4P/RNB1KB1R b KQkq - 1 9",
+          "san": "Qd3",
+          "label": "9. Qd3",
+          "note": "",
+          "clock": 179.0
+        },
+        {
+          "fen": "r1bqk1nr/pp3pbp/4p1p1/4p3/3P4/3Q2P1/PPP4P/RNB1KB1R w KQkq - 0 10",
+          "san": "dxe5",
+          "label": "9... dxe5",
+          "note": "",
+          "clock": 170.0
+        },
+        {
+          "fen": "r1bqk1nr/pp3pbp/4p1p1/1Q2p3/3P4/6P1/PPP4P/RNB1KB1R b KQkq - 1 10",
+          "san": "Qb5+",
+          "label": "10. Qb5+",
+          "note": "",
+          "clock": 179.0
+        },
+        {
+          "fen": "r2qk1nr/pp1b1pbp/4p1p1/1Q2p3/3P4/6P1/PPP4P/RNB1KB1R w KQkq - 2 11",
+          "san": "Bd7",
+          "label": "10... Bd7",
+          "note": "",
+          "clock": 168.0
+        },
+        {
+          "fen": "r2qk1nr/pQ1b1pbp/4p1p1/4p3/3P4/6P1/PPP4P/RNB1KB1R b KQkq - 0 11",
+          "san": "Qxb7",
+          "label": "11. Qxb7",
+          "note": "",
+          "clock": 178.0
+        },
+        {
+          "fen": "r2qk2r/pQ1bnpbp/4p1p1/4p3/3P4/6P1/PPP4P/RNB1KB1R w KQkq - 1 12",
+          "san": "Ne7",
+          "label": "11... Ne7",
+          "note": "",
+          "clock": 165.0
+        },
+        {
+          "fen": "r2qk2r/p2bnpbp/4p1p1/4p3/3PQ3/6P1/PPP4P/RNB1KB1R b KQkq - 2 12",
+          "san": "Qe4",
+          "label": "12. Qe4",
+          "note": "",
+          "clock": 175.0
+        },
+        {
+          "fen": "r2q1rk1/p2bnpbp/4p1p1/4p3/3PQ3/6P1/PPP4P/RNB1KB1R w KQ - 3 13",
+          "san": "O-O",
+          "label": "12... O-O",
+          "note": "",
+          "clock": 162.0
+        },
+        {
+          "fen": "r2q1rk1/p2bnpbp/4p1p1/4P3/4Q3/6P1/PPP4P/RNB1KB1R b KQ - 0 13",
+          "san": "dxe5",
+          "label": "13. dxe5",
+          "note": "",
+          "clock": 175.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/q3P3/4Q3/6P1/PPP4P/RNB1KB1R w KQ - 1 14",
+          "san": "Qa5+",
+          "label": "13... Qa5+",
+          "note": "",
+          "clock": 154.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/q3P3/4Q3/2P3P1/PP5P/RNB1KB1R b KQ - 0 14",
+          "san": "c3",
+          "label": "14. c3",
+          "note": "",
+          "clock": 173.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/4q3/4Q3/2P3P1/PP5P/RNB1KB1R w KQ - 0 15",
+          "san": "Qxe5",
+          "label": "14... Qxe5",
+          "note": "",
+          "clock": 152.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/4q1B1/4Q3/2P3P1/PP5P/RN2KB1R b KQ - 1 15",
+          "san": "Bg5",
+          "label": "15. Bg5",
+          "note": "",
+          "clock": 173.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/6B1/4q3/2P3P1/PP5P/RN2KB1R w KQ - 0 16",
+          "san": "Qxe4+",
+          "label": "15... Qxe4+",
+          "note": "15...Qxe4+ captures White\u2019s queen with check.",
+          "clock": 151.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/6B1/4q3/2P3P1/PP2B2P/RN2K2R b KQ - 1 16",
+          "san": "Be2",
+          "label": "16. Be2",
+          "note": "",
+          "clock": 170.0
+        },
+        {
+          "fen": "r4rk1/p2b1pbp/4p1p1/3n2B1/4q3/2P3P1/PP2B2P/RN2K2R w KQ - 2 17",
+          "san": "Nd5",
+          "label": "16... Nd5",
+          "note": "",
+          "clock": 145.0
+        },
+        {
+          "fen": "r4rk1/p2bBpbp/4p1p1/3n4/4q3/2P3P1/PP2B2P/RN2K2R b KQ - 3 17",
+          "san": "Be7",
+          "label": "17. Be7",
+          "note": "",
+          "clock": 170.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/4q3/2P3P1/PP2B2P/RN2K2R w KQ - 0 18",
+          "san": "Nxe7",
+          "label": "17... Nxe7",
+          "note": "",
+          "clock": 143.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/4q3/2P3P1/PP2B2P/RN3RK1 b - - 1 18",
+          "san": "O-O",
+          "label": "18. O-O",
+          "note": "",
+          "clock": 167.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP2q2P/RN3RK1 w - - 0 19",
+          "san": "Qxe2",
+          "label": "18... Qxe2",
+          "note": "",
+          "clock": 140.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP1Nq2P/R4RK1 b - - 1 19",
+          "san": "Nd2",
+          "label": "19. Nd2",
+          "note": "",
+          "clock": 167.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP1q3P/R4RK1 w - - 0 20",
+          "san": "Qxd2",
+          "label": "19... Qxd2",
+          "note": "",
+          "clock": 139.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP1q3P/3R1RK1 b - - 1 20",
+          "san": "Rad1",
+          "label": "20. Rad1",
+          "note": "20.Rad1 puts the a-rook on d1; Black takes it with Qxd1.",
+          "clock": 166.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP5P/3q1RK1 w - - 0 21",
+          "san": "Qxd1",
+          "label": "20... Qxd1",
+          "note": "",
+          "clock": 135.0
+        },
+        {
+          "fen": "r4rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP5P/3R2K1 b - - 0 21",
+          "san": "Rxd1",
+          "label": "21. Rxd1",
+          "note": "",
+          "clock": 164.0
+        },
+        {
+          "fen": "3r1rk1/p2bnpbp/4p1p1/8/8/2P3P1/PP5P/3R2K1 w - - 1 22",
+          "san": "Rad8",
+          "label": "21... Rad8",
+          "note": "21...Rad8: White has recaptured the black queen, but has paid heavily in pieces.",
+          "clock": 135.0
+        },
+        {
+          "fen": "3r1rk1/p2Rnpbp/4p1p1/8/8/2P3P1/PP5P/6K1 b - - 0 22",
+          "san": "Rxd7",
+          "label": "22. Rxd7",
+          "note": "",
+          "clock": 163.0
+        },
+        {
+          "fen": "5rk1/p2rnpbp/4p1p1/8/8/2P3P1/PP5P/6K1 w - - 0 23",
+          "san": "Rxd7",
+          "label": "22... Rxd7",
+          "note": "22...Rxd7 takes White\u2019s last rook, after Rxd7 captured a bishop.",
+          "clock": 134.0
+        },
+        {
+          "fen": "5rk1/p2rnpbp/4p1p1/8/8/2P3P1/PP4KP/8 b - - 1 23",
+          "san": "Kg2",
+          "label": "23. Kg2",
+          "note": "",
+          "clock": 163.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/8/2P3P1/PP1r2KP/8 w - - 2 24",
+          "san": "Rd2+",
+          "label": "23... Rd2+",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/8/2P3PK/PP1r3P/8 b - - 3 24",
+          "san": "Kh3",
+          "label": "24. Kh3",
+          "note": "",
+          "clock": 162.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/8/2P3PK/Pr5P/8 w - - 0 25",
+          "san": "Rxb2",
+          "label": "24... Rxb2",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/P7/2P3PK/1r5P/8 b - - 0 25",
+          "san": "a4",
+          "label": "25. a4",
+          "note": "",
+          "clock": 160.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/P7/2P3PK/r6P/8 w - - 1 26",
+          "san": "Ra2",
+          "label": "25... Ra2",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/P1P5/6PK/r6P/8 b - - 0 26",
+          "san": "c4",
+          "label": "26. c4",
+          "note": "",
+          "clock": 160.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/8/r1P5/6PK/7P/8 w - - 0 27",
+          "san": "Rxa4",
+          "label": "26... Rxa4",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/2P5/r7/6PK/7P/8 b - - 0 27",
+          "san": "c5",
+          "label": "27. c5",
+          "note": "",
+          "clock": 159.0
+        },
+        {
+          "fen": "5rk1/p3npbp/4p1p1/2P5/2r5/6PK/7P/8 w - - 1 28",
+          "san": "Rc4",
+          "label": "27... Rc4",
+          "note": "",
+          "clock": 132.0
+        },
+        {
+          "fen": "5rk1/p3npbp/2P1p1p1/8/2r5/6PK/7P/8 b - - 0 28",
+          "san": "c6",
+          "label": "28. c6",
+          "note": "",
+          "clock": 159.0
+        },
+        {
+          "fen": "5rk1/p3npbp/2r1p1p1/8/8/6PK/7P/8 w - - 0 29",
+          "san": "Rxc6",
+          "label": "28... Rxc6",
+          "note": "",
+          "clock": 131.0
+        },
+        {
+          "fen": "5rk1/p3npbp/2r1p1p1/8/6P1/7K/7P/8 b - - 0 29",
+          "san": "g4",
+          "label": "29. g4",
+          "note": "",
+          "clock": 158.0
+        },
+        {
+          "fen": "5rk1/4npbp/2r1p1p1/p7/6P1/7K/7P/8 w - - 0 30",
+          "san": "a5",
+          "label": "29... a5",
+          "note": "",
+          "clock": 131.0
+        },
+        {
+          "fen": "5rk1/4npbp/2r1p1p1/p5P1/8/7K/7P/8 b - - 0 30",
+          "san": "g5",
+          "label": "30. g5",
+          "note": "",
+          "clock": 157.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p2n2P1/8/7K/7P/8 w - - 1 31",
+          "san": "Nd5",
+          "label": "30... Nd5",
+          "note": "",
+          "clock": 127.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p2n2P1/7K/8/7P/8 b - - 2 31",
+          "san": "Kh4",
+          "label": "31. Kh4",
+          "note": "",
+          "clock": 157.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p5P1/7K/4n3/7P/8 w - - 3 32",
+          "san": "Ne3",
+          "label": "31... Ne3",
+          "note": "",
+          "clock": 126.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p5P1/7K/4n2P/8/8 b - - 0 32",
+          "san": "h3",
+          "label": "32. h3",
+          "note": "",
+          "clock": 157.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p5P1/7K/7P/6n1/8 w - - 1 33",
+          "san": "Ng2+",
+          "label": "32... Ng2+",
+          "note": "",
+          "clock": 124.0
+        },
+        {
+          "fen": "5rk1/5pbp/2r1p1p1/p5P1/8/6KP/6n1/8 b - - 2 33",
+          "san": "Kg3",
+          "label": "33. Kg3",
+          "note": "",
+          "clock": 157.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/8/6KP/2r3n1/8 w - - 3 34",
+          "san": "Rc2",
+          "label": "33... Rc2",
+          "note": "",
+          "clock": 121.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/8/5K1P/2r3n1/8 b - - 4 34",
+          "san": "Kf3",
+          "label": "34. Kf3",
+          "note": "",
+          "clock": 155.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/8/5K1P/2r5/4n3 w - - 5 35",
+          "san": "Ne1+",
+          "label": "34... Ne1+",
+          "note": "",
+          "clock": 118.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/4K3/7P/2r5/4n3 b - - 6 35",
+          "san": "Ke4",
+          "label": "35. Ke4",
+          "note": "",
+          "clock": 155.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/4K3/2r4P/8/4n3 w - - 7 36",
+          "san": "Rc3",
+          "label": "35... Rc3",
+          "note": "",
+          "clock": 116.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/5K2/2r4P/8/4n3 b - - 8 36",
+          "san": "Kf4",
+          "label": "36. Kf4",
+          "note": "",
+          "clock": 154.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/5K2/7r/8/4n3 w - - 0 37",
+          "san": "Rxh3",
+          "label": "36... Rxh3",
+          "note": "",
+          "clock": 115.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/6K1/7r/8/4n3 b - - 1 37",
+          "san": "Kg4",
+          "label": "37. Kg4",
+          "note": "",
+          "clock": 152.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/6K1/8/8/4n2r w - - 2 38",
+          "san": "Rh1",
+          "label": "37... Rh1",
+          "note": "",
+          "clock": 113.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/p5P1/8/6K1/8/4n2r b - - 3 38",
+          "san": "Kg3",
+          "label": "38. Kg3",
+          "note": "",
+          "clock": 151.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/6K1/8/4n2r w - - 0 39",
+          "san": "a4",
+          "label": "38... a4",
+          "note": "",
+          "clock": 113.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/8/5K2/4n2r b - - 1 39",
+          "san": "Kf2",
+          "label": "39. Kf2",
+          "note": "",
+          "clock": 151.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/8/2n2K2/7r w - - 2 40",
+          "san": "Nc2",
+          "label": "39... Nc2",
+          "note": "",
+          "clock": 111.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/8/2n1K3/7r b - - 3 40",
+          "san": "Ke2",
+          "label": "40. Ke2",
+          "note": "",
+          "clock": 150.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p2n4/8/4K3/7r w - - 4 41",
+          "san": "Nd4+",
+          "label": "40... Nd4+",
+          "note": "",
+          "clock": 111.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p2n4/3K4/8/7r b - - 5 41",
+          "san": "Kd3",
+          "label": "41. Kd3",
+          "note": "",
+          "clock": 149.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/3K1n2/8/7r w - - 6 42",
+          "san": "Nf3",
+          "label": "41... Nf3",
+          "note": "",
+          "clock": 110.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6P1/p7/4Kn2/8/7r b - - 7 42",
+          "san": "Ke3",
+          "label": "42. Ke3",
+          "note": "",
+          "clock": 148.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6n1/p7/4K3/8/7r w - - 0 43",
+          "san": "Nxg5",
+          "label": "42... Nxg5",
+          "note": "42...Nxg5 removes White\u2019s final pawn. White has only a king.",
+          "clock": 110.0
+        },
+        {
+          "fen": "5rk1/5pbp/4p1p1/6n1/p4K2/8/8/7r b - - 1 43",
+          "san": "Kf4",
+          "label": "43. Kf4",
+          "note": "",
+          "clock": 147.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/p4K2/8/8/7r w - - 0 44",
+          "san": "h6",
+          "label": "43... h6",
+          "note": "",
+          "clock": 108.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/p7/6K1/8/7r b - - 1 44",
+          "san": "Kg3",
+          "label": "44. Kg3",
+          "note": "",
+          "clock": 145.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/p5K1/8/7r w - - 0 45",
+          "san": "a3",
+          "label": "44... a3",
+          "note": "",
+          "clock": 108.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/p7/6K1/7r b - - 1 45",
+          "san": "Kg2",
+          "label": "45. Kg2",
+          "note": "",
+          "clock": 145.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/p7/6K1/1r6 w - - 2 46",
+          "san": "Rb1",
+          "label": "45... Rb1",
+          "note": "",
+          "clock": 106.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/p7/5K2/1r6 b - - 3 46",
+          "san": "Kf2",
+          "label": "46. Kf2",
+          "note": "",
+          "clock": 144.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/p4K2/1r6 w - - 0 47",
+          "san": "a2",
+          "label": "46... a2",
+          "note": "",
+          "clock": 106.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/p3K3/1r6 b - - 1 47",
+          "san": "Ke2",
+          "label": "47. Ke2",
+          "note": "",
+          "clock": 144.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/4K3/rr6 w - - 0 48",
+          "san": "a1=R",
+          "label": "47... a1=R",
+          "note": "47...a1=R is the first rook underpromotion.",
+          "clock": 104.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/3K4/rr6 b - - 1 48",
+          "san": "Kd2",
+          "label": "48. Kd2",
+          "note": "",
+          "clock": 143.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/3K4/r4r2 w - - 2 49",
+          "san": "Rf1",
+          "label": "48... Rf1",
+          "note": "",
+          "clock": 103.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/4K3/r4r2 b - - 3 49",
+          "san": "Ke2",
+          "label": "49. Ke2",
+          "note": "",
+          "clock": 142.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/4K3/4rr2 w - - 4 50",
+          "san": "Rae1+",
+          "label": "49... Rae1+",
+          "note": "",
+          "clock": 102.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1pp/6n1/8/8/3K4/4rr2 b - - 5 50",
+          "san": "Kd2",
+          "label": "50. Kd2",
+          "note": "",
+          "clock": 141.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1p1/6np/8/8/3K4/4rr2 w - - 0 51",
+          "san": "h5",
+          "label": "50... h5",
+          "note": "",
+          "clock": 102.0
+        },
+        {
+          "fen": "5rk1/5pb1/4p1p1/6np/8/3K4/8/4rr2 b - - 1 51",
+          "san": "Kd3",
+          "label": "51. Kd3",
+          "note": "",
+          "clock": 139.0
+        },
+        {
+          "fen": "5rk1/5pbn/4p1p1/7p/8/3K4/8/4rr2 w - - 2 52",
+          "san": "Nh7",
+          "label": "51... Nh7",
+          "note": "",
+          "clock": 101.0
+        },
+        {
+          "fen": "5rk1/5pbn/4p1p1/7p/2K5/8/8/4rr2 b - - 3 52",
+          "san": "Kc4",
+          "label": "52. Kc4",
+          "note": "",
+          "clock": 139.0
+        },
+        {
+          "fen": "5rk1/5pbn/4p3/6pp/2K5/8/8/4rr2 w - - 0 53",
+          "san": "g5",
+          "label": "52... g5",
+          "note": "",
+          "clock": 101.0
+        },
+        {
+          "fen": "5rk1/5pbn/4p3/2K3pp/8/8/8/4rr2 b - - 1 53",
+          "san": "Kc5",
+          "label": "53. Kc5",
+          "note": "",
+          "clock": 138.0
+        },
+        {
+          "fen": "5rk1/5pbn/4p3/2K3p1/7p/8/8/4rr2 w - - 0 54",
+          "san": "h4",
+          "label": "53... h4",
+          "note": "",
+          "clock": 100.0
+        },
+        {
+          "fen": "5rk1/5pbn/2K1p3/6p1/7p/8/8/4rr2 b - - 1 54",
+          "san": "Kc6",
+          "label": "54. Kc6",
+          "note": "",
+          "clock": 138.0
+        },
+        {
+          "fen": "5rk1/5pbn/2K1p3/6p1/8/7p/8/4rr2 w - - 0 55",
+          "san": "h3",
+          "label": "54... h3",
+          "note": "",
+          "clock": 100.0
+        },
+        {
+          "fen": "5rk1/3K1pbn/4p3/6p1/8/7p/8/4rr2 b - - 1 55",
+          "san": "Kd7",
+          "label": "55. Kd7",
+          "note": "",
+          "clock": 138.0
+        },
+        {
+          "fen": "5rk1/3K1pbn/4p3/6p1/8/8/7p/4rr2 w - - 0 56",
+          "san": "h2",
+          "label": "55... h2",
+          "note": "",
+          "clock": 100.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/6p1/8/8/7p/4rr2 b - - 1 56",
+          "san": "Ke7",
+          "label": "56. Ke7",
+          "note": "",
+          "clock": 137.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/6p1/8/8/8/4rr1r w - - 0 57",
+          "san": "h1=R",
+          "label": "56... h1=R",
+          "note": "56...h1=R is the second rook underpromotion.",
+          "clock": 98.0
+        },
+        {
+          "fen": "5rk1/5pbn/3Kp3/6p1/8/8/8/4rr1r b - - 1 57",
+          "san": "Kd6",
+          "label": "57. Kd6",
+          "note": "",
+          "clock": 134.0
+        },
+        {
+          "fen": "5rk1/5pbn/3Kp3/8/6p1/8/8/4rr1r w - - 0 58",
+          "san": "g4",
+          "label": "57... g4",
+          "note": "",
+          "clock": 98.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/8/6p1/8/8/4rr1r b - - 1 58",
+          "san": "Ke7",
+          "label": "58. Ke7",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/8/8/6p1/8/4rr1r w - - 0 59",
+          "san": "g3",
+          "label": "58... g3",
+          "note": "",
+          "clock": 98.0
+        },
+        {
+          "fen": "5rk1/5pbn/3Kp3/8/8/6p1/8/4rr1r b - - 1 59",
+          "san": "Kd6",
+          "label": "59. Kd6",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/5pbn/3Kp3/8/8/8/6p1/4rr1r w - - 0 60",
+          "san": "g2",
+          "label": "59... g2",
+          "note": "",
+          "clock": 97.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/8/8/8/6p1/4rr1r b - - 1 60",
+          "san": "Ke7",
+          "label": "60. Ke7",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/4Kpbn/4p3/8/8/8/8/4rrrr w - - 0 61",
+          "san": "g1=R",
+          "label": "60... g1=R",
+          "note": "60...g1=R is the third: Black now has five rooks.",
+          "clock": 95.0
+        },
+        {
+          "fen": "5rk1/5pbn/3Kp3/8/8/8/8/4rrrr b - - 1 61",
+          "san": "Kd6",
+          "label": "61. Kd6",
+          "note": "",
+          "clock": 133.0
+        },
+        {
+          "fen": "5rk1/6bn/3Kp3/5p2/8/8/8/4rrrr w - - 0 62",
+          "san": "f5",
+          "label": "61... f5",
+          "note": "",
+          "clock": 94.0
+        },
+        {
+          "fen": "5rk1/4K1bn/4p3/5p2/8/8/8/4rrrr b - - 1 62",
+          "san": "Ke7",
+          "label": "62. Ke7",
+          "note": "",
+          "clock": 132.0
+        },
+        {
+          "fen": "5rk1/4K1bn/8/4pp2/8/8/8/4rrrr w - - 0 63",
+          "san": "e5",
+          "label": "62... e5",
+          "note": "",
+          "clock": 93.0
+        },
+        {
+          "fen": "5rk1/6bn/4K3/4pp2/8/8/8/4rrrr b - - 1 63",
+          "san": "Ke6",
+          "label": "63. Ke6",
+          "note": "",
+          "clock": 131.0
+        },
+        {
+          "fen": "5rk1/6bn/4K3/5p2/4p3/8/8/4rrrr w - - 0 64",
+          "san": "e4",
+          "label": "63... e4",
+          "note": "",
+          "clock": 92.0
+        },
+        {
+          "fen": "5rk1/6bn/8/3K1p2/4p3/8/8/4rrrr b - - 1 64",
+          "san": "Kd5",
+          "label": "64. Kd5",
+          "note": "",
+          "clock": 130.0
+        },
+        {
+          "fen": "5rk1/6bn/8/3K4/4pp2/8/8/4rrrr w - - 0 65",
+          "san": "f4",
+          "label": "64... f4",
+          "note": "",
+          "clock": 92.0
+        },
+        {
+          "fen": "5rk1/6bn/8/8/2K1pp2/8/8/4rrrr b - - 1 65",
+          "san": "Kc4",
+          "label": "65. Kc4",
+          "note": "",
+          "clock": 128.0
+        },
+        {
+          "fen": "5rk1/6bn/8/8/2K2p2/4p3/8/4rrrr w - - 0 66",
+          "san": "e3",
+          "label": "65... e3",
+          "note": "",
+          "clock": 92.0
+        },
+        {
+          "fen": "5rk1/6bn/8/8/5p2/3Kp3/8/4rrrr b - - 1 66",
+          "san": "Kd3",
+          "label": "66. Kd3",
+          "note": "",
+          "clock": 127.0
+        },
+        {
+          "fen": "2r3k1/6bn/8/8/5p2/3Kp3/8/4rrrr w - - 2 67",
+          "san": "Rc8",
+          "label": "66... Rc8",
+          "note": "",
+          "clock": 92.0
+        },
+        {
+          "fen": "2r3k1/6bn/8/8/4Kp2/4p3/8/4rrrr b - - 3 67",
+          "san": "Ke4",
+          "label": "67. Ke4",
+          "note": "",
+          "clock": 125.0
+        },
+        {
+          "fen": "3r2k1/6bn/8/8/4Kp2/4p3/8/4rrrr w - - 4 68",
+          "san": "Rd8",
+          "label": "67... Rd8",
+          "note": "",
+          "clock": 92.0
+        },
+        {
+          "fen": "3r2k1/6bn/8/5K2/5p2/4p3/8/4rrrr b - - 5 68",
+          "san": "Kf5",
+          "label": "68. Kf5",
+          "note": "68.Kf5: the white king reaches f5.",
+          "clock": 124.0
+        },
+        {
+          "fen": "4r1k1/6bn/8/5K2/5p2/4p3/8/4rrrr w - - 6 69",
+          "san": "Re8",
+          "label": "68... Re8",
+          "note": "68...Re8 is stalemate: White to move, not in check, zero legal moves. Black still has five rooks, a bishop, a knight, and two pawns.",
+          "clock": 92.0
+        }
+      ],
+      "legal_plies": 136,
+      "final_stalemate": true,
+      "final_check": false,
+      "final_legal_moves": 0,
+      "final_piece_count": 11,
+      "source": "dmiiitr.pgn",
+      "king_neighbours": [
+        {
+          "square": "e4",
+          "occupied": null,
+          "attackers": [
+            "e8"
+          ]
+        },
+        {
+          "square": "f4",
+          "occupied": "p",
+          "attackers": [
+            "f1"
+          ]
+        },
+        {
+          "square": "g4",
+          "occupied": null,
+          "attackers": [
+            "g1"
+          ]
+        },
+        {
+          "square": "e5",
+          "occupied": null,
+          "attackers": [
+            "g7",
+            "e8"
+          ]
+        },
+        {
+          "square": "g5",
+          "occupied": null,
+          "attackers": [
+            "g1",
+            "h7"
+          ]
+        },
+        {
+          "square": "e6",
+          "occupied": null,
+          "attackers": [
+            "e8"
+          ]
+        },
+        {
+          "square": "f6",
+          "occupied": null,
+          "attackers": [
+            "g7",
+            "h7"
+          ]
+        },
+        {
+          "square": "g6",
+          "occupied": null,
+          "attackers": [
+            "g1"
+          ]
+        }
+      ]
+    }
+  ]
+}

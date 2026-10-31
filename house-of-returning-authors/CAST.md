@@ -31,3 +31,7 @@ The three brothers are Dmitri, Ivan, and Alexei (Alyosha); their father is Fyodo
 ## Tara and the tea movement
 
 The fictional Tara is the heroine: calm, politically perceptive, protective of women and girls, with an independent purpose beyond Emanuel’s development. Her Marian and dove imagery belongs to the author’s symbolic theatre, not to a claim about the real journalist’s identity or faith. Emanuel is both hero and antihero through his actions, ambitions, care, and capacity for correction. The author’s “bipolar bear” metaphor does not make a diagnosis a measure of goodness or evil. The dream’s divine titles are contested images, not confirmations of the author’s literal identity. Dasha’s cabinet role and intelligence-service past are invented and do not allege facts about any real chess acquaintance.
+
+## The crossing crew
+
+Maya, Leon, and Ruth are fictional African American members of the wartime theatre shelter. Maya repairs equipment and plays chess; Leon reads the saved studies and helps move supplies; Ruth operates and repairs the radio and coordinates the service lane. They act, joke, disagree, and work alongside Michael and Emanuel. They are not portraits of the PGN players or claims about their identities. Their ages, appearance, clothing, and illustration prompts are retained in ../artwork/study-crossings/prompts.json.
