@@ -1398,5 +1398,13 @@
     "alt": "Chess towers and routes across an illustrated globe",
     "motif": "atlas-chess",
     "kind": "original SVG illustration"
+  },
+  {
+    "route": "worlds-of-kings/nuclear/",
+    "title": "Nuclear Chess · Worlds of Kings",
+    "image": "worlds-of-kings/nuclear/cover.svg",
+    "alt": "Artwork from Nuclear Chess · Worlds of Kings",
+    "motif": "atlas-chess",
+    "kind": "existing destination artwork"
   }
 ]
