@@ -1,0 +1,20 @@
+{
+  "README.md": "02ecf623319a50a5d22ddd97b10e998ba66e57a2c22ba87e66a79574401b5f7f",
+  "DESIGN.md": "6972eeac4d221623afe9cce558dafc1839ad5e1efed7f92b804d7204db083779",
+  "ACTIVE-DESIGN.md": "5a219279c42f12b5a6a7563eb028479248bec7258c8db5c7378edac42c8aa8ca",
+  "experiment.py": "b7c14c6bc2d186ed0a0f75642bdc862cc71bf87c4dae099e8f10e235d4f1c2d7",
+  "active.py": "c86723cbbffc15b70d4f2132ac584e66c5160da8505c4bbb921801504af5de51",
+  "test_experiment.py": "38535b4901469092f2d1dab30d3ecafd34b9cc8cb22b9e8ecd83098ae25901e1",
+  "test_active.py": "aaa8614d820588164efd917bd29f8110d70b2e924fc653aa4e021e0f6e71c3b5",
+  "make_report.py": "0e0e28cba49089b8914b439d4703da71e672f98ada238fb64829c85d6ddd92a8",
+  "requirements.txt": "a2b456f536ab0dccfb0b2b881ee85822002f96166923b2c8d34abad1ba09811a",
+  "results/records.json": "6e50b7d3dec9d12f5251b578e79dd561964a39a5649501696c4af74227588a2e",
+  "results/results.json": "28808c952c58707e77ec0672e37218d63db247656b616fa1c0fbf92daf3ee440",
+  "active-results/records.json": "cf7abaa4f0f8e1e240d0f81a5394e1a5263ad95fd40f07d5c4a9c8b06323e6fa",
+  "active-results/results.json": "a854c622662135b8b5b64b719c496dcd87e2c81b2b356bc206ddb1352eb8d08f",
+  "publication/study-figure.png": "cb1b069ffd7046a378bcc87362cc9c06e6c7b2ec5b6f6cebdf9d82fe95314fad",
+  "publication/examples.json": "63a4bdc9a03ffe25df10cf8bf4cc9f6929badbc94e83ed0a9d5f568af8d7f63a",
+  "publication/study-figure.svg": "28a94b2f910267adf19ae7b339591d6cd5a433859179e78da7bdb22a136dec5a",
+  "publication/study-figure.pdf": "318426b1b4d010cc036a28489620899ec900a8a58b9d9a1adb04c019cb848728",
+  "publication/REPORT.md": "042cfe90f0a14d1c2e80bfefd58c708754f81a12836af5951280a64e3e6efc1d"
+}

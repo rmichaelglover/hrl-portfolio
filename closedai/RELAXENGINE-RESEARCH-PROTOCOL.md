@@ -47,8 +47,8 @@ Attach tentative labels such as “evidence of external target,” “claimed si
 The existing GRRLE update has the form:
 
 ```
-s_i <- (1-damping) * s_i
-       + damping * sigmoid(logit(prior_i) + gain * sum_j(w_ij * s_j))
+s_i <- damping * s_i
+       + (1-damping) * sigmoid(logit(prior_i) + gain * sum_j(w_ij * s_j))
 ```
 
 Here `w_ij` is compatibility/support between hypotheses in the analysis graph. It is **not** a synaptic weight from Mythos. `s_i` is a support strength, not automatically a calibrated probability or confidence interval. Convergence means the update stabilized under those assumptions, not that the explanation is true. Wrong priors and reinforcing edges can stabilize a wrong explanation.
@@ -118,3 +118,8 @@ If no intervention result discriminates the hypotheses, keep the mechanism unres
 - [AISI's Mythos incident analysis](https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident): observations and limits motivating the proposed tests.
 
 The graph design, interview protocol, and integration with RelaxEngine are **our proposed research program**, not findings established by these sources or by the current repository.
+
+
+## Executed follow-up, 31 October 2026
+
+The first synthetic circuit-labeling study is now available at [Circuit Lab](circuit-lab/). It tests a new categorical variant inspired by GRRLE, not a direct call to the existing engines. It reports useful labeling information alongside forecast-transfer failures, nonselective suppression, and a null/unfavorable querying result. It does not establish a Mythos mechanism or repair. The damping equation above was corrected to match the cited GRRLE implementation; an earlier version reversed the old/proposed coefficients.

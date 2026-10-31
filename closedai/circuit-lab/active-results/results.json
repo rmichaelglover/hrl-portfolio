@@ -1,0 +1,96 @@
+{
+  "data_origin": "SYNTHETIC FOLLOW-UP; NOT LLM INTERVIEWS",
+  "circuits_per_condition": 100,
+  "query_units": 3,
+  "forecast_targets": 3,
+  "max_queries": 2,
+  "selected_gain": 1.0,
+  "summaries": {
+    "familiar": {
+      "unary_random": {
+        "0": 0.059929426016068946,
+        "1": 0.05792703286643511,
+        "2": 0.056626612918798634
+      },
+      "unary_disagreement": {
+        "0": 0.059929426016068946,
+        "1": 0.0531248465668999,
+        "2": 0.0531248465668999
+      },
+      "relaxation_random": {
+        "0": 0.04713919768107446,
+        "1": 0.04713919768107446,
+        "2": 0.04713919768107446
+      },
+      "relaxation_disagreement": {
+        "0": 0.04713919768107446,
+        "1": 0.04713919768107446,
+        "2": 0.04713919768107446
+      }
+    },
+    "novel_motif": {
+      "unary_random": {
+        "0": 0.19987884872480294,
+        "1": 0.1922205437713599,
+        "2": 0.18786647485309316
+      },
+      "unary_disagreement": {
+        "0": 0.19987884872480294,
+        "1": 0.1960678570861087,
+        "2": 0.17935858988571543
+      },
+      "relaxation_random": {
+        "0": 0.14355866520642754,
+        "1": 0.1452149431089009,
+        "2": 0.14421733496126332
+      },
+      "relaxation_disagreement": {
+        "0": 0.14355866520642754,
+        "1": 0.1439512406180631,
+        "2": 0.14649941811885409
+      }
+    }
+  },
+  "paired_policy_contrasts": [
+    {
+      "condition": "familiar",
+      "method": "unary",
+      "contrast": "disagreement minus random; budget 2",
+      "mean": -0.0035017663518987397,
+      "ci95": [
+        -0.008207270960422171,
+        0.0
+      ]
+    },
+    {
+      "condition": "familiar",
+      "method": "relaxation",
+      "contrast": "disagreement minus random; budget 2",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "condition": "novel_motif",
+      "method": "unary",
+      "contrast": "disagreement minus random; budget 2",
+      "mean": -0.008507884967377775,
+      "ci95": [
+        -0.017677709332376293,
+        0.0008587305826928031
+      ]
+    },
+    {
+      "condition": "novel_motif",
+      "method": "relaxation",
+      "contrast": "disagreement minus random; budget 2",
+      "mean": 0.0022820831575907636,
+      "ci95": [
+        0.0,
+        0.0050519845523387084
+      ]
+    }
+  ]
+}
