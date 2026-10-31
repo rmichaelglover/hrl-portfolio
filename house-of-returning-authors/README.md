@@ -39,3 +39,7 @@ Eight distinct new stage illustrations, plus the newly generated Rainbow Hyperst
 ## One Quick Follow-Up · 30 October 2026
 
 The original fictional interview sketch and its three CMYK illustrations enter after Six Authors, before the final turn toward Babylon. FOLLOW-UP-BRIDGES.md connects the struggle for the last word to listening, consent to end a performance, and Emanuel’s aspiration toward care. The complete sketch dialogue is preserved in ONE-QUICK-FOLLOW-UP.md. The invented outburst and diagnosis are explicitly labeled fiction. Images and full generation prompts are retained in ../artwork/one-quick-follow-up/. This addition brings the reader to twelve works, fifteen framing scenes, and eleven stage illustrations plus the flag.
+
+## World War III: The Room That Remains · 30 October 2026
+
+WWIII.md adds three fictional scenes after the interview movement and before the existing final conversation. The Warning, The Crossing, and The Room That Remains follow Michael and Emanuel through an evacuation, a bridge rescue, and a theatre shelter. This separate imagined future does not extend the real interview or claim to predict events. Three PG-13 illustrations and full built-in image generation prompts are preserved in ../artwork/wwiii-the-room-that-remains/. The reader now contains thirteen works and fourteen stage illustrations plus the flag.

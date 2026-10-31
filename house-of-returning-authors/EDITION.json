@@ -7,7 +7,7 @@
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
-  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. Eleven stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Fourteen stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
   "sources": [
     {
       "id": "cakes",
@@ -134,6 +134,16 @@
       "original_whitespace_word_count": 495,
       "role_change": "none; sketch dialogue preserved",
       "collaboration": "Manny Glover with ChatGPT / Codex"
+    },
+    {
+      "id": "wwiii",
+      "title": "World War III: The Room That Remains",
+      "source_path": "house-of-returning-authors/WWIII.md",
+      "snapshot": "WWIII.md",
+      "sha256": "a3a386ca9a4f7daa5906cd1304d7e7f14c70ffc98449f700067af7a7feb9ca58",
+      "original_whitespace_word_count": 914,
+      "role_change": "none; original fictional movement",
+      "collaboration": "Manny Glover with ChatGPT / Codex"
     }
   ],
   "follow_up_bridges_sha256": "5d719b54090c30f220897f81a2bb658be15b339a93265e2cdb11b3b260e42322",
@@ -169,6 +179,21 @@
         "height": 1024,
         "sha256": "957bc92727e9c860de004fd1ba57adfd7341c01fc8ee1cca92fa3aa783adcb72"
       }
+    ]
+  },
+  "wwiii_art": {
+    "title": "World War III — The Room That Remains",
+    "fictional": true,
+    "mode": "built-in image_gen",
+    "prompts": [
+      "Use case: illustration-story. Create a landscape 3:2 cinematic graphic-novel illustration for a fictional World War III chapter of The House of Returning Authors. Serious, sad, intense, action-packed, emotionally humane. Painterly ink and textured CMYK printing, rich deep cyan shadows, restrained magenta, amber firelight, ivory highlights; sophisticated dramatic composition, no comedy. Entirely invented near-future setting, no real politicians, no identifiable current battle or national insignia. PG-13: no blood, gore, corpses, visible wounds, or graphic injury. No written words, speech balloons, captions, logos, or watermark. Scene 1, the warning: A theatre rehearsal abruptly becomes a wartime evacuation. A middle-aged man with dark curly hair in a charcoal coat and another middle-aged man with short graying hair in an olive coat hold open heavy theatre doors for frightened civilians. Outside, a vast near-future city is blacked out, distant orange explosions glow beyond the skyline, aircraft silhouettes streak through smoke, rain and flying paper swirl. A physical wheeled whiteboard still stands beside the abandoned stage, blank, two overturned empty armchairs behind it. Foreground a dropped theatrical mask beside a child's small backpack, with no child injured. Dynamic diagonal evacuation movement toward safety, urgent faces, enormous scale, mournful humanity.",
+      "Use case: illustration-story. Create a landscape 3:2 cinematic graphic-novel illustration for a fictional World War III chapter of The House of Returning Authors. Serious, sad, intense, action-packed, emotionally humane. Painterly ink and textured CMYK printing, rich deep cyan shadows, restrained magenta, amber firelight, ivory highlights; sophisticated dramatic composition, no comedy. Entirely invented near-future setting, no real politicians, no identifiable current battle or national insignia. PG-13: no blood, gore, corpses, visible wounds, or graphic injury. No written words, speech balloons, captions, logos, or watermark. Scene 2, the crossing: At the height of a fictional global war, a curly-haired middle-aged man wearing a charcoal coat and a short-gray-haired middle-aged man in an olive coat help a group of civilians across a damaged urban bridge in pounding rain. One helps an older woman step across a gap while the other reaches back to support a frightened young adult. Far behind them a distant explosion throws amber light through smoke, unmarked rescue vehicles and hovering searchlights, shattered empty buildings, wind whipping coats. Nobody is hit or visibly injured. Dramatic low angle, powerful motion, rescue and solidarity at the center, grief and courage rather than triumph. No weapons aimed at viewer.",
+      "Use case: illustration-story. Create a landscape 3:2 cinematic graphic-novel illustration for a fictional World War III chapter of The House of Returning Authors. Serious, sad, intense, action-packed, emotionally humane. Painterly ink and textured CMYK printing, rich deep cyan shadows, restrained magenta, amber firelight, ivory highlights; sophisticated dramatic composition, no comedy. Entirely invented near-future setting, no real politicians, no identifiable current battle or national insignia. PG-13: no blood, gore, corpses, visible wounds, or graphic injury. No written words, speech balloons, captions, logos, or watermark. Scene 3, the room that remains: After a night of fictional world war, a ruined theatre has become a civilian shelter. Cold dawn through a broken roof. The same curly-haired middle-aged man in charcoal coat and short-gray-haired middle-aged man in olive coat kneel beside an exhausted older woman wrapped in a blanket, offering water. Other living survivors sit close together, grief-stricken, resting. A blank physical whiteboard stands upright beside them, small children's drawings pinned to its edge with no writing. Through the open theatre doors, immense damaged city skyline under smoke, a distant rescue helicopter, tiny amber rescue lights. Rainwater reflects a thin beam of sunrise. Intense, quiet sadness and fragile care; no victorious posing, no dead bodies."
+    ],
+    "files": [
+      "01-the-warning.png",
+      "02-the-crossing.png",
+      "03-the-room-that-remains.png"
     ]
   },
   "new_frame_path": "FRAME.md",
@@ -271,6 +296,6 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 10530,
+  "compiled_whitespace_word_count": 11453,
   "candidate_count": 39
 }
