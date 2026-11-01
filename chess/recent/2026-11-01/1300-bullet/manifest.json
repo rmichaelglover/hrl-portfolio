@@ -1,0 +1,14 @@
+{
+  "title": "The One-Minute Chessboard · November 1 Bullet Arena",
+  "source_file": "original.pgn",
+  "date": "2026-11-01",
+  "event": "≤1300 Bullet Arena",
+  "games_in_export": 33,
+  "user_games": 8,
+  "user": "mannyfresher",
+  "user_results": {"wins": 1, "draws": 0, "losses": 7},
+  "rating_change_sum": -44,
+  "time_control": "60+1",
+  "review_status": "Eight-game review prepared from the PGN headers and recorded move scores; no engine analysis claimed.",
+  "cast_sources": ["../../../../house-of-returning-authors/CAST.md", "../../../../thursday/THURSDAY.md", "../../../../whimsy-chess/CAST-POLICY.md"]
+}

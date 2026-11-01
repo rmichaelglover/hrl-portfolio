@@ -248,6 +248,14 @@
     "kind": "existing destination artwork"
   },
   {
+    "route": "chess/recent/2026-11-01/1300-bullet/",
+    "title": "The One-Minute Chessboard",
+    "image": "chess/recent/2026-11-01/1300-bullet/cover.svg",
+    "alt": "A midnight chessboard with an advancing mint pawn and a golden queen.",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "chesshustlagaard/",
     "title": "♞ Chesshustlagaard",
     "image": "assets/card-art/chesshustlagaard-1add186.svg",
