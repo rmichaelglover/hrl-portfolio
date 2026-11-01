@@ -15,6 +15,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'assets/card-art'
 OVERRIDES = {
+    'glover-chess-mission/': 'glover-chess-mission/assets/mission-card.svg',
     'halloween-valentine/': 'halloween-valentine/art/first-halloween.png',
     'worlds-of-kings/nuclear-globe/': 'worlds-of-kings/nuclear-globe/cover.svg',
     'worlds-of-kings/nuclear/': 'worlds-of-kings/nuclear/cover.svg',
@@ -36,6 +37,7 @@ OVERRIDES = {
 }
 
 ALT_OVERRIDES = {
+    'glover-chess-mission/': 'A chessboard connects learning, competition, and creative work to a clearly marked path toward permitted, fair earnings.',
     'halloween-valentine/': 'Tara and Emanuel share chocolate on a moonlit Halloween night; Emanuel lifts his cracked porcelain mask.',
 }
 

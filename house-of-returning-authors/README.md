@@ -6,7 +6,7 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 13,400 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. It now also includes a proposed prison chess mission, published separately as a standalone concept. This is an opening edition of approximately 14,000 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
@@ -53,3 +53,7 @@ The movement now continues into The Atlanta Porch. ATLANTA-PORCH.md preserves th
 ## Your Valentine, for Now and Forever · 1 November 2026
 
 HALLOWEEN-VALENTINE.md is a new fictional romance scene, also published as a standalone illustrated story at ../halloween-valentine/. Its adult characters Tara and Emanuel meet on a quiet Halloween night and reveal their names years later. The scene is included in the House reader before its closing Babylon scene. Its illustration and prompt notes are kept with the standalone story. The reader now contains fifteen works and nineteen stage illustrations plus the flag.
+
+## Glover’s Prison Chess Mission · 1 November 2026
+
+PRISON-CHESS-MISSION.md adds a proposed public-interest mission and a separate illustrated concept page at ../glover-chess-mission/. The scene offers free access to chess, then distinguishes facility-approved earning opportunities from a post-release bridge to tournaments, coaching, commentary, or creator work. No program, institution, partner, funding, or income is promised. Any real effort would require co-design with incarcerated and formerly incarcerated players, facility approval, transparent rights and payment terms, and local policy review. The House reader now contains sixteen works.

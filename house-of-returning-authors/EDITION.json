@@ -7,7 +7,7 @@
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
-  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Two Studies at the Crossing adds a further fictional chess-and-shelter movement based on two supplied PGNs. The author’s Atlanta porch recollection and a fourth illustration close the movement. Your Valentine, for Now and Forever is a new standalone illustrated fictional romance also staged within this reader. Nineteen stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Two Studies at the Crossing adds a further fictional chess-and-shelter movement based on two supplied PGNs. The author’s Atlanta porch recollection and a fourth illustration close the movement. Your Valentine, for Now and Forever is a standalone illustrated fictional romance also staged within this reader. Glover’s Prison Chess Mission is a separate proposed public-interest concept, not a launched program. Nineteen stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months.",
   "sources": [
     {
       "id": "cakes",
@@ -165,6 +165,17 @@
       "role_change": "none; new fictional illustrated romance scene",
       "collaboration": "Manny Glover with ChatGPT / Codex; illustration generated with OpenAI built-in image generation",
       "standalone_route": "halloween-valentine/"
+    },
+    {
+      "id": "prison-chess-mission",
+      "title": "Glover’s Prison Chess Mission",
+      "source_path": "house-of-returning-authors/PRISON-CHESS-MISSION.md",
+      "snapshot": "PRISON-CHESS-MISSION.md",
+      "sha256": "6f711b79bd0510b989ef5ca7ecd6816410aa208e4087e3ddef9b4e47d7abcdbc",
+      "original_whitespace_word_count": 456,
+      "role_change": "none; proposed public-interest mission, not a launched program",
+      "collaboration": "Manny Glover with ChatGPT / Codex",
+      "standalone_route": "glover-chess-mission/"
     }
   ],
   "follow_up_bridges_sha256": "5d719b54090c30f220897f81a2bb658be15b339a93265e2cdb11b3b260e42322",
@@ -250,6 +261,18 @@
     "standalone_route": "halloween-valentine/",
     "megaplay_route": "house-of-returning-authors/#halloween-valentine",
     "fiction_notice": "The cemetery, romance, dialogue, and events are imagined. The characters are theatrical portrayals, not documentary claims."
+  },
+  "prison_chess_mission": {
+    "title": "Glover’s Prison Chess Mission",
+    "status": "Proposed concept in development; no program launched and no partners or funding committed.",
+    "principle": "Free access to chess; possible legitimate earning only through facility-approved, transparent and fair opportunities. No guaranteed income.",
+    "standalone_route": "glover-chess-mission/",
+    "megaplay_route": "house-of-returning-authors/#prison-chess-mission",
+    "references": [
+      "https://chessforfreedom.fide.com/",
+      "https://www.cdcr.ca.gov/insidecdcr/2024/04/19/chess-tournament-bridges-gap-at-san-quentin/",
+      "https://www2.fed.bop.gov/locations/institutions/bro/bro_ao-handbook.pdf?v=1.0.0#page=28"
+    ]
   },
   "atlanta_recollection": {
     "path": "house-of-returning-authors/ATLANTA-PORCH.md",
@@ -357,6 +380,6 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 13420,
+  "compiled_whitespace_word_count": 13882,
   "candidate_count": 39
 }

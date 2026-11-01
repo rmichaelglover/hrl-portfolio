@@ -688,6 +688,14 @@
     "kind": "original SVG illustration"
   },
   {
+    "route": "glover-chess-mission/",
+    "title": "Glover’s Prison Chess Mission",
+    "image": "glover-chess-mission/assets/mission-card.svg",
+    "alt": "A chessboard connects learning, competition, and creative work to a clearly marked path toward permitted, fair earnings.",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "gospel/",
     "title": "✝️ The Gospel",
     "image": "assets/card-art/gospel-315e2c8.svg",
