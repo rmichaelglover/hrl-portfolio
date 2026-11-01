@@ -704,6 +704,14 @@
     "kind": "original SVG illustration"
   },
   {
+    "route": "halloween-valentine/",
+    "title": "Your Valentine, for Now and Forever",
+    "image": "halloween-valentine/art/first-halloween.png",
+    "alt": "Tara and Emanuel share chocolate on a moonlit Halloween night; Emanuel lifts his cracked porcelain mask.",
+    "motif": "network",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "house-of-returning-authors/",
     "title": "The House of Returning Authors",
     "image": "house-of-returning-authors/art/01-three-names.png",

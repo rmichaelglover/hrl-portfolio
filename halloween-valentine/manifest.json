@@ -1,0 +1,14 @@
+{
+  "title": "Your Valentine, for Now and Forever",
+  "type": "fictional illustrated story",
+  "characters": "Tara and Emanuel are fictional adult theatrical characters.",
+  "image": {
+    "file": "art/first-halloween.png",
+    "alt": "Tara and Emanuel, both adults, share chocolate on a moonlit cemetery bench while Emanuel lifts his cracked Halloween mask.",
+    "credit": "OpenAI built-in image generation",
+    "prompt": "Literary Halloween romance illustration in painterly cinematic gouache and delicate ink linework, warm candlelit amber and midnight teal. Two clearly adult people in their mid-to-late twenties: an alternative woman with short dark hair, silver moon makeup, black coat and striped scarf; a gentle man holding a cracked porcelain Halloween mask. They sit close on an old stone bench in a quiet cemetery garden, share chocolate, smile softly, fingers gently touching. Yew tree, crows, iron gate, autumn lanterns, falling leaves. Spooky but safe, intimate, hopeful; no real-person likeness, text, logos, or graphic content. Portrait book-cover composition."
+  },
+  "standalone_route": "halloween-valentine/",
+  "megaplay_route": "house-of-returning-authors/#halloween-valentine",
+  "fiction_notice": "The cemetery, romance, dialogue, and events are imagined. The characters are theatrical portrayals, not documentary claims."
+}

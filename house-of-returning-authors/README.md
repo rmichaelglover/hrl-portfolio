@@ -6,7 +6,7 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, thirteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 9,700 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. This is an opening edition of approximately 13,400 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
@@ -49,3 +49,7 @@ WWIII.md adds three fictional scenes after the interview movement and before the
 TWO-STUDIES.md brings the two supplied 31 October study exports into another night in the WWIII shelter. Three new PG-13 illustrations introduce Maya, Leon, and Ruth alongside the existing company. Dialogue follows real captures, two missed queen captures, three rook underpromotions, and the final five-rook stalemate, while practical shelter action carries the scene. The original PGNs, complete mainline replays, exact diagrams, source hashes, and notes on the RickUp clock discrepancy are published at ../chess/studies/2026-10-31/. Original PGN annotations and variations remain in the downloads; no new engine scores are claimed. This expands the reader to fourteen works and seventeen stage illustrations plus the flag.
 
 The movement now continues into The Atlanta Porch. ATLANTA-PORCH.md preserves the author-supplied recollection with reading punctuation and spacing. The transition is invented, and no dialogue is fabricated for Brandon, Keema, Miya, or Norman. A fourth illustration is an imagined reconstruction, not likenesses of the named friends. The new total is eighteen stage illustrations plus the flag.
+
+## Your Valentine, for Now and Forever · 1 November 2026
+
+HALLOWEEN-VALENTINE.md is a new fictional romance scene, also published as a standalone illustrated story at ../halloween-valentine/. Its adult characters Tara and Emanuel meet on a quiet Halloween night and reveal their names years later. The scene is included in the House reader before its closing Babylon scene. Its illustration and prompt notes are kept with the standalone story. The reader now contains fifteen works and nineteen stage illustrations plus the flag.

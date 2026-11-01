@@ -15,6 +15,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'assets/card-art'
 OVERRIDES = {
+    'halloween-valentine/': 'halloween-valentine/art/first-halloween.png',
     'worlds-of-kings/nuclear-globe/': 'worlds-of-kings/nuclear-globe/cover.svg',
     'worlds-of-kings/nuclear/': 'worlds-of-kings/nuclear/cover.svg',
     'chess/recent/2026-10-30/eastern-bullet/story/': 'chess/recent/2026-10-30/eastern-bullet/story/art/01-dilorias-exit.png',
@@ -32,6 +33,10 @@ OVERRIDES = {
     'genesis/forecast/': 'assets/thumbs/forecast.png',
     'genesis/planck/': 'assets/thumbs/planck.png',
     'genesis/ontology/': 'assets/thumbs/ontology.png',
+}
+
+ALT_OVERRIDES = {
+    'halloween-valentine/': 'Tara and Emanuel share chocolate on a moonlit Halloween night; Emanuel lifts his cracked porcelain mask.',
 }
 
 
@@ -364,7 +369,7 @@ class CardIllustrator:
                 image=asset.relative_to(ROOT).as_posix();break
         if image and not (ROOT/image).is_file():image=None
         if image:
-            alt=f'Artwork from {title}'
+            alt=ALT_OVERRIDES.get(route,f'Artwork from {title}')
             kind='existing destination artwork'
         else:
             key=hashlib.sha256(route.encode()).hexdigest()
