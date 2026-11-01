@@ -6,7 +6,7 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. It now also includes a proposed prison chess mission, published separately as a standalone concept, and an illustrated adaptation of the supplied arena chat excerpt. This is an opening edition of approximately 14,800 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. It now also includes a proposed prison chess mission, published separately as a standalone concept, and an illustrated adaptation of the supplied arena chat excerpt with a three-image fictional romance companion. This is an opening edition of approximately 15,500 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
@@ -60,4 +60,4 @@ PRISON-CHESS-MISSION.md adds a proposed public-interest mission and a separate i
 
 ## The Arena Lounge at One Second · 1 November 2026
 
-The supplied arena-chat excerpt is adapted as a separate illustrated scene at ../chess/chat-stories/2026-11-01/arena-lounge/. Usernames and quoted fragments remain distinct from newly written House-cast commentary. The transcript contains no PGN, so the scene makes no claims about game quality or results. The House reader now contains seventeen works and twenty large illustrations plus the republic flag.
+The supplied arena-chat excerpt is adapted as a separate illustrated scene at ../chess/chat-stories/2026-11-01/arena-lounge/. Usernames and quoted fragments remain distinct from newly written House-cast commentary. The transcript contains no PGN, so the scene makes no claims about game quality or results. Its companion romance, Three Moves Across the Years, follows invented adults Rowan and Jules from their first online game to a shared porch twenty-two years later. They are not based on chat participants. The House reader now contains eighteen works and twenty-three large illustrations plus the republic flag.

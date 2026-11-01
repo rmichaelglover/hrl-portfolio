@@ -10,5 +10,17 @@
     "file": "arena-lounge.png",
     "alt": "A cozy midnight chess lounge with a glowing board, colorful empty chat bubbles, a mint pawn, golden queen, sleeping cat, one-second clock, and guitar beneath a galaxy. No people are depicted.",
     "generated_with": "OpenAI built-in image generation"
+  },
+  "fictional_romance_companion": {
+    "title": "Three Moves Across the Years",
+    "route": "chess/chat-stories/2026-11-01/arena-lounge/romance.html",
+    "megaplay_route": "house-of-returning-authors/#arena-romance",
+    "characters": "Rowan and Jules, invented adults unrelated to the supplied chat usernames.",
+    "images": [
+      {"file": "romance-first-hello.png", "caption": "Their first online hello in separate cozy apartments."},
+      {"file": "romance-chess-cafe.png", "caption": "A few years later, they meet over a chessboard in a rainy café."},
+      {"file": "romance-years-later.png", "caption": "Twenty-two years later, they share tea and chess on their porch."}
+    ],
+    "generated_with": "OpenAI built-in image generation"
   }
 }

@@ -7,7 +7,7 @@
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
   "michael_character": "Composite dramatic figure drawing on Robert Michael Glover (the author’s father), Michael Emanuel Glover (the author), and scriptural archangel Michael as an image and exemplar; not interchangeable biographies or attributed quotations.",
   "collaboration": "Manny Glover with ChatGPT / Codex for the assembled edition and Six Authors exchange; Gemini for the author-supplied PDF collaboration; inherited pieces retain their original credits",
-  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Two Studies at the Crossing adds a further fictional chess-and-shelter movement based on two supplied PGNs. The author’s Atlanta porch recollection and a fourth illustration close the movement. Your Valentine, for Now and Forever is a standalone illustrated fictional romance also staged within this reader. Glover’s Prison Chess Mission is a separate proposed public-interest concept, not a launched program. Twenty stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months. The Arena Lounge at One Second adapts the supplied chat excerpt; no PGN accompanied it. The illustrated scene is linked in the reader.",
+  "coverage": "Five previously published stage/dialogue pieces, the complete supplied Gemini PDF, the verbatim Six Authors exchange, four additional preserved dream/tea scenes, and the fictional One Quick Follow-Up sketch with fifteen framing scenes. The fictional WWIII movement follows the interview, with three further illustrations. Two Studies at the Crossing adds a further fictional chess-and-shelter movement based on two supplied PGNs. The author’s Atlanta porch recollection and a fourth illustration close the movement. Your Valentine, for Now and Forever is a standalone illustrated fictional romance also staged within this reader. Glover’s Prison Chess Mission is a separate proposed public-interest concept, not a launched program. Twenty-three stage illustrations, the republic flag, and a standing board convention. Not a complete archive of prior conversations or the previous six to seven months. The Arena Lounge at One Second adapts the supplied chat excerpt; no PGN accompanied it. The illustrated scene is linked in the reader. Three Moves Across the Years is a wholly fictional adult romance companion with three illustrations; its characters are unrelated to chat usernames.",
   "sources": [
     {
       "id": "cakes",
@@ -187,6 +187,17 @@
       "role_change": "none; supplied chat fragments kept distinct from newly written fictional cast dialogue",
       "collaboration": "Manny Glover with ChatGPT / Codex; illustration generated with OpenAI built-in image generation",
       "standalone_route": "chess/chat-stories/2026-11-01/arena-lounge/"
+    },
+    {
+      "id": "arena-romance",
+      "title": "Three Moves Across the Years",
+      "source_path": "chess/chat-stories/2026-11-01/arena-lounge/ROMANCE.md",
+      "snapshot": "../chess/chat-stories/2026-11-01/arena-lounge/ROMANCE.md",
+      "sha256": "eb827c81e27d25f79e707e5155d9f7ecb8814fb30dff7c1ef7f5a80accdc18d9",
+      "original_whitespace_word_count": 608,
+      "role_change": "none; entirely fictional adult characters unrelated to supplied chat usernames",
+      "collaboration": "Manny Glover with ChatGPT / Codex; three illustrations generated with OpenAI built-in image generation",
+      "standalone_route": "chess/chat-stories/2026-11-01/arena-lounge/romance.html"
     }
   ],
   "follow_up_bridges_sha256": "5d719b54090c30f220897f81a2bb658be15b339a93265e2cdb11b3b260e42322",
@@ -391,8 +402,17 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 14780,
+  "compiled_whitespace_word_count": 15395,
   "candidate_count": 39,
+  "arena_romance_art": {
+    "source": "chess/chat-stories/2026-11-01/arena-lounge/ROMANCE.md",
+    "images": [
+      "romance-first-hello.png",
+      "romance-chess-cafe.png",
+      "romance-years-later.png"
+    ],
+    "status": "fictional adult characters, unrelated to chat participants"
+  },
   "arena_lounge_art": {
     "path": "chess/chat-stories/2026-11-01/arena-lounge/arena-lounge.png",
     "alt": "A cozy midnight chess lounge with a glowing board, colorful empty chat bubbles, a mint pawn, golden queen, sleeping cat, one-second clock, and guitar beneath a galaxy. No people are depicted.",
