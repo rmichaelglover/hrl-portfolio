@@ -15,6 +15,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'assets/card-art'
 OVERRIDES = {
+    'chess/chat-stories/2026-11-01/arena-lounge/': 'chess/chat-stories/2026-11-01/arena-lounge/arena-lounge.png',
     'chess/recent/2026-11-01/1300-bullet/': 'chess/recent/2026-11-01/1300-bullet/cover.svg',
     'glover-chess-mission/': 'glover-chess-mission/assets/mission-card.svg',
     'halloween-valentine/': 'halloween-valentine/art/first-halloween.png',
@@ -38,6 +39,7 @@ OVERRIDES = {
 }
 
 ALT_OVERRIDES = {
+    'chess/chat-stories/2026-11-01/arena-lounge/': 'A cozy midnight chess lounge with colorful chat bubbles, a mint pawn, golden queen, one-second clock, and guitar under a galaxy; no people depicted.',
     'chess/recent/2026-11-01/1300-bullet/': 'A midnight chessboard with an advancing mint pawn and a golden queen.',
     'glover-chess-mission/': 'A chessboard connects learning, competition, and creative work to a clearly marked path toward permitted, fair earnings.',
     'halloween-valentine/': 'Tara and Emanuel share chocolate on a moonlit Halloween night; Emanuel lifts his cracked porcelain mask.',

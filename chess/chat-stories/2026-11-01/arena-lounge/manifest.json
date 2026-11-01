@@ -1,0 +1,14 @@
+{
+  "title": "The Arena Lounge at One Second",
+  "date": "2026-11-01",
+  "kind": "Fictional ensemble adaptation of user-supplied online chat excerpt",
+  "source_limit": "Chat excerpt only; no PGN or complete tournament export supplied.",
+  "status": "Published adaptation. Chat usernames and quoted fragments are identified as source speech; fictional cast dialogue and stage action are newly written.",
+  "standalone_route": "chess/chat-stories/2026-11-01/arena-lounge/",
+  "megaplay_route": "house-of-returning-authors/#arena-lounge",
+  "illustration": {
+    "file": "arena-lounge.png",
+    "alt": "A cozy midnight chess lounge with a glowing board, colorful empty chat bubbles, a mint pawn, golden queen, sleeping cat, one-second clock, and guitar beneath a galaxy. No people are depicted.",
+    "generated_with": "OpenAI built-in image generation"
+  }
+}

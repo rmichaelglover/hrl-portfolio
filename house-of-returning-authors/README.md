@@ -6,7 +6,7 @@ Michael inhabits the scene as a composite figure drawing on the author’s fathe
 
 ## Current scope
 
-One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. It now also includes a proposed prison chess mission, published separately as a standalone concept. This is an opening edition of approximately 14,000 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
+One continuous web reader contains five previously published dialogue/stage pieces, the complete supplied 15-page Gemini PDF drama, the verbatim Six Authors exchange, four preserved dream/tea scenes, fifteen framing scenes, original-publication links, unchanged source snapshots, and existing illustrations. It now also includes a proposed prison chess mission, published separately as a standalone concept, and an illustrated adaptation of the supplied arena chat excerpt. This is an opening edition of approximately 14,800 words, not the requested eventual volume-length collected work and not a complete recovery of six or seven months of conversations.
 
 `FRAME.md` holds new material. Its final two speeches were supplied by the author in the current conversation and punctuated for reading. The Babylon figure is symbolic, not an identification of a living person portrayed elsewhere in the book. The fictional marriage dialogue is not a verified biographical declaration.
 
@@ -56,4 +56,8 @@ HALLOWEEN-VALENTINE.md is a new fictional romance scene, also published as a sta
 
 ## Glover’s Prison Chess Mission · 1 November 2026
 
-PRISON-CHESS-MISSION.md adds a proposed public-interest mission and a separate illustrated concept page at ../glover-chess-mission/. The scene offers free access to chess, then distinguishes facility-approved earning opportunities from a post-release bridge to tournaments, coaching, commentary, or creator work. No program, institution, partner, funding, or income is promised. Any real effort would require co-design with incarcerated and formerly incarcerated players, facility approval, transparent rights and payment terms, and local policy review. The House reader now contains sixteen works.
+PRISON-CHESS-MISSION.md adds a proposed public-interest mission and a separate illustrated concept page at ../glover-chess-mission/. The scene offers free access to chess, then distinguishes facility-approved earning opportunities from a post-release bridge to tournaments, coaching, commentary, or creator work. No program, institution, partner, funding, or income is promised. Any real effort would require co-design with incarcerated and formerly incarcerated players, facility approval, transparent rights and payment terms, and local policy review. The House reader then contained sixteen works.
+
+## The Arena Lounge at One Second · 1 November 2026
+
+The supplied arena-chat excerpt is adapted as a separate illustrated scene at ../chess/chat-stories/2026-11-01/arena-lounge/. Usernames and quoted fragments remain distinct from newly written House-cast commentary. The transcript contains no PGN, so the scene makes no claims about game quality or results. The House reader now contains seventeen works and twenty large illustrations plus the republic flag.

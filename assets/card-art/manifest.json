@@ -208,6 +208,14 @@
     "kind": "existing destination artwork"
   },
   {
+    "route": "chess/chat-stories/2026-11-01/arena-lounge/",
+    "title": "The Arena Lounge at One Second",
+    "image": "chess/chat-stories/2026-11-01/arena-lounge/arena-lounge.png",
+    "alt": "A cozy midnight chess lounge with colorful chat bubbles, a mint pawn, golden queen, one-second clock, and guitar under a galaxy; no people depicted.",
+    "motif": "knight",
+    "kind": "existing destination artwork"
+  },
+  {
     "route": "chess/recent/2026-09-27/saragossa-mimosa-review.html",
     "title": "🍊 Saragossa Mimosa",
     "image": "assets/card-art/chess-recent-2026-09-27-saragossa-mimosa-review-html-27e7584.svg",
