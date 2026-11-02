@@ -1,0 +1,23 @@
+{
+  "title": "After the Clock · A Bullet Arena and a Rapid Rematch",
+  "date": "2026-11-02",
+  "user": "mannyfresher",
+  "sources": ["hourly-bullet-original.pgn", "rancid-randi-original.pgn"],
+  "bullet_arena": {
+    "time_control": "60+0",
+    "user_games": 10,
+    "wins": 1,
+    "draws": 0,
+    "losses": 9,
+    "abandoned_win_after": "1.Nf3",
+    "rating_change_sum": 0
+  },
+  "rapid_feature": {
+    "game_id": "cjAUBAG5",
+    "opponent": "Aarkom",
+    "result": "0-1",
+    "opening": "Scandinavian Defense: Mieses-Kotroc Variation",
+    "study": "https://lichess.org/study/2nJl10wd/5HVlZPFo"
+  },
+  "analysis_note": "The rapid PGN includes engine annotations. This chapter reports selected annotations and does not claim a fresh engine analysis."
+}
