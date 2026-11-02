@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Two horizons, one coast</title>
+<desc id="desc">A warm sunrise over Chula Vista and a coral sunset over Tijuana, joined by a blue coastal sound wave.</desc>
+<defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#12243f"/><stop offset=".54" stop-color="#425f83"/><stop offset="1" stop-color="#f29b76"/></linearGradient>
+  <linearGradient id="water" x2="0" y2="1"><stop stop-color="#216681"/><stop offset="1" stop-color="#132e4a"/></linearGradient>
+  <linearGradient id="gold" x2="1"><stop stop-color="#ffe0a0"/><stop offset="1" stop-color="#ff9c78"/></linearGradient>
+  <linearGradient id="wave"><stop stop-color="#ffe2a3"/><stop offset=".52" stop-color="#b8eaff"/><stop offset="1" stop-color="#ffab89"/></linearGradient>
+</defs>
+<rect width="1200" height="720" rx="28" fill="#0b1425"/>
+<g transform="translate(34 34)">
+  <rect width="548" height="652" rx="22" fill="url(#sky)"/>
+  <circle cx="274" cy="276" r="103" fill="url(#gold)" opacity=".96"/>
+  <path d="M0 355Q110 324 210 354T548 344V652H0Z" fill="url(#water)"/>
+  <path d="M0 410Q115 385 222 410T548 397M0 468Q120 446 250 466T548 455M0 531Q115 512 260 533T548 521" fill="none" stroke="#bbd9d9" stroke-opacity=".4" stroke-width="3"/>
+  <path d="M0 353L78 322 125 346 182 297 230 349 284 314 347 354 398 307 450 348 503 326 548 351" fill="none" stroke="#f4c69a" stroke-opacity=".65" stroke-width="5"/>
+  <path d="M0 0H548V150Q390 191 274 150T0 165Z" fill="#111d35" opacity=".35"/>
+  <text x="40" y="60" fill="#fff2dc" font-family="system-ui,sans-serif" font-size="19" letter-spacing="4">CHULA VISTA</text>
+  <text x="40" y="618" fill="#fff2dc" font-family="Georgia,serif" font-size="30">morning light</text>
+</g>
+<g transform="translate(618 34)">
+  <rect width="548" height="652" rx="22" fill="url(#sky)"/>
+  <circle cx="274" cy="276" r="103" fill="url(#gold)" opacity=".96"/>
+  <path d="M0 355Q110 324 210 354T548 344V652H0Z" fill="url(#water)"/>
+  <path d="M0 410Q115 385 222 410T548 397M0 468Q120 446 250 466T548 455M0 531Q115 512 260 533T548 521" fill="none" stroke="#bbd9d9" stroke-opacity=".4" stroke-width="3"/>
+  <path d="M0 353L48 341 106 354 158 310 214 352 269 327 330 356 388 300 444 348 500 319 548 351" fill="none" stroke="#f4c69a" stroke-opacity=".65" stroke-width="5"/>
+  <path d="M0 0H548V150Q390 191 274 150T0 165Z" fill="#111d35" opacity=".35"/>
+  <text x="40" y="60" fill="#fff2dc" font-family="system-ui,sans-serif" font-size="19" letter-spacing="4">TIJUANA</text>
+  <text x="40" y="618" fill="#fff2dc" font-family="Georgia,serif" font-size="30">evening glow</text>
+</g>
+<path d="M80 364 C160 305 210 426 290 364 S420 304 500 364 630 426 710 364 840 304 920 364 1050 426 1120 364" fill="none" stroke="url(#wave)" stroke-width="7" stroke-linecap="round"/>
+<g fill="#ffe4ac"><circle cx="290" cy="364" r="8"/><circle cx="500" cy="364" r="8"/><circle cx="710" cy="364" r="8"/><circle cx="920" cy="364" r="8"/></g>
+</svg>
