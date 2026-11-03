@@ -61,7 +61,9 @@ James 1:19 is the first worked passage. In this source its word sequence include
 The English dictionary path has two complementary roles:
 
 1. **A recursive English lexical graph** supplies spelling, letter identity, headwords, grammatical forms, multiple senses, definitions, examples, and usage relations. Its definitions are parsed with the same typed English resources as ordinary text.
-2. **Webster’s 1828 American Dictionary** is a historical aid for the English register represented by the KJV. The reader links selected surface forms to their historical headwords and gives authored plain-English glosses for central James terms. As the lexicon grows, each local gloss can resolve to a source-cited Webster record and one or more modern English senses.
+2. **Webster’s 1828 American Dictionary** is a historical aid for the English register represented by the KJV. Selected records link to historical headwords; the interface distinguishes paraphrased historical senses from project-authored glosses and links each candidate sense to its provenance.
+
+The starter records now live in `lexicon/lexicon.json`, versioned as `hrl.self-interpreting-lexicon/v1`. Each English lexeme has a stable ID, headword, part of speech, candidate senses, and optional verse notes and source-language links. `surfaceForms` records explicit links from inflected forms to lexemes. The top-level provenance registry describes the KJV corpus, Webster 1828, Strong’s Greek lexicon, and project-authored glosses and contextual notes. Source-language records have their own IDs, lemmas, transliterations, glosses, citations, and provenance. This replaces the former page-local gloss, inflection, source-gloss, and context-note maps.
 
 The Greek and Hebrew layer is separate. A Strong’s number is a stable lookup index in the source edition, not itself a lexical definition or an interpretive verdict. Where available, it connects the English occurrence to a source-language headword, morphology, pronunciation, and lexicon gloss. Translation choices can then be compared across occurrences and contexts.
 
@@ -76,7 +78,7 @@ Jas 1:19 / KJV-1769 / token 8
   → Greek lemma ταχύς (tachys)
 ```
 
-The reader presents the English headword, a concise contextual gloss, the exact verse address, and outbound dictionary/lexicon references. Unrecognized forms still remain selectable and can be looked up; they are marked as unresolved rather than being assigned an invented sense.
+The reader follows the selected occurrence through the registered surface-form link, English lexeme, candidate senses, occurrence-level Strong’s tag, and any imported source-language lexeme. It displays that sequence as an interpretation path, alongside the sense-by-sense provenance and any note matched to the exact verse. This path is deterministic link traversal: it exposes which records were followed and which links are absent; it does not silently select one sense as the only reading. Unrecognized forms remain selectable and searchable, and are marked unresolved rather than being assigned an invented sense.
 
 The first archaic-term records include `naughtiness`, `filthiness`, `superfluity`, and `engrafted` from James 1:21. For `naughtiness`, the reader records Webster’s historical primary sense—badness, wickedness, or evil purpose—alongside the occurrence’s Greek index `G2549` (`κακία`, *kakia*), whose range includes badness, wickedness, and, in some contexts, malice. The verse note connects the term to James’s instruction to put it away and to the contrast with receiving the word in meekness. This keeps the historical English sense, Greek lexical range, and local contextual reading distinct but connected.
 
@@ -96,7 +98,7 @@ This operational definition is deliberately useful: it can be checked by verifyi
 
 ## James-first, whole-canon build path
 
-1. **James reader:** navigate all five chapters; select any word; expose its surface form, token index, source Strong’s tags, Webster link, and local contextual glosses for key terms.
+1. **James reader:** navigate all five chapters; select any word; expose its surface form, zero-based token index, traversed lexicon links, candidate senses with provenance, source Strong’s tags, Webster link, and verse-specific notes for key terms.
 2. **English lexicon:** add licensed or public-domain headword, inflection, definition, and example records with source and edition metadata.
 3. **Original-language records:** import a compatible Hebrew and Greek lexicon, morphology, and transliteration source; retain that source’s license and record IDs.
 4. **Whole-canon navigation:** load any of the 66 books and chapters from the same edition-bound schema; add search, concordance, and linked occurrences.

@@ -1,0 +1,869 @@
+{
+  "schema": "hrl.self-interpreting-lexicon/v1",
+  "edition": "KJV-1769",
+  "provenance": {
+    "kjv-corpus": {
+      "label": "KJV 1769 occurrence data",
+      "type": "translation-corpus",
+      "url": "https://ebible.org/bible/details.php?all=1&id=eng-kjv2006",
+      "description": "eBible.org eng-kjv2006 USFM distribution; occurrence-level Strong's numbers are retained from the supplied source tags."
+    },
+    "webster-1828": {
+      "label": "Webster's 1828",
+      "type": "historical-English-dictionary",
+      "urlPattern": "https://webstersdictionary1828.com/Dictionary/{headword}",
+      "description": "Noah Webster, An American Dictionary of the English Language (1828). Local wording is labeled as a paraphrase, not a verbatim quotation."
+    },
+    "strongs-1890": {
+      "label": "Strong's Greek Dictionary (1890)",
+      "type": "source-language-lexicon",
+      "urlPattern": "https://www.blueletterbible.org/lexicon/{id}/kjv/tr/",
+      "description": "Greek headword and lexical range indexed by the Strong's identifier attached to the KJV occurrence."
+    },
+    "project-gloss": {
+      "label": "Project-curated English gloss",
+      "type": "authored-summary",
+      "author": "Codex, research assistant to Michael Emanuel Glover",
+      "direction": "Michael Emanuel Glover's self-interpreting Bible project",
+      "description": "Concise reader-facing lexical summary. It is a project gloss, not a quotation from a dictionary."
+    },
+    "project-context": {
+      "label": "Project-curated verse note",
+      "type": "contextual-note",
+      "author": "Codex, research assistant to Michael Emanuel Glover",
+      "direction": "Michael Emanuel Glover's self-interpreting Bible project",
+      "description": "A local contextual connection attached to a specific verse reference."
+    }
+  },
+  "lexemes": {
+    "wherefore": {
+      "id": "en:wherefore",
+      "headword": "wherefore",
+      "partOfSpeech": "adverb",
+      "senses": [
+        {
+          "id": "en:wherefore:project-1",
+          "label": "Project gloss",
+          "definition": "Therefore; for that reason.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "beloved": {
+      "id": "en:beloved",
+      "headword": "beloved",
+      "partOfSpeech": "adjective",
+      "senses": [
+        {
+          "id": "en:beloved:project-1",
+          "label": "Project gloss",
+          "definition": "Dearly loved; in James 1:19 it is part of a form of address.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "brethren": {
+      "id": "en:brethren",
+      "headword": "brethren",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:brethren:project-1",
+          "label": "Project gloss",
+          "definition": "Brothers or fellow members of a community; a traditional collective form of address.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "swift": {
+      "id": "en:swift",
+      "headword": "swift",
+      "partOfSpeech": "adjective",
+      "senses": [
+        {
+          "id": "en:swift:project-1",
+          "label": "Project gloss",
+          "definition": "Quick or ready to act.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "sourceLexemes": [
+        "G5036"
+      ]
+    },
+    "hear": {
+      "id": "en:hear",
+      "headword": "hear",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:hear:project-1",
+          "label": "Project gloss",
+          "definition": "To receive sound or attend to what is said; context can sharpen the sense to listening.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "slow": {
+      "id": "en:slow",
+      "headword": "slow",
+      "partOfSpeech": "adjective",
+      "senses": [
+        {
+          "id": "en:slow:project-1",
+          "label": "Project gloss",
+          "definition": "Not quick; deliberate or restrained in the action named by the following phrase.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "speak": {
+      "id": "en:speak",
+      "headword": "speak",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:speak:project-1",
+          "label": "Project gloss",
+          "definition": "To utter words or express oneself in speech.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "wrath": {
+      "id": "en:wrath",
+      "headword": "wrath",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:wrath:project-1",
+          "label": "Project gloss",
+          "definition": "Anger or strong displeasure.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "naughtiness": {
+      "id": "en:naughtiness",
+      "headword": "naughtiness",
+      "partOfSpeech": "noun",
+      "websterHeadword": "naughtiness",
+      "senses": [
+        {
+          "id": "en:naughtiness:webster-1",
+          "label": "Historical English sense",
+          "definition": "Badness or wickedness; an evil purpose.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:naughtiness:project-1",
+          "label": "Reader gloss",
+          "definition": "A harmful moral quality; in James 1:21, what the reader is told to put away.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "contextNotes": [
+        {
+          "reference": "JAS.1.21",
+          "text": "James places it beside moral filthiness and contrasts it with receiving the word in meekness.",
+          "provenance": [
+            "project-context"
+          ]
+        }
+      ],
+      "sourceLexemes": [
+        "G2549"
+      ]
+    },
+    "filthiness": {
+      "id": "en:filthiness",
+      "headword": "filthiness",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:filthiness:project-1",
+          "label": "Project gloss",
+          "definition": "Moral uncleanness or defilement.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "superfluity": {
+      "id": "en:superfluity",
+      "headword": "superfluity",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:superfluity:project-1",
+          "label": "Project gloss",
+          "definition": "An overflowing excess or abundance.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "engrafted": {
+      "id": "en:engrafted",
+      "headword": "engrafted",
+      "partOfSpeech": "adjective",
+      "senses": [
+        {
+          "id": "en:engrafted:project-1",
+          "label": "Project gloss",
+          "definition": "Implanted or rooted within, like a living shoot.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "doer": {
+      "id": "en:doer",
+      "headword": "doer",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:doer:project-1",
+          "label": "Project gloss",
+          "definition": "A person who carries out an action; in James 1, one who acts on the teaching heard.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "do": {
+      "id": "en:do",
+      "headword": "do",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:do:project-1",
+          "label": "Project gloss",
+          "definition": "To perform or carry out an action.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "word": {
+      "id": "en:word",
+      "headword": "word",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:word:project-1",
+          "label": "Project gloss",
+          "definition": "A spoken or written expression; in a passage, the intended message is resolved from context.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "faith": {
+      "id": "en:faith",
+      "headword": "faith",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:faith:project-1",
+          "label": "Project gloss",
+          "definition": "Trust, confidence, or belief; the passage and grammatical construction shape its contextual sense.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "sourceLexemes": [
+        "G4102"
+      ]
+    },
+    "servant": {
+      "id": "en:servant",
+      "headword": "servant",
+      "partOfSpeech": "noun",
+      "websterHeadword": "servant",
+      "sourceLexemes": [
+        "G1401"
+      ],
+      "senses": [
+        {
+          "id": "en:servant:webster-1",
+          "label": "Historical English sense",
+          "definition": "A person employed for service or other work under another's direction.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:servant:project-1",
+          "label": "Reader gloss",
+          "definition": "A person who serves another or acts under another's authority.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "contextNotes": [
+        {
+          "reference": "JAS.1.1",
+          "text": "James introduces himself as belonging to God and the Lord Jesus Christ. The KJV's English choice is 'servant'; the tagged Greek term also has the range 'slave' or 'bondservant.'",
+          "provenance": [
+            "project-context"
+          ]
+        }
+      ]
+    },
+    "scatter": {
+      "id": "en:scatter",
+      "headword": "scatter",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:scatter:project-1",
+          "label": "Project gloss",
+          "definition": "To spread or disperse across different places.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "tribe": {
+      "id": "en:tribe",
+      "headword": "tribe",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:tribe:project-1",
+          "label": "Project gloss",
+          "definition": "A group or family understood as belonging to a larger people.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "greeting": {
+      "id": "en:greeting",
+      "headword": "greeting",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:greeting:project-1",
+          "label": "Project gloss",
+          "definition": "A salutation or expression of welcome.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "patience": {
+      "id": "en:patience",
+      "headword": "patience",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:patience:project-1",
+          "label": "Project gloss",
+          "definition": "Steadfast endurance through difficulty or delay.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "temptation": {
+      "id": "en:temptation",
+      "headword": "temptation",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:temptation:project-1",
+          "label": "Project gloss",
+          "definition": "A trial or enticement; the surrounding passage helps distinguish the senses.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "wisdom": {
+      "id": "en:wisdom",
+      "headword": "wisdom",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:wisdom:project-1",
+          "label": "Project gloss",
+          "definition": "Sound judgment and practical understanding.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "liberally": {
+      "id": "en:liberally",
+      "headword": "liberally",
+      "partOfSpeech": "adverb",
+      "senses": [
+        {
+          "id": "en:liberally:project-1",
+          "label": "Project gloss",
+          "definition": "Generously; without reserve.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "waver": {
+      "id": "en:waver",
+      "headword": "waver",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:waver:project-1",
+          "label": "Project gloss",
+          "definition": "To become unsteady or divided in resolve.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "unstable": {
+      "id": "en:unstable",
+      "headword": "unstable",
+      "partOfSpeech": "adjective",
+      "senses": [
+        {
+          "id": "en:unstable:project-1",
+          "label": "Project gloss",
+          "definition": "Not firmly settled or consistent.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "exalt": {
+      "id": "en:exalt",
+      "headword": "exalt",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:exalt:project-1",
+          "label": "Project gloss",
+          "definition": "To raise up or honor.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "endure": {
+      "id": "en:endure",
+      "headword": "endure",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:endure:project-1",
+          "label": "Project gloss",
+          "definition": "To continue through or bear difficulty.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "lust": {
+      "id": "en:lust",
+      "headword": "lust",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:lust:project-1",
+          "label": "Project gloss",
+          "definition": "Strong desire; its particular object and moral force come from context.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "entice": {
+      "id": "en:entice",
+      "headword": "entice",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:entice:project-1",
+          "label": "Project gloss",
+          "definition": "To draw or persuade toward an action.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "crown": {
+      "id": "en:crown",
+      "headword": "crown",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:crown:project-1",
+          "label": "Project gloss",
+          "definition": "A wreath or crown; figuratively, a prize or honor.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "firstfruits": {
+      "id": "en:firstfruits",
+      "headword": "firstfruits",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:firstfruits:project-1",
+          "label": "Project gloss",
+          "definition": "The first yield of a harvest; figuratively, an early or representative portion.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "righteousness": {
+      "id": "en:righteousness",
+      "headword": "righteousness",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:righteousness:project-1",
+          "label": "Project gloss",
+          "definition": "Right conduct or justice; the passage and its theological vocabulary shape the contextual sense.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "meekness": {
+      "id": "en:meekness",
+      "headword": "meekness",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:meekness:project-1",
+          "label": "Project gloss",
+          "definition": "Gentleness and humility rather than forceful self-assertion.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "hearer": {
+      "id": "en:hearer",
+      "headword": "hearer",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:hearer:project-1",
+          "label": "Project gloss",
+          "definition": "A person who listens or receives instruction.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "liberty": {
+      "id": "en:liberty",
+      "headword": "liberty",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:liberty:project-1",
+          "label": "Project gloss",
+          "definition": "Freedom; in James 1:25, freedom associated with the law described in the passage.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "work": {
+      "id": "en:work",
+      "headword": "work",
+      "partOfSpeech": "noun or verb",
+      "senses": [
+        {
+          "id": "en:work:project-1",
+          "label": "Project gloss",
+          "definition": "An action, deed, or activity; grammatical role is resolved from the surrounding sentence.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "works": {
+      "id": "en:works",
+      "headword": "works",
+      "partOfSpeech": "noun",
+      "senses": [
+        {
+          "id": "en:works:project-1",
+          "label": "Project gloss",
+          "definition": "Deeds or actions; James uses the term in an argument about enacted conduct.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    },
+    "tempt": {
+      "id": "en:tempt",
+      "headword": "tempt",
+      "partOfSpeech": "verb",
+      "senses": [
+        {
+          "id": "en:tempt:project-1",
+          "label": "Project gloss",
+          "definition": "To test, try, or entice; the surrounding passage determines which sense is active.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ]
+    }
+  },
+  "surfaceForms": {
+    "heareth": {
+      "lexeme": "hear",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "hearing": {
+      "lexeme": "hear",
+      "relation": "gerund-or-participle"
+    },
+    "hearers": {
+      "lexeme": "hearer",
+      "relation": "plural"
+    },
+    "speaketh": {
+      "lexeme": "speak",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "speaking": {
+      "lexeme": "speak",
+      "relation": "gerund-or-participle"
+    },
+    "spake": {
+      "lexeme": "speak",
+      "relation": "irregular-past"
+    },
+    "spoken": {
+      "lexeme": "speak",
+      "relation": "past-participle"
+    },
+    "swiftly": {
+      "lexeme": "swift",
+      "relation": "adverbial-derivation"
+    },
+    "doers": {
+      "lexeme": "doer",
+      "relation": "plural"
+    },
+    "doeth": {
+      "lexeme": "do",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "servants": {
+      "lexeme": "servant",
+      "relation": "plural"
+    },
+    "scattered": {
+      "lexeme": "scatter",
+      "relation": "past-participle"
+    },
+    "tribes": {
+      "lexeme": "tribe",
+      "relation": "plural"
+    },
+    "temptations": {
+      "lexeme": "temptation",
+      "relation": "plural"
+    },
+    "tempteth": {
+      "lexeme": "tempt",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "wavering": {
+      "lexeme": "waver",
+      "relation": "gerund-or-participle"
+    },
+    "exalted": {
+      "lexeme": "exalt",
+      "relation": "past-participle"
+    },
+    "endureth": {
+      "lexeme": "endure",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "enticed": {
+      "lexeme": "entice",
+      "relation": "past-participle"
+    },
+    "firstfruits": {
+      "lexeme": "firstfruits",
+      "relation": "exact-form"
+    },
+    "words": {
+      "lexeme": "word",
+      "relation": "plural"
+    },
+    "worketh": {
+      "lexeme": "work",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    },
+    "worked": {
+      "lexeme": "work",
+      "relation": "past-tense"
+    },
+    "scattereth": {
+      "lexeme": "scatter",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present"
+    }
+  },
+  "sourceLexemes": {
+    "G1401": {
+      "id": "grc:G1401",
+      "strongId": "G1401",
+      "language": "Koine Greek",
+      "lemma": "δοῦλος",
+      "transliteration": "doulos",
+      "gloss": "Slave or bondservant; figuratively, one subject to or devoted to another's service.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g1401/kjv/tr/"
+    },
+    "G2549": {
+      "id": "grc:G2549",
+      "strongId": "G2549",
+      "language": "Koine Greek",
+      "lemma": "κακία",
+      "transliteration": "kakia",
+      "gloss": "Badness or wickedness; in some contexts, malice or ill-will.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g2549/kjv/tr/"
+    },
+    "G4102": {
+      "id": "grc:G4102",
+      "strongId": "G4102",
+      "language": "Koine Greek",
+      "lemma": "πίστις",
+      "transliteration": "pistis",
+      "gloss": "Faith, trust, or confidence.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g4102/kjv/tr/"
+    },
+    "G5036": {
+      "id": "grc:G5036",
+      "strongId": "G5036",
+      "language": "Koine Greek",
+      "lemma": "ταχύς",
+      "transliteration": "tachys",
+      "gloss": "Quick or swift.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g5036/kjv/tr/"
+    }
+  }
+}
