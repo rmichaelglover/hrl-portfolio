@@ -4,6 +4,8 @@ Originating architecture and mission: **Michael Glover**. Implementation: Cypher
 
 This first implementation gives Maestro a working research-to-accounting loop: import predictions and constraints, run relaxation labeling, inspect the graph, export and replay-verify receipts, allocate local demonstration credits 80/10/10, and calculate a revenue-funded Sanctuary scenario.
 
+For current status and the next bounded milestone, see the [project handoff](HANDOFF.md).
+
 Open `index.html` through HTTPS or a localhost HTTP server. There are no dependencies or accounts. The workspace is linked from Maestro and the HRL landing page.
 
 ## Implemented
@@ -51,6 +53,8 @@ CZI is a prospective alignment, not an announced partner. This implementation co
 - CZI, [Open Science Grants](https://chanzuckerberg.com/science/programs-resources/open-science/grants/) and [Science Funding](https://chanzuckerberg.com/science/science-funding/): institutional context.
 
 ## Verification
+
+Run `npm test` from this directory (Node 20+, no dependency installation). It runs the scientific engine, PoDD protocol, and loopback HTTP checks. See [HANDOFF.md](HANDOFF.md) for restart instructions.
 
 `node test-engine.cjs` tests deterministic replay, normalization, synthetic-label evaluation, isolated/zero-support nodes, damping, edge transpose invariance, malformed input rejection, and conservation of allocations.
 

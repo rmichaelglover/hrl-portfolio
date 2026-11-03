@@ -1,7 +1,7 @@
 /* Chess Maestro — offline service worker.
    maestro.html is fully self-contained (no external assets), so caching it + the
    icons/manifest makes the installed PWA work with no network at all. */
-const CACHE = "chess-maestro-v11-podd-traces";
+const CACHE = "chess-maestro-v12-mani-handoff";
 const ASSETS = [
   "mani/index.html",
   "mani/style.css",
@@ -12,6 +12,7 @@ const ASSETS = [
   "mani/podd.schema.json",
   "mani/PODD.md",
   "mani/README.md",
+  "mani/HANDOFF.md",
   "../assets/day-visuals/gallery.js",
   "../assets/day-visuals/chess.png",
   "../assets/day-visuals/chess.gif",

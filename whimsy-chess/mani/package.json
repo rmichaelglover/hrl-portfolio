@@ -1,0 +1,11 @@
+{
+  "name": "@michaelglover/maestro-mani",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Michael Glover’s Maestro / Mani research workspace and PoDD verification prototype",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node test-engine.cjs && node test-podd.cjs && node test-podd-http.cjs",
+    "start": "node podd-node.cjs serve"
+  }
+}
