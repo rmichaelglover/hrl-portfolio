@@ -1,0 +1,441 @@
+{
+  "edition": "KJV-1769",
+  "generated_on": "2026-11-02",
+  "coverage_unit": "case-folded English surface tokens after removing inline |strong=\"ID\" source markup",
+  "corpus": {
+    "books": 66,
+    "verses": 31102,
+    "word_occurrences": 790453,
+    "unique_surface_forms": 12676,
+    "inline_strong_markers_removed": 35489,
+    "verses_with_inline_strong_markers": 7857
+  },
+  "english_lexicon": {
+    "local_lexemes": 40,
+    "registered_surface_forms": 25,
+    "exact_lexeme_occurrences": 7112,
+    "registered_form_occurrences": 2623,
+    "resolved_word_occurrences": 9735,
+    "resolved_occurrence_percent": 1.232,
+    "unique_forms_resolved": 62,
+    "unique_forms_using_lookup_fallback": 12614
+  },
+  "source_language": {
+    "strong_tag_occurrences_in_source": 348884,
+    "inline_tags_attached_from_verse_text": 35489,
+    "unique_strong_ids": 14047,
+    "local_source_lexeme_records": 6,
+    "unique_ids_without_local_records": 14041
+  },
+  "annotation_alignment": {
+    "source_annotation_keys_without_displayed_token": 48,
+    "inline_strong_markers_without_preceding_token": 0,
+    "method": "Inline markers are attached to their preceding visible token. Source ordinals after two marker fragments are remapped; unmatchable source IDs are listed separately and remain clickable in the reader."
+  },
+  "downloads": {
+    "all_surface_forms": "coverage-audit.csv",
+    "unaligned_source_annotations": "unaligned-source-annotations.csv"
+  },
+  "top_unresolved_forms_by_frequency": [
+    {
+      "surface_form": "the",
+      "occurrences": 63919
+    },
+    {
+      "surface_form": "and",
+      "occurrences": 51695
+    },
+    {
+      "surface_form": "of",
+      "occurrences": 34618
+    },
+    {
+      "surface_form": "to",
+      "occurrences": 13563
+    },
+    {
+      "surface_form": "that",
+      "occurrences": 12915
+    },
+    {
+      "surface_form": "in",
+      "occurrences": 12670
+    },
+    {
+      "surface_form": "he",
+      "occurrences": 10419
+    },
+    {
+      "surface_form": "shall",
+      "occurrences": 9837
+    },
+    {
+      "surface_form": "unto",
+      "occurrences": 9001
+    },
+    {
+      "surface_form": "for",
+      "occurrences": 8971
+    },
+    {
+      "surface_form": "i",
+      "occurrences": 8855
+    },
+    {
+      "surface_form": "his",
+      "occurrences": 8474
+    },
+    {
+      "surface_form": "a",
+      "occurrences": 8179
+    },
+    {
+      "surface_form": "lord",
+      "occurrences": 7830
+    },
+    {
+      "surface_form": "they",
+      "occurrences": 7376
+    },
+    {
+      "surface_form": "be",
+      "occurrences": 7012
+    },
+    {
+      "surface_form": "is",
+      "occurrences": 6989
+    },
+    {
+      "surface_form": "him",
+      "occurrences": 6661
+    },
+    {
+      "surface_form": "not",
+      "occurrences": 6609
+    },
+    {
+      "surface_form": "them",
+      "occurrences": 6429
+    },
+    {
+      "surface_form": "it",
+      "occurrences": 6129
+    },
+    {
+      "surface_form": "with",
+      "occurrences": 6012
+    },
+    {
+      "surface_form": "all",
+      "occurrences": 5620
+    },
+    {
+      "surface_form": "thou",
+      "occurrences": 5474
+    },
+    {
+      "surface_form": "thy",
+      "occurrences": 4603
+    },
+    {
+      "surface_form": "was",
+      "occurrences": 4521
+    },
+    {
+      "surface_form": "god",
+      "occurrences": 4446
+    },
+    {
+      "surface_form": "which",
+      "occurrences": 4413
+    },
+    {
+      "surface_form": "my",
+      "occurrences": 4367
+    },
+    {
+      "surface_form": "me",
+      "occurrences": 4097
+    },
+    {
+      "surface_form": "said",
+      "occurrences": 3999
+    },
+    {
+      "surface_form": "but",
+      "occurrences": 3994
+    },
+    {
+      "surface_form": "ye",
+      "occurrences": 3985
+    },
+    {
+      "surface_form": "their",
+      "occurrences": 3932
+    },
+    {
+      "surface_form": "have",
+      "occurrences": 3905
+    },
+    {
+      "surface_form": "will",
+      "occurrences": 3837
+    },
+    {
+      "surface_form": "thee",
+      "occurrences": 3827
+    },
+    {
+      "surface_form": "from",
+      "occurrences": 3642
+    },
+    {
+      "surface_form": "as",
+      "occurrences": 3520
+    },
+    {
+      "surface_form": "are",
+      "occurrences": 2949
+    },
+    {
+      "surface_form": "when",
+      "occurrences": 2834
+    },
+    {
+      "surface_form": "this",
+      "occurrences": 2785
+    },
+    {
+      "surface_form": "out",
+      "occurrences": 2775
+    },
+    {
+      "surface_form": "were",
+      "occurrences": 2773
+    },
+    {
+      "surface_form": "upon",
+      "occurrences": 2747
+    },
+    {
+      "surface_form": "by",
+      "occurrences": 2625
+    },
+    {
+      "surface_form": "you",
+      "occurrences": 2616
+    },
+    {
+      "surface_form": "man",
+      "occurrences": 2614
+    },
+    {
+      "surface_form": "israel",
+      "occurrences": 2566
+    },
+    {
+      "surface_form": "up",
+      "occurrences": 2380
+    },
+    {
+      "surface_form": "son",
+      "occurrences": 2370
+    },
+    {
+      "surface_form": "there",
+      "occurrences": 2300
+    },
+    {
+      "surface_form": "hath",
+      "occurrences": 2263
+    },
+    {
+      "surface_form": "king",
+      "occurrences": 2256
+    },
+    {
+      "surface_form": "then",
+      "occurrences": 2168
+    },
+    {
+      "surface_form": "people",
+      "occurrences": 2139
+    },
+    {
+      "surface_form": "came",
+      "occurrences": 2093
+    },
+    {
+      "surface_form": "had",
+      "occurrences": 2028
+    },
+    {
+      "surface_form": "house",
+      "occurrences": 2023
+    },
+    {
+      "surface_form": "into",
+      "occurrences": 2015
+    },
+    {
+      "surface_form": "on",
+      "occurrences": 2010
+    },
+    {
+      "surface_form": "her",
+      "occurrences": 1994
+    },
+    {
+      "surface_form": "come",
+      "occurrences": 1971
+    },
+    {
+      "surface_form": "one",
+      "occurrences": 1967
+    },
+    {
+      "surface_form": "we",
+      "occurrences": 1844
+    },
+    {
+      "surface_form": "children",
+      "occurrences": 1803
+    },
+    {
+      "surface_form": "before",
+      "occurrences": 1796
+    },
+    {
+      "surface_form": "your",
+      "occurrences": 1776
+    },
+    {
+      "surface_form": "also",
+      "occurrences": 1769
+    },
+    {
+      "surface_form": "day",
+      "occurrences": 1730
+    },
+    {
+      "surface_form": "land",
+      "occurrences": 1717
+    },
+    {
+      "surface_form": "an",
+      "occurrences": 1699
+    },
+    {
+      "surface_form": "so",
+      "occurrences": 1689
+    },
+    {
+      "surface_form": "against",
+      "occurrences": 1667
+    },
+    {
+      "surface_form": "men",
+      "occurrences": 1653
+    },
+    {
+      "surface_form": "shalt",
+      "occurrences": 1617
+    },
+    {
+      "surface_form": "if",
+      "occurrences": 1595
+    },
+    {
+      "surface_form": "at",
+      "occurrences": 1570
+    },
+    {
+      "surface_form": "let",
+      "occurrences": 1511
+    },
+    {
+      "surface_form": "go",
+      "occurrences": 1492
+    },
+    {
+      "surface_form": "hand",
+      "occurrences": 1468
+    },
+    {
+      "surface_form": "us",
+      "occurrences": 1451
+    },
+    {
+      "surface_form": "saying",
+      "occurrences": 1445
+    },
+    {
+      "surface_form": "made",
+      "occurrences": 1406
+    },
+    {
+      "surface_form": "went",
+      "occurrences": 1400
+    },
+    {
+      "surface_form": "even",
+      "occurrences": 1393
+    },
+    {
+      "surface_form": "no",
+      "occurrences": 1393
+    },
+    {
+      "surface_form": "now",
+      "occurrences": 1356
+    },
+    {
+      "surface_form": "behold",
+      "occurrences": 1326
+    },
+    {
+      "surface_form": "saith",
+      "occurrences": 1262
+    },
+    {
+      "surface_form": "every",
+      "occurrences": 1238
+    },
+    {
+      "surface_form": "therefore",
+      "occurrences": 1237
+    },
+    {
+      "surface_form": "these",
+      "occurrences": 1225
+    },
+    {
+      "surface_form": "because",
+      "occurrences": 1209
+    },
+    {
+      "surface_form": "after",
+      "occurrences": 1179
+    },
+    {
+      "surface_form": "our",
+      "occurrences": 1165
+    },
+    {
+      "surface_form": "things",
+      "occurrences": 1162
+    },
+    {
+      "surface_form": "down",
+      "occurrences": 1125
+    },
+    {
+      "surface_form": "or",
+      "occurrences": 1122
+    },
+    {
+      "surface_form": "sons",
+      "occurrences": 1094
+    }
+  ]
+}
