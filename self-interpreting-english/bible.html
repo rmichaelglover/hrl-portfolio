@@ -95,6 +95,7 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   const headword=form?form.lexeme:surface;
   const record=lexicon.lexemes[headword];
   const occurrenceRef=currentBook+"."+$('chapter').value+"."+ref.split(":").at(-1);
+  const phraseLinks=(lexicon.phraseLinks||[]).filter(link=>link.reference===occurrenceRef&&link.tokenIndices.includes(tokenIndex));
   const aside=$("lexical");aside.replaceChildren();
   aside.append(el("div","Word record","label"),el("h3",word),el("div",ref+" · KJV surface form","loc"));
   aside.append(el("span",form?"Registered form · "+form.relation:"English word form","badge"));
@@ -108,8 +109,9 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   else addStep("No matching local lexeme; interpretation stops here rather than inventing a definition.");
   if(record?.sourceLexemes?.length)addStep("English lexeme links to source-language index record(s) "+record.sourceLexemes.join(", ")+".");
   if(strong.length)addStep("Occurrence annotation in the KJV source package → "+strong.join(", ")+".");
-  else addStep("No Strong’s occurrence annotation is attached to this token in the source data.");
+  else addStep("No token-level Strong’s annotation is attached to this word in the source data.");
   for(const id of strong){const canonical=canonicalStrongId(id),source=sourceLexeme(id),li=el("li");li.append(document.createTextNode("Source tag "+id+(canonical!==id?" normalized to canonical ID "+canonical:"")+" → "+(source?source.language+" lemma "+source.lemma+" ("+source.transliteration+") via "+source.provenance.map(p=>lexicon.provenance[p]?.label||p).join(", "):"external lexicon lookup; local source-language record not yet imported")+". "));const a=el("a",canonical+" lexicon ↗");a.href=sourceLexiconUrl(id);a.target="_blank";a.rel="noopener";li.append(a);steps.append(li)}
+  for(const link of phraseLinks){addStep("Phrase-level link “"+link.surface+"” → source tag "+link.sourceLexemes.join(", ")+" (the KJV corpus places this tag on token "+link.sourceAnnotation.tokenIndex+", “"+link.sourceAnnotation.surface+"”).");for(const id of link.sourceLexemes){const source=sourceLexeme(id),li=el("li");li.append(document.createTextNode(source?"Phrase source index "+id+" → "+source.language+" lemma "+source.lemma+" ("+source.transliteration+"): "+source.gloss+". ":"Phrase source index "+id+" has an external lexicon lookup. "));const a=el("a",canonicalStrongId(id)+" lexicon ↗");a.href=sourceLexiconUrl(id);a.target="_blank";a.rel="noopener";li.append(a);steps.append(li)}}
   const note=record?(record.contextNotes||[]).find(item=>item.reference===occurrenceRef):null;
   if(note)for(const sourceId of note.provenance||[]){const source=lexicon.provenance[sourceId];if(source)addStep("Context note "+note.reference+" · provenance: "+source.label+".")}
   trace.append(steps);aside.append(trace);
@@ -120,6 +122,7 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   const dl=document.createElement("dl");
   dl.append(el("dt","English headword"),el("dd",record?record.headword+" · "+record.partOfSpeech:headword+" · no local headword record yet"));
   if(note)dl.append(el("dt","In this verse"),el("dd",note.text));
+  if(phraseLinks.length)dl.append(el("dt","Phrase-level source link"),el("dd",phraseLinks.map(link=>"“"+link.surface+"” → "+link.sourceLexemes.join(", ")+" (tag on “"+link.sourceAnnotation.surface+"”)").join(" · ")));
   if(strong.length){dl.append(el("dt","Source-language occurrence indexes"),el("dd",strong.join(" · ")+" · occurrence tags from the KJV source package"));for(const id of strong){const source=sourceLexeme(id);if(source)dl.append(el("dt",source.language+" lexical record"),el("dd",source.lemma+" ("+source.transliteration+") · "+(source.partOfSpeech?source.partOfSpeech+" · ":"")+source.gloss))}}
   aside.append(dl);
   const links=el("div",undefined,"links");

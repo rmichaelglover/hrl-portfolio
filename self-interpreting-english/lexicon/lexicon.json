@@ -39,6 +39,13 @@
       "type": "source-language-lexicon",
       "urlPattern": "https://www.blueletterbible.org/lexicon/{id}/kjv/wlc/",
       "description": "Hebrew and Aramaic headword lookup indexed by the Strong identifier attached to a KJV occurrence."
+    },
+    "project-morphology": {
+      "label": "Project-curated form-to-headword analysis",
+      "type": "authored-morphological-analysis",
+      "author": "Codex, research assistant to Michael Emanuel Glover",
+      "direction": "Michael Emanuel Glover's self-interpreting Bible project",
+      "description": "An explicit English surface-form relation to a lexeme, including archaic inflection links. This records the project analysis rather than claiming an imported corpus annotation."
     }
   },
   "lexemes": {
@@ -718,111 +725,235 @@
           ]
         }
       ]
+    },
+    "rejoice": {
+      "id": "en:rejoice",
+      "headword": "rejoice",
+      "partOfSpeech": "verb",
+      "websterHeadword": "rejoice",
+      "senses": [
+        {
+          "id": "en:rejoice:webster-1",
+          "label": "Historical English sense · intransitive",
+          "definition": "To experience joy and gladness; to exult.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:rejoice:webster-2",
+          "label": "Historical English sense · transitive",
+          "definition": "To make joyful; to gladden or exhilarate.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:rejoice:project-1",
+          "label": "Reader gloss",
+          "definition": "To feel or express joy; in James 2:13, the KJV uses it in the phrase “rejoiceth against judgment.”",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "contextNotes": [
+        {
+          "reference": "JAS.2.13",
+          "text": "The KJV phrase is “mercy rejoiceth against judgment.” The source package places Strong’s G2620 on the following token “against,” not directly on “rejoiceth”; the linked phrase record keeps that annotation visible at phrase level.",
+          "provenance": [
+            "project-context"
+          ]
+        }
+      ]
     }
   },
   "surfaceForms": {
     "heareth": {
       "lexeme": "hear",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "hearing": {
       "lexeme": "hear",
-      "relation": "gerund-or-participle"
+      "relation": "gerund-or-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "hearers": {
       "lexeme": "hearer",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "speaketh": {
       "lexeme": "speak",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "speaking": {
       "lexeme": "speak",
-      "relation": "gerund-or-participle"
+      "relation": "gerund-or-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "spake": {
       "lexeme": "speak",
-      "relation": "irregular-past"
+      "relation": "irregular-past",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "spoken": {
       "lexeme": "speak",
-      "relation": "past-participle"
+      "relation": "past-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "swiftly": {
       "lexeme": "swift",
-      "relation": "adverbial-derivation"
+      "relation": "adverbial-derivation",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "doers": {
       "lexeme": "doer",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "doeth": {
       "lexeme": "do",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "servants": {
       "lexeme": "servant",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "scattered": {
       "lexeme": "scatter",
-      "relation": "past-participle"
+      "relation": "past-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "tribes": {
       "lexeme": "tribe",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "temptations": {
       "lexeme": "temptation",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "tempteth": {
       "lexeme": "tempt",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "wavering": {
       "lexeme": "waver",
-      "relation": "gerund-or-participle"
+      "relation": "gerund-or-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "exalted": {
       "lexeme": "exalt",
-      "relation": "past-participle"
+      "relation": "past-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "endureth": {
       "lexeme": "endure",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "enticed": {
       "lexeme": "entice",
-      "relation": "past-participle"
+      "relation": "past-participle",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "firstfruits": {
       "lexeme": "firstfruits",
-      "relation": "exact-form"
+      "relation": "exact-form",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "words": {
       "lexeme": "word",
-      "relation": "plural"
+      "relation": "plural",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "worketh": {
       "lexeme": "work",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "worked": {
       "lexeme": "work",
-      "relation": "past-tense"
+      "relation": "past-tense",
+      "provenance": [
+        "project-morphology"
+      ]
     },
     "scattereth": {
       "lexeme": "scatter",
       "relation": "archaic-inflection",
-      "rule": "third-person singular present"
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
+    },
+    "rejoiceth": {
+      "lexeme": "rejoice",
+      "relation": "archaic-inflection",
+      "rule": "third-person singular present",
+      "provenance": [
+        "project-morphology"
+      ]
     }
   },
   "sourceLexemes": {
@@ -886,6 +1017,44 @@
         "strongs-1890"
       ],
       "url": "https://www.blueletterbible.org/lexicon/g182/kjv/tr/"
+    },
+    "G2620": {
+      "id": "grc:G2620",
+      "strongId": "G2620",
+      "language": "Koine Greek",
+      "lemma": "κατακαυχάομαι",
+      "transliteration": "katakauchaomai",
+      "partOfSpeech": "verb",
+      "gloss": "To exult over or against; to boast, glory, or rejoice against.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g2620/kjv/tr/"
     }
-  }
+  },
+  "phraseLinks": [
+    {
+      "id": "phrase:JAS.2.13:mercy-rejoiceth-against",
+      "reference": "JAS.2.13",
+      "tokenIndices": [
+        13,
+        14,
+        15
+      ],
+      "surface": "mercy rejoiceth against",
+      "relation": "phrase-level-source-link",
+      "sourceLexemes": [
+        "G2620"
+      ],
+      "sourceAnnotation": {
+        "tokenIndex": 15,
+        "surface": "against"
+      },
+      "provenance": [
+        "kjv-corpus",
+        "strongs-1890",
+        "project-context"
+      ]
+    }
+  ]
 }
