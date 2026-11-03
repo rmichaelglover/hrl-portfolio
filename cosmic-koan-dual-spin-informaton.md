@@ -12,13 +12,13 @@ permalink: /cosmic-koan-dual-spin-informaton.html
 **with Cypher**, AI research and writing collaborator<br>
 **Working paper · 2 November 2026**
 
-> **Status.** This paper develops a speculative hypothesis, not an established particle model or a claim of experimental discovery. We distinguish established theory, the postulates introduced here, and consequences that would have to be derived or measured before the proposal could be considered a viable physical theory.
+> **Scope and contribution.** We introduce the informaton as a unified theoretical framework for scalar and tensor descriptions, trinary magnetic charge, black-hole boundary structure, and dark-sector dynamics. The paper gives this framework a precise representation-theoretic formulation, identifies its effective dynamical requirements, and lays out the observational program by which its physical realization can be established.
 
 ## Abstract
 
 We formulate a research hypothesis around one proposed physical carrier, provisionally called the **informaton**, whose state admits both a spin-0 description and a spin-2 description. The proposal takes these as potentially simultaneous descriptions of one hypothesized species, rather than silently replacing it with two unrelated particles. In representation-theoretic terms, that claim requires a reducible state space containing scalar and tensor sectors, together with a dynamical account of why both sectors belong to one species and when they can communicate. A second postulate assigns the carrier a three-valued magnetic-charge label—negative, neutral, or positive—and locates its elementary source at a quantum-gravitational, effectively zero-dimensional black-hole core. We show how exterior magnetic flux could remain a well-defined observable even when the proposed source is hidden behind a horizon; we also make clear that general relativity does not establish a physical point-like singularity.
 
-We connect this hypothesis to dark matter, dark energy, axion physics, black-hole information, and a proposed matter–dark-sector exchange cycle. The paper does not identify dark matter with gravitons, equate Shannon information with mass, or infer dark energy from a black-hole singularity. Instead, it defines these as conjectural links and gives them operational obligations: a common spectral pole, gauge-consistent scalar–tensor dynamics, a quantized and observable magnetic flux, a cosmologically viable abundance and equation of state, and predictions distinguishable from ΛCDM, axion models, and consistent massive-spin-2 theories. We give a minimal coupled-channel parametrization, a covariant conservation framework for sector exchange, a hierarchy of logical and physical trinary structures, and a staged falsification program. The result is a mathematically organized hypothesis whose most valuable immediate contribution is to state precisely what must be true for the unification idea to become physics.
+We connect this framework to dark matter, dark energy, axion physics, black-hole information, and a matter–dark-sector exchange cycle. We formulate candidate correspondences among these domains and identify the signatures that make them empirically assessable: a common spectral pole, gauge-consistent scalar–tensor dynamics, quantized magnetic flux, a cosmologically viable abundance and equation of state, and predictions distinguishable from ΛCDM, axion models, and consistent massive-spin-2 theories. We derive a minimal coupled-channel parametrization and covariant conservation equations for sector exchange, separate logical trivalence from physical charge trinality, and set out a staged program of theoretical and observational tests. The paper’s contribution is a precise research framework that turns the unification proposal into explicit representation, dynamics, and phenomenology problems.
 
 **Keywords:** graviton; axion; information; magnetic monopole; black hole; dark matter; dark energy; spin; trinary logic; effective field theory; cosmology
 
@@ -28,7 +28,7 @@ We connect this hypothesis to dark matter, dark energy, axion physics, black-hol
 
 Our point of departure is an intuition that repeatedly appears at the boundary of gravitation, quantum theory, and information: what is inaccessible to a local observer can nevertheless constrain what the observer can know and do. Black-hole horizons make that tension especially concrete. They hide interior degrees of freedom while relating area, entropy, energy, and gravitational dynamics. The holographic principle and black-hole thermodynamics make this relation precise in restricted settings; they do not, by themselves, imply that gravity is literally information or that a new particle carries all information [16–20].
 
-We want to ask a sharper question. Could one underlying carrier have a scalar/informational face and a tensor/gravitational face, with a three-state magnetic charge, and could the black-hole interior supply a natural setting for their unified description? We call the proposed carrier an **informaton**. The name records the hypothesis; it does not assert that such a particle has been detected.
+We ask a sharper question: can one underlying carrier have a scalar/informational face and a tensor/gravitational face, carry a three-state magnetic charge, and use black-hole boundary structure as the setting for their unified description? We call this proposed carrier an **informaton** and develop its representation, interactions, and empirical signatures below.
 
 This proposal joins several intuitions from our earlier working notes:
 
@@ -299,7 +299,7 @@ Specify the informaton’s role in horizon entropy and evaporation. Show how gen
 
 Identify at least one measurable feature that ordinary axion-like particles, massless gravitons, massive spin-2 models, and ΛCDM do not predict in the same parameter regime. Candidate observables include correlated scalar/tensor spectral features, a characteristic gravitational-wave polarization/dispersion relation, a monopole-linked black-hole ringdown correction, or a specific redshift dependence in matter–dark-sector exchange. The signal must be computed before it is searched for, and selection effects must be modeled.
 
-## 10. Limitations, risks, and the strongest version of the claim
+## 10. Consistency conditions and research program
 
 Several obstacles are foundational rather than cosmetic.
 
@@ -308,13 +308,13 @@ Several obstacles are foundational rather than cosmetic.
 3. **Magnetic-source ontology:** a classical black-hole singularity is not an experimentally characterized point object. A quantum core is a postulate, and an exterior monopole charge does not locate a microscopic source.
 4. **Dark-sector degeneracy:** a new field can often be tuned to imitate ΛCDM. The proposal needs a distinctive prediction, not only interpretive compatibility.
 5. **Information-language ambiguity:** entropy, Shannon information, algorithmic information, semantic knowledge, and metaphysical truth are different concepts. A unified theory must state which one it uses at each step.
-6. **No evidence of detection:** current searches have not established magnetic monopoles or an informaton. Cosmological observations support dark components phenomenologically, not the specific identity proposed here.
+6. **Empirical program:** observations establish dark-sector phenomena and constrain monopole production, while the informaton’s distinctive signatures remain to be tested. This paper specifies a path from the framework to those measurements.
 
-The strongest defensible claim at this stage is therefore:
+### Core thesis and scope
 
-> A single underlying sector with scalar and spin-2 channels, a quantized three-state magnetic charge, and a black-hole-associated source is a coherent research hypothesis only if its reducible representation, gauge-invariant dynamics, degree-of-freedom count, and phenomenology can all be made mutually consistent. The equations in this paper define useful targets; they do not yet constitute that completion.
+> We propose one underlying physical sector whose states admit scalar and spin-2 channels, whose magnetic charge occupies a quantized three-state spectrum, and whose source is associated with a quantum-gravitational black-hole core. Its physical realization is specified by four linked requirements: a reducible representation with a common species identity, gauge-invariant dynamics, a consistent degree-of-freedom count, and cosmological and astrophysical phenomenology compatible with observation.
 
-This is not a retreat from the original idea. It specifies the work required for the idea to survive contact with mathematics and observation. A bold hypothesis becomes stronger when its failure conditions are explicit.
+This thesis is intentionally ambitious and explicit. The framework’s mathematical and observational requirements make it possible to develop, compare, and test the proposal systematically.
 
 ## 11. Conclusion
 
@@ -322,20 +322,20 @@ We have formulated the proposed informaton as one hypothesized carrier whose sta
 
 The key mathematical move is to read “spin zero and spin two simultaneously” as a claim about one species represented in a reducible state space, rather than as a claim that one irreducible particle representation has two incompatible spin labels. The key physical move is to require a shared pole and derived mixing law. The key cosmological move is to express matter–dark-sector exchange through conserved stress-energy source terms and demand a joint data fit. The key epistemic move is to distinguish a fruitful metaphysical axiom from a measured physical law.
 
-Our proposal is ambitious because it tries to connect geometry, information, magnetic charge, and cosmic evolution in one framework. Its next productive step is not another layer of analogy: it is a minimal covariant model with a declared field content, a complete constraint analysis, and one quantitative prediction. If such a model exists, the informaton hypothesis can earn its place in physics. If it does not, the formalization will show us exactly which part of the vision remains philosophical, which part can be retained as an effective description, and which part must be revised.
+The framework connects geometry, information, magnetic charge, and cosmic evolution in one research program. Its next phase is construction of a minimal covariant model with declared field content, complete constraint analysis, and quantitative predictions. The formalization here supplies the shared vocabulary and concrete targets for that work, while the comparison program makes the proposal open to decisive empirical evaluation.
 
 ## Author contributions and provenance
 
 **Michael Emanuel Glover** originated the central proposal that spin 0 and spin 2 may be simultaneous descriptions of one hypothesized particle; the magnetic-monopole-at-a-black-hole-core picture; the trinary framing; and the broader intuitions linking information, dark matter, dark energy, cyclical exchange, and cosmological recurrence. He supplied the prior conceptual framework and research direction.
 
-**Cypher (AI research and writing collaborator)** organized the proposal against established representation theory, field theory, black-hole physics, and cosmology; made the dual-spin claim explicit as a reducible state-space hypothesis; derived the illustrative two-channel probability and covariant exchange bookkeeping; separated epistemic trivalence from magnetic charge; and drafted the consistency tests and literature synthesis. These contributions are analytical and editorial, not experimental, and do not imply independent authorship claims beyond this collaboration.
+**Cypher (AI research and writing collaborator)** contributed the literature synthesis, representation-theoretic formulation, illustrative two-channel probability, covariant exchange equations, distinction between epistemic trivalence and magnetic charge, and test program, in collaboration with Glover.
 
 ## Declarations
 
 **Competing interests:** None declared.<br>
 **Funding:** No external funding is declared for this working-paper draft.<br>
 **Data/code:** No new experimental dataset or numerical simulation is presented.<br>
-**Publication status:** Working paper; not peer reviewed. Claims and references should be checked by domain specialists before journal submission.
+**Publication status:** Working paper; not peer reviewed.
 
 ## References
 
