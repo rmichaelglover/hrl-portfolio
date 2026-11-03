@@ -33,6 +33,12 @@
       "author": "Codex, research assistant to Michael Emanuel Glover",
       "direction": "Michael Emanuel Glover's self-interpreting Bible project",
       "description": "A local contextual connection attached to a specific verse reference."
+    },
+    "strongs-hebrew": {
+      "label": "Strong's Hebrew and Aramaic Dictionary",
+      "type": "source-language-lexicon",
+      "urlPattern": "https://www.blueletterbible.org/lexicon/{id}/kjv/wlc/",
+      "description": "Hebrew and Aramaic headword lookup indexed by the Strong identifier attached to a KJV occurrence."
     }
   },
   "lexemes": {
@@ -500,6 +506,9 @@
             "project-gloss"
           ]
         }
+      ],
+      "sourceLexemes": [
+        "G182"
       ]
     },
     "exalt": {
@@ -864,6 +873,19 @@
         "strongs-1890"
       ],
       "url": "https://www.blueletterbible.org/lexicon/g5036/kjv/tr/"
+    },
+    "G182": {
+      "id": "grc:G182",
+      "strongId": "G182",
+      "language": "Koine Greek",
+      "lemma": "ἀκατάστατος",
+      "transliteration": "akatastatos",
+      "partOfSpeech": "adjective",
+      "gloss": "Unstable, inconstant, or restless.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g182/kjv/tr/"
     }
   }
 }

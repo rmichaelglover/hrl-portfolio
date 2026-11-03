@@ -65,7 +65,7 @@ The English dictionary path has two complementary roles:
 
 The starter records now live in `lexicon/lexicon.json`, versioned as `hrl.self-interpreting-lexicon/v1`. Each English lexeme has a stable ID, headword, part of speech, candidate senses, and optional verse notes and source-language links. `surfaceForms` records explicit links from inflected forms to lexemes. The top-level provenance registry describes the KJV corpus, Webster 1828, Strong’s Greek lexicon, and project-authored glosses and contextual notes. Source-language records have their own IDs, lemmas, transliterations, glosses, citations, and provenance. This replaces the former page-local gloss, inflection, source-gloss, and context-note maps.
 
-The Greek and Hebrew layer is separate. A Strong’s number is a stable lookup index in the source edition, not itself a lexical definition or an interpretive verdict. Where available, it connects the English occurrence to a source-language headword, morphology, pronunciation, and lexicon gloss. Translation choices can then be compared across occurrences and contexts.
+The Greek and Hebrew layer is separate. A Strong’s number is a stable lookup index in the source edition, not itself a lexical definition or an interpretive verdict. Where available, it connects the English occurrence to a source-language headword, morphology, pronunciation, and lexicon gloss. The interpreter canonicalizes zero-padded corpus tags for record lookup while preserving the original tag in the displayed occurrence path; for example, `G0182` resolves to the local `G182` record. If a source-language record has not yet been imported, the occurrence still receives a language-appropriate outbound lexicon link.
 
 For example, selecting `swift` in James 1:19 yields this path:
 
@@ -82,7 +82,7 @@ The reader follows the selected occurrence through the registered surface-form l
 
 The first archaic-term records include `naughtiness`, `filthiness`, `superfluity`, and `engrafted` from James 1:21. For `naughtiness`, the reader records Webster’s historical primary sense—badness, wickedness, or evil purpose—alongside the occurrence’s Greek index `G2549` (`κακία`, *kakia*), whose range includes badness, wickedness, and, in some contexts, malice. The verse note connects the term to James’s instruction to put it away and to the contrast with receiving the word in meekness. This keeps the historical English sense, Greek lexical range, and local contextual reading distinct but connected.
 
-The James 1 seed also includes everyday and theological vocabulary such as `servant`, `patience`, `temptation`, `wisdom`, `righteousness`, `faith`, and `liberty`. In James 1:1, `servant` links to Webster’s English entry and to Greek `G1401`, *doulos*. The lexical note preserves both the KJV’s “servant” and the Greek term’s broader range, including “slave” or “bondservant”; the verse context shows James’s self-description as belonging to God and the Lord Jesus Christ. This prevents the familiar English surface form from hiding a meaningful source-language distinction.
+The James 1 seed also includes everyday and theological vocabulary such as `servant`, `patience`, `temptation`, `wisdom`, `righteousness`, `faith`, and `liberty`. In James 1:1, `servant` links to Webster’s English entry and to Greek `G1401`, *doulos*. The lexical note preserves both the KJV’s “servant” and the Greek term’s broader range, including “slave” or “bondservant”; the verse context shows James’s self-description as belonging to God and the Lord Jesus Christ. James 1:8 `unstable` resolves its padded occurrence tag `G0182` to Greek `G182`, *akatastatos* (ἀκατάστατος), with the sourced lexical range “unstable, inconstant, or restless.” This prevents the familiar English surface form from hiding a meaningful source-language distinction.
 
 ## Self-interpretation and closure
 
@@ -116,5 +116,6 @@ This operational definition is deliberately useful: it can be checked by verifyi
 - Blue Letter Bible, [Greek lexicon G5036](https://www.blueletterbible.org/lexicon/g5036/kjv/tr/), linked from the example occurrence `swift` in James 1:19.
 - Blue Letter Bible, [Greek lexicon G2549](https://www.blueletterbible.org/lexicon/g2549/kjv/tr/), linked from `naughtiness` in James 1:21.
 - Blue Letter Bible, [Greek lexicon G1401](https://www.blueletterbible.org/lexicon/g1401/kjv/tr/), linked from `servant` in James 1:1.
+- Blue Letter Bible, [Greek lexicon G182](https://www.blueletterbible.org/lexicon/g182/kjv/tr/), linked from `unstable` in James 1:8.
 
 The complete Bible corpus and reader are this project’s working implementation. The contribution is the translation-bound, word-occurrence graph and the design that lets scripture, English lexicography, and source-language lookup be interpreted through one recursively extensible lexical system.

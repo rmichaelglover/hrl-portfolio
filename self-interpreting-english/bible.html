@@ -86,6 +86,9 @@ let manifest, currentBook, bookData, lexicon;
 let selected = null;
 function el(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node}
 function provenanceAnchor(id,headword){const source=lexicon.provenance[id];if(!source)return null;const a=el("a",source.label);if(source.urlPattern)a.href=source.urlPattern.replace("{headword}",encodeURIComponent(headword));else if(source.url)a.href=source.url;else return null;a.target="_blank";a.rel="noopener";return a}
+function canonicalStrongId(id){return id[0]+id.slice(1).replace(/^0+(?=\d)/,"")}
+function sourceLexeme(id){return lexicon.sourceLexemes[id]||lexicon.sourceLexemes[canonicalStrongId(id)]||null}
+function sourceLexiconUrl(id){const entry=sourceLexeme(id);if(entry?.url)return entry.url;const canonical=canonicalStrongId(id),provenanceId=canonical[0]==="H"?"strongs-hebrew":"strongs-1890",source=lexicon.provenance[provenanceId];return source.urlPattern.replace("{id}",canonical.toLowerCase())}
 function renderLexical(word,strong,ref,added,tokenIndex){
   const surface=word.toLocaleLowerCase().replace(/[^a-z'-]/g,"");
   const form=lexicon.surfaceForms[surface];
@@ -106,7 +109,7 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   if(record?.sourceLexemes?.length)addStep("English lexeme links to source-language index record(s) "+record.sourceLexemes.join(", ")+".");
   if(strong.length)addStep("Occurrence annotation in the KJV source package → "+strong.join(", ")+".");
   else addStep("No Strong’s occurrence annotation is attached to this token in the source data.");
-  for(const id of strong){const source=lexicon.sourceLexemes[id];if(source)addStep("Source index "+id+" → "+source.language+" lemma "+source.lemma+" ("+source.transliteration+") via "+source.provenance.map(p=>lexicon.provenance[p]?.label||p).join(", ")+".");else addStep("Source index "+id+" has an outbound lookup link; no local source-language record is imported.")}
+  for(const id of strong){const canonical=canonicalStrongId(id),source=sourceLexeme(id),li=el("li");li.append(document.createTextNode("Source tag "+id+(canonical!==id?" normalized to canonical ID "+canonical:"")+" → "+(source?source.language+" lemma "+source.lemma+" ("+source.transliteration+") via "+source.provenance.map(p=>lexicon.provenance[p]?.label||p).join(", "):"external lexicon lookup; local source-language record not yet imported")+". "));const a=el("a",canonical+" lexicon ↗");a.href=sourceLexiconUrl(id);a.target="_blank";a.rel="noopener";li.append(a);steps.append(li)}
   const note=record?(record.contextNotes||[]).find(item=>item.reference===occurrenceRef):null;
   if(note)for(const sourceId of note.provenance||[]){const source=lexicon.provenance[sourceId];if(source)addStep("Context note "+note.reference+" · provenance: "+source.label+".")}
   trace.append(steps);aside.append(trace);
@@ -117,12 +120,12 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   const dl=document.createElement("dl");
   dl.append(el("dt","English headword"),el("dd",record?record.headword+" · "+record.partOfSpeech:headword+" · no local headword record yet"));
   if(note)dl.append(el("dt","In this verse"),el("dd",note.text));
-  if(strong.length){dl.append(el("dt","Source-language occurrence indexes"),el("dd",strong.join(" · ")+" · occurrence tags from the KJV source package"));for(const id of strong){const source=lexicon.sourceLexemes[id];if(source)dl.append(el("dt",source.language+" lexical record"),el("dd",source.lemma+" ("+source.transliteration+"): "+source.gloss))}}
+  if(strong.length){dl.append(el("dt","Source-language occurrence indexes"),el("dd",strong.join(" · ")+" · occurrence tags from the KJV source package"));for(const id of strong){const source=sourceLexeme(id);if(source)dl.append(el("dt",source.language+" lexical record"),el("dd",source.lemma+" ("+source.transliteration+") · "+(source.partOfSpeech?source.partOfSpeech+" · ":"")+source.gloss))}}
   aside.append(dl);
   const links=el("div",undefined,"links");
   if(record?.websterHeadword){const a=provenanceAnchor("webster-1828",record.websterHeadword);if(a){a.textContent="Webster 1828 ↗";links.append(a)}}
   else{const a=el("a","Search Webster 1828 ↗");a.href="https://webstersdictionary1828.com/Dictionary/"+encodeURIComponent(headword);a.target="_blank";a.rel="noopener";links.append(a)}
-  for(const id of strong){const a=el("a",id+" lexicon ↗");a.href=lexicon.sourceLexemes[id]?.url||("https://www.blueletterbible.org/lexicon/"+id.toLowerCase()+"/kjv/"+(id[0]==="G"?"tr":"wlc")+"/");a.target="_blank";a.rel="noopener";links.append(a)}
+  for(const id of strong){const a=el("a",canonicalStrongId(id)+" lexicon ↗");a.href=sourceLexiconUrl(id);a.target="_blank";a.rel="noopener";links.append(a)}
   aside.append(links);
 }
 function renderChapter(){
