@@ -19,3 +19,7 @@ Allow time for writing and reading. Keep the writing within physical reach, choo
 The web page signals the standing convention at each scene. Eight new illustrations carry a reachable board as part of their theatrical staging. Earlier source illustrations are retained as archival images; they predate this production convention and do not override it. Captions distinguish the new stage illustrations from those earlier images.
 
 For future performances or a graphic adaptation, the board offers a recurring visual element and a place where the same line can receive different readings. This edition remains an illustrated play; it has not been converted into a graphic novel.
+
+## Illustrated story world
+
+The website is the written and illustrated version of the play, not a record of a live production. Illustrations may depict the story world directly and need not include a whiteboard. The physical-board convention applies to live performance. Yoshimi’s illustrations follow this distinction.

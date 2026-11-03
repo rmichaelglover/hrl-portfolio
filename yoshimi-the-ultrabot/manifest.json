@@ -1,0 +1,26 @@
+{
+  "title": "Yoshimi the Ultrabot",
+  "protagonist": "Starshine",
+  "date": "2026-11-02",
+  "originating_concept_and_creative_direction": "Michael Glover",
+  "prose": "Cypher / ChatGPT / Codex",
+  "genre": "science fiction",
+  "manuscript": "SCENE.md",
+  "manuscript_sha256": "b985dbebae3a36621300a22af80896b76b1372cf6e080b4ecefddbb1b9a47ee6",
+  "images": [
+    {
+      "file": "art/01-starshine-and-yoshimi.png",
+      "caption": "Starshine checks Yoshimi in a maintenance room.",
+      "alt": "An adult Starshine at her workstation beside Yoshimi, a low industrial robot with articulated wheels and folded manipulators.",
+      "tool": "OpenAI built-in image generation"
+    },
+    {
+      "file": "art/02-the-tunnel.png",
+      "caption": "Yoshimi holds the tunnel barrier while the crew reaches the side passage.",
+      "alt": "A broad grey rescue robot braces beside a stopped truck in a dusty tunnel as adult maintenance workers reach a side door.",
+      "tool": "OpenAI built-in image generation"
+    }
+  ],
+  "illustration_convention": "Depicts the story world; live-performance board is not required in images.",
+  "illustration_prompts": "art/PROMPTS.md"
+}

@@ -402,7 +402,7 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 16389,
+  "compiled_whitespace_word_count": 18638,
   "candidate_count": 39,
   "arena_romance_art": {
     "source": "chess/chat-stories/2026-11-01/arena-lounge/ROMANCE.md",
@@ -428,5 +428,15 @@
       "status": "required; inserted before The hand belongs to Michael",
       "author_credit": "Michael Glover with ChatGPT / Codex"
     }
-  ]
+  ],
+  "yoshimi_scene": {
+    "title": "Yoshimi the Ultrabot",
+    "protagonist": "Starshine",
+    "source": "YOSHIMI-STARSHINE.md",
+    "standalone": "../yoshimi-the-ultrabot/",
+    "placement": "After World War III: The Room That Remains, before Two Studies at the Crossing",
+    "originating_concept_and_direction": "Michael Glover",
+    "prose_and_illustrations": "Cypher / ChatGPT / Codex",
+    "illustration_convention": "Story-world illustrations; physical board required only for live performance"
+  }
 }
