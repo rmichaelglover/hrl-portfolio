@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Michael Emanuel Glover's recursive English lexicon: a self-interpreting dictionary that includes letters, letter names, punctuation, words, definitions, and meaning relations.">
+  <title>The Self-Interpreting English Dictionary | Michael Emanuel Glover</title>
+  <style>
+    :root{--night:#101d2a;--panel:#172838;--panel2:#1e3445;--paper:#f5f1e9;--ink:#edf4f6;--muted:#afc1c8;--cyan:#73d6d0;--gold:#ffc978;--coral:#ff9584;--line:#ffffff20;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#245269 0,transparent 45%),var(--night);color:var(--ink);font:16px/1.65 var(--sans)}a{color:var(--cyan);text-underline-offset:3px}main{max-width:1120px;margin:auto;padding:26px 24px 80px}.nav{font-size:13px;color:var(--muted)}.hero{padding:75px 0 45px;max-width:940px}.eyebrow{color:var(--gold);font-size:12px;letter-spacing:.17em;text-transform:uppercase;font-weight:750}.hero h1{font:clamp(44px,8vw,86px)/.99 var(--serif);letter-spacing:-.045em;margin:18px 0 22px;max-width:900px}.hero p{font:clamp(19px,2.5vw,24px)/1.55 var(--serif);color:#cfdee1;max-width:770px}.author{font-size:14px;color:var(--muted);margin-top:26px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}.chip{border:1px solid var(--line);border-radius:30px;padding:6px 12px;color:#d8e6e8;font-size:12px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:17px}.card{grid-column:span 6;background:linear-gradient(150deg,#1a3040,#152636);border:1px solid var(--line);border-radius:18px;padding:23px 25px}.wide{grid-column:span 12}.card h2{font:29px/1.2 var(--serif);margin:0 0 10px}.card h3{font:21px/1.25 var(--serif);margin:0 0 8px}.card p{color:#bfd0d5;margin:9px 0}.section-label{color:var(--cyan);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:750;margin-bottom:10px}.chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin-top:22px}.node{flex:1 1 120px;min-width:110px;padding:15px 14px;border-radius:12px;background:#ffffff09;border:1px solid var(--line)}.node b{display:block;color:var(--gold);font:700 18px var(--serif)}.node span{font-size:12px;color:var(--muted)}.arrow{align-self:center;color:var(--cyan);font-size:21px}.equation{background:#0c1721;border:1px solid var(--line);border-radius:12px;padding:17px 20px;overflow:auto;font:15px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:#e4f1f0}.equation .accent{color:var(--gold)}.demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}.demo textarea{width:100%;min-height:225px;padding:16px;border-radius:11px;border:1px solid #385268;background:#0e1b27;color:#f4f5f2;font:15px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}.result{min-height:225px;max-height:460px;overflow:auto;white-space:pre-wrap;padding:16px;border-radius:11px;border:1px solid #385268;background:#0e1b27;color:#dbe9e9;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}.button{border:0;border-radius:9px;background:var(--cyan);color:#10222c;font-weight:750;padding:11px 15px;cursor:pointer}.button.secondary{background:#2a4354;color:#e8f0f1;border:1px solid #ffffff20}.button:hover{filter:brightness(1.08)}.legend{display:flex;gap:13px;flex-wrap:wrap;margin:12px 0;color:var(--muted);font-size:12px}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-right:5px}.letter-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:7px;margin:17px 0}.letter{background:#ffffff09;border:1px solid var(--line);border-radius:9px;text-align:center;padding:8px 3px;min-height:65px}.letter strong{display:block;color:var(--gold);font:22px var(--serif)}.letter small{display:block;color:var(--muted);font-size:9px;letter-spacing:.03em}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}td,th{padding:10px 11px;text-align:left;border-bottom:1px solid var(--line)}th{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--cyan)}td:first-child{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--gold)}.note{border-left:3px solid var(--gold);padding:10px 15px;background:#ffc9780a;color:#e4e8e2;margin-top:17px}.steps{counter-reset:step;list-style:none;padding:0}.steps li{counter-increment:step;position:relative;padding:2px 0 13px 42px;color:#cfdee1}.steps li:before{content:counter(step);position:absolute;left:0;top:0;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#73d6d025;color:var(--cyan);font-weight:800}.footer{margin-top:34px;border-top:1px solid var(--line);padding-top:22px;color:var(--muted);font-size:12px}.footer a{margin-right:12px}.cite{font-size:12px;color:var(--muted)}code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--gold)}@media(max-width:760px){main{padding:18px 16px 55px}.hero{padding:50px 0 32px}.card,.wide{grid-column:span 12}.demo{grid-template-columns:1fr}.letter-grid{grid-template-columns:repeat(6,1fr)}.arrow{display:none}}
+  </style>
+</head>
+<body>
+<main>
+  <nav class="nav"><a href="../">HRL Portfolio</a> &nbsp;›&nbsp; <a href="../research-whitepapers/">Research White Papers</a></nav>
+  <header class="hero">
+    <div class="eyebrow">NLP research · Recursive English · GRRLE</div>
+    <h1>The dictionary that can read itself.</h1>
+    <p>I am building an English lexicon that includes the letters, their spoken names, punctuation, words, definitions, and the interpreter that reads those definitions. A letter can name itself through a word whose spelling is made from letters already in the same dictionary.</p>
+    <div class="author">Michael Emanuel Glover · Research model and interactive prototype</div>
+    <div class="chips"><span class="chip">Self-interpreting lexicon</span><span class="chip">Letter names and graphemes</span><span class="chip">Recursive definitions</span><span class="chip">Hierarchical relaxation labeling</span></div>
+  </header>
+
+  <section class="grid">
+    <article class="card wide">
+      <div class="section-label">The seed</div>
+      <h2>Every mark gets an entry.</h2>
+      <p>Take <code>N: EN</code>. The left-hand <code>N</code> is a Unicode character and a letter in the alphabet. The right-hand <code>EN</code> is its spoken letter-name and is itself spelled from <code>E</code> and <code>N</code>. The colon is a character, punctuation mark, spoken name, and definition operator—all in the same lexicon.</p>
+      <div class="chain" aria-label="Interpretation layers">
+        <div class="node"><b>N</b><span>Unicode grapheme U+004E</span></div><div class="arrow">→</div>
+        <div class="node"><b>EN</b><span>letter-name · /ɛn/</span></div><div class="arrow">→</div>
+        <div class="node"><b>E + N</b><span>spelling of “EN”</span></div><div class="arrow">→</div>
+        <div class="node"><b>EE + EN</b><span>letter-names of its letters</span></div>
+      </div>
+      <div class="note">The graph may contain cycles. A cycle is recorded as a relation and interpreted to a fixed point; it does not trigger endless recursive expansion.</div>
+    </article>
+
+    <article class="card wide">
+      <div class="section-label">Interactive prototype</div>
+      <h2>Read a dictionary entry through its own alphabet.</h2>
+      <p>Enter records in <code>key: definition</code> form. The interpreter resolves character identities, letter-names, punctuation, recursive spellings, and links among the entries.</p>
+      <div class="demo">
+        <div>
+          <label for="records" class="section-label">Lexicon records</label>
+          <textarea id="records" spellcheck="false">N: EN
+L: ELL
+COLON: :
+U+003A: colon
+LETTER: a symbol in an alphabet
+DICTIONARY: a set of word records interpreted by this dictionary</textarea>
+          <div class="controls"><button class="button" id="interpret">Interpret the lexicon</button><button class="button secondary" id="speak">Speak the letter names</button><button class="button secondary" id="reset">Restore seed</button></div>
+          <div class="legend"><span><i></i>resolved symbol/name</span><span>↻ recursive link</span><span>? open lexical record</span></div>
+        </div>
+        <pre class="result" id="result" aria-live="polite"></pre>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="section-label">Alphabet kernel</div>
+      <h2>Letter identity, name, and sound are separate but connected.</h2>
+      <p>The same graph stores the written character, conventional name, pronunciation, regional variants, and spelling of each name. Click-free text parsing can still expose every layer; audio is an additional grounding channel.</p>
+      <div id="alphabet" class="letter-grid" aria-label="English letter names"></div>
+      <p class="cite">Letter names and pronunciation vary by dialect. The initial interface uses a US-oriented seed, with explicit variants such as ZEE/ZED and AITCH/HAITCH added as parallel entries.</p>
+    </article>
+
+    <article class="card">
+      <div class="section-label">Formal model</div>
+      <h2>One graph, recursively interpreted.</h2>
+      <p>Nodes represent Unicode characters, graphemes, letter-names, morphemes, words, senses, definitions, examples, and grammatical constructions. Edges encode <code>names</code>, <code>spells</code>, <code>pronounces</code>, <code>defines</code>, <code>uses</code>, and <code>exemplifies</code>.</p>
+      <div class="equation">D<sub>k+1</sub> = D<sub>k</sub> ∪ { e : parse<sub>Dk</sub>(definition(e)) succeeds }<br><br><span class="accent">Closure:</span> D<sub>k+1</sub> = D<sub>k</sub><br><span class="accent">Interpretation:</span> relaxed, typed paths through the closed graph</div>
+    </article>
+
+    <article class="card">
+      <div class="section-label">Recursive relaxation</div>
+      <h2>Ambiguity stays visible while context does its work.</h2>
+      <p>The existing GRRLE text frontend already proposes competing word spans, parts of speech, and phrase hypotheses. The self-interpreting lexicon adds grapheme/name/sound and definition/sense layers to that same field.</p>
+      <div class="equation">sᵢ(t+1) = σ(logit(pᵢ) + η Σⱼ wᵢⱼ sⱼ(t))<br><br><span class="accent">positive w</span> reinforces compatible readings<br><span class="accent">negative w</span> suppresses competitors<br><span class="accent">cycles</span> settle as recurrent support</div>
+    </article>
+
+    <article class="card">
+      <div class="section-label">Recursive levels</div>
+      <ol class="steps">
+        <li>Unicode scalar and punctuation identity</li>
+        <li>Grapheme, letter-name, and pronunciation</li>
+        <li>Word spelling, morphology, and word sense</li>
+        <li>Definition, example, and semantic relation</li>
+        <li>Phrase, sentence, and discourse interpretation</li>
+        <li>Dictionary schema and interpreter described in English</li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <div class="section-label">Scaling path</div>
+      <h2>From the alphabet kernel to the full lexicon.</h2>
+      <p>The full dictionary is a typed lexical graph with corpus provenance. WordNet supplies senses and gloss relations; pronunciation lexicons supply sound; public-domain text supplies usage and construction evidence. Every imported record is normalized into the same graph, with source and license retained.</p>
+      <p>Coverage grows by closure: the interpreter parses dictionary entries with the same grammar it uses on ordinary English. Unresolved senses remain explicit candidates until usage, syntax, pronunciation, or human correction supplies support.</p>
+    </article>
+
+    <article class="card wide">
+      <div class="section-label">Research program</div>
+      <h2>My next build steps</h2>
+      <div class="grid">
+        <div class="node"><b>01 · Lexical closure</b><span>Import a licensed lexicon and validate character-to-definition coverage.</span></div>
+        <div class="node"><b>02 · Typed records</b><span>Preserve spelling, sound, morphology, sense, example, and provenance as distinct fields.</span></div>
+        <div class="node"><b>03 · Recursive interpreter</b><span>Compile definitions and interpreter rules through the same English grammar.</span></div>
+        <div class="node"><b>04 · GRRLE integration</b><span>Relax competing spans, senses, and definition paths together; keep the whole resolution trace inspectable.</span></div>
+      </div>
+      <p class="note">This is the first working kernel of the full dictionary: the alphabet and punctuation are lexicon entries, and each definition is interpreted through those same entries.</p>
+    </article>
+  </section>
+  <footer class="footer"><a href="../">HRL Portfolio</a><a href="../research-whitepapers/">Research White Papers</a><br>Michael Emanuel Glover · Hierarchical relaxation labeling for recursively interpreted language.</footer>
+</main>
+<script>
+const letters = {
+ A:["AY","/eɪ/"],B:["BEE","/biː/"],C:["CEE","/siː/"],D:["DEE","/diː/"],E:["EE","/iː/"],F:["EF","/ɛf/"],G:["GEE","/dʒiː/"],H:["AITCH","/eɪtʃ/"],I:["EYE","/aɪ/"],J:["JAY","/dʒeɪ/"],K:["KAY","/keɪ/"],L:["ELL","/ɛl/"],M:["EM","/ɛm/"],N:["EN","/ɛn/"],O:["OH","/oʊ/"],P:["PEE","/piː/"],Q:["CUE","/kjuː/"],R:["AR","/ɑɹ/"],S:["ESS","/ɛs/"],T:["TEE","/tiː/"],U:["YOU","/juː/"],V:["VEE","/viː/"],W:["DOUBLE-U","/ˌdʌbəlˈjuː/"],X:["EX","/ɛks/"],Y:["WYE","/waɪ/"],Z:["ZEE","/ziː/ · also ZED"]
+};
+const seed=`N: EN\nL: ELL\nCOLON: :\nU+003A: colon\nLETTER: a symbol in an alphabet\nDICTIONARY: a set of word records interpreted by this dictionary`;
+const reverseNames=Object.fromEntries(Object.entries(letters).map(([letter,[name]])=>[name.replaceAll("-"," "),letter]));
+function codepoint(ch){return "U+"+ch.codePointAt(0).toString(16).toUpperCase().padStart(ch.codePointAt(0)>0xffff?6:4,"0")}
+function parseRecords(source){const records=[];for(const raw of source.split(/\n/)){const line=raw.trim();if(!line)continue;const cut=line.indexOf(":");if(cut<0){records.push({raw:line,key:"",value:"",error:"No colon separator"});continue}records.push({raw:line,key:line.slice(0,cut).trim().toUpperCase(),value:line.slice(cut+1).trim()})}return records}
+function showToken(token,out,depth=0,seen=new Set()){
+ const word=token.toUpperCase();
+ if(word.length===1&&letters[word]){out.push(`${"  ".repeat(depth)}${word} → ${letters[word][0]} ${letters[word][1]} · ${codepoint(word)}`);return}
+ if(reverseNames[word]){const ch=reverseNames[word];out.push(`${"  ".repeat(depth)}${word} → letter-name of ${ch} ${letters[ch][1]}; spelling ${[...word].join(" · ")}`);if(depth<2){if(seen.has(ch)){out.push(`${"  ".repeat(depth+1)}↻ ${ch} already on this path`);return}const next=new Set(seen);next.add(ch);for(const c of [...word])showToken(c,out,depth+1,next)}return}
+ if(word==="COLON"){out.push(`${"  ".repeat(depth)}COLON → punctuation “:” · ${codepoint(":")}`);return}
+ if(word==="PERIOD"){out.push(`${"  ".repeat(depth)}PERIOD → punctuation “.” · ${codepoint(".")}`);return}
+ if(word.startsWith("U+")&&/^U\+[0-9A-F]{4,6}$/.test(word)){const ch=String.fromCodePoint(parseInt(word.slice(2),16));out.push(`${"  ".repeat(depth)}${word} → “${ch}” · ${ch===":"?"COLON":"Unicode character"}`);return}
+ out.push(`${"  ".repeat(depth)}${token} → lexical phrase; spelling ${[...token.toUpperCase()].join(" · ")}`);
+}
+function interpret(){const source=document.getElementById("records").value;const records=parseRecords(source);const out=["SELF-INTERPRETING LEXICON · recursive readout","─".repeat(52)];let accepted=0;for(const r of records){if(r.error){out.push(`? ${r.raw} · ${r.error}`);continue}accepted++;const key=r.key;out.push(`\nENTRY ${key||"∅"}  ${letters[key] ? "· "+codepoint(key) : ""}`);out.push(`  separator : → ${codepoint(":")} · DEFINITION-BOUNDARY`);out.push(`  definition ${r.value?"“"+r.value+"”":"∅"}`);if(letters[key])out.push(`  key identity ${key} → ${letters[key][0]} ${letters[key][1]} · name spelling ${[...letters[key][0]].join(" · ")}`);for(const token of (r.value.match(/U\+[0-9A-F]{4,6}|[A-Za-z]+|[^\sA-Za-z]/g)||[])){if(token.trim())showToken(token,out,1,new Set(key?[key]:[]))}}
+out.push("\nCLOSURE SUMMARY");out.push(`  records parsed: ${accepted}/${records.length}`);out.push(`  alphabet identities available: ${Object.keys(letters).length}/26`);out.push("  recursive letter-name links: active and cycle-marked");out.push("  punctuation separator: interpreted as U+003A");out.push("  unresolved ordinary words: retained as lexical phrases for later graph expansion");document.getElementById("result").textContent=out.join("\n")}
+document.getElementById("alphabet").innerHTML=Object.entries(letters).map(([ch,[name,ipa]])=>`<div class="letter" title="${ch}: ${name} ${ipa}"><strong>${ch}</strong><small>${name}</small></div>`).join("");
+document.getElementById("interpret").addEventListener("click",interpret);document.getElementById("reset").addEventListener("click",()=>{document.getElementById("records").value=seed;interpret()});document.getElementById("speak").addEventListener("click",()=>{if(!("speechSynthesis" in window)){document.getElementById("result").textContent="Speech synthesis is unavailable in this browser.";return}const utterance=new SpeechSynthesisUtterance(Object.entries(letters).map(([l,[n]])=>`${l}, ${n}`).join(". "));utterance.rate=.82;speechSynthesis.speak(utterance)});interpret();
+</script>
+</body>
+</html>
