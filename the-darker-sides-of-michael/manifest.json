@@ -1,0 +1,15 @@
+{
+  "title": "The Darker Sides of Michael",
+  "date": "2026-11-02",
+  "author": "Michael Glover",
+  "collaborator": "ChatGPT / Codex",
+  "genre": "fictional self-portrait / required Megaplay scene",
+  "placement": "Before The hand belongs to Michael",
+  "conversation_scope": "All visible user and assistant messages from opening two-thread request through publication request; excludes environment, system, developer, and tool records.",
+  "message_count": 17,
+  "files": {
+    "SCENE.md": "33765d62468ce9b9f466f08d5013ee266aa12a827b8d68090a672342f04fe908",
+    "CONVERSATION.md": "38dfe98100ecb594006fb1c57168e3e930ae1c9373e8d2c072897319ebcacc24",
+    "CONVERSATION.json": "6b24cba4029f032d56ed6c3c45f6c4c7beda394aba9e238368814dd04f9d5195"
+  }
+}
