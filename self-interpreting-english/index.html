@@ -18,7 +18,7 @@
     <h1>The dictionary that can read itself.</h1>
     <p>I am building an English lexicon that includes the letters, their spoken names, punctuation, words, definitions, and the interpreter that reads those definitions. A letter can name itself through a word whose spelling is made from letters already in the same dictionary.</p>
     <div class="author">Michael Emanuel Glover · Research model and interactive prototype</div>
-    <div class="chips"><span class="chip">Self-interpreting lexicon</span><span class="chip">Letter names and graphemes</span><span class="chip">Recursive definitions</span><span class="chip">Hierarchical relaxation labeling</span></div>
+    <div class="chips"><span class="chip">Self-interpreting lexicon</span><span class="chip">Letter names and graphemes</span><span class="chip">Recursive definitions</span><span class="chip">KJV Bible reader</span><span class="chip">Hierarchical relaxation labeling</span></div>
   </header>
 
   <section class="grid">
@@ -61,6 +61,13 @@ DICTIONARY: a set of word records interpreted by this dictionary</textarea>
       <p>The same graph stores the written character, conventional name, pronunciation, regional variants, and spelling of each name. Click-free text parsing can still expose every layer; audio is an additional grounding channel.</p>
       <div id="alphabet" class="letter-grid" aria-label="English letter names"></div>
       <p class="cite">Letter names and pronunciation vary by dialect. The initial interface uses a US-oriented seed, with explicit variants such as ZEE/ZED and AITCH/HAITCH added as parallel entries.</p>
+    </article>
+
+    <article class="card wide">
+      <div class="section-label">Bible pilot · James first · full canon indexed</div>
+      <h2>Read a translation through its words.</h2>
+      <p>I have bound a whole 66-book King James Version corpus to exact book, chapter, verse, and word-occurrence addresses. Begin in James: select a word to follow its English dictionary path and the source Strong’s index where the edition provides one.</p>
+      <div class="controls"><a class="button" href="bible.html" style="display:inline-block;text-decoration:none">Open the self-interpreting Bible</a><a class="button secondary" href="BIBLE-MODEL.md" style="display:inline-block;text-decoration:none">Read the Bible data model</a></div>
     </article>
 
     <article class="card">
