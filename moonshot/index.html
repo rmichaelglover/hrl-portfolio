@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A playful, equation-forward investigation of a sugar mountain tall enough to reach the Moon, with a live geometry calculator and a fictional Candyland moon." />
+  <title>The Sugar Mountain Moonshot | HRL Portfolio</title>
+  <style>
+    :root{color-scheme:dark;--night:#07111f;--panel:#101f32;--panel2:#14263a;--ink:#edf5ff;--muted:#b6c7d7;--gold:#ffc66d;--ice:#8ee4ee;--line:#35516b;--pink:#f1a9da;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 1%,#26334f 0,transparent 32rem),var(--night);color:var(--ink);font:17px/1.7 var(--serif)}a{color:var(--ice);text-underline-offset:3px}a:hover{color:#fff}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.top{font:14px/1.5 var(--sans);padding:14px max(22px,calc((100vw - 1120px)/2));background:#06101ddd;border-bottom:1px solid #ffffff18}.top a{color:#d3e7fa}.hero{position:relative;isolation:isolate;min-height:min(78vh,740px);display:grid;align-items:end;overflow:hidden;border-bottom:1px solid var(--line)}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06101ff2 0%,#06101fbf 45%,#06101f24 100%),linear-gradient(0deg,#07111f 0%,transparent 42%);z-index:-1}.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 47%;z-index:-2}.hero-copy{width:min(1120px,100%);margin:0 auto;padding:80px 28px 70px}.eyebrow,.tag,.byline,.small{font:700 12px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase}.eyebrow{color:var(--gold)}h1,h2,h3{line-height:1.14}h1{max-width:820px;margin:16px 0;font-size:clamp(44px,8vw,88px);letter-spacing:-.055em}h1 em{font-weight:400;color:var(--gold)}.dek{max-width:660px;color:#e1ebf4;font-size:clamp(18px,2.4vw,23px);line-height:1.48}.byline{margin-top:26px;color:#d1e2f1;letter-spacing:.04em;text-transform:none}.byline strong{color:white}.wrap{width:min(1040px,calc(100% - 36px));margin:0 auto}.intro{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;padding:64px 0 36px}.intro h2{font-size:clamp(28px,4vw,42px);margin:0 0 16px}.intro p{margin:.7em 0}.thesis{align-self:center;padding:20px 22px;border-left:3px solid var(--gold);background:linear-gradient(120deg,#1c2a3d,#101c2b);font-size:20px}.section{padding:54px 0;border-top:1px solid var(--line)}.kicker{color:var(--ice);font:700 12px/1.5 var(--sans);letter-spacing:.14em;text-transform:uppercase}.section h2{font-size:clamp(30px,4.8vw,52px);margin:.25em 0 .45em;letter-spacing:-.035em}.section>p{max-width:760px;color:#d6e2ec}.figure{margin:28px 0 0;background:#0d1928;border:1px solid var(--line);border-radius:16px;overflow:hidden}.figure img{display:block;width:100%;height:auto}.figure figcaption{padding:13px 17px;color:var(--muted);font:13px/1.6 var(--sans)}.math-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.calc{padding:24px;border-radius:16px;background:linear-gradient(150deg,#172b40,#0f1b2b);border:1px solid #456179}.calc h3{margin:0 0 12px;font-size:25px}.control{margin:22px 0}.control-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font:14px/1.5 var(--sans)}output{color:var(--gold);font-weight:800;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--gold);margin-top:12px}.range-ends{display:flex;justify-content:space-between;color:#8fa8bd;font:11px var(--sans)}.results{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.metric{padding:14px;border:1px solid #39536b;border-radius:10px;background:#07142280}.metric span{display:block;color:#b3c6d8;font:11px/1.5 var(--sans);text-transform:uppercase;letter-spacing:.07em}.metric strong{display:block;margin-top:6px;color:#fff;font:700 clamp(18px,2.8vw,25px)/1.2 var(--sans);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.formula{margin:18px 0;padding:16px;border-radius:10px;background:#071421;color:#d8edfa;font:16px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-x:auto}.note{padding:16px 18px;border:1px solid #7f6741;border-radius:10px;background:#211b16;color:#f3dfc2}.callout{margin-top:22px;padding:18px 20px;border-radius:12px;background:#12283a;border-left:3px solid var(--ice)}.callout strong{color:var(--ice)}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{padding:22px;border:1px solid var(--line);border-radius:14px;background:#0d1a29}.panel h3{margin:0 0 8px;color:var(--gold);font-size:22px}.panel p{margin:.5em 0;color:#d4e0eb}.correction{background:#201c2a;border-color:#625078}.correction h3{color:var(--pink)}.credit{padding:25px 0 58px;border-top:1px solid var(--line);color:var(--muted)}.credit h2{color:var(--ink);font-size:25px}.sources{font:14px/1.7 var(--sans)}.sources li{margin:.55em 0}.footer{padding:20px;text-align:center;background:#050c15;color:#a5b7c7;font:13px/1.6 var(--sans)}
+    @media(max-width:760px){.hero{min-height:640px}.hero img{object-position:58% center}.intro,.math-layout,.twocol{grid-template-columns:1fr}.intro{padding-top:42px}.hero-copy{padding:60px 22px 46px}.section{padding:40px 0}.calc{padding:18px}.results{grid-template-columns:1fr 1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <nav class="top"><a href="../">HRL Portfolio</a> &nbsp;›&nbsp; <a href="../research-whitepapers/">Research White Papers</a> &nbsp;›&nbsp; Moonshot notebook</nav>
+  <header class="hero">
+    <img src="assets/moonshot-hero.png" alt="An imagined mountain of glittering sugar stretching from Earth toward the Moon, with a surveyor measuring the ridge." fetchpriority="high">
+    <div class="hero-copy">
+      <div class="eyebrow">A Cypher–Neo collaboration log · Thought experiment 001</div>
+      <h1>The Sugar Mountain <em>Moonshot</em></h1>
+      <p class="dek">A campaign promise, a stack of cups, one very ambitious surveyor—and the geometry of a sugar mountain that refuses to stay small.</p>
+      <p class="byline"><strong>Michael Emanuel Glover</strong> · Originating idea, campaign joke, and surveyor candidacy<br>Developed in dialogue with Codex · calculations, source-checking, and page</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <div><div class="kicker">The proposal</div><h2>Build it. Let them come get Moon Diabetes.</h2><p>The Moonshot begins with a deliberately ridiculous civic promise: take sugar from an imagined Jovian Candyland and build a mountain tall enough to reach the Moon. Michael Emanuel Glover has already voted for himself as surveyor—an indispensable appointment for a project whose first engineering milestone is deciding how wide “the mountain” should be.</p><p>The central correction is simple: once the mountain’s shape is chosen, its volume is determined by its height and slope. There is no fixed cup allowance. The cups are a unit for describing volume; the mountain gets to be as enormous as the geometry demands.</p></div>
+      <aside class="thesis">A 45° cone with its tip at the Moon’s average distance has a base about <strong>768,800 km wide</strong> and contains about <strong>5.95 × 10<sup>16</sup> km³</strong> of sugar.</aside>
+    </section>
+
+    <section class="section" id="geometry">
+      <div class="kicker">01 · Geometry, with the dial turned up</div><h2>Choose the slope. The mountain follows.</h2>
+      <div class="math-layout">
+        <div>
+          <p>Use a simple cone as the idealized shape. Let <i>h</i> be the Earth-to-Moon center distance and let θ be the angle between the cone’s side and its flat base. The base radius is <i>r = h / tan θ</i>; the volume is <i>V = πr²h / 3</i>.</p>
+          <div class="formula" aria-label="Cone equations">r = h / tan(θ)<br>diameter = 2r<br>V = π r² h / 3<br>cups = 10⁹ V[km³] / 0.000236588[m³]</div>
+          <p>At 45°, the radius equals the height: the cone’s base is about 768,800 km wide. Make the slope shallower and the mountain spreads wider and holds more sugar. Drag the control to explore.</p>
+          <figure class="figure"><img src="assets/moonshot-math.png" alt="An idealized sugar cone stretching from Earth to the Moon, with a tiny surveyor on the slope." loading="lazy"><figcaption>Illustration of the geometric model. It is intentionally not to scale and does not show a physically stable structure.</figcaption></figure>
+        </div>
+        <div class="calc" aria-label="Interactive sugar mountain calculator">
+          <h3>The surveyor’s calculator</h3>
+          <div class="control"><div class="control-head"><label for="slope">Slope angle from the flat base</label><output id="slope-out" for="slope">45°</output></div><input id="slope" type="range" min="15" max="80" step="1" value="45" aria-describedby="slope-range"><div class="range-ends" id="slope-range"><span>15° · broad and gentle</span><span>80° · very steep</span></div></div>
+          <div class="control"><div class="control-head"><label for="distance">Earth–Moon distance</label><output id="distance-out" for="distance">384,400 km</output></div><input id="distance" type="range" min="357000" max="407000" step="100" value="384400" aria-describedby="distance-range"><div class="range-ends" id="distance-range"><span>357,000 km</span><span>407,000 km</span></div></div>
+          <div class="results" aria-live="polite">
+            <div class="metric"><span>Base diameter</span><strong id="diameter">768,800 km</strong></div>
+            <div class="metric"><span>Cone volume</span><strong id="volume">5.95 × 10<sup>16</sup> km³</strong></div>
+            <div class="metric"><span>U.S. cups of sugar</span><strong id="cups">2.52 × 10<sup>29</sup></strong></div>
+            <div class="metric"><span>Mountain height</span><strong id="height">384,400 km</strong></div>
+          </div>
+          <p class="small" style="color:#a9bdcf;letter-spacing:0;text-transform:none;margin-top:18px">Cup conversion treats one U.S. cup as 236.588 mL of loose sugar. This computes volume only; it doesn’t make the pile structurally possible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gravity">
+      <div class="kicker">02 · Does adding sugar make the Moon easier to reach?</div><h2>Technically yes. Practically: planetary.</h2>
+      <div class="twocol">
+        <article class="panel"><h3>The gravity idea</h3><p>Newton’s force law says <i>F = GM<sub>E</sub>M<sub>M</sub> / r²</i>. If Earth gains mass ΔM and the Earth–Moon separation stays fixed, the attraction scales by <i>1 + ΔM/M<sub>E</sub></i>. Add mass equal to the Moon’s and the force rises by about 1.23%; add one Earth mass and it doubles.</p><p>That is a real mathematical direction for the idea: extra mass attracts the Moon. But the Moon is already in orbit, so adding that much mass changes the orbit and the whole Earth–Moon system. It does not act like a convenient ladder.</p></article>
+        <article class="panel"><h3>Scale check</h3><p>Earth’s mass is about 5.9722×10<sup>24</sup> kg; the Moon’s is about 7.346×10<sup>22</sup> kg. A Moon-mass of sugar would be roughly 1.23% of Earth’s present mass. Doubling Earth’s mass would require another Earth mass of sugar.</p><p>The pictured reach-the-Moon cone is a volume model, not a load-bearing design. Sugar cannot remain a narrow mountain at that scale; gravity would compress and redistribute it long before a summit reached lunar distance.</p></article>
+      </div>
+      <div class="callout"><strong>Moonshot reading:</strong> the extra gravity can increase attraction in the equation, but the amount needed to matter turns “add sugar” into “rebuild the mass budget of the Earth–Moon system.” Our campaign keeps the ambition and lets the surveyor handle the fine print.</div>
+    </section>
+
+    <section class="section" id="candyland">
+      <div class="kicker">03 · The sugar source, on the map of imagination</div><h2>Odo, Candyland, and a small astronomy correction.</h2>
+      <div class="math-layout">
+        <div><p>For this story, <strong>Odo / Candyland</strong> is our invented sugar-rich moon in Jupiter’s system. Its crystalline ridges are the origin point for the campaign’s interplanetary supply chain.</p><p>One real-world naming correction keeps the fiction neatly labeled: <strong>Titania is a real moon of Uranus</strong>, not another name for a Jovian moon. So the working map keeps “Odo / Candyland” as our fictional location and reserves “Titania” for Uranus’s largest moon.</p><p>Moving material from a Jovian moon to Earth would also be a formidable transportation problem. The thought experiment grants the sugar delivery and asks what follows from the geometry and gravity.</p></div>
+        <figure class="figure"><img src="assets/moonshot-candyland.png" alt="A fictional icy moon called Candyland, with pink crystal ridges, an exploration rover and a giant banded planet overhead." loading="lazy"><figcaption>Odo / Candyland is an imagined setting for the Moonshot story, not a mapped or confirmed sugar world.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="kicker">04 · Notebook correction</div><h2>What the first rough answers got wrong.</h2>
+      <article class="panel correction"><h3>The 1.62-billion-cup number had no reach-the-Moon derivation.</h3><p>The earlier exchange treated a made-up volume of about 384,000 m³ as if it were the required mountain. If that volume were forced into a cone 384,400 km tall, its base would be only about <strong>6 cm across</strong>—a needle-thin mathematical shape, not the broad 45° mountain in the campaign illustration.</p><p>The earlier “1.1 m” base-width answer was also an arithmetic error. The corrected cone equation gives approximately 6 cm under that artificial volume constraint. The interactive calculator now starts from the actual chosen slope and height, computes the required volume, then converts that volume into cups.</p></article>
+      <figure class="figure"><img src="assets/moonshot-hero.png" alt="The surveyor’s sugar mountain rising from Earth toward the Moon." loading="lazy"><figcaption>The campaign image: an impossible mountain, a real geometric question, and a surveyor who has volunteered for the job.</figcaption></figure>
+    </section>
+
+    <section class="credit">
+      <div class="kicker">Collaboration record</div><h2>Cypher–Neo working notebook · entry 001</h2>
+      <p><strong>Originating work:</strong> Michael Emanuel Glover proposed the Jupiter-sugar premise, challenged the arbitrary volume cap, connected added terrestrial mass to lunar attraction, and nominated himself for surveyor. <strong>Codex’s contribution:</strong> source-checking, cone geometry, corrected arithmetic, an interactive calculator, and this page’s implementation. The exchange is preserved as an evolving collaboration record.</p>
+      <h3>Sources and definitions</h3>
+      <ul class="sources">
+        <li>NASA, <a href="https://science.nasa.gov/moon/by-the-numbers/">Moon by the Numbers</a>: average Earth–Moon orbital distance of 384,400 km.</li>
+        <li>NASA NSSDC, <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html">Earth Fact Sheet</a> and <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html">Moon Fact Sheet</a>: planetary masses used for the gravity comparison.</li>
+        <li>NASA, <a href="https://science.nasa.gov/uranus/moons/titania/">Titania</a>: Titania is Uranus’s largest moon.</li>
+      </ul>
+      <p class="small" style="letter-spacing:0;text-transform:none">“Moon Diabetes” remains campaign absurdism, not a medical claim. This is an educational thought experiment and not a construction proposal.</p>
+      <p><a href="../research-whitepapers/">Back to Research White Papers</a> · <a href="../">HRL Portfolio</a></p>
+    </section>
+  </main>
+  <footer class="footer">Michael Emanuel Glover · HRL Portfolio · The Moonshot notebook is open for future entries.</footer>
+  <script>
+    (()=>{
+      const slope=document.getElementById("slope"),distance=document.getElementById("distance");
+      const fmt=(n,d=0)=>new Intl.NumberFormat("en-US",{maximumFractionDigits:d,minimumFractionDigits:d}).format(n);
+      const sci=n=>{const e=Math.floor(Math.log10(n)),m=n/10**e;return `${m.toFixed(2)} × 10<sup>${e}</sup>`};
+      function update(){
+        const deg=Number(slope.value),h=Number(distance.value),r=h/Math.tan(deg*Math.PI/180),v=Math.PI*r*r*h/3;
+        const cups=v*1e9/0.0002365882365;
+        document.getElementById("slope-out").textContent=`${deg}°`;
+        document.getElementById("distance-out").textContent=`${fmt(h)} km`;
+        document.getElementById("height").textContent=`${fmt(h)} km`;
+        document.getElementById("diameter").textContent=`${fmt(2*r)} km`;
+        document.getElementById("volume").innerHTML=`${sci(v)} km³`;
+        document.getElementById("cups").innerHTML=sci(cups);
+      }
+      slope.addEventListener("input",update);distance.addEventListener("input",update);update();
+    })();
+  </script>
+</body>
+</html>
