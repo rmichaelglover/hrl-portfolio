@@ -43,7 +43,8 @@
       <button class="button light" id="previous" type="button">← Previous</button>
       <button class="button light" id="next" type="button">Next →</button>
     </div>
-    <p class="word-hint">Select any word: recorded entries show their linked senses and sources; other words stay selectable with a Webster lookup. Dotted-underlined words are marked as supplied in the source edition.</p>
+    <p class="word-hint">Select any word to follow its project entry, WordNet headword candidates, phrase links, and occurrence-level Strong’s data. Candidate senses remain visible for comparison; no single sense is chosen automatically.</p>
+    <p class="word-hint" id="dictionary-status" aria-live="polite">Loading local English dictionary…</p>
     <div class="reader-grid">
       <div class="passage" id="passage" aria-live="polite"></div>
       <aside class="lexical" id="lexical" aria-live="polite"><div class="label">Word record</div><p class="empty">Choose a word in the passage. Its verse address, dictionary path, and available Strong’s link will appear here.</p></aside>
@@ -56,6 +57,7 @@
     <div class="twocol">
       <article class="mini"><h3>Webster’s 1828</h3><p>A period-aware English dictionary helps unpack vocabulary and senses close to the KJV’s historical language. The project will bind its headwords to the same recursive English lexicon used by the letter-and-word prototype.</p></article>
       <article class="mini"><h3>Strong’s and original-language lexica</h3><p>The source marks many KJV word occurrences with Greek or Hebrew Strong’s identifiers. These act as occurrence-level lookup keys, not as full definitions; linked lexicon entries provide the underlying headword and gloss material.</p></article>
+      <article class="mini"><h3>WordNet 3.0</h3><p>Local English headword candidates, multiple senses, examples, and morphology links fill the general vocabulary layer. The reader follows those links and leaves sense comparison visible for the reader.</p></article>
     </div>
     <div class="note">For James 1:19, try <em>swift</em>, <em>hear</em>, <em>slow</em>, <em>speak</em>, or <em>wrath</em>. Each English occurrence remains attached to the exact verse and its own source tag.</div>
   </section>
@@ -74,17 +76,23 @@
       <li><a href="https://1828dictionary.com/about/">Noah Webster, <em>An American Dictionary of the English Language</em> (1828)</a>: digitization notes its public-domain source text and Project Gutenberg transcription lineage.</li>
       <li><a href="https://www.blueletterbible.org/lexicon/g5036/kjv/tr/">Strong’s Greek G5036, ταχύς</a>: an example lexical endpoint for <em>swift</em> in James 1:19.</li>
       <li><a href="https://webstersdictionary1828.com/Dictionary/servant">Webster 1828, “servant”</a>, and <a href="https://www.blueletterbible.org/lexicon/g1401/kjv/tr/">Strong’s Greek G1401, δοῦλος</a>: linked from James 1:1.</li>
+      <li><a href="https://webstersdictionary1828.com/Dictionary/fall">Webster 1828, “fall”</a>, and <a href="https://www.blueletterbible.org/lexicon/g4045/kjv/tr/">Strong’s Greek G4045, περιπίπτω</a>: Webster records the “fall into temptation” construction; the KJV source attaches G4045 to “into” in James 1:2, and the reader links the full phrase.</li>
+      <li><a href="https://wordnet.princeton.edu/">Princeton WordNet 3.0</a>: local candidate senses and word-form links; see the included <a href="lexicon/WORDNET-LICENSE.txt">license and attribution</a>.</li>
       <li><a href="BIBLE-MODEL.md">Read the data model, compiler, provenance, and expansion plan.</a></li>
       <li><a href="lexicon/lexicon.json">Inspect the structured starter lexicon (JSON).</a></li>
       <li><a href="lexicon/coverage-audit.json">Read the whole-canon coverage summary (JSON)</a> or <a href="lexicon/coverage-audit.csv">inspect every distinct surface form and its lookup status (CSV)</a>.</li>
       <li><a href="lexicon/unaligned-source-annotations.csv">Inspect source-index tags that do not align to a displayed English token (CSV).</a></li>
+      <li><a href="lexicon/wordnet-3.0.json">Inspect the local WordNet 3.0 KJV subset</a> · <a href="lexicon/WORDNET-LICENSE.txt">WordNet license and attribution</a>.</li>
     </ul>
   </section>
   <footer><a href="./">Self-Interpreting English</a> · <a href="../research-whitepapers/">Research White Papers</a> · Michael Emanuel Glover</footer>
 </main>
+<style>
+.wn-senses{margin-top:16px;border:1px solid #cad7cb;border-radius:11px;background:#f8faf6;padding:10px 13px}.wn-senses summary{cursor:pointer;color:var(--blue);font-weight:750;font-size:13px}.wn-group{margin:12px 0}.wn-group h5{margin:8px 0;color:var(--teal);font-size:12px}.wn-sense{margin:7px 0}.wn-example{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+</style>
 <script>
 const $ = (id) => document.getElementById(id);
-let manifest, currentBook, bookData, lexicon;
+let manifest, currentBook, bookData, lexicon, wordnet=null, wordnetLoadFailed=false, selectedContext=null;
 let selected = null;
 function el(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node}
 function provenanceAnchor(id,headword){const source=lexicon.provenance[id];if(!source)return null;const a=el("a",source.label);if(source.urlPattern)a.href=source.urlPattern.replace("{headword}",encodeURIComponent(headword));else if(source.url)a.href=source.url;else return null;a.target="_blank";a.rel="noopener";return a}
@@ -113,6 +121,8 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   const form=lexicon.surfaceForms[surface];
   const headword=form?form.lexeme:surface;
   const record=lexicon.lexemes[headword];
+  const wordnetLinks=wordnet?.surfaceForms?.[surface]||[];
+  const wordnetCandidates=wordnetLinks.map(link=>({link,entry:wordnet.entries[link.lemma]})).filter(item=>item.entry);
   const occurrenceRef=currentBook+"."+$('chapter').value+"."+ref.split(":").at(-1);
   const phraseLinks=(lexicon.phraseLinks||[]).filter(link=>link.reference===occurrenceRef&&link.tokenIndices.includes(tokenIndex));
   const aside=$("lexical");aside.replaceChildren();
@@ -124,8 +134,10 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   addStep("KJV occurrence "+occurrenceRef+", token "+tokenIndex+" (zero-based) → surface form “"+word+"”.");
   if(form)addStep("Surface-form link “"+surface+"” → "+form.relation+(form.rule?" ("+form.rule+")":"")+" → English lexeme “"+headword+"”.");
   else addStep("No registered inflection link; exact-form lookup → English lexeme “"+headword+"”.");
-  if(record)addStep("Lexeme "+record.id+" → "+record.senses.length+" candidate sense"+(record.senses.length===1?"":"s")+"; all remain visible for comparison.");
-  else addStep("No matching local lexeme; interpretation stops here rather than inventing a definition.");
+  if(record)addStep("Project lexeme "+record.id+" → "+record.senses.length+" authored or historical candidate sense"+(record.senses.length===1?"":"s")+".");
+  else if(wordnetCandidates.length)addStep("No project-curated lexeme; the WordNet surface-form index follows to "+wordnetCandidates.length+" headword candidate"+(wordnetCandidates.length===1?"":"s")+".");
+  else addStep(wordnetLoadFailed?"No local headword matched, and the WordNet file did not load; use the Webster lookup below.":wordnet?"No local headword or WordNet candidate matched; use the Webster lookup below.":"The local WordNet file is still loading; this word’s lookup status will update when it finishes.");
+  for(const item of wordnetCandidates)addStep("WordNet "+item.link.relation+" link → "+item.entry.id+" ("+item.link.partOfSpeech+") → "+item.entry.senses.length+" candidate senses; context does not automatically select one.");
   if(record?.sourceLexemes?.length)addStep("English lexeme links to source-language index record(s) "+record.sourceLexemes.join(", ")+".");
   if(strong.length)addStep("Occurrence annotation in the KJV source package → "+strong.join(", ")+".");
   else addStep("No token-level Strong’s annotation is attached to this word in the source data.");
@@ -135,24 +147,30 @@ function renderLexical(word,strong,ref,added,tokenIndex){
   if(note)for(const sourceId of note.provenance||[]){const source=lexicon.provenance[sourceId];if(source)addStep("Context note "+note.reference+" · provenance: "+source.label+".")}
   trace.append(steps);aside.append(trace);
   if(record){
-    aside.append(el("div","Candidate senses","label"));const senses=document.createElement("div");senses.className="sense-list";
+    aside.append(el("div","Project and historical candidate senses","label"));const senses=document.createElement("div");senses.className="sense-list";
     for(const sense of record.senses){const card=document.createElement("article");card.className="sense";card.append(el("strong",sense.label),el("p",sense.definition));const meta=el("small",sense.kind+" · "+sense.id+" · provenance: ");meta.className="prov";for(const sourceId of sense.provenance){const a=provenanceAnchor(sourceId,record.websterHeadword||record.headword);if(a)meta.append(a);else meta.append(document.createTextNode((lexicon.provenance[sourceId]?.label||sourceId)+" · "))}card.append(meta);senses.append(card)}aside.append(senses);
   }
+  if(wordnetCandidates.length){const details=document.createElement("details");details.className="wn-senses";const total=wordnetCandidates.reduce((sum,item)=>sum+item.entry.senses.length,0);details.append(el("summary","WordNet 3.0 candidate senses ("+total+") · compare; none selected automatically"));
+    for(const item of wordnetCandidates){const group=document.createElement("section");group.className="wn-group";group.append(el("h5",item.entry.headword+" · "+item.link.partOfSpeech+" · "+item.link.relation));
+      for(const sense of item.entry.senses){const card=document.createElement("article");card.className="sense wn-sense";card.append(el("strong",sense.label),el("p",sense.definition));if(sense.examples?.length)card.append(el("small","Examples: "+sense.examples.join(" · "),"wn-example"));const meta=el("small",sense.lexicographerFile+" · "+sense.id+" · provenance: ");meta.className="prov";const citation=wordnet.provenance["wordnet-3.0"];const a=el("a",citation.label);a.href=citation.url;a.target="_blank";a.rel="noopener";meta.append(a);card.append(meta);group.append(card)}details.append(group)}aside.append(details);
+  }
   const dl=document.createElement("dl");
-  dl.append(el("dt","English headword"),el("dd",record?record.headword+" · "+record.partOfSpeech:headword+" · no local headword record yet"));
+  const heads=wordnetCandidates.map(item=>item.entry.headword+" ("+item.link.partOfSpeech+")");
+  dl.append(el("dt","English headword"),el("dd",record?record.headword+" · "+record.partOfSpeech:heads.length?"WordNet candidates: "+heads.join("; "):headword+" · no local headword record yet"));
   if(note)dl.append(el("dt","In this verse"),el("dd",note.text));
   if(phraseLinks.length)dl.append(el("dt","Phrase-level source link"),el("dd",phraseLinks.map(link=>"“"+link.surface+"” → "+link.sourceLexemes.join(", ")+" (tag on “"+link.sourceAnnotation.surface+"”)").join(" · ")));
   if(strong.length){dl.append(el("dt","Source-language occurrence indexes"),el("dd",strong.join(" · ")+" · occurrence tags from the KJV source package"));for(const id of strong){const source=sourceLexeme(id);if(source)dl.append(el("dt",source.language+" lexical record"),el("dd",source.lemma+" ("+source.transliteration+") · "+(source.partOfSpeech?source.partOfSpeech+" · ":"")+source.gloss))}}
   aside.append(dl);
   const links=el("div",undefined,"links");
   if(record?.websterHeadword){const a=provenanceAnchor("webster-1828",record.websterHeadword);if(a){a.textContent="Webster 1828 ↗";links.append(a)}}
-  else{const a=el("a","Search Webster 1828 ↗");a.href="https://webstersdictionary1828.com/Dictionary/"+encodeURIComponent(headword);a.target="_blank";a.rel="noopener";links.append(a)}
+  else{const lookupHead=heads.length?wordnetCandidates[0].entry.headword:headword;const a=el("a","Search Webster 1828 ↗");a.href="https://webstersdictionary1828.com/Dictionary/"+encodeURIComponent(lookupHead);a.target="_blank";a.rel="noopener";links.append(a)}
   for(const id of strong){const a=el("a",canonicalStrongId(id)+" lexicon ↗");a.href=sourceLexiconUrl(id);a.target="_blank";a.rel="noopener";links.append(a)}
   aside.append(links);
 }
 function renderChapter(){
   if(!bookData)return;
-  const chap=$("chapter").value, verses=bookData.chapters[chap]||[], host=$("passage");host.replaceChildren();selected=null;
+  const chap=$("chapter").value, verses=bookData.chapters[chap]||[], host=$("passage");host.replaceChildren();selected=null;selectedContext=null;
+  $("lexical").replaceChildren(el("div","Word record","label"),el("p","Choose a word in the passage. Its verse address, dictionary path, and available Strong’s link will appear here.","empty"));
   const title=document.createElement("div");title.className="label";title.style.margin="12px 0 4px";title.textContent=`${bookData.name} ${chap} · King James Version`;host.append(title);
   for(const verse of verses){
     const row=document.createElement("div");row.className="verse";row.id=`v-${verse.n}`;
@@ -165,7 +183,7 @@ function renderChapter(){
       const strong=prepared.strongByIndex[String(wordIndex)]||[];
       if(strong.length)button.title=`${m[0]} · ${strong.join(", ")} · click for lexical links`;
       const occurrenceIndex=wordIndex;
-      button.addEventListener("click",()=>{document.querySelectorAll(".word.selected").forEach(el=>el.classList.remove("selected"));button.classList.add("selected");selected=button;renderLexical(m[0],strong,`${bookData.name} ${chap}:${verse.n}`,button.classList.contains("added"),occurrenceIndex)});
+      button.addEventListener("click",()=>{document.querySelectorAll(".word.selected").forEach(el=>el.classList.remove("selected"));button.classList.add("selected");selected=button;selectedContext={word:m[0],strong,ref:`${bookData.name} ${chap}:${verse.n}`,added:button.classList.contains("added"),index:occurrenceIndex};renderLexical(selectedContext.word,selectedContext.strong,selectedContext.ref,selectedContext.added,selectedContext.index)});
       row.append(button);cursor=m.index+m[0].length;wordIndex++;
     }
     if(cursor<text.length)row.append(document.createTextNode(text.slice(cursor)));
@@ -198,6 +216,7 @@ $("book").addEventListener("change",()=>loadBook($("book").value,1));
 $("chapter").addEventListener("change",renderChapter);
 $("previous").addEventListener("click",()=>{if(Number($("chapter").value)>1){$("chapter").value=String(Number($("chapter").value)-1);renderChapter()}else{const i=manifest.books.findIndex(b=>b.id===currentBook);if(i>0)loadBook(manifest.books[i-1].id,manifest.books[i-1].chapters)}});
 $("next").addEventListener("click",()=>{const n=Number($("chapter").value),max=Object.keys(bookData.chapters).length;if(n<max){$("chapter").value=String(n+1);renderChapter()}else{const i=manifest.books.findIndex(b=>b.id===currentBook);if(i<manifest.books.length-1)loadBook(manifest.books[i+1].id,1)}});
+fetch("lexicon/wordnet-3.0.json").then(response=>{if(!response.ok)throw Error("WordNet data unavailable");return response.json()}).then(data=>{wordnet=data;const stats=data.buildStats;$("dictionary-status").textContent="WordNet 3.0 loaded · local senses for "+stats.formsWithWordNetLinks.toLocaleString()+" of "+stats.corpusUniqueForms.toLocaleString()+" KJV surface forms.";if(selectedContext)renderLexical(selectedContext.word,selectedContext.strong,selectedContext.ref,selectedContext.added,selectedContext.index)}).catch(()=>{wordnetLoadFailed=true;$("dictionary-status").textContent="WordNet local data could not be loaded. Curated entries and Webster lookup remain available.";if(selectedContext)renderLexical(selectedContext.word,selectedContext.strong,selectedContext.ref,selectedContext.added,selectedContext.index)});
 Promise.all([fetch("kjv/manifest.json"),fetch("lexicon/lexicon.json")]).then(async responses=>{if(!responses[0].ok)throw Error("Corpus manifest could not be loaded");if(!responses[1].ok)throw Error("Structured lexicon could not be loaded");manifest=await responses[0].json();lexicon=await responses[1].json();setBookOptions();$("book").value="JAS";return loadBook("JAS",1)}).catch(e=>{$("passage").textContent=`${e.message}. Open this page through the published portfolio site to load its local Bible corpus.`});
 </script>
 </body>

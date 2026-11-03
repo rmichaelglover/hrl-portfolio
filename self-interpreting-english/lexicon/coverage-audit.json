@@ -1,7 +1,7 @@
 {
   "edition": "KJV-1769",
   "generated_on": "2026-11-02",
-  "coverage_unit": "case-folded English surface tokens after removing inline |strong=\"ID\" source markup",
+  "coverage_unit": "case-folded English surface tokens after removal of inline Strong's source markup",
   "corpus": {
     "books": 66,
     "verses": 31102,
@@ -11,32 +11,36 @@
     "verses_with_inline_strong_markers": 7857
   },
   "english_lexicon": {
-    "local_lexemes": 40,
-    "registered_surface_forms": 25,
-    "exact_lexeme_occurrences": 7112,
-    "registered_form_occurrences": 2623,
-    "resolved_word_occurrences": 9735,
-    "resolved_occurrence_percent": 1.232,
-    "unique_forms_resolved": 62,
-    "unique_forms_using_lookup_fallback": 12614
+    "project_lexemes": 41,
+    "registered_project_forms": 25,
+    "project_resolved_occurrences": 9987,
+    "project_resolved_occurrence_percent": 1.263,
+    "wordnet_edition": "Princeton WordNet 3.0",
+    "wordnet_headwords": 6344,
+    "wordnet_senses": 25815,
+    "wordnet_linked_unique_forms": 8001,
+    "wordnet_only_occurrences": 454013,
+    "combined_local_dictionary_occurrences": 464000,
+    "combined_local_dictionary_occurrence_percent": 58.701,
+    "unique_forms_with_local_dictionary_data": 8011,
+    "unique_forms_using_external_lookup_fallback": 4665
   },
   "source_language": {
-    "strong_tag_occurrences_in_source": 348884,
+    "strong_tag_occurrences_in_source": 384373,
     "inline_tags_attached_from_verse_text": 35489,
     "unique_strong_ids": 14047,
-    "local_source_lexeme_records": 6,
-    "unique_ids_without_local_records": 14041
+    "local_source_lexeme_records": 7,
+    "unique_ids_without_local_records": 14040
   },
   "annotation_alignment": {
     "source_annotation_keys_without_displayed_token": 48,
-    "inline_strong_markers_without_preceding_token": 0,
-    "method": "Inline markers are attached to their preceding visible token. Source ordinals after two marker fragments are remapped; unmatchable source IDs are listed separately and remain clickable in the reader."
+    "method": "Inline markers attach to their preceding displayed word; later source ordinals are shifted back by two marker fragments. Unmatched IDs remain separately listed and clickable."
   },
   "downloads": {
     "all_surface_forms": "coverage-audit.csv",
     "unaligned_source_annotations": "unaligned-source-annotations.csv"
   },
-  "top_unresolved_forms_by_frequency": [
+  "top_external_fallback_forms": [
     {
       "surface_form": "the",
       "occurrences": 63919
@@ -58,14 +62,6 @@
       "occurrences": 12915
     },
     {
-      "surface_form": "in",
-      "occurrences": 12670
-    },
-    {
-      "surface_form": "he",
-      "occurrences": 10419
-    },
-    {
       "surface_form": "shall",
       "occurrences": 9837
     },
@@ -78,72 +74,24 @@
       "occurrences": 8971
     },
     {
-      "surface_form": "i",
-      "occurrences": 8855
-    },
-    {
-      "surface_form": "his",
-      "occurrences": 8474
-    },
-    {
-      "surface_form": "a",
-      "occurrences": 8179
-    },
-    {
-      "surface_form": "lord",
-      "occurrences": 7830
-    },
-    {
       "surface_form": "they",
       "occurrences": 7376
-    },
-    {
-      "surface_form": "be",
-      "occurrences": 7012
-    },
-    {
-      "surface_form": "is",
-      "occurrences": 6989
     },
     {
       "surface_form": "him",
       "occurrences": 6661
     },
     {
-      "surface_form": "not",
-      "occurrences": 6609
-    },
-    {
       "surface_form": "them",
       "occurrences": 6429
-    },
-    {
-      "surface_form": "it",
-      "occurrences": 6129
     },
     {
       "surface_form": "with",
       "occurrences": 6012
     },
     {
-      "surface_form": "all",
-      "occurrences": 5620
-    },
-    {
-      "surface_form": "thou",
-      "occurrences": 5474
-    },
-    {
       "surface_form": "thy",
       "occurrences": 4603
-    },
-    {
-      "surface_form": "was",
-      "occurrences": 4521
-    },
-    {
-      "surface_form": "god",
-      "occurrences": 4446
     },
     {
       "surface_form": "which",
@@ -154,32 +102,12 @@
       "occurrences": 4367
     },
     {
-      "surface_form": "me",
-      "occurrences": 4097
-    },
-    {
-      "surface_form": "said",
-      "occurrences": 3999
-    },
-    {
-      "surface_form": "but",
-      "occurrences": 3994
-    },
-    {
       "surface_form": "ye",
       "occurrences": 3985
     },
     {
       "surface_form": "their",
       "occurrences": 3932
-    },
-    {
-      "surface_form": "have",
-      "occurrences": 3905
-    },
-    {
-      "surface_form": "will",
-      "occurrences": 3837
     },
     {
       "surface_form": "thee",
@@ -190,14 +118,6 @@
       "occurrences": 3642
     },
     {
-      "surface_form": "as",
-      "occurrences": 3520
-    },
-    {
-      "surface_form": "are",
-      "occurrences": 2949
-    },
-    {
       "surface_form": "when",
       "occurrences": 2834
     },
@@ -206,136 +126,28 @@
       "occurrences": 2785
     },
     {
-      "surface_form": "out",
-      "occurrences": 2775
-    },
-    {
-      "surface_form": "were",
-      "occurrences": 2773
-    },
-    {
-      "surface_form": "upon",
-      "occurrences": 2747
-    },
-    {
-      "surface_form": "by",
-      "occurrences": 2625
-    },
-    {
       "surface_form": "you",
       "occurrences": 2616
-    },
-    {
-      "surface_form": "man",
-      "occurrences": 2614
-    },
-    {
-      "surface_form": "israel",
-      "occurrences": 2566
-    },
-    {
-      "surface_form": "up",
-      "occurrences": 2380
-    },
-    {
-      "surface_form": "son",
-      "occurrences": 2370
-    },
-    {
-      "surface_form": "there",
-      "occurrences": 2300
     },
     {
       "surface_form": "hath",
       "occurrences": 2263
     },
     {
-      "surface_form": "king",
-      "occurrences": 2256
-    },
-    {
-      "surface_form": "then",
-      "occurrences": 2168
-    },
-    {
-      "surface_form": "people",
-      "occurrences": 2139
-    },
-    {
-      "surface_form": "came",
-      "occurrences": 2093
-    },
-    {
-      "surface_form": "had",
-      "occurrences": 2028
-    },
-    {
-      "surface_form": "house",
-      "occurrences": 2023
-    },
-    {
-      "surface_form": "into",
-      "occurrences": 2015
-    },
-    {
-      "surface_form": "on",
-      "occurrences": 2010
-    },
-    {
       "surface_form": "her",
       "occurrences": 1994
-    },
-    {
-      "surface_form": "come",
-      "occurrences": 1971
-    },
-    {
-      "surface_form": "one",
-      "occurrences": 1967
     },
     {
       "surface_form": "we",
       "occurrences": 1844
     },
     {
-      "surface_form": "children",
-      "occurrences": 1803
-    },
-    {
-      "surface_form": "before",
-      "occurrences": 1796
-    },
-    {
       "surface_form": "your",
       "occurrences": 1776
     },
     {
-      "surface_form": "also",
-      "occurrences": 1769
-    },
-    {
-      "surface_form": "day",
-      "occurrences": 1730
-    },
-    {
-      "surface_form": "land",
-      "occurrences": 1717
-    },
-    {
-      "surface_form": "an",
-      "occurrences": 1699
-    },
-    {
-      "surface_form": "so",
-      "occurrences": 1689
-    },
-    {
       "surface_form": "against",
       "occurrences": 1667
-    },
-    {
-      "surface_form": "men",
-      "occurrences": 1653
     },
     {
       "surface_form": "shalt",
@@ -346,64 +158,12 @@
       "occurrences": 1595
     },
     {
-      "surface_form": "at",
-      "occurrences": 1570
-    },
-    {
-      "surface_form": "let",
-      "occurrences": 1511
-    },
-    {
-      "surface_form": "go",
-      "occurrences": 1492
-    },
-    {
-      "surface_form": "hand",
-      "occurrences": 1468
-    },
-    {
-      "surface_form": "us",
-      "occurrences": 1451
-    },
-    {
-      "surface_form": "saying",
-      "occurrences": 1445
-    },
-    {
-      "surface_form": "made",
-      "occurrences": 1406
-    },
-    {
-      "surface_form": "went",
-      "occurrences": 1400
-    },
-    {
-      "surface_form": "even",
-      "occurrences": 1393
-    },
-    {
-      "surface_form": "no",
-      "occurrences": 1393
-    },
-    {
-      "surface_form": "now",
-      "occurrences": 1356
-    },
-    {
-      "surface_form": "behold",
-      "occurrences": 1326
-    },
-    {
       "surface_form": "saith",
       "occurrences": 1262
     },
     {
       "surface_form": "every",
       "occurrences": 1238
-    },
-    {
-      "surface_form": "therefore",
-      "occurrences": 1237
     },
     {
       "surface_form": "these",
@@ -414,28 +174,272 @@
       "occurrences": 1209
     },
     {
-      "surface_form": "after",
-      "occurrences": 1179
-    },
-    {
       "surface_form": "our",
       "occurrences": 1165
     },
     {
-      "surface_form": "things",
-      "occurrences": 1162
+      "surface_form": "hast",
+      "occurrences": 1071
     },
     {
-      "surface_form": "down",
-      "occurrences": 1125
+      "surface_form": "what",
+      "occurrences": 987
     },
     {
-      "surface_form": "or",
-      "occurrences": 1122
+      "surface_form": "she",
+      "occurrences": 982
     },
     {
-      "surface_form": "sons",
-      "occurrences": 1094
+      "surface_form": "thine",
+      "occurrences": 937
+    },
+    {
+      "surface_form": "among",
+      "occurrences": 916
+    },
+    {
+      "surface_form": "should",
+      "occurrences": 783
+    },
+    {
+      "surface_form": "whom",
+      "occurrences": 764
+    },
+    {
+      "surface_form": "nor",
+      "occurrences": 756
+    },
+    {
+      "surface_form": "how",
+      "occurrences": 543
+    },
+    {
+      "surface_form": "himself",
+      "occurrences": 527
+    },
+    {
+      "surface_form": "than",
+      "occurrences": 483
+    },
+    {
+      "surface_form": "those",
+      "occurrences": 465
+    },
+    {
+      "surface_form": "would",
+      "occurrences": 451
+    },
+    {
+      "surface_form": "another",
+      "occurrences": 448
+    },
+    {
+      "surface_form": "themselves",
+      "occurrences": 409
+    },
+    {
+      "surface_form": "where",
+      "occurrences": 406
+    },
+    {
+      "surface_form": "until",
+      "occurrences": 366
+    },
+    {
+      "surface_form": "both",
+      "occurrences": 361
+    },
+    {
+      "surface_form": "toward",
+      "occurrences": 346
+    },
+    {
+      "surface_form": "whose",
+      "occurrences": 314
+    },
+    {
+      "surface_form": "king's",
+      "occurrences": 284
+    },
+    {
+      "surface_form": "cometh",
+      "occurrences": 282
+    },
+    {
+      "surface_form": "thyself",
+      "occurrences": 215
+    },
+    {
+      "surface_form": "doth",
+      "occurrences": 206
+    },
+    {
+      "surface_form": "yourselves",
+      "occurrences": 191
+    },
+    {
+      "surface_form": "whosoever",
+      "occurrences": 180
+    },
+    {
+      "surface_form": "moab",
+      "occurrences": 174
+    },
+    {
+      "surface_form": "ephraim",
+      "occurrences": 172
+    },
+    {
+      "surface_form": "cannot",
+      "occurrences": 171
+    },
+    {
+      "surface_form": "whether",
+      "occurrences": 171
+    },
+    {
+      "surface_form": "could",
+      "occurrences": 166
+    },
+    {
+      "surface_form": "lo",
+      "occurrences": 165
+    },
+    {
+      "surface_form": "wherein",
+      "occurrences": 165
+    },
+    {
+      "surface_form": "father's",
+      "occurrences": 147
+    },
+    {
+      "surface_form": "manasseh",
+      "occurrences": 143
+    },
+    {
+      "surface_form": "joab",
+      "occurrences": 137
+    },
+    {
+      "surface_form": "goeth",
+      "occurrences": 135
+    },
+    {
+      "surface_form": "lord's",
+      "occurrences": 134
+    },
+    {
+      "surface_form": "beside",
+      "occurrences": 132
+    },
+    {
+      "surface_form": "gilead",
+      "occurrences": 131
+    },
+    {
+      "surface_form": "giveth",
+      "occurrences": 126
+    },
+    {
+      "surface_form": "maketh",
+      "occurrences": 126
+    },
+    {
+      "surface_form": "whither",
+      "occurrences": 124
+    },
+    {
+      "surface_form": "ashamed",
+      "occurrences": 122
+    },
+    {
+      "surface_form": "didst",
+      "occurrences": 122
+    },
+    {
+      "surface_form": "man's",
+      "occurrences": 122
+    },
+    {
+      "surface_form": "myself",
+      "occurrences": 118
+    },
+    {
+      "surface_form": "mayest",
+      "occurrences": 114
+    },
+    {
+      "surface_form": "wherewith",
+      "occurrences": 110
+    },
+    {
+      "surface_form": "edom",
+      "occurrences": 106
+    },
+    {
+      "surface_form": "knoweth",
+      "occurrences": 104
+    },
+    {
+      "surface_form": "absalom",
+      "occurrences": 103
+    },
+    {
+      "surface_form": "ought",
+      "occurrences": 97
+    },
+    {
+      "surface_form": "liveth",
+      "occurrences": 96
+    },
+    {
+      "surface_form": "ammon",
+      "occurrences": 91
+    },
+    {
+      "surface_form": "knowest",
+      "occurrences": 89
+    },
+    {
+      "surface_form": "jehoshaphat",
+      "occurrences": 85
+    },
+    {
+      "surface_form": "bringeth",
+      "occurrences": 79
+    },
+    {
+      "surface_form": "sware",
+      "occurrences": 78
+    },
+    {
+      "surface_form": "sheba",
+      "occurrences": 76
+    },
+    {
+      "surface_form": "mother's",
+      "occurrences": 75
+    },
+    {
+      "surface_form": "selah",
+      "occurrences": 75
+    },
+    {
+      "surface_form": "dan",
+      "occurrences": 74
+    },
+    {
+      "surface_form": "eleazar",
+      "occurrences": 74
+    },
+    {
+      "surface_form": "taketh",
+      "occurrences": 74
+    },
+    {
+      "surface_form": "amorites",
+      "occurrences": 73
     }
   ]
 }

@@ -769,6 +769,51 @@
           ]
         }
       ]
+    },
+    "fall": {
+      "id": "en:fall",
+      "headword": "fall",
+      "partOfSpeech": "verb",
+      "websterHeadword": "fall",
+      "sourceLexemes": [],
+      "senses": [
+        {
+          "id": "en:fall:webster-1",
+          "label": "Historical English sense · descent",
+          "definition": "To drop or descend from a higher place.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:fall:webster-2",
+          "label": "Historical English sense · change of state",
+          "definition": "To pass into a new state or condition; Webster gives “fall into temptation” as an example of this construction.",
+          "kind": "historical-dictionary-paraphrase",
+          "provenance": [
+            "webster-1828"
+          ]
+        },
+        {
+          "id": "en:fall:project-1",
+          "label": "Reader gloss · James 1:2",
+          "definition": "To encounter or come into a situation. In this verse, “fall into” introduces the varied trials the readers meet.",
+          "kind": "project-gloss",
+          "provenance": [
+            "project-gloss"
+          ]
+        }
+      ],
+      "contextNotes": [
+        {
+          "reference": "JAS.1.2",
+          "text": "The source tags “into” with G4045, a Greek verb rendered by the whole phrase “fall into.” James calls these experiences trials; the phrase-level link preserves the source mapping without assigning its tag to “fall” alone.",
+          "provenance": [
+            "project-context"
+          ]
+        }
+      ]
     }
   },
   "surfaceForms": {
@@ -1030,6 +1075,19 @@
         "strongs-1890"
       ],
       "url": "https://www.blueletterbible.org/lexicon/g2620/kjv/tr/"
+    },
+    "G4045": {
+      "id": "grc:G4045",
+      "strongId": "G4045",
+      "language": "Koine Greek",
+      "lemma": "περιπίπτω",
+      "transliteration": "peripiptō",
+      "partOfSpeech": "verb",
+      "gloss": "To fall into or come upon something so as to be surrounded by it; to encounter.",
+      "provenance": [
+        "strongs-1890"
+      ],
+      "url": "https://www.blueletterbible.org/lexicon/g4045/kjv/tr/"
     }
   },
   "phraseLinks": [
@@ -1049,6 +1107,30 @@
       "sourceAnnotation": {
         "tokenIndex": 15,
         "surface": "against"
+      },
+      "provenance": [
+        "kjv-corpus",
+        "strongs-1890",
+        "project-context"
+      ]
+    },
+    {
+      "id": "phrase:JAS.1.2:fall-into",
+      "reference": "JAS.1.2",
+      "tokenIndices": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "surface": "fall into divers temptations",
+      "relation": "phrase-level-source-link",
+      "sourceLexemes": [
+        "G4045"
+      ],
+      "sourceAnnotation": {
+        "tokenIndex": 9,
+        "surface": "into"
       },
       "provenance": [
         "kjv-corpus",
