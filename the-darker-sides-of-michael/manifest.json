@@ -11,5 +11,13 @@
     "SCENE.md": "33765d62468ce9b9f466f08d5013ee266aa12a827b8d68090a672342f04fe908",
     "CONVERSATION.md": "38dfe98100ecb594006fb1c57168e3e930ae1c9373e8d2c072897319ebcacc24",
     "CONVERSATION.json": "6b24cba4029f032d56ed6c3c45f6c4c7beda394aba9e238368814dd04f9d5195"
+  },
+  "illustration": {
+    "file": "art/michael-at-the-desk.png",
+    "prompt": "art/PROMPT.md",
+    "tool": "OpenAI built-in image generation",
+    "width": 1536,
+    "height": 1024,
+    "physical_board_visible": true
   }
 }
