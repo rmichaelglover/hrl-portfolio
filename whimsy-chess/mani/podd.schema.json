@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rmichaelglover.github.io/hrl-portfolio/whimsy-chess/mani/podd.schema.json",
+  "title": "Michael Glover \u2014 Mani PoDD v0 replay receipt",
+  "$comment": "Structural validation is necessary but insufficient. podd.js verifies cross-field limits, fixed-point sums, hashes, Merkle openings, and transitions. Sampled audits do not establish complete trace correctness.",
+  "$ref": "#/$defs/bundle",
+  "$defs": {
+    "state": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,9})$"
+        },
+        "minItems": 2,
+        "maxItems": 16
+      },
+      "minItems": 2,
+      "maxItems": 128
+    },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "scale",
+        "labels",
+        "nodes",
+        "edges",
+        "iterations",
+        "damping"
+      ],
+      "properties": {
+        "profile": {
+          "const": "rl-fixed6-v1"
+        },
+        "scale": {
+          "const": "1000000"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "minItems": 2,
+          "maxItems": 16
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "prior"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "prior": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]{0,9})$"
+                },
+                "minItems": 2,
+                "maxItems": 16
+              }
+            }
+          },
+          "minItems": 2,
+          "maxItems": 128
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source",
+              "target",
+              "weight",
+              "compatibility"
+            ],
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,9})$"
+              },
+              "compatibility": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(0|[1-9][0-9]{0,9})$"
+                  },
+                  "minItems": 2,
+                  "maxItems": 16
+                },
+                "minItems": 2,
+                "maxItems": 16
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 2048
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "damping": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,9})$"
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "profile",
+        "challengeId",
+        "iterations",
+        "leafCount",
+        "traceRoot",
+        "initialStateHash",
+        "finalStateHash",
+        "finalAssignments",
+        "receiptId"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "mani-podd-0"
+        },
+        "profile": {
+          "const": "rl-fixed6-v1"
+        },
+        "challengeId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "leafCount": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 101
+        },
+        "traceRoot": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "initialStateHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "finalStateHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "finalAssignments": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15
+          },
+          "minItems": 2,
+          "maxItems": 128
+        },
+        "receiptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "iteration",
+        "state",
+        "siblings"
+      ],
+      "properties": {
+        "iteration": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "siblings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "minItems": 1,
+          "maxItems": 7
+        }
+      }
+    },
+    "bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt",
+        "challenge",
+        "states"
+      ],
+      "properties": {
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        },
+        "challenge": {
+          "$ref": "#/$defs/challenge"
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/state"
+          },
+          "minItems": 2,
+          "maxItems": 101
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt",
+        "challenge",
+        "initial",
+        "final",
+        "transitions"
+      ],
+      "properties": {
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        },
+        "challenge": {
+          "$ref": "#/$defs/challenge"
+        },
+        "initial": {
+          "$ref": "#/$defs/point"
+        },
+        "final": {
+          "$ref": "#/$defs/point"
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "before",
+              "after"
+            ],
+            "properties": {
+              "before": {
+                "$ref": "#/$defs/point"
+              },
+              "after": {
+                "$ref": "#/$defs/point"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      }
+    }
+  }
+}

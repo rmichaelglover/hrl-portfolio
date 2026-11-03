@@ -55,3 +55,7 @@ CZI is a prospective alignment, not an announced partner. This implementation co
 `node test-engine.cjs` tests deterministic replay, normalization, synthetic-label evaluation, isolated/zero-support nodes, damping, edge transpose invariance, malformed input rejection, and conservation of allocations.
 
 Code and exports remain subject to the repository's existing [MIRL-1.0 terms](../../LICENSE). This implementation does not change project licensing or create ownership rights in third-party datasets.
+
+## PoDD protocol tools
+
+The workspace now also includes [Proof of Deterministic Distillation v0](PODD.md): an exact fixed-point engine, content-addressed execution specification, Merkle trace commitments, full replay and selected-transition audits, browser export/import, a headless CLI, and a loopback JSON-RPC verifier. See the [schema](podd.schema.json) for receipt and witness formats. This is the next execution-verification layer; it does not deploy consensus or alter the local-credit ledger.
