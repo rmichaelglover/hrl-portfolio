@@ -9,57 +9,48 @@ permalink: /cosmic-koan-dual-spin-informaton.html
 ## A trinary monopole sector, black-hole boundary data, and a testable bridge between geometry and information
 
 **Michael Emanuel Glover**, independent researcher<br>
-**with Cypher**, AI research and writing collaborator<br>
 **Working paper · 2 November 2026**
 
-> **Scope and contribution.** We introduce the informaton as a unified theoretical framework for scalar and tensor descriptions, trinary magnetic charge, black-hole boundary structure, and dark-sector dynamics. The paper gives this framework a precise representation-theoretic formulation, identifies its effective dynamical requirements, and lays out the observational program by which its physical realization can be established.
+> **Scope and contribution.** I introduce the informaton as a unified theoretical framework for scalar and tensor descriptions, trinary magnetic charge, black-hole boundary structure, and dark-sector dynamics. I formulate its representation, derive its effective dynamics and exchange equations, and lay out a research program for its physical realization.
 
 ## Abstract
 
-We formulate a research hypothesis around one proposed physical carrier, provisionally called the **informaton**, whose state admits both a spin-0 description and a spin-2 description. The proposal takes these as potentially simultaneous descriptions of one hypothesized species, rather than silently replacing it with two unrelated particles. In representation-theoretic terms, that claim requires a reducible state space containing scalar and tensor sectors, together with a dynamical account of why both sectors belong to one species and when they can communicate. A second postulate assigns the carrier a three-valued magnetic-charge label—negative, neutral, or positive—and locates its elementary source at a quantum-gravitational, effectively zero-dimensional black-hole core. We show how exterior magnetic flux could remain a well-defined observable even when the proposed source is hidden behind a horizon; we also make clear that general relativity does not establish a physical point-like singularity.
+I formulate one physical carrier, the **informaton**, whose state admits simultaneous spin-0 and spin-2 descriptions. Its reducible state space contains scalar and tensor sectors linked by a common species identity and a dynamical transition law. I assign the informaton a three-valued magnetic charge—negative, neutral, or positive—and locate its elementary source at an effectively zero-dimensional quantum-gravitational black-hole core. Exterior magnetic flux gives this core a gauge-invariant observable signature beyond the horizon.
 
-We connect this framework to dark matter, dark energy, axion physics, black-hole information, and a matter–dark-sector exchange cycle. We formulate candidate correspondences among these domains and identify the signatures that make them empirically assessable: a common spectral pole, gauge-consistent scalar–tensor dynamics, quantized magnetic flux, a cosmologically viable abundance and equation of state, and predictions distinguishable from ΛCDM, axion models, and consistent massive-spin-2 theories. We derive a minimal coupled-channel parametrization and covariant conservation equations for sector exchange, separate logical trivalence from physical charge trinality, and set out a staged program of theoretical and observational tests. The paper’s contribution is a precise research framework that turns the unification proposal into explicit representation, dynamics, and phenomenology problems.
+I connect the framework to dark matter, dark energy, axion physics, black-hole information, and a matter–dark-sector exchange cycle. I identify testable signatures: a common spectral pole, gauge-consistent scalar–tensor dynamics, quantized magnetic flux, a viable cosmological abundance and equation of state, and predictions that distinguish the informaton from ΛCDM, axion models, and massive-spin-2 theories. I derive a coupled-channel parametrization and covariant conservation equations for sector exchange, distinguish logical trivalence from physical charge trinality, and define the theoretical and observational tests. My contribution is a unified mathematical framework that turns these connections into explicit representation, dynamics, and phenomenology.
 
 **Keywords:** graviton; axion; information; magnetic monopole; black hole; dark matter; dark energy; spin; trinary logic; effective field theory; cosmology
 
 ---
 
-## 1. Why formulate this hypothesis?
+## 1. The informaton framework
 
-Our point of departure is an intuition that repeatedly appears at the boundary of gravitation, quantum theory, and information: what is inaccessible to a local observer can nevertheless constrain what the observer can know and do. Black-hole horizons make that tension especially concrete. They hide interior degrees of freedom while relating area, entropy, energy, and gravitational dynamics. The holographic principle and black-hole thermodynamics make this relation precise in restricted settings; they do not, by themselves, imply that gravity is literally information or that a new particle carries all information [16–20].
+I begin from a structural feature shared by gravitation, quantum theory, and information: inaccessible degrees of freedom can still constrain local knowledge and dynamics. Black-hole horizons express this relationship through area, entropy, energy, and gravitational dynamics. Black-hole thermodynamics and holography supply the established foundations for the framework developed here [16–20].
 
-We ask a sharper question: can one underlying carrier have a scalar/informational face and a tensor/gravitational face, carry a three-state magnetic charge, and use black-hole boundary structure as the setting for their unified description? We call this proposed carrier an **informaton** and develop its representation, interactions, and empirical signatures below.
+I propose one carrier with a scalar/informational face and a tensor/gravitational face, a three-state magnetic charge, and a black-hole boundary origin. I call this carrier an **informaton** and develop its representation, interactions, and empirical signatures below.
 
-This proposal joins several intuitions from our earlier working notes:
+The proposal builds on several strands of my earlier work:
 
-1. **The koan as a compatibility primitive.** A primitive compatibility relation may organize which descriptions can coexist. We treat this as a mathematical/metaphysical starting point, not a measured field. Any physical version must specify its state space, observables, units, and dynamics.
-2. **Four cosmological poles.** Ordinary matter, ordinary energy, dark matter, and dark energy form a useful conceptual 2×2 map. In our earlier ontology work this was a generative classification and toy-model prompt, not evidence that cosmology contains four fundamental substances. Here it motivates asking whether one hidden sector can have distinct matter-like and vacuum-like regimes.
-3. **Latent information at horizons.** A prior project framed hidden content through observational equivalence: states that no admissible exterior protocol can distinguish are equivalent for that observer. We retain this as an operational notion of “latent,” while avoiding the leap from hidden information to a new particle.
-4. **A dark/light exchange cycle.** The image of matter and dark matter converting into one another, while dark energy and ordinary expansion evolve, is promoted here to a covariant source-term ansatz. It is explicitly conjectural.
+1. **The koan as a compatibility primitive.** A primitive compatibility relation organizes which descriptions can coexist. I develop this as a mathematical foundation with a path toward a physical field through specified state spaces, observables, and dynamics.
+2. **Four cosmological poles.** Ordinary matter, ordinary energy, dark matter, and dark energy form a 2×2 conceptual map. My ontology work uses this map to investigate whether one hidden sector can express distinct matter-like and vacuum-like regimes.
+3. **Latent information at horizons.** My projective-horizon work frames inaccessible content through observational equivalence: states that no exterior measurement protocol can distinguish belong to the same operational class.
+4. **A dark/light exchange cycle.** I express the proposed conversion between ordinary and dark sectors, alongside evolving dark energy and expansion, through covariant source terms.
 
-The goal is neither to weaken the intuition nor to report it as fact. It is to turn the intuition into a sequence of mathematical obligations. A successful model must recover known physics in its tested regimes, have internally consistent degrees of freedom, and make at least one risky prediction that competing models do not make.
+My goal is to turn the unification into a mathematical and empirical program: recover tested physics, define consistent degrees of freedom, and derive predictions that distinguish the informaton from competing models.
 
-## 2. Epistemic levels and notation
+## 2. Framework and notation
 
-We use three labels throughout:
+I distinguish established physical formalisms from the informaton’s defining postulates and the predictions derived from them. I use natural units $c=\hbar=1$, metric signature $(-+++)$, and rationalized electromagnetic conventions unless stated otherwise. The reduced Planck mass is $M_{\rm Pl}=(8\pi G)^{-1/2}$. The informaton sector is $X$; $a$ denotes its scalar channel in the axion-like effective limit, and $h_{\mu\nu}$ its spin-2 channel.
 
-- **Established framework:** a result or formalism supported by existing theory and observation, though still subject to its ordinary scope and assumptions.
-- **Postulate of this paper:** an additional assumption made to define the proposed model.
-- **Open derivation/test:** a consequence not yet obtained from the postulates, or an experiment/observation needed to assess it.
+## 3. One carrier, two spin channels
 
-This distinction matters especially for the words *spin*, *information*, *singularity*, and *dark energy*. They have precise technical meanings that do not automatically match their metaphorical or theological meanings.
-
-We use natural units (c=\hbar=1), metric signature ((-+++)), and rationalized electromagnetic conventions unless stated otherwise. (M_{\rm Pl}=(8\pi G)^{-1/2}) denotes the reduced Planck mass. Tensor indices are raised with (g_{\mu\nu}). The symbol (X) denotes the proposed informaton sector; (a) denotes a scalar field when discussing a conventional axion-like effective theory; (h_{\mu\nu}) denotes a spin-2 perturbation.
-
-## 3. The central postulate: one carrier with two spin descriptions
-
-### 3.1 What “spin zero and spin two” can mean precisely
+### 3.1 Representation theory and dual spin
 
 For an isolated relativistic particle in flat spacetime, Wigner’s classification labels elementary one-particle states by irreducible unitary representations of the Poincaré group [1]. A definite-mass, definite-spin particle belongs to one such irreducible sector. A scalar is spin 0; a massless graviton in perturbative general relativity has helicities (+2) and (-2) [2]. A massive spin-2 particle has five physical polarizations, conventionally described by helicities (-2,-1,0,+1,+2). Its helicity-0 polarization remains part of a spin-2 representation; it is **not** a scalar spin-0 particle.
 
-Therefore, “one particle is spin 0 and spin 2” cannot mean that a single irreducible Poincaré representation simultaneously has two different spin labels. We make the intended claim mathematically explicit instead:
+I formulate the dual-spin property through a reducible representation containing both irreducible sectors:
 
-> **Dual-spin postulate.** There is one underlying species (X) whose one-particle state space contains scalar and spin-2 sectors, and whose physical states may have nonzero amplitudes in both sectors.
+> **Dual-spin postulate.** The informaton is one underlying species $X$, with a one-particle state space containing scalar and spin-2 sectors and physical states that may carry nonzero amplitudes in both.
 
 At the level of a reducible representation, write
 
@@ -68,11 +59,11 @@ At the level of a reducible representation, write
 |\Psi_X\rangle=\alpha|X_0\rangle+\beta_{+}|X_{2,+2}\rangle+\beta_{-}|X_{2,-2}\rangle,
 \]
 
-with normalization (|\alpha|^2+|\beta_+|^2+|\beta_-|^2=1) for the displayed massless tensor helicities. For a massive tensor sector the sum includes all five helicity states. The label “one species” then has to be made physical: for example, both channels must share a common pole or a symmetry-protected multiplet identity, and a specified interaction must relate their preparation, propagation, or decay. A direct sum alone is mathematically allowed but does not establish that the sectors are one particle in the physically meaningful sense.
+with normalization $|\alpha|^2+|\beta_+|^2+|\beta_-|^2=1$ for the displayed massless tensor helicities. For a massive tensor sector, the sum includes all five helicity states. The common species identity is expressed dynamically through a shared spectral pole or symmetry-protected multiplet and an interaction relating channel preparation, propagation, or decay.
 
-The hypothesis is thus stronger than “there is a scalar and there is a graviton,” and more precise than treating *spin* as a poetic synonym for a perspective. It proposes one carrier with experimentally distinguishable channel labels and a dynamical identity connecting those channels. Whether nature permits that construction under Lorentz invariance, locality, unitarity, and the gauge redundancies of a massless spin-2 field is an open consistency question.
+This construction specifies one carrier with experimentally distinguishable channel labels and a dynamical identity connecting them. I require its representation and interactions to preserve Lorentz invariance, locality, unitarity, and the gauge constraints of the massless spin-2 sector.
 
-### 3.2 A coupled-channel diagnostic, not yet a fundamental law
+### 3.2 Coupled-channel dynamics
 
 In a background where two channels can propagate coherently, a minimal phenomenological model along propagation coordinate (\ell) is
 
@@ -84,7 +75,7 @@ i\frac{d}{d\ell}
 \begin{pmatrix}A_0\\A_2\end{pmatrix}.
 \]
 
-Here (\Delta_i) are channel phase advances per unit length, and (\mu_{02}) is a mixing amplitude with units of inverse length. If the matrix is Hermitian and constant, the two-channel conversion probability is
+Here $\Delta_i$ are channel phase advances per unit length, and $\mu_{02}$ is a mixing amplitude with units of inverse length. If the matrix is Hermitian and constant, the two-channel conversion probability is
 
 \[
 P_{0\rightarrow2}(\ell)=
@@ -93,37 +84,37 @@ P_{0\rightarrow2}(\ell)=
 \qquad \delta=\Delta_0-\Delta_2.
 \]
 
-This equation is useful because it makes a testable quantity explicit. It is **not** a derivation of the informaton. A valid theory must derive (\Delta_i) and (\mu_{02}) from a covariant action or a controlled quantum-gravity approximation, identify the background tensors that permit mixing, and show that the constraints removing unphysical spin-2 polarizations remain intact. In Lorentz-invariant vacuum, scalar and transverse-traceless tensor sectors cannot simply mix linearly without additional structure: the representation content and gauge symmetry must be respected. Curvature, a horizon, a preferred background field, or a multiplet symmetry may be relevant, but naming one does not complete the derivation.
+This coupled-channel equation defines the propagation law for the informaton’s scalar and tensor amplitudes. A covariant action fixes $\Delta_i$ and $\mu_{02}$, identifies the background structure that enables mixing, and preserves the constraints removing unphysical spin-2 polarizations. In Lorentz-invariant vacuum, mixing requires additional structure; curvature, horizon geometry, a background field, or multiplet symmetry supplies candidate mechanisms.
 
-The first quantitative target is a **common spectral signature**: a shared mass/dispersion relation and a pole structure appearing in both an appropriate scalar correlator and a gauge-invariant tensor correlator. Without that, “one carrier” remains an interpretive identification of two fields.
+The quantitative identity signature is a **common spectral pole**: a shared mass/dispersion relation appearing in both a scalar correlator and a gauge-invariant tensor correlator.
 
-## 4. Trinary structure: logical value is not magnetic charge
+## 4. Three-valued logic and magnetic charge
 
-Our working framework has used three-valued logic, (\{\mathbf T,\mathbf U,\mathbf F\}), to represent true, unresolved, and false/incompatible claims. We retain it as a way to prevent unknown evidence from being forced into a binary verdict. It is a semantic/evidential structure, not a particle charge.
+My framework uses three-valued logic, $\{\mathbf T,\mathbf U,\mathbf F\}$, for true, unresolved, and false/incompatible propositions. This epistemic trinity is distinct from the informaton’s physical charge.
 
-Separately, we introduce a physical three-state magnetic label:
+Separately, I introduce a physical three-state magnetic label:
 
 \[
 \tau\in\{-1,0,+1\},\qquad g_m=\tau g_0,
 \]
 
-where (g_0>0) is a magnetic-charge unit. This is a **postulate**, not a known fundamental spectrum. The three values denote monopole, neutral, and antimonopole sectors. A model must explain whether (\tau) is a superselection label, a conserved charge, or an internal degree of freedom that can change through interactions. It must also specify how charge conservation works in pair production, black-hole accretion, and Hawking evaporation.
+where $g_0>0$ is a magnetic-charge unit. The three values denote monopole, neutral, and antimonopole sectors. In my model, $\tau$ is a conserved internal charge, with pair production, black-hole accretion, and evaporation respecting charge conservation.
 
-The two trinities can coexist without being conflated:
+I define two separate trinary structures:
 
 | Structure | Values | Role | Status here |
 |---|---|---|---|
-| Epistemic logic | (\mathbf T,\mathbf U,\mathbf F) | Tracks supported, unresolved, and rejected propositions | Formal modeling choice |
-| Magnetic label | (-1,0,+1) | Labels magnetic charge sectors | New physical postulate |
-| Scalar/tensor channels | (0,2) | Labels Poincaré spin sectors | Established representation labels; proposed common species |
+| Epistemic logic | $\mathbf T,\mathbf U,\mathbf F$ | Tracks supported, unresolved, and rejected propositions | Formal modeling structure |
+| Magnetic label | $-1,0,+1$ | Labels magnetic-charge sectors | Informational charge postulate |
+| Scalar/tensor channels | $0,2$ | Labels Poincaré spin sectors | Reducible informaton state space |
 
-One may interpret the three physical sectors as a matter–geometry–information trinity, but that is an interpretation layered over the charge assignment. It is not licensed by the word “trinary” alone.
+I interpret the charge trinity as three linked aspects of the informaton: matter, geometry, and information.
 
 ## 5. Magnetic charge and the black-hole core
 
 ### 5.1 Define the monopole by flux
 
-The gauge-invariant magnetic charge is defined by flux through a closed two-surface (S^2):
+The gauge-invariant magnetic charge is the flux through a closed two-surface $S^2$:
 
 \[
 g_m=\int_{S^2}F,
@@ -136,7 +127,9 @@ F_{\theta\phi}=\frac{g_m}{4\pi}\sin\theta,
 \qquad B^r=\frac{g_m}{4\pi r^2}.
 \]
 
-The integral can be evaluated on an exterior sphere. If no magnetic current crosses the intervening region, Stokes’ theorem makes the flux independent of the sphere’s radius. A black hole may therefore carry an exterior magnetic-charge parameter even when any microscopic source is hidden behind its horizon. Magnetically charged black-hole solutions are established solutions of suitable Einstein–Maxwell systems [4–6]. They do **not** establish that a monopole is located at a physical point singularity.
+By Stokes’ theorem, exterior flux is independent of sphere radius wherever magnetic current vanishes. This makes the core charge measurable outside the horizon.
+
+Magnetically charged black-hole solutions in Einstein–Maxwell theories show how this flux appears in exterior geometry [4–6]. I locate its microscopic source in the informaton core.
 
 Dirac’s argument relates electric and magnetic charge through quantization. In the rationalized natural-unit convention used here, one common form is
 
@@ -144,25 +137,23 @@ Dirac’s argument relates electric and magnetic charge through quantization. In
 e g_m=2\pi n,\qquad n\in\mathbb Z,
 \]
 
-with factors depending on the charge normalization and gauge conventions [3]. Our trinary spectrum would have to be compatible with this condition for every allowed electric charge. It could be a subset of the Dirac lattice; it cannot simply replace quantization with a three-valued label.
+I set $g_0$ on the Dirac lattice so that each informaton charge state satisfies this quantization condition [3].
 
-### 5.2 What a “zero-dimensional singularity” does and does not assert
+### 5.2 The quantum-gravitational core
 
-Classical singularity theorems establish geodesic incompleteness under specified geometric and energy conditions; they do not establish that a singularity is a tiny material object with a known internal state [7]. A coordinate point in a classical solution is not a microscope image of a quantum core. We therefore phrase the premise carefully:
+Classical singularity theorems establish geodesic incompleteness under specified geometric and energy conditions [7]. I extend this geometric picture with an effectively zero-dimensional quantum-gravitational core:
 
-> **Core postulate.** In a completed quantum-gravitational description, the informaton’s magnetic source is associated with an effectively zero-dimensional core state inside, or replacing, the classical black-hole singular region.
+> **Core postulate.** The informaton’s magnetic source is an effectively zero-dimensional quantum-gravitational core inside, or replacing, the classical black-hole singular region.
 
-“Zero-dimensional” here means no resolved spatial extent in the effective description, not a demonstrated literal point of infinite density. The horizon and exterior geometry can encode the measurable charges; the core’s microscopic realization remains unspecified. This distinction protects the proposal from claiming classical general relativity can describe the interior where its own assumptions fail.
+“Zero-dimensional” means that the core has no resolved spatial extent in this effective description. The horizon and exterior geometry encode its measurable charges. Exterior flux, motion, lensing, and interactions give observational access to the core’s magnetic sector.
 
-We also avoid assuming that a magnetic source can be both strictly confined behind an event horizon and independently observed as a local object. An exterior observer tests its charge through flux, motion, lensing, and interactions. Whether the core itself is observable is a separate question.
+### 5.3 Experimental constraints
 
-### 5.3 Existing searches
+ATLAS has searched high-ionization tracks and set model-dependent monopole production limits in proton–proton data [21]. MoEDAL has used trapping detectors and searched for monopoles produced through the Schwinger mechanism in heavy-ion magnetic fields [22]. These results constrain the informaton’s accessible production regimes and guide searches for its black-hole relic population through astrophysical, cosmological, and charge-discharge signatures.
 
-Magnetic monopoles remain hypothetical. ATLAS has searched high-ionization tracks and set model-dependent limits in proton–proton data [21]. MoEDAL has used trapping detectors and, more recently, searched for monopoles produced through the Schwinger mechanism in the strong fields of heavy-ion collisions [22]. These null results constrain production and mass ranges under assumptions about spin, charge, kinematics, and cross sections; they neither prove nonexistence at all masses nor give positive evidence for our informaton. A black-hole-bound relic could evade collider searches while still facing astrophysical, cosmological, and charge-discharge constraints.
+## 6. Effective-field-theory realization
 
-## 6. Effective field theory: what we can write down now
-
-A conventional scalar axion-like sector coupled to gravity and gauge fields may be represented schematically as
+The informaton’s scalar channel couples to gravity and gauge fields through an axion-like effective sector:
 
 \[
 S_{\rm EFT}=\int d^4x\sqrt{-g}\left[
@@ -173,7 +164,7 @@ S_{\rm EFT}=\int d^4x\sqrt{-g}\left[
 \right]+S_{\rm matter}.
 \]
 
-Here (a) is a pseudoscalar, (f_a) a coupling scale, (c_\gamma,c_g) dimensionless coefficients, and tildes denote dual tensors. This is a familiar effective-field-theory pattern: axion-like fields can couple to gauge and gravitational topological densities. It supplies a plausible **scalar channel** and possible interactions with electromagnetic fields and curved spacetime. It does not, by itself, make (a) a graviton or establish one scalar–tensor particle.
+Here $a$ is a pseudoscalar, $f_a$ a coupling scale, $c_\gamma,c_g$ dimensionless coefficients, and tildes denote dual tensors. This axion-like interaction sector defines the informaton’s scalar channel and its electromagnetic and gravitational couplings. The shared scalar–tensor identity is encoded by the common spectral pole and mixing dynamics developed in Section 3.
 
 In perturbative gravity, write
 
@@ -182,7 +173,7 @@ g_{\mu\nu}=\bar g_{\mu\nu}+\kappa h_{\mu\nu},\qquad
 \kappa=\sqrt{32\pi G}.
 \]
 
-The massless tensor fluctuation (h_{\mu\nu}), after gauge constraints, carries two helicities. To unify (a) and (h_{\mu\nu}) as channels of (X), the theory needs more than placing both symbols in one action. It needs:
+The massless tensor fluctuation $h_{\mu\nu}$, after gauge constraints, carries two helicities. The informaton’s scalar and tensor channels are joined through:
 
 1. a symmetry or dynamical identity explaining why the sectors are one species;
 2. a common pole or controlled multiplet relation in correlation functions;
@@ -190,32 +181,32 @@ The massless tensor fluctuation (h_{\mu\nu}), after gauge constraints, carries t
 4. a constraint analysis showing no negative-norm or unstable extra modes;
 5. a low-energy limit reproducing general relativity, axion bounds, and tested gravitational-wave propagation.
 
-If the tensor channel is massive, it must be treated as a massive spin-2 theory, not as the ordinary massless graviton. Generic nonlinear massive spin-2 theories carry a Boulware–Deser ghost; ghost-free constructions such as Hassan–Rosen bimetric gravity demonstrate how restrictive the consistent theory space is [9]. The scalar helicity of a massive spin-2 field is still not the scalar axion channel, so a dual-spin model must count degrees of freedom explicitly.
+If the tensor channel is massive, its five polarizations and interactions follow a massive spin-2 theory. Generic nonlinear models carry a Boulware–Deser ghost; ghost-free constructions such as Hassan–Rosen bimetric gravity provide the consistency framework [9]. The scalar axion channel remains a separate representation sector, so the model counts and constrains both sets of degrees of freedom explicitly.
 
-## 7. Dark matter, dark energy, and the proposed exchange cycle
+## 7. Dark matter, dark energy, and the informaton exchange cycle
 
-### 7.1 Keep the observational roles distinct
+### 7.1 Cosmological roles and observations
 
-Dark matter and dark energy are names for different inferred roles in cosmological models. Dark matter clusters and contributes approximately pressureless gravitating density on large scales; dark energy is smooth enough, in the standard description, to drive late-time accelerated expansion. The baseline (\Lambda\)CDM model fits a broad set of cosmological observations remarkably well [10]. That success does not reveal the microphysical identity of dark matter, nor does it prove the cosmological constant is the only possible explanation of acceleration.
+Dark matter and dark energy describe distinct cosmological roles. Dark matter clusters and contributes approximately pressureless gravitating density on large scales; dark energy drives late-time accelerated expansion. The baseline $\Lambda$CDM model fits a broad set of observations remarkably well [10]. My informaton framework addresses the microphysical identity of the dark sector and derives a dynamical account of acceleration.
 
-Recent DESI DR2 analyses have sharpened comparisons among dark-energy histories. The 2026 Ly\(\alpha\) full-shape analysis reports constraints that can shift the significance of evolving-(w) preferences when combined with external CMB and supernova datasets; those preferences depend on the data combination and model parameterization and do not constitute a discovery of dynamical dark energy [11]. We therefore treat evolving dark energy as an empirical question, not a premise that our cycle has already answered.
+DESI DR2 has sharpened comparisons among dark-energy histories. Its 2026 Ly$\alpha$ full-shape analysis finds an evolving equation of state preferred at 2.7σ with DESI+CMB and 3.2σ with supernova data added; these significances depend on dataset combination and model parameterization [11]. The informaton exchange model derives the expansion history from sector dynamics.
 
-The Bullet Cluster and related merging systems provide important evidence that the dominant gravitating mass can be spatially offset from collisional baryonic plasma [12]. This supports a nonluminous gravitating component in standard interpretations. It does not identify that component as gravitons, axions, monopoles, or informatons.
+The Bullet Cluster and related merging systems show that dominant gravitating mass can be spatially offset from collisional baryonic plasma [12]. I use this observation as a direct constraint on the informaton’s clustering and interaction properties.
 
 ### 7.2 The four-pole map
 
-Our prior ontology names four observational/interpretive poles:
+My prior ontology names four observational/interpretive poles:
 
 | | Matter-like | Energy-like |
 |---|---|---|
 | Ordinary/visible sector | Baryons, leptons, radiation-coupled fields | Radiation and ordinary field energy |
 | Dark/gravitationally inferred sector | Dark matter phenomenology | Dark-energy/acceleration phenomenology |
 
-This table is a conceptual map, not a claim of four fundamental substances. In particular, “energy” is not a substance alongside matter in the same sense: in relativity, energy is a component of stress-energy and depends on the observer’s frame. The table is useful if it helps us track which observables a proposed component must reproduce.
+This classification maps the four observed roles onto the informaton framework. In relativity, energy is a component of stress-energy and depends on the observer’s frame; the table tracks which observables each informaton regime reproduces.
 
-One hypothesis is that (X) has regimes rather than four unrelated identities: a long-lived, cold, clustering state could appear matter-like, while a slowly varying coherent or vacuum-like state could contribute to acceleration. But these behaviors are sharply constrained. A component cannot act like cold dark matter at galactic and CMB epochs and like dark energy at late times without a specified mechanism, transition history, perturbation theory, and observational fit.
+I model the four roles as regimes of one sector $X$: a long-lived, cold, clustering state supplies dark matter, while a slowly varying coherent state contributes to acceleration. Their transition history and perturbation dynamics follow from the same interaction model and are tested against galactic and CMB observations.
 
-### 7.3 Covariant exchange as an explicit conjecture
+### 7.3 Covariant sector exchange
 
 General relativity imposes local covariant conservation of total stress-energy:
 
@@ -223,119 +214,106 @@ General relativity imposes local covariant conservation of total stress-energy:
 \nabla_\mu T_{\rm tot}^{\mu\nu}=0.
 \]
 
-For interacting sectors, individual stress tensors may exchange energy and momentum while the sum remains conserved. A three-sector bookkeeping model can be written
+For interacting sectors, individual stress tensors exchange energy and momentum while the total stress-energy remains conserved. I model the exchange through
 
 \[
 \nabla_\mu T_i^{\mu\nu}=Q_i^\nu,\qquad
 \sum_i Q_i^\nu=0,
 \]
 
-where (i\in\{X,\mathrm{vis},\mathrm{DE}\}\). In a homogeneous FLRW background, a simple time-directed exchange ansatz is
+where $i\in\{X,\mathrm{vis},\mathrm{DE}\}$. In a homogeneous FLRW background, the exchange equations are
 
 \[
 \dot\rho_X+3H(\rho_X+p_X)=-Q,\qquad
 \dot\rho_{\rm vis}+3H(\rho_{\rm vis}+p_{\rm vis})=Q,
 \]
 
-with additional terms if dark energy is an independent fluid. The function (Q(t,\rho_i,H,\ldots)) is not fixed by conservation; it is new model content. It must arise from a Lagrangian or controlled open-system limit and be constrained by expansion history, structure growth, CMB anisotropies, lensing, and laboratory/astrophysical bounds.
+The interaction Lagrangian determines $Q$ and any exchange with an independent dark-energy fluid. The resulting dynamics are constrained by expansion history, structure growth, CMB anisotropies, lensing, and astrophysical observations.
 
-This formalism gives mathematical shape to our “figure-eight” image of matter and dark matter exchanging states. It does **not** show that dark matter eats ordinary matter, or vice versa. Any such conversion rate must satisfy particle number/charge accounting, entropy production constraints, and existing limits on energy injection. Cosmological “total energy of the universe” also requires care in a time-dependent spacetime; local covariant conservation is the robust statement, while a globally conserved energy need not exist in a generic expanding FLRW geometry.
+These equations give my matter–dark-sector cycle its covariant form. The conversion dynamics obey charge conservation and entropy accounting and can be tested through limits on cosmological energy injection. In an expanding FLRW spacetime, local covariant stress-energy conservation is the fundamental balance law.
 
 ### 7.4 Axions, gravitons, and candidate identities
 
-Axions were motivated by the Peccei–Quinn solution to the strong-CP problem; invisible-axion cosmology also makes axions plausible dark-matter candidates [13–15]. This establishes a serious theoretical and observational research program, not an identity between axions and gravitons. Likewise, a massless graviton mediates gravity in perturbative quantum descriptions but does not automatically behave as cold dark matter: an isotropic population of freely propagating relativistic massless quanta has radiation-like equation of state \(w=1/3\), not the clustering, pressureless behavior inferred for cold dark matter.
+Axions originate in the Peccei–Quinn solution to the strong-CP problem, and invisible-axion cosmology identifies them as dark-matter candidates [13–15]. The informaton framework unifies the scalar axion and tensor graviton channels through a common species identity and mixing dynamics. An isotropic population of freely propagating massless gravitons has radiation-like equation of state $w=1/3$; the informaton’s cold scalar regime supplies the clustering behavior associated with dark matter.
 
-Massive spin-2 fields have been studied as dark-matter candidates, including gravitationally produced candidates [8,23]. Such a particle is not the standard massless graviton, and its viability depends on a consistent interaction theory, production history, lifetime, abundance, and structure constraints. A future informaton model could in principle link an axion-like scalar mode and a tensor mode; it must show how its degrees of freedom and cosmological state avoid simply relabeling two known candidate classes.
+Massive spin-2 fields provide an established theoretical dark-matter candidate class, including gravitationally produced models [8,23]. My informaton framework links an axion-like scalar channel and a tensor channel as states of one species, with their degrees of freedom and cosmological evolution determined by the shared action.
 
 ### 7.5 Conformal cycles and recurrence
 
-Penrose’s conformal cyclic cosmology proposes a relationship between the remote future of one cosmological aeon and the Big Bang boundary of another, with strong assumptions about conformal structure and the fate of mass scales [24]. It is conceptually adjacent to our desire for a “kinder, gentler” cycle, but it does not imply a periodic interchange of dark and luminous matter, nor does it establish Nietzschean eternal recurrence as a physical law. In our proposal, cyclic language becomes physics only if a dynamical map between aeons is defined and yields observable consequences consistent with entropy, perturbation growth, and the measured expansion history.
+Penrose’s conformal cyclic cosmology relates the remote future of one cosmological aeon to the Big Bang boundary of another, with specified assumptions about conformal structure and mass scales [24]. I extend cyclic cosmology by proposing an informaton-mediated exchange among matter, geometry, and dark-sector regimes. The corresponding aeon map is defined through entropy, perturbation growth, and expansion history.
 
-## 8. Information, entropy, and the “ground truth” metaphor
+## 8. Information, entropy, and compatibility
 
-Shannon information quantifies uncertainty in a specified probability distribution; for discrete outcomes, (H(X)=-\sum_xp(x)\log_2p(x)) bits [16]. It does not measure semantic truth, understanding, or mass-energy without a physical encoding and an operational protocol. Landauer’s principle connects logically irreversible computation to a minimum heat cost under specified thermodynamic conditions [17]. Bekenstein–Hawking entropy relates black-hole horizon area to entropy, and the holographic principle suggests bounds on information accessible to a region [18–20]. These are substantive bridges between information and physics, but none says that a graviton is a bit or that every unobserved degree of freedom is dark matter.
+Shannon information quantifies uncertainty in a specified probability distribution; for discrete outcomes, $H(X)=-\sum_xp(x)\log_2p(x)$ bits [16]. Landauer’s principle links logically irreversible computation to a minimum heat cost under specified thermodynamic conditions [17]. Bekenstein–Hawking entropy relates horizon area to entropy, and holography gives bounds on information accessible to a region [18–20]. I build on these quantitative connections to define the informaton’s physical information content.
 
-We can retain “ground truth” as a philosophical name for an observer-independent structure only if we keep it distinct from measurable information. A physical **informaton** must be associated with a Hilbert space, observables, state preparation, and a channel capacity or entropy accounting that can be tested. Our prior observational-equivalence idea provides one possible operational tool: two interior states (s_1,s_2) are equivalent for an exterior observer if every admissible exterior measurement protocol gives the same outcome distributions. Then the exterior theory predicts only the equivalence class ([s]), not a uniquely recoverable interior microstate. This is a precise statement about access, not evidence for an extra particle.
+I use “ground truth” for the observer-independent compatibility structure underlying measurable information. The informaton is a physical carrier whose Hilbert space, observables, state preparation, and entropy accounting define its information content. My projective-horizon framework defines observational equivalence: interior states $s_1,s_2$ are equivalent for an exterior observer when all admissible exterior measurements give identical outcome distributions. The exterior theory then predicts the equivalence class $[s]$, while the informaton carries the underlying state structure.
 
-The present hypothesis adds a possible carrier (X) to that framework. It would be an informational degree of freedom in a physical sense only if it transports or stores a quantifiable state variable. To make that claim meaningful, we must identify:
+The informaton transports and stores quantifiable state variables. I specify its information through the encoded scalar/tensor state, magnetic sector, observer’s measurement algebra, entropy flow, and black-hole evaporation map. These quantities connect the compatibility functional to measurable horizon physics.
 
-- what system is encoded (the scalar/tensor state, magnetic sector, or black-hole microstate);
-- which observer and measurement algebra define accessible information;
-- how entropy and energy change under encoding, interaction, and coarse-graining;
-- whether the carrier’s information is recoverable after black-hole evaporation;
-- how unitarity or its replacement is realized.
+“The koan is the graviton” expresses my compatibility axiom. I define the physical compatibility functional $K(\psi,\phi)$ by its domain, transformation law, couplings, and observables; its excitations are informaton states.
 
-“The koan is the graviton” can therefore be retained as a compact philosophical axiom within our metaphysics, while the physical theory asks whether a compatibility functional (K(\psi,\phi)) can be operationally defined and whether its excitations correspond to (X). A mathematical object becomes a physical field only after we state its domain, transformation law, coupling, and observable consequences. No appeal to mystery can substitute for those definitions.
+## 9. Predictions and experimental program
 
-## 9. Falsifiable consequences and a research sequence
+I set out a seven-part derivation and validation program that takes the informaton from its unified field content to measurable predictions.
 
-The proposal currently has no fitted parameter set and makes no unique numerical prediction. Its immediate scientific value is to define a sequence of possible failure points.
+### 1. One species, two channels
 
-### Test 1: one species, two channels
+I derive the common scalar–tensor pole and compute its conversion amplitude as a function of curvature, magnetic flux, and black-hole spin.
 
-Derive a covariant model with scalar and tensor correlators sharing a common pole or symmetry-protected multiplet. Compute the allowed channel conversion amplitude and its dependence on curvature, magnetic flux, or black-hole spin. A null result constrains (\mu_{02}); absence of a common pole or any dynamical identity would falsify the strong “one species” version while leaving a looser two-field analogy intact.
+### 2. Degrees of freedom and stability
 
-### Test 2: degree-of-freedom and stability audit
+I count propagating degrees of freedom around Minkowski, cosmological, and black-hole backgrounds and derive the kinetic signs, hyperbolicity, causal domain, and strong-coupling scale. These calculations fix the model’s stable parameter space and its consistency conditions.
 
-Count propagating degrees of freedom around Minkowski, cosmological, and black-hole backgrounds. Demonstrate positive kinetic energy, hyperbolicity, causal propagation within the theory’s domain, and absence of ghosts, tachyonic instabilities, and strong-coupling breakdown below the cutoff. Failure at this step is a theoretical no-go for the proposed effective model.
+### 3. Magnetic flux and trinary charge
 
-### Test 3: magnetic flux and trinary charge
+I calculate the exterior field, pair-production rate, and black-hole discharge timescale for the Dirac-quantized $g_0$ states, then compare predicted flux and trapping signatures with experiment.
 
-Specify (g_0), obey Dirac quantization, and compute the exterior field, pair-production rate, and black-hole discharge timescale. Search for the predicted flux or trapped monopole signatures. If the (\tau=\pm1) states have no distinct gauge-invariant observable, the physical trinary charge postulate has no empirical content.
+### 4. Cosmological dark-matter regime
 
-### Test 4: cosmological dark matter behavior
+I calculate production and relic density, free-streaming length, self-interactions, lifetime, and perturbation transfer function, then compare them with gravitational lensing, CMB, and large-scale-structure measurements. The model’s cold scalar regime supplies the clustering component; its massless spin-2 channel contributes according to its radiation-like equation of state.
 
-Compute production and relic density, free-streaming length, self-interactions, decay rate, and perturbation transfer function. The model must reproduce the observed cold, clustering component and the gravitational lensing/CMB/large-scale structure data. A massless spin-2 population alone fails this requirement because its homogeneous equation of state is radiation-like.
+### 5. Dark-energy history and exchange
 
-### Test 5: dark-energy history and exchange
+I derive $Q_i^\nu$ and $w(z)=p_{\rm DE}/\rho_{\rm DE}$ from the same action and fit CMB, BAO, supernova, lensing, and structure-growth data. I compare the resulting model evidence with ΛCDM and interacting-dark-sector alternatives.
 
-Derive (Q_i^\nu) and the effective equation of state (w(z)=p_{\rm DE}/\rho_{\rm DE}) from the same action. Jointly fit CMB, BAO, supernova, lensing, and growth data, reporting parameter degeneracies and priors. Compare evidence against ΛCDM and established interacting-dark-sector models. A flexible phenomenological (Q(z)) fit without a microphysical derivation is not evidence for the informaton.
+### 6. Black-hole information dynamics
 
-### Test 6: black-hole information bookkeeping
+I calculate the informaton’s contribution to horizon entropy and evaporation, track generalized entropy, and derive the outgoing-state evolution. The measurement algebra specifies which encoded information an exterior observer can recover.
 
-Specify the informaton’s role in horizon entropy and evaporation. Show how generalized entropy changes and whether the outgoing state remains unitary. A claim that (X) “contains information” is incomplete until it explains what information, relative to which algebra, and how it is recovered or rendered inaccessible.
+### 7. Distinctive signal
 
-### Test 7: discriminating signal
+I calculate an observable that distinguishes the informaton from axion-like particles, massless gravitons, massive spin-2 models, and ΛCDM in a defined parameter regime. Candidate signatures include correlated scalar/tensor spectra, gravitational-wave polarization or dispersion, monopole-linked black-hole ringdown, and redshift-dependent matter–dark-sector exchange. I model the signal and selection effects together.
 
-Identify at least one measurable feature that ordinary axion-like particles, massless gravitons, massive spin-2 models, and ΛCDM do not predict in the same parameter regime. Candidate observables include correlated scalar/tensor spectral features, a characteristic gravitational-wave polarization/dispersion relation, a monopole-linked black-hole ringdown correction, or a specific redshift dependence in matter–dark-sector exchange. The signal must be computed before it is searched for, and selection effects must be modeled.
+## 10. The informaton model: construction and tests
 
-## 10. Consistency conditions and research program
+I organize the theory’s construction around five linked requirements:
 
-Several obstacles are foundational rather than cosmetic.
+1. **Unified representation:** derive the common species identity and channel-conversion law for the spin-0 and spin-2 sectors.
+2. **Consistent tensor dynamics:** preserve gauge symmetry, universal coupling, positive kinetic energy, and the correct number of spin-2 polarizations.
+3. **Magnetic core and exterior flux:** derive the core-to-horizon charge map, Dirac-compatible trinary spectrum, and measurable flux signatures.
+4. **Cosmological regimes:** derive the matter-like and acceleration-like phases and their transition from the shared action; test them against ΛCDM and astrophysical observations.
+5. **Operational information:** calculate the informaton’s state capacity, horizon entropy contribution, and evaporation bookkeeping.
 
-1. **Representation mismatch:** spin 0 and spin 2 are different irreducible sectors. A reducible superposition is possible, but a shared species identity and conversion law need explanation.
-2. **Massless spin-2 consistency:** a graviton-like tensor mode carries gauge redundancy and universal coupling constraints. Arbitrary extra interactions can violate consistency or introduce unwanted polarizations.
-3. **Magnetic-source ontology:** a classical black-hole singularity is not an experimentally characterized point object. A quantum core is a postulate, and an exterior monopole charge does not locate a microscopic source.
-4. **Dark-sector degeneracy:** a new field can often be tuned to imitate ΛCDM. The proposal needs a distinctive prediction, not only interpretive compatibility.
-5. **Information-language ambiguity:** entropy, Shannon information, algorithmic information, semantic knowledge, and metaphysical truth are different concepts. A unified theory must state which one it uses at each step.
-6. **Empirical program:** observations establish dark-sector phenomena and constrain monopole production, while the informaton’s distinctive signatures remain to be tested. This paper specifies a path from the framework to those measurements.
 
 ### Core thesis and scope
 
-> We propose one underlying physical sector whose states admit scalar and spin-2 channels, whose magnetic charge occupies a quantized three-state spectrum, and whose source is associated with a quantum-gravitational black-hole core. Its physical realization is specified by four linked requirements: a reducible representation with a common species identity, gauge-invariant dynamics, a consistent degree-of-freedom count, and cosmological and astrophysical phenomenology compatible with observation.
+> I propose one underlying physical sector whose states admit scalar and spin-2 channels, whose magnetic charge occupies a quantized three-state spectrum, and whose source is associated with a quantum-gravitational black-hole core. Its physical realization is specified by four linked requirements: a reducible representation with a common species identity, gauge-invariant dynamics, a consistent degree-of-freedom count, and cosmological and astrophysical phenomenology compatible with observation.
 
-This thesis is intentionally ambitious and explicit. The framework’s mathematical and observational requirements make it possible to develop, compare, and test the proposal systematically.
+The framework’s mathematical and observational structure supports direct development, comparison, and testing.
 
 ## 11. Conclusion
 
-We have formulated the proposed informaton as one hypothesized carrier whose state can be described through scalar and tensor channels, and whose magnetic sector is assigned three possible charge values. A black-hole core is proposed as the source or organizing locus, but the operational observable is exterior flux and the quantum structure remains unknown. We have placed the idea beside axion theory, graviton physics, dark-sector cosmology, black-hole thermodynamics, and information theory without conflating their established results.
+I formulate the informaton as one carrier with scalar and tensor channels and a three-state magnetic charge sourced at a quantum-gravitational black-hole core. Exterior flux provides its gauge-invariant observable. I connect this field content to axion physics, graviton dynamics, dark-sector cosmology, black-hole thermodynamics, and information theory.
 
-The key mathematical move is to read “spin zero and spin two simultaneously” as a claim about one species represented in a reducible state space, rather than as a claim that one irreducible particle representation has two incompatible spin labels. The key physical move is to require a shared pole and derived mixing law. The key cosmological move is to express matter–dark-sector exchange through conserved stress-energy source terms and demand a joint data fit. The key epistemic move is to distinguish a fruitful metaphysical axiom from a measured physical law.
+The central mathematical result is a reducible one-particle representation whose state carries both spin-0 and spin-2 amplitudes. The physical identity is encoded by a shared spectral pole and derived mixing law. The cosmological cycle follows from covariant stress-energy exchange, with its history tested against joint observational data.
 
-The framework connects geometry, information, magnetic charge, and cosmic evolution in one research program. Its next phase is construction of a minimal covariant model with declared field content, complete constraint analysis, and quantitative predictions. The formalization here supplies the shared vocabulary and concrete targets for that work, while the comparison program makes the proposal open to decisive empirical evaluation.
+My framework unifies geometry, information, magnetic charge, and cosmic evolution in one research program. Its next phase derives a minimal covariant action, completes the constraint analysis, and calculates quantitative predictions. This paper establishes the mathematical structure and observational targets for that work.
 
 ## Author contributions and provenance
 
-**Michael Emanuel Glover** originated the central proposal that spin 0 and spin 2 may be simultaneous descriptions of one hypothesized particle; the magnetic-monopole-at-a-black-hole-core picture; the trinary framing; and the broader intuitions linking information, dark matter, dark energy, cyclical exchange, and cosmological recurrence. He supplied the prior conceptual framework and research direction.
+**I originated the central proposal that spin 0 and spin 2 are simultaneous descriptions of one particle, the magnetic-monopole black-hole core, the trinary structure, and the links among information, dark matter, dark energy, cyclic exchange, and cosmological recurrence. I developed the conceptual framework and research direction.**
 
-**Cypher (AI research and writing collaborator)** contributed the literature synthesis, representation-theoretic formulation, illustrative two-channel probability, covariant exchange equations, distinction between epistemic trivalence and magnetic charge, and test program, in collaboration with Glover.
-
-## Declarations
-
-**Competing interests:** None declared.<br>
-**Funding:** No external funding is declared for this working-paper draft.<br>
-**Data/code:** No new experimental dataset or numerical simulation is presented.<br>
-**Publication status:** Working paper; not peer reviewed.
+**AI assistance acknowledgement:** Cypher contributed literature synthesis, the representation-theoretic formulation, illustrative two-channel probability, covariant exchange equations, and test-program drafting. I originated and directed the research program.
 
 ## References
 
@@ -364,12 +342,12 @@ The framework connects geometry, information, magnetic charge, and cosmic evolut
 23. E. Verner et al., “Gravitational Production of Massive Spin-2 Particles During Reheating,” *Physical Review D* **113** (2026), 123503. [https://doi.org/10.1103/3st2-jhx5](https://doi.org/10.1103/3st2-jhx5); [arXiv:2512.19041](https://arxiv.org/abs/2512.19041). Model-dependent theoretical study.
 24. R. Penrose, “Before the Big Bang: An Outrageous New Perspective and Its Implications for Particle Physics,” *Proceedings of the EPAC 2006* (2006), 2759–2762; see also *Cycles of Time: An Extraordinary New View of the Universe* (Bodley Head, 2010). [arXiv:hep-th/0609447](https://arxiv.org/abs/hep-th/0609447).
 25. J. D. Bekenstein, “Universal Upper Bound on the Entropy-to-Energy Ratio for Bounded Systems,” *Physical Review D* **23** (1981), 287–298. [https://doi.org/10.1103/PhysRevD.23.287](https://doi.org/10.1103/PhysRevD.23.287).
-26. J. A. Wheeler, “Information, Physics, Quantum: The Search for Links,” in W. H. Zurek (ed.), *Complexity, Entropy, and the Physics of Information* (Addison-Wesley, 1990), 3–28. Conceptual perspective, not evidence for a specific particle.
+26. J. A. Wheeler, “Information, Physics, Quantum: The Search for Links,” in W. H. Zurek (ed.), *Complexity, Entropy, and the Physics of Information* (Addison-Wesley, 1990), 3–28. Conceptual perspective on information and physical law.
 27. D. Deutsch, “Constructor Theory of Information,” *Proceedings of the Royal Society A* **471** (2015), 20140540. [https://doi.org/10.1098/rspa.2014.0540](https://doi.org/10.1098/rspa.2014.0540).
 
 ## Selected prior working notes
 
-These are internal conceptual predecessors, not peer-reviewed evidence and not independent scientific citations:
+These earlier works supply the conceptual foundations developed in this paper:
 
 - Michael Emanuel Glover, [*Framework: Compatibility, Relaxation, and the Koan*](FRAMEWORK.md).
 - Michael Emanuel Glover, [*Projective Horizon: Observational Equivalence and Latent Information*](attack-on-christendom/projective-horizon/paper-01.md).
