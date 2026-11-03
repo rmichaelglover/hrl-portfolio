@@ -1,7 +1,7 @@
 {
   "title": "The House of Returning Authors",
   "edition": "Opening reading edition",
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "author": "Manny Glover — Michael Emanuel Glover",
   "emanuel_character": "Manny’s better self: an aspiration toward care and judgment, still imperfect and open to correction; not omniscient or a separate infallible judge.",
   "glover_character": "Chorus and symbolic father figure; Karamazov father analogy; Shakespearean grandeur and glove-maker craft; admired strength; the destructive aspect of American empire figured as Babylon. Layered literary associations, not allegations against relatives.",
@@ -402,7 +402,7 @@
       "original_prompt": "Use case: illustration-story. Asset: a fictional republic flag for the philosophical stage play The House of Returning Authors. Name: Rainbow Hyperstars of David. Create a clean flat rectangular flag design in landscape 3:2 proportions, edge to edge, NOT a flag waving on a pole, no background outside the rectangle. Deep midnight navy field. Three beautiful six-pointed Stars of David arranged in a balanced horizontal row, a larger central star flanked by two smaller stars. Each star consists of two clearly interlaced equilateral triangle outlines, unmistakably six points, with additional slender concentric hexagram outlines suggesting a hyperstar and depth through geometry rather than a 3D object. Use a disciplined full-spectrum rainbow along the triangle bands: red orange yellow green blue violet. Thin warm ivory separation lines keep the colored bands legible against navy. Strong simple silhouette readable at a distance. Harmonious dignified vexillological composition, crisp geometric edges, restrained proportions, no lettering, no political endorsements, no religious caricature, no seals, no weapons, no people. A respectful invented theatrical emblem, beautifully precise."
     }
   ],
-  "compiled_whitespace_word_count": 18638,
+  "compiled_whitespace_word_count": 19779,
   "candidate_count": 39,
   "arena_romance_art": {
     "source": "chess/chat-stories/2026-11-01/arena-lounge/ROMANCE.md",
@@ -438,5 +438,15 @@
     "originating_concept_and_direction": "Michael Glover",
     "prose_and_illustrations": "Cypher / ChatGPT / Codex",
     "illustration_convention": "Story-world illustrations; physical board required only for live performance"
+  },
+  "newest_chapter": {
+    "id": "operation-french-fry-earth",
+    "title": "Operation French Fry Earth",
+    "source": "OPERATION-FRENCH-FRY-EARTH.md",
+    "standalone": "../operation-french-fry-earth/",
+    "original_page": "../operation-french-fry-earth/original.html",
+    "placement": "Before The hand belongs to Michael; the existing Babylon coda is retained",
+    "supplied_page_and_artwork": "Michael Glover",
+    "chapter_development": "Cypher / ChatGPT / Codex"
   }
 }

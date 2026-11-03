@@ -1,0 +1,20 @@
+{
+  "title": "Operation French Fry Earth",
+  "date": "2026-11-03",
+  "originator": "Michael Glover",
+  "supplied_source": "original.html",
+  "original_source_sha256": "9347d934001ec89e8a08b5cad65a12e533687cf0cc5fae1d4b1474488943a393",
+  "chapter_development": "Cypher / ChatGPT / Codex",
+  "chapter": "CHAPTER.md",
+  "images": [
+    {
+      "file": "operation-french-fry-earth.png",
+      "supplied_filename": "FrenchFriesSalvation.png"
+    },
+    {
+      "file": "giant-martian-potato.png",
+      "supplied_filename": "GiantMartianPotato.png"
+    }
+  ],
+  "source_preservation": "Original supplied HTML preserved byte-for-byte. Images copied unchanged. Published reader adds navigation and the new Earthlings chapter."
+}
