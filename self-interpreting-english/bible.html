@@ -88,12 +88,17 @@ const glosses = {
   swift:"Quick or ready to act.", hear:"To receive sound or attend to what is said; context can sharpen the sense to listening.",
   slow:"Not quick; deliberate or restrained in the action named by the following phrase.",
   speak:"To utter words or express oneself in speech.", wrath:"Anger or strong displeasure.",
+  naughtiness:"Badness or wickedness; an evil purpose. Webster’s 1828 gives this as the noun’s primary sense, distinct from its later, lighter child-related use.",
+  filthiness:"Moral uncleanness or defilement.", superfluity:"An overflowing excess or abundance.",
+  engrafted:"Implanted or rooted within, like a living shoot.",
   doer:"A person who carries out an action; in James 1, one who acts on the teaching heard.",
   word:"A spoken or written expression; in a passage, the intended message is resolved from context.",
   faith:"Trust, confidence, or belief; the passage and grammatical construction shape its contextual sense.",
   works:"Deeds or actions; James uses the term in an argument about enacted conduct."
 };
 const lemma = {"heareth":"hear","hearing":"hear","hearers":"hear","speaketh":"speak","speaking":"speak","spake":"speak","spoken":"speak","swiftly":"swift","beloved":"beloved","brethren":"brethren","wrath":"wrath","doers":"doer","doeth":"doer","works":"works","worketh":"works","worked":"works","words":"word"};
+const sourceGlosses = {G2549:"κακία (kakia): badness or wickedness; in some contexts, malice or ill-will."};
+const contextNotes = {naughtiness:"In James 1:21, this names what the reader is told to put away. James places it beside moral filthiness and contrasts it with receiving the word in meekness."};
 function strongUrl(id){const n=id[0].toLowerCase()+id.slice(1).replace(/^0+(?=\d)/,"");return `https://www.blueletterbible.org/lexicon/${n}/kjv/${id[0]==="G"?"tr":"wlc"}/`}
 function renderLexical(word, strong, ref, added){
   const key=lemma[word.toLowerCase()]||word.toLowerCase().replace(/[^a-z'-]/g,"");
@@ -106,12 +111,13 @@ function renderLexical(word, strong, ref, added){
   const dl=document.createElement("dl");
   const dt=document.createElement("dt");dt.textContent="Reader’s gloss";dl.append(dt);
   const dd=document.createElement("dd");dd.textContent=glosses[key]||"Open the historical dictionary entry and use the sentence context to compare its senses.";dl.append(dd);
-  const lemmaDt=document.createElement("dt");lemmaDt.textContent="Headword path";dl.append(lemmaDt);
-  const lemmaDd=document.createElement("dd");lemmaDd.textContent=`${key} · selected from the surface form ${word}`;dl.append(lemmaDd);
-  if(strong.length){const st=document.createElement("dt");st.textContent="Source-language index";dl.append(st);const sd=document.createElement("dd");sd.textContent=strong.join(" · ")+" · occurrence tag from the KJV source package";dl.append(sd)}
+  const lemmaDt=document.createElement("dt");lemmaDt.textContent="English headword";dl.append(lemmaDt);
+  const lemmaDd=document.createElement("dd");lemmaDd.textContent=glosses[key]?`${key} · local lexical record with historical dictionary lookup`:`${key} · lookup form; verified headword record not yet added`;dl.append(lemmaDd);
+  if(contextNotes[key]){const ct=document.createElement("dt");ct.textContent="In this verse";dl.append(ct);const cd=document.createElement("dd");cd.textContent=contextNotes[key];dl.append(cd)}
+  if(strong.length){const st=document.createElement("dt");st.textContent="Source-language index";dl.append(st);const sd=document.createElement("dd");sd.textContent=strong.join(" · ")+" · occurrence tag from the KJV source package";dl.append(sd);for(const id of strong){if(sourceGlosses[id]){const gt=document.createElement("dt");gt.textContent="Greek lexical gloss";dl.append(gt);const gd=document.createElement("dd");gd.textContent=sourceGlosses[id];dl.append(gd)}}}
   aside.append(dl);
   const links=document.createElement("div");links.className="links";
-  const webster=document.createElement("a");webster.href=glosses[key]?`https://1828dictionary.com/word/${encodeURIComponent(key)}/`:"https://1828dictionary.com/";webster.target="_blank";webster.rel="noopener";webster.textContent=glosses[key]?"Webster 1828 ↗":"Search Webster 1828 ↗";links.append(webster);
+  const webster=document.createElement("a");webster.href=glosses[key]?`https://webstersdictionary1828.com/Dictionary/${encodeURIComponent(key)}`:"https://webstersdictionary1828.com/";webster.target="_blank";webster.rel="noopener";webster.textContent=glosses[key]?"Webster 1828 ↗":"Search Webster 1828 ↗";links.append(webster);
   for(const id of strong){const a=document.createElement("a");a.href=strongUrl(id);a.target="_blank";a.rel="noopener";a.textContent=`${id} lexicon ↗`;links.append(a)}
   aside.append(links);
 }

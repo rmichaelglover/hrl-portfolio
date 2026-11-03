@@ -61,14 +61,14 @@ James 1:19 is the first worked passage. In this source its word sequence include
 The English dictionary path has two complementary roles:
 
 1. **A recursive English lexical graph** supplies spelling, letter identity, headwords, grammatical forms, multiple senses, definitions, examples, and usage relations. Its definitions are parsed with the same typed English resources as ordinary text.
-2. **Webster’s 1828 American Dictionary** is a historical aid for the English register represented by the KJV. The reader links each selected surface form to its historical headword and gives a small, authored plain-English gloss for central James terms. As the lexicon grows, the local gloss can resolve to a source-cited Webster record and one or more modern English senses.
+2. **Webster’s 1828 American Dictionary** is a historical aid for the English register represented by the KJV. The reader links selected surface forms to their historical headwords and gives authored plain-English glosses for central James terms. As the lexicon grows, each local gloss can resolve to a source-cited Webster record and one or more modern English senses.
 
 The Greek and Hebrew layer is separate. A Strong’s number is a stable lookup index in the source edition, not itself a lexical definition or an interpretive verdict. Where available, it connects the English occurrence to a source-language headword, morphology, pronunciation, and lexicon gloss. Translation choices can then be compared across occurrences and contexts.
 
 For example, selecting `swift` in James 1:19 yields this path:
 
 ```text
-Jas 1:19 / KJV-1769 / token 7
+Jas 1:19 / KJV-1769 / token 8
   → surface “swift”
   → English headword “swift”
   → historical English dictionary entry
@@ -77,6 +77,8 @@ Jas 1:19 / KJV-1769 / token 7
 ```
 
 The reader presents the English headword, a concise contextual gloss, the exact verse address, and outbound dictionary/lexicon references. Unrecognized forms still remain selectable and can be looked up; they are marked as unresolved rather than being assigned an invented sense.
+
+The first archaic-term records include `naughtiness`, `filthiness`, `superfluity`, and `engrafted` from James 1:21. For `naughtiness`, the reader records Webster’s historical primary sense—badness, wickedness, or evil purpose—alongside the occurrence’s Greek index `G2549` (`κακία`, *kakia*), whose range includes badness, wickedness, and, in some contexts, malice. The verse note connects the term to James’s instruction to put it away and to the contrast with receiving the word in meekness. This keeps the historical English sense, Greek lexical range, and local contextual reading distinct but connected.
 
 ## Self-interpretation and closure
 
@@ -105,6 +107,8 @@ This operational definition is deliberately useful: it can be checked by verifyi
 - eBible.org, [USFM source archive](https://ebible.org/Scriptures/eng-kjv2006_usfm.zip). Source package used for the checked-in corpus and Strong’s word tags.
 - CrossWire Bible Society, [KJV module notes](https://wiki.crosswire.org/CrossWire_KJV), describing the 1769 Oxford basis and source lineage of its Strong’s annotations.
 - Noah Webster, *An American Dictionary of the English Language* (1828); [digitized edition notes and source attribution](https://1828dictionary.com/about/).
+- Webster 1828, [“Naughtiness”](https://webstersdictionary1828.com/Dictionary/naughtiness), whose primary noun sense is badness, wickedness, or evil purpose.
 - Blue Letter Bible, [Greek lexicon G5036](https://www.blueletterbible.org/lexicon/g5036/kjv/tr/), linked from the example occurrence `swift` in James 1:19.
+- Blue Letter Bible, [Greek lexicon G2549](https://www.blueletterbible.org/lexicon/g2549/kjv/tr/), linked from `naughtiness` in James 1:21.
 
 The complete Bible corpus and reader are this project’s working implementation. The contribution is the translation-bound, word-occurrence graph and the design that lets scripture, English lexicography, and source-language lookup be interpreted through one recursively extensible lexical system.
