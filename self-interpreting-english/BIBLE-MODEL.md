@@ -80,6 +80,8 @@ The reader presents the English headword, a concise contextual gloss, the exact 
 
 The first archaic-term records include `naughtiness`, `filthiness`, `superfluity`, and `engrafted` from James 1:21. For `naughtiness`, the reader records Webster’s historical primary sense—badness, wickedness, or evil purpose—alongside the occurrence’s Greek index `G2549` (`κακία`, *kakia*), whose range includes badness, wickedness, and, in some contexts, malice. The verse note connects the term to James’s instruction to put it away and to the contrast with receiving the word in meekness. This keeps the historical English sense, Greek lexical range, and local contextual reading distinct but connected.
 
+The James 1 seed also includes everyday and theological vocabulary such as `servant`, `patience`, `temptation`, `wisdom`, `righteousness`, `faith`, and `liberty`. In James 1:1, `servant` links to Webster’s English entry and to Greek `G1401`, *doulos*. The lexical note preserves both the KJV’s “servant” and the Greek term’s broader range, including “slave” or “bondservant”; the verse context shows James’s self-description as belonging to God and the Lord Jesus Christ. This prevents the familiar English surface form from hiding a meaningful source-language distinction.
+
 ## Self-interpretation and closure
 
 The graph includes the characters used in scripture references and lexicon entries; the words in the verses; the English entries used to interpret those words; and the dictionary grammar used to read the entries. If `D_n` is the lexicon after iteration `n`, define
@@ -108,7 +110,9 @@ This operational definition is deliberately useful: it can be checked by verifyi
 - CrossWire Bible Society, [KJV module notes](https://wiki.crosswire.org/CrossWire_KJV), describing the 1769 Oxford basis and source lineage of its Strong’s annotations.
 - Noah Webster, *An American Dictionary of the English Language* (1828); [digitized edition notes and source attribution](https://1828dictionary.com/about/).
 - Webster 1828, [“Naughtiness”](https://webstersdictionary1828.com/Dictionary/naughtiness), whose primary noun sense is badness, wickedness, or evil purpose.
+- Webster 1828, [“Servant”](https://webstersdictionary1828.com/Dictionary/servant).
 - Blue Letter Bible, [Greek lexicon G5036](https://www.blueletterbible.org/lexicon/g5036/kjv/tr/), linked from the example occurrence `swift` in James 1:19.
 - Blue Letter Bible, [Greek lexicon G2549](https://www.blueletterbible.org/lexicon/g2549/kjv/tr/), linked from `naughtiness` in James 1:21.
+- Blue Letter Bible, [Greek lexicon G1401](https://www.blueletterbible.org/lexicon/g1401/kjv/tr/), linked from `servant` in James 1:1.
 
 The complete Bible corpus and reader are this project’s working implementation. The contribution is the translation-bound, word-occurrence graph and the design that lets scripture, English lexicography, and source-language lookup be interpreted through one recursively extensible lexical system.

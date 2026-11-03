@@ -73,6 +73,7 @@
       <li><a href="https://ebible.org/bible/details.php?all=1&amp;id=eng-kjv2006">eBible.org, King James (Authorized) Version</a>: standardized 1769 text; source USFM contains per-word Strong’s markers; text package is identified as public domain and credited to CrossWire Bible Society and eBible.org.</li>
       <li><a href="https://1828dictionary.com/about/">Noah Webster, <em>An American Dictionary of the English Language</em> (1828)</a>: digitization notes its public-domain source text and Project Gutenberg transcription lineage.</li>
       <li><a href="https://www.blueletterbible.org/lexicon/g5036/kjv/tr/">Strong’s Greek G5036, ταχύς</a>: an example lexical endpoint for <em>swift</em> in James 1:19.</li>
+      <li><a href="https://webstersdictionary1828.com/Dictionary/servant">Webster 1828, “servant”</a>, and <a href="https://www.blueletterbible.org/lexicon/g1401/kjv/tr/">Strong’s Greek G1401, δοῦλος</a>: linked from James 1:1.</li>
       <li><a href="BIBLE-MODEL.md">Read the data model, compiler, provenance, and expansion plan.</a></li>
     </ul>
   </section>
@@ -94,11 +95,29 @@ const glosses = {
   doer:"A person who carries out an action; in James 1, one who acts on the teaching heard.",
   word:"A spoken or written expression; in a passage, the intended message is resolved from context.",
   faith:"Trust, confidence, or belief; the passage and grammatical construction shape its contextual sense.",
+  servant:"A person who serves another or acts under another’s authority. The KJV’s English choice is linked here to the tagged Greek term rather than treated as its only possible sense.",
+  scattered:"Spread or dispersed across different places.", tribes:"Groups or families understood as belonging to a larger people.",
+  greeting:"A salutation or expression of welcome.", patience:"Steadfast endurance through difficulty or delay.",
+  temptation:"A trial or enticement; the surrounding passage helps distinguish the senses.",
+  wisdom:"Sound judgment and practical understanding.", liberally:"Generously; without reserve.",
+  wavering:"Unsteady or divided in resolve.", unstable:"Not firmly settled or consistent.",
+  exalted:"Raised up or honored.", endureth:"Continues through or bears difficulty.",
+  lust:"Strong desire; its particular object and moral force come from context.", enticed:"Drawn or persuaded toward an action.",
+  crown:"A wreath or crown; figuratively, a prize or honor.", firstfruits:"The first yield of a harvest; figuratively, an early or representative portion.",
+  righteousness:"Right conduct or justice; its contextual sense is shaped by the passage and its theological vocabulary.",
+  meekness:"Gentleness and humility rather than forceful self-assertion.", doer:"A person who carries out an action; in James 1, one who acts on the teaching heard.",
+  hearer:"A person who listens or receives instruction.", liberty:"Freedom; in James 1:25, freedom associated with the law described in the passage.",
   works:"Deeds or actions; James uses the term in an argument about enacted conduct."
 };
-const lemma = {"heareth":"hear","hearing":"hear","hearers":"hear","speaketh":"speak","speaking":"speak","spake":"speak","spoken":"speak","swiftly":"swift","beloved":"beloved","brethren":"brethren","wrath":"wrath","doers":"doer","doeth":"doer","works":"works","worketh":"works","worked":"works","words":"word"};
-const sourceGlosses = {G2549:"κακία (kakia): badness or wickedness; in some contexts, malice or ill-will."};
-const contextNotes = {naughtiness:"In James 1:21, this names what the reader is told to put away. James places it beside moral filthiness and contrasts it with receiving the word in meekness."};
+const lemma = {"heareth":"hear","hearing":"hear","hearers":"hearer","speaketh":"speak","speaking":"speak","spake":"speak","spoken":"speak","swiftly":"swift","beloved":"beloved","brethren":"brethren","wrath":"wrath","doers":"doer","doeth":"doer","works":"works","worketh":"works","worked":"works","words":"word","servants":"servant","scattereth":"scattered","scattered":"scattered","temptations":"temptation","tempteth":"temptation","wisdom":"wisdom","endureth":"endureth","enticed":"enticed","firstfruits":"firstfruits","hearer":"hearer"};
+const sourceGlosses = {
+  G1401:"δοῦλος (doulos): slave or bondservant; figuratively, one subject to or devoted to another’s service. The KJV renders it “servant” here.",
+  G2549:"κακία (kakia): badness or wickedness; in some contexts, malice or ill-will."
+};
+const contextNotes = {
+  servant:"James introduces himself as belonging to God and the Lord Jesus Christ. The English “servant” follows the KJV; the Greek term’s range also includes “slave” or “bondservant.”",
+  naughtiness:"In James 1:21, this names what the reader is told to put away. James places it beside moral filthiness and contrasts it with receiving the word in meekness."
+};
 function strongUrl(id){const n=id[0].toLowerCase()+id.slice(1).replace(/^0+(?=\d)/,"");return `https://www.blueletterbible.org/lexicon/${n}/kjv/${id[0]==="G"?"tr":"wlc"}/`}
 function renderLexical(word, strong, ref, added){
   const key=lemma[word.toLowerCase()]||word.toLowerCase().replace(/[^a-z'-]/g,"");
