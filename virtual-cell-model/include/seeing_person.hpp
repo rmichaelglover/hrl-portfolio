@@ -8,12 +8,12 @@ struct SeeingPerson {
     electric::CellId left_optic=electric::CellId::eye(0,0,2);
     electric::CellId right_optic=electric::CellId::eye(1,0,2);
 };
-inline SeeingPerson make_seeing_alex() {
+inline SeeingPerson make_seeing_alex(RodParameters rod_parameters={}) {
     SeeingPerson result{mind::PersonModel("Alex",3,{1,1,1,1,1})};
     auto scaffold=electric::make_body_example("Alex");
     auto& body=result.alex.human().body();body=std::move(scaffold.person.body());
-    body.add_eyes({Eye("Left eye",ReferenceFrame({-.032,0,0})),
-                   Eye("Right eye",ReferenceFrame({.032,0,0}))});
+    body.add_eyes({Eye("Left eye",ReferenceFrame({-.032,0,0}),Optics{},rod_parameters),
+                   Eye("Right eye",ReferenceFrame({.032,0,0}),Optics{},rod_parameters)});
     body.connect(result.left_optic,electric::CellId::brain(0,0),{5,5,0,2});
     body.connect(result.right_optic,electric::CellId::brain(0,0),{5,5,0,2});
     return result;

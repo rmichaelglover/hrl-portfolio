@@ -23,8 +23,11 @@ for key in normal:
     if key!='integrated_feature':np.testing.assert_allclose(normal[key],decline[key],rtol=0,atol=0)
 assert decline['integrated_feature'].max()==0
 assert normal['integrated_feature'].max()>0
-for key in ['left_photoevents','right_photoevents','left_ganglion','right_ganglion']:
+for key in ['left_photoevents','right_photoevents']:
     assert scenarios['closed'][key].max()==0
+for side in ['left','right']:
+    if scenarios['closed'][side+'_endogenous'].max()==0:
+        assert scenarios['closed'][side+'_ganglion'].max()==0
 assert scenarios['one-eye']['left_photoevents'].max()==0
 assert scenarios['one-eye']['right_photoevents'].max()>0
 np.testing.assert_array_equal(scenarios['one-eye']['right_photoevents'],normal['right_photoevents'])

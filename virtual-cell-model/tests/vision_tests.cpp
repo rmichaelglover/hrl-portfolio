@@ -37,7 +37,8 @@ int main() {
     rod.advance(10,20);check(rod.cgmp()<1 && rod.cng_ns()<1.5,"Phototransduction sign");
     for(int i=0;i<500;++i)rod.advance(10,0);
     check(near(rod.cgmp(),1,1e-8),"Rod recovers after activation");
-    auto seeing=make_seeing_alex();auto& body=seeing.alex.human().body();
+    RodParameters quiet;quiet.dark_event_rate_per_second=0;
+    auto seeing=make_seeing_alex(quiet);auto& body=seeing.alex.human().body();
     check(body.organ_count()==7 && body.has_organ(OrganKind::Eye),"Eyes owned by existing Body");
     check(body.electrical_cells().size()==16,"Retinal cells integrated with Body");
     check(body.nervous_system().synapses().size()==8,"Optic nerve routing");
