@@ -1,0 +1,440 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype,graphicx,booktabs,array,amsmath,amssymb,amsthm}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=teal,pdftitle={Compositional virtual persons link cellular state, relational memory and multi-objective governance},pdfauthor={Michael Emanuel Glover}]{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\emergencystretch=2em
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Virtual Cell}\fancyhead[R]{\small Research manuscript}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\parskip}{4pt}\setlength{\parindent}{0pt}
+\renewcommand{\abstractname}{Summary}
+\makeatletter\let\tableinput\@@input\makeatother
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\fig}[3]{\begin{figure}[htbp]\centering\includegraphics[width=\linewidth]{figures/#1.pdf}\caption{\textbf{#2} #3}\label{fig:#1}\end{figure}}
+\title{\sffamily\bfseries Compositional virtual persons link cellular state, relational memory and multi-objective governance}
+\author{Michael Emanuel Glover\\\small Independent researcher\\\small \href{https://rmichaelglover.github.io/hrl-portfolio/virtual-cell-model/}{Virtual Cell research project}}
+\date{11 November 2026\\\small Research manuscript, version 1.0}
+\begin{document}
+\maketitle
+\begin{abstract}
+Virtual agents that combine embodied state, uncertain inference and competing goals require explicit boundaries between what exists in a model, what the model predicts and what an agent values. Here we introduce Virtual Cell, a C++17 architecture originating in Michael Emanuel Glover's framework of compositional persons and cascading governors. The implementation distinguishes biological containment, persistent relational identity, simplicial contact structure, ordered routes, categorical compatibility strengths, probabilistic forecasts and multi-objective action selection. A common runtime connects these components through provenance-bearing experience records and summaries of nested memory. Across 200 synthetic graphs of 64 objects, prior-anchored compatibility raises mean label accuracy from 71.18\% to 82.41\%, a paired gain of 11.23 percentage points (95\% seed-bootstrap interval, 10.68--11.79). Shuffled relations reduce accuracy to 70.14\%, whereas a shared wrong label interpretation converges at 17.59\% accuracy despite matching the entropy of the correctly interpreted field. Exhaustive evaluation of 5,151 preference vectors exposes policy-dependent choices, while graph summaries preserve unique observations under sharing and cycles. Forecast and resource-ledger experiments establish inspectable numerical behavior. These results support an executable research substrate for compositional agents and specify the experiments needed to develop biological, cognitive and prosthetic applications.
+\end{abstract}
+
+\section*{Introduction}
+An embodied decision-maker must relate several descriptions of the same situation. A cell has material constituents and local conditions. An organ groups tissues without replacing their internal organization. A person remembers events, anticipates another person's actions, values several possible outcomes and acts under resource constraints. A useful computational architecture should let these descriptions interact while retaining their different mathematical roles.
+
+Glover's originating thesis is that the virtual person should be constructed through explicit composition and recursive relationships, with locally situated governors embedded in wider contexts. A modeled self includes representations of others, and can evaluate the performance of those representations through experience. The development began with small C++ classes, proceeded from molecules toward cells and bodies, and introduced chess as an inspectable source of relational examples. The scientific contribution presented here is an implemented separation of representational responsibilities, accompanied by reproducible experiments that identify when relational reinforcement helps and when it fails.
+
+This separation connects established approaches without identifying them with one another. Relaxation labeling resolves competing assignments through contextual compatibility\cite{hummel}. Multi-objective decision-making retains tradeoffs that a single reward can conceal\cite{roijers}. Information-theoretic surprisal evaluates an observation relative to a predictive model\cite{shannon}, whereas forecast scores assess the relationship between probabilities and outcomes\cite{brier}. Higher-order structures distinguish group interactions from pairwise links\cite{zhang}. Each supplies a component with a particular contract.
+
+The architecture introduces a finite relational container family named \texttt{NullSet}, \texttt{One}, \texttt{Two} and \texttt{Three}. Here \texttt{NullSet} is the name of an abstract software interface; a variable-size concrete root may contain zero or more registered identities. The fixed-size types contain exactly one, two or three distinct immediate identities. Their members may themselves refer to further containers. This provides finite recursive graphs without requiring an unrestricted universal set or identifying a populated container with the mathematical empty set.
+
+The embodied hierarchy and relational graph coexist. Biological containment uses value ownership; a tissue owns cell values. Relational memory owns each node once and refers to it by an identifier. Tissue contacts can be represented as a simplicial complex, but neither a three-member container nor a three-step route is automatically a filled triangle. Predictions, categorical strengths, preferences and physical budgets retain separate types and interfaces.
+
+We evaluate the architecture through six complementary tasks: synthetic contextual labeling, convergence sensitivity, exhaustive preference variation, probabilistic forecast diagnostics, summaries under shared and cyclic containment, and cellular bookkeeping. Two recorded chess endings serve as structural case studies. The implementation and all experimental artifacts are distributed with the manuscript.
+
+\section*{Results}
+\subsection*{A common owner connects embodied and representational state}
+The \texttt{PersonModel} runtime composes a \texttt{HomoSapiens}, a \texttt{Brain}, a \texttt{SummaryStore}, a multi-objective governor and an experience history (Fig.~\ref{fig:fig01_architecture}). \texttt{HomoSapiens} derives from the abstract \texttt{Person}; its body contains organs, tissues, cells and molecular collections. \texttt{HomoTechnicus} and \texttt{HomoEconomicus} preserve the tool-making and subjective-valuation roles developed alongside the embodied hierarchy. They are distinct concrete classes rather than an assertion that each actual person occupies one exclusive category.
+
+The biological prototype stores elemental composition for a molecule and collections of molecule instances. It transfers molecules between cells, represents a simplified one-time differentiation transition, and tracks available and allocated energy. A neutral glycine example has elemental counts corresponding to $\mathrm{C_2H_5NO_2}$. Element counts identify composition, while bonds, charge and stereochemistry require additional representation.
+
+Behavioral action energy is held in a separate runtime ledger. No conversion between that budget and cellular energy is assumed. Likewise, a permitted action consumes a budget but does not automatically instantiate its physiological consequences. This preserves a concrete extension point for future coupling rather than silently equating resources that use different units.
+
+\fig{fig01_architecture}{Architecture with explicit responsibilities.}{The runtime owns an embodied hierarchy, a brain and relational memory, a governor, and experience records. Arrows indicate implemented ownership or information flow. The body and brain share a runtime owner; the prototype does not yet fit a physiological coupling law. Predictions and observations are retained separately, and each energy ledger has its own declared meaning.}
+
+\begin{table}[htbp]\centering\small
+\caption{Implemented components and their contracts.}\label{tab:contracts}
+\begin{tabular}{p{.21\linewidth}p{.35\linewidth}p{.35\linewidth}}\toprule
+Component & Stored or computed quantity & Contract \\\midrule
+Biological containment & Molecules, cells, tissues, organs, body & Value ownership; adding a child stores a copy \\
+Relational memory & Identities, membership, typed edges & One owner per node; references by stable index \\
+Simplicial complex & Vertices, edges, explicit triangles & Closure under faces; no inferred filling \\
+Compatibility field & Normalized categorical strengths & Fixed prior, signed support, synchronous damping \\
+Governor & Feasible Pareto set and selected action & Permission and energy precede valuation \\
+Experience & Predicted and observed objective vectors & Forecast, outcome and provenance remain explicit \\
+Summary & Counts, means, dispersion, surprisal & Reachable identities visited once per query \\\bottomrule
+\end{tabular}\end{table}
+
+\subsection*{Useful relations improve inference, while convergence alone does not establish correctness}
+We generated 200 independent synthetic two-community graphs with 64 objects each. The graph generator provides homophilic structure: edge probability is 0.20 within a community and 0.02 between communities. No hidden label is passed to the inference interface. Initial strengths arise from noisy label-dependent logits; the generator's community labels are used for graph construction and evaluation, making this a controlled planted-structure benchmark.
+
+The inference update combines normalized prior strengths with degree-normalized same-label neighbor support. At fixed coupling $\beta=1.5$ and damping $\eta=0.5$, valid relations raise mean accuracy from 71.18\% to 82.41\% (Table~\ref{tab:compat}; Fig.~\ref{fig:fig02_compatibility}). The paired improvement is 11.23 percentage points, with a 95\% bootstrap interval of 10.68--11.79 percentage points. The interval resamples whole graph seeds, retaining within-graph dependence.
+
+\begin{table}[htbp]\centering\small
+\caption{Synthetic contextual labeling, 200 graphs per condition. Strength error is the binary squared error against hidden labels; categorical strengths have not been calibrated as probabilities. All four conditions converged within 200 iterations.}\label{tab:compat}
+\begin{tabular}{lrrrr}\toprule
+Condition & Accuracy (\%) & Strength error & Entropy (nats) & Iterations \\\midrule
+\tableinput{source/compatibility_rows.tex}
+\bottomrule\end{tabular}\end{table}
+
+Shuffling the graph's association with object identities reduces accuracy to 70.14\%, a paired change of $-1.04$ percentage points (95\% interval, $-1.53$ to $-0.55$). Relational computation therefore has no general entitlement to improve a model: the support must correspond to the task.
+
+The shared-wrong condition exchanges the meanings of the two prior columns while preserving their consistency with one another. Accuracy falls to 17.59\%. Its entropy and iteration counts equal those of the correctly interpreted field because the update is equivariant under a global column exchange. Thus a field can be just as internally settled, and just as concentrated, while assigning the wrong external meanings. This experiment isolates the distinction between numerical agreement and externally evaluated correctness.
+
+\fig{fig02_compatibility}{Relational support changes accuracy and concentration.}{\textbf{a}, Accuracy against planted labels. \textbf{b}, Binary squared strength error. \textbf{c}, Mean categorical entropy. \textbf{d}, Mean iteration count. Bars show means across 200 graph seeds; error bars are percentile 95\% bootstrap intervals from 5,000 whole-seed resamples. The shared-wrong condition retains the entropy of the valid condition while reversing its label interpretation.}
+
+A separate grid uses 20 fresh seeds, five coupling values and four damping values, for 400 runs. This grid characterizes sensitivity; it was not used to select the fixed setting of the primary experiment. A constructed inhibitory self-loop supplies a complementary failure case: undamped iteration oscillates, while stronger damping settles for this example (Extended Data Figs.~\ref{fig:fig04_convergence}, \ref{fig:fig11_oscillation}). The runtime reports nonconvergence when the iteration budget expires.
+
+\subsection*{Preferences select among tradeoffs after feasibility}
+The governor evaluates an objective vector with distinct health, security, relationships, learning and resource components. In an illustrative three-active-objective slice, action C has scores $(8,7,3)$ and action D has scores $(6,5,9)$ for health, relationships and resources. Neither dominates the other. A third candidate is dominated, and an idealized fourth candidate exceeds the energy budget.
+
+We exhaustively evaluated all 5,151 nonnegative integer weight triples summing to 100. Both feasible nondominated actions remain in the frontier. The explicit weighted policy selects C for 2,294 triples and D for 2,857 triples, using strict floating-point comparison and the first-entry rule for exactly equal computed scores. These counts describe the chosen discrete grid and numerical comparison rule; they are not probabilities of human preference. The 76 mathematically tied configurations at resource weight 0.25 split into 69 selections of C and 7 of D under floating-point arithmetic. Away from that boundary, all selections agree with the analytic inequality below.
+
+When health and relationship weights are equal, C and D exchange preference at a resource weight of $1/4$:
+\begin{equation}
+U_C-U_D=2(w_H+w_R)-6w_M=2-8w_M.
+\end{equation}
+The same alternatives therefore support different selections under different priorities (Fig.~\ref{fig:fig05_policy}). The experiment formalizes the distinction between retaining a resource as an instrument and assigning it exclusive priority. It does not encode a universal ranking of the underlying values.
+
+\fig{fig05_policy}{Policy-dependent selection across an explicit preference space.}{\textbf{Left}, All 5,151 integer weight triples summing to 100, mapped to a triangular coordinate system. Green selects C; orange selects D. The dominated and unaffordable candidates are excluded before selection. \textbf{Right}, Scores along the slice with equal health and relationship weights. The curves cross at resource weight 0.25. Security and learning scores are zero in this constructed slice; the runtime supports all five objectives.}
+
+The ordering of operations matters. A large utility score cannot override permission or manufacture energy. After selection, execution again checks the supplied current permission and budget. The present synchronous runtime does not supply a transactional protocol for changes across multiple concurrently acting governors.
+
+\subsection*{Forecast diagnostics remain separate from compatibility strength and utility}
+We generated 20,000 Bernoulli outcomes in 100 independent seed groups. The generating probability $p$ is uniform on $[0.05,0.95]$. Three forecasters receive the same events: the generating probability, an overconfident transformation $\sigma(2\operatorname{logit}p)$, and an underconfident transformation $\sigma(0.5\operatorname{logit}p)$. These are controlled transformations rather than trained neural networks.
+
+The generating-probability forecaster attains mean binary Brier score 0.1796 and mean log loss 0.5363 nats. Overconfidence raises these values to 0.1913 and 0.6035; underconfidence yields 0.1920 and 0.5705 (Table~\ref{tab:forecast}). Reliability diagrams expose the different systematic errors (Fig.~\ref{fig:fig06_forecasts}). These experiments verify the diagnostic layer and illustrate why a concentrated categorical strength should not be silently substituted for a calibrated forecast\cite{guo}.
+
+\begin{table}[htbp]\centering\small
+\caption{Controlled probability diagnostics over 20,000 outcomes. Confidence intervals resample the 100 seed groups. The generating-probability forecaster is an oracle comparator for this synthetic experiment.}\label{tab:forecast}
+\begin{tabular}{lrrr}\toprule
+Forecaster & Brier score & 95\% interval & Log loss (nats) \\\midrule
+\tableinput{source/forecast_rows.tex}
+\bottomrule\end{tabular}\end{table}
+
+\fig{fig06_forecasts}{Probability quality has observable consequences.}{\textbf{Left}, Reliability diagrams using ten fixed probability bins; the dashed diagonal denotes agreement between predicted probability and observed event fraction. \textbf{Middle}, Mean Brier scores. \textbf{Right}, Mean log loss. All methods use identical realized events. The transformations change confidence without adding observations, and their effects are measured separately from action preferences.}
+
+An observed event receives surprisal $-\log p$; an observed failure receives $-\log(1-p)$ when $p$ denotes forecast success. Zero assigned probability is retained as infinite surprisal rather than clipped. Surprisal records model mismatch. It is not itself a complete action objective: an agent may accept immediate surprise to acquire information or pursue another goal.
+
+\subsection*{Shared memory requires summaries over identities rather than paths}
+A modeled event can belong to several contexts. In a graph with $b$ branches, each branch holds one local observation with health proxy 2 and refers to one shared observation with health proxy 8. The shared node also points back to the root, introducing a cycle. The correct number of unique records is $b+1$.
+
+For $b\in\{1,2,4,8,16,32\}$, the visited-identity summary returns exactly $b+1$ observations and mean $(2b+8)/(b+1)$. A path-count baseline on the acyclic projection returns $2b$ records and mean 5, because it repeats the shared record once per branch. At 32 branches, it counts 64 records rather than 33 and reports mean 5 rather than approximately 2.18 (Fig.~\ref{fig:fig07_summaries}). The implemented traversal terminates on the cyclic graph; the comparison baseline deliberately omits the back-edge so its finite path-counting error can be inspected.
+
+\fig{fig07_summaries}{Shared identities change the meaning of aggregation.}{\textbf{Left}, Unique observation count versus a baseline that repeats the shared observation along every root-to-leaf branch in an acyclic projection. \textbf{Right}, The corresponding mean health proxy. The implemented graph also includes a back-edge to the root; a visited-ID set ensures termination and one visit per identity. The baseline illustrates path multiplicity rather than a competing statistical estimator for independent observations.}
+
+Summaries retain counts, means, descriptive dispersion and omission notes. They are recomputed from reachable raw records, not recursively cached and reinserted as independent data. This avoids one source of circular evidence but does not establish evidence independence: separately entered copies of the same observation still require provenance-based deduplication.
+
+\subsection*{Chess distinguishes relations, routes and terminal states}
+Two recorded games supply concrete case studies. In carla227--mannyfresher, the final position after \texttt{20...Qxg2\#} has a black rook on e2 supporting a black queen on g2, which attacks the white king on h2. The model records distinct \texttt{Supports} and \texttt{Attacks} edges and an ordered route through the final moves. In olk--mannyfresher, the position after \texttt{27.Qxf3} leaves Black with no legal move and no check: stalemate (Fig.~\ref{fig:fig09_chess}).
+
+\fig{fig09_chess}{Two terminal positions distinguish coordination from outcome classification.}{\textbf{Left}, Checkmate in carla227--mannyfresher, game UYo057a7, dated 11 November 2026 in the source PGN. The arrow marks rook support from e2 to g2. \textbf{Right}, Stalemate in olk--mannyfresher, game g3J5EH39, dated 7 November 2026. Light pieces use white letters on dark disks; dark pieces use dark letters on orange disks. Positions are replayed from the supplied PGN and checked with python-chess.}
+
+The encoded route follows observed play; it is not a search tree or a proof that each move was optimal. A future game-theoretic extension must enumerate opponent replies and evaluate alternatives rather than reinforce only the route that occurred. Similarly, an opponent model stores forecasts about observable behavior, not direct access to an opponent's mental state.
+
+\subsection*{Resource checks preserve declared bookkeeping invariants}
+Three families of 1,000 deterministic fixtures each test molecule-transfer counts, cellular energy ledgers and permission gates. Transfers conserve the number of modeled molecule instances. A successful transition requiring 3 units from a store of 5 leaves 2 available and 3 in the transition ledger; an attempted repeated differentiation consumes no additional energy. Withheld permission prevents the transition even under large positive preference biases. No failures occur in these fixtures (Table~\ref{tab:invariants}).
+
+These are software invariants over declared representations. The transition ledger records allocation without modeling heat, free energy, reaction stoichiometry or chemical work. A biochemical model would need additional state and equations before thermodynamic claims could be evaluated.
+
+\begin{table}[htbp]\centering\small
+\caption{Deterministic bookkeeping checks. Repetition probes varying initial molecule counts for transfers; energy and permission fixtures repeat fixed contracts. Zero failures here is a finite test result, not a statistical bound on untested physiology.}\label{tab:invariants}
+\begin{tabular}{lrrp{.42\linewidth}}\toprule
+Family & Fixtures & Failures & Checked contract \\\midrule
+Molecule transfer & 1,000 & 0 & Sender and receiver counts sum to the initial total \\
+Energy ledger & 1,000 & 0 & Available plus allocated energy remains 5; repeat transition rejected \\
+Permission gate & 1,000 & 0 & Withheld permission preserves state and available energy \\\bottomrule
+\end{tabular}\end{table}
+
+\section*{Discussion}
+Virtual Cell expresses Glover's proposed architecture as inspectable software contracts. Its contribution lies in the composition of distinct representations and in tests that reveal the consequences of conflating them. A body contains cells; a memory refers to identities; a simplex denotes an explicitly supplied group; a route carries order; a forecast predicts an event; a utility policy ranks outcomes. The common runtime permits interaction while retaining these distinctions.
+
+The contextual-labeling result is conditional on useful graph structure. Its positive paired effect shows what relational support can do in a planted homophily task. The shuffled and shared-wrong conditions show what that result cannot establish. Internal agreement may amplify noise or preserve an externally wrong interpretation. Identity anchors, independent observations and revisable audits are therefore substantive research requirements, not cosmetic additions to a convergent update.
+
+The multi-objective results make preferences observable. A resource-maximizing policy and a balanced policy can select different actions from the same frontier without disagreeing about predicted consequences. This gives a formal starting point for Glover's distinction between resources as instruments and resources as overriding ends. Biological markets offer related hypotheses about exchange and partner dependence\cite{werner}, but money, nutrients, bodily effort and tissue are not interchangeable quantities. A future ecological experiment should state what is exchanged, which units are conserved and how agents value access.
+
+The self-model and opponent model support a further hypothesis: improved self-understanding may improve the assessment of an opponent model's reliability. The current software records the relevant forecast histories but does not demonstrate that causal relationship. Testing it requires an intervention on self-model quality, a held-out opponent-prediction task and an evaluation that distinguishes accuracy, coverage and utility. It also requires protection against counting shared feedback as independent evidence.
+
+The simplicial layer currently organizes contacts and groups without affecting biochemical dynamics. Its explicit face closure is useful precisely because a group interaction is a modeling choice. Higher-order models can behave differently under different structural assumptions\cite{zhang}; automatic filling would impose such an assumption before a problem demanded it. Ordered traversals remain separate, making future maze and ant-colony experiments possible without redefining simplex membership.
+
+Glover's metaphysical account motivates the distinction between law configuration and locally selected action. In a future configuration interface, a \texttt{Metabeing} could set permitted laws, objectives and parameterizations, while local governors still perform selection. This is a declared interpretation of a configurable computational model. Neither the synthetic benchmark nor the software contracts establish theological propositions, quantum mechanisms of decision or an anatomical location for a unique human governor.
+
+The next empirical stage should connect the framework to a bounded task with independently measured outcomes. Suitable tasks include time-limited chess forecasting, an atom-balanced compartment reaction, or a prosthetic-control simulator with explicit kinematics and costs. Each would test whether the architectural separation helps debug, calibrate or improve decisions relative to a simpler baseline. The present paper establishes a reproducible substrate and a set of falsifiable extension points for that work.
+
+\section*{Methods}
+\subsection*{Software and experimental provenance}
+The implementation uses C++17 and the standard library. Python analysis uses NumPy and Matplotlib; python-chess replays the two case-study games. No model-training framework, GPU or external scientific runtime is needed for the C++ experiments. The source package contains the exact headers used, the benchmark driver, raw CSV files, analysis script, generated vector figures, manuscript source, and a cryptographic manifest.
+
+The baseline published project is associated with repository commit \texttt{444881c}; paper experiments are an additional source snapshot. Source hashes identify the snapshot independently of a later repository state. Figure regeneration reads CSV data rather than embedding manually transcribed results. The manuscript's principal numerical tables are generated directly from those records.
+
+Four pre-existing runtime test suites exercise cells, memory, objectives and their integration. The paper benchmark adds 800 primary labeling runs, 400 sensitivity runs, 5,151 policy evaluations, 20,000 forecast events, six summary fixtures, 3,000 ledger fixtures and 120 inhibitory-loop budget runs. Different families answer different questions; their counts should not be combined into a single sample size.
+
+\subsection*{Ownership, identity and recursion}
+Let $V$ be a finite registry of memory nodes. Each node $v$ has an immediate membership set $E_v\subseteq V$, while directed typed relations are elements of $V\times\mathcal{T}\times V$. Fixed-size containers enforce $|E_v|\in\{1,2,3\}$. A variable-size root permits any finite cardinality, including zero. References to existing nodes may create cycles. Central ownership uses \texttt{unique\_ptr}; identifiers are indices in an append-only registry.
+
+A route is an ordered list $(v_0,\ldots,v_k)$ validated by the presence of a \texttt{LeadsTo} edge at every adjacent pair. This validates stored graph connectivity, not chess legality. Names are partial mappings from strings to node IDs. Multiple names may map to one ID; conflicting rebinding is rejected in the current implementation.
+
+Biological containment instead uses \texttt{vector<T>} values. A copied tissue contains independent copies of its cells. This behavior is deliberate in the teaching implementation. A future shared physiological object must receive explicit identity ownership rather than relying on accidental copies.
+
+\subsection*{Compatibility update}
+For object $i$ and label $a$, let $\pi_{ia}\geq0$ be a normalized prior with positive row mass, $P^{(t)}$ current strengths, and $C_{ia,jb}$ sparse signed compatibility weights. The update is
+\begin{align}
+S^{(t)}_{ia}&=\sum_{j,b}C_{ia,jb}P^{(t)}_{jb},\\
+Q^{(t)}_{i:}&=\operatorname{softmax}\!\left(\log\pi_{i:}+\beta S^{(t)}_{i:}\right),\\
+P^{(t+1)}&=(1-\eta)P^{(t)}+\eta Q^{(t)},\qquad P^{(0)}=\pi.
+\end{align}
+Zero prior entries use log value $-\infty$ and remain zero. Softmax subtracts the row maximum before exponentiation. The runtime rejects non-finite inputs and intermediate values that overflow its finite checks. It returns the iteration count, final maximum elementwise change and a convergence flag. The primary stopping tolerance is $10^{-8}$, with a budget of 200 rounds.
+
+This update is independently implemented and differs from the multiplicative update in the portfolio's Python HRL core. Its relationship to relaxation labeling is contextual reinforcement with retained prior information\cite{hummel}; no equivalence theorem to that implementation is asserted.
+
+\subsection*{Synthetic graph protocol}
+For each seed, 32 zero labels and 32 one labels are shuffled. Conditional edge draws are independent for unordered pairs. Logits satisfy
+\begin{equation}
+z_i=0.65(2y_i-1)+1.2\epsilon_i,\quad \epsilon_i\sim\mathcal{N}(0,1),\quad \pi_{i1}=\sigma(z_i).
+\end{equation}
+For each neighbor $j$ of $i$, same-label compatibility is $1/d_i$. Isolated rows receive no support. The prior-only comparator sets $\beta=0$ using the same graph and priors. The shuffled comparator permutes graph endpoints using a fixed permutation generated with seed 123456, leaving priors and targets attached to their original objects. The shared-wrong comparator exchanges prior columns globally.
+
+Primary graph seeds are 1000--1199. Sensitivity seeds are 5000--5019, with $\beta\in\{0,0.5,1.5,3,6\}$ and $\eta\in\{0.2,0.5,0.8,1\}$. The generator uses \texttt{mt19937}; normal-distribution implementations can differ across standard libraries, so the archived raw records define the numerical artifact for cross-platform comparison. There is no fitted parameter or checkpoint selection in this benchmark.
+
+Accuracy uses the larger of the two strengths, with equality classified as label zero. Binary squared strength error is $n^{-1}\sum_i(P_{i1}-y_i)^2$. Entropy is $-n^{-1}\sum_{i,a}P_{ia}\log P_{ia}$. Strength error is a diagnostic comparison, not evidence that strengths are calibrated probabilities. Confidence intervals use 5,000 percentile bootstrap resamples of seed-level records, generated with NumPy seed 9817. Paired differences are formed within seeds before resampling.
+
+\subsection*{Multi-objective policy}
+For candidate $a$, the governor stores vector $\mathbf{v}(a)\in\R^5$, nonnegative energy requirement $e(a)$ and a permission flag. It first forms
+\begin{equation}
+\mathcal{F}=\{a:\operatorname{permitted}(a)\ \land\ e(a)\leq E\}.
+\end{equation}
+Strict Pareto dominance requires componentwise non-inferiority and one strict improvement. The frontier consists of nondominated members of $\mathcal{F}$. Selection maximizes $\sum_k w_kv_k(a)$ over this frontier, with supplied nonnegative weights normalized to sum to one. All-zero weights are rejected. Exactly equal computed scores retain input order; no feasible candidate returns an empty optional. Near-equality is not tolerance-adjusted, which affects seven of the mathematically tied policy-grid configurations.
+
+The policy experiment fixes C and D as given above, a dominated candidate $(5,4,2)$ and an unaffordable candidate with all five scores equal to 10. Feasible candidates cost 2 energy units; the idealized candidate costs 20 against budget 5. Security and learning are zero for the three feasible candidates in this slice. Integer triples $(h,r,m)$ satisfy $h+r+m=100$, yielding $\binom{102}{2}=5151$ configurations.
+
+\subsection*{Forecast evaluation and observed-event surprisal}
+Forecast seeds are 8000--8099, each producing 200 events. For each event, $p=0.05+0.9u$, with independent uniform variates for $u$ and the Bernoulli draw. The three transformations are fixed before sampling outcomes. Binary Brier score uses $(p-y)^2$; this convention differs by a factor of two from summing squared errors across both complementary outcomes. Log loss uses the realized outcome's probability. Reliability bins are fixed intervals of width 0.1, and empty bins are omitted. Intervals resample seed groups rather than individual events.
+
+\subsection*{Summary computation}
+For a queried root, iterative traversal records visited node IDs and visits each reachable member once. Local observations contribute to online means and second central moments. Population standard deviation describes score variation. It does not constitute a confidence interval or estimate of future predictive reliability. Missing observations yield count zero and an absent mean-surprisal value; zero-initialized objective arrays must be interpreted alongside the count.
+
+Omission notes accompany observations. Zero-probability events increment a separate counter and make mean surprisal infinite. Distinct records attached to distinct IDs remain distinct; the traversal does not infer duplicate provenance. Querying a summary store against a different registry is outside the interface contract because node IDs are registry-local.
+
+\subsection*{Topology and chess case studies}
+The finite simplicial complex includes vertices, explicit edges and explicit triangles, with all faces added recursively. It rejects repeated or unknown vertices and dimensions above two. Its empty face is stored. Euler characteristics in the illustrations use nonempty simplices. A three-edge cycle has $\chi=3-3=0$; adding its face gives $\chi=3-3+1=1$.
+
+The two chess cases are selected examples from Glover's supplied Rancid Randi study, not a randomized sample. The source package stores the selected PGN chapters and their final FEN positions can be regenerated. python-chess verifies legal replay, checkmate for UYo057a7 and stalemate for g3J5EH39. No chess engine evaluation, player psychology measurement or opponent-strength estimate is used. Recorded moves do not establish an optimal route.
+
+\section*{Data availability}
+Raw CSV data, selected chess PGNs, generated statistics and vector figures accompany the reproducibility package. The public project entry point is \url{https://rmichaelglover.github.io/hrl-portfolio/virtual-cell-model/}. The manuscript package records hashes for experimental source and artifacts. The package can be evaluated locally without a network connection after its stated dependencies are installed.
+
+\section*{Code availability}
+The C++ model is available in the \href{https://github.com/rmichaelglover/hrl-portfolio/tree/main/virtual-cell-model}{project repository}. A frozen copy of its headers and tests accompanies this paper's reproduction package. Reproduction instructions distinguish rebuilding the measured data from rebuilding the PDF. The arXiv source archive contains only files needed to compile the manuscript and its figures; executable code and raw data are distributed separately.
+
+\section*{Acknowledgements and contributions}
+This work is dedicated to James Calvin Glover, often known as Jimmy, Michael's brother: a kind and gifted Kennesaw State University biochemistry graduate who wanted to study prosthetics. His interests motivate the project's progression toward practical biomedical and prosthetic modeling.
+
+Michael Emanuel Glover originated the framework, proposed its compositional persons, cascading governors, recursive containers, self/other distinction, multi-objective interpretation and chess connections, and directed its development. The assistant contributed C++ implementation, experimental scaffolding, numerical execution, figures, mathematical exposition and manuscript drafting under that direction. The assistant is disclosed as a tool contribution, not listed as an author. The named author is responsible for reviewing the manuscript and its claims before submission.
+
+\section*{Competing interests}
+The author develops and maintains the research software evaluated in this manuscript.
+
+\begin{thebibliography}{12}
+\bibitem{hummel} Hummel, R. A. \& Zucker, S. W. On the foundations of relaxation labeling processes. \textit{IEEE Trans. Pattern Anal. Mach. Intell.} \textbf{PAMI-5}, 267--287 (1983). \href{https://doi.org/10.1109/TPAMI.1983.4767390}{doi:10.1109/TPAMI.1983.4767390}.
+\bibitem{roijers} Roijers, D. M., Vamplew, P., Whiteson, S. \& Dazeley, R. A survey of multi-objective sequential decision-making. \textit{J. Artif. Intell. Res.} \textbf{48}, 67--113 (2013). \href{https://arxiv.org/abs/1402.0590}{arXiv:1402.0590}.
+\bibitem{shannon} Shannon, C. E. A mathematical theory of communication. \textit{Bell Syst. Tech. J.} \textbf{27}, 379--423, 623--656 (1948). \href{https://www.princeton.edu/~wbialek/rome/refs/shannon_48.pdf}{Original article}.
+\bibitem{brier} Brier, G. W. Verification of forecasts expressed in terms of probability. \textit{Mon. Weather Rev.} \textbf{78}, 1--3 (1950). \href{https://journals.ametsoc.org/view/journals/mwre/78/1/1520-0493_1950_078_0001_vofeit_2_0_co_2.xml}{Publisher record}.
+\bibitem{zhang} Zhang, Y., Lucas, M. \& Battiston, F. Higher-order interactions shape collective dynamics differently in hypergraphs and simplicial complexes. \textit{Nat. Commun.} \textbf{14}, 1605 (2023). \href{https://doi.org/10.1038/s41467-023-37190-9}{doi:10.1038/s41467-023-37190-9}.
+\bibitem{guo} Guo, C., Pleiss, G., Sun, Y. \& Weinberger, K. Q. On calibration of modern neural networks. \textit{Proc. Mach. Learn. Res.} \textbf{70}, 1321--1330 (2017). \url{https://proceedings.mlr.press/v70/guo17a.html}.
+\bibitem{breiman} Breiman, L. Random forests. \textit{Mach. Learn.} \textbf{45}, 5--32 (2001). \href{https://doi.org/10.1023/A:1010933404324}{doi:10.1023/A:1010933404324}.
+\bibitem{werner} Werner, G. D. A. \textit{et al.} Evolution of microbial markets. \textit{Proc. Natl Acad. Sci. USA} \textbf{111}, 1237--1244 (2014). \href{https://doi.org/10.1073/pnas.1315980111}{doi:10.1073/pnas.1315980111}.
+\bibitem{software} Glover, M. E. Virtual Cell: A Person, Composed. C++17 research software (2026). \url{https://rmichaelglover.github.io/hrl-portfolio/virtual-cell-model/}.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section*{Supplementary Information}
+\addcontentsline{toc}{section}{Supplementary Information}
+\subsection*{Supplementary Note 1: An ontology of distinct responsibilities}
+A computational model becomes difficult to evaluate when the same numerical object silently changes meaning across interfaces. A categorical label strength can be normalized without being a calibrated probability. A probability can predict success without encoding the value of success. A utility can prefer an action without showing that the action is feasible. A resource can constrain execution without specifying how its expenditure changes a physical system. Virtual Cell makes each boundary inspectable.
+
+The model is deliberately broad in organization and narrow in current dynamics. It has classes named after organs and cells, but the present experimental claims concern data ownership, contextual labeling, policy selection and bookkeeping. The path toward biological reality proceeds by adding independently testable state and transition laws. The same principle applies to the brain: a class named Brain organizes memory and model diagnostics; its name alone supplies no evidence for a neural implementation.
+
+\begin{table}[htbp]\centering\small
+\caption{Quantities that must remain distinguishable.}\label{tab:quantities}
+\begin{tabular}{p{.2\linewidth}p{.3\linewidth}p{.41\linewidth}}\toprule
+Quantity & Mathematical object & Question answered \\\midrule
+Identity & Registry-local node ID & Which modeled entity is referenced? \\
+Name & String-to-ID mapping & Which expression denotes that identity? \\
+Membership & Finite set of IDs & Which entities are immediate members? \\
+Relation & Directed typed edge & How are two identities related? \\
+Label strength & Row-normalized nonnegative vector & Which categorical assignments receive support? \\
+Probability & Forecast over defined outcomes & How likely is an event under this model? \\
+Utility vector & Ordered real-valued criteria & How are consequences evaluated? \\
+Energy budget & Nonnegative scalar in stated units & Which modeled expenditures are affordable? \\
+Provenance & Recorded source description & Where did an observation or claim originate? \\\bottomrule
+\end{tabular}\end{table}
+
+\subsection*{Supplementary Note 2: Finite recursive containers}
+The name NullSet preserves Glover's originating intuition of a container that is still a modeled thing when empty and may support further construction. Its operational definition is a polymorphic interface with a name and an immediate-member query. The variable-size Root supplies zero or more members. FixedSet enforces distinct IDs, and One, Two and Three specialize its cardinality.
+
+This is a graph-theoretic construction. A Root may refer to itself, or participate in a longer cycle. Such a reference is an edge within a finite registry; it does not invoke unrestricted comprehension in set theory. The graph can represent a self-model, but a self-reference does not automatically create self-knowledge. Likewise, the capacity to append a node is explicit software functionality rather than spontaneous physical generation.
+
+The current creation interface validates child IDs before insertion, so a fixed-size node refers only to already registered identities. Root membership can be extended afterward. Future deletion would require generation-tagged IDs or another invalidation scheme; append-only indices alone would no longer suffice.
+
+\subsection*{Supplementary Note 3: A sufficient convergence condition}
+The compatibility iteration has a simple sufficient contraction bound. This bound is useful because it identifies a regime in which damping and finite iteration have a mathematical interpretation beyond a visual impression of settling.
+
+\begin{proposition}
+Let $C$ act linearly on the flattened strength field, and let $R=\|C\|_\infty$ be its maximum absolute row sum. On the fixed support of a normalized prior, the map
+\[
+T(P)=(1-\eta)P+\eta\operatorname{softmax}(\log\pi+\beta CP)
+\]
+is a contraction in the maximum norm if $0<\eta\leq1$ and $\beta R<2$.
+\end{proposition}
+\begin{proof}
+For one softmax row $q$, the absolute row sum of its Jacobian at coordinate $a$ is
+\[
+q_a(1-q_a)+\sum_{b\neq a}q_aq_b=2q_a(1-q_a)\leq\tfrac12.
+\]
+Thus softmax is $1/2$-Lipschitz in the maximum norm. Composition with $\beta C$ gives bound $\beta R/2$. The damped map has Lipschitz bound
+\[
+L\leq1-\eta+\eta\beta R/2<1.
+\]
+It maps the product of prior-support simplices into itself, a closed complete domain. The contraction mapping theorem gives a unique fixed point and convergence from every point in that domain. Zero-prior coordinates can be omitted, leaving the same argument on the supported face.
+\end{proof}
+
+Degree-normalized same-label support in the primary benchmark has $R\leq1$. The chosen coupling 1.5 therefore satisfies the sufficient bound. Larger coupling may still converge, but this proof does not cover it. Damping alone does not restore this particular sufficient inequality when $\beta R\geq2$; observed settling outside the bound is an empirical property of a specific field.
+
+\subsection*{Supplementary Note 4: Why the shared-wrong condition is decisive}
+Let $J$ exchange the two label columns. The synthetic compatibility edges treat both labels symmetrically, so applying $J$ to the prior and current strengths commutes with the update. Consequently, the shared-wrong trajectory is exactly the column-exchanged valid trajectory up to floating-point effects. Entropy, maximum iteration change and iteration count are invariant under that exchange. External accuracy changes because evaluation retains the original label meanings.
+
+The construction is intentionally adversarial and transparent. It does not show that contextual inference is generally misleading. It shows that numerical self-consistency cannot, by itself, choose an external interpretation. An anchor capable of distinguishing the label meanings must enter through observations, task definitions or another independently justified relation. Repeatedly circulating the same wrong interpretation supplies no such anchor.
+
+\begin{table}[htbp]\centering\small
+\caption{Paired accuracy changes from the prior-only comparator. Intervals resample graph seeds, with 5,000 bootstrap resamples.}\label{tab:paired}
+\begin{tabular}{lrr}\toprule
+Condition & Change (percentage points) & 95\% interval \\\midrule
+\tableinput{source/paired_rows.tex}
+\bottomrule\end{tabular}\end{table}
+
+\subsection*{Supplementary Note 5: Temporal priors and evidence reuse}
+The prototype demonstrates temporal carryover by feeding a previous strength field into a fresh CompatibilityField as its prior. With no additional relations, the new run preserves that prior. This is memory. It should not be reported as a second independent observation or as an additional calibration sample.
+
+A real temporal model would require state transition assumptions, observation likelihoods, time stamps and a policy for stale information. An opponent's behavior may change; a cell's local conditions may change; a remembered name may become ambiguous in a new context. The present interface exposes the point at which a temporal prior enters but does not fit these dynamics. A fair evaluation should compare carryover with a fresh-observation baseline and measure both stability and responsiveness after a change point.
+
+\subsection*{Supplementary Note 6: Pareto order and scalarization}
+Pareto dominance is a partial order on outcome vectors, rather than a universal scalar preference. Two vectors can be incomparable. Retaining the frontier preserves alternatives that matter under different future priorities. The implementation then uses a stated weighted sum to choose from that frontier.
+
+With nonnegative weights, strictly dominated alternatives need not improve weighted score; with zero weights they can tie on the active dimensions. Removing them first gives the declared policy a consistent feasibility-and-dominance interpretation. A linear weighted sum also cannot expose every possible nondominated point in every nonconvex outcome set. The present two-action example is a transparent policy experiment, not a general algorithm for discovering all supported or unsupported Pareto solutions.
+
+The 5,151 grid points are not independent human observations. Their selection frequencies depend on coordinate choice and grid resolution. We report exact counts to demonstrate reproducible policy boundaries, not uncertainty intervals around a psychological population parameter.
+
+\subsection*{Supplementary Note 7: Surprisal, forecast error and information seeking}
+Surprisal measures an observation's unexpectedness under a specified forecast. A well-calibrated model still experiences surprising events because low-probability events sometimes occur. Therefore a single high-surprisal event is not proof of model failure. Repeated forecasts and outcomes support scoring, calibration inspection and comparison with a baseline.
+
+The binary Brier score is a proper score: if the event's true probability is $q$, expected loss at forecast $p$ is
+\[
+\mathbb{E}(p-Y)^2=(p-q)^2+q(1-q),
+\]
+which is minimized at $p=q$. This decomposition separates reducible probability error from the event's irreducible Bernoulli variability. It also explains why the generating-probability forecaster in the experiment has positive loss.
+
+Minimizing immediate surprisal by controlling observations can favor predictable situations. Information acquisition instead concerns an expected change in knowledge or future performance and requires a defined experiment or observation model. The current architecture stores learning as an objective proxy but does not implement expected information gain or active inference.
+
+\subsection*{Supplementary Note 8: A model of another person}
+The modeled self can contain an opponent-model node without containing the opponent. A prediction about a move is an empirical claim about observable behavior. A statement about the opponent's motives adds an interpretation and requires evidence beyond the move alone. The architecture accommodates this distinction by separating identity, model relations, forecast histories and provenance.
+
+SelfModel records one's own forecasts and forecasts concerning the success of an opponent model. These records make metacognitive questions expressible. They do not guarantee that increasing self-description improves predictive performance. An intervention study could vary access to one's prior forecast errors, preserve the same opponent observations, and compare held-out Brier score, coverage and decision utility. Such a study would operationalize Glover's proposed self-understanding hypothesis.
+
+\subsection*{Supplementary Note 9: Summary correctness under graph sharing}
+\begin{proposition}
+For a finite membership graph and a fixed registry of observations, the implemented visited-ID traversal counts every reachable node's local observations exactly once, regardless of cycles or the number of paths to that node.
+\end{proposition}
+\begin{proof}
+The root enters the pending collection. When a node is first removed, its ID is inserted into the visited set, its observations are processed, and its children are added to pending. Every reachable node is eventually added by induction on a finite path from the root. Later removals of an already visited ID skip processing. Each reachable node is therefore processed once. Because the graph is finite and every processed node enqueues a finite number of children once, the traversal terminates.
+\end{proof}
+The proof concerns registry identities. Two distinct nodes containing identical measurements remain distinct. Deduplication by source, measurement ID or time stamp is a separate layer. Likewise, aggregate summaries should not be entered alongside their raw constituent observations and then treated as independent evidence.
+
+\subsection*{Supplementary Note 10: Topological dimension and hierarchy depth}
+Containment depth counts how many membership steps separate a node from a queried root along a chosen path. A cyclic graph may have several paths and no single intrinsic depth without an additional convention. Simplex dimension is instead one less than the number of vertices in an individual simplex. A root represented as a vertex can summarize a large hierarchy; it does not gain geometric dimension by containing more descriptions.
+
+The tissue complex includes edges for pairwise contact and optional triangles for declared cooperative groups. Face closure means a triangle entails its edges and vertices as members of the abstract complex. That entails a structural assumption and should be introduced because a task needs it. The present implementation does not attach biochemical dynamics to simplices or calculate homology groups. The illustrated Euler characteristics are elementary counts over the declared complexes.
+
+\subsection*{Supplementary Note 11: Biological resources and currencies}
+Glover's ecological-currency analogy motivates a family of models rather than one universal exchange unit. Nutrients can be exchanged; oxygen can be transported; labor uses bodily capacities; money supplies transferable claims within institutions. A common resource-allocation interface can represent constraints and transfers while requiring each quantity to retain its units and conversion rules.
+
+Biological market research examines cases with exchange, partner choice and differing terms of trade\cite{werner}. Those conditions are more specific than the mere presence of a resource flow. Our current molecule-transfer routine conserves represented instances but contains neither prices nor partner choice. A future market experiment should define agents, goods, exchange rules, reserve depletion and welfare measures, then compare accumulation-oriented and plural-objective policies under identical environmental shocks.
+
+\subsection*{Supplementary Note 12: Biomedical and prosthetic extension}
+The project's dedication to Jimmy motivates practical biomedical work. A coherent next biochemical increment is a small compartment system with an atom-balanced reaction. It would require molecular species with stoichiometry, concentrations or counts, rate laws, transport rules and energy accounting with units. A lineage-specific differentiation model would require named target states and transition dynamics rather than a single generic boolean change.
+
+A prosthetic-control extension would introduce sensors, an estimated body state, a device model, candidate controls, mechanical constraints and observed feedback. Multi-objective policies could then compare task performance, comfort proxies and energy consumption using explicit measurement definitions. Such a task would test whether the existing separation helps identify an erroneous sensor forecast, an unsuitable preference weight or a physically infeasible control.
+
+\subsection*{Supplementary Note 13: Random forests and alternative predictors}
+The original teaching code averages three handwritten trees. This demonstrates a prediction interface but is not a trained random forest in Breiman's sense\cite{breiman}. A trained forest would require a dataset, sample and feature randomization, a fitting protocol and held-out evaluation. The paper's Bernoulli experiment likewise uses specified probability transformations rather than claiming learned predictive performance.
+
+The interface can accept a forest, neural network, calibrated statistical model or mechanistic simulator. To compare them, the evaluation should hold outcome definitions and decision criteria fixed. A model with better classification accuracy can still have worse probability calibration or lower downstream utility under a particular cost structure. The architecture retains those diagnostic questions separately.
+
+\subsection*{Supplementary Note 14: Governance and configuration}
+The governor hierarchy is a computational assumption. Person-level and tissue-level signals can prohibit or bias a cell transition; body and organ classes currently route containment rather than supply independent policy layers. This establishes a place to add cascading policies without asserting a discovered biological command hierarchy.
+
+The metaphysical Metabeing interpretation can be represented as a configuration authority over laws and objectives. Configuring the admissible space differs from choosing every action within it. Questions about divine identity, disclosure and love remain part of Glover's philosophical account and are not conclusions inferred from convergence or synthetic performance. The software remains usable under different interpretations because its operational contracts do not require resolving those metaphysical questions.
+
+\subsection*{Supplementary Note 15: Numerical and software boundaries}
+Numeric validation rejects negative resource requirements, out-of-range probabilities and non-finite scores. This prevents several avoidable failures but does not make the code transactional under allocation failure, thread-safe or suitable for arbitrary adversarial workloads. Memory node IDs are local to one registry; deleting nodes or mixing registries would require stronger identity management.
+
+Tests use explicit runtime checks so they remain active in Release builds. Finite fixtures verify the implemented contracts on the tested inputs. They do not prove absence of all defects. The mathematical propositions address selected invariants and convergence under stated assumptions, while the archived numerical experiments establish the reported finite observations.
+
+\subsection*{Supplementary Note 16: A testable development programme}
+The immediate next study should use a task whose observations can independently challenge the model. In chess, a forecast can specify a distribution over legal opponent replies before the reply occurs. A baseline can omit relational support while retaining the same priors. Evaluation can separate probability quality, coverage under abstention, time cost and game utility.
+
+Ant-colony route exploration is a later component. Pheromone reinforcement would be an algorithmic memory of evaluated routes, not a guarantee of optimality. Opponent replies, exploration budget and route costs must enter the experiment. In cellular modeling, a comparable study would compare candidate reaction paths under explicit mass and energy constraints. The common scientific discipline is to state the predicted quantity, retain observations independently and test whether the added structure improves a specified outcome.
+
+\begin{table}[htbp]\centering\small
+\caption{Status of the broader programme.}\label{tab:status}
+\begin{tabular}{p{.29\linewidth}p{.21\linewidth}p{.4\linewidth}}\toprule
+Direction & Current status & Next decisive test \\\midrule
+Compositional biology & Implemented containers and ledgers & Atom-balanced compartment reactions \\
+Relational memory & Implemented IDs, names, edges and routes & Temporal revision with independent observations \\
+Compatibility inference & Implemented, synthetic evaluation & Task-grounded relation construction and ablation \\
+Multi-objective governance & Implemented, exhaustive policy slice & Measured outcome vectors and prospective decisions \\
+Self/opponent modeling & Forecast records implemented & Intervention on self-model information \\
+Simplicial dynamics & Structural complex implemented & Explicit group-dependent transition law \\
+Random forests & Handwritten teaching ensemble & Training and held-out calibration \\
+Ant-colony search & Proposed & Opponent-aware route benchmark \\
+Prosthetic control & Proposed & Sensor and device simulator with mechanical constraints \\\bottomrule
+\end{tabular}\end{table}
+
+\clearpage
+\section*{Extended Data figures}
+\renewcommand{\thefigure}{E\arabic{figure}}\setcounter{figure}{0}
+\fig{fig03_paired}{Paired effects retain seed-level dependence.}{Each point is one graph seed's accuracy difference from its prior-only comparator. Horizontal jitter is visual only. Black markers and error bars show the mean paired effect and its 95\% whole-seed bootstrap interval. The shared-wrong condition reverses the externally evaluated interpretation while preserving internal field concentration.}
+\fig{fig04_convergence}{Coupling and damping have different roles.}{Each heatmap cell averages 20 fresh graph seeds with a 200-iteration budget and tolerance $10^{-8}$. Accuracy, computational iterations and convergence fraction are shown separately. This grid characterizes sensitivity and was not used for primary-setting selection. The sufficient contraction bound covers coupling below 2 for these degree-normalized fields, but not all values displayed.}
+\clearpage
+\fig{fig08_topology}{A cycle, a filled triangle and a route are different structures.}{Three pairwise contacts form a one-dimensional cycle. Declaring a cooperative three-cell group adds the 2-simplex and its faces. The route $0\rightarrow2\rightarrow1$ supplies a traversal order over existing adjacency; it does not change simplex membership. Euler characteristics count nonempty simplices.}
+\fig{fig10_ledgers}{Selection and execution have distinct effects.}{\textbf{Left}, A transition moves three toy energy units from the available store into an allocation ledger. The sum remains five. \textbf{Right}, The action pipeline separates proposal, evaluation, execution and observation. The ledger is bookkeeping; a biochemical energy model needs thermodynamic states and conversion laws.}
+\clearpage
+\fig{fig11_oscillation}{A finite budget exposes a noncontractive failure case.}{An inhibitory self-loop uses two labels with prior $(0.51,0.49)$ and weight $-8$ on each same-label self-assignment. With damping 1, strength oscillates and the maximum change does not approach the tolerance. Damping 0.2 settles in this particular example. Each displayed point reruns the same initialized field for the specified budget, making the iteration trajectory reproducible without a hidden stateful plotting routine.}
+\fig{fig12_identity}{Two names can denote one modeled identity.}{Alias bindings resolve to one registered memory node, which refers to a historical event. These relations distinguish names, model identities and external referents. The example makes no claim that a stored model exhausts the event it represents.}
+
+\clearpage
+\section*{Reproducibility notes and artifact map}
+\begin{table}[htbp]\centering\small
+\caption{Artifacts and the claims they support.}\label{tab:artifacts}
+\begin{tabular}{p{.35\linewidth}p{.55\linewidth}}\toprule
+Artifact & Purpose \\\midrule
+\texttt{experiments/benchmark.cpp} & Executes model headers for all C++ benchmark families \\
+\texttt{experiments/analyze.py} & Generates original figures, tables, bootstrap intervals and chess boards \\
+\texttt{data/compatibility.csv} & 800 graph-condition records \\
+\texttt{data/convergence.csv} & 400 coupling/damping sensitivity records \\
+\texttt{data/policies.csv} & 5,151 exhaustive policy evaluations \\
+\texttt{data/forecasts.csv} & 20,000 generating probabilities, outcomes and forecasts \\
+\texttt{data/summaries.csv} & Six shared-memory fixtures \\
+\texttt{data/invariants.csv} & Counts and failures for 3,000 deterministic fixtures \\
+\texttt{data/oscillation.csv} & 120 inhibitory-loop budget results \\
+\texttt{data/chess\_cases.pgn} & Two selected game chapters used in case-study figures \\
+\texttt{data/statistics.json} & Machine-readable manuscript statistics \\
+\texttt{MANIFEST.sha256} & Hashes for sources, data, figures and manuscript \\\bottomrule
+\end{tabular}\end{table}
+
+\subsection*{Reading the evidence correctly}
+The primary experiment's unit is a generated graph, not an individual label. Within-graph labels exchange support and are dependent. The bootstrap therefore resamples graph-level metrics. The forecast experiment likewise groups events by seed for interval estimation. The exhaustive policy grid is a deterministic enumeration, and its counts have no sampling interval. The ledger fixtures are contract checks, not empirical observations of living cells.
+
+No synthetic data are described as clinical measurements. No model is trained on the two chess games. No neural network is claimed to have been fitted. The figures are generated with standard plotting tools from declared data or explicit structural schematics; no generated imagery is used as experimental evidence.
+
+\subsection*{Manuscript packaging}
+The typeset document follows a research-article progression with a summary, results, methods, references, supplementary notes and extended figures. It uses standard \texttt{article} LaTeX and PDF figures, avoiding dependence on a proprietary journal class. A clean-source archive supplies the manuscript, generated table fragments and every used figure. It is prepared for compilation with pdfLaTeX; submission metadata, category, license choice and the author review of the compiled upload remain part of the eventual arXiv submission process. No submission or acceptance is claimed by the preparation of these files.
+
+\end{document}

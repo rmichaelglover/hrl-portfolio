@@ -1,0 +1,7 @@
+branches,true_observations,computed_observations,naive_path_observations,mean_health,visited_nodes
+1,2,2,2,5,3
+2,3,3,4,4,4
+4,5,5,8,3.2000000000000002,6
+8,9,9,16,2.6666666666666665,10
+16,17,17,32,2.3529411764705883,18
+32,33,33,64,2.1818181818181821,34
