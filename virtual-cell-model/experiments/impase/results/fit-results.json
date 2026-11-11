@@ -1,0 +1,247 @@
+{
+  "status": "Conditional bovine enzyme-assay calibration; no human behavioral inference",
+  "seed": 20261111,
+  "data_sha256": "724edecd94d237515cb07c41b4b6a37040dabd8735ecf6e3a7cf84f2aa9573ee",
+  "coordinate_perturbation": "150 refits with independent uniform +/-2 pixel perturbations; 5th\u201395th percentiles are sensitivity ranges, not experimental confidence intervals",
+  "datasets": {
+    "ins1p_magnesium": {
+      "n_train": 7,
+      "n_test": 3,
+      "objective_units": "Delta A360/min",
+      "models": {
+        "hill": {
+          "parameters": {
+            "V": 0.05331584119311456,
+            "Ka": 0.26792665167544794,
+            "h": 7.999999999999995
+          },
+          "train_rmse": 0.010999350987748591,
+          "test_rmse": 0.009839352230509416,
+          "test_native_rate_rmse": 0.009839352230509416,
+          "test_native_rate_nrmse_mean": 0.1902840244578401,
+          "aicc": -35.13886612653431,
+          "log_parameter_jacobian_condition": 100.7469334068053,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": [
+            "h"
+          ]
+        },
+        "hill_inhibition": {
+          "parameters": {
+            "V": 0.08758983117567841,
+            "Ka": 0.3265817307070071,
+            "h": 2.0321735512492407,
+            "Kmg": 4.303343835326408
+          },
+          "train_rmse": 0.002198958752509641,
+          "test_rmse": 0.002345159226878914,
+          "test_native_rate_rmse": 0.002345159226878914,
+          "test_native_rate_nrmse_mean": 0.045353222979583586,
+          "aicc": -15.676798549590828,
+          "log_parameter_jacobian_condition": 22.691927460164976,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        },
+        "single_site_inhibition": {
+          "parameters": {
+            "V": 0.12673820949746858,
+            "Ka": 0.5592443441621819,
+            "Kmg": 2.4188779667515194
+          },
+          "train_rmse": 0.0030271355984317553,
+          "test_rmse": 0.003470840079364366,
+          "test_native_rate_rmse": 0.003470840079364366,
+          "test_native_rate_nrmse_mean": 0.06712285555782235,
+          "aicc": -53.201938350895915,
+          "log_parameter_jacobian_condition": 22.16337314105816,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        }
+      },
+      "selected_by_training_aicc": "single_site_inhibition",
+      "digitization_parameter_ranges": {
+        "V": [
+          0.11181150192551317,
+          0.1262850426609656,
+          0.14229954375612205
+        ],
+        "Ka": [
+          0.3957594168693009,
+          0.5482115510212022,
+          0.7279299042290588
+        ],
+        "Kmg": [
+          2.0347986857968055,
+          2.443829280879817,
+          2.9617809921094866
+        ]
+      },
+      "held_out_predictions": [
+        {
+          "id": "mg_02",
+          "substrate_mm": 0.5,
+          "magnesium_mm": 0.7407407407407407,
+          "lithium_mm": 0.0,
+          "observed_rate": 0.06419019316493314,
+          "predicted_rate": 0.06148719492341024
+        },
+        {
+          "id": "mg_06",
+          "substrate_mm": 0.5,
+          "magnesium_mm": 2.9891067538126364,
+          "lithium_mm": 0.0,
+          "observed_rate": 0.05040118870728084,
+          "predicted_rate": 0.05230987696519129
+        },
+        {
+          "id": "mg_08",
+          "substrate_mm": 0.5,
+          "magnesium_mm": 5.9869281045751634,
+          "lithium_mm": 0.0,
+          "observed_rate": 0.04053491827637445,
+          "predicted_rate": 0.0355158643605448
+        }
+      ]
+    },
+    "ribose_lithium": {
+      "n_train": 15,
+      "n_test": 5,
+      "objective_units": "reciprocal Delta A360/min",
+      "models": {
+        "competitive": {
+          "parameters": {
+            "V": 0.04424031363325339,
+            "Km": 0.30350807576842925,
+            "Kis": 0.27478395616919565
+          },
+          "train_rmse": 5.117913658006868,
+          "test_rmse": 12.608481409761984,
+          "test_native_rate_rmse": 0.00604350918335172,
+          "test_native_rate_nrmse_mean": 0.4198306909203584,
+          "aicc": 60.98240602004441,
+          "log_parameter_jacobian_condition": 27.487348528239032,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        },
+        "uncompetitive": {
+          "parameters": {
+            "V": 0.1398743674835067,
+            "Km": 2.705698709669232,
+            "Kii": 0.23129999992851116
+          },
+          "train_rmse": 1.7590155101378862,
+          "test_rmse": 3.5991863695414685,
+          "test_native_rate_rmse": 0.0008905692427843241,
+          "test_native_rate_nrmse_mean": 0.06186609288863616,
+          "aicc": 28.942628499146526,
+          "log_parameter_jacobian_condition": 33.75757618970409,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        },
+        "pure_noncompetitive": {
+          "parameters": {
+            "V": 0.06589277792038586,
+            "Km": 0.7847546099825327,
+            "Ki": 0.9042152643876193
+          },
+          "train_rmse": 2.070715084320513,
+          "test_rmse": 4.545659461585888,
+          "test_native_rate_rmse": 0.0011782710382912704,
+          "test_native_rate_nrmse_mean": 0.08185217050053799,
+          "aicc": 33.83681996955782,
+          "log_parameter_jacobian_condition": 10.119364739804261,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        },
+        "mixed": {
+          "parameters": {
+            "V": 0.09852351687811779,
+            "Km": 1.6091998048930123,
+            "Kis": 2.712586513324222,
+            "Kii": 0.40749541836950165
+          },
+          "train_rmse": 1.085673797948811,
+          "test_rmse": 2.1822648376655773,
+          "test_native_rate_rmse": 0.0003055507490539146,
+          "test_native_rate_nrmse_mean": 0.021226009292732533,
+          "aicc": 19.13269085202751,
+          "log_parameter_jacobian_condition": 56.4775358035966,
+          "cpp_python_max_error": 0.0,
+          "optimizer_success": true,
+          "parameters_at_optimization_bound": []
+        }
+      },
+      "selected_by_training_aicc": "mixed",
+      "digitization_parameter_ranges": {
+        "V": [
+          0.09006547700222833,
+          0.09851973938043065,
+          0.10883792630664774
+        ],
+        "Km": [
+          1.386707385847895,
+          1.6096093193772159,
+          1.87635904242274
+        ],
+        "Kis": [
+          2.102514309713777,
+          2.7670020630704473,
+          3.662637960281348
+        ],
+        "Kii": [
+          0.35116213253683104,
+          0.4036056539466857,
+          0.47213228989879175
+        ]
+      },
+      "held_out_predictions": [
+        {
+          "id": "ribose_1.5_0",
+          "substrate_mm": 5.0,
+          "magnesium_mm": 3.0,
+          "lithium_mm": 1.5,
+          "observed_rate": 0.019130434782608695,
+          "predicted_rate": 0.019016924791536396
+        },
+        {
+          "id": "ribose_1.5_1",
+          "substrate_mm": 1.68,
+          "magnesium_mm": 3.0,
+          "lithium_mm": 1.5,
+          "observed_rate": 0.01595854922279793,
+          "predicted_rate": 0.01597189919738107
+        },
+        {
+          "id": "ribose_1.5_2",
+          "substrate_mm": 1.0023866348448687,
+          "magnesium_mm": 3.0,
+          "lithium_mm": 1.5,
+          "observed_rate": 0.014063926940639269,
+          "predicted_rate": 0.01373317661412238
+        },
+        {
+          "id": "ribose_1.5_3",
+          "substrate_mm": 0.7118644067796611,
+          "magnesium_mm": 3.0,
+          "lithium_mm": 1.5,
+          "observed_rate": 0.011622641509433963,
+          "predicted_rate": 0.012027390629360582
+        },
+        {
+          "id": "ribose_1.5_4",
+          "substrate_mm": 0.5599999999999999,
+          "magnesium_mm": 3.0,
+          "lithium_mm": 1.5,
+          "observed_rate": 0.0112,
+          "predicted_rate": 0.010775116565667668
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "status": "candidate buffered microscopic mechanism, illustrative rates; distinct from fitted empirical assay layer",
+  "reference": "Leech et al. 1993 doi:10.1111/j.1432-1033.1993.tb17707.x motivates examining product-associated states; does not determine these rates or joint release pathway",
+  "isolated_one_second_probability": {
+    "rate_1_per_s": 0.6321205588285577,
+    "rate_0_2_per_s": 0.18126924692201815
+  },
+  "final_states": [
+    {
+      "lithium_mm": 0.0,
+      "time_s": 60.0,
+      "free": 0.30434782608696,
+      "substrate_bound": 0.17391304347826,
+      "products_bound": 0.52173913043478,
+      "products_lithium": 0.0,
+      "expected_cycles": 31.009451795841,
+      "stationary_flux": 0.52173913043478
+    },
+    {
+      "lithium_mm": 0.5,
+      "time_s": 60.0,
+      "free": 0.24137931034483,
+      "substrate_bound": 0.13793103448276,
+      "products_bound": 0.36206896551724,
+      "products_lithium": 0.25862068965517,
+      "expected_cycles": 24.67063020214,
+      "stationary_flux": 0.41379310344828
+    },
+    {
+      "lithium_mm": 1.0,
+      "time_s": 60.0,
+      "free": 0.20792079207921,
+      "substrate_bound": 0.11881188118812,
+      "products_bound": 0.27722772277228,
+      "products_lithium": 0.39603960396041,
+      "expected_cycles": 21.270463680032,
+      "stationary_flux": 0.35643564356436
+    },
+    {
+      "lithium_mm": 2.0,
+      "time_s": 60.0,
+      "free": 0.17303370786517,
+      "substrate_bound": 0.098876404494385,
+      "products_bound": 0.18876404494383,
+      "products_lithium": 0.53932584269665,
+      "expected_cycles": 17.701461936624,
+      "stationary_flux": 0.29662921348315
+    },
+    {
+      "lithium_mm": 5.0,
+      "time_s": 60.0,
+      "free": 0.13662456946039,
+      "substrate_bound": 0.078071182548794,
+      "products_bound": 0.096440872560275,
+      "products_lithium": 0.68886337543054,
+      "expected_cycles": 13.950993948389,
+      "stationary_flux": 0.23421354764638
+    }
+  ],
+  "no_effect_control": {
+    "lithium_mm": 5,
+    "equal_product_release_rates": true,
+    "stationary_flux": 0.5217391304347826
+  },
+  "validation": "Seven CTest suites; exact-event sample mean versus master equation; stationary analytic solution; probability normalization; semigroup propagation."
+}

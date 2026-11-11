@@ -1,5 +1,15 @@
 # Virtual Cell
 
+Latest reaction-cycle milestone: [from stages to timing](experiments/enzyme-cycle/README.md)
+adds exact-event sampling, a population master equation and an analytical
+turnover check. Its candidate microscopic mechanism remains distinct from
+the measured assay calibration below.
+
+Latest empirical extension: [IMPase assay calibration](experiments/impase/README.md)
+fits competing rate laws to traceable published enzyme measurements, with
+held-out prediction and digitization sensitivity. This is distinct from the
+earlier illustrative lithium response model.
+
 Latest integrated example: `./build/person_model_demo`. See
 [MODEL_UPDATE.md](MODEL_UPDATE.md) for the portfolio connections, equations,
 implemented behavior, validation, and remaining extensions.

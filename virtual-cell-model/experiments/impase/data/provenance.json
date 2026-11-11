@@ -1,0 +1,59 @@
+{
+  "citation": "Strasser F, Pelton PD, Ganzhorn AJ (1995), Biochemical Journal 307:585\u2013593",
+  "doi": "10.1042/bj3070585",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1136688/",
+  "organism": "Bos taurus",
+  "preparation": "recombinant bovine brain myo-inositol monophosphatase",
+  "pH": 7.5,
+  "temperature_c": 37,
+  "buffer": "50 mM Tris/HCl, 0.1 mM EGTA; coupled phosphate assay",
+  "optical_readout": "Delta A360/min; no assumed optical path or conversion to kcat",
+  "enzyme_nm": {
+    "ins1p_magnesium": 6,
+    "ribose_lithium": 87
+  },
+  "coordinate_error_pixels": 2,
+  "coordinate_error_status": "declared digitization sensitivity, not biological standard error",
+  "selection": "Visually separable open-circle Mg markers; all five visible markers in each selected ribose Li series. No overlapping low-Mg markers or fitted-curve points included.",
+  "split": "Within-figure retrospective split fixed in input CSV before fitting. Three Mg markers held out; entire 1.5 mM lithium ribose series held out. This is not independent-laboratory validation.",
+  "axes": {
+    "ins1p_magnesium": {
+      "x0_px": 495,
+      "x8_px": 724.5,
+      "y0_px": 278.5,
+      "y008_px": 110.25
+    },
+    "ribose_lithium": {
+      "x0_px": 509.5,
+      "x2_px": 719.5,
+      "y0_px": 557.5,
+      "y100_px": 403.5
+    }
+  },
+  "source_images": [
+    {
+      "page": 586,
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6ba8/1136688/a3c04a8fa23e/biochemj00065-0264.png",
+      "sha256": "43659703fc32d66bab017014e16a7c3d9bc25dd678cafe7ae4550a7d5750c5e9"
+    },
+    {
+      "page": 587,
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6ba8/1136688/ab16e2539880/biochemj00065-0265.png",
+      "sha256": "3ffbea3af7d6b8088fb660920a8b825e32740a6609c09634449267200e331d59"
+    },
+    {
+      "page": 590,
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6ba8/1136688/d719e62fd439/biochemj00065-0268.png",
+      "sha256": "d3547503ab28f26a14863dca5a778dad4469e2b0260b1ed795eb51f2095f1b73"
+    }
+  ],
+  "total_assay_volume_ml": 0.5,
+  "coupled_assay_reagents": {
+    "purine_ribonucleoside_mm": 0.1,
+    "nucleoside_phosphorylase_units": 0.5
+  },
+  "substrate_stereochemistry_ins1p": "D,L (racemic), per paper materials and abstract",
+  "concentration_status": "nominal assay additions; Mg speciation with EGTA/substrate is not resolved",
+  "digitizer": "assistant, manual marker-centre reading from original PNG coordinates",
+  "extraction_status": "approximate figure digitization, not author-supplied raw measurements"
+}
