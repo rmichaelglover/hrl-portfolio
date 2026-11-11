@@ -12,6 +12,8 @@
 #include <vector>
 #include <optional>
 #include "bioelectric.hpp"
+#include "vision_optics.hpp"
+#include "observer.hpp"
 
 namespace virtual_cell {
 
@@ -252,7 +254,7 @@ public:
     }
 };
 
-enum class OrganKind { Heart, Liver, Brain, Lungs, Skin, Mouth };
+enum class OrganKind { Heart, Liver, Brain, Lungs, Skin, Mouth, Eye };
 
 class Organ {
     std::string name_;
@@ -285,15 +287,69 @@ public:
     std::size_t molecule_count() const { return organ_.molecule_count(); }
 };
 
+// Vertebrate-inspired reduced retina: graded rod -> ON bipolar -> spiking ganglion.
+// These are effective cells, not a reconstructed human retinal microcircuit.
+class Eye {
+    Organ organ_;
+    vision::OpticalWindow window_;
+    vision::RodTransduction transduction_;
+    vision::OpticalAudit audit_;
+    std::uint64_t endogenous_events_=0,pending_endogenous_=0;
+    std::mt19937_64 optical_rng_{1},endogenous_rng_{2};
+public:
+    Eye(std::string name,vision::ReferenceFrame frame=vision::ReferenceFrame{},vision::Optics optics={},vision::RodParameters rod={})
+        : organ_(std::move(name),OrganKind::Eye),window_(frame,optics),transduction_(rod) {
+        Cell receptor,bipolar,ganglion;
+        receptor.attach_membrane(electric::Membrane({20,2,-70},-40));
+        bipolar.attach_membrane(electric::Membrane({50,5,-65},-65));
+        ganglion.attach_membrane(electric::Membrane({50,5,-65},-65,electric::SpikeRule{}));
+        organ_.add_tissue(Tissue({receptor,bipolar,ganglion}));
+    }
+    Cell& cell(std::size_t tissue,std::size_t index) { return organ_.tissue(tissue).cell(index); }
+    const Cell& cell(std::size_t tissue,std::size_t index) const { return organ_.tissue(tissue).cell(index); }
+    const Organ& organ() const { return organ_; }
+    vision::OpticalWindow& window() { return window_; }
+    const vision::OpticalWindow& window() const { return window_; }
+    const vision::OpticalAudit& optical_audit() const { return audit_; }
+    std::uint64_t endogenous_events() const { return endogenous_events_; }
+    double cgmp() const { return transduction_.cgmp(); }
+    double cng_ns() const { return transduction_.cng_ns(); }
+    void set_visual_seed(std::uint64_t seed) {
+        optical_rng_.seed(seed);endogenous_rng_.seed(seed^0xd1b54a32d192ed03ULL);
+    }
+    // Research intervention, not voluntary suppression/creation of receptor noise.
+    void add_endogenous_activation(std::uint64_t count) { pending_endogenous_+=count; }
+    void transduce(const vision::Environment& environment,double dt_ms) {
+        const auto sample=window_.sample(environment,dt_ms,optical_rng_);
+        const auto endogenous=transduction_.sample_endogenous(dt_ms,endogenous_rng_)+pending_endogenous_;
+        pending_endogenous_=0;
+        audit_.incident_photons+=sample.incident_photons;
+        audit_.transmitted_photons+=sample.transmitted_photons;
+        audit_.photoisomerizations+=sample.photoisomerizations;
+        audit_.incident_energy_j+=sample.incident_energy_j;
+        endogenous_events_+=endogenous;
+        transduction_.advance(dt_ms,sample.photoisomerizations+endogenous);
+    }
+    std::array<double,3> graded_currents_pa() const {
+        // Reduced sign-inverting ON pathway. Glutamate receptors and synaptic
+        // vesicle chemistry require a richer model; gains are illustrative nS.
+        const double rod_voltage=cell(0,0).membrane().voltage_mv();
+        const double bipolar_voltage=cell(0,1).membrane().voltage_mv();
+        return {0,10*std::max(0.0,-40-rod_voltage),5*std::max(0.0,bipolar_voltage+65)};
+    }
+};
+
 class Body {
     std::optional<Brain> brain_;
+    std::optional<std::array<Eye,2>> eyes_;
     std::vector<Organ> organs_;
     electric::NervousSystem nervous_system_;
     double electrical_time_ms_=0;
+    std::uint64_t visual_seed_=20261111;
 public:
     void add_organ(const Organ& organ) {
-        if (organ.kind()==OrganKind::Brain)
-            throw std::invalid_argument("Add the typed Brain with add_brain()");
+        if (organ.kind()==OrganKind::Brain || organ.kind()==OrganKind::Eye)
+            throw std::invalid_argument("Use add_brain() or add_eyes() for typed sensory organs");
         organs_.push_back(organ);
     }
     void add_brain(Brain brain) {
@@ -304,20 +360,44 @@ public:
         if (!brain_) throw std::logic_error("Body has no Brain model");
         return *brain_;
     }
-    std::size_t organ_count() const { return organs_.size()+(brain_?1:0); }
+    void add_eyes(std::array<Eye,2> eyes) {
+        if(eyes_)throw std::logic_error("Body already owns its pair of Eyes");
+        eyes_=std::move(eyes);
+        set_visual_seed(visual_seed_);
+    }
+    Eye& eye(std::size_t side) {
+        if(!eyes_)throw std::logic_error("Body has no Eye model");
+        return eyes_->at(side);
+    }
+    const Eye& eye(std::size_t side) const {
+        if(!eyes_)throw std::logic_error("Body has no Eye model");
+        return eyes_->at(side);
+    }
+    void set_visual_seed(std::uint64_t seed) {
+        visual_seed_=seed;
+        if(eyes_)for(std::size_t side=0;side<2;++side)
+            eyes_->at(side).set_visual_seed(seed+0x9e3779b97f4a7c15ULL*(side+1));
+    }
+    std::size_t organ_count() const { return organs_.size()+(brain_?1:0)+(eyes_?2:0); }
     Organ& organ(std::size_t index) { return organs_.at(index); }
     const Organ& organ(std::size_t index) const { return organs_.at(index); }
     bool has_organ(OrganKind kind) const {
         if (kind==OrganKind::Brain) return brain_.has_value();
+        if (kind==OrganKind::Eye) return eyes_.has_value();
         return std::any_of(organs_.begin(), organs_.end(),
                            [kind](const Organ& o) { return o.kind() == kind; });
     }
     std::size_t molecule_count() const {
         std::size_t total = brain_?brain_->molecule_count():0;
+        if(eyes_)for(const auto& eye:*eyes_)total+=eye.organ().molecule_count();
         for (const auto& organ : organs_) total += organ.molecule_count();
         return total;
     }
     Cell& cell(electric::CellId id) {
+        if(id.eye_index) {
+            if(id.in_brain || id.organ_index!=0)throw std::out_of_range("Ambiguous Eye cell address");
+            return eye(*id.eye_index).cell(id.tissue_index,id.cell_index);
+        }
         if (id.in_brain) {
             if (!brain_ || id.organ_index!=0) throw std::out_of_range("Unknown Brain cell address");
             return brain_->tissue(id.tissue_index).cell(id.cell_index);
@@ -325,6 +405,10 @@ public:
         return organs_.at(id.organ_index).tissue(id.tissue_index).cell(id.cell_index);
     }
     const Cell& cell(electric::CellId id) const {
+        if(id.eye_index) {
+            if(id.in_brain || id.organ_index!=0)throw std::out_of_range("Ambiguous Eye cell address");
+            return eye(*id.eye_index).cell(id.tissue_index,id.cell_index);
+        }
         if (id.in_brain) {
             if (!brain_ || id.organ_index!=0) throw std::out_of_range("Unknown Brain cell address");
             return brain_->tissue(id.tissue_index).cell(id.cell_index);
@@ -333,6 +417,8 @@ public:
     }
     std::vector<electric::CellId> electrical_cells() const {
         std::vector<electric::CellId> result;
+        if(eyes_)for(std::size_t side=0;side<2;++side)for(std::size_t c=0;c<3;++c)
+            result.push_back(electric::CellId::eye(side,0,c));
         if (brain_) for (std::size_t t=0;t<brain_->tissue_count();++t)
             for (std::size_t c=0;c<brain_->tissue(t).cell_count();++c)
                 if (brain_->tissue(t).cell(c).has_membrane()) result.push_back(electric::CellId::brain(t,c));
@@ -353,7 +439,12 @@ public:
     }
     void advance_electrical(double duration_ms,const std::vector<electric::CurrentInput>& currents={},
                             double max_step_ms=0.05) {
+        advance_in_environment(vision::Environment{},duration_ms,currents,max_step_ms);
+    }
+    void advance_in_environment(const vision::Environment& environment,double duration_ms,
+                            const std::vector<electric::CurrentInput>& currents={},double max_step_ms=0.05) {
         nonnegative(duration_ms);electric::detail::positive(max_step_ms);
+        if(eyes_)for(const auto& eye:*eyes_)eye.window().expected_incident(environment,0);
         for (const auto& input:currents) {
             finite(input.inward_pa);cell(input.target).membrane();
         }
@@ -370,11 +461,19 @@ public:
         const auto ids=electrical_cells();
         for (std::size_t step=0;step<static_cast<std::size_t>(count);++step) {
             const double now=start_time+step*dt;
-            const auto inputs=nervous_system_.interval_inputs(now,dt);
+            auto inputs=nervous_system_.interval_inputs(now,dt);
+            std::vector<electric::CurrentInput> retinal_currents;
+            if(eyes_)for(std::size_t side=0;side<2;++side) {
+                auto& eye=eyes_->at(side);eye.transduce(environment,dt);
+                inputs.push_back({electric::CellId::eye(side,0,0),{eye.cng_ns(),0}});
+                const auto graded=eye.graded_currents_pa();
+                for(std::size_t c=1;c<3;++c)retinal_currents.push_back({electric::CellId::eye(side,0,c),graded[c]});
+            }
             std::vector<electric::Spike> firing;
             for (const auto id:ids) {
                 double current=0;
                 for (const auto& input:currents) if (input.target==id) current=finite(current+input.inward_pa);
+                for (const auto& input:retinal_currents) if (input.target==id) current=finite(current+input.inward_pa);
                 std::vector<electric::Conductance> channels;
                 for (const auto& input:inputs) if (input.target==id) channels.push_back(input.channel);
                 for (double offset:cell(id).membrane().advance_events(dt,current,channels))
@@ -391,12 +490,15 @@ public:
 class Person {
     bool permits_ = true;
     double bias_ = 0.0;
+    mind::Will will_;
 public:
     virtual ~Person() = default;
     virtual std::string describe_role() const = 0;
     void set_governance(bool permits, double bias) { bias_ = finite(bias); permits_ = permits; }
     bool permits_differentiation() const { return permits_; }
     double differentiation_bias() const { return bias_; }
+    mind::Will& will() { return will_; }
+    const mind::Will& will() const { return will_; }
 };
 
 struct Tool { double cost; double hours_saved; };

@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest sensory milestone: [Alex’s pair of Eyes](experiments/eyes/README.md)
+connects photon arrivals to a reduced retinal pathway, uncertain source attribution,
+and an explicit attended-integration policy. [Gradual lesson](experiments/eyes/TUTORIAL.md).
+
 Latest daily milestone: [a value-owned bioelectric Brain and Body](experiments/bioelectric/README.md)
 adds membrane physics, reduced spikes, delayed synapses and organ-labelled
 electrical compartments to the existing HomoSapiens hierarchy.

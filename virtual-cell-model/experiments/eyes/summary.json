@@ -1,0 +1,91 @@
+{
+  "status": "Reduced rod-like binocular detection plus classical uncertain source inference and an explicit proposed attended-integration rule",
+  "physical_units": {
+    "position": "m",
+    "power": "W",
+    "wavelength": "nm",
+    "time": "ms",
+    "voltage": "mV",
+    "conductance": "nS"
+  },
+  "composition": {
+    "eyes": 2,
+    "retinal_cells_per_eye": 3,
+    "body_electrical_cells": 16,
+    "body_organ_components": 7
+  },
+  "seed": 20261111,
+  "source": {
+    "isotropic_power_w": 1e-10,
+    "wavelength_nm": 500,
+    "position_m": [
+      0,
+      0,
+      1
+    ],
+    "on_ms": [
+      200,
+      600
+    ]
+  },
+  "scenarios": {
+    "light": {
+      "left_photoevents": 20,
+      "right_photoevents": 18,
+      "left_endogenous_events": 0,
+      "right_endogenous_events": 0,
+      "left_ganglion_spikes": 81,
+      "right_ganglion_spikes": 69,
+      "brain_spikes": 82,
+      "minimum_left_rod_mv": -67.576611354065,
+      "final_attended_feature": 0.22869968547355
+    },
+    "one-eye": {
+      "left_photoevents": 0,
+      "right_photoevents": 18,
+      "left_endogenous_events": 0,
+      "right_endogenous_events": 0,
+      "left_ganglion_spikes": 0,
+      "right_ganglion_spikes": 69,
+      "brain_spikes": 40,
+      "minimum_left_rod_mv": -40.0,
+      "final_attended_feature": 0.18048462970771
+    },
+    "closed": {
+      "left_photoevents": 0,
+      "right_photoevents": 0,
+      "left_endogenous_events": 0,
+      "right_endogenous_events": 0,
+      "left_ganglion_spikes": 0,
+      "right_ganglion_spikes": 0,
+      "brain_spikes": 0,
+      "minimum_left_rod_mv": -40.0,
+      "final_attended_feature": 0.0
+    },
+    "endogenous": {
+      "left_photoevents": 0,
+      "right_photoevents": 0,
+      "left_endogenous_events": 20,
+      "right_endogenous_events": 0,
+      "left_ganglion_spikes": 47,
+      "right_ganglion_spikes": 0,
+      "brain_spikes": 27,
+      "minimum_left_rod_mv": -69.60698650392,
+      "final_attended_feature": 0.10401419339804
+    },
+    "decline": {
+      "left_photoevents": 20,
+      "right_photoevents": 18,
+      "left_endogenous_events": 0,
+      "right_endogenous_events": 0,
+      "left_ganglion_spikes": 81,
+      "right_ganglion_spikes": 69,
+      "brain_spikes": 82,
+      "minimum_left_rod_mv": -67.576611354065,
+      "final_attended_feature": 0.0
+    }
+  },
+  "origin_inference": "Independent-Poisson likelihoods are illustrative hypotheses. Observer sees event counts, duration and supplied interoceptive count, never simulator photon/endogenous truth flags.",
+  "qrf_status": "Classical physical reference frames inspired by Fields, Glazebrook and Levin (2022); no quantum-state or quantum-reference-frame dynamics simulated.",
+  "will_status": "Explicit attention/integration policy; no control of immune rejection, tissue compatibility or medication tolerability."
+}

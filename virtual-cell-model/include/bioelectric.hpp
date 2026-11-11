@@ -143,13 +143,17 @@ public:
 struct CellId {
     bool in_brain;
     std::size_t organ_index,tissue_index,cell_index;
+    std::optional<std::size_t> eye_index=std::nullopt;
     static CellId brain(std::size_t tissue,std::size_t cell) { return {true,0,tissue,cell}; }
     static CellId organ(std::size_t organ,std::size_t tissue,std::size_t cell) {
         return {false,organ,tissue,cell};
     }
+    static CellId eye(std::size_t side,std::size_t tissue,std::size_t cell) {
+        return {false,0,tissue,cell,side};
+    }
     bool operator==(const CellId& other) const {
         return in_brain==other.in_brain && organ_index==other.organ_index
-            && tissue_index==other.tissue_index && cell_index==other.cell_index;
+            && tissue_index==other.tissue_index && cell_index==other.cell_index && eye_index==other.eye_index;
     }
 };
 struct CurrentInput { CellId target; double inward_pa; };

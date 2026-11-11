@@ -3,6 +3,7 @@
 #include "hierarchical_summary.hpp"
 #include "compatibility.hpp"
 #include "biochemistry.hpp"
+#include "observer.hpp"
 
 namespace virtual_cell::mind {
 
@@ -14,6 +15,12 @@ struct Experience {
     double predicted_success;
     bool success;
     std::string provenance;
+};
+struct Percept {
+    BoundaryObservation observed;
+    double probability_external;
+    std::string feature;
+    double integrated_value;
 };
 
 // Coordinates existing components without changing their inheritance contracts.
@@ -29,6 +36,9 @@ class PersonModel {
     std::map<std::string, NodeId> names_;
     std::vector<Experience> experiences_;
     std::optional<bio::LithiumPhysiology> physiology_;
+    BoundaryObserver boundary_observer_;
+    AttendedSelfModel attended_self_;
+    std::vector<Percept> percepts_;
 public:
     PersonModel(std::string name, double action_energy,
                 std::array<double, objective_count> weights)
@@ -43,6 +53,22 @@ public:
     double available_action_energy() const { return action_energy_; }
     double spent_action_energy() const { return spent_energy_; }
     const std::vector<Experience>& experiences() const { return experiences_; }
+    Will& will() { return human_.will(); }
+    const Will& will() const { return human_.will(); }
+    void configure_boundary_observer(BoundaryObserver observer) { boundary_observer_=std::move(observer); }
+    const AttendedSelfModel& attended_self() const { return attended_self_; }
+    const std::vector<Percept>& percepts() const { return percepts_; }
+    void retire_representation(const std::string& feature) { attended_self_.retire(feature); }
+    Percept perceive(BoundaryObservation observation,std::string feature="visual_activity") {
+        const double probability=boundary_observer_.probability_external(observation);
+        const double visual=static_cast<double>(observation.visual_events);
+        const double sensed=visual/(1+visual);
+        attended_self_.integrate(feature,probability*sensed,will());
+        Percept percept{observation,probability,std::move(feature),0};
+        percept.integrated_value=attended_self_.feature(percept.feature);
+        percepts_.push_back(percept);
+        return percept;
+    }
     void attach_physiology(bio::LithiumPhysiology physiology) {
         physiology_=std::move(physiology);
     }
