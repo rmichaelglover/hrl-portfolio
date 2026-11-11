@@ -1,0 +1,106 @@
+{
+  "parameter_status": "illustrative, not fitted",
+  "model_time_seconds": 60,
+  "final_states": [
+    {
+      "profile": "coupled",
+      "external_initial_li_mm": 0.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.0,
+      "productive_fraction": 0.665181900401,
+      "impase_mm_per_s": 1.83187845327e-06,
+      "inositol_mm": 0.249990839769,
+      "response_proxy": 1.47938295996
+    },
+    {
+      "profile": "coupled",
+      "external_initial_li_mm": 0.5,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.112992093113,
+      "productive_fraction": 0.640990254592,
+      "impase_mm_per_s": 2.16890480251e-06,
+      "inositol_mm": 0.249989154167,
+      "response_proxy": 1.45518111157
+    },
+    {
+      "profile": "coupled",
+      "external_initial_li_mm": 1.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.386886991548,
+      "productive_fraction": 0.589083345496,
+      "impase_mm_per_s": 3.39867503976e-06,
+      "inositol_mm": 0.249983002619,
+      "response_proxy": 1.40323513314
+    },
+    {
+      "profile": "coupled",
+      "external_initial_li_mm": 2.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 1.13424688117,
+      "productive_fraction": 0.482556108314,
+      "impase_mm_per_s": 1.33959349867e-05,
+      "inositol_mm": 0.24993292444,
+      "response_proxy": 1.29643781153
+    },
+    {
+      "profile": "uncoupled",
+      "external_initial_li_mm": 0.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.0,
+      "productive_fraction": 0.665181900401,
+      "impase_mm_per_s": 1.83187845327e-06,
+      "inositol_mm": 0.249990839769,
+      "response_proxy": 0.0999993855788
+    },
+    {
+      "profile": "uncoupled",
+      "external_initial_li_mm": 0.5,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.112992093113,
+      "productive_fraction": 0.640990254592,
+      "impase_mm_per_s": 2.16890480251e-06,
+      "inositol_mm": 0.249989154167,
+      "response_proxy": 0.0999993855788
+    },
+    {
+      "profile": "uncoupled",
+      "external_initial_li_mm": 1.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 0.386886991548,
+      "productive_fraction": 0.589083345496,
+      "impase_mm_per_s": 3.39867503976e-06,
+      "inositol_mm": 0.249983002619,
+      "response_proxy": 0.0999993855788
+    },
+    {
+      "profile": "uncoupled",
+      "external_initial_li_mm": 2.0,
+      "time_s": 60.0,
+      "free_li_inside_mm": 1.13424688117,
+      "productive_fraction": 0.482556108314,
+      "impase_mm_per_s": 1.33959349867e-05,
+      "inositol_mm": 0.24993292444,
+      "response_proxy": 0.0999993855788
+    }
+  ],
+  "declared_reference_range_examples": [
+    {
+      "range": [
+        1.35,
+        1.42
+      ],
+      "unexposed_distance": 0.05938295995999998,
+      "exposed_distance": 0,
+      "interpretation": "synthetic evaluation convention, not clinical benefit or harm"
+    },
+    {
+      "range": [
+        1.45,
+        1.5
+      ],
+      "unexposed_distance": 0,
+      "exposed_distance": 0.04676486686000003,
+      "interpretation": "synthetic evaluation convention, not clinical benefit or harm"
+    }
+  ]
+}

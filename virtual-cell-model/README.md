@@ -223,3 +223,14 @@ The new components compose with Brain's existing relational memory. They do not
 replace the cellular governor, train a forest, implement ecological markets, or
 introduce ternary logic. Next useful examples include chess forecasts attached to
 position nodes and comparisons between predicted and observed objective vectors.
+# Lithium and biochemical state evolution
+
+The new [lithium extension](experiments/lithium/README.md) adds unit-labelled ion
+amounts, compartments, reversible LiCl transport, competing Li/Mg enzyme binding,
+IMPase-inspired balanced hydrolysis, and a synthetic downstream response to an
+optional physiology owned by `PersonModel`. Molecular state evolves separately
+from behavioral governance. [Research and primary sources](LITHIUM_RESEARCH.md).
+
+Build with CMake, run `ctest --test-dir build --output-on-failure`, and execute
+`./build/lithium_demo`. Recreate plots with `python3 experiments/lithium/plot.py`.
+The parameters are illustrative; no clinical response predictor is implemented.

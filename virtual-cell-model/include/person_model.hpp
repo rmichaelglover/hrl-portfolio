@@ -2,6 +2,7 @@
 
 #include "hierarchical_summary.hpp"
 #include "compatibility.hpp"
+#include "biochemistry.hpp"
 
 namespace virtual_cell::mind {
 
@@ -27,6 +28,7 @@ class PersonModel {
     double spent_energy_ = 0;
     std::map<std::string, NodeId> names_;
     std::vector<Experience> experiences_;
+    std::optional<bio::LithiumPhysiology> physiology_;
 public:
     PersonModel(std::string name, double action_energy,
                 std::array<double, objective_count> weights)
@@ -41,6 +43,18 @@ public:
     double available_action_energy() const { return action_energy_; }
     double spent_action_energy() const { return spent_energy_; }
     const std::vector<Experience>& experiences() const { return experiences_; }
+    void attach_physiology(bio::LithiumPhysiology physiology) {
+        physiology_=std::move(physiology);
+    }
+    bool has_physiology() const { return physiology_.has_value(); }
+    const bio::LithiumPhysiology& physiology() const {
+        if (!physiology_) throw std::logic_error("No physiology attached");
+        return *physiology_;
+    }
+    void advance_physiology(bio::Seconds duration,bio::Seconds step=bio::Seconds(0.01)) {
+        if (!physiology_) throw std::logic_error("No physiology attached");
+        physiology_->advance(duration,step);
+    }
 
     NodeId add_context(std::string name) {
         auto id = brain_.memory().create<Root>(std::move(name));
