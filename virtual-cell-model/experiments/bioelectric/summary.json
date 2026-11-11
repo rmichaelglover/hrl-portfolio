@@ -1,0 +1,97 @@
+{
+  "model": "Physical RC membrane, reduced integrate-and-fire events, delayed conductance routing; synthetic parameters and topology",
+  "composition": {
+    "owner": "HomoSapiens -> Body",
+    "brain_cells": 2,
+    "heart_cells": 2,
+    "lungs_cells": 2,
+    "skin_cells": 2,
+    "mouth_cells": 2,
+    "chemical_connections": 6
+  },
+  "raii": "Rule of Zero; owned optional Brain, Organ/Tissue/Cell values, vectors and body-local CellId routes; no owning pointers in this layer",
+  "baseline_step_ms": 0.05,
+  "refined_step_ms": 0.01,
+  "stimulus": {
+    "inward_current_pa": 350,
+    "start_ms": 20,
+    "end_ms": 80
+  },
+  "rc_reference_max_abs_error_mv": 7.105427357601002e-15,
+  "scenarios": {
+    "connected": {
+      "spikes": {
+        "skin_spikes": 14,
+        "sensory_spikes": 21,
+        "motor_spikes": 25
+      },
+      "peak_depolarization_mv": {
+        "heart_mv": 33.401994390762,
+        "lungs_mv": 26.745400000927,
+        "skin_mv": 34.04506449059,
+        "mouth_mv": 31.163841391142
+      }
+    },
+    "disconnected": {
+      "spikes": {
+        "skin_spikes": 14,
+        "sensory_spikes": 0,
+        "motor_spikes": 0
+      },
+      "peak_depolarization_mv": {
+        "heart_mv": 0.0,
+        "lungs_mv": 0.0,
+        "skin_mv": 0.0,
+        "mouth_mv": 0.0
+      }
+    },
+    "higher_brain_leak": {
+      "spikes": {
+        "skin_spikes": 14,
+        "sensory_spikes": 0,
+        "motor_spikes": 0
+      },
+      "peak_depolarization_mv": {
+        "heart_mv": 0.0,
+        "lungs_mv": 0.0,
+        "skin_mv": 0.0,
+        "mouth_mv": 0.0
+      }
+    },
+    "refined": {
+      "spikes": {
+        "skin_spikes": 14,
+        "sensory_spikes": 21,
+        "motor_spikes": 25
+      },
+      "peak_depolarization_mv": {
+        "heart_mv": 33.521014508234,
+        "lungs_mv": 26.877918210928,
+        "skin_mv": 34.124180786406,
+        "mouth_mv": 31.254172109224
+      }
+    }
+  },
+  "refinement": {
+    "heart_mv_max_difference": 0.2478958632090027,
+    "lungs_mv_max_difference": 0.4783408684710011,
+    "skin_mv_max_difference": 0.33575687452700365,
+    "mouth_mv_max_difference": 0.3602331976379958,
+    "skin_sensor_first_spike_ms": {
+      "baseline": 22.411620568169,
+      "refined": 22.411620568169,
+      "absolute_difference": 0.0
+    },
+    "sensory_brain_first_spike_ms": {
+      "baseline": 24.470030327566,
+      "refined": 24.439953682709,
+      "absolute_difference": 0.0300766448570009
+    },
+    "motor_brain_first_spike_ms": {
+      "baseline": 27.520030327566,
+      "refined": 27.459953682709,
+      "absolute_difference": 0.06007664485700204
+    }
+  },
+  "scope": "Organ-labelled voltage compartments, not organ mechanics, gas exchange, a clinical brain or a human anatomical connectome. Microscopic IMPase rates do not set membrane properties."
+}

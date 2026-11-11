@@ -1,5 +1,10 @@
 # Virtual Cell
 
+Latest daily milestone: [a value-owned bioelectric Brain and Body](experiments/bioelectric/README.md)
+adds membrane physics, reduced spikes, delayed synapses and organ-labelled
+electrical compartments to the existing HomoSapiens hierarchy.
+[Gradual C++ lesson](experiments/bioelectric/TUTORIAL.md).
+
 Latest reaction-cycle milestone: [from stages to timing](experiments/enzyme-cycle/README.md)
 adds exact-event sampling, a population master equation and an analytical
 turnover check. Its candidate microscopic mechanism remains distinct from
