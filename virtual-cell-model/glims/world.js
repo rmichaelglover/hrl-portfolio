@@ -150,7 +150,7 @@ function chooseNext(){
  const best=Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];act(best,true);
 }
 function tick(dt){
- if(state.paused)return;
+ if(state.paused||state.location==='yard')return;
  dt=Math.min(dt,.12);state.time+=dt;state.hunger=clamp(state.hunger+dt*.0015);
  state.energy=clamp(state.energy-dt*.0015);state.stepPhase+=dt*8;tickResidents(dt);tickArt(dt);
  const turn=(held.has('d')?1:0)-(held.has('a')?1:0),drive=(held.has('w')?1:0)-(held.has('s')?1:0);
@@ -294,7 +294,7 @@ function drawVision(){
  const vignette=vctx.createRadialGradient(w/2,h/2,h*.2,w/2,h/2,w*.65);vignette.addColorStop(0,'#10292b00');vignette.addColorStop(1,'#10292b99');vctx.fillStyle=vignette;vctx.fillRect(0,0,w,h);
  const blinkPhase=state.time%9;if(blinkPhase>8.8 && !prefersReduced){vctx.fillStyle=`rgba(12,26,28,${Math.sin((blinkPhase-8.8)/.2*Math.PI)})`;vctx.fillRect(0,0,w,h);}
 }
-function draw(){if(!state)return;drawRoom();drawVision();}
+function draw(){if(!state||W<1||H<36)return;drawRoom();drawVision();}
 function updateUI(){
  updateGlimsUI();updateArtUI();
  $('clock').textContent=clock();$('activity-label').textContent=state.paused?'An evening, paused':state.phase==='walking'?(state.action?'On the way · '+activities[state.action].label.toLowerCase():'A different point of view'):state.action?activities[state.action].label:'Taking in the room';
@@ -345,6 +345,7 @@ function playTone(){if(!sound||!audio||state.paused||audio.currentTime<noteAt)re
 }
 function frame(ms){const dt=lastFrame===undefined?0:Math.min(.1,(ms-lastFrame)/1000);lastFrame=ms;tick(dt*state.speed);draw();playTone();requestAnimationFrame(frame);}
 window.alexWorld=window.glimsWorld={getState:()=>JSON.parse(JSON.stringify(state)),step:seconds=>{for(let t=0;t<seconds;t+=.05)tick(Math.min(.05,seconds-t));updateUI();draw();},reset,act,walkTo,enqueueAction,saveEvening,loadEvening,learningInfo:()=>({loaded:learningData.length,step:state.labIndex,lastLoss:learningData.length?learningData[learningData.length-1].loss:null}),visibleNames:()=>visibleObjects().map(o=>o.id),free,routeTo,
+ outdoors:active=>{cancelAction();state.location=active?'yard':'home';updateUI();},outdoorTick:dt=>{if(state.paused)return;state.time+=dt;state.energy=clamp(state.energy-dt*.0005);},outdoorReward:kind=>{if(kind==='rest')state.energy=clamp(state.energy+.15);else if(kind==='read')state.booksRead++;else if(kind==='paint'){state.artSubject='river';addArtwork('Alex');state.wishes.creative=true;}else state.connection=clamp(state.connection+.08);state.happiness=clamp(state.happiness+.025);log('Glackyard: '+kind+' beside the tiny creek.');updateUI();},
  turn:yaw=>{state.yaw=wrap(yaw);refreshPerception();updateUI();draw();}};
 
 function syncResidents(){for(const [id,npc] of Object.entries(state.residents)){byId(id).x=npc.x;byId(id).z=npc.z;}}

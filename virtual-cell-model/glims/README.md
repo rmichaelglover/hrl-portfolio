@@ -86,3 +86,23 @@ and the muted TV setting join existing browser saves; older saves still load.
 The television displays an original procedural river scene without external video.
 Reading excerpts are original short fiction. Family quiet preferences still govern
 conversation invitations. Four wishes include a creative moment.
+
+## Tiny Creeks: glamping in the glackyard
+
+Go glamping opens a connected outdoor scene and freezes indoor activity. Alex,
+Mama, Papa, Cypher and Rosy walk to shared tea, painting, reading, tent-rest and
+footbridge destinations. Click the lawn for free walking. Grid pathfinding treats
+the creek as impassable except at the bridge. Return inside to resume the house.
+Shared pause and speed apply outdoors; a completed activity updates the existing
+Alex state and painting contributes to the same gallery. Evening lights toggle
+the outdoor palette and string lights. Save evening stores both home progress and
+validated outdoor positions under separate localStorage keys; old home saves work.
+
+The actual Tiny Creek World `world-core.js` supplies its deterministic,
+Georgia-inspired fictional neighbor roster. Links connect to the existing whole
+world and chess editions; this does not merge those games’ inventories or saves.
+`glackyard.js` provides original canvas landscape, household movement and routing.
+Browser checks cover bridge crossing, activity rewards, outdoor pause/save/load,
+and all five responsive widths, as well as existing indoor regression checks.
+
+Originating glackyard and Tiny Creeks integration concept: Michael Emanuel Glover.

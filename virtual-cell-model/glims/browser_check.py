@@ -105,7 +105,33 @@ try:
  assert js('glimsWorld.getState().journal.some(a=>a.text.includes("finish a page"))')
  js('glimsWorld.reset();glimsWorld.turn(Math.atan2(3.65-3.2,.85-4.9))')
  assert js('glimsWorld.visibleNames().includes("mama")'),'Mama missing from the visual field'
- js('glimsWorld.reset();document.querySelector("#paint-together").click();glimsWorld.step(40);document.querySelector("#tv-toggle").click()')
+ js('glimsWorld.reset();glimsYard.enter()')
+ assert js('glimsYard.getState().active')
+ assert js('document.querySelector(".world-shell").hidden')
+ assert not js('glimsYard.walkable(7.45+Math.sin(1.25)*.38,1)')
+ assert js('glimsYard.walkable(7.1,3.7)')
+ assert js('glimsYard.go("bridge")')
+ js('glimsYard.step(30)')
+ assert js('glimsYard.getState().people[0].x')>8.5,'Bridge crossing failed'
+ assert js('glimsYard.getState().completed')
+ js('glimsYard.go("paint");glimsYard.step(40)')
+ assert js('glimsWorld.getState().wishes.creative')
+ js('glimsYard.go("read");glimsYard.step(35)')
+ assert js('glimsWorld.getState().booksRead')>=1
+ js('if(!glimsYard.getState().night)document.querySelector("#yard-night").click();document.querySelector("#yard-save").click()')
+ assert js('glimsYard.getState().night')
+ js('glimsYard.leave();glimsYard.load();glimsYard.enter()')
+ assert js('glimsYard.getState().night')
+ js('document.querySelector("#yard-pause").click()')
+ before=js('glimsYard.getState().time');js('glimsYard.step(5)');assert js('glimsYard.getState().time')==before
+ js('document.querySelector("#yard-pause").click()')
+ for width in [320,390,720,1000,1440]:
+  call('Emulation.setDeviceMetricsOverride',{'width':width,'height':1100,'deviceScaleFactor':1,'mobile':width<721});time.sleep(.2)
+  assert js('document.documentElement.scrollWidth<=innerWidth'),f'Yard overflow at {width}'
+  if width in [390,1440]:
+   js('document.querySelector("#glackyard").scrollIntoView()');time.sleep(.1)
+   data=call('Page.captureScreenshot',{'format':'png'})['data'];Path(f'/tmp/glims-glackyard-{width}.png').write_bytes(base64.b64decode(data))
+ js('glimsYard.leave();glimsWorld.reset();document.querySelector("#paint-together").click();glimsWorld.step(40);document.querySelector("#tv-toggle").click()')
  for width in [320,390,720,1000,1440]:
   call('Emulation.setDeviceMetricsOverride',{'width':width,'height':1100,'deviceScaleFactor':1,'mobile':width<721});time.sleep(.2)
   assert js('document.documentElement.scrollWidth<=innerWidth'),f'Overflow at {width}'
@@ -115,7 +141,7 @@ try:
  js('glimsWorld.act("work");glimsWorld.step(30);document.querySelector(".learning-workbench").scrollIntoView()')
  data=call('Page.captureScreenshot',{'format':'png'})['data'];Path('/tmp/glims-workbench-1440.png').write_bytes(base64.b64decode(data))
  assert not errors,errors
- print('PASS: Glims households, queue, wishes, naps, NPC autonomy and replies, C++ trace replay, local save/load, speed, initialization, pause, visual field, route/collision, eating, independent practice, family replies, music permission, mantra, keyboard motion, autonomy, reset, five viewport widths and no runtime exceptions.')
+ print('PASS: Glackyard bridge routing, glamping, shared art/reading progress, night, pause/save/load, outdoor responsive layouts; Glims households, queue, wishes, naps, NPC autonomy and replies, C++ trace replay, local save/load, speed, initialization, pause, visual field, route/collision, eating, independent practice, family replies, music permission, mantra, keyboard motion, autonomy, reset, five viewport widths and no runtime exceptions.')
  ws.close()
 finally:
  chrome.terminate();chrome.wait(timeout=10)
