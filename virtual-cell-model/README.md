@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest C++ learning milestone: [backpropagation through categorical relaxation](experiments/learning/README.md)
+adds manual reverse mode, projected Adam, independent gradient checks, and a
+recording-disjoint measured-EOG training/evaluation pipeline with local outputs.
+
 Latest molecular-control experiment: [receptors, memory, and prediction](experiments/receptor/README.md)
 compares three controllers on paired synthetic environments, with held-out seeds,
 causal forecasts, exact open-compartment updates, and an explicit transport ATP ledger.

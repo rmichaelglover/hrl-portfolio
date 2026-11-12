@@ -151,3 +151,13 @@ stochastic receptor readout, observer memory, future concentration prediction,
 delayed uptake, internal feedback, and transport ATP consumption. Synthetic
 held-out comparisons retain both improvements and failures; they do not establish
 whole-system energetic efficiency or a molecular implementation of cognition.
+
+
+## Trainable relaxation milestone
+
+[Learning through the field](experiments/learning/README.md) implements the
+existing categorical CompatibilityField update with trainable unary and shared
+compatibility parameters. C++ reverse mode includes initialization and repeated
+unary injection, agrees with finite differences and independent PyTorch autograd,
+and retains an explicit contraction bound under projected training. Measured
+sleep-data evaluation is recording-disjoint and remains in local study outputs.
