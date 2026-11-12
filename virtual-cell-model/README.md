@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest molecular-control experiment: [receptors, memory, and prediction](experiments/receptor/README.md)
+compares three controllers on paired synthetic environments, with held-out seeds,
+causal forecasts, exact open-compartment updates, and an explicit transport ATP ledger.
+
 Latest observation milestone: [ROS 2 passive tracking and real sleep replay](experiments/observation/README.md)
 adds an optional C++ Humble node, synthetic optical/lidar streams, calibrated
 local EDF EOG extraction, and separate-session REM epoch transport.

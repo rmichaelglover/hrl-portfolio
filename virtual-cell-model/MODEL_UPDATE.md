@@ -142,3 +142,12 @@ a separately owned external tracker, an optional ROS 2 Humble C++ node, real
 local PSG EOG feature extraction, and timestamped reference sleep-stage epochs.
 Tracking and sleep remain separate sessions. ReflectivePractice belongs to
 PersonModel and records contextual attention revisions and named mantra rewards.
+
+
+## Receptor prediction experiment
+
+[The first molecular-control benchmark](experiments/receptor/README.md) separates
+stochastic receptor readout, observer memory, future concentration prediction,
+delayed uptake, internal feedback, and transport ATP consumption. Synthetic
+held-out comparisons retain both improvements and failures; they do not establish
+whole-system energetic efficiency or a molecular implementation of cognition.
