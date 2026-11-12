@@ -30,7 +30,7 @@ const activities = {
  rest:{label:'Letting the evening breathe',target:null,duration:7,thought:'Nothing needs to be solved for a moment.'},
  sing:{label:'Guitar and voice together',target:'guitar',duration:8,thought:'A little voice, a little courage, and room for everyone else.'}
 };
-let state, lastFrame, uiAccumulator=0, sound=false, audio=null, noteAt=0, projection;
+let journalSignature='', state, lastFrame, uiAccumulator=0, sound=false, audio=null, noteAt=0, projection;
 const held = new Set(), prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function initialState(){return {x:3.2,z:4.9,yaw:-2.65,time:0,paused:false,autonomy:false,
  hunger:.15,happiness:.58,connection:.4,concentration:.65,relaxation:.4,progress:.16,
@@ -248,7 +248,7 @@ function drawVision(){
 function draw(){if(!state)return;drawRoom();drawVision();}
 function updateUI(){
  $('clock').textContent=clock();$('activity-label').textContent=state.paused?'An evening, paused':state.phase==='walking'?(state.action?'On the way · '+activities[state.action].label.toLowerCase():'A different point of view'):state.action?activities[state.action].label:'Taking in the room';
- $('thought').textContent=state.thought;$('mode-label').textContent=state.autonomy?'FOLLOWING HIS OWN CURIOSITY':'ALEX, HERE & NOW';
+ if($('thought').textContent!==state.thought)$('thought').textContent=state.thought;$('mode-label').textContent=state.autonomy?'FOLLOWING HIS OWN CURIOSITY':'ALEX, HERE & NOW';
  const visible=visibleObjects();$('visible').textContent=visible.length?visible.map(o=>o.name).join(' · '):'A quieter corner of the room.';
  $('eyes-label').textContent=state.phase==='walking'||state.phase==='steering'?'a moving point of view':'looking, remembering';
  $('location').textContent=state.z<2?'HOME / KITCHEN & DESK':'HOME / LIVING ROOM';
@@ -258,7 +258,7 @@ function updateUI(){
  for(const name of ['hunger','happiness','connection','concentration','relaxation','progress']){const n=Math.round(state[name]*100);$(`meter-${name}`).style.width=`${n}%`;$(`value-${name}`).textContent=`${n}%`;}
  $('guitar-skill').textContent=`${Math.round(state.guitar*100)}%`;$('voice-skill').textContent=`${Math.round(state.voice*100)}%`;$('lyric-skill').textContent=`${Math.round(state.lyrics*100)}%`;
  document.querySelectorAll('[data-action]').forEach(b=>{const on=b.dataset.action===state.action;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
- $('journal').replaceChildren(...state.journal.map(item=>{const li=document.createElement('li'),t=document.createElement('time'),text=document.createElement('span');t.textContent=item.time;text.textContent=item.text;li.append(t,text);return li;}));
+ const signature=JSON.stringify(state.journal);if(signature!==journalSignature){journalSignature=signature;$('journal').replaceChildren(...state.journal.map(item=>{const li=document.createElement('li'),t=document.createElement('time'),text=document.createElement('span');t.textContent=item.time;text.textContent=item.text;li.append(t,text);return li;}));}
  $('household').value=state.household;
  $('mantra-count').textContent=state.mantras?`Said ${state.mantras} ${state.mantras===1?'time':'times'} · named happiness reward +${state.mantras}`:'Attributed to Henri Matisse · Alex’s remembered wording';
 }
