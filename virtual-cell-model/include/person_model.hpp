@@ -5,6 +5,7 @@
 #include "biochemistry.hpp"
 #include "observer.hpp"
 #include "inference_evidence.hpp"
+#include "reflective_practice.hpp"
 
 namespace virtual_cell::mind {
 
@@ -38,6 +39,7 @@ class PersonModel {
     std::vector<Experience> experiences_;
     std::optional<bio::LithiumPhysiology> physiology_;
     BoundaryObserver boundary_observer_;
+    ReflectivePractice reflection_;
     AttendedSelfModel attended_self_;
     std::vector<Percept> percepts_;
 public:
@@ -46,6 +48,8 @@ public:
         : human_(std::move(name)), governor_(weights), action_energy_(nonnegative(action_energy)) {
         context_ = brain_.memory().create<Root>("Person's modeled context");
     }
+    ReflectivePractice& reflection() {return reflection_;}
+    const ReflectivePractice& reflection() const {return reflection_;}
     HomoSapiens& human() { return human_; }
     const HomoSapiens& human() const { return human_; }
     Brain& brain() { return brain_; }

@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest observation milestone: [ROS 2 passive tracking and real sleep replay](experiments/observation/README.md)
+adds an optional C++ Humble node, synthetic optical/lidar streams, calibrated
+local EDF EOG extraction, and separate-session REM epoch transport.
+
 Latest situated milestone: [Alex at home](experiments/household/README.md)
 adds subjective mapping, motion frames, independent family preferences, food
 appeal, and attention-dependent music-practice state. Run `./build/household_demo`.

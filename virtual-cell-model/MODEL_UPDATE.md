@@ -133,3 +133,12 @@ optical-frame motion, remembered food, independent parental preferences,
 cooperative permissions, and separate music-practice states. Household choices
 combine the existing goal proxies with explicit joy, peace, stimulation and
 autonomy weights. All new classes own state by value.
+
+
+## ROS 2 observation and sleep milestone
+
+[Passive tracking and real sleep replay](experiments/observation/README.md) adds
+a separately owned external tracker, an optional ROS 2 Humble C++ node, real
+local PSG EOG feature extraction, and timestamped reference sleep-stage epochs.
+Tracking and sleep remain separate sessions. ReflectivePractice belongs to
+PersonModel and records contextual attention revisions and named mantra rewards.
