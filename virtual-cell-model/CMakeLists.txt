@@ -54,3 +54,7 @@ target_link_libraries(vision_demo PRIVATE virtual_cell)
 add_executable(vision_tests tests/vision_tests.cpp)
 target_link_libraries(vision_tests PRIVATE virtual_cell)
 add_test(NAME eyes_observer_checks COMMAND vision_tests)
+
+add_executable(inference_tests tests/inference_tests.cpp)
+target_link_libraries(inference_tests PRIVATE virtual_cell)
+add_test(NAME inference_evidence_checks COMMAND inference_tests)

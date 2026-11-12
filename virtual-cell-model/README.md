@@ -1,5 +1,10 @@
 # Virtual Cell
 
+Latest statistical milestone: [actual HRL/GRRLE evidence integration](experiments/relaxation/README.md)
+compares Bayesian, fuzzy and recursive interpretations with independent scene
+splits, missing-channel handling, and adverse compatibility controls.
+[Small C++ lesson](experiments/relaxation/TUTORIAL.md).
+
 Latest sensory milestone: [Alex’s pair of Eyes](experiments/eyes/README.md)
 connects photon arrivals to a reduced retinal pathway, uncertain source attribution,
 and an explicit attended-integration policy. [Gradual lesson](experiments/eyes/TUTORIAL.md).

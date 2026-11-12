@@ -4,6 +4,7 @@
 #include "compatibility.hpp"
 #include "biochemistry.hpp"
 #include "observer.hpp"
+#include "inference_evidence.hpp"
 
 namespace virtual_cell::mind {
 
@@ -55,6 +56,10 @@ public:
     const std::vector<Experience>& experiences() const { return experiences_; }
     Will& will() { return human_.will(); }
     const Will& will() const { return human_.will(); }
+    BoundaryEvidence boundary_evidence(BoundaryObservation observation,
+                                       std::string provenance) const {
+        return EvidenceEncoder(boundary_observer_).encode(observation,std::move(provenance));
+    }
     void configure_boundary_observer(BoundaryObserver observer) { boundary_observer_=std::move(observer); }
     const AttendedSelfModel& attended_self() const { return attended_self_; }
     const std::vector<Percept>& percepts() const { return percepts_; }

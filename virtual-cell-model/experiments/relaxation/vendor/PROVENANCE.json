@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/rmichaelglover/relaxation-labeling",
+  "working_tree_base_commit": "f627fbbfdfabf9d23b770df33490fe0a92c0e1af",
+  "note": "Exact working-tree engine snapshots; hashes identify bytes independently of commit. Minimal package wrappers exclude unrelated frontends.",
+  "sha256": {
+    "hrl_generic/engine.py": "59e9654448d14116beb1b135d45acbf6eaff1d559449bb9619445d5172e72dd0",
+    "grrle/engine.py": "20f0c0ae55c14f4c6dbc4e84e9000edf26667041f82c122692e2d51857278693"
+  }
+}

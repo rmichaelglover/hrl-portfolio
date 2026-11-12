@@ -115,3 +115,12 @@ predicted/observed discrepancies, failure surprisal, and rejected invalid inputs
 Next step: use a small recorded chess forecasting task to compare the same model
 with and without relational support. Keep outcomes and evaluation separate from
 the labels and parameters used to construct that support.
+
+
+## Evidence integration milestone
+
+[The systems-of-systems integration](experiments/relaxation/README.md) connects
+PersonModel evidence and paired-Eye traces to exact HRL/GRRLE engine snapshots,
+with separate Bayesian probabilities, fuzzy memberships, and recursive strengths.
+Independent synthetic scene groups expose both success and shift failures;
+the empirical IMPase calibration retains its own measurement provenance.

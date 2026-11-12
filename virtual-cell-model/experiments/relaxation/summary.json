@@ -1,0 +1,226 @@
+{
+  "originator": "Michael Emanuel Glover",
+  "implementation": "Assistant implementation and numerical experiments",
+  "data": "Synthetic independent scenes; existing mechanistic Eye traces separately unlabelled",
+  "split": {
+    "train_seed": 1101,
+    "validation_seed": 2202,
+    "test_seed": 3303,
+    "shift_seed": 4404,
+    "scenes_each": 180
+  },
+  "fitted_rates": [
+    [
+      2.046511627906977,
+      2.244186046511628,
+      8.104651162790697
+    ],
+    [
+      12.260416666666666,
+      12.041666666666666,
+      2.0520833333333335
+    ]
+  ],
+  "validation": {
+    "hrl": [
+      {
+        "gain": 0.0,
+        "nonconverged": 0,
+        "accuracy": 0.4777777777777778,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      {
+        "gain": 0.25,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      {
+        "gain": 0.5,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "selective_accuracy": 1.0
+      },
+      {
+        "gain": 1.0,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "selective_accuracy": 1.0
+      }
+    ],
+    "grrle": [
+      {
+        "gain": 0.0,
+        "nonconverged": 0,
+        "accuracy": 0.4777777777777778,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      {
+        "gain": 0.25,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      {
+        "gain": 0.5,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 0.7833333333333333,
+        "selective_accuracy": 1.0
+      },
+      {
+        "gain": 1.0,
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 0.9888888888888889,
+        "selective_accuracy": 1.0
+      }
+    ]
+  },
+  "selected_gains": {
+    "hrl": 0.25,
+    "grrle": 0.25
+  },
+  "tests": {
+    "matched": {
+      "bayes": {
+        "nonconverged": 0,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "selective_accuracy": 1.0,
+        "brier": 7.040166997345604e-07,
+        "log_loss": 0.00011163110310079468
+      },
+      "fuzzy": {
+        "nonconverged": 0,
+        "accuracy": 0.95,
+        "coverage": 0.8611111111111112,
+        "selective_accuracy": 0.9935483870967742
+      },
+      "hrl_selected": {
+        "nonconverged": 0,
+        "accuracy": 0.9944444444444445,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "grrle_selected": {
+        "nonconverged": 0,
+        "accuracy": 0.9944444444444445,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "hrl_no_links": {
+        "nonconverged": 0,
+        "accuracy": 0.45,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "grrle_no_links": {
+        "nonconverged": 0,
+        "accuracy": 0.45,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "hrl_fixed_gain_1": {
+        "nonconverged": 0,
+        "accuracy": 0.9944444444444445,
+        "coverage": 1.0,
+        "selective_accuracy": 0.9944444444444445
+      },
+      "grrle_fixed_gain_1": {
+        "nonconverged": 0,
+        "accuracy": 0.9944444444444445,
+        "coverage": 0.9888888888888889,
+        "selective_accuracy": 1.0
+      },
+      "hrl_wrong_relations": {
+        "nonconverged": 0,
+        "accuracy": 0.005555555555555556,
+        "coverage": 1.0,
+        "selective_accuracy": 0.005555555555555556
+      },
+      "grrle_wrong_relations": {
+        "nonconverged": 0,
+        "accuracy": 0.005555555555555556,
+        "coverage": 0.9888888888888889,
+        "selective_accuracy": 0.0
+      }
+    },
+    "correlated_shift": {
+      "bayes": {
+        "nonconverged": 0,
+        "accuracy": 0.5777777777777777,
+        "coverage": 1.0,
+        "selective_accuracy": 0.5777777777777777,
+        "brier": 0.4105251380854139,
+        "log_loss": 6.089321064932695
+      },
+      "fuzzy": {
+        "nonconverged": 0,
+        "accuracy": 0.95,
+        "coverage": 0.6888888888888889,
+        "selective_accuracy": 0.9838709677419355
+      },
+      "hrl_selected": {
+        "nonconverged": 0,
+        "accuracy": 0.5555555555555556,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "grrle_selected": {
+        "nonconverged": 0,
+        "accuracy": 0.5555555555555556,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "hrl_no_links": {
+        "nonconverged": 0,
+        "accuracy": 0.46111111111111114,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "grrle_no_links": {
+        "nonconverged": 0,
+        "accuracy": 0.46111111111111114,
+        "coverage": 0.0,
+        "selective_accuracy": null
+      },
+      "hrl_fixed_gain_1": {
+        "nonconverged": 0,
+        "accuracy": 0.5555555555555556,
+        "coverage": 1.0,
+        "selective_accuracy": 0.5555555555555556
+      },
+      "grrle_fixed_gain_1": {
+        "nonconverged": 0,
+        "accuracy": 0.5555555555555556,
+        "coverage": 0.6833333333333333,
+        "selective_accuracy": 0.7967479674796748
+      },
+      "hrl_wrong_relations": {
+        "nonconverged": 0,
+        "accuracy": 0.4444444444444444,
+        "coverage": 1.0,
+        "selective_accuracy": 0.4444444444444444
+      },
+      "grrle_wrong_relations": {
+        "nonconverged": 0,
+        "accuracy": 0.4444444444444444,
+        "coverage": 0.6833333333333333,
+        "selective_accuracy": 0.2032520325203252
+      }
+    }
+  },
+  "mechanistic_windows": 75,
+  "empirical_anchor": {
+    "path": "../impase/data/digitized.csv",
+    "sha256": "724edecd94d237515cb07c41b4b6a37040dabd8735ecf6e3a7cf84f2aa9573ee",
+    "role": "Independent measured biochemical calibration retained; not used as sensory ground truth."
+  }
+}
