@@ -106,3 +106,15 @@ Browser checks cover bridge crossing, activity rewards, outdoor pause/save/load,
 and all five responsive widths, as well as existing indoor regression checks.
 
 Originating glackyard and Tiny Creeks integration concept: Michael Emanuel Glover.
+
+## Glackyard wildlife
+
+Eight original vector neighbors appear in the landscape: owls, chipmunks,
+squirrels, birds, fishies, froggies, lizards and skinks. Fish animate within the
+creek above the bridge; frogs hop along the bank. The owl wakes at night while
+daytime critters settle down. Pause freezes their animation. Select a neighbor
+from the keyboard-accessible notebook or tap its canvas illustration to highlight
+it and read a short description. These are fictional garden characters, separate
+from the shared Tiny Creek World regional roster. No wildlife save migration is
+needed. Original direction and characters: Michael Emanuel Glover; assistant:
+vector drawing and implementation.

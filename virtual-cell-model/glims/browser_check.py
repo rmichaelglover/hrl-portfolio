@@ -107,6 +107,13 @@ try:
  assert js('glimsWorld.visibleNames().includes("mama")'),'Mama missing from the visual field'
  js('glimsWorld.reset();glimsYard.enter()')
  assert js('glimsYard.getState().active')
+ assert js('glimsYard.wildlife().length')==8
+ assert js('document.querySelectorAll("[data-wildlife]").length')==8
+ js('document.querySelector("[data-wildlife=skink]").click()')
+ assert js('document.querySelector("#wildlife-note").textContent.includes("blue tail")')
+ fish=js('glimsYard.wildlife().find(a=>a.id==="fish")')
+ assert abs(fish['x']-(7.45+__import__('math').sin(fish['y']*1.25)*.38))<.62
+
  assert js('document.querySelector(".world-shell").hidden')
  assert not js('glimsYard.walkable(7.45+Math.sin(1.25)*.38,1)')
  assert js('glimsYard.walkable(7.1,3.7)')
