@@ -124,3 +124,12 @@ PersonModel evidence and paired-Eye traces to exact HRL/GRRLE engine snapshots,
 with separate Bayesian probabilities, fuzzy memberships, and recursive strengths.
 Independent synthetic scene groups expose both success and shift failures;
 the empirical IMPase calibration retains its own measurement provenance.
+
+
+## Situated household milestone
+
+[Alex at home](experiments/household/README.md) adds subjective map estimates,
+optical-frame motion, remembered food, independent parental preferences,
+cooperative permissions, and separate music-practice states. Household choices
+combine the existing goal proxies with explicit joy, peace, stimulation and
+autonomy weights. All new classes own state by value.

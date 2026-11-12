@@ -1,0 +1,19 @@
+Retinal event count: 135
+Mama currently seen: 0
+Remembered fridge route steps: 3
+Activity,permitted,score,joy,peace,stimulation,autonomy
+Listen with headphones,1,0.565,0.8,0.9,0.5,0.5
+Quiet lyric recall,1,0.67,0.6,0.9,0.6,0.6
+Guitar and voice practice,0,0.6825,0.9,0.4,0.9,0.7
+Eat Singaporean noodle leftovers,1,0.394,0.82,0.7,0.3,0.4
+Ask Papa about a conversation,0,0.555,0.5,0.7,0.4,0.5
+Talk with Papa,1,0.7675,0.8,0.8,0.6,0.5
+Contact Mama to ask availability,1,0.515,0.5,0.8,0.3,0.5
+Focused paid-work preparation,1,0.8025,0.3,0.6,0.7,0.9
+Rest quietly,1,0.4725,0.5,1,0.1,0.5
+Current illustrative choice: Focused paid-work preparation
+Relationship-prioritizing choice: Talk with Papa
+Independent ten-minute lyric-practice probe follows.
+Lyric recall after ten quiet practice minutes: 0.384525
+Papa: meal=0, roll=1, drink=1
+Mama preferences exist independently; Alex has not read them.

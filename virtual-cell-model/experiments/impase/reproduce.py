@@ -14,7 +14,7 @@ def run(*command):
 
 def package():
     files = [ROOT/name for name in ['CMakeLists.txt', 'README.md', 'MODEL_UPDATE.md', 'LITHIUM_RESEARCH.md']]
-    for folder in ['include', 'src', 'tests', 'experiments/lithium', 'experiments/impase', 'experiments/enzyme-cycle', 'experiments/bioelectric', 'experiments/eyes', 'experiments/relaxation']:
+    for folder in ['include', 'src', 'tests', 'experiments/lithium', 'experiments/impase', 'experiments/enzyme-cycle', 'experiments/bioelectric', 'experiments/eyes', 'experiments/relaxation', 'experiments/household']:
         files.extend(p for p in (ROOT/folder).rglob('*') if p.is_file()
                      and '__pycache__' not in p.parts and p.suffix != '.zip'
                      and p.name != 'MANIFEST.sha256')

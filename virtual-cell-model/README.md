@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest situated milestone: [Alex at home](experiments/household/README.md)
+adds subjective mapping, motion frames, independent family preferences, food
+appeal, and attention-dependent music-practice state. Run `./build/household_demo`.
+
 Latest statistical milestone: [actual HRL/GRRLE evidence integration](experiments/relaxation/README.md)
 compares Bayesian, fuzzy and recursive interpretations with independent scene
 splits, missing-channel handling, and adverse compatibility controls.
