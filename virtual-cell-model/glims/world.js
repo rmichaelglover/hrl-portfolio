@@ -23,11 +23,15 @@ objects.push(
  {id:'rosy',name:'Rosy',x:7.2,z:5.0,w:.45,d:.35,h:1.1,color:'#c68f80',solid:false},
  {id:'cushion',name:'A quiet place to rest',x:2.5,z:3.55,w:.65,d:.65,h:.12,color:'#a5aa7b',solid:false}
 );
+objects.push({id:'mama',name:'Mama',x:3.65,z:.85,w:.4,d:.3,h:1.25,color:'#ba93a5',solid:false},{id:'easel',name:'The family easel',x:2.8,z:2,w:.5,d:.4,h:1.3,color:'#b58b60',solid:true},{id:'tv',name:'A quiet nature film',x:6.05,z:.15,w:1.2,d:.1,h:1.7,color:'#507a69',solid:false});
 const byId = id => objects.find(o => o.id === id);
-const WISHES={music:'Make room for a little music',company:'Share a welcome moment',learning:'Make something that learns'};
+const WISHES={creative:'Make something beautiful together',music:'Make room for a little music',company:'Share a welcome moment',learning:'Make something that learns'};
 let learningData=[],learningError=false;
 const SAVE_KEY='glover-machine-works-glims-evening-v1';
 const activities = {
+ paint:{label:'Painting a little world',target:'easel',duration:8,thought:'A few colors can say something words cannot.'},
+ read:{label:'Reading a good page',target:'cushion',duration:8,thought:'There is another world inside this little book.'},
+ tv:{label:'Watching the river',target:'sofa',duration:8,thought:'A quiet river on the television. No hurry at all.'},
  cypher:{label:'A little company for Cypher',target:'cypher',duration:6,thought:'CYPHER: You don’t have to be interesting. I’m happy to listen.'},
  rosy:{label:'Making plans with Rosy',target:'rosy',duration:6,thought:'ROSY: Let’s make something useful, then put the kettle on.'},
  nap:{label:'A little nap',target:'cushion',duration:12,thought:'The room can keep being a room while I rest.'},
@@ -36,7 +40,7 @@ const activities = {
  lyrics:{label:'Remembering the words',target:'guitar',duration:7,thought:'One phrase at a time. A little more of the song stays with me.'},
  eat:{label:'Enjoying the leftovers',target:'fridge',duration:6,thought:'Those Singaporean noodles were good. A little would be lovely.'},
  papa:{label:'A conversation with Papa',target:'sofa',duration:7,thought:'Papa, would you like a little company?'},
- mama:{label:'Checking in with Mama',target:'desk',duration:5,thought:'I can’t see Mama. I can still ask if she has a moment.'},
+ mama:{label:'Checking in with Mama',target:'mama',duration:5,thought:'Mama, what are you reading?'},
  work:{label:'Building something',target:'desk',duration:9,thought:'A small piece, understood well. That counts as progress.'},
  rest:{label:'Letting the evening breathe',target:null,duration:7,thought:'Nothing needs to be solved for a moment.'},
  sing:{label:'Guitar and voice together',target:'guitar',duration:8,thought:'A little voice, a little courage, and room for everyone else.'}
@@ -49,7 +53,8 @@ function initialState(){return {x:3.2,z:4.9,yaw:-2.65,time:0,paused:false,autono
  target:null,path:[],action:null,phase:'idle',actionTime:0,nextChoice:3,
  thought:'There might be a little melody in this evening.',journal:[],memory:{},
  recent:[],fridgeOpen:false,blink:0,stepPhase:0,mouseTarget:null,
- speed:1,energy:.78,queue:[],wishes:{music:false,company:false,learning:false},labIndex:0,labRunning:false,
+ artMode:'mixed',artSubject:'flowers',artPalette:'garden',artworks:[],sketch:[],booksRead:0,artistry:0,tvOn:false,artClock:0,
+ speed:1,energy:.78,queue:[],wishes:{creative:false,music:false,company:false,learning:false},labIndex:0,labRunning:false,
  residents:{cypher:{x:4.8,z:4.8,happiness:.65,occupied:false,path:[],wait:2,visit:0,invited:false},
  rosy:{x:7.2,z:5.,happiness:.62,occupied:false,path:[],wait:5,visit:0,invited:false}}};}
 function clock(){const m=18*60+42+Math.floor(state.time/3);return `${String(Math.floor(m/60)%24).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;}
@@ -72,7 +77,7 @@ function eyeOrigins(){return [-.032,.032].map(side=>({x:state.x+side*Math.cos(st
 function visibleObjects(){return objects.filter(o=>eyeOrigins().some(eye=>{
  const dx=o.x-eye.x,dz=o.z-eye.z,distance=Math.hypot(dx,dz);
  if(distance>7.5 || Math.abs(wrap(Math.atan2(dx,dz)-state.yaw))>FOV/2)return false;
- return !objects.some(block=>block.solid && block!==o &&
+ return !objects.some(block=>block.solid && block.h>=1 && block!==o &&
    !(o.id==='papa' && block.id==='sofa') && occludes(eye.x,eye.z,o.x,o.z,rectOf(block,-.05)));
  }));}
 function refreshPerception(){for(const o of visibleObjects())state.memory[o.id]={x:o.x,z:o.z,lastSeen:state.time};}
@@ -129,14 +134,15 @@ function beginAction(){
   think('“A little later, Alex? I’d like some quiet.” Of course, Papa.');log('Papa preferred quiet. Alex left the invitation open.');cancelAction();state.nextChoice=5;return;
  }
  if(id==='mama' && state.household==='quiet'){
-  think('Mama is occupied. A warm message can wait for her.');log('Left Mama a message; did not assume she was available.');state.connection=clamp(state.connection+.015);cancelAction();state.nextChoice=5;return;
+  think('“One more page, Alex, then let’s talk.” Mama smiles from her reading chair.');log('Mama wanted to finish a page. Alex gave her a little room.');state.connection=clamp(state.connection+.015);cancelAction();state.nextChoice=5;return;
  }
+ if(id==='tv'){state.tvOn=true;state.yaw=Math.atan2(byId('tv').x-state.x,byId('tv').z-state.z);}
  state.phase='doing';state.actionTime=0;state.fridgeOpen=id==='eat';think(activities[id].thought);if(id==='work'){state.labIndex=0;state.labRunning=true;}
  if(id==='papa')log('Papa welcomed a conversation.');
- if(id==='mama')log('Mama replied: a little company sounds nice.');
+ if(id==='mama')log('Mama put down her book and welcomed a little company.');
 }
 function chooseNext(){
- const scores={listen:.70+(1-state.happiness)*.3,guitar:.72+(1-state.guitar)*.2,lyrics:.55+(1-state.lyrics)*.35,
+ const scores={paint:.65+(1-state.artistry)*.2,read:.6,tv:.25,listen:.70+(1-state.happiness)*.3,guitar:.72+(1-state.guitar)*.2,lyrics:.55+(1-state.lyrics)*.35,
   eat:.20+state.hunger*.8,papa:state.household==='quiet'?.05:.5+(1-state.connection)*.55,
   mama:state.household==='quiet'?.12:.45+(1-state.connection)*.5,work:.35+(1-state.progress)*.5,
   rest:.3+(1-state.relaxation)*.65,nap:.10+(1-state.energy)*.95,cypher:.28+(1-state.connection)*.35,rosy:state.residents.rosy.occupied?.01:.25+(1-state.connection)*.35};
@@ -146,7 +152,7 @@ function chooseNext(){
 function tick(dt){
  if(state.paused)return;
  dt=Math.min(dt,.12);state.time+=dt;state.hunger=clamp(state.hunger+dt*.0015);
- state.energy=clamp(state.energy-dt*.0015);state.stepPhase+=dt*8;tickResidents(dt);
+ state.energy=clamp(state.energy-dt*.0015);state.stepPhase+=dt*8;tickResidents(dt);tickArt(dt);
  const turn=(held.has('d')?1:0)-(held.has('a')?1:0),drive=(held.has('w')?1:0)-(held.has('s')?1:0);
  if(turn||drive){cancelAction();state.queue=[];state.autonomy=false;state.yaw=wrap(state.yaw+turn*dt*1.8);
   const nx=state.x+Math.sin(state.yaw)*drive*dt*1.2,nz=state.z+Math.cos(state.yaw)*drive*dt*1.2;
@@ -167,6 +173,7 @@ function tick(dt){
   if(id==='guitar'||id==='sing')state.guitar+=(1-state.guitar)*dt*.018;
   if(id==='sing')state.voice+=(1-state.voice)*dt*.025;
   if(id==='lyrics')state.lyrics+=(1-state.lyrics)*dt*(.015+.045*state.concentration);
+  if(id==='paint')state.artistry=clamp(state.artistry+dt*.012);
   if(id==='eat')state.hunger=clamp(state.hunger-dt*.07);
   if(['papa','mama','cypher','rosy'].includes(id))state.connection=clamp(state.connection+dt*.025);
   if(state.residents[id])state.residents[id].happiness=clamp(state.residents[id].happiness+dt*.018);
@@ -176,6 +183,8 @@ function tick(dt){
   if(id==='work')state.progress=clamp(state.progress+dt*.018);
   if(state.actionTime>=activities[id].duration){
    const finished=id;
+   if(id==='paint'){addArtwork('Alex');state.wishes.creative=true;}
+   if(id==='read'){state.booksRead++;state.wishes.creative=true;}
    if(['listen','guitar','sing'].includes(id))state.wishes.music=true;
    if(['papa','mama','cypher','rosy'].includes(id))state.wishes.company=true;
    if(id==='work'&&learningData.length&&state.labIndex>=learningData.length)state.wishes.learning=true;
@@ -204,7 +213,7 @@ function box(x,z,w,d,h,color){const a=project(x-w/2,z-d/2),b=project(x+w/2,z-d/2
 }
 function ellipseAt(x,z,rx,ry,color){const p=project(x,z);ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(p.x,p.y,rx*projection.s,ry*projection.s,0,0,TAU);ctx.fill();}
 function line(a,b,color,width=1){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
-function person(x,z,isAlex=false){
+function person(x,z,isAlex=false,character='papa'){
  if(isAlex&&state.action==='nap'&&state.phase==='doing'){
   const p=project(x,z,.22),s=projection.s;ellipseAt(x,z,.35,.16,'#00000020');
   line({x:p.x-.24*s,y:p.y},{x:p.x+.23*s,y:p.y+.04*s},'#8cb8a6',.24*s);
@@ -216,17 +225,19 @@ function person(x,z,isAlex=false){
  ellipseAt(x,z,.27,.12,'#00000028');ctx.lineCap='round';
  line({x:p.x-4,y:p.y-3},{x:p.x-5+sway,y:p.y-.35*s},isAlex?'#303c49':'#8d7663',5);
  line({x:p.x+5,y:p.y-4},{x:p.x+5-sway,y:p.y-.35*s},isAlex?'#303c49':'#8d7663',5);
- line({x:p.x,y:p.y-.35*s},{x:p.x,y:p.y-.86*s},isAlex?'#8cb8a6':'#c4aa7f',.28*s);
- line({x:p.x-.1*s,y:p.y-.76*s},{x:p.x-.2*s+sway*.3,y:p.y-.44*s},isAlex?'#8cb8a6':'#c4aa7f',5);
- line({x:p.x+.1*s,y:p.y-.76*s},{x:p.x+.2*s-sway*.3,y:p.y-.44*s},isAlex?'#8cb8a6':'#c4aa7f',5);
+ line({x:p.x,y:p.y-.35*s},{x:p.x,y:p.y-.86*s},isAlex?'#8cb8a6':character==='mama'?'#ba93a5':'#c4aa7f',.28*s);
+ line({x:p.x-.1*s,y:p.y-.76*s},{x:p.x-.2*s+sway*.3,y:p.y-.44*s},isAlex?'#8cb8a6':character==='mama'?'#ba93a5':'#c4aa7f',5);
+ line({x:p.x+.1*s,y:p.y-.76*s},{x:p.x+.2*s-sway*.3,y:p.y-.44*s},isAlex?'#8cb8a6':character==='mama'?'#ba93a5':'#c4aa7f',5);
  ctx.fillStyle='#deb18b';ctx.beginPath();ctx.ellipse(head.x,head.y,.12*s,.15*s,0,0,TAU);ctx.fill();
- ctx.fillStyle=isAlex?'#48443b':'#b8b3a1';ctx.beginPath();ctx.ellipse(head.x-1,head.y-3,.13*s,.09*s,-.1,Math.PI,TAU);ctx.fill();
+ ctx.fillStyle=isAlex?'#48443b':character==='mama'?'#827b77':'#b8b3a1';ctx.beginPath();ctx.ellipse(head.x-1,head.y-3,.13*s,.09*s,-.1,Math.PI,TAU);ctx.fill();
  if(isAlex){const face=project(x+Math.sin(state.yaw)*.13,z+Math.cos(state.yaw)*.13,1.15);ctx.fillStyle='#efe6cd';ctx.beginPath();ctx.arc(face.x-2,face.y,1.3,0,TAU);ctx.arc(face.x+2,face.y,1.3,0,TAU);ctx.fill();}
 }
 function flower(x,z,height){const stem=project(x,z,height),top={x:stem.x,y:stem.y-.20*projection.s};line(stem,top,'#759274',2);for(let k=0;k<5;k++){ctx.fillStyle=k%2?'#dfaf72':'#d58d7d';ctx.beginPath();ctx.arc(top.x+Math.cos(k*TAU/5)*4,top.y+Math.sin(k*TAU/5)*4,3.2,0,TAU);ctx.fill();}ctx.fillStyle='#f6d49b';ctx.beginPath();ctx.arc(top.x,top.y,2.5,0,TAU);ctx.fill();}
 function drawObject(o){const s=projection.s;if(state.residents[o.id]){drawRobot(o);return;}
  if(o.id==='window'){const p=project(o.x,.02,1.8);ctx.fillStyle='#bdc3a0';ctx.fillRect(p.x-.72*s,p.y-.65*s,1.5*s,.9*s);ctx.fillStyle='#587b7d';ctx.fillRect(p.x-.66*s,p.y-.59*s,.65*s,.78*s);ctx.fillRect(p.x+.06*s,p.y-.59*s,.65*s,.78*s);ctx.fillStyle='#e5c998';ctx.beginPath();ctx.arc(p.x+.40*s,p.y-.35*s,.13*s,0,TAU);ctx.fill();return;}
- if(o.id==='papa'){person(o.x,o.z,false);return;}
+ if(o.id==='papa'||o.id==='mama'){if(o.id==='mama')box(o.x,o.z,.6,.5,.35,'#718f82');person(o.x,o.z,false,o.id);drawPastime(o.id,o.x,o.z);return;}
+ if(o.id==='easel'){const p=project(o.x,o.z,1.35);line(project(o.x-.22,o.z),p,'#b58b60',4);line(project(o.x+.22,o.z+.1),p,'#b58b60',4);ctx.save();ctx.translate(p.x-.28*s,p.y);GlimsArt.paint(ctx,.56*s,.64*s,state.artSubject,state.artPalette);ctx.restore();return;}
+ if(o.id==='tv'){const p=project(o.x,o.z,2.05);ctx.fillStyle='#172f32';ctx.fillRect(p.x-.65*s,p.y,1.3*s,.78*s);if(state.tvOn){ctx.save();ctx.translate(p.x-.6*s,p.y+.05*s);GlimsArt.paint(ctx,1.2*s,.68*s,'river','blue',state.time);ctx.restore();}return;}
  ellipseAt(o.x,o.z,o.w*.6,o.d*.3,'#00000018');
  if(o.id==='guitar'){const p=project(o.x,o.z,.45);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(.16);ctx.fillStyle=o.color;ctx.beginPath();ctx.ellipse(0,0,.18*s,.24*s,0,0,TAU);ctx.ellipse(0,-.21*s,.14*s,.17*s,0,0,TAU);ctx.fill();ctx.fillStyle='#674d32';ctx.fillRect(-.035*s,-.95*s,.07*s,.65*s);ctx.fillStyle='#795634';ctx.beginPath();ctx.arc(0,-.14*s,.055*s,0,TAU);ctx.fill();ctx.restore();return;}
  if(o.id==='plant'){box(o.x,o.z,.36,.36,.32,'#b28b6a');for(let i=0;i<8;i++){const p=project(o.x+Math.sin(i*2)*.2,o.z+Math.cos(i*2)*.2,.65+i*.065);ctx.fillStyle=i%2?'#769471':'#517763';ctx.beginPath();ctx.ellipse(p.x,p.y,.09*s,.25*s,(i-4)*.3,0,TAU);ctx.fill();}return;}
@@ -253,7 +264,7 @@ function drawRoom(){
  if($('show-field').checked){const pts=[project(state.x,state.z)];for(let i=0;i<=24;i++){const a=state.yaw-FOV/2+FOV*i/24;pts.push(project(clamp(state.x+Math.sin(a)*2.5,.1,7.9),clamp(state.z+Math.cos(a)*2.5,.1,5.9)));}polygon(pts,'#d6dbb51a','#dce3b32b');}
  if(state.path.length){let p=project(state.x,state.z);for(const q of state.path){const n=project(q.x,q.z);line(p,n,'#f2d7a16b',1.5);p=n;}ctx.fillStyle='#e5c590';ctx.beginPath();ctx.arc(p.x,p.y,4,0,TAU);ctx.fill();}
  const renderables=[...objects,{id:'alex',x:state.x,z:state.z}].sort((a,b)=>(a.x+a.z+(a.id==='papa'?.4:0))-(b.x+b.z+(b.id==='papa'?.4:0)));
- for(const o of renderables){if(o.id==='alex')person(state.x,state.z,true);else drawObject(o);}
+ for(const o of renderables){if(o.id==='alex'){person(state.x,state.z,true);drawPastime('alex',state.x,state.z);}else drawObject(o);}
  if($('show-tracker').checked){
   const origin=project(.35,5.6,.25),tracked=project(state.x,state.z,1.2);
   for(let k=-3;k<=3;k++){
@@ -265,7 +276,7 @@ function drawRoom(){
   ctx.fillStyle='#bdd1bc';ctx.font='8px system-ui';ctx.textAlign='left';ctx.fillText('PASSIVE TRACKING / SIMULATED',18,24);
  }
  const visible=new Set(visibleObjects().map(o=>o.id));
- for(const id of ['desk','guitar','fridge','papa','cypher','rosy']){const o=byId(id),p=project(o.x,o.z,o.h+.30);ctx.font=`${Math.max(9,Math.min(11,s*.26))}px system-ui`;ctx.textAlign='center';ctx.fillStyle=visible.has(id)?'#f5e7c5':'#c6d0bd90';ctx.fillText(id==='desk'?'COMPUTER':id.toUpperCase(),p.x,p.y);}
+ for(const id of ['desk','guitar','fridge','papa','mama','cypher','rosy','easel','tv']){const o=byId(id),p=project(o.x,o.z,o.h+.30);ctx.font=`${Math.max(9,Math.min(11,s*.26))}px system-ui`;ctx.textAlign='center';ctx.fillStyle=visible.has(id)?'#f5e7c5':'#c6d0bd90';ctx.fillText(id==='desk'?'COMPUTER':id.toUpperCase(),p.x,p.y);}
  const p=project(state.x,state.z,1.55);ctx.fillStyle='#e7d5ac';ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillText('ALEX',p.x,p.y);
 }
 function drawVision(){
@@ -274,7 +285,7 @@ function drawVision(){
  for(const o of visibleObjects().sort((a,b)=>Math.hypot(b.x-state.x,b.z-state.z)-Math.hypot(a.x-state.x,a.z-state.z))){const d=Math.max(.5,Math.hypot(o.x-state.x,o.z-state.z)),a=wrap(Math.atan2(o.x-state.x,o.z-state.z)-state.yaw);
   const x=w/2+Math.tan(a)/Math.tan(FOV/2)*w/2,size=Math.min(h*.9,h/d*.8),base=h*.62+size*.16;
   vctx.fillStyle=o.color;
-  if(o.id==='papa'){vctx.fillRect(x-size*.10,base-size*.6,size*.20,size*.6);vctx.fillStyle='#d5af87';vctx.beginPath();vctx.arc(x,base-size*.72,size*.13,0,TAU);vctx.fill();}
+  if(o.id==='papa'||o.id==='mama'){vctx.fillRect(x-size*.10,base-size*.6,size*.20,size*.6);vctx.fillStyle='#d5af87';vctx.beginPath();vctx.arc(x,base-size*.72,size*.13,0,TAU);vctx.fill();}
   else if(o.id==='guitar'){vctx.beginPath();vctx.ellipse(x,base-size*.22,size*.13,size*.22,0,0,TAU);vctx.fill();vctx.fillStyle='#67513b';vctx.fillRect(x-size*.025,base-size*.85,size*.05,size*.52);}
   else if(o.id==='window'){vctx.fillStyle='#c5c49b';vctx.fillRect(x-size*.45,base-size*.9,size*.9,size*.5);}
   else{vctx.fillRect(x-size*o.w*.35,base-size*o.h*.6,Math.max(5,size*o.w*.7),size*o.h*.6);if(o.id==='flowers'){vctx.fillStyle='#e7b58d';vctx.beginPath();vctx.arc(x,base-size*.8,5,0,TAU);vctx.fill();}}
@@ -285,13 +296,13 @@ function drawVision(){
 }
 function draw(){if(!state)return;drawRoom();drawVision();}
 function updateUI(){
- updateGlimsUI();
+ updateGlimsUI();updateArtUI();
  $('clock').textContent=clock();$('activity-label').textContent=state.paused?'An evening, paused':state.phase==='walking'?(state.action?'On the way · '+activities[state.action].label.toLowerCase():'A different point of view'):state.action?activities[state.action].label:'Taking in the room';
  if($('thought').textContent!==state.thought)$('thought').textContent=state.thought;$('mode-label').textContent=state.autonomy?'FOLLOWING HIS OWN CURIOSITY':'ALEX, HERE & NOW';
  const visible=visibleObjects();$('visible').textContent=visible.length?visible.map(o=>o.name).join(' · '):'A quieter corner of the room.';
  $('eyes-label').textContent=state.phase==='walking'||state.phase==='steering'?'a moving point of view':'looking, remembering';
  $('location').textContent=state.z<2?'HOME / KITCHEN & DESK':'HOME / LIVING ROOM';
- $('remembered').textContent=state.fridgeOpen?'The noodles are here. Mama still isn’t in view.':'Singaporean noodles, in the fridge. Mama isn’t in view.';
+ $('remembered').textContent=(state.fridgeOpen?'The noodles are here. ':'Singaporean noodles, in the fridge. ')+(visible.some(o=>o.id==='mama')?'Mama is here by the window.':'Mama’s reading chair is by the window.');
  $('pause').textContent=state.paused?'Resume':'Pause';$('pause').setAttribute('aria-pressed',String(state.paused));
  $('autonomy').setAttribute('aria-pressed',String(state.autonomy));$('autonomy').innerHTML=state.autonomy?'Alex is choosing <span>↗</span>':'Let Alex choose <span>↗</span>';
  for(const name of ['energy','hunger','happiness','connection','concentration','relaxation','progress']){const n=Math.round(state[name]*100);$(`meter-${name}`).style.width=`${n}%`;$(`value-${name}`).textContent=`${n}%`;}
@@ -338,7 +349,7 @@ window.alexWorld=window.glimsWorld={getState:()=>JSON.parse(JSON.stringify(state
 
 function syncResidents(){for(const [id,npc] of Object.entries(state.residents)){byId(id).x=npc.x;byId(id).z=npc.z;}}
 function canStand(x,z,who,clearance=.43){
- if(!free(x,z))return false;
+ if(!free(x,z)||Math.hypot(x-byId('mama').x,z-byId('mama').z)<clearance)return false;
  if(who!=='alex'&&Math.hypot(x-state.x,z-state.z)<clearance)return false;
  return !Object.entries(state.residents).some(([id,npc])=>id!==who&&Math.hypot(x-npc.x,z-npc.z)<clearance);
 }
@@ -368,6 +379,7 @@ function drawRobot(o){
  ctx.fillStyle='#e8d7ac';ctx.beginPath();ctx.arc(p.x-.065*s,p.y-.90*s,.025*s,0,TAU);ctx.arc(p.x+.065*s,p.y-.90*s,.025*s,0,TAU);ctx.fill();
  line({x:p.x-.19*s,y:p.y-.62*s},{x:p.x-.26*s,y:p.y-.35*s},o.color,.07*s);
  line({x:p.x+.19*s,y:p.y-.62*s},{x:p.x+.26*s,y:p.y-.35*s},o.color,.07*s);
+ drawPastime(o.id,o.x,o.z);
  if(rosy){line({x:p.x-.18*s,y:p.y-1.04*s},{x:p.x+.18*s,y:p.y-1.04*s},'#ad6258',.07*s);}
 }
 function enqueueAction(id){
@@ -389,7 +401,7 @@ function updateGlimsUI(){
   else state.queue.forEach((id,index)=>{const b=document.createElement('button');b.textContent=activities[id].label+' ×';b.setAttribute('aria-label','Remove queued '+activities[id].label);b.addEventListener('click',()=>{state.queue.splice(index,1);updateUI();});$('action-queue').append(b);});
  }
  const wish=JSON.stringify(state.wishes);
- if(wish!==wishesSignature){wishesSignature=wish;$('wish-count').textContent=Object.values(state.wishes).filter(Boolean).length+' / 3';$('wishes').replaceChildren(...Object.entries(WISHES).map(([id,text])=>{const li=document.createElement('li'),mark=document.createElement('span');li.className=state.wishes[id]?'complete':'';mark.className='wish-mark';mark.textContent=state.wishes[id]?'✓':'○';li.append(mark,document.createTextNode(text));return li;}));}
+ if(wish!==wishesSignature){wishesSignature=wish;$('wish-count').textContent=Object.values(state.wishes).filter(Boolean).length+' / '+Object.keys(WISHES).length;$('wishes').replaceChildren(...Object.entries(WISHES).map(([id,text])=>{const li=document.createElement('li'),mark=document.createElement('span');li.className=state.wishes[id]?'complete':'';mark.className='wish-mark';mark.textContent=state.wishes[id]?'✓':'○';li.append(mark,document.createTextNode(text));return li;}));}
  const index=Math.min(learningData.length,Math.floor(state.labIndex));
  $('learning-step').textContent='Step '+index+' / '+(learningData.length||100);
  $('learning-loss').textContent=learningData.length&&index>0?learningData[Math.max(0,index-1)].loss.toFixed(4):'—';
@@ -397,7 +409,7 @@ function updateGlimsUI(){
  if(learningData.length){const maximum=Math.max(...learningData.map(p=>p.loss)),path=points=>points.map((p,i)=>(i?'L':'M')+(8+(p.step-1)/(learningData.length-1)*364).toFixed(2)+','+(88-p.loss/maximum*72).toFixed(2)).join(' ');$('learning-background').setAttribute('d',path(learningData));$('learning-progress').setAttribute('d',index>0?path(learningData.slice(0,index)):'');}
 }
 function saveEvening(){
- const fields=['x','z','yaw','time','energy','hunger','happiness','connection','concentration','relaxation','progress','guitar','voice','lyrics','mantras','household','wishes','residents'];
+ const fields=['x','z','yaw','time','energy','hunger','happiness','connection','concentration','relaxation','progress','guitar','voice','lyrics','mantras','household','wishes','residents','artMode','artSubject','artPalette','artworks','sketch','booksRead','artistry','tvOn'];
  const snapshot={version:1};for(const key of fields)snapshot[key]=state[key];
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(snapshot));$('save-status').textContent='Evening saved in this browser.';return true;}
  catch(e){$('save-status').textContent='This browser could not save the evening.';return false;}
@@ -414,7 +426,7 @@ function loadEvening(){
   if(['quiet','social','music'].includes(saved.household))next.household=saved.household;
   for(const key of Object.keys(WISHES))next.wishes[key]=saved.wishes?.[key]===true;
   for(const id of ['cypher','rosy']){const npc=saved.residents?.[id];if(npc&&Number.isFinite(npc.x)&&Number.isFinite(npc.z)&&free(npc.x,npc.z)){next.residents[id].x=npc.x;next.residents[id].z=npc.z;if(Number.isFinite(npc.happiness))next.residents[id].happiness=clamp(npc.happiness);}}
-  state=next;held.clear();tickResidents(0);
+  GlimsArt.restore(next,saved);state=next;held.clear();tickResidents(0);
   const robotDistance=Math.hypot(state.residents.cypher.x-state.residents.rosy.x,state.residents.cypher.z-state.residents.rosy.z);
   if(robotDistance<.43){const defaults=initialState().residents;state.residents.cypher.x=defaults.cypher.x;state.residents.cypher.z=defaults.cypher.z;state.residents.rosy.x=defaults.rosy.x;state.residents.rosy.z=defaults.rosy.z;syncResidents();}
   if(!canStand(state.x,state.z,'alex')){state.x=3.2;state.z=4.9;if(!canStand(state.x,state.z,'alex')){state.residents=initialState().residents;syncResidents();}}
@@ -429,5 +441,22 @@ fetch('learning-trace.json').then(r=>{if(!r.ok)throw new Error('Trace');return r
  learningData=data.steps;updateUI();
 }).catch(()=>{learningError=true;updateUI();});
 
+
+function pastimeOf(id){
+ if(id==='alex')return state.phase==='doing'&&['paint','read'].includes(state.action)?state.action:null;
+ if(state.residents[id]?.occupied||state.residents[id]?.invited)return null;
+ if(state.artMode!=='mixed')return state.artMode;
+ return (Math.floor(state.time/14)+['papa','mama','cypher','rosy'].indexOf(id))%2?'read':'paint';
+}
+function drawPastime(id,x,z){const mode=pastimeOf(id);if(!mode)return;const p=project(x,z,.65),s=projection.s;
+ ctx.save();ctx.translate(p.x-.19*s,p.y-.05*s);
+ if(mode==='paint'){GlimsArt.paint(ctx,.38*s,.29*s,state.artSubject,state.artPalette);line({x:.34*s,y:.1*s},{x:.45*s,y:-.15*s+Math.sin(state.time*2)*2},'#d6a553',2);}
+ else {ctx.fillStyle='#f2e4c4';ctx.fillRect(0,0,.42*s,.25*s);line({x:.21*s,y:0},{x:.21*s,y:.25*s},'#9a8364',1);for(let i=1;i<4;i++){line({x:.04*s,y:i*.055*s},{x:.17*s,y:i*.055*s},'#a89579',1);line({x:.25*s,y:i*.055*s},{x:.38*s,y:i*.055*s},'#a89579',1);}}
+ ctx.restore();
+}
+function addArtwork(author){state.artworks=state.artworks.filter(a=>a.author!==author);state.artworks.push({author,subject:state.artSubject,palette:state.artPalette});}
+function tickArt(dt){state.artClock+=dt;if(state.artClock>=10){state.artClock=0;for(const id of ['papa','mama','cypher','rosy'])if(pastimeOf(id)==='paint')addArtwork(byId(id).name);}}
+function updateArtUI(){GlimsArt.update(state,pastimeOf);}
+GlimsArt.connect(()=>state,{act,addArtwork,updateUI,log});
 reset();new ResizeObserver(resize).observe(room.parentElement);new ResizeObserver(resize).observe(vision);resize();requestAnimationFrame(frame);
 })();

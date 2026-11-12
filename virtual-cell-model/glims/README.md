@@ -5,7 +5,7 @@ Canonical page: `virtual-cell-model/glims/`. The short `glims/` entry point and
 original `virtual-cell-model/alex/` URL both redirect here.
 
 Alex remains the playable person. Cypher and Rosy have their own small routines,
-availability and happiness state, alongside Papa and the offscreen Mama contact.
+availability and happiness state, alongside Papa and Mama, who is present by the window.
 All residents, needs and outcomes are simulated. This is not live ROS telemetry,
 retinal object recognition, a clinical model, or a declaration of machine experience.
 
@@ -22,7 +22,7 @@ retinal object recognition, a clinical model, or a declaration of machine experi
   scenario happiness reward without forcing an interaction.
 - A nap restores the energy proxy and closes the modeled visual display for a
   short scripted rest. It does not classify REM or reproduce real PSG physiology.
-- Three evening wishes recognize music, a welcome interaction, and a completed
+- Four evening wishes recognize music, a welcome interaction, making art or reading, and a completed
   replay of a learning example. They persist in explicit browser-local saves.
 - Pause stops simulation time for the whole household. 1×/2×/4× adjusts playback.
 - Save and Load use `glover-machine-works-glims-evening-v1` in localStorage.
@@ -73,3 +73,16 @@ The legacy `alexWorld` debug API is retained alongside `glimsWorld`.
 
 Originating framework, characters, naming and direction: Michael Emanuel Glover.
 Assistant: implementation, original illustrations, design and verification.
+
+## Art and reading set
+
+Painting hour and Reading hour invite the household to share a pastime. Papa,
+Mama, Cypher and Rosy visibly carry sketchpads or books; Rosy keeps her existing
+project availability. Alex can walk to the easel, read, or watch the television.
+Every painter contributes a named picture to the household gallery. Choose
+flowers, river or stars and garden, sunset or blue palettes. Add pointer/touch
+brush strokes to Alex’s page and export a PNG. Artwork, strokes, reading progress
+and the muted TV setting join existing browser saves; older saves still load.
+The television displays an original procedural river scene without external video.
+Reading excerpts are original short fiction. Family quiet preferences still govern
+conversation invitations. Four wishes include a creative moment.

@@ -89,7 +89,23 @@ try:
  js('document.querySelector("#speed").click()');assert js('glimsWorld.getState().speed')==4
  js('glimsWorld.reset();document.querySelector("#autonomy").click();glimsWorld.step(70)')
  assert js('Math.hypot(glimsWorld.getState().residents.cypher.x-4.8,glimsWorld.getState().residents.cypher.z-4.8)')>.1
- js('alexWorld.reset()')
+ js('glimsWorld.reset();document.querySelector("#paint-together").click();glimsWorld.step(40)')
+ assert js('glimsWorld.getState().wishes.creative'),'Painting did not complete'
+ assert js('new Set(glimsWorld.getState().artworks.map(a=>a.author)).size')==5,'Family gallery lacks an artist'
+ assert js('document.querySelector("#mama-pastime").textContent.includes("Painting")')
+ js('document.querySelector("#read-together").click();glimsWorld.step(30)')
+ assert js('glimsWorld.getState().booksRead')>=1
+ assert js('document.querySelector("#mama-pastime").textContent.includes("book")')
+ js('document.querySelector("#tv-toggle").click()');assert js('glimsWorld.getState().tvOn')
+ js('glimsWorld.saveEvening();glimsWorld.reset();glimsWorld.loadEvening()')
+ assert js('glimsWorld.getState().artworks.length')==5
+ assert js('glimsWorld.getState().booksRead')>=1
+ assert js('glimsWorld.getState().tvOn')
+ js('glimsWorld.reset();glimsWorld.act("mama");glimsWorld.step(30)')
+ assert js('glimsWorld.getState().journal.some(a=>a.text.includes("finish a page"))')
+ js('glimsWorld.reset();glimsWorld.turn(Math.atan2(3.65-3.2,.85-4.9))')
+ assert js('glimsWorld.visibleNames().includes("mama")'),'Mama missing from the visual field'
+ js('glimsWorld.reset();document.querySelector("#paint-together").click();glimsWorld.step(40);document.querySelector("#tv-toggle").click()')
  for width in [320,390,720,1000,1440]:
   call('Emulation.setDeviceMetricsOverride',{'width':width,'height':1100,'deviceScaleFactor':1,'mobile':width<721});time.sleep(.2)
   assert js('document.documentElement.scrollWidth<=innerWidth'),f'Overflow at {width}'
