@@ -6,6 +6,7 @@
 #include "observer.hpp"
 #include "inference_evidence.hpp"
 #include "reflective_practice.hpp"
+#include "peaceful_motion.hpp"
 
 namespace virtual_cell::mind {
 
@@ -42,12 +43,15 @@ class PersonModel {
     ReflectivePractice reflection_;
     AttendedSelfModel attended_self_;
     std::vector<Percept> percepts_;
+    motion::Preferences movement_preferences_;
 public:
     PersonModel(std::string name, double action_energy,
                 std::array<double, objective_count> weights)
         : human_(std::move(name)), governor_(weights), action_energy_(nonnegative(action_energy)) {
         context_ = brain_.memory().create<Root>("Person's modeled context");
     }
+    motion::Preferences& movement_preferences() { return movement_preferences_; }
+    const motion::Preferences& movement_preferences() const { return movement_preferences_; }
     ReflectivePractice& reflection() {return reflection_;}
     const ReflectivePractice& reflection() const {return reflection_;}
     HomoSapiens& human() { return human_; }

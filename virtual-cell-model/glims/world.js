@@ -29,6 +29,7 @@ const WISHES={creative:'Make something beautiful together',music:'Make room for 
 let learningData=[],learningError=false;
 const SAVE_KEY='glover-machine-works-glims-evening-v1';
 const activities = {
+ roses:{label:'Stopping to smell the roses',target:'flowers',duration:5,thought:'No hurry. These flowers are part of the evening, too.'},
  paint:{label:'Painting a little world',target:'easel',duration:8,thought:'A few colors can say something words cannot.'},
  read:{label:'Reading a good page',target:'cushion',duration:8,thought:'There is another world inside this little book.'},
  tv:{label:'Watching the river',target:'sofa',duration:8,thought:'A quiet river on the television. No hurry at all.'},
@@ -142,7 +143,7 @@ function beginAction(){
  if(id==='mama')log('Mama put down her book and welcomed a little company.');
 }
 function chooseNext(){
- const scores={paint:.65+(1-state.artistry)*.2,read:.6,tv:.25,listen:.70+(1-state.happiness)*.3,guitar:.72+(1-state.guitar)*.2,lyrics:.55+(1-state.lyrics)*.35,
+ const scores={roses:.25+(1-state.relaxation)*.25,paint:.65+(1-state.artistry)*.2,read:.6,tv:.25,listen:.70+(1-state.happiness)*.3,guitar:.72+(1-state.guitar)*.2,lyrics:.55+(1-state.lyrics)*.35,
   eat:.20+state.hunger*.8,papa:state.household==='quiet'?.05:.5+(1-state.connection)*.55,
   mama:state.household==='quiet'?.12:.45+(1-state.connection)*.5,work:.35+(1-state.progress)*.5,
   rest:.3+(1-state.relaxation)*.65,nap:.10+(1-state.energy)*.95,cypher:.28+(1-state.connection)*.35,rosy:state.residents.rosy.occupied?.01:.25+(1-state.connection)*.35};
@@ -154,16 +155,11 @@ function tick(dt){
  dt=Math.min(dt,.12);state.time+=dt;state.hunger=clamp(state.hunger+dt*.0015);
  state.energy=clamp(state.energy-dt*.0015);state.stepPhase+=dt*8;tickResidents(dt);tickArt(dt);
  const turn=(held.has('d')?1:0)-(held.has('a')?1:0),drive=(held.has('w')?1:0)-(held.has('s')?1:0);
+ let manual=null;
  if(turn||drive){cancelAction();state.queue=[];state.autonomy=false;state.yaw=wrap(state.yaw+turn*dt*1.8);
-  const nx=state.x+Math.sin(state.yaw)*drive*dt*1.2,nz=state.z+Math.cos(state.yaw)*drive*dt*1.2;
-  if(canStand(nx,nz,'alex')){state.x=nx;state.z=nz;}state.phase='steering';
- }else if(state.path.length){
-  const next=state.path[0],dx=next.x-state.x,dz=next.z-state.z,d=Math.hypot(dx,dz),step=dt*1.25;
-  state.yaw=Math.atan2(dx,dz);
-  if(d<step){if(canStand(next.x,next.z,'alex')){state.x=next.x;state.z=next.z;state.path.shift();}else{cancelAction();think('A little room for everyone. I’ll wait here.');state.nextChoice=2;return;}}
-  else {const nx=state.x+dx/d*step,nz=state.z+dz/d*step;if(canStand(nx,nz,'alex')){state.x=nx;state.z=nz;}else{cancelAction();think('Let me find a clear place to stand.');updateUI();return;}}
-  if(!state.path.length){if(state.target){const o=byId(state.target);state.yaw=Math.atan2(o.x-state.x,o.z-state.z);}beginAction();}
+  manual={x:state.x+Math.sin(state.yaw)*drive*dt*1.2,z:state.z+Math.cos(state.yaw)*drive*dt*1.2};state.phase='steering';
  }else if(state.phase==='steering')state.phase='idle';
+ tickJointMovement(dt,manual);
  if(state.phase==='doing' && state.action){
   const id=state.action;state.actionTime+=dt;
   // Independent scenario state variables; this is not a physiological fit.
@@ -178,11 +174,13 @@ function tick(dt){
   if(['papa','mama','cypher','rosy'].includes(id))state.connection=clamp(state.connection+dt*.025);
   if(state.residents[id])state.residents[id].happiness=clamp(state.residents[id].happiness+dt*.018);
   if(id==='nap')state.energy=clamp(state.energy+dt*.035);
+  if(id==='roses'){state.relaxation=clamp(state.relaxation+dt*.025);state.happiness=clamp(state.happiness+dt*.005);}
   if(id==='rest')state.energy=clamp(state.energy+dt*.012);
   if(id==='work'&&state.labRunning&&learningData.length)state.labIndex=Math.min(learningData.length,state.labIndex+dt*14);
   if(id==='work')state.progress=clamp(state.progress+dt*.018);
   if(state.actionTime>=activities[id].duration){
    const finished=id;
+   if(id==='roses')GlimsMotion.noteRose();
    if(id==='paint'){addArtwork('Alex');state.wishes.creative=true;}
    if(id==='read'){state.booksRead++;state.wishes.creative=true;}
    if(['listen','guitar','sing'].includes(id))state.wishes.music=true;
@@ -297,6 +295,7 @@ function drawVision(){
 function draw(){if(!state||W<1||H<36)return;drawRoom();drawVision();}
 function updateUI(){
  updateGlimsUI();updateArtUI();
+ if($('joint-motion-status')){const m=GlimsMotion.status();$('joint-motion-status').textContent=`${m.engine} · ${m.yields} considerate waits · ${m.rosePauses} rose moments`; }
  $('clock').textContent=clock();$('activity-label').textContent=state.paused?'An evening, paused':state.phase==='walking'?(state.action?'On the way · '+activities[state.action].label.toLowerCase():'A different point of view'):state.action?activities[state.action].label:'Taking in the room';
  if($('thought').textContent!==state.thought)$('thought').textContent=state.thought;$('mode-label').textContent=state.autonomy?'FOLLOWING HIS OWN CURIOSITY':'ALEX, HERE & NOW';
  const visible=visibleObjects();$('visible').textContent=visible.length?visible.map(o=>o.name).join(' · '):'A quieter corner of the room.';
@@ -360,13 +359,27 @@ function tickResidents(dt){
   npc.occupied=id==='rosy'&&Math.floor(state.time/18)%3===1&&!npc.invited;
   if(npc.invited||npc.occupied)continue;
   if(!npc.path.length){npc.wait-=dt;if(npc.wait<=0){npc.visit=(npc.visit+1)%2;const target=destinations[id][npc.visit];npc.path=routeBetween(npc,target.x,target.z);npc.wait=6;}}
-  if(npc.path.length){const next=npc.path[0],dx=next.x-npc.x,dz=next.z-npc.z,d=Math.hypot(dx,dz),step=Math.min(d,dt*.45);
-   const x=d>0?npc.x+dx/d*step:npc.x,z=d>0?npc.z+dz/d*step:npc.z;
-   const yielding=state.path.slice(0,8).some(p=>Math.hypot(x-p.x,z-p.z)<.55);
-   if(!yielding&&canStand(x,z,id)){npc.x=x;npc.z=z;if(d<.03)npc.path.shift();}
-  }
+
  }
  syncResidents();
+}
+function tickJointMovement(dt,manual){
+ const next=manual||state.path[0];
+ const agents=[{id:'alex',x:state.x,z:state.z,next,speed:manual?1.2:1.25,manual:!!manual,waited:state.motionWait||0,rosePause:state.action==='roses'&&state.phase==='doing'},
+  ...Object.entries(state.residents).map(([id,p])=>({id,x:p.x,z:p.z,next:!p.invited&&!p.occupied?p.path[0]:null,speed:.45,waited:p.motionWait||0})),
+  ...['mama','papa'].map(id=>({id,x:byId(id).x,z:byId(id).z}))];
+ const result=GlimsMotion.step(agents,[],dt,free);
+ agents.forEach((a,i)=>{
+  const q=result.positions[i],moving=Math.hypot(q.x-a.x,q.z-a.z)>1e-8;
+  if(a.id==='alex'){
+   state.motionWait=next&&!moving?(state.motionWait||0)+dt:0;
+   if(moving){state.yaw=Math.atan2(q.x-state.x,q.z-state.z);state.x=q.x;state.z=q.z;}
+   if(!manual&&state.path.length&&Math.hypot(state.x-state.path[0].x,state.z-state.path[0].z)<1e-6){state.path.shift();
+    if(!state.path.length){if(state.target){const o=byId(state.target);state.yaw=Math.atan2(o.x-state.x,o.z-state.z);}beginAction();}}
+  }else if(state.residents[a.id]){const p=state.residents[a.id];p.x=q.x;p.z=q.z;p.motionWait=a.next&&!moving?(p.motionWait||0)+dt:0;
+   if(p.path.length&&Math.hypot(p.x-p.path[0].x,p.z-p.path[0].z)<1e-6)p.path.shift();}
+ });
+ state.jointMotion={...GlimsMotion.status(),feasible:result.feasible};syncResidents();
 }
 function drawRobot(o){
  const p=project(o.x,o.z),s=projection.s,rosy=o.id==='rosy',npc=state.residents[o.id];

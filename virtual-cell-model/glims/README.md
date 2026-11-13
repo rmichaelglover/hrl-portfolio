@@ -126,3 +126,23 @@ five-person joint preferences informed by three archived chess games. The Python
 planner and ROS2 node anticipate preferred steps, avoid swept person/frog paths,
 and allow pauses by roses. The page replays computed decisions with inspectable
 PGN provenance and source. See its README for measured results and execution.
+
+## Live C++ joint preferences in the original Glims
+
+The same isometric home, household activities, and glackyard now call the shared
+C++ `peaceful_motion.hpp` kernel live through WebAssembly. PersonModel owns
+movement preferences natively, and the situated household records joint moves
+in its existing experience store while preserving body/organ/tissue/cell ownership.
+Rendering and route generation stay in the original browser world.
+
+Choose **Stop and smell the roses** at home or **Meet by the garden roses** to
+gather outdoors. All five people coordinate their preferred next steps, yield or
+step aside, and replan around others. Ground wildlife retain swept-path clearance.
+Music, art, books, television, family replies, queues, workbench, naps and saves
+remain covered by the original regression suite. The native structural snapshot
+is explicitly labeled; it does not claim browser physiological simulation.
+
+`python3 virtual-cell-model/glims/joint_browser_check.py` checks live C++ loading,
+180-ply profile, indoor roses, all bridge arrivals, 700 turns of swept clearance,
+and outdoor roses. Source, build instructions and native/WASM parity fixtures
+are linked in `cpp/` and included in the updated full source zip.

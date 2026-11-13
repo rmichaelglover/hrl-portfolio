@@ -1,0 +1,9 @@
+{
+  "kernel_sha256": "a73c0579f1558580bb77652c8669c99a2e4960a5fc1854e0d1ad7983332e980c",
+  "wasm_sha256": "bcc27e57fd5705c00b14b5d147fe75e7fcdbff219a8fd96266ab4e3601a91d9a",
+  "native_suites_passed": 15,
+  "native_wasm_cases": 32,
+  "browser_turns_checked": 700,
+  "minimum_person_clearance": 0.43102349123916595,
+  "minimum_frog_clearance": 0.6
+}

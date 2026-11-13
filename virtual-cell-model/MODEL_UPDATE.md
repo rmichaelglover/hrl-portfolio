@@ -161,3 +161,41 @@ compatibility parameters. C++ reverse mode includes initialization and repeated
 unary injection, agrees with finite differences and independent PyTorch autograd,
 and retains an explicit contraction bound under projected training. Measured
 sleep-data evaluation is recording-disjoint and remains in local study outputs.
+
+
+## Live joint preferences in the existing Glims
+
+Michael Emanuel Glover’s peaceful chess analogy now extends the original
+`PersonModel` and rendered Glims household. `movement_preferences()` belongs to
+PersonModel, alongside the existing body, brain, eyes, will, memory and experience
+records. `joint_household.hpp` supplies owned situated persons and commits feasible
+joint movement into that same experience ledger. The cellular scaffold is retained;
+a symbolic water record illustrates conservation. Behavior does not fabricate
+cellular ATP or physiological responses.
+
+The freestanding `peaceful_motion.hpp` kernel compiles unchanged for native C++
+and browser WebAssembly. `web/glims_motion.cpp` exposes its small C ABI. The
+original Glims home and glackyard call it for live movement choices rather than
+playing a trajectory. Browser adapters supply terrain feasibility, planned steps,
+known simulated neighbors, and preferences. Routing and artwork remain JavaScript;
+full physiological integration is native. A labeled native snapshot makes that
+separation inspectable.
+
+The existing 180-ply three-game profile sets progress and anticipation weights.
+Movement preferences and hard clearance are explicit scenario values. The joint
+score combines individual choice utilities, a small minimum-utility term, and
+obstruction of others’ preferred steps. Entire simultaneous person and wildlife
+segments are checked. Side steps and waiting are choices; periodic route replanning
+avoids crowding obsolete waypoints. Rose activities coexist with all prior
+household activities, independent replies, local saves and pause controls.
+
+Validation: all 15 native suites pass; 32 native/WASM decision fixtures agree.
+The full original Glims browser regression suite passes. A new live-browser test
+checks indoor roses, all five bridge arrivals, shared outdoor roses, and 700
+turns of swept person/frog clearance. On that bridge scenario, measured minimum
+separations are 0.4310 for people and 0.6000 for the frog, against thresholds
+0.43 and 0.4. These are finite modeled scenario results.
+
+Run `joint_household_demo`, `ctest`, and the browser’s `joint_browser_check.py`.
+Build WebAssembly with `python3 web/build_motion.py --output <glims>/glims-motion.wasm`
+using Clang 14 and wasm-ld 14, or supply explicit compiler/linker paths.
