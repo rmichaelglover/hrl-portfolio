@@ -68,3 +68,16 @@ source /opt/ros/humble/setup.bash
 ```
 
 Tests cover Bayesian updates, Kalman covariance and tracking, hierarchical interpretation, obstacle-aware planning, bounded attention, authorization/replay behavior, permission roles, and presence/sleep/hibernation transitions with a fake clock. Live ROS and browser checks are described in `VALIDATION.md` once run.
+
+## Peaceful joint-preference garden
+
+Michael Emanuel Glover’s Virtual Person extension is available through
+`ros2 run cypher_robot_mind peaceful_garden`. It models Alex, Rosy, Mama, Papa,
+and Cypher coordinating movement, protecting a frog’s swept hop, and enjoying
+roses. Three archived chess games inform explicit progress and anticipation
+weights; household values are authored separately. State: `/peaceful_garden/state`;
+services: `/peaceful_garden/pause` (SetBool) and `/peaceful_garden/reset` (Trigger).
+This separate node emits no robot velocity commands.
+
+Public replay, PGNs, algorithm, tests and full instructions:
+https://rmichaelglover.github.io/hrl-portfolio/virtual-cell-model/glims/peaceful-garden/

@@ -1,0 +1,7671 @@
+{
+  "profile": {
+    "sha256": "b39b014544693fb5987e371004c9b3d05a4b388bcd3978a2ce6402fe5935410c",
+    "games": [
+      {
+        "white": "mannyfresher",
+        "black": "zxcvbnmasfesgjejwj",
+        "site": "https://lichess.org/game/DItWyjG9",
+        "plies": 51
+      },
+      {
+        "white": "cazadu-valencia",
+        "black": "gnesazlesa",
+        "site": "https://lichess.org/game/LEHEVWbn",
+        "plies": 38
+      },
+      {
+        "white": "maximiv61",
+        "black": "mannyfresher",
+        "site": "https://lichess.org/game/WC1AuJwO",
+        "plies": 91
+      }
+    ],
+    "plies": 180,
+    "quiet_fraction": 0.7555555555555555,
+    "reply_exposure": 0.28282344746712823,
+    "weights": {
+      "progress": 1.7555555555555555,
+      "anticipation": 1.2828234474671283,
+      "roses": 0.7
+    },
+    "interpretation": "Designed transfer of recorded chess geometry to planning weights; not learned human preferences."
+  },
+  "states": [
+    {
+      "tick": 0,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            6
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "reason": "Everyone has a destination and a preference of their own."
+      }
+    },
+    {
+      "tick": 1,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            5,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            6
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            1,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            4,
+            6
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 2,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 1,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 1,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            6
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -2.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "utilities": [
+          3.8600000000000003,
+          2.8066666666666666,
+          -0.04,
+          1.7555555555555555,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 3,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            3
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          3.8600000000000003,
+          2.8066666666666666,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 4,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            3
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            3,
+            5
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          -0.04,
+          1.7555555555555555,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 5,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            2,
+            3
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            5
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 3.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 6,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            3
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 7,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 8,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          -0.04,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 9,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            3,
+            5
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 10,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 11,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            3
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            4,
+            6
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            3
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            3
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 12,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            5,
+            6
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            3
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 13,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 3.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            6
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": -1.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 14,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            3
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            7,
+            6
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 15,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            6,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 5.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": -1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            6
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 16,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            4
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 0.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            5
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 3.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          1.7555555555555555,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 17,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            3
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 1.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          1.7555555555555555,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 18,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 2.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0,
+          -0.04
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 19,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 3.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0,
+          -0.04
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 20,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            3,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            5
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 0.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 21,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            2,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 5.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            4
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 1.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            4
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            4
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 22,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            3
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 2.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            4
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "utilities": [
+          0.0,
+          1.7555555555555555,
+          0.0,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 23,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            5,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 3.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 24,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.7555555555555555
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 25,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 26,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 27,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 28,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 29,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 30,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 31,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 32,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 33,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 34,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 35,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 36,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 37,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 38,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        5
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 39,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    },
+    {
+      "tick": 40,
+      "people": [
+        {
+          "name": "Alex",
+          "position": [
+            7,
+            2
+          ],
+          "goal": [
+            7,
+            2
+          ],
+          "rose_interest": 0.9,
+          "wants_prosthetic_support": true,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Rosy",
+          "position": [
+            1,
+            2
+          ],
+          "goal": [
+            1,
+            2
+          ],
+          "rose_interest": 0.6,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 2,
+          "total_progress": 6.0
+        },
+        {
+          "name": "Mama",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "rose_interest": 0.8,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Papa",
+          "position": [
+            2,
+            4
+          ],
+          "goal": [
+            2,
+            4
+          ],
+          "rose_interest": 0.7,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        },
+        {
+          "name": "Cypher",
+          "position": [
+            4,
+            2
+          ],
+          "goal": [
+            4,
+            2
+          ],
+          "rose_interest": 0.5,
+          "wants_prosthetic_support": false,
+          "rose_pauses": 0,
+          "total_progress": 4.0
+        }
+      ],
+      "frog": [
+        3,
+        6
+      ],
+      "roses": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "walls": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "decision": {
+        "from": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "preferred": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "chosen": [
+          [
+            7,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "utilities": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "reason": "A joint choice respects people, swept frog paths, and time by the roses."
+      }
+    }
+  ]
+}

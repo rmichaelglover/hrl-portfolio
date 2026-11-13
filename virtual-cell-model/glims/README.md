@@ -118,3 +118,11 @@ it and read a short description. These are fictional garden characters, separate
 from the shared Tiny Creek World regional roster. No wildlife save migration is
 needed. Original direction and characters: Michael Emanuel Glover; assistant:
 vector drawing and implementation.
+
+## Room for Everyone
+
+[Peaceful garden](peaceful-garden/) extends Michael’s Virtual Person idea with
+five-person joint preferences informed by three archived chess games. The Python
+planner and ROS2 node anticipate preferred steps, avoid swept person/frog paths,
+and allow pauses by roses. The page replays computed decisions with inspectable
+PGN provenance and source. See its README for measured results and execution.

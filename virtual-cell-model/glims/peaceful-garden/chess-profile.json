@@ -1,0 +1,32 @@
+{
+  "sha256": "b39b014544693fb5987e371004c9b3d05a4b388bcd3978a2ce6402fe5935410c",
+  "games": [
+    {
+      "white": "mannyfresher",
+      "black": "zxcvbnmasfesgjejwj",
+      "site": "https://lichess.org/game/DItWyjG9",
+      "plies": 51
+    },
+    {
+      "white": "cazadu-valencia",
+      "black": "gnesazlesa",
+      "site": "https://lichess.org/game/LEHEVWbn",
+      "plies": 38
+    },
+    {
+      "white": "maximiv61",
+      "black": "mannyfresher",
+      "site": "https://lichess.org/game/WC1AuJwO",
+      "plies": 91
+    }
+  ],
+  "plies": 180,
+  "quiet_fraction": 0.7555555555555555,
+  "reply_exposure": 0.28282344746712823,
+  "weights": {
+    "progress": 1.7555555555555555,
+    "anticipation": 1.2828234474671283,
+    "roses": 0.7
+  },
+  "interpretation": "Designed transfer of recorded chess geometry to planning weights; not learned human preferences."
+}
