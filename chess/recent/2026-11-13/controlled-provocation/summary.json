@@ -1,0 +1,31 @@
+{
+  "unique_games": 76,
+  "outcomes": {
+    "Loss": 25,
+    "Win": 41,
+    "Draw": 10
+  },
+  "early_queen_games": 44,
+  "early_queen_results": {
+    "Win": 26,
+    "Loss": 12,
+    "Draw": 6
+  },
+  "queen_first5_games": 27,
+  "queen_pressure_games": 43,
+  "early_queen_pressure_games": 30,
+  "queen_pressure_episodes": 93,
+  "episode_kinds": {
+    "pawn commitment": 20,
+    "other piece move": 9,
+    "repeat-piece move": 41,
+    "minor-piece development": 22,
+    "piece drop": 1
+  },
+  "queen_answers": 70,
+  "forcing_queen_answers": 33,
+  "checking_queen_pressure_episodes": 7,
+  "early_king_move_games": 22,
+  "standard_games": 75,
+  "crazyhouse_games": 1
+}

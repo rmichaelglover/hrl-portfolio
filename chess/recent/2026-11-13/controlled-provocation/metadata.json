@@ -1,0 +1,158 @@
+{
+  "engine": {
+    "name": "Stockfish 14.1",
+    "author": "the Stockfish developers (see AUTHORS file)"
+  },
+  "nodes_per_position": 20000,
+  "source_files": [
+    {
+      "file": "inputs/lichess_study_kings-gambit_by_mannyfresher_2026.08.03.pgn",
+      "sha256": "8952f3bcb6a979ddc1fc90756ce1857b5f10d13b2e4a950024482387a4ffde20"
+    },
+    {
+      "file": "inputs/lichess_study_the-queens-gambit-netflix_by_mannyfresher_2026.10.05 (1).pgn",
+      "sha256": "209fd7833ab2190e9997ac6264f896bb0c70b09c61d35cbc083ee9eb7ffcd987"
+    },
+    {
+      "file": "inputs/lichess_study_van-mieses_mannyfresher-936-kusal2022-1034_by_mannyfresher_2026.11.12.pgn",
+      "sha256": "d2f5c337c2d789ec1ac6061a53162ba224eb8ce67bc8b9e49376e65243397969"
+    },
+    {
+      "file": "inputs/lichess_study_rancid-randi_by_mannyfresher_2026.09.09 (1).pgn",
+      "sha256": "01d0207af6d576a241d63eba922d9205da852ef61114e324c01c29807e5eb77e"
+    },
+    {
+      "file": "inputs/lichess_study_pircerson-parks_by_mannyfresher_2026.09.09.pgn",
+      "sha256": "6c511ee6db154c795003261eca21501b775410391e22197799c8e6983dc7bf5b"
+    },
+    {
+      "file": "inputs/lichess_study_vant-kruijsing_by_mannyfresher_2026.09.08 (1).pgn",
+      "sha256": "8a4c15f1a4adceaf5a7185d41c4a543d9055c4c3e00673f0c600dde21b8b2310"
+    }
+  ],
+  "studies": [
+    {
+      "name": "Kings Gambit",
+      "file": "lichess_study_kings-gambit_by_mannyfresher_2026.08.03.pgn",
+      "chapters": 9,
+      "ids": [
+        "UttLxPKo",
+        "e5Jt4Pgw",
+        "CfGIc0tx",
+        "J3IcMnZK",
+        "dKgQcSKp",
+        "df4AKckV",
+        "AOYgpFzW",
+        "1ET6rM28",
+        "LL67ubcC"
+      ]
+    },
+    {
+      "name": "The Queen's Gambit: NETFLIX",
+      "file": "lichess_study_the-queens-gambit-netflix_by_mannyfresher_2026.10.05 (1).pgn",
+      "chapters": 8,
+      "ids": [
+        "F7VWRiUN",
+        "oDPwg4ID",
+        "KU50IW6W",
+        "q45ZUO6W",
+        "eYgsUU8Z",
+        "LseqYWyF",
+        "7BUj2Rvv",
+        "PCUmbC2N"
+      ]
+    },
+    {
+      "name": "Van Mieses",
+      "file": "lichess_study_van-mieses_mannyfresher-936-kusal2022-1034_by_mannyfresher_2026.11.12.pgn",
+      "chapters": 1,
+      "ids": [
+        "i0W1q3IX"
+      ]
+    },
+    {
+      "name": "Rancid Randi",
+      "file": "lichess_study_rancid-randi_by_mannyfresher_2026.09.09 (1).pgn",
+      "chapters": 18,
+      "ids": [
+        "4182Oyps",
+        "POY7Vryc",
+        "cwGjSsEN",
+        "kzbSo2vU",
+        "Ep2VxHEC",
+        "e9dop6g7",
+        "JhxEruTO",
+        "2nJxcpYA",
+        "ziNJzlZm",
+        "Yez6uJVF",
+        "P1ARyfX7",
+        "RICo4AbD",
+        "iXhLee7j",
+        "VC5MszyS",
+        "cjAUBAG5",
+        "Pe8OcQiJ",
+        "g3J5EH39",
+        "UYo057a7"
+      ]
+    },
+    {
+      "name": "Pircerson Parks",
+      "file": "lichess_study_pircerson-parks_by_mannyfresher_2026.09.09.pgn",
+      "chapters": 14,
+      "ids": [
+        "RPqJPm8K",
+        "bEU6Bd9W",
+        "cXjNygRo",
+        "4u6HwGxw",
+        "475976ig",
+        "YLjcKPXi",
+        "TaC6RghC",
+        "6BAtOdha",
+        "NupgaHtz",
+        "rmMa0yGW",
+        "uwIkaXdf",
+        "BJzsFoag",
+        "jwTAjfrm",
+        "tSUtX3fq"
+      ]
+    },
+    {
+      "name": "Van't Kruijsing",
+      "file": "lichess_study_vant-kruijsing_by_mannyfresher_2026.09.08 (1).pgn",
+      "chapters": 27,
+      "ids": [
+        "DlsWV4m5",
+        "LULfIsiU",
+        "1ET6rM28",
+        "ZGcMZHLX",
+        "bFKICDGR",
+        "0Ot0AVBp",
+        "YUlGIZqU",
+        "yHDp9B7U",
+        "zFiz2FiO",
+        "l6XkdB9K",
+        "pjvMqQeJ",
+        "OGrU8gpH",
+        "P5Kc7JsX",
+        "cimlkC2j",
+        "gWIkn4LS",
+        "E4gJBzYS",
+        "gzr8DmHy",
+        "Ok27NG4F",
+        "XMZxmF9X",
+        "2edLyNmz",
+        "FnXnKKR3",
+        "DItWyjG9",
+        "yFUi7qS7",
+        "15QVQJQZ",
+        "BQVwXNN0",
+        "fjFuElbw",
+        "zoMm9deu"
+      ]
+    }
+  ],
+  "unique_games": 76,
+  "chapters": 77,
+  "framework_originator": "Michael Emanuel Glover",
+  "assistant_contribution": "Operational definitions, engine screening, legal replay, aggregation and writing."
+}

@@ -1,0 +1,77 @@
+game_id,studies,opponent,your_color,result,date,plies,variant,early_queen,first_queen_move,queen_moves_first10,queen_pressure_episodes_first20,minor_development_threats,repeat_piece_threats,public_chapter
+UttLxPKo,Kings Gambit,Chungkheu,White,Loss,2026.08.03,52,From Position,False,11.Qe2+,0,1,0,0,https://lichess.org/study/y98nnAdG/A5hrlMxp
+e5Jt4Pgw,Kings Gambit,amirof_99,Black,Loss,2026.08.04,49,From Position,False,17...Qb6,0,0,0,0,https://lichess.org/study/y98nnAdG/Mr8XqeGX
+CfGIc0tx,Kings Gambit,adechess,Black,Win,2026.09.01,76,Standard,True,2...Qd7,2,0,0,0,https://lichess.org/study/y98nnAdG/NkWt8i0H
+J3IcMnZK,Kings Gambit,gamlet12345,Black,Loss,2026.09.09,99,Standard,False,14...Qe7,0,0,0,0,https://lichess.org/study/y98nnAdG/2GBr87NF
+dKgQcSKp,Kings Gambit,Joslugal,Black,Win,2026.09.09,88,Standard,True,3...Qe7,3,2,0,0,https://lichess.org/study/y98nnAdG/PzOR1RdH
+df4AKckV,Kings Gambit,Fermathemate,Black,Win,2026.09.09,24,Standard,True,2...Qd7,3,1,0,1,https://lichess.org/study/y98nnAdG/KPNfbnIQ
+AOYgpFzW,Kings Gambit,AndriyMAY,White,Loss,2026.09.09,36,Standard,True,2.Qd2,2,1,0,1,https://lichess.org/study/y98nnAdG/GjzR5jsO
+1ET6rM28,Kings Gambit; Van't Kruijsing,Svenjamin94,White,Loss,2026.09.09,44,Standard,True,3.Qe1,2,1,1,0,https://lichess.org/study/y98nnAdG/zPcFbWuf
+LL67ubcC,Kings Gambit,tahan10,Black,Draw,2026.11.12,19,Standard,False,,0,0,0,0,https://lichess.org/study/y98nnAdG/J4fx1nMj
+F7VWRiUN,The Queen's Gambit: NETFLIX,Greggorr,Black,Win,2026.10.05,44,Standard,False,14...Qb8,0,0,0,0,https://lichess.org/study/nErRsOiw/pgOaAEPX
+oDPwg4ID,The Queen's Gambit: NETFLIX,Ernestino_13,Black,Win,2026.10.05,62,Standard,False,13...Qf6,0,0,0,0,https://lichess.org/study/nErRsOiw/NvLHGgKw
+KU50IW6W,The Queen's Gambit: NETFLIX,kingEnteng,Black,Loss,2026.11.02,65,Standard,False,26...Qa5,0,0,0,0,https://lichess.org/study/nErRsOiw/3bMq8LjT
+q45ZUO6W,The Queen's Gambit: NETFLIX,daniel_dgm,Black,Draw,2026.11.10,81,Standard,False,11...Qxd1,0,0,0,0,https://lichess.org/study/nErRsOiw/v3cUJAB4
+eYgsUU8Z,The Queen's Gambit: NETFLIX,endri_abazi_albania,White,Loss,2026.11.10,62,Standard,False,14.Qb3,0,3,0,2,https://lichess.org/study/nErRsOiw/XakVukqt
+LseqYWyF,The Queen's Gambit: NETFLIX,ElJuliCC,Black,Loss,2026.11.10,41,Standard,False,13...Qf8,0,1,1,0,https://lichess.org/study/nErRsOiw/4gwsrGK2
+7BUj2Rvv,The Queen's Gambit: NETFLIX,fchfan,Black,Draw,2026.11.10,133,Standard,True,2...Qd6,2,4,1,2,https://lichess.org/study/nErRsOiw/YNlrJNPi
+PCUmbC2N,The Queen's Gambit: NETFLIX,EminBurak2018,Black,Loss,2026.11.12,61,Standard,False,,0,0,0,0,https://lichess.org/study/nErRsOiw/HqWDhHRd
+i0W1q3IX,Van Mieses,kusal2022,White,Win,2026.11.12,169,Standard,True,2.Qd2,2,1,0,1,https://lichess.org/study/da9uLoen/JLwbFtbu
+4182Oyps,Rancid Randi,YouddaVonBlbackoff,Black,Loss,2026.09.09,89,Standard,True,3...Qe8,1,0,0,0,https://lichess.org/study/2nJl10wd/JfbUggCa
+POY7Vryc,Rancid Randi,Bntimane,Black,Win,2026.09.28,44,Standard,True,7...Qh4,3,1,1,0,https://lichess.org/study/2nJl10wd/jCJfv4yw
+cwGjSsEN,Rancid Randi,Audvik_Acharya,Black,Win,2026.10.03,26,Standard,True,7...Qa5,1,0,0,0,https://lichess.org/study/2nJl10wd/uYBFkaJt
+kzbSo2vU,Rancid Randi,Legoboost,Black,Loss,2026.10.03,85,Standard,False,12...Qe7,0,3,0,1,https://lichess.org/study/2nJl10wd/ThPXDbER
+Ep2VxHEC,Rancid Randi,MOREbming498,Black,Win,2026.10.05,50,Standard,False,14...Qxd5,0,0,0,0,https://lichess.org/study/2nJl10wd/30nRNN6I
+e9dop6g7,Rancid Randi,Carpena1980,Black,Loss,2026.10.05,93,Standard,False,,0,0,0,0,https://lichess.org/study/2nJl10wd/4bnTbmNa
+JhxEruTO,Rancid Randi,Ahmedadilzumrawi,Black,Draw,2026.10.06,83,Standard,True,2...Qxd5,6,4,2,1,https://lichess.org/study/2nJl10wd/jp5QW8xt
+2nJxcpYA,Rancid Randi,No_More_Bans_Pls,Black,Win,2026.10.08,22,Standard,True,2...Qxd5,4,3,2,1,https://lichess.org/study/2nJl10wd/DF5ruzYx
+ziNJzlZm,Rancid Randi,sonsnare,Black,Loss,2026.10.15,99,Standard,False,,0,0,0,0,https://lichess.org/study/2nJl10wd/rwt9tgbC
+Yez6uJVF,Rancid Randi,dragonakm,Black,Win,2026.10.15,58,Standard,False,13...Qxc8,0,0,0,0,https://lichess.org/study/2nJl10wd/w9J9Iuxp
+P1ARyfX7,Rancid Randi,geogektor291,Black,Win,2026.10.22,36,Standard,True,4...Qd7,3,0,0,0,https://lichess.org/study/2nJl10wd/F8N0EcWp
+RICo4AbD,Rancid Randi,clavenera,Black,Loss,2026.11.01,67,Standard,True,9...Qb6,2,2,0,1,https://lichess.org/study/2nJl10wd/hzcJ6F21
+iXhLee7j,Rancid Randi,Succot,Black,Loss,2026.11.01,69,Standard,True,2...Qxd5,4,3,2,1,https://lichess.org/study/2nJl10wd/5nLiZH4K
+VC5MszyS,Rancid Randi,tucz1n,Black,Win,2026.11.01,26,Standard,True,6...Qxd4,3,2,1,1,https://lichess.org/study/2nJl10wd/skhS7jNc
+cjAUBAG5,Rancid Randi,Aarkom,Black,Win,2026.11.02,52,Standard,True,2...Qxd5,5,7,1,2,https://lichess.org/study/2nJl10wd/5HVlZPFo
+Pe8OcQiJ,Rancid Randi,bujurest,Black,Win,2026.11.02,82,Standard,False,,0,0,0,0,https://lichess.org/study/2nJl10wd/SxobnIT4
+g3J5EH39,Rancid Randi,olk,Black,Draw,2026.11.07,53,Standard,True,9...Qxd3,1,0,0,0,https://lichess.org/study/2nJl10wd/2vQTrkgq
+UYo057a7,Rancid Randi,carla227,Black,Win,2026.11.11,40,Standard,False,13...Qxd4,0,2,0,2,https://lichess.org/study/2nJl10wd/YIqsmqAS
+RPqJPm8K,Pircerson Parks,LeaderAswa,Black,Loss,2026.09.09,61,Standard,True,2...Qd7,3,2,0,1,https://lichess.org/study/QLTafcOT/U2WQabYo
+bEU6Bd9W,Pircerson Parks,Posseidon1977,Black,Loss,2026.09.10,37,Standard,True,2...Qd7,2,0,0,0,https://lichess.org/study/QLTafcOT/sb7Gu17i
+cXjNygRo,Pircerson Parks,GreyWizard-108,Black,Loss,2026.09.10,43,Standard,True,2...Qd7,2,1,0,0,https://lichess.org/study/QLTafcOT/tziqO3c1
+4u6HwGxw,Pircerson Parks,Skn_wittur,Black,Loss,2026.09.10,53,Standard,True,2...Qd7,1,0,0,0,https://lichess.org/study/QLTafcOT/YhQJkSnz
+475976ig,Pircerson Parks,hopydopy,Black,Win,2026.09.26,38,Standard,True,2...Qd7,6,4,0,3,https://lichess.org/study/QLTafcOT/lHlqOGGd
+YLjcKPXi,Pircerson Parks,Azsch,Black,Loss,2026.09.26,81,Standard,False,15...Qh4,0,1,0,1,https://lichess.org/study/QLTafcOT/fB8YsmfB
+TaC6RghC,Pircerson Parks,A-Roy2025,Black,Win,2026.09.27,52,Standard,True,6...Qf6,3,2,1,1,https://lichess.org/study/QLTafcOT/VNvrJfzC
+6BAtOdha,Pircerson Parks,Ishanth14,Black,Draw,2026.09.28,99,Standard,True,2...Qd7,1,1,0,0,https://lichess.org/study/QLTafcOT/GkZZ3GMP
+NupgaHtz,Pircerson Parks,DmitriySvr,Black,Win,2026.09.30,74,Standard,True,4...Qd4,3,7,1,4,https://lichess.org/study/QLTafcOT/6uE67M6i
+rmMa0yGW,Pircerson Parks,trostyanko-13,Black,Win,2026.09.30,52,Standard,False,18...Qg5,0,0,0,0,https://lichess.org/study/QLTafcOT/5DJOGmw5
+uwIkaXdf,Pircerson Parks,Ttedv,Black,Win,2026.10.01,106,Standard,False,18...Qxa8,0,1,0,1,https://lichess.org/study/QLTafcOT/WSIKeZn0
+BJzsFoag,Pircerson Parks,Raymond_Juma,Black,Win,2026.10.15,60,Standard,True,2...Qd7,1,3,1,1,https://lichess.org/study/QLTafcOT/RRstcV0k
+jwTAjfrm,Pircerson Parks,Emanuel_pro,Black,Win,2026.10.21,66,Standard,False,12...Qe7+,0,2,0,0,https://lichess.org/study/QLTafcOT/U2jkVAt2
+tSUtX3fq,Pircerson Parks,WARIK_12364764-E,Black,Win,2026.11.10,66,Standard,True,6...Qa5+,2,1,0,1,https://lichess.org/study/QLTafcOT/9Fl4YmqK
+DlsWV4m5,Van't Kruijsing,Genose,Black,Win,2026.09.08,42,Standard,False,11...Qh4+,0,0,0,0,https://lichess.org/study/7hLlnCHF/MhOWgUk4
+LULfIsiU,Van't Kruijsing,sidpadhi,White,Win,2026.09.08,75,Standard,True,3.Qe1,1,0,0,0,https://lichess.org/study/7hLlnCHF/wHZor7mJ
+ZGcMZHLX,Van't Kruijsing,franck_tp,White,Draw,2026.09.11,116,Standard,False,22.Qb3,0,0,0,0,https://lichess.org/study/7hLlnCHF/tgfU7d9I
+bFKICDGR,Van't Kruijsing,chess06sisi,White,Win,2026.09.13,99,Standard,True,7.Qe1,1,0,0,0,https://lichess.org/study/7hLlnCHF/TPg2Z63q
+0Ot0AVBp,Van't Kruijsing,PamukSeker,White,Loss,2026.09.17,48,Standard,True,8.Qa4+,2,3,2,1,https://lichess.org/study/7hLlnCHF/747H95OW
+YUlGIZqU,Van't Kruijsing,Afiyet2016,White,Draw,2026.09.19,59,Standard,False,11.Qxc2,0,2,1,0,https://lichess.org/study/7hLlnCHF/ydDbTU1X
+yHDp9B7U,Van't Kruijsing,AbilashNelapati,Black,Win,2026.09.26,70,Standard,False,17...Qf6+,0,2,1,1,https://lichess.org/study/7hLlnCHF/KJc3rKFD
+zFiz2FiO,Van't Kruijsing,Stickity,White,Win,2026.09.26,65,Standard,True,6.Qf3,1,4,1,0,https://lichess.org/study/7hLlnCHF/hJUTprSN
+l6XkdB9K,Van't Kruijsing,RogueDoc007,White,Win,2026.09.26,37,Standard,True,2.Qf3,1,1,0,1,https://lichess.org/study/7hLlnCHF/tOWMQmei
+pjvMqQeJ,Van't Kruijsing,tixupixu,White,Win,2026.09.27,51,Crazyhouse,False,12.Qb3,0,2,0,1,https://lichess.org/study/7hLlnCHF/CdApVQI0
+OGrU8gpH,Van't Kruijsing,JaydenMogorosii,White,Win,2026.09.30,1,Standard,False,,0,0,0,0,https://lichess.org/study/7hLlnCHF/R1rIL7wF
+P5Kc7JsX,Van't Kruijsing,pavelbraginskiy,White,Win,2026.09.30,24,Standard,True,10.Qe2,1,0,0,0,https://lichess.org/study/7hLlnCHF/wzjaCzx5
+cimlkC2j,Van't Kruijsing,Beckerhecht,Black,Loss,2026.09.30,95,Standard,False,11...Qg5,0,3,0,1,https://lichess.org/study/7hLlnCHF/s4gFN1l8
+gWIkn4LS,Van't Kruijsing,mogdalyan,White,Win,2026.10.01,51,Standard,False,22.Qe2,0,0,0,0,https://lichess.org/study/7hLlnCHF/BLNVYTVP
+E4gJBzYS,Van't Kruijsing,agenT007_xx2,White,Win,2026.10.01,61,Standard,True,6.Qd3,1,1,0,1,https://lichess.org/study/7hLlnCHF/VlclqMn0
+gzr8DmHy,Van't Kruijsing,cata1983,Black,Win,2026.10.02,68,Standard,True,7...Qa5+,2,1,1,0,https://lichess.org/study/7hLlnCHF/49C14q1i
+Ok27NG4F,Van't Kruijsing,ximenacaicedoluna,White,Win,2026.10.04,13,Standard,True,2.Qe2,3,0,0,0,https://lichess.org/study/7hLlnCHF/6qsVKEfV
+XMZxmF9X,Van't Kruijsing,Rathiem888,Black,Draw,2026.10.04,127,Standard,True,3...Qe8,2,1,0,1,https://lichess.org/study/7hLlnCHF/5zprCskL
+2edLyNmz,Van't Kruijsing,Sungirl20,White,Loss,2026.10.05,66,Standard,True,2.Qe2,2,0,0,0,https://lichess.org/study/7hLlnCHF/1V4k2rEf
+FnXnKKR3,Van't Kruijsing,TheNorth87,White,Win,2026.10.05,45,Standard,True,7.Qd2,1,2,0,2,https://lichess.org/study/7hLlnCHF/wJ6KyuWg
+DItWyjG9,Van't Kruijsing,zxcvbnmasfesgjejwj,White,Win,2026.10.27,51,Standard,True,7.Qb1,2,0,0,0,https://lichess.org/study/7hLlnCHF/dn9ni27j
+yFUi7qS7,Van't Kruijsing,Dmiiitr,White,Draw,2026.10.31,136,Standard,True,9.Qd3,2,2,1,1,https://lichess.org/study/7hLlnCHF/3qbrIJIN
+15QVQJQZ,Van't Kruijsing,Arisotocrata,White,Win,2026.11.02,89,Standard,True,6.Qe2,1,1,0,0,https://lichess.org/study/7hLlnCHF/tevZBnTE
+BQVwXNN0,Van't Kruijsing,AOK_Koliberda,Black,Loss,2026.11.07,33,Standard,False,,0,0,0,0,https://lichess.org/study/7hLlnCHF/GaAy4q7S
+fjFuElbw,Van't Kruijsing,pietro_atlas,White,Loss,2026.11.10,72,Standard,True,5.Qe2,1,0,0,0,https://lichess.org/study/7hLlnCHF/dlVgbw2v
+zoMm9deu,Van't Kruijsing,Justinnn09,White,Win,2026.11.10,95,Standard,False,19.Qxd4,0,1,0,1,https://lichess.org/study/7hLlnCHF/1j1079eC
