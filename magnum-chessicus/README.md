@@ -5,3 +5,11 @@ Michael Emanuel Glover, developed in dialogue with Codex. Conditional draw-certi
 Run `python3 experiment.py`, then `python3 verify.py`, then `python3 write.py`. Requires Python 3, python-chess 1.999 (chess module 1.10.0), NumPy, Matplotlib and pdflatex. Fixtures are valid roots with explicitly supplied FEN and fresh histories. The initial root uses the complete initial move history; claims are optional actions, not automatic threefold endings.
 
 Read WHITE-PAPER.pdf or WHITE-PAPER.txt. SOURCE.zip includes code, figures, data and the three small certificates. Archived Relaxfish data is copied and hashed, not rerun here. Exact finite-depth outcome bounds are distinguished from heuristic engine scores and hypothetical statistical plots.
+
+## Pure C++ continuation
+
+The original conditional theorems and experiments continue in [cpp/](cpp/).
+The native solver retains sound White-perspective intervals and full root history,
+exports replayable certificates, supplies outcome-optimal actions only for exact
+roots, and compares legal order, tactical priors and relaxation on the recent PGNs.
+See cpp/REPORT.md for the executed benchmark and exact helper-work reductions.

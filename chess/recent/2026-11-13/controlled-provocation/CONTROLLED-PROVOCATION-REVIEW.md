@@ -20,7 +20,7 @@ The board-level hypothesis is that selected queen provocations elicit exploitabl
 
 All **77 chapters** in the six recent files were reviewed. They contain **76 unique games**, with **4,856 recorded plies** after deduplication. The unique results are **41 wins, 10 draws, 25 losses** from your side. The duplicate is the Svenjamin94 game `1ET6rM28`, appearing in two study chapters; both chapter locations remain indexed below.
 
-There are **75 standard-rule chapters/games** eligible for standard Stockfish evaluation, including two chapters beginning from supplied positions, and **one Crazyhouse game**. Study membership totals below count the duplicate in each study where it appears.
+There are **75 unique games under standard chess rules** eligible for standard Stockfish evaluation, including two chapters beginning from supplied positions, and **one Crazyhouse game**. Study membership totals below count the duplicate in each study where it appears.
 
 | Study | Chapters | Wins | Draws | Losses | Queen moved by move 10 |
 |---|---:|---:|---:|---:|---:|

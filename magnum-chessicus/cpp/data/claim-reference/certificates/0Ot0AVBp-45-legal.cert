@@ -1,0 +1,1054 @@
+MAGNUM_CPP_V1
+"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+45
+"e2e3"
+"d7d5"
+"g1e2"
+"e7e5"
+"g2g3"
+"d5d4"
+"f1g2"
+"e5e4"
+"g2e4"
+"c7c5"
+"e3d4"
+"c5d4"
+"c2c3"
+"d4d3"
+"d1a4"
+"c8d7"
+"a4d4"
+"d3e2"
+"e4b7"
+"b8c6"
+"b7c6"
+"d7c6"
+"d4d8"
+"a8d8"
+"e1e2"
+"c6b5"
+"e2f3"
+"d8d3"
+"f3g2"
+"b5c6"
+"g2h3"
+"c6h1"
+"f2f4"
+"h7h5"
+"h3h4"
+"f8e7"
+"h4h3"
+"h5h4"
+"a2a4"
+"h4g3"
+"h3g4"
+"g3g2"
+"b1a3"
+"g2g1q"
+"g4f5"
+3
+B -1 -1 "search" 1
+"e8d7"
+B -1 -1 "search" 13
+"f5e5"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"f7f5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"b2b3"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"h2h3"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"c3c4"
+B -1 -1 "search" 44
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3a3"
+F -1 1 "depth" 0
+"d3b3"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+F -1 1 "depth" 0
+"d3d6"
+F -1 1 "depth" 0
+"h8h2"
+F -1 1 "depth" 0
+"h8h3"
+F -1 1 "depth" 0
+"h8h4"
+F -1 1 "depth" 0
+"h8h5"
+T -1 -1 "mate" 0
+"a4a5"
+B -1 -1 "search" 36
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"b2b4"
+B -1 -1 "search" 36
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"h2h4"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"a3b1"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"a3c2"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"a3c4"
+B -1 -1 "search" 41
+"d7c6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+F -1 1 "depth" 0
+"d3d6"
+F -1 1 "depth" 0
+"h8h2"
+F -1 1 "depth" 0
+"h8h3"
+F -1 1 "depth" 0
+"h8h4"
+F -1 1 "depth" 0
+"h8h5"
+T -1 -1 "mate" 0
+"a3b5"
+B -1 -1 "search" 35
+"d7c6"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"a1b1"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0
+"a1a2"
+B -1 -1 "search" 37
+"d7c6"
+F -1 1 "depth" 0
+"d7d6"
+F -1 1 "depth" 0
+"d7c7"
+F -1 1 "depth" 0
+"d7c8"
+F -1 1 "depth" 0
+"d7d8"
+F -1 1 "depth" 0
+"d7e8"
+F -1 1 "depth" 0
+"a7a6"
+F -1 1 "depth" 0
+"f7f6"
+F -1 1 "depth" 0
+"g7g6"
+F -1 1 "depth" 0
+"a7a5"
+F -1 1 "depth" 0
+"g7g5"
+F -1 1 "depth" 0
+"g8f6"
+F -1 1 "depth" 0
+"g8h6"
+F -1 1 "depth" 0
+"h1g2"
+F -1 1 "depth" 0
+"h1f3"
+F -1 1 "depth" 0
+"h1e4"
+F -1 1 "depth" 0
+"h1d5"
+F -1 1 "depth" 0
+"h1c6"
+F -1 1 "depth" 0
+"h1b7"
+F -1 1 "depth" 0
+"h1a8"
+F -1 1 "depth" 0
+"e7a3"
+F -1 1 "depth" 0
+"e7b4"
+F -1 1 "depth" 0
+"e7h4"
+F -1 1 "depth" 0
+"e7c5"
+F -1 1 "depth" 0
+"e7g5"
+F -1 1 "depth" 0
+"e7d6"
+F -1 1 "depth" 0
+"e7f6"
+F -1 1 "depth" 0
+"e7d8"
+F -1 1 "depth" 0
+"e7f8"
+F -1 1 "depth" 0
+"d3d2"
+F -1 1 "depth" 0
+"d3c3"
+F -1 1 "depth" 0
+"d3e3"
+F -1 1 "depth" 0
+"d3f3"
+F -1 1 "depth" 0
+"d3g3"
+F -1 1 "depth" 0
+"d3h3"
+F -1 1 "depth" 0
+"d3d4"
+F -1 1 "depth" 0
+"d3d5"
+T -1 -1 "mate" 0

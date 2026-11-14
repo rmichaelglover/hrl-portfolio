@@ -1,0 +1,23 @@
+{
+  "project": "Magnum Chessicus pure C++ continuation",
+  "originator": "Michael Emanuel Glover",
+  "compiler": "GCC 11.4, C++17, CMake Release",
+  "current_results": "data/claim-gated/results.json",
+  "reference_results": "data/claim-reference/results.json",
+  "reversed_results": "data/claim-gated-reverse/results.json",
+  "gate_comparison": "data/gate-comparison.json",
+  "source_sha256": {
+    "CMakeLists.txt": "fc7f3b0700a0f9170651395fc48251b1b7084b5ebe4fe9c4fa5c808ff34c58f2",
+    "REPORT.md": "bef69fff77832459060ae987c3eb226ba61b3db9d7bf631000a9ebde780da5e4",
+    "README.md": "0b802338e6badfd7ff56fdfdaaf9bd45f9767f0132aa35982f89ff1c54437961",
+    "data/pilot-two-mode/README.md": "07371ae7e6e4dab1435cef401927418ff2f0db9e55800b46c8f13d22047f7ae0",
+    "vendor/chess.hpp": "e8e3c58d3bff0a057f52568d953960bbb70f892ea3b6942d5feccfe13470f420",
+    "src/compare.cpp": "48ab7d617030b1a8b12aa2e451fd43a5eafe675314574e1068e878f86da39930",
+    "src/main.cpp": "32e67d45324885f8ff86d613a366a2ffcd1870751b115218de591f7f3a7befa3",
+    "src/verify.cpp": "e419651d5e642b8b6ab55a8cf3302b63e26e3038dfd7a6aeb98c2f6ccc76a088",
+    "src/benchmark.cpp": "cb4818bb1e1a153fdb4a2b09ccf0603d6f2fd9f5de4d74cf5f484f7328510d73",
+    "tests/tests.cpp": "3c4cb3109c741852407e582784aa65c99764279a0c4d2dd3c52b4d662adc0c01",
+    "include/proof.hpp": "bbc28e944946c5ff437281879176c5bbdba4e7713c99223b1e6155a5394f5c6a"
+  },
+  "verified_final_certificates": 220
+}

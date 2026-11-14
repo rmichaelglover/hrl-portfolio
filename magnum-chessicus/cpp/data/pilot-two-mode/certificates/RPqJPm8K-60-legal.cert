@@ -1,0 +1,109 @@
+MAGNUM_CPP_V1
+"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+60
+"e2e4"
+"d7d6"
+"g1f3"
+"d8d7"
+"b1c3"
+"e8d8"
+"d2d4"
+"d7e8"
+"c1f4"
+"b8d7"
+"f1b5"
+"e7e6"
+"b5d7"
+"e8d7"
+"e4e5"
+"g8e7"
+"e5d6"
+"e7d5"
+"d6c7"
+"d8e8"
+"c3d5"
+"d7d5"
+"d1d3"
+"d5a5"
+"c2c3"
+"f8b4"
+"c3b4"
+"a5b4"
+"e1f1"
+"b4b2"
+"a1e1"
+"b2a2"
+"d4d5"
+"a2a6"
+"d3a6"
+"b7a6"
+"e1b1"
+"c8b7"
+"b1b7"
+"a8c8"
+"b7b8"
+"e8e7"
+"b8c8"
+"h8c8"
+"d5d6"
+"e7d7"
+"f1e2"
+"d7c6"
+"h1a1"
+"e6e5"
+"a1a6"
+"c6b7"
+"d6d7"
+"b7a6"
+"d7c8q"
+"a6b5"
+"c8b7"
+"b5c5"
+"c7c8q"
+"c5d6"
+1
+B 1 1 "search" 22
+"e2d1"
+F -1 1 "depth" 0
+"e2e1"
+F -1 1 "depth" 0
+"e2f1"
+F -1 1 "depth" 0
+"e2d2"
+F -1 1 "depth" 0
+"e2d3"
+F -1 1 "depth" 0
+"e2e3"
+F -1 1 "depth" 0
+"g2g3"
+F -1 1 "depth" 0
+"h2h3"
+F -1 1 "depth" 0
+"g2g4"
+F -1 1 "depth" 0
+"h2h4"
+F -1 1 "depth" 0
+"f3e1"
+F -1 1 "depth" 0
+"f3g1"
+F -1 1 "depth" 0
+"f3d2"
+F -1 1 "depth" 0
+"f3d4"
+F -1 1 "depth" 0
+"f3h4"
+F -1 1 "depth" 0
+"f3e5"
+F -1 1 "depth" 0
+"f3g5"
+F -1 1 "depth" 0
+"f4c1"
+F -1 1 "depth" 0
+"f4d2"
+F -1 1 "depth" 0
+"f4e3"
+F -1 1 "depth" 0
+"f4g3"
+F -1 1 "depth" 0
+"f4e5"
+T 1 1 "mate" 0

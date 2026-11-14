@@ -1,0 +1,1 @@
+e8e3c58d3bff0a057f52568d953960bbb70f892ea3b6942d5feccfe13470f420  vendor/chess.hpp
