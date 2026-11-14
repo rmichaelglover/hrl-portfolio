@@ -1,0 +1,8 @@
+Captured: 2026-11-13, America/New_York
+CPU: Intel Core i7-1255U, x86_64, 12 logical CPUs (single-threaded solvers)
+Compiler: c++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+Build: CMake CMAKE_BUILD_TYPE=Release, C++17, -O3 -DNDEBUG (CMake default)
+Timer: std::chrono::steady_clock, microseconds
+One warmup per solver; 21 measurements per solver per case; alternating order
+No CPU affinity, frequency pinning or exclusive CPU reservation.
+Python/numpy/matplotlib are outside timed solver measurements.

@@ -1,0 +1,33 @@
+name: Compatibility regression
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * 1'
+  push:
+    paths:
+      - 'virtual-cell-model/include/**'
+      - 'virtual-cell-model/src/**'
+      - 'virtual-cell-model/tests/**'
+      - 'virtual-cell-model/CMakeLists.txt'
+      - '.github/workflows/compatibility-regression.yml'
+permissions:
+  contents: read
+jobs:
+  native-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S virtual-cell-model -B /tmp/virtual-cell-build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build /tmp/virtual-cell-build -j 2
+      - run: ctest --test-dir /tmp/virtual-cell-build --output-on-failure
+      - run: mkdir -p /tmp/convergence-results
+      - run: /tmp/virtual-cell-build/convergence_benchmark /tmp/convergence-results
+      - name: Record runner environment
+        run: |
+          uname -a > /tmp/convergence-results/environment.txt
+          c++ --version >> /tmp/convergence-results/environment.txt
+          lscpu >> /tmp/convergence-results/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-measurements
+          path: /tmp/convergence-results/

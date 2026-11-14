@@ -42,6 +42,42 @@ public:
         finite(edge.weight);
         edges_.push_back(edge);
     }
+    const auto& prior() const noexcept { return prior_; }
+    // Shared undamped map for iteration and fixed-point experiments.
+    std::vector<std::vector<double>> target(
+        const std::vector<std::vector<double>>& state, double coupling = 1) const {
+        nonnegative(coupling);
+        if (state.size() != prior_.size()) throw std::invalid_argument("State shape");
+        for (const auto& row : state) {
+            if (row.size() != prior_[0].size()) throw std::invalid_argument("State shape");
+            double sum = 0;
+            for (double v : row) sum += nonnegative(v);
+            if (std::abs(sum - 1) > 1e-9) throw std::invalid_argument("State simplex");
+        }
+        auto support = prior_;
+        for (auto& row : support) std::fill(row.begin(), row.end(), 0);
+        for (const auto& edge : edges_) {
+            auto& value = support[edge.object][edge.label];
+            value = finite(value + edge.weight * state[edge.neighbor][edge.neighbor_label]);
+        }
+        auto next = state;
+        for (std::size_t i = 0; i < prior_.size(); ++i) {
+            // Stable softmax(log(prior) + coupling * support).
+            std::vector<double> logits(prior_[i].size());
+            double maximum = -std::numeric_limits<double>::infinity();
+            for (std::size_t a = 0; a < logits.size(); ++a) {
+                logits[a] = prior_[i][a] == 0 ? -std::numeric_limits<double>::infinity()
+                    : finite(std::log(prior_[i][a]) + finite(coupling * support[i][a]));
+                maximum = std::max(maximum, logits[a]);
+            }
+            double sum = 0;
+            for (auto& value : logits) { value = std::exp(value - maximum); sum += value; }
+            for (std::size_t a = 0; a < logits.size(); ++a) {
+                next[i][a] = logits[a] / sum;
+            }
+        }
+        return next;
+    }
     LabelField run(std::size_t budget = 100, double damping = 0.5,
                    double coupling = 1.0, double tolerance = 1e-8) const {
         if (!budget || !std::isfinite(damping) || damping <= 0 || damping > 1)
@@ -49,30 +85,13 @@ public:
         nonnegative(coupling); nonnegative(tolerance);
         LabelField result{prior_};
         for (std::size_t iteration = 0; iteration < budget; ++iteration) {
-            auto support = prior_;
-            for (auto& row : support) std::fill(row.begin(), row.end(), 0);
-            for (const auto& edge : edges_) {
-                auto& value = support[edge.object][edge.label];
-                value = finite(value + edge.weight * result.strengths[edge.neighbor][edge.neighbor_label]);
-            }
-            auto next = result.strengths;
+            auto next = target(result.strengths, coupling);
             double delta = 0;
-            for (std::size_t i = 0; i < prior_.size(); ++i) {
-                // Stable softmax(log(prior) + coupling * support).
-                std::vector<double> logits(prior_[i].size());
-                double maximum = -std::numeric_limits<double>::infinity();
-                for (std::size_t a = 0; a < logits.size(); ++a) {
-                    logits[a] = prior_[i][a] == 0 ? -std::numeric_limits<double>::infinity()
-                        : finite(std::log(prior_[i][a]) + finite(coupling * support[i][a]));
-                    maximum = std::max(maximum, logits[a]);
-                }
-                double sum = 0;
-                for (auto& value : logits) { value = std::exp(value - maximum); sum += value; }
-                for (std::size_t a = 0; a < logits.size(); ++a) {
-                    next[i][a] += damping * (logits[a] / sum - next[i][a]);
+            for (std::size_t i = 0; i < next.size(); ++i)
+                for (std::size_t a = 0; a < next[i].size(); ++a) {
+                    next[i][a] = result.strengths[i][a] + damping * (next[i][a] - result.strengths[i][a]);
                     delta = std::max(delta, std::abs(next[i][a] - result.strengths[i][a]));
                 }
-            }
             result.strengths = std::move(next);
             result.iterations = iteration + 1;
             result.final_delta = delta;

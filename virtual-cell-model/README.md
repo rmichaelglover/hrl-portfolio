@@ -1,5 +1,9 @@
 # Virtual Cell
 
+Latest numerical experiment: [compatibility, convergence and cost](experiments/convergence/README.md)
+compares relaxation with safeguarded Newton on the same existing C++ map.
+Includes residual traces, runtime, compatibility heat maps, 3D response surfaces and repeatable checks.
+
 Latest C++ learning milestone: [backpropagation through categorical relaxation](experiments/learning/README.md)
 adds manual reverse mode, projected Adam, independent gradient checks, and a
 recording-disjoint measured-EOG training/evaluation pipeline with local outputs.
@@ -274,3 +278,10 @@ from behavioral governance. [Research and primary sources](LITHIUM_RESEARCH.md).
 Build with CMake, run `ctest --test-dir build --output-on-failure`, and execute
 `./build/lithium_demo`. Recreate plots with `python3 experiments/lithium/plot.py`.
 The parameters are illustrative; no clinical response predictor is implemented.
+
+## Small C++ lessons: capabilities and memory
+
+Start with [One reusable task, one change in memory](lessons/01-supported-plan.md).
+It uses the existing embodied Alex and PersonModel, with a reusable object that
+records a plan only when a directed support relation is present. Read
+`include/supported_plan.hpp`, then run `supported_plan_demo`.
