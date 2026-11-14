@@ -17,6 +17,16 @@ The solver, PGN reader, benchmark, rules wrapper and standalone certificate chec
 are C++17. They do not invoke Python, JavaScript, Stockfish or an external service.
 The existing implementations and manuscripts remain intact.
 
+## Legal-progression logic
+
+Michael’s next research question now has an executable first formulation:
+[a logic built from legal chess progressions](lessons/02-legal-progression-logic.md).
+It adds composable legal paths, injective natural-number codes, modal queries,
+cooperative versus adversarial bounded goals, and explicitly bounded arithmetic
+on certified prefixes. The lesson proves the finite-domain obstruction to Q
+and identifies which extensions require separate expressivity proofs.
+Run `progression_demo` after building; `legal_progression_logic` joins CTest.
+
 ## Build and use
 
 ```sh

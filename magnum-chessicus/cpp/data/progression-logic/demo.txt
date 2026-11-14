@@ -1,0 +1,12 @@
+Legal composition: 1 + 1 = 2 plies
+Black can cooperate to reach e4/e5: true
+White can force that position on Black's turn: false
+White can force mate within one ply: true
+Formula text: |1:M40:&4:!1:X30:|10:&1:W4:D1:M13:&4:!1:W4:B1:M
+Formula natural code: 1124049058077052048058038052058033049058088051048058124049048058038049058087052058068049058077049051058038052058033049058087052058066049058077
+Certified prefix domain: 0..8
+2 * 4 = 8
+S(8) exists: false
+Same repetition-position key after eight plies: true
+Same complete state code: false
+Conclusion: bounded arithmetic tables are faithful on their stated domain; no interpretation of unbounded arithmetic is established.
