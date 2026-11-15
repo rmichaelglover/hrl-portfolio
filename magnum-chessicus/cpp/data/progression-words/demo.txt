@@ -1,0 +1,10 @@
+Rules: movement-only variant; draw adjudication is absent.
+Generator: g1f3 g8f6 f3g1 f6g8 (4 plies)
+Concatenation: c^3 ; c^4 = c^7 (7 cycles, 28 plies)
+Symbolic successor of c^(10^40): c^10000000000000000000000000000000000000001
+100-ply expansion budget: refused; the symbolic word remains exact.
+Same 28-ply sequence under existing standard kernel: rejected after automatic draw.
+EXTRA Repeat operation: Repeat(c^3, c^4) = c^12 (12 cycles, 48 plies)
+Concatenation-only structure: (N,0,1,+).
+With added variable-count Repeat: (N,0,1,+,*).
+Multiplication is not first-order definable in the concatenation-only structure; Repeat is an explicit extension.

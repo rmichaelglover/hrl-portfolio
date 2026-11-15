@@ -27,6 +27,16 @@ on certified prefixes. The lesson proves the finite-domain obstruction to Q
 and identifies which extensions require separate expressivity proofs.
 Run `progression_demo` after building; `legal_progression_logic` joins CTest.
 
+## Unbounded progression words
+
+The next [didactic lesson](lessons/03-unbounded-progression-words.md) constructs
+an explicit movement-only word variant, certifies a repeatable knight loop,
+and proves that its first-order concatenation structure interprets unbounded
+addition. It establishes the first-order multiplication boundary and defines
+variable-count Repeat as an explicit sufficient extension. `word_demo` runs
+exact symbolic examples beyond machine-word limits; CTest adds `word_tests`.
+The ordinary game kernel and existing outcome solver retain their rules.
+
 ## Build and use
 
 ```sh

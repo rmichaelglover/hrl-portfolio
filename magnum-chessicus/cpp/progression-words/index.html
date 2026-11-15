@@ -1,0 +1,161 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progression words: addition & repetition | Michael Emanuel Glover</title><meta name="description" content="Understand a C++ chess-progression word model: a knight-loop example, exact addition, the multiplication boundary and an explicit Repeat extension."><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f8fa;color:#153f50;font:18px/1.7 Georgia,serif}main{max-width:1120px;margin:auto;padding:35px 24px 75px}nav,.eyebrow,button,label,figcaption{font-family:system-ui,sans-serif}nav{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}a{color:#006fa4}header{padding:55px 0 25px}.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#477b84}h1{font-size:clamp(40px,7vw,78px);line-height:1.04;letter-spacing:-.04em;margin:22px 0}h2{font-size:32px;line-height:1.2;margin-top:45px}p{max-width:850px}.lead{font-size:23px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:35px 0}.card{background:#e5eff0;padding:23px;border-top:4px solid #447e7a}.card strong{display:block;font-size:42px;line-height:1.2}.card span{font:14px/1.6 system-ui}.table-wrap{overflow:auto;border:1px solid #c7d9dd;border-radius:6px}table{border-collapse:collapse;width:100%;font:14px/1.6 system-ui}th,td{padding:12px;border-bottom:1px solid #d7e1e4;text-align:left;vertical-align:top}th{background:#e5eff0}code,pre{font:14px/1.7 ui-monospace,monospace}code{overflow-wrap:anywhere}pre{background:#e5eff0;padding:20px;white-space:pre-wrap;overflow-wrap:anywhere}.note{font-size:15px;color:#456774}.filter{display:flex;gap:15px;flex-wrap:wrap;margin:20px 0;font:14px system-ui}.filter input{font:inherit;padding:10px}.case-row[hidden]{display:none}.math{border-left:4px solid #568c83;padding:12px 22px;background:#edf3f2}.downloads{display:flex;gap:20px;flex-wrap:wrap;margin:25px 0}footer{border-top:1px solid #c7d9dd;margin-top:50px;padding-top:25px;font-size:14px}@media(max-width:650px){.cards{grid-template-columns:1fr;gap:10px}.card{padding:17px}.card strong{font-size:34px}main{padding:24px 15px}header{padding-top:30px}}
+.dance,.count-controls{display:flex;flex-wrap:wrap;gap:14px}.dance span{background:#e5eff0;padding:9px;font:14px/1.5 system-ui}.count-controls{margin:25px 0}.count-controls label{flex:1;min-width:200px;font:16px/1.5 system-ui}input[type=range]{display:block;width:100%;accent-color:#326e88;margin:12px 0}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison article{padding:20px;background:#edf3f2;border-radius:8px}.comparison h3{margin-top:0}.equation{font:16px/1.6 ui-monospace,monospace;overflow-wrap:anywhere}.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{display:inline-block;background:#1c657b;color:white;padding:1px 8px;border-radius:4px;font:14px/1.7 ui-monospace,monospace}.chip.second{background:#705295}.block{display:inline-flex;flex-wrap:wrap;gap:3px;border:1px solid #8fa9b1;padding:4px;border-radius:5px;max-width:100%}h1{font-size:clamp(36px,6vw,66px)}h2{margin-top:50px}main{max-width:980px}li{margin:10px 0}.table-wrap{margin:25px 0}#try-counts{padding-bottom:30px;border-bottom:1px solid #c7d9dd}@media(max-width:650px){.comparison{grid-template-columns:1fr}.count-controls label{min-width:100%}}</style><main><nav><a href="../">← Magnum Chessicus C++</a><a href="../progression-logic/">Previous lesson</a><a href="../lessons/03-unbounded-progression-words.md">Markdown</a><a href="../MAGNUM_CPP_SOURCE.zip">Source ZIP</a><a href="#try-counts">Try the counts</a></nav><p class="eyebrow">Michael Emanuel Glover · C++ research lesson · 14 November 2026</p><h1>Progression words: addition, repetition, and an expressivity boundary</h1>
+<p><strong>Originating proposal and research direction: Michael Emanuel Glover.</strong> Michael proposed constructing a logic from legal chess progressions, investigating arithmetic interpretations, and factoring transformations to reduce repeated work. Cypher contributed this continuation's formal construction, C++ implementation, examples and tests. It extends <a href="../progression-logic/">the preceding lesson</a> and the existing Magnum Chessicus engine.</p>
+<p>This lesson introduces a genuinely unbounded mathematical word domain, proves an additive interpretation, identifies an exact first-order limitation, and specifies one sufficient extension for multiplication. The C++ program implements ground operations and checks examples. The general expressivity statements are mathematical arguments; no general arithmetic theorem prover has been implemented.</p>
+<h2>Start here: what should the reader take away?</h2>
+<p>Michael's proposal asks whether legal chess transformations can serve as a language for arithmetic, and whether their structure offers useful compression. We now have a worked example with three distinct results: a reusable movement loop, an exact additive interpretation on words, and an explicit extension for multiplication.</p>
+<p><strong>Picture a short dance.</strong> White's knight goes out, Black's knight goes out, White's knight comes back, and Black's knight comes back. Call the whole dance c. One c is four plies: four individual player moves. The pieces and movement rights return to their starting configuration. The fact that the dance happened is still part of the history.</p>
+<p><strong>Now count dances, not board arrangements.</strong> The empty dance ε represents zero; c represents one; cc represents two. Appending a three-dance history to a four-dance history gives seven dances. That is addition expressed by concatenating the histories themselves:</p>
+<pre><code>ccc ; cccc = ccccccc
+3 + 4 = 7 cycles = 28 plies.
+</code></pre>
+<p>Multiplication asks a different question: take the entire three-dance block and perform it four times. That gives twelve dances, not seven:</p>
+<pre><code>(ccc)(ccc)(ccc)(ccc) = c^12
+3 * 4 = 12 cycles = 48 plies.
+</code></pre>
+<p>A fixed number of copies can always be written as a finite concatenation. Letting another variable word specify how many copies to make is a stronger operation. We call that new operation Repeat. The mathematical result below explains why no first-order formula in the concatenation-only language already defines general multiplication. Our C++ implementation supplies Repeat explicitly; it does not discover multiplication hidden inside ordinary chess moves.</p>
+<p><strong>Why change the rules?</strong> An ordinary game would end in a draw instead of allowing this dance forever. To study unbounded words, we declared a movement-only variant without draw adjudication. We also made entire histories the mathematical objects. We did not turn one ordinary chess board into infinitely many distinct board configurations.</p>
+<p><strong>Why is the huge example useful?</strong> A checked dance and its repetition count can describe an enormous move history exactly. The program adds one to a 41-digit cycle count without writing out the moves. This is compression of a particular repeatable witness family. It is not yet a method for evaluating every opponent reply or solving the initial position.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Result</th>
+<th>What establishes it</th>
+<th>What it tells us</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The knight dance can repeat in the variant</td>
+<td>One legal period checked in C++, plus induction on the number of periods</td>
+<td>Every finite word c^n has a legal movement interpretation</td>
+</tr>
+<tr>
+<td>Concatenation expresses addition</td>
+<td>The bijection c^n ↔ n preserves the operation</td>
+<td>A faithful unbounded additive interpretation in the declared first-order word language</td>
+</tr>
+<tr>
+<td>First-order concatenation cannot define general multiplication</td>
+<td>The classical Presburger definability theorem, transferred through that bijection</td>
+<td>A precise limitation of this selected language; not a limit on every possible chess-based language</td>
+</tr>
+<tr>
+<td>Added Repeat expresses multiplication</td>
+<td>Its specified meaning Repeat(c^a,c^b)=c^(ab), and the same bijection</td>
+<td>One sufficient enrichment for the full arithmetic signature</td>
+</tr>
+<tr>
+<td>Symbolic words remain exact at large counts</td>
+<td>C++ ground examples and tests, including values beyond 64 bits</td>
+<td>The representation avoids expanding this witness family</td>
+</tr>
+</tbody>
+</table></div>
+<p>The contribution here is Michael's chess-progression research direction and this explicit construction, implementation and application of established logic. The Presburger theorems are established results, credited in the references below. Tests check program behavior; they do not replace the general mathematical proofs. Arithmetic expressivity, an effectively axiomatized proof theory, and optimal chess play remain distinct questions.</p>
+<section id="try-counts" aria-labelledby="count-heading"><p class="eyebrow">A worked picture</p><h2 id="count-heading">Append two histories, or repeat a whole block?</h2><p>One <b>c</b> is the four-ply knight dance. Every chip below stands for one whole dance. All counts refer to the declared movement-only variant.</p><div class="dance"><span>White: g1 → f3</span><span>Black: g8 → f6</span><span>White: f3 → g1</span><span>Black: f6 → g8</span></div><div class="count-controls"><label>First word: <output id="a-value">3</output> cycles<input id="a" type="range" min="0" max="8" value="3"></label><label>Second word: <output id="b-value">4</output> cycles<input id="b" type="range" min="0" max="8" value="4"></label></div><div class="comparison"><article><h3>Concatenation</h3><p>Append the second word to the first.</p><p id="sum" class="equation" aria-live="polite">c^3 ; c^4 = c^7 · 28 plies</p><div id="sum-chips" class="chips" aria-hidden="true"></div></article><article><h3>Added Repeat operation</h3><p>Copy the first word as many times as the second word counts.</p><p id="product" class="equation" aria-live="polite">Repeat(c^3, c^4) = c^12 · 48 plies</p><div id="product-chips" class="chips" aria-hidden="true"></div></article></div><p class="note">With zero cycles, the word is empty (ε). Moving a slider illustrates the definitions; the recorded C++ results and tests appear below.</p></section><h2>1. Remove a bound explicitly</h2>
+<p>Choose the generator</p>
+<pre><code>c = g1f3 g8f6 f3g1 f6g8.
+</code></pre>
+<p>From the standard initial position, these four legal plies restore piece placement, side to move, castling rights and effective en-passant possibilities. They do not restore the complete history or move counters.</p>
+<p>Ordinary chess therefore does not permit this loop to repeat forever: automatic draw adjudication eventually ends the game. The original <code>Progression</code>, <code>State</code>, outcome solver and modal checker keep their existing rules.</p>
+<p>For this new construction, declare a <strong>movement-only variant without draw adjudication</strong>. It retains orthodox move legality, occupancy, king safety, side to move, castling rights and en-passant constraints. It ignores draw claims, repetition adjudication, move-count adjudication and other draw adjudication. Mate and stalemate still prevent further moves because they have no legal movement successor. The construction is about move words, not a complete competitive scoring system.</p>
+<p>The movement position is a projection of a game state, not a full game state. <code>projected_board</code> resets the library's counters after each step to prevent finite-counter overflow. It does not silently make a standard game's history cyclic. Chess960 is rejected explicitly.</p>
+<p><code>LoopCertificate</code> checks one nonempty period using the existing legal move generator and checks equality of the projected starting and ending position keys. The explicit <code>movement_only</code> tag is required when constructing a certificate. It does not certify reachability of an arbitrary supplied root from the normal initial position.</p>
+<p><strong>Repeatability lemma.</strong> Move legality in the selected variant depends on the projected movement position, not on the discarded adjudication data. If every move in c is legal and c returns to its starting projected position, then c^n is a legal movement word for every natural number n. Proof: the empty word is legal. If c^n is legal and ends at the starting projected position, the same checked period c can be appended, establishing c^(n+1). This is a mathematical induction argument over a finite, checkable loop certificate.</p>
+<p>The supplied generator is jointly performed by White and Black. Its repeatability proves the existence of a cooperative progression. It does not prove that White can force Black to keep participating.</p>
+<h2>2. An infinite domain from finite descriptions</h2>
+<p>Let</p>
+<pre><code>D = {ε, c, cc, ccc, ...} = {c^n : n ∈ N}.
+</code></pre>
+<p>Objects are finite move words, rather than just their terminal board positions. Different exponents denote different words even though their projected endpoints agree. Because c is nonempty, words with different exponents have different lengths. We do not identify all returning words with a single board state.</p>
+<p>Define the structure</p>
+<pre><code>W_add = (D; ε, c, ;),
+</code></pre>
+<p>where <code>;</code> is concatenation. Every pair of words in D can compose because each whole period returns to the same projected position. This is a one-generator free monoid. The general category of chess progressions has partial composition; this chosen loop family has total composition. Powers of this single generator also commute under concatenation. That does not mean distinct chess moves or unrelated loop families commute.</p>
+<p><strong>Encoding implementation.</strong> <code>Word</code> stores a shared checked generator and an exact canonical decimal exponent. <code>Natural</code> uses a dynamically sized digit string, rather than a uint64 counter. It can represent, for example, c^(10^40) and its successor without expanding the moves. Every actual object and allocation is finite; the mathematical family has no fixed maximum exponent. Available memory remains a physical bound on implementation, not a new mathematical largest natural number.</p>
+<p>Words from different declared generator families cannot be concatenated by this API. Generator identity includes its projected starting position, explicit movement policy, and ordered moves. Two families may have related expansions, but no cross-family equivalence theorem or quotient is claimed.</p>
+<p><code>Word::materialize(max_plies)</code> is a separate bounded request. If the expansion would exceed the allowance, it throws <code>ResourceLimit</code>; it neither truncates nor changes the exact symbolic word. The earlier natural-number byte codec can encode this compressed representation. That code is not the same number as a code of the fully expanded history.</p>
+<h2>3. Addition is now intrinsic to the word operation</h2>
+<p>Define</p>
+<pre><code>ν : D → N,     ν(c^n)=n.
+</code></pre>
+<p>This is a bijection, and</p>
+<pre><code>ν(ε)=0,
+ν(c)=1,
+ν(x;y)=ν(x)+ν(y).
+</code></pre>
+<p>Consequently W_add is isomorphic to (N;0,1,+). This is stronger than the previous lesson's externally supplied finite arithmetic table: addition is exactly the existing concatenation operation on the chosen domain.</p>
+<p>A first-order word language has variables ranging over D, constants ε and c, equality, concatenation, ordinary Boolean connectives and quantifiers over D. In that language:</p>
+<pre><code>Zero(x)       := x=ε
+Succ(x,y)     := x;c=y
+Add(x,y,z)    := x;y=z
+Leq(x,y)      := ∃z (x;z=y).
+</code></pre>
+<p>To translate an additive arithmetic formula, replace 0 with ε, 1 with c, and + with <code>;</code>, leaving equality and logical structure intact; quantify over D. Structural induction on terms and formulas proves that the translation preserves truth under the bijection ν. Thus the construction faithfully interprets unbounded additive arithmetic in this specified word language.</p>
+<p>This is an added first-order word structure. The previous state-modal language did not already quantify over all histories, and has not silently acquired those quantifiers.</p>
+<p>The relevant classical setting is Presburger arithmetic, with a decidable first-order theory; see the <a href="https://cvc4.cs.stanford.edu/logic/slides/lec10.pdf">logic course's Presburger treatment</a>. The C++ code here implements exact ground concatenation and equality, not a quantifier-elimination algorithm or decision procedure for arbitrary first-order formulas. Infinite domain and unbounded syntax therefore need not imply undecidability.</p>
+<h2>4. Multiplication is not hidden in first-order concatenation</h2>
+<p>Fixed repetition is available: for any fixed natural k, concatenating x with itself k times expresses multiplication by that fixed constant. Each k gives a finite term. There is no single first-order formula in W_add defining general multiplication of two variable exponents.</p>
+<p>For the precise scope, assume a formula in the first-order concatenation language defined M(x,y,z) exactly when ν(z)=ν(x)ν(y). Translating through ν would define multiplication in Presburger arithmetic. The classical definability theorem says each unary Presburger-definable set is ultimately periodic; its modern formalization also explicitly establishes that multiplication is not definable. See the <a href="https://leanprover.github.io/hex/docs/Mathlib/ModelTheory/Arithmetic/Presburger/Definability.html">Mathlib definability results</a>.</p>
+<p>Here is the obstruction using squares. If multiplication were definable, so would be</p>
+<pre><code>Square(z) := ∃x M(x,x,z).
+</code></pre>
+<p>Suppose the squares were periodic beyond N with positive period p. Choose n with n²&gt;N and 2n+1&gt;p. Periodicity would make n²+p a square, yet</p>
+<pre><code>n² &lt; n²+p &lt; (n+1)²,
+</code></pre>
+<p>which is impossible. Thus squares are not ultimately periodic, contradicting the definability theorem.</p>
+<p>The conclusion is specific to first-order W_add. It does not prohibit C++ loops, richer sequence languages, second-order quantifiers, newly added predicates, or a different multi-generator word construction from expressing more. Finite ground tests cannot establish this nondefinability theorem; the theorem and the isomorphism do that work.</p>
+<h2>5. One sufficient extension: variable-count block repetition</h2>
+<p>Add a new binary operation on word objects:</p>
+<pre><code>Repeat(c^a,c^b) = (c^a) repeated b times = c^(a*b).
+</code></pre>
+<p>The second argument is another word in D, interpreted as a counter by its cycle length. This is well-defined for every pair, with Repeat(x,ε)=ε and Repeat(x,c)=x. It satisfies the recursion</p>
+<pre><code>Repeat(x,y;c) = Repeat(x,y);x.
+</code></pre>
+<p><strong>Repeat is explicitly new vocabulary.</strong> It is not claimed to be first-order definable from concatenation. Writing the recursion is not a proof that a formula in the old language can express arbitrary iterations. The <code>RepeatExtension</code> C++ class implements the intended operation by exact decimal multiplication; that algorithm computes the new interpretation rather than deriving it from the old language.</p>
+<p>For the expanded structure</p>
+<pre><code>W_arith = (D; ε, c, ;, Repeat),
+</code></pre>
+<p>the same ν gives an isomorphism to (N;0,1,+,<em>). Extend the translation with x</em>y mapped to Repeat(x,y). Structural induction now proves truth preservation for the full first-order arithmetic signature. This supplies a specific sufficient extension for an arithmetic interpretation; it is not a proof that Repeat is the only possible route or that standard chess already contains it.</p>
+<p>A useful difference in the example:</p>
+<pre><code>c^3 ; c^4             = c^7
+Repeat(c^3,c^4)        = c^12.
+</code></pre>
+<p>Both produce legal words in the variant, but only the second uses the added variable-count operation.</p>
+<h2>6. What this does and does not imply about Gödel</h2>
+<p>The intended W_arith structure satisfies translated arithmetic truths, including the PA axioms and each translated induction instance, by its isomorphism with the standard natural numbers. That is a semantic statement in the surrounding mathematics.</p>
+<p>A proof system is a separate object. One can choose translated PA as an effectively axiomatized theory in this expanded word language. Conditional on its consistency, the usual incompleteness results apply to that theory. The set of <em>all</em> truths of W_arith is complete by its definition but is not an effective axiomatization; these are different theories.</p>
+<p>We have not implemented PA proof syntax, proof checking, internal arithmetization of those proofs, or a Gödel sentence. We have not shown that the standard finite chess game is undecidable, inconsistent, or a draw. We have established where an additive word structure stops and what one explicit extension contributes.</p>
+<h2>7. Compression with a precise scope</h2>
+<p>A checked loop and a 41-digit exponent represent 4×10^40 individual plies. Concatenating c^a and c^b costs work proportional to exponent-digit lengths for this implementation, rather than work proportional to the expanded histories. The period is certified once; its legality for all repetitions follows from the repeatability lemma.</p>
+<p>This is exact compression of a selected cooperative witness family. It does not compress all possible legal games, retain all adversarial branches, or improve a worst-case chess-solving bound. We have changed both the rule policy and the domain to study expressivity. A search-compression experiment must separately preserve the original rules and strategic quantifiers.</p>
+<h2>8. Read, run, and inspect</h2>
+<p>The existing C++17 project now contains:</p>
+<ul>
+<li><a href="../include/progression_words.hpp"><code>include/progression_words.hpp</code></a>: Natural, LoopCertificate, Word, RepeatExtension.</li>
+<li><a href="../src/word_demo.cpp"><code>src/word_demo.cpp</code></a>: the small worked example.</li>
+<li><a href="../tests/word_tests.cpp"><code>tests/word_tests.cpp</code></a>: exact arithmetic, loop checks, policy separation, coding and bounded expansion checks.</li>
+<li><a href="../data/progression-words/demo.txt"><code>data/progression-words/demo.txt</code></a>: captured output.</li>
+</ul>
+<pre><code class="language-sh">cmake -S . -B /tmp/magnum-progression-build -DCMAKE_BUILD_TYPE=Release
+cmake --build /tmp/magnum-progression-build -j 2
+ctest --test-dir /tmp/magnum-progression-build --output-on-failure
+/tmp/magnum-progression-build/word_demo
+</code></pre>
+<p>No new runtime dependencies. Both the original outcome tests and the earlier bounded-logic tests remain in CTest. The new suite checks 1,000 deterministic arithmetic/law cases, large carries beyond machine-word sizes, a 160-ply movement-only replay, refusal of the same kind of continuation under standard adjudication, and explicit expansion-budget refusal. Those checks validate implementation instances; the all-natural-number claims rest on the mathematical proofs above.</p>
+<p>Next didactic step: specify a small proof language for this expanded arithmetic structure and verify proof objects, keeping that separate from the ordinary chess solver. A separate empirical track can test safe compression of standard-game witnesses.</p><section><h2>Recorded executable example</h2><pre>Rules: movement-only variant; draw adjudication is absent.
+Generator: g1f3 g8f6 f3g1 f6g8 (4 plies)
+Concatenation: c^3 ; c^4 = c^7 (7 cycles, 28 plies)
+Symbolic successor of c^(10^40): c^10000000000000000000000000000000000000001
+100-ply expansion budget: refused; the symbolic word remains exact.
+Same 28-ply sequence under existing standard kernel: rejected after automatic draw.
+EXTRA Repeat operation: Repeat(c^3, c^4) = c^12 (12 cycles, 48 plies)
+Concatenation-only structure: (N,0,1,+).
+With added variable-count Repeat: (N,0,1,+,*).
+Multiplication is not first-order definable in the concatenation-only structure; Repeat is an explicit extension.
+</pre><p><a href="../data/progression-words/demo.txt">Plain-text output</a> · <a href="../tests/word_tests.cpp">Executable checks</a></p></section><footer>Originating proposal and research direction: Michael Emanuel Glover. Formalization, implementation and checks with Cypher.</footer></main><script>const a=document.querySelector('#a'),b=document.querySelector('#b');
+function chip(second=false){const e=document.createElement('span');e.className='chip'+(second?' second':'');e.textContent='c';return e;}
+function update(){const x=Number(a.value),y=Number(b.value);document.querySelector('#a-value').textContent=x;document.querySelector('#b-value').textContent=y;document.querySelector('#sum').textContent=`c^${x} ; c^${y} = c^${x+y} · ${4*(x+y)} plies`;document.querySelector('#product').textContent=`Repeat(c^${x}, c^${y}) = c^${x*y} · ${4*x*y} plies`;const sum=document.querySelector('#sum-chips'),product=document.querySelector('#product-chips');sum.replaceChildren();product.replaceChildren();for(let i=0;i<x+y;i++)sum.append(chip(i>=x));if(x+y===0)sum.textContent='ε';for(let j=0;j<y&&x>0;j++){const block=document.createElement('span');block.className='block';for(let i=0;i<x;i++)block.append(chip(j%2===1));product.append(block);}if(x*y===0)product.textContent='ε';}
+a.addEventListener('input',update);b.addEventListener('input',update);update();</script></html>
