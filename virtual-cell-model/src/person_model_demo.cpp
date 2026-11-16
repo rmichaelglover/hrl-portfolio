@@ -6,6 +6,8 @@ using namespace virtual_cell::mind;
 
 int main() {
     PersonModel alex("Alex", 5, {1, 1, 1, 1, 1});
+    const auto learning_goal = alex.add_goal(chess_learning_goal, Objective::Learning);
+    std::cout << "Goal: " << alex.brain().memory().at(learning_goal).name() << '\n';
     const Molecule glycine("glycine", {2, 5, 1, 2});
     Cell cell; cell.add_molecule(glycine);
     Tissue tissue({cell, cell, cell});

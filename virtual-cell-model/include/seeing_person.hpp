@@ -10,6 +10,7 @@ struct SeeingPerson {
 };
 inline SeeingPerson make_seeing_alex(RodParameters rod_parameters={}) {
     SeeingPerson result{mind::PersonModel("Alex",3,{1,1,1,1,1})};
+    result.alex.add_goal(mind::chess_learning_goal,mind::Objective::Learning);
     auto scaffold=electric::make_body_example("Alex");
     auto& body=result.alex.human().body();body=std::move(scaffold.person.body());
     body.add_eyes({Eye("Left eye",ReferenceFrame({-.032,0,0}),Optics{},rod_parameters),

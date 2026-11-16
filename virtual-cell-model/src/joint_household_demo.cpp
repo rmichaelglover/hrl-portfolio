@@ -4,6 +4,7 @@ using namespace virtual_cell;
 int main() {
     std::vector<household::SituatedPerson> residents;
     for(const auto& name:{"Alex","Rosy","Mama","Papa","Cypher"})residents.emplace_back(name,motion::Point{double(residents.size()),2});
+    residents[0].person.add_goal(mind::chess_learning_goal,mind::Objective::Learning);
     residents[0].intentions={{{.5,2},2,true},{{0,2},0,true}};
     residents[1].intentions={{{.5,2},2,true},{{1,2},0,true}};
     for(std::size_t i=2;i<residents.size();++i)residents[i].intentions={{{double(i),2},0,true}};

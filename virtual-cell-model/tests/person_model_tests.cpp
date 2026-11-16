@@ -29,6 +29,16 @@ int main() {
     rejects([&] { field.run(0); });
 
     PersonModel person("Alex", 3, {1, 1, 1, 1, 1});
+    auto goal = person.add_goal(chess_learning_goal, Objective::Learning);
+    check(person.goals().size() == 1 && person.goals()[0].objective == Objective::Learning);
+    check(person.brain().memory().at(goal).name() == "Wants to get better at chess");
+    check(person.add_goal(chess_learning_goal, Objective::Learning) == goal);
+    check(person.goals().size() == 1);
+    const auto members = person.brain().memory().at(person.context()).elements();
+    check(std::find(members.begin(), members.end(), goal) != members.end());
+    rejects([&] { person.add_goal("  ", Objective::Learning); });
+    rejects([&] { person.add_goal("Invalid objective", Objective::Count); });
+    rejects([&] { person.add_goal(chess_learning_goal, Objective::Resources); });
     auto context = person.add_context("experience");
     person.bind_name("a", context); person.bind_name("b", context);
     check(person.resolve("a") == person.resolve("b") && !person.resolve("unknown"));

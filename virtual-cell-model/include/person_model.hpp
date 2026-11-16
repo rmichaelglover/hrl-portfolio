@@ -10,6 +10,12 @@
 
 namespace virtual_cell::mind {
 
+struct PersonalGoal {
+    NodeId representation;
+    Objective objective;
+};
+inline constexpr const char* chess_learning_goal = "Wants to get better at chess";
+
 struct Experience {
     NodeId context;
     std::string action;
@@ -38,6 +44,7 @@ class PersonModel {
     double spent_energy_ = 0;
     std::map<std::string, NodeId> names_;
     std::vector<Experience> experiences_;
+    std::vector<PersonalGoal> goals_;
     std::optional<bio::LithiumPhysiology> physiology_;
     BoundaryObserver boundary_observer_;
     ReflectivePractice reflection_;
@@ -49,6 +56,23 @@ public:
                 std::array<double, objective_count> weights)
         : human_(std::move(name)), governor_(weights), action_energy_(nonnegative(action_energy)) {
         context_ = brain_.memory().create<Root>("Person's modeled context");
+    }
+    const std::vector<PersonalGoal>& goals() const { return goals_; }
+    NodeId add_goal(std::string description, Objective objective) {
+        if (description.find_first_not_of(" \t\r\n") == std::string::npos ||
+            static_cast<std::size_t>(objective) >= objective_count)
+            throw std::invalid_argument("Goal needs content and a valid objective");
+        for (const auto& goal : goals_) {
+            if (brain_.memory().at(goal.representation).name() == description) {
+                if (goal.objective != objective)
+                    throw std::invalid_argument("Goal already has another objective");
+                return goal.representation;
+            }
+        }
+        const auto id = brain_.memory().create<Root>(std::move(description));
+        brain_.memory().include(context_, id);
+        goals_.push_back({id, objective});
+        return id;
     }
     motion::Preferences& movement_preferences() { return movement_preferences_; }
     const motion::Preferences& movement_preferences() const { return movement_preferences_; }

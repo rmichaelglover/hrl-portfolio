@@ -285,3 +285,9 @@ Start with [One reusable task, one change in memory](lessons/01-supported-plan.m
 It uses the existing embodied Alex and PersonModel, with a reusable object that
 records a plan only when a directed support relation is present. Read
 `include/supported_plan.hpp`, then run `supported_plan_demo`.
+
+Alex now has the explicit Learning goal **“Wants to get better at chess.”**
+`PersonModel::add_goal` records a typed goal in relational memory, avoiding duplicate
+entries. The seeing-Alex factory and the person/household demos initialize it.
+Goals record intentions; existing candidate evaluation and learning observations
+continue to determine action choices and recorded outcomes.
