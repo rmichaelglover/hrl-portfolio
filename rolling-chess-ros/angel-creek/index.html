@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Follow water, stored energy, and an electrical pulse into the Virtual Person garden in this ROS 2 replay.">
+<title>The Creek Carries a Question · Glover Labs</title>
+<link rel="stylesheet" href="style.css">
+<script src="replay.js" defer></script>
+</head>
+<body>
+<header><a href="../">ROS 2 Worlds</a><a href="../../virtual-cell-model/glims/peaceful-garden/">Peaceful Garden</a></header>
+<main>
+<section class="intro">
+<p class="edition">Glover Labs · Michael Emanuel Glover</p>
+<h1>The creek carries<br><em>a question.</em></h1>
+<p>Follow a particle downstream. Watch the water charge a capacitor and the Artificial Angel decide when to spend that energy. Each delivered electrical pulse gives the Virtual Person garden one turn.</p>
+</section>
+<section class="instrument" aria-label="Creek and garden replay">
+<div class="bar"><strong>Tiny Creek → Peaceful Garden</strong><span id="source">Synthetic ROS 2 model replay</span></div>
+<canvas id="world" width="1040" height="460" role="img" aria-label="Schematic of a flowing creek, capacitor, pulse, and five garden residents"></canvas>
+<div class="controls"><button id="play" type="button" disabled>Play</button><label for="time">Replay time</label><input id="time" type="range" min="0" max="59" value="0" disabled><output id="clock" for="time">00 s</output></div>
+<p id="reading" role="status">Loading replay…</p>
+</section>
+<dl class="metrics">
+<div><dt>Water flow</dt><dd id="flow">—</dd></div>
+<div><dt>Stored energy</dt><dd id="energy">—</dd></div>
+<div><dt>Brownian step</dt><dd id="brownian">—</dd></div>
+<div><dt>Garden turn</dt><dd id="step">—</dd></div>
+</dl>
+<section class="notes">
+<article><h2>Water and motion</h2><p>Flow sets downstream drift. Water temperature and viscosity set the scale of Brownian diffusion for a suspended 0.5 µm-radius tracer. The creek drawing is schematic. The signed Brownian step above is in micrometres.</p></article>
+<article><h2>Energy and evidence</h2><p>The capacitor stores modeled harvest from 12 cm of hydraulic head. A pulse spends 50 mJ and opens a downstream observation on the next sample. The Angel uses that reading to update its trust in its three forecasters.</p></article>
+<article><h2>From replay to creek</h2><p>This replay uses synthetic flow. The native ROS 2 node also accepts flow and temperature measured at 1 Hz, with an optional downstream reading for feedback. The garden, generator and circuit run as models.</p><a href="replay.json" download>Download the replay ledger</a> · <a href="../ros_package/cypher_robot_mind/cypher_robot_mind/angel_creek.py">Model source</a></article>
+</section>
+</main>
+</body>
+</html>

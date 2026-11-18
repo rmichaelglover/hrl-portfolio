@@ -13,6 +13,7 @@ setup(
     description='Virtual embodied HRL robot mind for ROS 2 Humble', license='MIRL-1.0',
     entry_points={'console_scripts': [
         'peaceful_garden = cypher_robot_mind.peaceful_node:main',
+        'angel_creek = cypher_robot_mind.angel_creek_node:main',
         'chess_lab = cypher_robot_mind.chess_lab_node:main',
         'world = cypher_robot_mind.world_node:main',
         'mind = cypher_robot_mind.mind_node:main',

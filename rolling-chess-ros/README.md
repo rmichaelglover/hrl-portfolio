@@ -59,3 +59,37 @@ The following are accelerated numerical model runs, not recordings of a ROS subs
 The deterministic PGN records the intended move supporting its prospective fifty-move draw claim. A known PGN replay is a consistency test, not discovery or proof of faster chess search. In the initial apparatus, all 20 opening moves had physical witnesses; the demonstrated 20 → 2 → 1 branch reduction comes from known source and observed destination evidence.
 
 Glover Labs · R. Michael Glover & Cypher · [License](LICENSE)
+
+## Angel Creek and Virtual Person
+
+[Open The Creek Carries a Question](angel-creek/) to replay Tiny Creek, the
+Artificial Angel, and the Peaceful Garden on one timeline. Each delivered
+capacitor pulse advances the garden by one turn. A pulse also enables a
+downstream observation on the following sample, when that reading exists.
+Michael Emanuel Glover originated the Artificial Angel and the coupled-world
+experiment.
+
+Build and source the package as above, then run the independent ROS node:
+
+```bash
+ros2 run cypher_robot_mind angel_creek
+ros2 topic echo /angel_creek/ledger
+ros2 topic echo /angel_creek/garden
+```
+
+Both topics carry JSON in `std_msgs/msg/String` at 1 Hz. The default trace has
+60 samples. Use `--ros-args -p csv_path:=/absolute/path/to/creek.csv` for a file
+with one sample per second and columns `flow_lps,temperature_c`. Include
+`downstream_flow_lps` to supply separate observations for learning. The first
+two columns alone drive the model while skipping downstream learning updates.
+The bundled replay uses synthetic readings. Hydraulic head, efficiency, the
+capacitor and resistor are modeled. Brownian diffusion applies to a suspended
+particle in liquid water using the Stokes–Einstein approximation with a
+one-dimensional downstream current.
+
+Regenerate the browser data from the same model:
+
+```bash
+PYTHONPATH=ros_package/cypher_robot_mind python3 -m cypher_robot_mind.angel_creek |
+  python3 -c 'import json,sys; json.dump([json.loads(line) for line in sys.stdin],sys.stdout,separators=(",",":"))' > angel-creek/replay.json
+```
