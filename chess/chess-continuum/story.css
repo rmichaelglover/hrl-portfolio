@@ -1,0 +1,73 @@
+:root {
+  color-scheme: light;
+  --paper: #fcf5e4;
+  --ink: #242c22;
+  --green: #2e5544;
+  --berry: #743952;
+  --line: #d9cdb1;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font: clamp(1.14rem, 1.6vw, 1.3rem)/1.72 Georgia, serif;
+}
+a { color: var(--green); text-underline-offset: .22em; }
+a:focus-visible { outline: 2px solid var(--berry); outline-offset: 4px; }
+nav, main { width: min(100% - 2rem, 68rem); margin-inline: auto; }
+nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: .95rem;
+  border-bottom: 1px solid var(--line);
+  font: 650 .82rem/1.4 system-ui, sans-serif;
+}
+.masthead { padding: clamp(2.5rem, 7vw, 5rem) 0 2.2rem; }
+.eyebrow, .byline, figcaption, .chorus {
+  font: 650 .82rem/1.55 system-ui, sans-serif;
+}
+.eyebrow, .chorus strong { text-transform: uppercase; letter-spacing: .13em; }
+.eyebrow, .byline, figcaption { color: var(--green); }
+h1 {
+  font-size: clamp(2.3rem, 7.6vw, 6.25rem);
+  line-height: .97;
+  letter-spacing: -.052em;
+  margin: 0;
+}
+.subtitle {
+  color: var(--berry);
+  font-size: clamp(1.25rem, 3.5vw, 2rem);
+  font-style: italic;
+  margin: .7em 0 .5em;
+  line-height: 1.18;
+}
+figure { margin: 0; }
+img { display: block; width: 100%; height: auto; border-radius: .35rem; }
+.cover img { aspect-ratio: 3 / 2; object-fit: cover; }
+.story, .afterword, .interlude { width: min(100%, 39rem); margin-inline: auto; }
+.story { margin-block: 2.3rem; }
+.story p { margin: 0 0 .85em; }
+.opening::first-letter {
+  color: var(--berry);
+  float: left;
+  font-size: 3.8em;
+  line-height: .82;
+  margin: .07em .09em 0 0;
+}
+h2 { color: var(--green); font-size: 1.6em; line-height: 1.16; margin: 1.8em 0 .55em; }
+figcaption { margin-top: .55rem; }
+figcaption span { font-family: ui-monospace, monospace; }
+.story .chorus {
+  border-left: .22rem solid var(--berry);
+  padding-left: .85rem;
+  margin: 1.5rem 0;
+}
+.chorus strong { display: block; color: var(--berry); }
+.afterword {
+  margin-block: 3.6rem 4.8rem;
+  border-top: 1px solid var(--line);
+  font-size: .94rem;
+}
+.afterword h2 { font-size: 1.45rem; }
