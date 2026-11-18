@@ -28,3 +28,34 @@
 @media(prefers-reduced-motion:reduce){.card-art{transition:none}}
 /* Keep the archive's wide comparison table inside its own phone-width scroller. */
 @media(max-width:680px){#engine table{display:block;max-width:100%;overflow-x:auto}}
+
+/* Three projects, each with a composition drawn from its own world. */
+.home-showcase{max-width:1240px;margin:30px auto 0;padding:0 24px}
+.home-showcase h2{font:700 clamp(25px,4vw,36px)/1.16 Georgia,serif;margin:0 0 14px}
+.showcase-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);grid-template-rows:auto auto;gap:12px}
+.showcase-layout a{display:flex;min-width:0;overflow:hidden;text-decoration:none;border-radius:14px;border:1px solid #ffffff25;color:inherit}
+.showcase-layout a:hover,.showcase-layout a:focus-visible{outline:2px solid #bbf6db;outline-offset:3px}
+.showcase-layout strong,.showcase-layout b{display:block}
+.showcase-layout strong{line-height:1.18}
+.showcase-layout b{font:700 12px/1.4 system-ui;margin-top:10px}
+.showcase-story{grid-row:span 2;flex-direction:column;background:#f6e6c6!important;color:#39281f!important}
+.showcase-story img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 48%}
+.showcase-story>span{padding:17px 20px}
+.showcase-story strong{font:700 clamp(22px,3vw,34px)/1.1 Georgia,serif;margin-bottom:6px}
+.showcase-story b{color:#743952}
+.showcase-creek{flex-direction:column;justify-content:center;gap:5px;padding:17px 20px;background:radial-gradient(ellipse at top left,#284d3b,#0d262a 72%);color:#d9f1dd!important}
+.showcase-creek strong{font-size:20px}
+.showcase-creek b{color:#b5f0ce}
+.creek-pulse{display:flex;align-items:center;gap:6px;min-height:29px;margin:0 0 7px}
+.creek-pulse i{height:3px;flex:1;background:#6a9b7e;border-radius:2px}
+.creek-pulse i:nth-child(4n + 2){height:12px}.creek-pulse i:nth-child(6n + 4){height:28px;background:#f0ce87}
+.showcase-world{background:#142839;align-items:center}
+.showcase-world img{width:42%;height:100%;min-height:110px;object-fit:cover}
+.showcase-world>span{padding:13px 14px}
+.showcase-world strong{font-size:17px;margin-bottom:5px}
+.showcase-world b{color:#a7dbff}
+@media(max-width:680px){
+  .home-showcase{padding-inline:16px}
+  .showcase-layout{grid-template-columns:minmax(0,1fr)}
+  .showcase-story{grid-row:auto}
+}

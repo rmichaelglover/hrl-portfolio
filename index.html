@@ -4,13 +4,15 @@
 <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('maestro-embedded');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Maestro+++ — play colorful, musical chess | Manny Glover</title>
-<!-- PWA: installable to the iPad/iPhone home screen (Share ▸ Add to Home Screen), runs fullscreen & offline -->
+<title>Maestro+++ — musical chess, worlds &amp; research | HRL Portfolio</title>
+<!-- The installable Maestro app lives under whimsy-chess/. -->
+<meta name="description" content="Play musical chess in Maestro, read illustrated stories, and explore Michael Emanuel Glover’s playable worlds and research.">
 <meta name="theme-color" content="#04050b" />
 <link rel="manifest" href="whimsy-chess/manifest.webmanifest" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Maestro" />
+<link rel="icon" type="image/png" sizes="192x192" href="whimsy-chess/icons/icon-192.png" />
 <link rel="apple-touch-icon" href="whimsy-chess/icons/apple-touch-icon.png" />
 <style>
   :root{
@@ -190,7 +192,7 @@
 @media(max-width:820px){.maestro-home .top>span{min-width:0;max-width:100%}.maestro-home .top>span:has(#selGame){display:flex;align-items:center;gap:6px;width:100%}.maestro-home #selGame{min-width:0;width:0;max-width:100%;flex:1}}
 .mini-square{position:relative}.mini-square small{position:absolute;font:700 7px/1 system-ui;pointer-events:none}.mini-co-rank{left:2px;top:2px}.mini-co-file{right:2px;bottom:1px}.mini-square.light small{color:#355947}.mini-square.dark small{color:#f0f3d7}
 </style><link rel="stylesheet" href="world-directory.css"><link rel="stylesheet" href="homepage-cards.css"></head>
-<body class="maestro-home" data-maestro-landing="1"><a class="home-skip" href="#board">Skip to chess board</a><div class="home-mast"><h1>♟ Maestro+++ <small>Chess. Music. A little magic.</small></h1><nav aria-label="Main navigation"><a href="#home-mini">Mini-puzzles</a><a href="#home-variants">Fun variants</a><a href="chess-lessons/">Learn chess</a><a href="chess-music/">Music</a><a href="community/">Meet the players</a><a href="#world-directory">All worlds ↓</a><a href="#research-shelf">Research ↓</a></nav></div>  <div class="app">
+<body class="maestro-home" data-maestro-landing="1"><a class="home-skip" href="#board">Skip to chess board</a><div class="home-mast"><h1>♟ Maestro+++ <small>Chess. Music. A little magic.</small></h1><nav aria-label="Main navigation"><a href="#home-mini">Mini-puzzles</a><a href="#home-variants">Fun variants</a><a href="chess-lessons/">Learn chess</a><a href="chess-music/">Music</a><a href="community/">Meet the players</a><a href="#world-directory">Find a project ↓</a><a href="#research-shelf">Research ↓</a></nav></div>  <div class="app">
     <div class="boardcol"><p class="home-board-hint">Your move. Click a piece, pick a square, make it sing.</p>
       <div class="pbar" id="pTop"></div>
       <div class="board" id="board"></div>
@@ -210,10 +212,10 @@
       <div id="rolesPanel"></div>
       <div id="scorePanel"></div>
       <div class="meta" id="meta"></div><aside class="home-discoveries" aria-labelledby="home-discoveries-title">
-<a id="french-fry-earth-feature" class="discovery discovery-study has-card-image" href="operation-french-fry-earth/"><img class="card-art" src="operation-french-fry-earth/operation-french-fry-earth.png" width="1672" height="941" alt="A giant Martian potato becomes golden French fries in a satirical planetary rescue."><span class="discovery-copy"><span class="discovery-kicker">NEWEST MEGA PLAY CHAPTER · TWO SUPPLIED ILLUSTRATIONS</span><strong>Operation French Fry Earth</strong><span>All Earthlings unite against the Martian potato-farming conglomerate. Starshine, Yoshimi, Michael, and an interplanetary dispute over the delivery charge.</span><span class="discovery-action">Read the chapter ↗</span></span></a>
+<a id="french-fry-earth-feature" class="discovery discovery-study has-card-image" href="operation-french-fry-earth/"><img class="card-art" src="assets/home/french-fry-earth.webp" width="720" height="405" decoding="async" alt="A giant Martian potato becomes golden French fries in a satirical planetary rescue."><span class="discovery-copy"><span class="discovery-kicker">NEWEST MEGA PLAY CHAPTER · TWO SUPPLIED ILLUSTRATIONS</span><strong>Operation French Fry Earth</strong><span>All Earthlings unite against the Martian potato-farming conglomerate. Starshine, Yoshimi, Michael, and an interplanetary dispute over the delivery charge.</span><span class="discovery-action">Read the chapter ↗</span></span></a>
 <a id="mani-feature" class="discovery discovery-study" href="whimsy-chess/mani/"><span class="discovery-copy"><span class="discovery-kicker">MAESTRO · WORKING RESEARCH PROTOTYPE</span><strong>Mani: Research &amp; Sanctuary</strong><span>Run relaxation labeling, inspect hypothesis graphs, verify contribution receipts, and explore the 80/10/10 allocation.</span><span class="discovery-action">Open the workspace ↗</span></span></a>
-<a id="yoshimi-feature" class="discovery discovery-study has-card-image" href="yoshimi-the-ultrabot/"><img class="card-art" src="yoshimi-the-ultrabot/art/01-starshine-and-yoshimi.png" alt="Starshine checks Yoshimi the Ultrabot in the maintenance room." width="1536" height="1024" decoding="async"><span class="discovery-copy"><span class="discovery-kicker">NEW · ILLUSTRATED MEGAPLAY SCIENCE FICTION</span><strong>Yoshimi the Ultrabot</strong><span>Starshine, a tunnel rescue, and Michael Glover’s war-changing robot. Two original illustrations.</span><span class="discovery-action">Read Starshine’s scene ↗</span></span></a>
-<a id="darker-michael-feature" class="discovery discovery-study has-card-image" href="the-darker-sides-of-michael/"><img class="card-art" src="the-darker-sides-of-michael/art/michael-at-the-desk.png" alt="Michael at his desk with a spreadsheet, chat window, unfinished physics notes and a whiteboard." width="1536" height="1024" decoding="async"><span class="discovery-copy"><span class="discovery-kicker">NEW · REQUIRED MEGAPLAY SCENE</span><strong>The Darker Sides of Michael</strong><span>Michael Glover on sloth, bitterness, rivalry with AI, and the work behind a speculative research programme. Illustrated scene and complete conversation appendix.</span><span class="discovery-action">Read the scene ↗</span></span></a>
+<a id="yoshimi-feature" class="discovery discovery-study has-card-image" href="yoshimi-the-ultrabot/"><img class="card-art" src="assets/home/yoshimi.webp" width="720" height="480" decoding="async" alt="Starshine checks Yoshimi the Ultrabot in the maintenance room."><span class="discovery-copy"><span class="discovery-kicker">NEW · ILLUSTRATED MEGAPLAY SCIENCE FICTION</span><strong>Yoshimi the Ultrabot</strong><span>Starshine, a tunnel rescue, and Michael Glover’s war-changing robot. Two original illustrations.</span><span class="discovery-action">Read Starshine’s scene ↗</span></span></a>
+<a id="darker-michael-feature" class="discovery discovery-study has-card-image" href="the-darker-sides-of-michael/"><img class="card-art" src="assets/home/darker-michael.webp" width="720" height="480" decoding="async" alt="Michael at his desk with a spreadsheet, chat window, unfinished physics notes and a whiteboard."><span class="discovery-copy"><span class="discovery-kicker">NEW · REQUIRED MEGAPLAY SCENE</span><strong>The Darker Sides of Michael</strong><span>Michael Glover on sloth, bitterness, rivalry with AI, and the work behind a speculative research programme. Illustrated scene and complete conversation appendix.</span><span class="discovery-action">Read the scene ↗</span></span></a>
 <div class="discover-heading"><h2 id="home-discoveries-title">A little chess adventure?</h2><a href="chess/">All chess worlds ↗</a></div>
 <section class="home-mini" id="home-mini" aria-labelledby="mini-title">
 <div class="mini-heading"><span class="discovery-kicker">TINY PUZZLES · NO TIMER</span><span id="mini-count">Six guided exercises</span></div>
@@ -247,6 +249,24 @@
     </div>
   </div>
 
+<section class="home-showcase" aria-labelledby="showcase-title">
+  <h2 id="showcase-title">Read, watch, or play</h2>
+  <div class="showcase-layout">
+    <a class="showcase-story" href="chess/chess-continuum/">
+      <img src="chess/chess-continuum/breakfast.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="">
+      <span><strong>The Chess Continuum Hypothesis</strong><span>Luz, stale bread with butter and jam, and the knight that broke the draw pact.</span><b>Read the illustrated story ↗</b></span>
+    </a>
+    <a class="showcase-creek" href="rolling-chess-ros/angel-creek/">
+      <span class="creek-pulse" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <strong>The Creek Carries a Question</strong><span>Follow a pulse from flowing water into the Virtual Person garden.</span><b>Watch the ROS 2 replay ↗</b>
+    </a>
+    <a class="showcase-world" href="worlds-of-kings-wildlife/">
+      <img src="assets/card-art/worlds-of-kings-wildlife-0cfae55.svg" width="640" height="360" loading="lazy" decoding="async" alt="">
+      <span><strong>Worlds of Kings · Emoji Wilds</strong><span>Play chess across an illustrated Earth.</span><b>Enter the world ↗</b></span>
+    </a>
+  </div>
+</section>
+
 <!-- world-directory:start -->
 <section class="home-worlds" id="world-directory" aria-labelledby="world-directory-title">
 <div class="world-section-heading"><div><p class="world-eyebrow">AFTER YOUR NEXT MOVE · PICK AN ADVENTURE</p><h2 id="world-directory-title">Find your next world.</h2><p>Try a chess adventure, make some music, or explore a little world.</p></div><a href="#world-search">Search all worlds ↓</a></div>
@@ -268,11 +288,13 @@
 <button type="button" data-category="Music &amp; Art" aria-pressed="false">Music &amp; Art</button>
 <button type="button" data-category="Science &amp; Tools" aria-pressed="false">Science &amp; Tools</button>
 <button type="button" data-category="Words &amp; Faith" aria-pressed="false">Words &amp; Faith</button>
-<a href="#research-shelf">Research library ↓</a>
+<button type="button" data-category="Writing &amp; Research" aria-pressed="false">Writing &amp; Research</button>
 <button type="button" data-category="Community" aria-pressed="false">Community</button>
 </div>
 <p id="world-count" role="status">Games, worlds &amp; discoveries to explore.</p>
 <div id="world-links" class="world-links">
+<a href="chess/chess-continuum/" data-category="Writing &amp; Research" class="has-card-image"><img class="card-art" src="chess/chess-continuum/breakfast.webp" width="1536" height="1024" loading="lazy" decoding="async" alt=""><span class="card-caption"><span class="world-category">Writing &amp; Research</span><strong>The Chess Continuum Hypothesis</strong><span class="world-description">An illustrated story about Luz, a draw pact, and the third ply.</span><span class="world-go">Read ↗</span></span></a>
+<a href="rolling-chess-ros/angel-creek/" data-category="Science &amp; Tools"><span class="world-category">Science &amp; Tools</span><strong>The Creek Carries a Question · Angel Creek</strong><span class="world-description">Replay the Artificial Angel’s creek-powered Virtual Person garden in ROS 2.</span><span class="world-go">Watch ↗</span></a>
 <a href="glims/" data-category="Science &amp; Tools" class="has-card-image"><img class="card-art" src="virtual-cell-model/glims/card.svg" alt="Alex exploring a warm room with a guitar and a changing visual field" width="640" height="360" loading="lazy" decoding="async"><span class="card-caption"><span class="world-category">Science &amp; Tools</span><strong>The Glims · Glover Machine Works</strong><span class="world-description">Guide a virtual person through music, food, family, work, and rest. Watch his point of view change as he moves.</span><span class="world-go">Step into his world ↗</span></span></a>
 <a href="destryoeth-stones/" data-category="Words &amp; Faith" class="has-card-image"><img class="card-art" src="assets/destryoeth-stones/monument-at-dusk.png" alt="The Destryoeth Stones in Georgia granite country at sunset" width="1536" height="1024" loading="lazy" decoding="async"><span class="card-caption"><span class="world-category">Words &amp; Faith</span><strong>The Destryoeth Stones</strong><span class="world-description">Three sentences cut into Georgia granite: speak plainly, reason together, and let no slogan outrank a human life.</span><span class="world-go">Visit the stones ↗</span></span></a>
 <a href="closedai/" data-category="Science &amp; Tools" class="has-card-image"><img class="card-art" src="closedai/cover.svg" alt="A diagram of an AI task probing a marked authorization boundary" width="640" height="360" loading="lazy" decoding="async"><span class="card-caption"><span class="world-category">Science &amp; Tools</span><strong>ClosedAI · Open Questions. Closed Loopholes.</strong><span class="world-description">An independent AI accountability project: source-backed incident briefs, a Boundary Lab, and a proposed RelaxEngine interpretability research program.</span><span class="world-go">Explore the think tank ↗</span></span></a>
@@ -421,10 +443,10 @@
   <div class="top">
     <h2 style="font-size:18px;margin:0">Maestro controls · play, customize &amp; export</h2>
     <span class="sp"></span>
-    <span><label>Game</label><select id="selGame"></select></span>
-    <span><label>White</label><select id="selPieceW"></select></span>
-    <span><label>Black</label><select id="selPieceB"></select></span>
-    <span><label>Board</label><select id="selTheme"></select></span>
+    <span><label for="selGame">Game</label><select id="selGame"></select></span>
+    <span><label for="selPieceW">White</label><select id="selPieceW"></select></span>
+    <span><label for="selPieceB">Black</label><select id="selPieceB"></select></span>
+    <span><label for="selTheme">Board</label><select id="selTheme"></select></span>
     <button id="btnRole" class="btnrole" title="Relaxation-labeling role view (HRL)">🧠 Roles</button>
     <button id="btnMusic" class="btnrole" title="Orchestrated playback (Web Audio)">🔊 Music</button>
     <button id="btnMetro" class="btnrole" title="Metronome click track — hear the inferred time signature (off by default)">🥁 Click</button>
@@ -439,7 +461,7 @@
     <button id="btnExport" class="btnrole" title="Export MIDI / audio / Suno prompt">⬇ Export</button>
   </div>
   <div class="links">
-    <a href="#site-extras">All worlds ↓</a> · <a href="chess/">Chess library</a> · <a href="chess-music/">🎧 Listen &amp; mix in Audacity</a> · <a href="community/">My profile / Players</a> · <a href="hrl-lab/">The HRL Lab</a> · <a href="play/">Beat the Engine</a> ·
+    <a href="#world-directory">All worlds ↓</a> · <a href="chess/">Chess library</a> · <a href="chess-music/">🎧 Listen &amp; mix in Audacity</a> · <a href="community/">My profile / Players</a> · <a href="hrl-lab/">The HRL Lab</a> · <a href="play/">Beat the Engine</a> ·
     <a href="hrlized/">🎵 HRLized</a> <span style="color:var(--mut)">— the same engine that scores this game, composing music</span>
   </div>
   <div id="otbHint">♟️ <b>Play OTB</b> is on — click a piece, then a highlighted square, to move (hot-seat: you play both sides).
@@ -452,7 +474,7 @@
   </div></div>
 
   <div id="loadPanel"><div class="card2">
-    <textarea id="pgnText" placeholder="Paste an annotated PGN here — headers + moves. Comments, [%eval]/[%clk], NAGs (?! ??), and variations are all handled."></textarea>
+    <textarea id="pgnText" aria-label="Annotated PGN" placeholder="Paste an annotated PGN here — headers + moves. Comments, [%eval]/[%clk], NAGs (?! ??), and variations are all handled."></textarea>
     <div class="loadrow">
       <label>…or file: <input type="file" id="pgnFile" accept=".pgn,.txt"></label>
       <label>You play: <select id="pgnSide"><option value="w">White</option><option value="b">Black</option></select></label>
@@ -1696,10 +1718,6 @@ if(!window.WorldKit){ ["exMine","exRblx"].forEach(id=>{const b=document.getEleme
 
 load("queendab");
 
-/* PWA offline: register the service worker (only when served over http/https, not file://) */
-if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
-}
 </script>
 <script>
 /* ===== rage.js (inlined — keep maestro self-contained for the PWA cache) ===== */
